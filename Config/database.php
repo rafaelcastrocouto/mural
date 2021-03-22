@@ -82,9 +82,9 @@ class DATABASE_CONFIG {
 			'datasource' => 'Database/Mysql',
 			'persistent' => false,
 			'host' => 'localhost',
-			'login' => 'root',
-			'password' => 'root',
-			'database' => 'mural',
+			'login' => 'xxxxx',
+			'password' => 'xxxx',
+			'database' => 'xxxxx',
 			'prefix' => '',
 			'encoding' => 'utf8',
 	);
@@ -93,9 +93,9 @@ class DATABASE_CONFIG {
 			'datasource' => 'Database/Mysql',
 			'persistent' => false,
 			'host' => 'localhost',
-			'login' => 'root',
-			'password' => 'root',
-			'database' => 'mural',
+			'login' => 'xxxx',
+			'password' => 'xxxx',
+			'database' => 'xxxx',
 			'prefix' => 'utf8',
 	);
 }
