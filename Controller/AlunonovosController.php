@@ -202,11 +202,13 @@ class AlunonovosController extends AppController {
     public function view($id = NULL) {
 
         // pr($id);
+        // die();
         $registro = isset($this->params['named']['registro']) ? $this->params['named']['registro'] : NULL;
         if (!$registro) {
             $registro = $this->request->query("registro");
         }
         // pr($registro);
+        // die();
         /* Calculo o id a partir do registro */
         if ($registro) {
             $aluno_id = $this->Alunonovo->find('first', [

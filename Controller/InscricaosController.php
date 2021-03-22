@@ -511,12 +511,12 @@ class InscricaosController extends AppController {
         // Envio os dados
         // die($registro);
         $this->set('registro', $registro);
-        $this->set('estagiario_id', $estagiario['Estagiario']['id']);
+        $this->set('estagiario_id', isset($estagiario['Estagiario']['id'])); // Aluno sem estagio não tem id
         $this->set('periodo', $periodo);
         $this->set('nivel', $nivel_ultimo);
         $this->set('turno', $turno_ultimo);
         $this->set('instituicoes', $instituicoes);
-        $this->set('supervisores', $super_atuais);
+        $this->set('supervisores', isset($super_atuais)); // Aluno sem estaǵio não tem supervisores de instituição cadastrados
     }
 
     /*

@@ -319,12 +319,21 @@ class EstagiariosController extends AppController {
             $estagio = $this->Estagiario->find('first', array(
                 'conditions' => array('Estagiario.id' => $id)));
         } elseif (!empty($this->request->query('registro'))) {
+            $registro = $this->request->query('registro');
             $estagio = $this->Estagiario->find('first', array(
-                'conditions' => ['Estagiario.registro' => ($this->request->query('registro'))]
+                'conditions' => ['Estagiario.registro' => $registro]
             ));
         }
-        // pr($estagio);
+        pr($estagio);
         // die();
+        if (empty($estagio)) {
+            $this->Flash->error(__('Estudante sem estágio'));
+            if ($registro) {
+                $this->redirect(['controller' => 'alunos', 'action' => 'view', '?' => 'registro', $registro]);
+            } elseif ($id) {
+                $this->redirect(['controller' => 'alunos', 'action' => 'view', $id]);
+            }
+        }
         $this->set('estagio', $estagio);
     }
 

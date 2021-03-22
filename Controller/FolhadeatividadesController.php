@@ -9,7 +9,10 @@ App::uses('AppController', 'Controller');
  * @property PaginatorComponent $Paginator
  * @property SessionComponent $Session
  * @property FlashComponent $Flash
+ * @property RequestHandlerComponent $RequestHandler
+ * @property AuthComponent $Auth
  */
+
 class FolhadeatividadesController extends AppController {
 
     /**
@@ -102,14 +105,14 @@ class FolhadeatividadesController extends AppController {
                 $this->loadModel('Alunonovo');
                 $alunonovos = $this->Alunonovo->findFirstByRegistro($this->data['Aluno']['registro']);
                 // pr($alunonovos);
+                // die();
                 if (empty($alunonovos)) {
-                    $this->Session->setFlash(__("Não foram encontrados registros do aluno"));
-                    $this->redirect('/Alunos/busca');
+                    $this->Flash->error(__("Não foram encontrados registros do aluno"));
+                    $this->redirect('/alunos/busca');
                     die();
                 } else {
-                    $this->set('alunos', $alunonovos);
-                    $this->Session->setFlash(__("Estudante sem estágio?"));
-                    $this->redirect('/Alunos/busca_dre/' . $this->data['Aluno']['registro']);
+                    $this->Flash->error(__("Estudante sem estágio"));
+                    $this->redirect('/alunonovos/view?registro=' . $this->data['Aluno']['registro']);
                     die();
                 }
             } else {

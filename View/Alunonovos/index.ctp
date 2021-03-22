@@ -1,7 +1,7 @@
 <?= $this->element('submenu_alunonovos') ?>
 
 <div class='row justify-content-center'>
-    <h1>Alunos novos</h1>
+    <h1>Estudantes</h1>
 </div>
 
 <div class='pagination justify-content-center'>
@@ -20,9 +20,9 @@
         <table class='table table-hover table-striped table-responsive'>
             <thead class='thead-light'>
                 <tr>
-                    <th>DRE</th>
-                    <th>Nome</th>
-                    <th>E-mail</th>
+                    <th><?= $this->Paginator->sort('registro', 'DRE') ?></th>
+                    <th><?= $this->Paginator->sort('nome', 'Nome') ?></th>
+                    <th><?= $this->Paginator->sort('email', 'E-mail') ?></th>
                 </tr>
             </thead>
             <tbody>

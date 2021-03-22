@@ -71,6 +71,7 @@ class AvaliacoesController extends AppController {
      */
     public function view($id = null) {
 
+        // die('view');
         if (!is_numeric($id)) {
             $estagiario_id = $this->request->query('estagiario_id');
             if ($estagiario_id) {
@@ -319,15 +320,16 @@ class AvaliacoesController extends AppController {
                 $this->loadModel('Alunonovo');
                 $alunonovos = $this->Alunonovo->findFirstByRegistro($this->data['Aluno']['registro']);
                 // pr($alunonovos);
+                // die();
                 if (empty($alunonovos)) {
-                    $this->Session->setFlash("Não foram encontrados registros do aluno");
-                    $this->redirect('/Alunos/busca');
+                    $this->Flash->error(__("Não foram encontrados registros do estudante"));
+                    $this->redirect(['controller' => 'alunos', 'action' => 'busca']);
                     die();
                 } else {
-                    $this->set('alunos', $alunonovos);
-                    $this->Session->setFlash("Estudante sem termo de compromisso?");
-                    $this->redirect('/Alunos/termosolicita/' . $this->data['Aluno']['registro']);
-                    die();
+                     $this->Flash->error(__("Estudante sem estágios"));
+                     // $this->redirect(['controller' => 'alunonovos', 'action' => 'view', '?' => 'registro', $this->Session->read('numero')]);
+                     $this->redirect('/alunonovos/view?registro=' . $this->Session->read('numero'));
+                     die();
                 }
             } else {
                 $this->set('alunos', $alunos);

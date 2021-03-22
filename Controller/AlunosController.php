@@ -370,17 +370,20 @@ class AlunosController extends AppController {
         if (!empty($this->data['Aluno']['registro'])) {
             $alunos = $this->Aluno->findFirstByRegistro($this->data['Aluno']['registro']);
             // pr($alunos);
+            // die();
             if (empty($alunos)) {
                 // Teria que buscar na tabela alunos_novos
                 $this->loadModel('Alunonovo');
                 $alunonovos = $this->Alunonovo->findFirstByRegistro($this->data['Aluno']['registro']);
                 // pr($alunonovos);
+                // die();
                 if (empty($alunonovos)) {
-                    $this->Session->setFlash("Não foram encontrados registros do aluno");
+                    $this->Flash->error(__("Não foram encontrados registros do aluno"));
                     $this->redirect('/Alunos/busca');
                 } else {
                     // $this->set('alunos', $alunonovos);
-                    $this->redirect('/Alunonovos/view/' . $alunos['Alunonovo']['id']);
+                    // die('redirect');
+                    $this->redirect('/Alunonovos/view/' . $alunonovos['Alunonovo']['id']);
                 }
             } else {
                 // pr($alunos['Aluno']['id']);
