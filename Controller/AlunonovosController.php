@@ -1,0 +1,465 @@
+<?php
+
+class AlunonovosController extends AppController {
+
+    public $name = "Alunonovos";
+    public $components = array('Auth', 'Flash', 'Paginator');
+    public $paginate = array(
+        'limit' => 10
+    );
+
+    public function beforeFilter() {
+
+        parent::beforeFilter();
+        // Para cadastrar usuarios do sistema precisso abrir este metodo
+
+        $this->Auth->allow('add');
+
+        // Admin
+        if ($this->Session->read('id_categoria') === '1') {
+            $this->Auth->allow();
+            // $this->Session->setFlash('Administrador');
+            // Estudantes podem somente fazer inscricao
+        } elseif ($this->Session->read('id_categoria') === '2') {
+            $this->Auth->allow('add', 'edit', 'index', 'view');
+            // $this->Session->setFlash('Estudante');
+            // die();
+            // Professores podem atualizar murais
+        } elseif ($this->Session->read('id_categoria') === '3') {
+            $this->Auth->allow('edit', 'index', 'view');
+            // $this->Session->setFlash('Professor');
+            // No futuro os supervisores poderao lançar murals
+        } elseif ($this->Session->read('id_categoria') === '4') {
+            $this->Auth->allow('add', 'edit', 'index', 'view');
+            // $this->Session->setFlash('Supervisor');
+            // Todos
+        } else {
+            $this->Session->setFlash("Não autorizado");
+            $this->redirect('/users/login/');
+        }
+        // die(pr($this->Session->read('user')));
+    }
+
+    public function index() {
+
+        $this->Paginator->settings = [
+            'Alunonovo' => [
+                'order' => ['Alunonovo.nome'],
+                'limit' => 10
+            ]
+        ];
+
+        $this->set('alunonovo', $this->Paginator->paginate('Alunonovo'));
+    }
+
+    /*
+     * Além de ser chamada por ela propria
+     * esta funcao eh chamada desde inscricao para selecao de estagio
+     * e tambem desde termo de compromisso
+     */
+
+    public function add($id = NULL) {
+
+        $registro = isset($this->params['named']['registro']) ? $this->params['named']['registro'] : NULL;
+        /* alunonovos/add?dre=100100100 */
+        if (!$registro) {
+            $registro = $this->request->query('registro');
+        }
+        // pr($registro);
+        // die('registro');
+        // $this->set('meses', $this->meses());
+        $this->set('registro', $registro);
+        // die("Alunonovo add: " . $id);
+        /* Vejo se foi chamado desde cadastro
+          $cadastro = $this->Session->read('cadastro');
+          pr($cadastro);
+          // die();
+         */
+
+        if ($this->Alunonovo->save($this->data)) {
+            // die("Aluno novo save");
+            // Capturo o id da instituicao (se foi chamada desde inscriacao add)
+            $inscricao_selecao_estagio = $this->Session->read('id_instituicao');
+            // Ainda nao posso apagar
+            // $this->Session->delete('id_instituicao');
+            // Capturo se foi chamado desde a solicitacao do termo
+            $registro_termo = $this->Session->read('termo');
+            // Acho que posso apagar aqui porque nao vai ser chamado novamente
+            $this->Session->delete('termo');
+
+            // Vejo se foi chamado desde cadastro
+            $cadastro = $this->Session->read('cadastro');
+
+            $registro = $this->data['Alunonovo']['registro'];
+            $this->Session->setFlash("Cadastro realizado: " . $registro);
+            // $this->redirect("/Inscricaos/solicitatermo/" . $registro);
+            // die(" Verificacao da rotina " . $registro);
+
+            if ($inscricao_selecao_estagio) {
+                // Volta para a pagina de inscricao
+                // die("inscricao_seleciona_estagio");
+                $this->redirect("/Inscricaos/inscricao?registro=" . $registro);
+            } elseif ($registro_termo) {
+                // Volta para a pagina de termo de compromisso
+                // die(" registro_termo " . $registro_termo);
+                $this->redirect("/Inscricaos/termocompromisso?registro=" . $registro_termo);
+                die("Redireciona para concluir solicitacao de termo de compromisso");
+            } elseif ($cadastro) {
+                // die("cadastro");
+                $this->Session->delete('cadastro');
+                $id_alunonovo = $this->Alunonovo->getLastInsertId();
+                $this->Session->write('menu_aluno', 'alunonovo');
+                $this->Session->write('menu_id_aluno', $id_alunonovo);
+                $this->redirect("/Alunonovos/view/" . $id_alunonovo);
+            } else {
+                // Mostra resultado da insercao
+                $this->Session->write('menu_aluno', 'alunonovo');
+                $this->Session->write('menu_id_aluno', $id_alunonovo);
+                $this->Session->setFlash('Dados inseridos');
+                $id_alunonovo = $this->Alunonovo->getLastInsertId();
+                // die(" else " . $id_alunonovo);
+                $this->redirect("/Alunonovos/view/" . $id_alunonovo);
+            }
+        }
+    }
+
+    /*
+     * Além de ser chamada por ela propria
+     * esta funcao eh chamada desde inscricao para selecao de estagio
+     * e tambem desde termo de compromisso
+     */
+
+    /*
+     * id eh o id do alunonovo
+     * registro vem como parâmetro
+     */
+
+    public function edit($id = NULL) {
+
+        // Somente o próprio pode editar
+        if ($this->Session->read('numero')) {
+            $verifica = $this->Alunonovo->findByRegistro($this->Session->read('numero'));
+            if ($id != $verifica['Alunonovo']['id']) {
+                $this->Session->setFlash("Acesso não autorizado");
+                $this->redirect("/Murals/index");
+                die("Não autorizado");
+            }
+        }
+
+        $registro = isset($this->params['named']['registro']) ? $this->params['named']['registro'] : NULL;
+        if (!$registro) {
+            $registro = $this->request->query("registro");
+        }
+        // pr($registro);
+        /* Calculo o id a partir do registro */
+        if ($registro) {
+            $aluno_id = $this->Alunonovo->find('first', [
+                'conditions' => ['Alunonovo.registro' => $registro]
+            ]);
+            if ($aluno_id) {
+                $id = $aluno_id['Alunonovo']['id'];
+            } else {
+                $this->Session->setFlash(__("Registro do estudante inexistente"));
+                $this->redirect('/alunonovos/index');
+                die();
+            }
+        }
+        $this->Alunonovo->id = $id;
+
+        // pr($id);
+        // pr($this->data);
+        // die();
+        // $this->set('meses', $this->meses());
+        if (empty($this->data)) {
+            $this->data = $this->Alunonovo->read();
+        } else {
+            if ($this->Alunonovo->save($this->data)) {
+                $this->Session->setFlash("Atualizado");
+
+                // Capturo o id da instituicao (se foi chamada desde inscriacao add)
+                $inscricao_selecao_estagio = $this->Session->read('id_instituicao');
+                // Ainda nao posso apagar
+                // $this->Session->delete('id_instituicao');
+                // Capturo se foi chamado desde a solicitacao do termo
+                $registro_termo = $this->Session->read('termo');
+                $this->Session->delete('termo');
+                if ($inscricao_selecao_estagio) {
+                    // Faz inscricao para selecao de estagio
+                    $this->Session->setFlash("Inscricao para selecao de estagio");
+                    $this->redirect('/Inscricaos/inscricao/' . $this->data['Alunonovo']['registro']);
+                } elseif (!empty($registro_termo)) {
+                    // Solicita termo de compromisso
+                    $this->Session->setFlash("Solicitacao de termo de compromisso");
+                    // $this->redirect('/Inscricaos/termocompromisso/' . $registro_termo);
+                } else {
+                    // Simplesmente atualiza e mostra o resultado
+                    $this->redirect('/Alunonovos/view/' . $id);
+                }
+            }
+        }
+    }
+
+    public function view($id = NULL) {
+
+        // pr($id);
+        $registro = isset($this->params['named']['registro']) ? $this->params['named']['registro'] : NULL;
+        if (!$registro) {
+            $registro = $this->request->query("registro");
+        }
+        // pr($registro);
+        /* Calculo o id a partir do registro */
+        if ($registro) {
+            $aluno_id = $this->Alunonovo->find('first', [
+                'conditions' => ['Alunonovo.registro' => $registro]
+            ]);
+            if ($aluno_id) {
+                $id = $aluno_id['Alunonovo']['id'];
+            } else {
+                $this->Session->setFlash(__("Registro do estudante inexistente"));
+                $this->redirect('/alunonovos/index');
+                die();
+            }
+        }
+        // $log = $this->Alunonovo->getDataSource()->getLog(false, false);
+        // debug($log);
+        // pr($aluno_id);
+        // die();
+        if (!isset($id) && (!empty($id))) {
+            $id = $aluno_id['Alunonovo']['id'];
+        }
+
+        // pr($id);
+        // die();
+        // pr($registro);
+        // die('registro');
+
+        if (($this->Session->read('id_categoria') === '2') && ($this->Session->read('numero'))) {
+            $verifica = $this->Alunonovo->findByRegistro($this->Session->read('numero'));
+            // pr($verifica);
+            // die('verifica');
+            // pr($this->Session->read('numero'));
+
+            if ($id) {
+                if ($id != $verifica['Alunonovo']['id']) {
+                    $this->Session->setFlash("Acesso não autorizado");
+                    $this->redirect("/Alunonovos/index/");
+                    die("Não autorizado");
+                }
+            } elseif ($registro) {
+                if ($registro != $verifica['Alunonovo']['registro']) {
+                    $this->Session->setFlash("Acesso não autorizado");
+                    $this->redirect("/Alunonovos/index");
+                    die("Não autorizado");
+                }
+            }
+        }
+
+        // pr($id);
+        //die('id');
+
+        if ($id) {
+            $aluno = $this->Alunonovo->find('first',
+                    array('conditions' => array('Alunonovo.id' => $id)));
+        } elseif ($registro) {
+            $aluno = $this->Alunonovo->find('first',
+                    array('conditions' => array('Alunonovo.registro' => $registro)));
+        }
+        // pr($aluno);
+        // die('aluno');
+        if (!isset($aluno) || empty($aluno)) {
+            $this->Session->setFlash('Estudante não cadastrado');
+            $this->redirect('/Alunonovos/index');
+            die();
+        }
+        // Onde fizeram inscricoes
+        $this->loadModel('Inscricao');
+        $inscricoes = $this->Inscricao->findAllByIdAluno($aluno['Alunonovo']['registro']);
+
+        // Onde fizeram estágios
+        $this->loadModel('Estagiario');
+        $estagios = $this->Estagiario->find('all', [
+            'conditions' => ['Estagiario.registro' => $aluno['Alunonovo']['registro']]
+        ]);
+        // pr($estagios);
+        // die('estagios');
+
+        $this->set('alunos', $aluno);
+        $this->set('inscricoes', $inscricoes);
+        $this->set('estagios', $estagios);
+    }
+
+    public function delete($id = NULL) {
+
+        // Capturo o numero de registro
+        $registro = $this->Alunonovo->findById($id, array('fields' => 'registro'));
+
+        // Capturo os estagios realizados
+        $this->loadModel('Estagiario');
+        $estagiario = $this->Estagiario->find('first', array(
+            'conditions' => array('Estagiario.registro' => $registro['Alunonovo']['registro']),
+            'fields' => 'Estagiario.id'));
+        // pr($estagiario);
+        // die('estagiario');
+        if ($estagiario) {
+            $this->Session->setFlash('Estudante com estágios. Exclua os estágio primeiro');
+            $this->redirect('/Estagiarios/view/' . $estagiario['Estagiario']['id']);
+            die();
+        }
+
+        // Capturo as inscricoes realizadas
+        $this->loadModel('Inscricao');
+        $inscricao = $this->Inscricao->find('all', array(
+            'conditions' => array('Inscricao.id_aluno' => $registro['Alunonovo']['registro']),
+            'fields' => 'id'));
+        // pr($inscricao);
+        // die();
+        if ($inscricao) {
+            foreach ($inscricao as $c_inscricao) {
+                // pr($c_inscricao['Inscricao']['id']);
+                // die();
+                $this->Inscricao->delete($c_inscricao['Inscricao']['id']);
+            }
+        }
+
+        $this->Alunonovo->delete($id);
+
+        $this->Session->setFlash("Registro excluído (junto com as inscrições)");
+        $this->redirect("/Inscricaos/index/");
+    }
+
+    public function busca($nome = NULL) {
+
+        // Para paginar os resultados da busca por nome
+        if (isset($nome)) {
+            $this->request->data['Alunonovo']['nome'] = $nome;
+        }
+
+        if (!empty($this->data['Alunonovo']['nome'])) {
+
+            $this->Alunonovo->recursive = -1;
+            $condicaoalunonovo = array('Alunonovo.nome like' => '%' . $this->data['Alunonovo']['nome'] . '%');
+            $alunos = $this->Alunonovo->find('all', [
+                'conditions' => $condicaoalunonovo
+            ]);
+            // pr($alunos);
+            // die();
+            // Nenhum resultado
+            if (empty($alunos)) {
+                $this->loadModel('Aluno');
+                $condicaoaluno = array('Aluno.nome like' => '%' . $this->data['Alunonovo']['nome'] . '%');
+                $alunos = $this->Aluno->find('all', array('conditions' => $condicaoaluno));
+                if (empty($alunonovos)) {
+                    $this->Session->setFlash("Não foram encontrados registros");
+                } else {
+                    $this->Paginator->settings = array('order' => array('Alunonovo.nome ASC'), 'limit' => 10, 'conditions' => $condicaoalunonovo);
+                    $this->set('alunos', $this->Paginator->paginate('Alunonovo'));
+                    $this->set('nome', $this->data['Aluno']['nome']);
+                }
+            } else {
+                $this->Paginator->settings = ['order' => 'Alunonovo.nome ASC', 'limit' => 10, 'conditions' => $condicaoalunonovo];
+                $this->set('alunos', $this->Paginator->paginate('Alunonovo'));
+                $this->set('nome', $this->data['Alunonovo']['nome']);
+            }
+        }
+    }
+
+    public function busca_dre() {
+
+        // pr($this->data);
+        if (!empty($this->data['Alunonovo']['registro'])) {
+            $alunos = $this->Alunonovo->findFirstByRegistro($this->data['Alunonovo']['registro']);
+            // pr($alunos);
+            // die('alunos');
+            if (empty($alunos)) {
+                // Buscar na tabela alunos. Não deveria existr um Aluno que não seja também Alunonovo
+                $alunonovos = $this->Aluno->findFirstByRegistro($this->data['Alunonovo']['registro']);
+                // pr($alunonovos);
+                if (empty($alunonovos)) {
+                    $this->Session->setFlash("Não foram encontrados registros do aluno");
+                    $this->redirect('/Alunonovos/busca_dre');
+                } else {
+                    $this->redirect('/Alunonovos/view/', $alunonovos['Aluno']['id']);
+                }
+            } else {
+                // die($alunos['Alunonovo']['id']);
+                $this->redirect('/Alunonovos/view/' . $alunos['Alunonovo']['id']);
+                // $this->redirect('/Alunonovos/view/2300');
+            }
+        }
+    }
+
+    public function busca_email() {
+
+        if (!empty($this->data)) {
+            // pr($this->data);
+            // die();
+            $alunos = $this->Alunonovo->findAllByEmail($this->data['Alunonovo']['email']);
+            // pr($alunos);
+            // die("Sem registro");
+            if (empty($alunos)) {
+                $this->Session->setFlash("Não foram encontrados registros do email aluno");
+                // Teria que buscar na tabela alunos_novos
+                // $alunos_novos = $this->Aluno_novo->findAllByRegistro($this->data['Aluno']['registro']);
+                // if (empty($alunos_novos)
+                $this->redirect('/Alunonovos/busca');
+            } else {
+                $this->set('alunos', $alunos);
+                // $this->set('alunos',$alunos_novos);
+            }
+        }
+    }
+
+    public function busca_cpf() {
+
+        if (!empty($this->data)) {
+            // pr($this->data);
+            // die();
+            $alunos = $this->Alunonovo->findAllByCpf($this->data['Alunonovo']['cpf']);
+            // pr($alunos);
+            // die("Sem registro");
+            if (empty($alunos)) {
+                $this->Session->setFlash("Não foram encontrados registros do CPF");
+                // Teria que buscar na tabela alunos_novos
+                // $alunos_novos = $this->Aluno_novo->findAllByRegistro($this->data['Aluno']['registro']);
+                // if (empty($alunos_novos)
+                $this->redirect('/Alunonovos/busca_cpf');
+            } else {
+                $this->set('alunos', $alunos);
+                // $this->set('alunos',$alunos_novos);
+            }
+        }
+    }
+
+    public function padroniza() {
+
+        $alunos = $this->Alunonovo->find('all', array('fields' => array('id', 'nome', 'email', 'endereco', 'bairro')));
+        // pr($alunos);
+        // die();
+        foreach ($alunos as $c_aluno):
+
+            if ($c_aluno['Alunonovo']['email']):
+                $email = strtolower($c_aluno['Alunonovo']['email']);
+                $this->Alunonovo->query("UPDATE alunosnovos set email = " . "\"" . $email . "\"" . " where id = " . $c_aluno['Alunonovo']['id']);
+            endif;
+
+            if ($c_aluno["Alunonovo"]['nome']):
+                $nome = ucwords(strtolower($c_aluno['Alunonovo']['nome']));
+                $this->Alunonovo->query("UPDATE alunosnovos set nome = " . "\"" . $nome . "\"" . " where id = " . $c_aluno['Alunonovo']['id']);
+            endif;
+
+            if ($c_aluno['Alunonovo']['endereco']):
+                $endereco = ucwords(strtolower($c_aluno['Alunonovo']['endereco']));
+                $this->Alunonovo->query("UPDATE alunosnovos set endereco = " . "\"" . $endereco . "\"" . " where id = " . $c_aluno['Alunonovo']['id']);
+            endif;
+
+            if ($c_aluno['Alunonovo']['bairro']):
+                $bairro = ucwords(strtolower($c_aluno['Alunonovo']['bairro']));
+                $this->Alunonovo->query("UPDATE alunosnovos set bairro = " . "\"" . $bairro . "\"" . " where id = " . $c_aluno['Alunonovo']['id']);
+            endif;
+
+        endforeach;
+    }
+
+}
+
+?>
