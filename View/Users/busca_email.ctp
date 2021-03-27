@@ -1,38 +1,40 @@
+<!--
 <?= $this->element('submenu_alunonovos'); ?>
+//-->
 
 <?php if ($id_categoria == '1'): ?>
     <p>
-        <?php echo $this->Html->link('Busca por Nome', '/alunonovos/busca'); ?> 
-        <?php echo " | "; ?>
-        <?php echo $this->Html->link('Busca por DRE', '/alunonovos/busca_dre'); ?>
-        <?php echo " | "; ?>
-        <?php echo $this->Html->link('Busca por Email', '/alunonovos/busca_email'); ?>
-        <?php echo " | "; ?>
-        <?php echo $this->Html->link('Busca por CPF', '/alunonovos/busca_cpf'); ?>
+        <?= $this->Html->link('Busca por numero', '/users/busca_numero') ?>
+        <?= " | "; ?>
+        <?= $this->Html->link('Busca por Email', '/users/busca_email') ?>
+        <?= " | " ?>
+        <?= $this->Html->link('Usuários', '/users/listausuarios') ?>
+        <?= " | " ?>
+        <?= $this->Html->link('Alterna usuário', '/users/alternarusuario') ?>
     </p>
 <?php endif; ?>
 
-<?php if (isset($alunos)): ?>
-
+<?php if (isset($usuarios)): ?>
+    <?php // pr($usuarios); ?>
     <h1>Resultado da busca por Email</h1>
     <table class="table table-hover table-striped table-responsive">
-        <?php foreach ($alunos as $c_alunos): ?>
+        <?php foreach ($usuarios as $c_alunos): ?>
             <tr>
                 <td>
-                    <?php echo $this->Html->link($c_alunos['Alunonovo']['nome'], '/alunonovos/view/' . $c_alunos['Alunonovo']['id']) . '<br>'; ?>
+                    <?php echo $this->Html->link($c_alunos['User']['numero'], '/users/view/' . $c_alunos['User']['numero']) . '<br>'; ?>
                 </td>
                 <td>
-                    <?php echo $this->Html->link($c_alunos['Alunonovo']['email'], '/alunonovos/view/' . $c_alunos['Alunonovo']['id']) . '<br>'; ?>
+                    <?php echo $this->Html->link($c_alunos['User']['email'], '/users/view/' . $c_alunos['User']['numero']) . '<br>'; ?>
                 </td>
             </tr>
         <?php endforeach; ?>
     </table>
-    
+
 <?php else: ?>
 
     <h1>Busca por Email</h1>
 
-    <?php echo $this->Form->create('Alunonovo'); ?>
+    <?php echo $this->Form->create('User'); ?>
     <?php echo $this->Form->input('email', array('label' => 'Digite o email', 'maxsize' => 70, 'size' => 70, 'class' => 'form-control')); ?>
 
     <div class='row justify-content-left'>

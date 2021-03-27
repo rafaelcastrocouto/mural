@@ -38,7 +38,7 @@ echo $this->Form->create('Alunonovo', [
     ]
 ]);
 
-if ($this->Session->read('id_categoria') === '1'):
+if ($this->Session->read('id_categoria') == '1'):
   echo $this->Form->input('registro', ['type' => 'text']);
 else:
   echo $this->Form->input('registro', ['type' => 'text', 'readonly']);

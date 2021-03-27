@@ -23,7 +23,7 @@
     
     $id_categoria = $this->Session->read('id_categoria');
     
-    if ($id_categoria === "2") {
+    if ($id_categoria == "2") {
         echo $this->Form->input('id_aluno', array('type' => 'text', 'label' => 'Registro (DRE)', 'size' => 9, 'maxlenght' => 9, 'readonly', 'default' => $this->Session->read('numero'), 'class' => 'form-control'));
     } else {
         echo $this->Form->input('id_aluno', array('type' => 'text', 'label' => 'Registro (DRE)', 'size' => 9, 'maxlenght' => 9, 'dafault' => NULL, 'class' => 'form-control'));

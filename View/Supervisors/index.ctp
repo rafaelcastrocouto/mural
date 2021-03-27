@@ -25,7 +25,7 @@
 </div>
 <div class='row justify-content-left'>
     <div class='col-auto'>
-        <?php if ($this->Session->read('id_categoria') === '1'): ?>
+        <?php if ($this->Session->read('id_categoria') == '1'): ?>
             <?php echo $this->Form->create('Supervisor', ['class' => 'form-inline']); ?>
             <?php echo $this->Form->input('periodo', array('type' => 'select', 'label' => array('text' => 'Período ', 'style' => 'display: inline'), 'options' => $todosPeriodos, 'default' => $periodo, 'empty' => 'Selecione', 'class' => 'form-control')); ?>
             <?php echo $this->Form->end(); ?>
@@ -48,7 +48,7 @@
 
     <thead class='thead-light'>
         <tr>
-            <?php if ($this->Session->read('id_categoria') === '1'): ?>
+            <?php if ($this->Session->read('id_categoria') == '1'): ?>
                 <th>X</th>
                 <th width='10%'><?php echo $this->Paginator->sort('Supervisor.cress', 'CRESS'); ?></th>
             <?php endif; ?>
@@ -67,7 +67,7 @@
                     <?php $c_supervisor['Supervisor']['id'] = 0; ?>
                 <?php endif; ?>
 
-                <?php if ($this->Session->read('id_categoria') === '1'): ?>
+                <?php if ($this->Session->read('id_categoria') == '1'): ?>
                     <td>
                         <?php echo $this->Html->link('X', '/Supervisors/delete/' . $c_supervisor['Supervisor']['id'], NULL, 'Confirma?'); ?>
                     </td>
@@ -79,7 +79,7 @@
                 <td>
                     <?php
                     if ($c_supervisor['Supervisor']['nome']):
-                        if ($this->Session->read('id_categoria') === '1'):
+                        if ($this->Session->read('id_categoria') == '1'):
                             echo $this->Html->link($c_supervisor['Supervisor']['nome'], '/Supervisors/view/' . $c_supervisor['Supervisor']['id']);
                         else:
                             echo $c_supervisor['Supervisor']['nome'];

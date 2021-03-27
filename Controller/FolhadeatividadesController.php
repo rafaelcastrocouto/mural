@@ -26,22 +26,22 @@ class FolhadeatividadesController extends AppController {
 
         parent::beforeFilter();
         // Admin
-        if ($this->Session->read('id_categoria') === '1') {
+        if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
             // $this->Session->setFlash("Administrador");
             // Estudantes
-        } elseif ($this->Session->read('id_categoria') === '2') {
+        } elseif ($this->Session->read('id_categoria') == '2') {
             $this->Auth->allow('add', 'addatividade', 'atividade', 'index', 'busca_dre', 'historico', 'imprimepdf', 'view', 'edit', 'delete');
             // $this->Session->setFlash("Estudante");
-        } elseif ($this->Session->read('id_categoria') === '3') {
+        } elseif ($this->Session->read('id_categoria') == '3') {
             $this->Auth->allow('index', 'view');
             // $this->Session->setFlash("Professor");
             // Professores, Supervisores
-        } elseif ($this->Session->read('id_cateogria') === '4') {
+        } elseif ($this->Session->read('id_cateogria') == '4') {
             $this->Auth->allow('index', 'view');
             // $this->Session->setFlash("Supervisor");
         } else {
-            $this->Session->setFlash("Não autorizado");
+            $this->Flash->error(__("Não autorizado"));
             $this->redirect('/users/login/');
         }
         // die(pr($this->Session->read('user')));
@@ -130,7 +130,7 @@ class FolhadeatividadesController extends AppController {
             $registro = $this->request->query('registro');
 
             $this->loadModel('Aluno');
-            if (($this->Session->read('id_categoria') === '2') && ($this->Session->read('numero'))) {
+            if (($this->Session->read('id_categoria') == '2') && ($this->Session->read('numero'))) {
                 // pr($this->Session->read('numero'));
                 // die();
                 if ($id) {

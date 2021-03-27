@@ -21,24 +21,24 @@ class AvaliacoesController extends AppController {
 
         parent::beforeFilter();
         // Admin
-        if ($this->Session->read('id_categoria') === '1') {
+        if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
             // $this->Session->setFlash("Administrador");
             // Estudantes
-        } elseif ($this->Session->read('id_categoria') === '2') {
+        } elseif ($this->Session->read('id_categoria') == '2') {
             $this->Auth->allow('view', 'busca_dre', 'imprimepdf', 'historico');
             // $this->Session->setFlash("Estudante");
             // Professor
-        } elseif ($this->Session->read('id_categoria') === '3') {
+        } elseif ($this->Session->read('id_categoria') == '3') {
             $this->Auth->allow('add', 'index', 'view', 'historico', 'edit', 'busca_dre');
             // $this->Session->setFlash("Professor");
             // Supervisores
-        } elseif ($this->Session->read('id_categoria') === '4') {
+        } elseif ($this->Session->read('id_categoria') == '4') {
             $this->Auth->allow('add', 'historico', 'index', 'view', 'edit', 'delete', 'busca_dre');
             // $this->Auth->allow();
             // $this->Session->setFlash("Professor/Supervisor");
         } else {
-            $this->Session->setFlash("Não autorizado");
+            $this->Flash->error(__("Não autorizado"));
             $this->redirect('/users/login/');
         }
         // die(pr($this->Session->read('user')));
@@ -83,7 +83,7 @@ class AvaliacoesController extends AppController {
                 }
                 $this->Session->write('estagiario_id', $estagiario_id);
             } else {
-                $this->Session->setFlash(__('Sem parâmetros para localizar o período de avaliação'));
+                $this->Flash->error(__('Sem parâmetros para localizar o período de avaliação'));
                 $this->redirect(['controller' => 'avaliacoes', 'action' => 'busca_dre']);
             }
         }
@@ -98,7 +98,7 @@ class AvaliacoesController extends AppController {
 
         if (empty($avaliacao)): // Sem avaliação
             // die('Estudante sem avaliacao');
-            $this->Session->setFlash(__("Estudante sem avaliação"));
+            $this->Flash->error(__("Estudante sem avaliação"));
             if ($this->Session->read('id_categoria') != '2') {
                 $this->redirect('/avaliacoes/add?estagiario_id=' . $estagiario_id);
             } else {
@@ -109,7 +109,7 @@ class AvaliacoesController extends AppController {
             if (isset($avaliacao['Estagiario']['Supervisor']['nome'])) {
                 $this->set('supervisor', $avaliacao['Estagiario']['Supervisor']['nome']);
             } else {
-                $this->Session->setFlash(__('Completar dados da supervisora'));
+                $this->Flash->error(__('Completar dados da supervisora'));
             }
         endif;
         // $log = $this->Avaliacao->getDataSource()->getLog(false, false);
@@ -139,7 +139,7 @@ class AvaliacoesController extends AppController {
                 }
                 $this->Session->write('estagiario_id', $estagiario_id);
             } else {
-                $this->Session->setFlash(__('Sem parâmetros para localizar o período de avaliação'));
+                $this->Flash->error(__('Sem parâmetros para localizar o período de avaliação'));
                 $this->redirect(['controller' => 'avaliacoes', 'action' => 'busca_dre']);
             }
         }
@@ -154,7 +154,7 @@ class AvaliacoesController extends AppController {
 
         if (empty($avaliacao)): // Sem avaliação
             // die('Estudante sem avaliacao');
-            $this->Session->setFlash(__("Estudante sem avaliação"));
+            $this->Flash->error(__("Estudante sem avaliação"));
             if ($this->Session->read('id_categoria') != '2') {
                 $this->redirect('/avaliacoes/add?estagiario_id=' . $estagiario_id);
             } else {
@@ -165,7 +165,7 @@ class AvaliacoesController extends AppController {
             if (isset($avaliacao['Estagiario']['Supervisor']['nome'])) {
                 $this->set('supervisor', $avaliacao['Estagiario']['Supervisor']['nome']);
             } else {
-                $this->Session->setFlash(__('Completar dados da supervisora'));
+                $this->Flash->error(__('Completar dados da supervisora'));
             }
         endif;
         // $log = $this->Avaliacao->getDataSource()->getLog(false, false);
@@ -218,7 +218,7 @@ class AvaliacoesController extends AppController {
             if ($avaliacao) {
                 // pr($avaliacao);
                 // echo "aluno já avaliado";
-                $this->Session->setFlash(__('Estudante já tem avaliação para este periódo de estágio!'));
+                $this->Flash->error(__('Estudante já tem avaliação para este periódo de estágio!'));
                 $this->redirect(array('action' => 'view/' . $avaliacao['Avaliacao']['id']));
                 die();
             }
@@ -228,11 +228,11 @@ class AvaliacoesController extends AppController {
             // pr($this->request->data);
             // die();
             if ($this->Avaliacao->save($this->request->data)) {
-                $this->Session->setFlash(__('Avaliação realizada!'));
+                $this->Flash->success(__('Avaliação realizada!'));
                 return $this->redirect(array('action' => 'view/' . $this->Avaliacao->id));
                 die();
             } else {
-                $this->Session->setFlash(__('Não foi possível completar a oporação. Tente novamente.'));
+                $this->Flash->error(__('Não foi possível completar a oporação. Tente novamente.'));
             }
         }
         // $estagiarios = $this->Avaliacao->Estagiario->find('list');
@@ -265,7 +265,7 @@ class AvaliacoesController extends AppController {
         }
 
         if ($this->request->is(array('post', 'put'))) {
-            pr($this->request->data);
+            // pr($this->request->data);
             // die();
             if ($this->Avaliacao->save($this->request->data, false)) {
                 $this->Flash->success(__('Avaliação atualizada.'));
@@ -326,10 +326,10 @@ class AvaliacoesController extends AppController {
                     $this->redirect(['controller' => 'alunos', 'action' => 'busca']);
                     die();
                 } else {
-                     $this->Flash->error(__("Estudante sem estágios"));
-                     // $this->redirect(['controller' => 'alunonovos', 'action' => 'view', '?' => 'registro', $this->Session->read('numero')]);
-                     $this->redirect('/alunonovos/view?registro=' . $this->Session->read('numero'));
-                     die();
+                    $this->Flash->error(__("Estudante sem estágios"));
+                    // $this->redirect(['controller' => 'alunonovos', 'action' => 'view', '?' => 'registro', $this->Session->read('numero')]);
+                    $this->redirect('/alunonovos/view?registro=' . $this->Session->read('numero'));
+                    die();
                 }
             } else {
                 $this->set('alunos', $alunos);
@@ -346,7 +346,7 @@ class AvaliacoesController extends AppController {
             $registro = $this->request->query('registro');
 
             $this->loadModel('Aluno');
-            if (($this->Session->read('id_categoria') === '2') && ($this->Session->read('numero'))) {
+            if (($this->Session->read('id_categoria') == '2') && ($this->Session->read('numero'))) {
                 // pr($this->Session->read('numero'));
                 // die();
                 if ($id) {
@@ -361,11 +361,11 @@ class AvaliacoesController extends AppController {
                 // pr($verifica);
                 // die('verifica');
                 if (!$verifica) {
-                    $this->Session->setFlash("Estudante não estágiario");
+                    $this->Flash->error(__("Estudante não estágiario"));
                     $this->redirect("/Alunonovos/view?registro=" . $this->Session->read('numero'));
                 } else {
                     if ($this->Session->read('numero') != $verifica['Aluno']['registro']) {
-                        $this->Session->setFlash("Acesso não autorizado");
+                        $this->Flash->error(__("Acesso não autorizado"));
                         $this->redirect("/Murals/index");
                         die("Não autorizado");
                     }

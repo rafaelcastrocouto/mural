@@ -15,23 +15,22 @@ class ProfessorsController extends AppController {
         $this->Auth->allow('usuarioprofessor', 'view');
 
         // Admin
-        if ($this->Session->read('id_categoria') === '1') {
+        if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
             // $this->Session->setFlash("Administrador");
             // Estudantes
-        } elseif ($this->Session->read('id_categoria') === '2') {
+        } elseif ($this->Session->read('id_categoria') == '2') {
             $this->Auth->allow('index', 'view', 'pauta');
             // $this->Session->setFlash("Estudante");
-        } elseif ($this->Session->read('id_categoria') === '3') {
+        } elseif ($this->Session->read('id_categoria') == '3') {
             $this->Auth->allow('add', 'edit', 'index', 'view', 'pauta');
             // $this->Session->setFlash("Professor");
             // Professores, Supervisores
-        } elseif ($this->Session->read('id_categoria') === '4') {
+        } elseif ($this->Session->read('id_categoria') == '4') {
             $this->Auth->allow('usuarioprofessor', 'index', 'view', 'pauta', 'edit');
             // $this->Session->setFlash("Professor/Supervisor");
         } else {
-            $this->Auth->allow();
-            $this->Session->setFlash("Não autorizado");
+            $this->Flash->error(__("Não autorizado"));
             // $this->redirect('/murals/index');
         }
         // die(pr($this->Session->read('user')));

@@ -40,7 +40,8 @@ class AppController extends Controller {
             // O certo eh redirecionar para o perfil do usuario
             'loginRedirect' => array('controller' => 'murals', 'url' => 'index'),
             'logoutRedirect' => array('controller' => 'murals', 'url' => 'index')
-        )
+        ),
+        'DebugKit.Toolbar'
     );
 
     public function beforeFilter() {

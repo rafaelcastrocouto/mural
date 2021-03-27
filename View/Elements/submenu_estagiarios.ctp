@@ -5,7 +5,7 @@
     </button>
     <div class='collapse navbar-collapse' id='navbarEstagiarios'>
         <ul class="navbar-nav mr-auto">
-            <?php if ($this->Session->read('id_categoria') === '1'): ?>
+            <?php if ($this->Session->read('id_categoria') == '1'): ?>
                 <li class="nav-item"><?= $this->Html->link(__('Alunos'), ['controller' => 'alunos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>            
                 <li class="nav-item"><?= $this->Html->link(__('Inserir aluno'), ['controller' => 'estagiarios', 'action' => 'add_estagiario'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Buscar'), ['controller' => 'alunos', 'action' => 'busca'], ['class' => 'nav-link']) ?></li>

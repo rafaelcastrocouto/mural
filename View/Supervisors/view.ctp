@@ -3,7 +3,7 @@
 
     <?= $this->element('submenu_supervisores') ?>
 
-    <?php if (($this->Session->read('id_categoria') === '4') and ($this->Session->read('numero') === $supervisor['Supervisor']['cress'])): ?>
+    <?php if (($this->Session->read('id_categoria') == '4') and ($this->Session->read('numero') == $supervisor['Supervisor']['cress'])): ?>
         <?php echo $this->Html->link('Meus estudantes', '/estagiarios/index?id_supervisor=' . $supervisor['Supervisor']['id'] . '&periodo=0'); ?>
     <?php endif; ?>
 

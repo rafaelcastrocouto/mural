@@ -9,22 +9,22 @@ class InstituicaosController extends AppController {
 
         parent::beforeFilter();
         // Admin
-        if ($this->Session->read('id_categoria') === '1') {
+        if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
             // $this->Session->setFlash("Administrador");
             // Estudantes
-        } elseif ($this->Session->read('id_categoria') === '2') {
+        } elseif ($this->Session->read('id_categoria') == '2') {
             $this->Auth->allow('index', 'lista', 'view', 'busca', 'seleciona_supervisor');
             // $this->Session->setFlash("Estudante");
-        } elseif ($this->Session->read('id_categoria') === '3') {
+        } elseif ($this->Session->read('id_categoria') == '3') {
             $this->Auth->allow('add', 'edit', 'addassociacao', 'deleteassociacao', 'index', 'lista', 'view', 'busca', 'seleciona_supervisor');
             // $this->Session->setFlash("Professor");
             // Professores, Supervisores
-        } elseif ($this->Session->read('id_categoria') === '4') {
+        } elseif ($this->Session->read('id_categoria') == '4') {
             $this->Auth->allow('add', 'edit', 'addassociacao', 'deleteassociacao', 'index', 'lista', 'view', 'busca', 'seleciona_supervisor');
             // $this->Session->setFlash("Professor/Supervisor");
         } else {
-            $this->Session->setFlash("Não autorizado");
+            $this->Flash->error(__("Não autorizado"));
             $this->redirect('/users/login/');
         }
     }

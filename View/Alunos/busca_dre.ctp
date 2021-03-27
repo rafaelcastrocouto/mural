@@ -1,4 +1,3 @@
-
 <?= $this->Html->script("jquery.maskedinput"); ?>
 
 <script>
@@ -9,7 +8,7 @@
 
 <?= $this->element('submenu_alunos'); ?>
 
-<?php if ($id_categoria === '1'): ?>
+<?php if ($id_categoria == '1'): ?>
     <p>
         <?php echo $this->Html->link('Busca por Nome', '/alunos/busca'); ?>
         <?php echo " | "; ?>
@@ -21,10 +20,10 @@
     </p>
 <?php endif; ?>
 
-<h1>Folha de atividades</h1>
+<h1>Busca por DRE</h1>
 
 <?php echo $this->Form->create('Aluno', ['class' => 'form-inline']); ?>
-<?php if ($id_categoria === '2'): ?>
+<?php if ($id_categoria == '2'): ?>
     <?= $this->Form->input('registro', ['type' => 'text', 'div' => 'form-group row', 'label' => ['text' => 'DRE', 'class' => 'label-control col-1'], 'value' => $this->Session->read('numero'), 'readonly', 'placeholder' => 'Digite o DRE', 'between' => '<div class ="form-inline col-8">', 'after' => '</div>', 'class' => 'form-control required']) ?>
 <?php else: ?>
     <?= $this->Form->input('registro', ['type' => 'text', 'div' => 'form-group row', 'label' => ['text' => 'DRE', 'class' => 'label-control col-1'], 'placeholder' => 'Digite o DRE', 'between' => '<div class ="form-inline col-8">', 'after' => '</div>', 'class' => 'form-control required']) ?>

@@ -10,6 +10,7 @@ App::uses('AppController', 'Controller');
  * @property SessionComponent $Session
  * @property FlashComponent $Flash
  */
+
 class ComplementosController extends AppController {
 
     /**
@@ -20,13 +21,14 @@ class ComplementosController extends AppController {
     public $components = array('Paginator', 'Session', 'Flash', 'Auth');
 
     public function beforeFilter() {
+        
         parent::beforeFilter();
 
-        if ($this->Session->read('id_categoria') === '1') {
+        if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
             // $this->Session->setFlash("Administrador");
         } else {
-            $this->Session->setFlash(__("Não autorizado"));
+            $this->Flash->error(__("Não autorizado"));
         }
     }
 
@@ -36,6 +38,7 @@ class ComplementosController extends AppController {
      * @return void
      */
     public function index() {
+        
         $this->Complemento->recursive = 0;
         $this->set('complementos', $this->Paginator->paginate());
     }
@@ -64,7 +67,7 @@ class ComplementosController extends AppController {
         if ($this->request->is('post')) {
             $this->Complemento->create();
             if ($this->Complemento->save($this->request->data)) {
-                $this->Flash->success(__('Ok!'));
+                $this->Flash->success(__('Inserido!'));
                 return $this->redirect(array('action' => 'index'));
             } else {
                 $this->Flash->error(__('Não foi possível completar a ação. Tente novamente.'));
@@ -80,6 +83,7 @@ class ComplementosController extends AppController {
      * @return void
      */
     public function edit($id = null) {
+        
         if (!$this->Complemento->exists($id)) {
             throw new NotFoundException(__('Invalid complemento'));
         }

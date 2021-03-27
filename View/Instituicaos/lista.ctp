@@ -28,7 +28,7 @@
 
     <?php echo $this->element('submenu_instituicoes'); ?>
 
-    <?php if ($this->Session->read('id_categoria') === '1'): ?>
+    <?php if ($this->Session->read('id_categoria') == '1'): ?>
 
         <?php echo $this->Form->create('Instituicao', ['controller' => 'Instituicao', 'url' => 'lista', 'class' => 'form-inline']); ?>
         <?php echo $this->Form->input('linhas', ['type' => 'select', 'label' => ['text' => 'Linhas por páginas ', 'style' => 'display: inline'], 'options' => ['15' => '15', '0' => 'Todos'], 'selected' => $linhas, 'empty' => ['15' => 'Selecione'], 'class' => 'form-control']); ?>

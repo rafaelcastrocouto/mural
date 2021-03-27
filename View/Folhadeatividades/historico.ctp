@@ -7,7 +7,7 @@
 <div class=table-responsive'>
     <?= $this->element('submenu_folhadeatividades'); ?>
 
-    <?php if ($this->Session->read('id_categoria') === '1'): ?>
+    <?php if ($this->Session->read('id_categoria') == '1'): ?>
         <?php echo $this->Html->link('Alunos', '/Alunos/index'); ?>
         <?php echo " | "; ?>
         <?php echo $this->Html->link('Estagiários', '/Estagiarios/index'); ?>
@@ -46,7 +46,7 @@
         <?php foreach ($c_estagios as $aluno_estagio): ?>
             <tr>
                 <td>
-                    <?php if ($this->Session->read('id_categoria') === '1'): ?>
+                    <?php if ($this->Session->read('id_categoria') == '1'): ?>
                         <?= $this->Html->link('Ver', '/folhadeatividades/atividade?estagiario_id=' . $aluno_estagio['id']); ?>
                     <?php elseif ($this->Session->read('id_categoria') != '1'): ?>    
                         <?= $this->Html->link('Ver', '/folhadeatividades/atividade?estagiario_id=' . $aluno_estagio['id']); ?>
@@ -75,7 +75,7 @@
         <table class="table table-striped table-hover table-responsive">
             <?php foreach ($nao_obrigatorio as $aluno_nao_estagio): ?>
                 <tr>
-                    <?php if ($this->Session->read('id_categoria') === '1'): ?>
+                    <?php if ($this->Session->read('id_categoria') == '1'): ?>
                         <td>
                             <?php echo $this->Html->link('Ver', '/Estagiarios/view/', $aluno_nao_estagio['id']); ?>
                         </td>

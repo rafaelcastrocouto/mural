@@ -12,19 +12,19 @@ class MuralsController extends AppController {
         parent::beforeFilter();
 
         // Admin
-        if ($this->Session->read('id_categoria') === '1') {
+        if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
             // $this->Session->setFlash('Administrador');
             // Estudantes podem somente fazer inscricao
-        } elseif ($this->Session->read('id_categoria') === '2') {
+        } elseif ($this->Session->read('id_categoria') == '2') {
             $this->Auth->allow('edit', 'index', 'view');
             // $this->Session->setFlash('Estudante');
             // Professores podem atualizar murais
-        } elseif ($this->Session->read('id_categoria') === '3') {
+        } elseif ($this->Session->read('id_categoria') == '3') {
             $this->Auth->allow('edit', 'index', 'view');
             // $this->Session->setFlash('Professor');
             // No futuro os supervisores poderao lançar murals
-        } elseif ($this->Session->read('id_categoria') === '4') {
+        } elseif ($this->Session->read('id_categoria') == '4') {
             $this->Auth->allow('add', 'edit', 'index', 'view');
             // $this->Session->setFlash('Supervisor');
             // Todos

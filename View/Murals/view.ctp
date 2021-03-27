@@ -211,7 +211,7 @@
                         </div>
                     </td>
                 </tr>
-            <?php elseif (($this->Session->read('id_categoria') === '2') || ($this->Session->read('id_categoria') === '3') || ($this->Session->read('id_categoria') === '4')): ?>
+            <?php elseif (($this->Session->read('id_categoria') == '2') || ($this->Session->read('id_categoria') == '3') || ($this->Session->read('id_categoria') == '4')): ?>
 
                 <!--
                 Para os outros usuários as inscrições dependem da data de encerramento

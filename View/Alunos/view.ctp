@@ -8,7 +8,7 @@
 <div class=table-responsive'>
     <?= $this->element('submenu_alunos'); ?>
 
-<?php if ($this->Session->read('id_categoria') === '1'): ?>
+<?php if ($this->Session->read('id_categoria') == '1'): ?>
     <?php echo $this->Html->link('Alunos', '/Alunos/index'); ?>
     <?php echo " | "; ?>
     <?php echo $this->Html->link('Estagiários', '/Estagiarios/index'); ?>
@@ -59,12 +59,12 @@ if (is_null($alunos['nascimento'])) {
     </table>
 
 <p>
-    <?php if ($this->Session->read('id_categoria') === '1'): ?>
+    <?php if ($this->Session->read('id_categoria') == '1'): ?>
         <?php echo $this->Html->link('Excluir', '/Alunos/delete/' . $alunos['id'], NULL, 'Tem certeza?'); ?>
         <?php echo " | "; ?>
     <?php endif; ?>
 
-    <?php if (($this->Session->read('id_categoria') === '2') && ($this->Session->read('numero') === $alunos['registro'])): ?>
+    <?php if (($this->Session->read('id_categoria') == '2') && ($this->Session->read('numero') == $alunos['registro'])): ?>
         <?php echo $this->Html->link('Editar', '/Alunos/edit/' . $alunos['id']); ?>
     <?php elseif ($this->Session->read('categoria') === 'administrador'): ?>
         <?php echo $this->Html->link('Editar', '/Alunos/edit/' . $alunos['id']); ?>
@@ -79,7 +79,7 @@ if (is_null($alunos['nascimento'])) {
     <table class='table table-striped table-hover table-responsive'>
         <thead class='thead-light'>
             <tr>
-        <?php if ($this->Session->read('id_categoria') === '1'): ?>
+        <?php if ($this->Session->read('id_categoria') == '1'): ?>
                 <th>Ver</th>
         <?php else: ?>
                 <th>Ver</th>
@@ -103,7 +103,7 @@ if (is_null($alunos['nascimento'])) {
 
         <tr>
             <td>
-            <?php if ($this->Session->read('id_categoria') === '1'): ?>
+            <?php if ($this->Session->read('id_categoria') == '1'): ?>
             <?= $this->Html->link('Ver', '/Estagiarios/view/' . $aluno_estagio['id']); ?>
             <?php else: ?>
             <?= $this->Html->link('Ver', '/Estagiarios/view/' . $aluno_estagio['id']); ?>
@@ -158,7 +158,7 @@ if (is_null($alunos['nascimento'])) {
     </table>
 
     <p>
-    <?php if ($this->Session->read('id_categoria') === '1'): ?>
+    <?php if ($this->Session->read('id_categoria') == '1'): ?>
     <?php echo $this->Html->link('Buscar', array('controller' => 'Alunos', 'action' => 'busca')); ?>
     <?php echo " | "; ?>
     <?php echo $this->Html->link("Inserir estágio", array('controller' => 'Estagiarios', 'action' => 'add', $alunos['id'])); ?>

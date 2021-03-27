@@ -21,22 +21,22 @@ class ExtensaosController extends AppController {
 
         parent::beforeFilter();
         // Admin
-        if ($this->Session->read('id_categoria') === '1') {
+        if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
             // $this->Session->setFlash("Administrador");
             // Estudantes
-        } elseif ($this->Session->read('id_categoria') === '2') {
+        } elseif ($this->Session->read('id_categoria') == '2') {
             $this->Auth->allow('add', 'index', 'view', 'edit');
             // $this->Session->setFlash("Estudante");
-        } elseif ($this->Session->read('id_categoria') === '3') {
+        } elseif ($this->Session->read('id_categoria') == '3') {
             $this->Auth->allow('add', 'index', 'view', 'edit');
             // $this->Session->setFlash("Professor");
             // Professores, Supervisores
-        } elseif ($this->Session->read('id_categoria') === '4') {
+        } elseif ($this->Session->read('id_categoria') == '4') {
             $this->Auth->allow('add', 'index', 'view', 'edit');
             // $this->Session->setFlash("Professor/Supervisor");
         } else {
-            $this->Session->setFlash("Não autorizado");
+            $this->Flash->error(__("Não autorizado"));
             $this->redirect('/users/login/');
         }
         // die(pr($this->Session->read('user')));

@@ -22,11 +22,11 @@
                         <?php echo $this->Html->link("Formulário de avaliação discente on-line", "/Avaliacoes/busca_dre", ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                         <?php echo $this->Html->link("Folha de atividades", "/Alunos/folhasolicita", ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                         <?php echo $this->Html->link("Folha de atividades on-line", "/folhadeatividades/busca_dre", ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
-                        <?php if ($this->Session->read('id_categoria') === '1'): ?>
+                        <?php if ($this->Session->read('id_categoria') == '1'): ?>
                             <?php echo $this->Html->link("Declaração de estágio", "/Alunos/busca_dre", ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
-                        <?php elseif ($this->Session->read('id_categoria') === '2'): ?>
+                        <?php elseif ($this->Session->read('id_categoria') == '2'): ?>
                             <?php echo $this->Html->link("Declaração de estágio", "/Estagiarios/view?registro=" . $this->Session->read('numero'), ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
-                        <?php elseif (($this->Session->read('id_categoria') === '3') || ($this->Session->read('id_categoria') === '4')): ?>
+                        <?php elseif (($this->Session->read('id_categoria') == '3') || ($this->Session->read('id_categoria') == '4')): ?>
                             <?php echo $this->Html->link("Declaração de estágio", "/Alunos/busca_dre", ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                         <?php endif; ?>
                     </div>
@@ -46,7 +46,7 @@
                 </li>
             <?php endif; ?>
 
-            <?php if ($this->Session->read('id_categoria') === '1'): ?>
+            <?php if ($this->Session->read('id_categoria') == '1'): ?>
                 <li class="nav-item dropdown">
                     <a style='color: white' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administração</a>
                     <div class="dropdown-menu">

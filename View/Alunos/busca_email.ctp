@@ -1,6 +1,6 @@
-<div class="table-responsive">
-    <?= $this->element('submenu_alunos'); ?>
+<?= $this->element('submenu_alunos'); ?>
 
+<?php if ($id_categoria == '1'): ?>
     <p>
         <?php echo $this->Html->link('Busca por Nome', '/alunos/busca'); ?> 
         <?php echo " | "; ?>
@@ -10,28 +10,28 @@
         <?php echo " | "; ?>
         <?php echo $this->Html->link('Busca por CPF', '/alunos/busca_cpf'); ?>
     </p>
+<?php endif; ?>
 
-    <?php if (isset($alunos)): ?>
+<?php if (isset($alunos)): ?>
 
-        <h1>Resultado da busca por Email</h1>
+    <h1>Resultado da busca por Email</h1>
 
-        <?php foreach ($alunos as $c_alunos): ?>
-            <?php echo $this->Html->link($c_alunos['Aluno']['nome'], '/alunos/view/' . $c_alunos['Aluno']['id']) . '<br>'; ?>
-        <?php endforeach; ?>
+    <?php foreach ($alunos as $c_alunos): ?>
+        <?php echo $this->Html->link($c_alunos['Aluno']['nome'], '/alunos/view/' . $c_alunos['Aluno']['id']) . '<br>'; ?>
+    <?php endforeach; ?>
 
-    <?php else: ?>
+<?php else: ?>
 
-        <h1>Busca por Email</h1>
+    <h1>Busca por Email</h1>
 
-        <?php echo $this->Form->create('Aluno', ['class' => 'form-inline']); ?>
-        <?php echo $this->Form->input('email', array('label' => ['text' => 'Digite o email', 'style' => 'display: inline;'], 'maxsize' => 70, 'size' => 70, 'class' => 'form-control')); ?>
+    <?php echo $this->Form->create('Aluno', ['class' => 'form-inline']); ?>
+    <?php echo $this->Form->input('email', array('label' => ['text' => 'Digite o email', 'style' => 'display: inline;'], 'maxsize' => 70, 'size' => 70, 'class' => 'form-control')); ?>
 
-        <div class='row justify-content-between'>
-            <div class='col-auto'>
-                <?php echo $this->Form->submit('Confirma', ['type' => 'Submit', 'label' => ['text' => 'Confirma', 'class' => 'col-4 col-form-label'], 'class' => 'btn btn-primary']); ?>
-                <?php echo $this->Form->end(); ?>
-            </div>
+    <div class='row justify-content-left'>
+        <div class='col-auto'>
+            <?php echo $this->Form->submit('Confirma', ['type' => 'Submit', 'label' => ['text' => 'Confirma', 'class' => 'col-4 col-form-label'], 'class' => 'btn btn-primary']); ?>
+            <?php echo $this->Form->end(); ?>
         </div>
+    </div>
 
-    <?php endif; ?>
-</div>
+<?php endif; ?>

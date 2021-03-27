@@ -112,7 +112,7 @@
             <!--
             Verifico que tenha um número e que seja de um estudante
             //-->
-        <?php if ($this->Session->read('numero') || ($this->Session->read('id_categoria') === '2')): ?>
+        <?php if ($this->Session->read('numero') || ($this->Session->read('id_categoria') == '2')): ?>
             <tr>
                 <td colspan="2">
                     <label for="AlunonovoRegistro">Registro na UFRJ (DRE): <?php echo $this->Session->read('numero'); ?></label>
@@ -124,7 +124,7 @@
             //-->
         <?php else: ?>
             <?php echo "Cadastro realizado pelo Administrador."; ?>
-            <?php if ($this->Session->read('id_categoria') === '1'): ?>
+            <?php if ($this->Session->read('id_categoria') == '1'): ?>
             <tr>
                 <td colspan="2">
                 <?php echo $this->Form->input('registro', array('type'=>'text', 'value'=>$registro, 'default'=>$this->Session->read('numero'))); ?>

@@ -10,22 +10,22 @@ class InscricaosController extends AppController {
 
         parent::beforeFilter();
         // Admin
-        if ($this->Session->read('id_categoria') === '1') {
+        if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
             // $this->Session->setFlash("Administrador");
             // Estudantes
-        } elseif ($this->Session->read('id_categoria') === '2') {
+        } elseif ($this->Session->read('id_categoria') == '2') {
             $this->Auth->allow('index', 'view', 'add', 'inscricao', 'termocadastra', 'termocompromisso', 'termoimprime', 'termosolicita', 'imprimepdf');
             // $this->Session->setFlash("Estudante");
-        } elseif ($this->Session->read('id_categoria') === '3') {
+        } elseif ($this->Session->read('id_categoria') == '3') {
             $this->Auth->allow('index', 'view', 'inscricao', 'termocadastra', 'termocompromisso', 'termoimprime', 'termosolicita', "imprimepdf");
             // $this->Session->setFlash("Professor");
             // Professores, Supervisores
-        } elseif ($this->Session->read('id_categoria') === '4') {
+        } elseif ($this->Session->read('id_categoria') == '4') {
             $this->Auth->allow('index', 'view', 'inscricao', 'termocadastra', 'termocompromisso', 'termoimprime', 'termosolicita', 'imprimepdf');
             // $this->Session->setFlash("Professor/Supervisor");
         } else {
-            $this->Session->setFlash("Não autorizado");
+            $this->Flash->error(__("Não autorizado"));
             $this->redirect('/users/login/');
         }
         // die(pr($this->Session->read('user')));
@@ -744,8 +744,6 @@ class InscricaosController extends AppController {
 
         $instituicao_nome = $estagiario['Instituicao']['instituicao'];
         $supervisor_nome = $estagiario['Supervisor']['nome'];
-        if (empty($supervisor_nome))
-            $supervisor_nome = "______________________________________";
         $aluno_nome = $estagiario['Aluno']['nome'];
         $nivel = $estagiario['Estagiario']['nivel'];
         $registro = $estagiario['Estagiario']['registro'];

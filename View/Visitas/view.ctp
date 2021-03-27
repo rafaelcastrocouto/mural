@@ -36,7 +36,7 @@
                 </td>
             </tr>
 
-        <?php if ($this->Session->read('id_categoria') === 1 || $this->Session->read('id_categoria') === 2): ?>
+        <?php if ($this->Session->read('id_categoria') == 1 || $this->Session->read('id_categoria') == 2): ?>
 
             <tr>
                 <td>Descrição</td>
@@ -57,7 +57,7 @@
         </tbody>
     </table>
 
-<?php if ($this->Session->read('id_categoria') === 1): ?>
+<?php if ($this->Session->read('id_categoria') == 1): ?>
     <?php
     echo $this->Html->link('Excluir', '/visitas/excluir/' . $visita['Visita']['id'], NULL, 'Tem certeza?');
     echo " | ";

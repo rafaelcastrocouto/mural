@@ -18,7 +18,7 @@
         <table class='table table-hover table-striped table-responsive'>
             <thead class='thead-light'>
                 <tr>
-                    <?php if ($this->Session->read('id_categoria') === '1'): ?>
+                    <?php if ($this->Session->read('id_categoria') == '1'): ?>
                         <th>
                             <?php echo $this->Paginator->sort('Professor.siape', 'Siape'); ?>
                         </th>
@@ -56,7 +56,7 @@
             <tbody>
                 <?php foreach ($professores as $c_professor): ?>
                     <tr>
-                        <?php if ($this->Session->read('id_categoria') === '1'): ?>
+                        <?php if ($this->Session->read('id_categoria') == '1'): ?>
                             <td>
                                 <?php echo $c_professor['Professor']['siape']; ?>
                             </td>

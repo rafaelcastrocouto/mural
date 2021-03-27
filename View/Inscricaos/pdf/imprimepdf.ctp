@@ -1,7 +1,20 @@
+<style>
+    table, th, td {
+        /* border: 1px solid black; */
+        border-spacing: 1px;
+    }
+    td {
+        padding: 0px 30px 0 35px;
+        text-align: center;
+    }
+</style>
 <?php
 if ($nivel === '9'):
     $nivel = ' <b>não obrigatório</b> ';
 endif;
+
+if (empty($supervisor_nome))
+    $supervisor_nome = "___________________";
 ?>
 
 <p style="text-align:center">
@@ -73,22 +86,24 @@ endif;
 <br />
 <br />
 
-<table style="width:100%">
-    <tr>
-        <td><span style="font-size: 90%; text-decoration: overline;">Coordenação de Estágio</span></td>
-        <td><span style="font-size: 90%; text-decoration: overline;"><?= $aluno_nome; ?></span></td>
-        <td><span style="font-size: 90%; text-decoration: overline;"><?= $supervisor_nome; ?></span></td>
-    </tr>
+<div style="center">
+    <table>
+        <tr>
+            <td><span style="font-size: 90%; text-decoration: overline;">Coordenação de Estágio</span></td>
+            <td><span style="font-size: 90%; text-decoration: overline;"><?= $aluno_nome; ?></span></td>
+            <td><span style="font-size: 90%; text-decoration: overline;"><?= $supervisor_nome; ?></span></td>
+        </tr>
 
-    <tr>
-        <td>Escola de Serviço Social</td>
-        <td><span style="font-size: 90%;">DRE: <?= $registro; ?></span></td>
-        <td><span style="font-size: 90%;">CRESS 7ª Região: <?= $supervisor_cress; ?></span></td>
-    </tr>
+        <tr>
+            <td>Escola de Serviço Social</td>
+            <td><span style="font-size: 90%;">DRE: <?= $registro; ?></span></td>
+            <td><span style="font-size: 90%;">CRESS 7ª Região: <?= $supervisor_cress; ?></span></td>
+        </tr>
 
-    <tr>
-        <td>UFRJ</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-</table>
+        <tr>
+            <td>UFRJ</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</div>

@@ -95,7 +95,7 @@
     <?php // die(); ?>
         <tr>
             <td>
-                <?php if ($this->Session->read('id_categoria') === '1'): ?>
+                <?php if ($this->Session->read('id_categoria') == '1'): ?>
                     <?= $this->Html->link('Ver', '/Estagiarios/view/' . $aluno_estagio['Estagiario']['id']); ?>
                 <?php else: ?>
                     <?= $this->Html->link('Ver', '/Estagiarios/view/' . $aluno_estagio['Estagiario']['id']); ?>

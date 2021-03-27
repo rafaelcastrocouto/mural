@@ -11,22 +11,22 @@ class AreainstituicaosController extends AppController {
 
         parent::beforeFilter();
         // Admin
-        if ($this->Session->read('id_categoria') === '1') {
+        if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
             // $this->Session->setFlash("Administrador");
             // Estudantes
-        } elseif ($this->Session->read('id_categoria') === '2') {
+        } elseif ($this->Session->read('id_categoria') == '2') {
             $this->Auth->allow('index', 'view');
             // $this->Session->setFlash("Estudante");
-        } elseif ($this->Session->read('id_categoria') === '3') {
+        } elseif ($this->Session->read('id_categoria') == '3') {
             $this->Auth->allow('index', 'view');
             // $this->Session->setFlash("Professor");
             // Professores, Supervisores
-        } elseif ($this->Session->read('id_categoria') === '4') {
+        } elseif ($this->Session->read('id_categoria') == '4') {
             $this->Auth->allow('index', 'view');
             // $this->Session->setFlash("Professor/Supervisor");
         } else {
-            $this->Session->setFlash("Não autorizado");
+            $this->Flash->error(__("Não autorizado"));
             // $this->redirect('/users/login/');
         }
         // die(pr($this->Session->read('user')));
@@ -77,7 +77,7 @@ class AreainstituicaosController extends AppController {
             if ($this->Areainstituicao->save($this->data)) {
                 // print_r($this->data);
                 // die();
-                $this->Session->setFlash("Atualizado");
+                $this->Flash->success(__("Atualizado!"));
                 $this->redirect('/Areainstituicaos/view/' . $id);
             }
         }
@@ -87,7 +87,7 @@ class AreainstituicaosController extends AppController {
 
         if ($this->data) {
             if ($this->Areainstituicao->save($this->data)) {
-                $this->Session->setFlash('Dados inseridos');
+                $this->Flash->success(__('Dados inseridos'));
                 $this->redirect('/Areainstituicaos/view/' . $this->Areainstituicao->getLastInsertId());
             }
         }
@@ -112,7 +112,7 @@ class AreainstituicaosController extends AppController {
           } else {
          */
         $this->Areainstituicao->delete($id);
-        $this->Session->setFlash("Área excluída");
+        $this->Flash->success(__("Área excluída"));
         // die("Área excluída");
         $this->redirect('/areainstituicaos/index/');
     }

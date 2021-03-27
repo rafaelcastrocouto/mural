@@ -19,13 +19,23 @@
 
 </script>
 
-<?php echo $this->Html->link('Configurações', '/configuracaos/view/1'); ?>
-<?php echo " | "; ?>
-<?php echo $this->Html->link('Lista de usuários', '/users/listausuarios/'); ?>
-<?php echo " | "; ?>
-<?php echo $this->Html->link('Usuários', '/users/index/'); ?>
-<?php echo " | "; ?>
-<?php // echo $this->Html->link('Permissões','/aros/indexaros/'); ?>
+<?php if ($id_categoria == '1'): ?>
+
+    <?= $this->Html->link('Configurações', '/configuracaos/view/1') ?>
+    <?= " | " ?>
+    <?= $this->Html->link('Lista de usuários', '/users/listausuarios/') ?>
+    <?= " | " ?>
+    <?= $this->Html->link('Usuários', '/users/index/') ?>
+    <?= " | " ?>
+    <?= $this->Html->link('Busca por numero', '/users/busca_numero') ?>
+    <?= " | " ?>
+    <?= $this->Html->link('Busca por Email', '/users/busca_email') ?>
+    <?= " | " ?>
+    <?= $this->Html->link('Usuários', '/users/listausuarios') ?>
+    <?= " | " ?>
+    <?= $this->Html->link('Alterna usuário', '/users/alternarusuario') ?>
+
+<?php endif; ?>
 
 <table 'class="table table-responsive">
     <tr>

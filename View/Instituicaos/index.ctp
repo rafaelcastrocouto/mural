@@ -23,7 +23,7 @@
 
     <?php echo $this->element('submenu_instituicoes'); ?>
 
-    <?php if ($this->Session->read('id_categoria') === '1'): ?>
+    <?php if ($this->Session->read('id_categoria') == '1'): ?>
 
         <?php echo $this->Form->create('Instituicao', ['controller' => 'Instituicao', 'url' => 'index', 'class' => 'form-inline']); ?>
         <?php echo $this->Form->input('periodo', array('type' => 'select', 'label' => array('text' => 'Período ', 'style' => 'display: inline'), 'options' => $todosPeriodos, 'default' => $periodo, 'empty' => 'Selecione', 'class' => 'form-control')); ?>

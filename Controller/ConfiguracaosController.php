@@ -10,7 +10,7 @@ class ConfiguracaosController extends AppController {
 
 		parent::beforeFilter();
 		// Admin
-		if ($this->Session->read('id_categoria') === '1') {
+		if ($this->Session->read('id_categoria') == '1') {
 			$this->Auth->allow();
 			$this->Session->setFlash("Administrador");
 		} else {

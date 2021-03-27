@@ -5,7 +5,7 @@
     </button>
     <div class='collapse navbar-collapse' id='navbarAluno'>
         <ul class="navbar-nav mr-auto">
-            <?php if ($this->Session->read('id_categoria') === '1'): ?>
+            <?php if ($this->Session->read('id_categoria') == '1'): ?>
                 <?php $parametros = $this->request->params['action']; ?>
                 <li class="nav-item"><?= $this->Html->link(__('Inserir'), ['controller' => 'alunos', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Buscar'), ['controller' => 'alunos', 'action' => 'busca'], ['class' => 'nav-link']) ?></li>
@@ -15,8 +15,8 @@
                     <li class="nav-item"><?= $this->Html->link(__('Editar'), ['controller' => 'alunos', 'action' => 'edit', $this->params['pass'][0]], ['class' => 'nav-link']) ?></li>
                     <li class="nav-item"><?= $this->Html->link(__('Excluir'), ['controller' => 'alunos', 'action' => 'delete', $this->params['pass'][0]], ['confirm' => __('Confirma?'), 'class' => 'nav-link']) ?></li>
                 <?php endif; ?>
-            <?php elseif ($this->Session->read('id_categoria') === '2'): ?>
-                <?php if ($this->request->params['action'] === 'view'): ?>
+            <?php elseif ($this->Session->read('id_categoria') == '2'): ?>
+                <?php if ($this->request->params['action'] == 'view'): ?>
                     <?php if (isset($this->params['pass'][0])): ?>
                         <li class="nav-item"><?= $this->Html->link(__('Editar'), ['controller' => 'alunos', 'action' => 'edit', $this->params['pass'][0]], ['class' => 'nav-link']) ?></li>
                     <?php else: ?>

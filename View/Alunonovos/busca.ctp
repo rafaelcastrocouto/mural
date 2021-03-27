@@ -1,6 +1,6 @@
-<div class="responsive">
-    <?= $this->element('submenu_alunonovos') ?>
+<?= $this->element('submenu_alunonovos') ?>
 
+<?php if ($id_categoria == '1'): ?>
     <p>
         <?php echo $this->Html->link('Busca por Nome', '/alunonovos/busca'); ?>
         <?php echo " | "; ?>
@@ -10,8 +10,7 @@
         <?php echo " | "; ?>
         <?php echo $this->Html->link('Busca por CPF', '/alunonovos/busca_cpf'); ?>
     </p>
-
-</div>
+<?php endif; ?>
 
 <?php if (isset($alunos)): ?>
 
@@ -50,6 +49,7 @@
             <?php endforeach; ?>
         </table>
     </div>
+    
 <?php else: ?>
 
     <div class='table-responsive'>
@@ -65,4 +65,5 @@
             </div>
         </div>
     </div>
+
 <?php endif; ?>

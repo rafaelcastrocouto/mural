@@ -29,8 +29,11 @@ class Professor extends AppModel {
 
     public function beforeValidate($options = array()) {
 
-        $this->data['Professor']['nome'] = ucwords(strtolower($this->data['Professor']['nome']));
-        $this->data['Professor']['email'] = strtolower($this->data['Professor']['email']);
+        // pr($this->data);
+        $this->data['Professor']['nome'] = mb_convert_case($this->data['Professor']['nome'], MB_CASE_TITLE, 'utf-8');
+        $this->data['Professor']['email'] = mb_convert_case($this->data['Professor']['email'], MB_CASE_LOWER, 'utf-8');
+        // pr($this->data);
+        // die();
 
         return true;
     }

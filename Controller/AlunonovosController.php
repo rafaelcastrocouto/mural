@@ -1,5 +1,17 @@
 <?php
 
+App::uses('AppController', 'Controller');
+
+/**
+ * Alunonovos Controller
+ *
+ * @property Alunonovo $Folhadeatividade
+ * @property PaginatorComponent $Paginator
+ * @property SessionComponent $Session
+ * @property FlashComponent $Flash
+ * @property RequestHandlerComponent $RequestHandler
+ * @property AuthComponent $Auth
+ */
 class AlunonovosController extends AppController {
 
     public $name = "Alunonovos";
@@ -16,25 +28,25 @@ class AlunonovosController extends AppController {
         $this->Auth->allow('add');
 
         // Admin
-        if ($this->Session->read('id_categoria') === '1') {
+        if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
             // $this->Session->setFlash('Administrador');
             // Estudantes podem somente fazer inscricao
-        } elseif ($this->Session->read('id_categoria') === '2') {
+        } elseif ($this->Session->read('id_categoria') == '2') {
             $this->Auth->allow('add', 'edit', 'index', 'view');
             // $this->Session->setFlash('Estudante');
             // die();
             // Professores podem atualizar murais
-        } elseif ($this->Session->read('id_categoria') === '3') {
+        } elseif ($this->Session->read('id_categoria') == '3') {
             $this->Auth->allow('edit', 'index', 'view');
             // $this->Session->setFlash('Professor');
             // No futuro os supervisores poderao lançar murals
-        } elseif ($this->Session->read('id_categoria') === '4') {
+        } elseif ($this->Session->read('id_categoria') == '4') {
             $this->Auth->allow('add', 'edit', 'index', 'view');
             // $this->Session->setFlash('Supervisor');
             // Todos
         } else {
-            $this->Session->setFlash("Não autorizado");
+            $this->Flash->error(__("Não autorizado"));
             $this->redirect('/users/login/');
         }
         // die(pr($this->Session->read('user')));
@@ -75,7 +87,8 @@ class AlunonovosController extends AppController {
           pr($cadastro);
           // die();
          */
-
+        // pr($this->data);
+        // die();
         if ($this->Alunonovo->save($this->data)) {
             // die("Aluno novo save");
             // Capturo o id da instituicao (se foi chamada desde inscriacao add)
@@ -91,7 +104,7 @@ class AlunonovosController extends AppController {
             $cadastro = $this->Session->read('cadastro');
 
             $registro = $this->data['Alunonovo']['registro'];
-            $this->Session->setFlash("Cadastro realizado: " . $registro);
+            $this->Flash->success(__("Cadastro realizado: " . $registro));
             // $this->redirect("/Inscricaos/solicitatermo/" . $registro);
             // die(" Verificacao da rotina " . $registro);
 
@@ -115,7 +128,7 @@ class AlunonovosController extends AppController {
                 // Mostra resultado da insercao
                 $this->Session->write('menu_aluno', 'alunonovo');
                 $this->Session->write('menu_id_aluno', $id_alunonovo);
-                $this->Session->setFlash('Dados inseridos');
+                $this->Flash->success(__('Dados inseridos'));
                 $id_alunonovo = $this->Alunonovo->getLastInsertId();
                 // die(" else " . $id_alunonovo);
                 $this->redirect("/Alunonovos/view/" . $id_alunonovo);
@@ -140,7 +153,7 @@ class AlunonovosController extends AppController {
         if ($this->Session->read('numero')) {
             $verifica = $this->Alunonovo->findByRegistro($this->Session->read('numero'));
             if ($id != $verifica['Alunonovo']['id']) {
-                $this->Session->setFlash("Acesso não autorizado");
+                $this->Flash->error(__("Acesso não autorizado"));
                 $this->redirect("/Murals/index");
                 die("Não autorizado");
             }
@@ -159,7 +172,7 @@ class AlunonovosController extends AppController {
             if ($aluno_id) {
                 $id = $aluno_id['Alunonovo']['id'];
             } else {
-                $this->Session->setFlash(__("Registro do estudante inexistente"));
+                $this->Flash->error(__("Registro do estudante inexistente"));
                 $this->redirect('/alunonovos/index');
                 die();
             }
@@ -174,7 +187,7 @@ class AlunonovosController extends AppController {
             $this->data = $this->Alunonovo->read();
         } else {
             if ($this->Alunonovo->save($this->data)) {
-                $this->Session->setFlash("Atualizado");
+                $this->Flash->success(__("Atualizado!"));
 
                 // Capturo o id da instituicao (se foi chamada desde inscriacao add)
                 $inscricao_selecao_estagio = $this->Session->read('id_instituicao');
@@ -185,11 +198,11 @@ class AlunonovosController extends AppController {
                 $this->Session->delete('termo');
                 if ($inscricao_selecao_estagio) {
                     // Faz inscricao para selecao de estagio
-                    $this->Session->setFlash("Inscricao para selecao de estagio");
+                    $this->Flash->success(__("Inscricao para selecao de estagio"));
                     $this->redirect('/Inscricaos/inscricao/' . $this->data['Alunonovo']['registro']);
                 } elseif (!empty($registro_termo)) {
                     // Solicita termo de compromisso
-                    $this->Session->setFlash("Solicitacao de termo de compromisso");
+                    $this->Flash->success(__("Solicitacao de termo de compromisso"));
                     // $this->redirect('/Inscricaos/termocompromisso/' . $registro_termo);
                 } else {
                     // Simplesmente atualiza e mostra o resultado
@@ -217,7 +230,7 @@ class AlunonovosController extends AppController {
             if ($aluno_id) {
                 $id = $aluno_id['Alunonovo']['id'];
             } else {
-                $this->Session->setFlash(__("Registro do estudante inexistente"));
+                $this->Flash->error(__("Registro do estudante inexistente"));
                 $this->redirect('/alunonovos/index');
                 die();
             }
@@ -235,7 +248,7 @@ class AlunonovosController extends AppController {
         // pr($registro);
         // die('registro');
 
-        if (($this->Session->read('id_categoria') === '2') && ($this->Session->read('numero'))) {
+        if (($this->Session->read('id_categoria') == '2') && ($this->Session->read('numero'))) {
             $verifica = $this->Alunonovo->findByRegistro($this->Session->read('numero'));
             // pr($verifica);
             // die('verifica');
@@ -243,13 +256,13 @@ class AlunonovosController extends AppController {
 
             if ($id) {
                 if ($id != $verifica['Alunonovo']['id']) {
-                    $this->Session->setFlash("Acesso não autorizado");
+                    $this->Flash->error(__("Acesso não autorizado"));
                     $this->redirect("/Alunonovos/index/");
                     die("Não autorizado");
                 }
             } elseif ($registro) {
                 if ($registro != $verifica['Alunonovo']['registro']) {
-                    $this->Session->setFlash("Acesso não autorizado");
+                    $this->Flash->error(__("Acesso não autorizado"));
                     $this->redirect("/Alunonovos/index");
                     die("Não autorizado");
                 }
@@ -269,7 +282,7 @@ class AlunonovosController extends AppController {
         // pr($aluno);
         // die('aluno');
         if (!isset($aluno) || empty($aluno)) {
-            $this->Session->setFlash('Estudante não cadastrado');
+            $this->Flash->error(__('Estudante não cadastrado'));
             $this->redirect('/Alunonovos/index');
             die();
         }
@@ -292,42 +305,50 @@ class AlunonovosController extends AppController {
 
     public function delete($id = NULL) {
 
-        // Capturo o numero de registro
-        $registro = $this->Alunonovo->findById($id, array('fields' => 'registro'));
-
+      // Capturo o numero de registro
+      $registro = $this->Alunonovo->find('first', [
+        'conditions' => ['Alunonovo.id' => $id],
+        'fields' => 'registro'
+      ]);
+      // pr($registro);
+      // die();
+      if ($registro) {
         // Capturo os estagios realizados
         $this->loadModel('Estagiario');
         $estagiario = $this->Estagiario->find('first', array(
-            'conditions' => array('Estagiario.registro' => $registro['Alunonovo']['registro']),
-            'fields' => 'Estagiario.id'));
-        // pr($estagiario);
-        // die('estagiario');
-        if ($estagiario) {
-            $this->Session->setFlash('Estudante com estágios. Exclua os estágio primeiro');
+          'conditions' => array('Estagiario.registro' => $registro['Alunonovo']['registro']),
+          'fields' => 'Estagiario.id'));
+          // pr($estagiario);
+          // die('estagiario');
+          if ($estagiario) {
+            $this->Flash->error(__('Estudante com estágios. Exclua os estágio primeiro'));
             $this->redirect('/Estagiarios/view/' . $estagiario['Estagiario']['id']);
             die();
-        }
+          }
 
-        // Capturo as inscricoes realizadas
-        $this->loadModel('Inscricao');
-        $inscricao = $this->Inscricao->find('all', array(
+          // Capturo as inscricoes realizadas
+          $this->loadModel('Inscricao');
+          $inscricao = $this->Inscricao->find('all', array(
             'conditions' => array('Inscricao.id_aluno' => $registro['Alunonovo']['registro']),
             'fields' => 'id'));
-        // pr($inscricao);
-        // die();
-        if ($inscricao) {
-            foreach ($inscricao as $c_inscricao) {
+            // pr($inscricao);
+            // die();
+            if ($inscricao) {
+              foreach ($inscricao as $c_inscricao) {
                 // pr($c_inscricao['Inscricao']['id']);
                 // die();
                 $this->Inscricao->delete($c_inscricao['Inscricao']['id']);
+              }
             }
+          }
+          if ($this->Alunonovo->delete($id)) {
+            $this->Flash->success(__("Registro excluído (junto com as inscrições)"));
+            $this->redirect("/Inscricaos/index/");
+          } else {
+            $this->Flash->error(__("Não foi possível excluir o registro"));
+            $this->redirect("/Inscricaos/index/");
+          }
         }
-
-        $this->Alunonovo->delete($id);
-
-        $this->Session->setFlash("Registro excluído (junto com as inscrições)");
-        $this->redirect("/Inscricaos/index/");
-    }
 
     public function busca($nome = NULL) {
 
@@ -369,23 +390,25 @@ class AlunonovosController extends AppController {
 
         // pr($this->data);
         if (!empty($this->data['Alunonovo']['registro'])) {
-            $alunos = $this->Alunonovo->findFirstByRegistro($this->data['Alunonovo']['registro']);
+            $alunos = $this->Alunonovo->find('first', [
+                'conditions' => ['Alunonovo.registro' => $this->data['Alunonovo']['registro']]
+            ]);
             // pr($alunos);
             // die('alunos');
             if (empty($alunos)) {
                 // Buscar na tabela alunos. Não deveria existr um Aluno que não seja também Alunonovo
+                $this->loadModel('Aluno');
                 $alunonovos = $this->Aluno->findFirstByRegistro($this->data['Alunonovo']['registro']);
                 // pr($alunonovos);
                 if (empty($alunonovos)) {
-                    $this->Session->setFlash("Não foram encontrados registros do aluno");
+                    $this->Flash->error(__("Não foram encontrados registros da(o) estudante"));
                     $this->redirect('/Alunonovos/busca_dre');
                 } else {
-                    $this->redirect('/Alunonovos/view/', $alunonovos['Aluno']['id']);
+                    $this->redirect('/Aluno/view/', $alunonovos['Aluno']['id']);
                 }
             } else {
                 // die($alunos['Alunonovo']['id']);
                 $this->redirect('/Alunonovos/view/' . $alunos['Alunonovo']['id']);
-                // $this->redirect('/Alunonovos/view/2300');
             }
         }
     }
@@ -399,7 +422,7 @@ class AlunonovosController extends AppController {
             // pr($alunos);
             // die("Sem registro");
             if (empty($alunos)) {
-                $this->Session->setFlash("Não foram encontrados registros do email aluno");
+                $this->Flash->error(__("Não foram encontrados registros do email aluno"));
                 // Teria que buscar na tabela alunos_novos
                 // $alunos_novos = $this->Aluno_novo->findAllByRegistro($this->data['Aluno']['registro']);
                 // if (empty($alunos_novos)
@@ -420,7 +443,7 @@ class AlunonovosController extends AppController {
             // pr($alunos);
             // die("Sem registro");
             if (empty($alunos)) {
-                $this->Session->setFlash("Não foram encontrados registros do CPF");
+                $this->Flash->error(__("Não foram encontrados registros do CPF"));
                 // Teria que buscar na tabela alunos_novos
                 // $alunos_novos = $this->Aluno_novo->findAllByRegistro($this->data['Aluno']['registro']);
                 // if (empty($alunos_novos)

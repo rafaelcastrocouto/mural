@@ -5,7 +5,7 @@
     </button>
     <div class='collapse navbar-collapse' id='navbarExtensao'>
         <ul class="navbar-nav mr-auto">
-            <?php if ($this->Session->read('id_categoria') === '1'): ?>
+            <?php if ($this->Session->read('id_categoria') == '1'): ?>
                 <?php $parametros = $this->request->params['action']; ?>
                 <li class="nav-item"><?= $this->Html->link(__('Inserir'), ['controller' => 'extensaos', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Extensão'), ['controller' => 'extensaos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>

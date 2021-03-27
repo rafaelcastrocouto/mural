@@ -18,14 +18,14 @@ class Aluno extends AppModel {
     );
 
     public function beforeValidate($options = array()) {
-        
-        $this->data['Aluno']['email'] = strtolower($this->data['Aluno']['email']);
-        $this->data['Aluno']['nome'] = ucwords(strtolower($this->data['Aluno']['nome']));
-        $this->data['Aluno']['endereco'] = ucwords(strtolower($this->data['Aluno']['endereco']));
-        $this->data['Aluno']['bairro'] = ucwords(strtolower($this->data['Aluno']['bairro']));
-        // pr($this->data['User']['email']);
+
+        // pr($this->data);
+        $this->data['Aluno']['email'] = mb_convert_case($this->data['Aluno']['email'], MB_CASE_LOWER, 'utf-8');
+        $this->data['Aluno']['nome'] = mb_convert_case($this->data['Aluno']['nome'], MB_CASE_TITLE, 'utf-8');
+        $this->data['Aluno']['endereco'] = mb_convert_case($this->data['Aluno']['endereco'], MB_CASE_TITLE, 'utf-8');
+        $this->data['Aluno']['bairro'] = mb_convert_case($this->data['Aluno']['bairro'], MB_CASE_TITLE, 'utf-8');
+        // pr($this->data);
         return true;
-        
     }
 
     public $validate = array(

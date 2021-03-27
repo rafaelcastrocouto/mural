@@ -90,7 +90,7 @@
                     if ($visitas > 0):
                         $ultimavisita = end($instituicao['Visita']);
                         if ($ultimavisita['data']):
-                            if ($this->Session->read('id_categoria') === '2'):
+                            if ($this->Session->read('id_categoria') == '2'):
                                 echo date('d-m-Y', strtotime($ultimavisita['data']));
                             else:
                                 echo $this->Html->link(date('d-m-Y', strtotime($ultimavisita['data'])), '/visitas/view/' . $ultimavisita['id']);

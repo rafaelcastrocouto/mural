@@ -12,7 +12,7 @@ class Alunonovo extends AppModel {
             'foreignKey' => 'id_instituicao'
         )
     );
-    
+
     public function alunonovorfao() {
 
         // return($this->query("select Alunonovo.id, Alunonovo.registro, Alunonovo.nome, Alunonovo.celular, Alunonovo.email, Inscricao.id, Inscricao.id_aluno from alunosnovos AS Alunonovo left join mural_inscricao AS Inscricao on Alunonovo.registro = Inscricao.id_aluno where Inscricao.id_aluno IS NULL group by Alunonovo.registro order by Alunonovo.nome"));
@@ -22,10 +22,10 @@ class Alunonovo extends AppModel {
     public function beforeValidate($options = array()) {
 
         // pr($this->data);
-        $this->data['Alunonovo']['email'] = strtolower($this->data['Alunonovo']['email']);
-        $this->data['Alunonovo']['nome'] = ucwords(strtolower($this->data['Alunonovo']['nome']));
-        $this->data['Alunonovo']['endereco'] = ucwords(strtolower($this->data['Alunonovo']['endereco']));
-        $this->data['Alunonovo']['bairro'] = ucwords(strtolower($this->data['Alunonovo']['bairro']));
+        $this->data['Alunonovo']['email'] = mb_convert_case($this->data['Alunonovo']['email'], MB_CASE_LOWER, 'utf-8');
+        $this->data['Alunonovo']['nome'] = mb_convert_case($this->data['Alunonovo']['nome'], MB_CASE_TITLE, 'utf-8');
+        $this->data['Alunonovo']['endereco'] = mb_convert_case($this->data['Alunonovo']['endereco'], MB_CASE_TITLE, 'utf-8');
+        $this->data['Alunonovo']['bairro'] = mb_convert_case($this->data['Alunonovo']['bairro'], MB_CASE_TITLE, 'utf-8');
         // pr($this->data);
         // die();
         return true;

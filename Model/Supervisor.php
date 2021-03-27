@@ -38,8 +38,11 @@ class Supervisor extends AppModel {
 
     public function beforeValidate($options = array()) {
 
-        $this->data['Supervisor']['nome'] = ucwords(strtolower($this->data['Supervisor']['nome']));
-        $this->data['Supervisor']['email'] = strtolower($this->data['Supervisor']['email']);
+        // pr($this->data);
+        $this->data['Supervisor']['nome'] = mb_convert_case($this->data['Supervisor']['nome'], MB_CASE_TITLE, 'utf-8');
+        $this->data['Supervisor']['email'] = mb_convert_case($this->data['Supervisor']['email'], MB_CASE_LOWER, 'utf-8');
+        // pr($this->data);
+        // die();
 
         return true;
     }

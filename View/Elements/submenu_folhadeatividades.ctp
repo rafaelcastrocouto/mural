@@ -5,7 +5,7 @@
     </button>
     <div class='collapse navbar-collapse' id='navbarAtividades'>
         <ul class="navbar-nav mr-auto">
-            <?php if ($this->Session->read('id_categoria') === '1'): ?>
+            <?php if ($this->Session->read('id_categoria') == '1'): ?>
                 <?php $parametros = $this->request->params['action']; ?>
                 <li class="nav-item"><?= $this->Html->link(__('Folha de atividades'), ['controller' => 'folhadeatividades', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Estagiarios'), ['controller' => 'estagiarios', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
@@ -13,7 +13,7 @@
                     <li class="nav-item"><?= $this->Html->link(__('Inserir'), ['controller' => 'folhadeatividades', 'action' => 'addatividade', "?" => ['estagiario_id' => $this->Session->read('estagiario_id')]], ['class' => 'nav-link']) ?></li>
                     <li class="nav-item"><?= $this->Html->link(__('Imprimir PDF'), ['controller' => 'folhadeatividades', 'action' => 'imprimepdf', '?' => ['estagiario_id' => $this->Session->read('estagiario_id')], 'ext' => 'pdf', 'atividadesdeestagio'], ['class' => 'nav-link']) ?></li>
                 <?php endif; ?>
-            <?php elseif ($this->Session->read('id_categoria') === '2'): ?>
+            <?php elseif ($this->Session->read('id_categoria') == '2'): ?>
                 <li class="nav-item"><?= $this->Html->link(__('Meus estágios'), ['controller' => 'alunos', 'action' => 'view?registro=' . $this->Session->read('numero')], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Atividades'), ['controller' => 'folhadeatividades', 'action' => 'atividade?estagiario_id=' . $this->Session->read('estagiario_id')], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Imprimir PDF'), ['controller' => 'folhadeatividades', 'action' => 'imprimepdf', '?' => ['estagiario_id' => $this->Session->read('estagiario_id')], 'ext' => 'pdf', 'atividadesdeestagio'], ['class' => 'nav-link']) ?></li>

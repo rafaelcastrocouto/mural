@@ -5,7 +5,7 @@
     </button>
     <div class='collapse navbar-collapse' id='navbarProfessores'>
         <ul class="navbar-nav mr-auto">
-            <?php if ($this->Session->read('id_categoria') === '1'): ?>
+            <?php if ($this->Session->read('id_categoria') == '1'): ?>
                 <li class="nav-item"><?= $this->Html->link(__('Inserir'), ['controller' => 'professors', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Professoras(es)'), ['controller' => 'professors', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Pauta'), ['controller' => 'professors', 'action' => 'pauta'], ['class' => 'nav-link']) ?></li>
@@ -31,11 +31,11 @@
                     <?php endif; ?>
                 <?php endif; ?>
                 <!-- Professores //-->
-            <?php elseif ($this->Session->read('id_categoria') === '3'): ?>
+            <?php elseif ($this->Session->read('id_categoria') == '3'): ?>
                          <li class="nav-item"><?= $this->Html->link(__('Professoras(es)'), ['controller' => 'professors', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
                          <li class="nav-item"><?= $this->Html->link(__('Pautas'), ['controller' => 'professors', 'action' => 'pauta'], ['class' => 'nav-link']) ?></li>
                          <li class="nav-item"><?= $this->Html->link(__('Áreas'), ['controller' => 'areas', 'action' => 'index'], ['class' => 'nav-link']) ?></li>                
-                <?php if ($this->request->params['action'] === 'view'): ?>
+                <?php if ($this->request->params['action'] == 'view'): ?>
                     <?php if (isset($this->params['pass'][0])): ?>
                             <li class="nav-item"><?= $this->Html->link(__('Editar'), ['controller' => 'professors', 'action' => 'edit/' . $this->params['pass'][0]], ['class' => 'nav-link']) ?></li>
                     <?php else: ?>
