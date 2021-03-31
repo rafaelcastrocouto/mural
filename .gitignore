@@ -53,3 +53,14 @@
 /Cache/Engine/
 /Config/Schema/
 /.htaccess
+tmp/cache/models/empty
+tmp/cache/models/empty
+tmp/cache/models/mural_cake_model_default_mural_areas_estagio
+tmp/cache/models/empty
+tmp/cache/models/mural_cake_model_default_mural_alunos
+tmp/tests/empty
+tmp/sessions/empty
+tmp/logs/error.log
+tmp/cache/models/mural_cake_model_default_mural_roles
+tmp/cache/models/mural_cake_model_default_mural_mural_inscricao
+tmp/cache/models/mural_cake_model_default_mural_alunosnovos

@@ -1,6 +1,5 @@
 <?php ?>
 
-
 <?php
 if ($professor['Professor']['siape']) {
     $this->Html->link('Estagiários', '/Estagiarios/index?siape=' . $professor['Professor']['siape'] . '&' . 'periodo=0');
@@ -8,7 +7,12 @@ if ($professor['Professor']['siape']) {
 ?>
 
 <?php echo $this->element('submenu_professores'); ?>
-<div class='row justify-content-center'>
+
+<?php if ($id_categoria == '3'): ?>
+    <?= $this->Html->link('Meus estudantes', '/estagiarios/index?siape=' . $this->Session->read('numero')) ?>
+<?php endif; ?> 
+
+<div class='row justify-content-left'>
     <div class='col-auto'>
         <table class="table table-hover table-striped table-responsive">
 

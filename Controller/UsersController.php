@@ -594,31 +594,32 @@ class UsersController extends AppController {
             $this->redirect('/users/listausuarios');
         } else {
             $this->User->delete($usuario_id['User']['id']);
-            $this->Session->setFlash('Registro excluído');
+            $this->Flash->success(__('Registro excluído'));
             $this->redirect('/users/listausuarios/');
         }
     }
 
     public function view($id = NULL) {
 
-        $usuario = $this->User->find('first', array(
-            'conditions' => array('User.numero' => $id)
-        ));
-
+        $usuario = $this->User->find('first', [
+            'conditions' => ['User.id' => $id]
+        ]);
+        // pr($id);
         // pr($usuario);
         // die();
 
-        if ($usuario['Role']['id'] == 2) {
+        if ($usuario['Role']['id'] == '2') {
             // echo "Estudante";
             $this->loadModel("Aluno");
             $aluno = $this->Aluno->find('first', array(
-                'conditions' => array('Aluno.registro' => $id)
+                'conditions' => array('Aluno.registro' => $usuario['User']['numero'])
             ));
             // pr($aluno);
             if (!$aluno) {
+                $this->Flash->error(__('Estudante sem estágio'));
                 $this->loadModel("Alunonovo");
                 $alunonovo = $this->Alunonovo->find('first', array(
-                    'conditions' => array('Alunonovo.registro' => $id)
+                    'conditions' => array('Alunonovo.registro' => $usuario['User']['numero'])
                 ));
                 // pr($alunonovo);
             }
@@ -629,13 +630,13 @@ class UsersController extends AppController {
             // pr($alunonovo);
             endif;
             // die();
-        } elseif ($usuario['Role']['id'] == 3) {
+        } elseif ($usuario['Role']['id'] == '3') {
             // echo "Professor";
             $this->loadModel('Professor');
             $professor = $this->Professor->find('first', array(
                 'conditions' => array('Professor.siape' => $id)
             ));
-        } elseif ($usuario['Role']['id'] == 4) {
+        } elseif ($usuario['Role']['id'] == '4') {
             // echo "Supervisor";
             $this->loadModel('Supervisor');
             $supervisor = $this->Supervisor->find('first', array(
@@ -662,11 +663,10 @@ class UsersController extends AppController {
         if (empty($this->data)) {
             $this->data = $this->User->read();
         } else {
-            pr($this->data);
+            // pr($this->data);
             $this->User->save($this->data);
             // print_r($this->data);
             $this->Flash->success(__("Atualizado"));
-
             $this->redirect('/users/view/' . $this->data['User']['numero']);
         }
     }
@@ -676,18 +676,39 @@ class UsersController extends AppController {
         if (!empty($this->data)) {
             // pr($this->data);
             // die();
-            $usuarios = $this->User->find('all', [
+            $usuarios = $this->User->find('first', [
                 'conditions' => ['User.email' => $this->data['User']['email']]
             ]);
             // pr($alunos);
             // die("Sem registro");
             if (empty($usuarios)) {
                 $this->Flash->error(__("Não foram encontrados registros de email"));
-                // Teria que buscar na tabela alunos_novos
-                // $alunos_novos = $this->Aluno_novo->findAllByRegistro($this->data['Aluno']['registro']);
-                // if (empty($alunos_novos)
                 $this->redirect('/Users/busca_email');
             } else {
+                // pr($usuarios);
+                switch ($usuarios['Role']['id']) {
+                    case 2:
+                        $this->loadModel('Aluno');
+                        $estudante = $this->Aluno->find('first', [
+                            'conditions' => ['Aluno.registro' => $usuarios['User']['numero']]
+                        ]);
+                        $this->set('segmento', $estudante);
+                        break;
+                    case 3:
+                        $this->loadModel('Professor');
+                        $professor = $this->Professor->find('first', [
+                            'conditions' => ['Professor.siape' => $usuarios['User']['numero']]
+                        ]);
+                        $this->set('segmento', $professor);
+                        break;
+                    case 4:
+                        $this->loadModel('Supervisor');
+                        $supervisor = $this->Supervisor->find('first', [
+                            'conditions' => ['Supervisor.cress' => $usuarios['User']['numero']]
+                        ]);
+                        $this->set('segmento', $supervisor);
+                        break;
+                }
                 $this->set('usuarios', $usuarios);
                 // $this->set('alunos',$alunos_novos);
             }
@@ -707,8 +728,8 @@ class UsersController extends AppController {
                 $this->Flash->error(__("Não foram encontrados registros do(a) usuario(a)"));
                 $this->redirect('/users/busca_numero');
             }
-            switch ($this->data['User']['categoria']) {
-                case 2:
+            switch ($usuarios['User']['categoria']) {
+                case '2':
                     $this->loadModel('Alunonovo');
                     $alunonovos = $this->Alunonovo->find('first', [
                         'conditions' => ['Alunonovo.registro' => $this->data['User']['numero']]
@@ -718,11 +739,11 @@ class UsersController extends AppController {
                         $this->Flash->error(__("Não foram encontrados registros da(o) estudante"));
                         $this->redirect('/users/busca_numero');
                     } else {
-                        $this->redirect('/users/view/', $alunonovos['Alunonovo']['id']);
+                        $this->redirect('/users/view/' . $usuarios['User']['id']);
                     }
                     break;
 
-                case 3:
+                case '3':
                     $this->loadModel('Professor');
                     $professor = $this->Professor->find('first', [
                         'conditions' => ['Professor.siape' => $this->data['User']['numero']]
@@ -732,12 +753,12 @@ class UsersController extends AppController {
                         $this->redirect('/users/busca_numero');
                         die();
                     } else {
-                        $this->redirect('/users/view/', $professor['Professor']['id']);
+                        $this->redirect('/users/view/' . $usuarios['User']['id']);
                         die();
                     }
                     break;
 
-                case 4:
+                case '4':
                     $this->loadModel('Supervisor');
                     $supervisor = $this->Supervisor->find('first', [
                         'conditions' => ['Supervisor.cress' => $this->data['User']['numero']]
@@ -747,12 +768,12 @@ class UsersController extends AppController {
                         $this->redirect('/users/busca_numero');
                         die();
                     } else {
-                        $this->redirect('/users/view/', $supervisor['Supervisor']['id']);
+                        $this->redirect('/users/view/' . $usuarios['User']['id']);
                         die();
                     }
                     break;
                 default:
-                    $this->redirect('/Users/view/' . $usuarios['User']['numero']);
+                    $this->redirect('/Users/view/' . $usuarios['User']['id']);
             }
         }
     }
@@ -827,7 +848,7 @@ class UsersController extends AppController {
                         } else {
                             $this->Session->write('id_categoria', 4);
                             $this->Session->write('numero', $this->data['User']['numero']);
-                            $this->redirect('/supervisors/view/', $supervisor['Supervisor']['id']);
+                            $this->redirect('/supervisors/view/' . $supervisor['Supervisor']['id']);
                             die();
                         }
                         break;

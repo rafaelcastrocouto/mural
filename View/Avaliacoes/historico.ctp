@@ -5,7 +5,7 @@
 // pr($nao_obrigatorio);
 ?>
 <div class=table-responsive'>
-    
+
     <?= $this->element('submenu_avaliacoes'); ?>
 
     <?php if ($this->Session->read('id_categoria') == '1'): ?>
@@ -39,7 +39,6 @@
                 <th>Supervisor</th>
                 <th>Professor</th>
                 <th>Área</th>
-
                 <th>Nota</th>
                 <th>CH</th>
             </tr>
@@ -47,11 +46,7 @@
         <?php foreach ($c_estagios as $aluno_estagio): ?>
             <tr>
                 <td>
-                    <?php if ($this->Session->read('id_categoria') == '1'): ?>
-                        <?= $this->Html->link('Ver', '/Avaliacoes/view?estagiario_id=' . $aluno_estagio['id']); ?>
-                    <?php elseif ($this->Session->read('id_categoria') != '1'): ?>    
-                        <?= $this->Html->link('Ver', '/Avaliacoes/view?estagiario_id=' . $aluno_estagio['id']); ?>
-                    <?php endif; ?>
+                    <?= $this->Html->link('Ver', '/estagiarios/view/' . $aluno_estagio['id']) ?>
                 </td>
                 <td><?php echo $aluno_estagio['periodo'] ?></td>
                 <td><?php echo $aluno_estagio['complemento_periodo_especial'] ?></td>

@@ -23,23 +23,23 @@ class AvaliacoesController extends AppController {
         // Admin
         if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
-            // $this->Session->setFlash("Administrador");
+            $this->Flash->success(__("Administrador"));
             // Estudantes
         } elseif ($this->Session->read('id_categoria') == '2') {
             $this->Auth->allow('view', 'busca_dre', 'imprimepdf', 'historico');
-            // $this->Session->setFlash("Estudante");
+            $this->Flash->success(__("Estudante"));
             // Professor
         } elseif ($this->Session->read('id_categoria') == '3') {
-            $this->Auth->allow('add', 'index', 'view', 'historico', 'edit', 'busca_dre');
-            // $this->Session->setFlash("Professor");
+            $this->Auth->allow('add', 'index', 'view', 'historico', 'view', 'edit', 'busca_dre', 'imprimepdf');
+            $this->Flash->success(__("Professor"));
             // Supervisores
         } elseif ($this->Session->read('id_categoria') == '4') {
-            $this->Auth->allow('add', 'historico', 'index', 'view', 'edit', 'delete', 'busca_dre');
+            $this->Auth->allow('add', 'historico', 'index', 'view', 'edit', 'delete', 'busca_dre', 'imprimepdf');
+            $this->Flash->success(__("Supervisor"));
             // $this->Auth->allow();
-            // $this->Session->setFlash("Professor/Supervisor");
         } else {
             $this->Flash->error(__("Não autorizado"));
-            $this->redirect('/users/login/');
+            $this->redirect('/murals/index/');
         }
         // die(pr($this->Session->read('user')));
     }

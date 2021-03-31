@@ -27,7 +27,7 @@ class SupervisorsController extends AppController {
             // $this->Session->setFlash("Supervisor");
         } else {
             $this->Flash->error(__("Não autorizado"));
-            $this->redirect('/users/login/');
+            $this->redirect('/murals/index/');
         }
         // die(pr($this->Session->read('user')));
     }

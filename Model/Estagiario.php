@@ -44,7 +44,6 @@ class Estagiario extends AppModel {
             'joinTable' => 'complementos'
         )
     );
-       
     public $validate = array(
         'id_instituicao' => array(
             'rule' => array('comparison', 'not equal', 0),
@@ -80,13 +79,22 @@ class Estagiario extends AppModel {
             'on' => 'create',
             'message' => 'Data da solicitação do Termo'
         ),
-        'nota' => array(
-            'rule' => array('range', 0, 10),
-            'requiered' => TRUE,
-            'allowEmpty' => TRUE,
-            'on' => 'create',
-            'message' => 'Valor entre 0 e 10 com as casas decimais separadas com um ponto'
-        ),
+        'nota' => [
+            'nota1' => [
+                'rule' => ['numeric'],
+                'requiered' => TRUE,
+                'allowEmpty' => TRUE,
+                'on' => 'update',
+                'message' => 'Digite um número'
+            ],
+            'nota2' => [
+                'rule' => ['range', '1', '10'],
+                'requiered' => TRUE,
+                'allowEmpty' => TRUE,
+                'on' => 'update',
+                'message' => 'Valor tem que ficar entre 0 e 10'
+            ]
+        ],
         'ch' => array(
             'rule' => 'numeric',
             'requiered' => TRUE,

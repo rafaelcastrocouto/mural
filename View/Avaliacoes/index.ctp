@@ -1,7 +1,7 @@
 <?php
-// pr($avaliacoes); 
+// pr($avaliacoes);
 ?>
-<div class='panel-body'>    
+<div class='panel-body'>
     <div class="table-responsive">
         <?= $this->element('submenu_avaliacoes'); ?>
 
@@ -20,23 +20,61 @@
             </thead>
             <tbody>
                 <?php foreach ($avaliacoes as $avaliacao): ?>
-                    <tr>
-                        <td><?php echo h($avaliacao['Avaliacao']['id']); ?>&nbsp;</td>
-                        <td>
-                            <?php
-                            if ($this->Session->read('id_categoria') != '2'):
-                                echo $this->Html->link($avaliacao['Estagiario']['Aluno']['nome'], array('controller' => 'avaliacoes', 'action' => 'view?estagiario_id=' . $avaliacao['Estagiario']['id']));
-                            else:
-                                echo $avaliacao['Estagiario']['Aluno']['nome'];
-                            endif;
-                            ?>
-                        </td>
-                        <td><?php echo h($avaliacao['Estagiario']['Instituicao']['instituicao']); ?>&nbsp;</td>
-                        <td><?php echo $avaliacao['Estagiario']['Professor']['nome'] = isset($avaliacao['Estagiario']['Professor']['nome']) ? $avaliacao['Estagiario']['Professor']['nome'] : 'Sem dados'; ?>&nbsp;</td>
-                        <td><?php echo $avaliacao['Estagiario']['Supervisor']['nome'] = isset($avaliacao['Estagiario']['Supervisor']['nome']) ? $avaliacao['Estagiario']['Supervisor']['nome'] : 'Sem dados'; ?>&nbsp;</td>
-                        <td><?php echo h($avaliacao['Estagiario']['nivel']); ?>&nbsp;</td>
-                        <td><?php echo h($avaliacao['Estagiario']['periodo']); ?>&nbsp;</td>
-                    </tr>
+                    <?php if ($id_categoria == '4' && $avaliacao['Estagiario']['Supervisor']['cress'] == $this->Session->read('numero')): ?>
+                        <tr>
+                            <td><?php echo h($avaliacao['Avaliacao']['id']); ?>&nbsp;</td>
+                            <td>
+                                <?php
+                                if ($this->Session->read('id_categoria') != '2'):
+                                    echo $this->Html->link($avaliacao['Estagiario']['Aluno']['nome'], array('controller' => 'avaliacoes', 'action' => 'view?estagiario_id=' . $avaliacao['Estagiario']['id']));
+                                else:
+                                    echo $avaliacao['Estagiario']['Aluno']['nome'];
+                                endif;
+                                ?>
+                            </td>
+                            <td><?php echo h($avaliacao['Estagiario']['Instituicao']['instituicao']); ?>&nbsp;</td>
+                            <td><?php echo $avaliacao['Estagiario']['Professor']['nome'] = isset($avaliacao['Estagiario']['Professor']['nome']) ? $avaliacao['Estagiario']['Professor']['nome'] : 'Sem dados'; ?>&nbsp;</td>
+                            <td><?php echo $avaliacao['Estagiario']['Supervisor']['nome'] = isset($avaliacao['Estagiario']['Supervisor']['nome']) ? $avaliacao['Estagiario']['Supervisor']['nome'] : 'Sem dados'; ?>&nbsp;</td>
+                            <td><?php echo h($avaliacao['Estagiario']['nivel']); ?>&nbsp;</td>
+                            <td><?php echo h($avaliacao['Estagiario']['periodo']); ?>&nbsp;</td>
+                        </tr>
+                    <?php elseif ($id_categoria == '2' && $avaliacao['Estagiario']['registro'] == $this->Session->read('numero')): ?>
+                        <tr>
+                            <td><?php echo h($avaliacao['Avaliacao']['id']); ?>&nbsp;</td>
+                            <td>
+                                <?php
+                                if ($this->Session->read('id_categoria') != '2'):
+                                    echo $this->Html->link($avaliacao['Estagiario']['Aluno']['nome'], array('controller' => 'avaliacoes', 'action' => 'view?estagiario_id=' . $avaliacao['Estagiario']['id']));
+                                else:
+                                    echo $avaliacao['Estagiario']['Aluno']['nome'];
+                                endif;
+                                ?>
+                            </td>
+                            <td><?php echo h($avaliacao['Estagiario']['Instituicao']['instituicao']); ?>&nbsp;</td>
+                            <td><?php echo $avaliacao['Estagiario']['Professor']['nome'] = isset($avaliacao['Estagiario']['Professor']['nome']) ? $avaliacao['Estagiario']['Professor']['nome'] : 'Sem dados'; ?>&nbsp;</td>
+                            <td><?php echo $avaliacao['Estagiario']['Supervisor']['nome'] = isset($avaliacao['Estagiario']['Supervisor']['nome']) ? $avaliacao['Estagiario']['Supervisor']['nome'] : 'Sem dados'; ?>&nbsp;</td>
+                            <td><?php echo h($avaliacao['Estagiario']['nivel']); ?>&nbsp;</td>
+                            <td><?php echo h($avaliacao['Estagiario']['periodo']); ?>&nbsp;</td>
+                        </tr>
+                    <?php elseif ($id_categoria == '1'): ?>
+                        <tr>
+                            <td><?php echo h($avaliacao['Avaliacao']['id']); ?>&nbsp;</td>
+                            <td>
+                                <?php
+                                if ($this->Session->read('id_categoria') != '2'):
+                                    echo $this->Html->link($avaliacao['Estagiario']['Aluno']['nome'], array('controller' => 'avaliacoes', 'action' => 'view?estagiario_id=' . $avaliacao['Estagiario']['id']));
+                                else:
+                                    echo $avaliacao['Estagiario']['Aluno']['nome'];
+                                endif;
+                                ?>
+                            </td>
+                            <td><?php echo h($avaliacao['Estagiario']['Instituicao']['instituicao']); ?>&nbsp;</td>
+                            <td><?php echo $avaliacao['Estagiario']['Professor']['nome'] = isset($avaliacao['Estagiario']['Professor']['nome']) ? $avaliacao['Estagiario']['Professor']['nome'] : 'Sem dados'; ?>&nbsp;</td>
+                            <td><?php echo $avaliacao['Estagiario']['Supervisor']['nome'] = isset($avaliacao['Estagiario']['Supervisor']['nome']) ? $avaliacao['Estagiario']['Supervisor']['nome'] : 'Sem dados'; ?>&nbsp;</td>
+                            <td><?php echo h($avaliacao['Estagiario']['nivel']); ?>&nbsp;</td>
+                            <td><?php echo h($avaliacao['Estagiario']['periodo']); ?>&nbsp;</td>
+                        </tr>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </tbody>
         </table>

@@ -2,12 +2,11 @@
 
     <?= $this->element('submenu_estagiarios') ?>
 
-    <?= $this->Html->link('Declaração de estágio', ['action' => 'declaracaoestagiopdf', $estagio['Estagiario']['id'], 'ext' => 'pdf', 'declaracaodeestagio']); ?>
-    <?= " | "; ?>
-    <?= $this->Html->link('Avaliação discente', '/Avaliacoes/view?estagiario_id=' . $estagio['Estagiario']['id']); ?>
-    <?= " | "; ?>
-    <?= $this->Html->link('Folha de atividades', '/folhadeatividades/atividade?estagiario_id=' . $estagio['Estagiario']['id']); ?>
-    
+    <?= $this->Html->link('Declaração de estágio', ['action' => 'declaracaoestagiopdf', $estagio['Estagiario']['id'], 'ext' => 'pdf', 'declaracaodeestagio'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
+    <?= $this->Html->link('Avaliação discente', '/Avaliacoes/view?estagiario_id=' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
+    <?= $this->Html->link('Folha de atividades', '/folhadeatividades/atividade?estagiario_id=' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
+    <?= $this->Html->link('Editar e lançar nota', '/estagiarios/edit/' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
+
     <h1>Estágiaria(o): <?php echo $estagio['Aluno']['nome']; ?></h1>
 
     <div class='table-responsive'>
@@ -61,9 +60,11 @@
 
                 <tr>
                     <td>Solicitação do TC</td>
-                    <?php if ($estagio['Estagiario']['tc_solicitacao']): ?>
-                        <td><?php echo date('d-m-Y', strtotime($estagio['Estagiario']['tc_solicitacao'])); ?></td>
-                    <?php endif; ?>
+                    <td>
+                        <?php if ($estagio['Estagiario']['tc_solicitacao']): ?>
+                            <?php echo date('d-m-Y', strtotime($estagio['Estagiario']['tc_solicitacao'])); ?>
+                        <?php endif; ?>
+                    </td>
                 </tr>
 
                 <tr>

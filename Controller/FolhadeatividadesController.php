@@ -12,7 +12,6 @@ App::uses('AppController', 'Controller');
  * @property RequestHandlerComponent $RequestHandler
  * @property AuthComponent $Auth
  */
-
 class FolhadeatividadesController extends AppController {
 
     /**
@@ -28,21 +27,21 @@ class FolhadeatividadesController extends AppController {
         // Admin
         if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
-            // $this->Session->setFlash("Administrador");
+            $this->Flash->success(__("Administrador"));
             // Estudantes
         } elseif ($this->Session->read('id_categoria') == '2') {
             $this->Auth->allow('add', 'addatividade', 'atividade', 'index', 'busca_dre', 'historico', 'imprimepdf', 'view', 'edit', 'delete');
-            // $this->Session->setFlash("Estudante");
+            $this->Flash->success(__("Estudante"));
         } elseif ($this->Session->read('id_categoria') == '3') {
-            $this->Auth->allow('index', 'view');
-            // $this->Session->setFlash("Professor");
+            $this->Auth->allow('index', 'view', 'busca_dre', 'atividade');
+            $this->Flash->success(__("Professor"));
             // Professores, Supervisores
-        } elseif ($this->Session->read('id_cateogria') == '4') {
-            $this->Auth->allow('index', 'view');
-            // $this->Session->setFlash("Supervisor");
+        } elseif ($this->Session->read('id_categoria') == '4') {
+            $this->Auth->allow('index', 'view', 'busca_dre', 'historico', 'atividade');
+            $this->Flash->success(__("Supervisor"));
         } else {
             $this->Flash->error(__("Não autorizado"));
-            $this->redirect('/users/login/');
+            $this->redirect('/murals/index/');
         }
         // die(pr($this->Session->read('user')));
     }
@@ -97,14 +96,16 @@ class FolhadeatividadesController extends AppController {
 
         if (!empty($this->data['Aluno']['registro'])) {
             $this->loadModel('Aluno');
-            $alunos = $this->Aluno->findFirstByRegistro($this->data['Aluno']['registro']);
-            // pr($alunos);
-            // die();
+            $alunos = $this->Aluno->find('first', [
+                'conditions' => ['Aluno.registro' => $this->data['Aluno']['registro']]
+            ]);
+            pr($alunos);
+            die();
             if (empty($alunos)) {
                 // Teria que buscar na tabela alunos_novos
                 $this->loadModel('Alunonovo');
                 $alunonovos = $this->Alunonovo->findFirstByRegistro($this->data['Aluno']['registro']);
-                // pr($alunonovos);
+                pr($alunonovos);
                 // die();
                 if (empty($alunonovos)) {
                     $this->Flash->error(__("Não foram encontrados registros do aluno"));
@@ -305,7 +306,7 @@ class FolhadeatividadesController extends AppController {
         if ($estagiario_id) {
             $this->Session->write('estagiario_id', $estagiario_id);
         } else {
-            $this->Session->setFlash(__('Sem parâmetros para imprimir a folha de atividades'));
+            $this->Session->setFlash(__('Sem parâmetros para localizar a folha de atividades'));
             $this->redirect(['controller' => 'folhadeatividades', 'action' => 'busca_dre']);
         }
 
@@ -315,8 +316,12 @@ class FolhadeatividadesController extends AppController {
         // pr($folhadeatividades);
         // die();
         if (empty($folhadeatividades)) {
-            $this->Session->setFlash(__('Sem folha de atividades cadastrada'));
-            $this->redirect('/folhadeatividades/addatividade?estagiario_id=' . $estagiario_id);
+            $this->Flash->error(__('Sem folha de atividades cadastrada'));
+            if ($id_categoria == '2') {
+                $this->redirect('/folhadeatividades/addatividade?estagiario_id=' . $estagiario_id);
+            } else {
+                $this->redirect('/avaliacoes/view?estagiario_id=' . $estagiario_id);
+            }
         }
 
         $this->Folhadeatividade->recursive = 2;

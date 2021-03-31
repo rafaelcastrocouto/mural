@@ -9,11 +9,9 @@
     <?= $this->element('submenu_alunos'); ?>
 
 <?php if ($this->Session->read('id_categoria') == '1'): ?>
-    <?php echo $this->Html->link('Alunos', '/Alunos/index'); ?>
-    <?php echo " | "; ?>
-    <?php echo $this->Html->link('Estagiários', '/Estagiarios/index'); ?>
-    <?php echo " | "; ?>
-    <?php echo $this->Html->link('Usuários', '/Users/listausuarios'); ?>
+    <?php echo $this->Html->link('Alunos', '/Alunos/index', ['role' => 'button', 'class' => 'btn btn-info']); ?>
+    <?php echo $this->Html->link('Estagiários', '/Estagiarios/index', ['role' => 'button', 'class' => 'btn btn-info']); ?>
+    <?php echo $this->Html->link('Usuários', '/Users/listausuarios', ['role' => 'button', 'class' => 'btn btn-info']); ?>
 <?php endif; ?>
 
 <?php if ($this->Session->read('id_categoria') != '2'): ?>
@@ -60,14 +58,13 @@ if (is_null($alunos['nascimento'])) {
 
 <p>
     <?php if ($this->Session->read('id_categoria') == '1'): ?>
-        <?php echo $this->Html->link('Excluir', '/Alunos/delete/' . $alunos['id'], NULL, 'Tem certeza?'); ?>
-        <?php echo " | "; ?>
+        <?php echo $this->Html->link('Excluir', '/Alunos/delete/' . $alunos['id'], ['role' => 'button', 'class' => 'btn btn-info'], 'Tem certeza?'); ?>
     <?php endif; ?>
 
     <?php if (($this->Session->read('id_categoria') == '2') && ($this->Session->read('numero') == $alunos['registro'])): ?>
-        <?php echo $this->Html->link('Editar', '/Alunos/edit/' . $alunos['id']); ?>
-    <?php elseif ($this->Session->read('categoria') === 'administrador'): ?>
-        <?php echo $this->Html->link('Editar', '/Alunos/edit/' . $alunos['id']); ?>
+        <?php echo $this->Html->link('Editar', '/Alunos/edit/' . $alunos['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
+    <?php elseif ($this->Session->read('id_categoria') == '1'): ?>
+        <?php echo $this->Html->link('Editar', '/Alunos/edit/' . $alunos['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
     <?php endif; ?>
 </p>
 </div>
@@ -133,7 +130,7 @@ if (is_null($alunos['nascimento'])) {
     <table class="table table-striped table-hover table-responsive">
     <?php foreach ($nao_obrigatorio as $aluno_nao_estagio): ?>
         <tr>
-        <?php if ($this->Session->read('categoria') === 'administrador'): ?>
+        <?php if ($this->Session->read('id_categoria') === '1'): ?>
             <td>
             <?php echo $this->Html->link('Ver', '/Estagiarios/view/' . $aluno_nao_estagio['id']); ?>
             </td>
@@ -159,9 +156,8 @@ if (is_null($alunos['nascimento'])) {
 
     <p>
     <?php if ($this->Session->read('id_categoria') == '1'): ?>
-    <?php echo $this->Html->link('Buscar', array('controller' => 'Alunos', 'action' => 'busca')); ?>
-    <?php echo " | "; ?>
-    <?php echo $this->Html->link("Inserir estágio", array('controller' => 'Estagiarios', 'action' => 'add', $alunos['id'])); ?>
+    <?php echo $this->Html->link('Buscar', ['controller' => 'Alunos', 'action' => 'busca'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
+    <?php echo $this->Html->link("Inserir estágio", ['controller' => 'Estagiarios', 'action' => 'add', $alunos['id']], ['role' => 'button', 'class' => 'btn btn-info']); ?>
     <?php endif; ?>
     </p>
 </div>

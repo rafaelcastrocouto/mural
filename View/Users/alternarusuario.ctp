@@ -1,13 +1,15 @@
+<?= $this->element('submenu_usuarios') ?>
+
 <?php if ($id_categoria == '1'): ?>
-    <p>
-        <?= $this->Html->link('Busca por número', '/users/busca_numero') ?>
-        <?= " | " ?>
-        <?= $this->Html->link('Busca por Email', '/users/busca_email') ?>
-        <?= " | " ?>
-        <?= $this->Html->link('Usuários', '/users/listausuarios') ?>
-        <?= " | " ?>
-        <?= $this->Html->link('Alterna usuário', '/users/alternarusuario') ?>
-    </p>
+
+    <?= $this->Html->link('Configurações', '/configuracaos/view/1', ['role' => 'button', 'class' => 'btn btn-info']) ?>
+    <?= $this->Html->link('Lista de usuários', '/users/listausuarios/', ['role' => 'button', 'class' => 'btn btn-info']) ?>
+    <?= $this->Html->link('Usuários', '/users/index/', ['role' => 'button', 'class' => 'btn btn-info']) ?>
+    <?= $this->Html->link('Busca por numero', '/users/busca_numero', ['role' => 'button', 'class' => 'btn btn-info']) ?>
+    <?= $this->Html->link('Busca por Email', '/users/busca_email', ['role' => 'button', 'class' => 'btn btn-info']) ?>
+    <?= $this->Html->link('Usuários', '/users/listausuarios', ['role' => 'button', 'class' => 'btn btn-info']) ?>
+    <?= $this->Html->link('Alterna usuário', '/users/alternarusuario', ['role' => 'button', 'class' => 'btn btn-info']) ?>
+
 <?php endif; ?>
 
 <?php

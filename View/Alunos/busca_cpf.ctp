@@ -2,13 +2,10 @@
 
 <?php if ($id_categoria == '1'): ?>
     <p>
-        <?php echo $this->Html->link('Busca por Nome', '/alunos/busca'); ?> 
-        <?php echo " | "; ?>
-        <?php echo $this->Html->link('Busca por DRE', '/alunos/busca_dre'); ?>
-        <?php echo " | "; ?>
-        <?php echo $this->Html->link('Busca por Email', '/alunos/busca_email'); ?>
-        <?php echo " | "; ?>
-        <?php echo $this->Html->link('Busca por CPF', '/alunos/busca_cpf'); ?>
+        <?php echo $this->Html->link('Busca por Nome', '/alunos/busca', ['role' => 'button', 'class' => 'btn btn-info']); ?>
+        <?php echo $this->Html->link('Busca por DRE', '/alunos/busca_dre', ['role' => 'button', 'class' => 'btn btn-info']); ?>
+        <?php echo $this->Html->link('Busca por Email', '/alunos/busca_email', ['role' => 'button', 'class' => 'btn btn-info']); ?>
+        <?php echo $this->Html->link('Busca por CPF', '/alunos/busca_cpf', ['role' => 'button', 'class' => 'btn btn-info']); ?>
     </p>
 <?php endif; ?>
 
@@ -22,8 +19,6 @@
 
 <?php else: ?>
 
-    <h1>Busca por CPF</h1>
-
     <?= $this->Html->script("jquery.maskedinput"); ?>
 
     <script>
@@ -32,8 +27,10 @@
         });
     </script>
 
+    <h1>Busca por CPF</h1>
+
     <?php echo $this->Form->create('Aluno', ['class' => 'form-inline']); ?>
-    <?php echo $this->Form->input('cpf', ['div' => 'form-group row', 'label' => ['text' => 'Digite o CPF', 'class' => 'col-form-label col-4'], 'between' => '<div class ="form-inline col-8">', 'after' => '</div>', 'class' => 'form-control required']); ?>
+    <?php echo $this->Form->input('cpf', ['div' => 'form-group form-inline', 'label' => ['text' => 'Digite o CPF', 'class' => 'col-4 col-form-label'], 'between' => '<div class ="col-6 form-inline">', 'after' => '</div>', 'class' => 'form-control required']); ?>
     <div class='row justify-content-left'>
         <div class='col-auto'>
             <?php echo $this->Form->submit('Confirma', ['type' => 'Submit', 'label' => ['text' => 'Confirma', 'class' => 'col-4 col-form-label'], 'class' => 'btn btn-primary']); ?>

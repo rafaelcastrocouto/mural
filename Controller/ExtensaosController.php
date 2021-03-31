@@ -37,7 +37,7 @@ class ExtensaosController extends AppController {
             // $this->Session->setFlash("Professor/Supervisor");
         } else {
             $this->Flash->error(__("Não autorizado"));
-            $this->redirect('/users/login/');
+            $this->redirect('/extensaos/index/');
         }
         // die(pr($this->Session->read('user')));
     }

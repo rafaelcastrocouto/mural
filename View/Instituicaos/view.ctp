@@ -183,13 +183,13 @@
 
         </table>
 
-        <?php if ($this->Session->read('categoria') === 'administrador'): ?>
+        <?php if ($this->Session->read('id_categoria') == '1'): ?>
             <?php
             echo $this->Html->link('Excluir', '/Instituicaos/delete/' . $instituicao['Instituicao']['id'], NULL, 'Tem certeza?');
             echo " | ";
             echo $this->Html->link('Editar', '/Instituicaos/edit/' . $instituicao['Instituicao']['id']);
             echo " | ";
-            if (sizeof($instituicao['Visita']) == 0) {
+            if (sizeof($instituicao['Visita']) == '0') {
                 echo $this->Html->link('Visita', '/Visitas/add/' . $instituicao['Instituicao']['id']);
                 echo " | ";
             }

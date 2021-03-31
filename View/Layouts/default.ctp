@@ -35,7 +35,7 @@
         echo $this->Html->meta('icon');
 
         echo $this->Html->css('bootstrap.min');
-        echo $this->Html->script(['jquery-3.5.1.min', 'popper.min', 'bootstrap.min', 'bootstrap.bundle.min']);
+        echo $this->Html->script(['jquery-3.6.0', 'popper.min', 'bootstrap.min', 'bootstrap.bundle.min']);
         // echo $this->Html->css('cake.generic');
         // echo $this->Html->css('abas');
         // echo $this->Html->script('jquery-1.9.1.min'); // Include jQuery library

@@ -1,25 +1,12 @@
-<?php echo $this->Html->link('Configurações','/configuracaos/view/1'); ?>
-<?php echo " | "; ?>
-
-<?php // echo $this->Html->link('Usuários','/aros/listausuarios/'); ?>
-<?php // echo " | "; ?>
-
-<?php echo $this->Html->link('Usuários','/users/listausuarios/'); ?>
-<?php echo " | "; ?>
-
-<?php echo $this->Html->link('Planilha seguro','/alunos/planilhaseguro/'); ?>
-<?php echo " | "; ?>
-
-<?php echo $this->Html->link('Planilha CRESS','/alunos/planilhacress/'); ?>
-<?php echo " | "; ?>
-
-<?php echo $this->Html->link('Carga horária','/alunos/cargahoraria/'); ?>
-<?php echo " | "; ?>
-
-<?php echo $this->Html->link('Complemento período especial','/complementos/index/'); ?>
-<?php echo " | "; ?>
-
-<?php echo $this->Html->link('Planejamento','/configuraplanejamentos/index/'); ?>
+<?php echo $this->Html->link('Configurações','/configuracaos/view/1', ['role' => 'button', 'class' => 'btn btn-info']); ?>
+<?php echo $this->Html->link('Usuários','/users/index/', ['role' => 'button', 'class' => 'btn btn-info']); ?>
+<?php echo $this->Html->link('Planilha seguro','/alunos/planilhaseguro/', ['role' => 'button', 'class' => 'btn btn-info']); ?>
+<?php echo $this->Html->link('Planilha CRESS','/alunos/planilhacress/', ['role' => 'button', 'class' => 'btn btn-info']); ?>
+<?php echo $this->Html->link('Carga horária','/alunos/cargahoraria/', ['role' => 'button', 'class' => 'btn btn-info']); ?>
+<?php echo $this->Html->link('Complemento período especial','/complementos/index/', ['role' => 'button', 'class' => 'btn btn-info']); ?>
+<!--
+    <?php echo $this->Html->link('Planejamento','/configuraplanejamentos/index/'); ?>
+//-->
 
 <h1>Configuração</h1>
 

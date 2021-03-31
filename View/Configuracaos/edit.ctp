@@ -14,19 +14,19 @@
 <fieldset>
     <legend class='w-auto'>Mural</legend>
     <?php
-    echo $this->Form->input('mural_periodo_atual', ['div' => 'form-group row', 'label' => ['text' => 'Período atual do mural', 'class' => 'control-label col-4'], 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control']);
-    echo $this->Form->input('termo_compromisso_periodo', ['div' => 'form-group row', 'label' => ['text' => 'Período atual do termo de compromisso', 'class' => 'control-label col-4'], 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control']);
-    echo $this->Form->input('termo_compromisso_inicio', array('type' => 'date', 'div' => 'form-group row', 'label' => ['text' => 'Data de inicio do termo de compromisso', 'class' => 'control-label col-4'], 'dateFormat' => 'DMY', 'monthNames' => $meses, 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control'));
-    echo $this->Form->input('termo_compromisso_final', array('type' => 'date', 'div' => 'form-group row', 'label' => ['text' => 'Data de finalização do termo de compromisso', 'class' => 'control-label col-4'], 'dateFormat' => 'DMY', 'monthNames' => $meses, 'between' => '<div class ="form-inline col-8">', 'after' => '</div>', 'class' => 'form-control'));
+    echo $this->Form->input('mural_periodo_atual', ['div' => 'form-group row', 'label' => ['text' => 'Período atual do mural', 'class' => 'col-form-label col-4'], 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control']);
+    echo $this->Form->input('termo_compromisso_periodo', ['div' => 'form-group row', 'label' => ['text' => 'Período atual do termo de compromisso', 'class' => 'col-form-label col-4'], 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control']);
+    echo $this->Form->input('termo_compromisso_inicio', array('type' => 'date', 'div' => 'form-group row', 'label' => ['text' => 'Data de inicio do termo de compromisso', 'class' => 'col-form-label col-4'], 'dateFormat' => 'DMY', 'monthNames' => $meses, 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control'));
+    echo $this->Form->input('termo_compromisso_final', array('type' => 'date', 'div' => 'form-group row', 'label' => ['text' => 'Data de finalização do termo de compromisso', 'class' => 'col-form-label col-4'], 'dateFormat' => 'DMY', 'monthNames' => $meses, 'between' => '<div class ="form-inline col-8">', 'after' => '</div>', 'class' => 'form-control'));
     ?>
 </fieldset>
 <br>
 <fieldset>
     <legend class='w-auto'>Curso de supervisores</legend>
     <?php
-    echo $this->Form->input('curso_turma_atual', ['div' => 'form-group row', 'label' => ['text' => 'Turma atual do curso', 'class' => 'control-label col-4'], 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control']);
-    echo $this->Form->input('curso_abertura_inscricoes', array('type' => 'date', 'div' => 'form-group row', 'label' => ['text' => 'Data de abertura das inscrições para o curso de supervisores', 'class' => 'control-label col-4'], 'dateFormat' => 'DMY', 'monthNames' => $meses, 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control'));
-    echo $this->Form->input('curso_encerramento_inscricoes', array('type' => 'date', 'div' => 'form-group row', 'label' => ['text' => 'Data de encerramento das inscrições para o curso de supervisores', 'class' => 'control-label col-4'], 'dateFormat' => 'DMY', 'monthNames' => $meses, 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control'));
+    echo $this->Form->input('curso_turma_atual', ['div' => 'form-group row', 'label' => ['text' => 'Turma atual do curso', 'class' => 'col-form-label col-4'], 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control']);
+    echo $this->Form->input('curso_abertura_inscricoes', array('type' => 'date', 'div' => 'form-group row', 'label' => ['text' => 'Data de abertura das inscrições para o curso de supervisores', 'class' => 'col-form-label col-4'], 'dateFormat' => 'DMY', 'monthNames' => $meses, 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control'));
+    echo $this->Form->input('curso_encerramento_inscricoes', array('type' => 'date', 'div' => 'form-group row', 'label' => ['text' => 'Data de encerramento das inscrições para o curso de supervisores', 'class' => 'col-form-label col-4'], 'dateFormat' => 'DMY', 'monthNames' => $meses, 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control'));
     ?>
 </fieldset>    
 

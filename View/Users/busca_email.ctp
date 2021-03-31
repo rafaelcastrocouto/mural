@@ -1,33 +1,61 @@
-<!--
-<?= $this->element('submenu_alunonovos'); ?>
-//-->
+<?= $this->element('submenu_usuarios') ?>
 
 <?php if ($id_categoria == '1'): ?>
-    <p>
-        <?= $this->Html->link('Busca por numero', '/users/busca_numero') ?>
-        <?= " | "; ?>
-        <?= $this->Html->link('Busca por Email', '/users/busca_email') ?>
-        <?= " | " ?>
-        <?= $this->Html->link('Usuários', '/users/listausuarios') ?>
-        <?= " | " ?>
-        <?= $this->Html->link('Alterna usuário', '/users/alternarusuario') ?>
-    </p>
+
+    <?= $this->Html->link('Configurações', '/configuracaos/view/1', ['role' => 'button', 'class' => 'btn btn-info']) ?>
+    <?= $this->Html->link('Lista de usuários', '/users/listausuarios/', ['role' => 'button', 'class' => 'btn btn-info']) ?>
+    <?= $this->Html->link('Usuários', '/users/index/', ['role' => 'button', 'class' => 'btn btn-info']) ?>
+    <?= $this->Html->link('Busca por numero', '/users/busca_numero', ['role' => 'button', 'class' => 'btn btn-info']) ?>
+    <?= $this->Html->link('Busca por Email', '/users/busca_email', ['role' => 'button', 'class' => 'btn btn-info']) ?>
+    <?= $this->Html->link('Usuários', '/users/listausuarios', ['role' => 'button', 'class' => 'btn btn-info']) ?>
+    <?= $this->Html->link('Alterna usuário', '/users/alternarusuario', ['role' => 'button', 'class' => 'btn btn-info']) ?>
+
 <?php endif; ?>
 
 <?php if (isset($usuarios)): ?>
     <?php // pr($usuarios); ?>
     <h1>Resultado da busca por Email</h1>
     <table class="table table-hover table-striped table-responsive">
-        <?php foreach ($usuarios as $c_alunos): ?>
-            <tr>
-                <td>
-                    <?php echo $this->Html->link($c_alunos['User']['numero'], '/users/view/' . $c_alunos['User']['numero']) . '<br>'; ?>
-                </td>
-                <td>
-                    <?php echo $this->Html->link($c_alunos['User']['email'], '/users/view/' . $c_alunos['User']['numero']) . '<br>'; ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
+        <tr>
+            <td colspan=2>
+                <?php if ($usuarios['Role']['id'] == '2'): ?>
+                    <?php echo 'Estudante'; ?>
+                <?php elseif ($usuarios['Role']['id'] == '3'): ?>
+                    <?php echo 'Professor(a)'; ?>
+                <?php elseif ($usuarios['Role']['id'] == '4'): ?>
+                    <?php echo 'Supervisor(a)'; ?>
+                <?php endif; ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <?php echo $this->Html->link($usuarios['User']['numero'], '/users/view/' . $usuarios['User']['id']); ?>
+            </td>
+            <td>
+                <?php echo $this->Html->link($usuarios['User']['email'], '/users/view/' . $usuarios['User']['id']); ?>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <?php if ($usuarios['Role']['id'] == '2'): ?>
+                    <?php echo $this->Html->link($segmento['Aluno']['registro'], '/alunos/view/' . $segmento['Aluno']['id']); ?>
+                <?php elseif ($usuarios['Role']['id'] == '3'): ?>
+                    <?php echo $this->Html->link($segmento['Professor']['siape'], '/professors/view/' . $segmento['Professor']['id']); ?>
+                <?php elseif ($usuarios['Role']['id'] == '4'): ?>
+                    <?php echo $this->Html->link($segmento['Supervisor']['cress'], '/supervisors/view/' . $segmento['Supervisor']['id']); ?>
+                <?php endif; ?>
+            </td>
+            <td>
+                <?php if ($usuarios['Role']['id'] == '2'): ?>
+                    <?php echo $this->Html->link($segmento['Aluno']['nome'], '/alunos/view/' . $segmento['Aluno']['id']); ?>
+                <?php elseif ($usuarios['Role']['id'] == '3'): ?>
+                    <?php echo $this->Html->link($segmento['Professor']['nome'], '/professors/view/' . $segmento['Professor']['id']); ?>
+                <?php elseif ($usuarios['Role']['id'] == '4'): ?>
+                    <?php echo $this->Html->link($segmento['Supervisor']['nome'], '/supervisors/view/' . $segmento['Supervisor']['id']); ?>
+                <?php endif; ?>
+            </td>
+        </tr>
     </table>
 
 <?php else: ?>

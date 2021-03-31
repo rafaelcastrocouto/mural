@@ -31,7 +31,7 @@ class ProfessorsController extends AppController {
             // $this->Session->setFlash("Professor/Supervisor");
         } else {
             $this->Flash->error(__("Não autorizado"));
-            // $this->redirect('/murals/index');
+            $this->redirect('/murals/index');
         }
         // die(pr($this->Session->read('user')));
     }

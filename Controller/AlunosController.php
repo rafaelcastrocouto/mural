@@ -12,7 +12,6 @@ App::uses('AppController', 'Controller');
  * @property RequestHandlerComponent $RequestHandler
  * @property AuthComponent $Auth
  */
-
 class AlunosController extends AppController {
 
     public $name = 'Alunos';
@@ -35,15 +34,15 @@ class AlunosController extends AppController {
             // $this->Session->setFlash("Estudante");
             // Professor
         } elseif ($this->Session->read('id_categoria') == '3') {
-            $this->Auth->allow('index', 'view', 'busca', 'busca_cpf', 'busca_dre', 'busca_email', 'edit');
+            $this->Auth->allow('index', 'view', 'busca', 'busca_cpf', 'busca_dre', 'busca_email', 'edit', 'avaliacaosolicita', 'avaliacaoedita', 'avaliacaoimprimepdf', 'folhasolicita', 'folhadeatividadespdf');
             // $this->Session->setFlash("Professor");
             // Supervisores
         } elseif ($this->Session->read('id_categoria') == '4') {
-            $this->Auth->allow('index', 'view', 'busca', 'busca_cpf', 'busca_dre', 'busca_email', 'avaliacaosolicita', 'avaliacaoverifica', 'avaliacaoedita', 'avaliacaoimprime', 'avaliacaoimprimepdf', 'folhadeatividades', 'folhadeatividadespdf');
-            // $this->Session->setFlash("Professor/Supervisor");
+            $this->Auth->allow('index', 'view', 'busca', 'busca_cpf', 'busca_dre', 'busca_email', 'avaliacaosolicita', 'avaliacaoverifica', 'avaliacaoedita', 'avaliacaoimprime', 'avaliacaoimprimepdf', 'folhasolicita', 'folhadeatividades', 'folhadeatividadespdf');
+            $this->Flash->success(__("Supervisor"));
         } else {
             $this->Flash->error(__("Não autorizado"));
-            $this->redirect('/users/login/');
+            $this->redirect('/murals/index/');
         }
         // die(pr($this->Session->read('user')));
     }
@@ -69,7 +68,6 @@ class AlunosController extends AppController {
         }
         // pr($registro);
         // die('registro');
-      
         // echo "Aluno";
         // die(pr($this->Session->read('numero')));
         // Se eh estudante somente o próprio pode ver
@@ -540,9 +538,9 @@ class AlunosController extends AppController {
                     // die('Verificar dados do supervisor');
                     $this->redirect('/Alunos/avaliacaoedita?supervisor_id=' . $aluno['Supervisor']['id'] . '&registro=' . $this->data['Aluno']['registro']);
                 } else {
-                    $this->Flash->error(__("Não foi indicado supervisor da instituicao. Retorna para solicitar termo de compromisso"));
+                    $this->Flash->error(__("Não foi indicado supervisor da instituicao."));
                     // die('Retorna para solicitar termo de compromisso');
-                    $this->redirect('/Inscricaos/termocompromisso?registro=' . $aluno['Aluno']['registro']);
+                    $this->redirect('/alunos/view?registro=' . $aluno['Aluno']['registro']);
                 }
             } else {
                 $this->Flash->error(__("Não há estágios cadastrados para este estudante"));

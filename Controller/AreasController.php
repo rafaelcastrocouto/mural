@@ -27,7 +27,7 @@ class AreasController extends AppController {
             // $this->Session->setFlash("Professor/Supervisor");
         } else {
             $this->Session->setFlash("Não autorizado");
-            // $this->redirect('/users/login/');
+            $this->redirect('/murals/index/');
         }
         // die(pr($this->Session->read('user')));
     }

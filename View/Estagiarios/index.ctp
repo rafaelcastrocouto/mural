@@ -146,7 +146,7 @@
     <table class="table table-hover table-striped table-responsive">
         <thead class='thead-light'>
             <tr>
-                <?php if ($this->Session->read('id_categoria') == '1'): ?>
+                <?php if ($this->Session->read('id_categoria') != '2'): ?>
                     <th><?php echo $this->Paginator->sort('Estagiario.registro', 'Registro'); ?></th>
                 <?php endif; ?>
                 <th><?php echo $this->Paginator->sort('Aluno.nome', 'Nome'); ?></th>
@@ -169,6 +169,10 @@
             <tr>
                 <?php if ($this->Session->read('id_categoria') == '1'): ?>
                     <td style='text-align:center'><?php echo $this->Html->link($aluno['Estagiario']['registro'], "/alunos/view/" . $aluno['Aluno']['id']); ?></td>
+                <?php elseif ($this->Session->read('id_categoria') == '4'): ?>
+                    <td style='text-align:center'><?php echo $this->Html->link($aluno['Estagiario']['registro'], "/estagiarios/view/" . $aluno['Estagiario']['id']); ?></td>
+                <?php elseif ($this->Session->read('id_categoria') == '3'): ?> 
+                    <td style='text-align:center'><?php echo $this->Html->link($aluno['Estagiario']['registro'], "/estagiarios/view/" . $aluno['Estagiario']['id']); ?></td>                    
                 <?php endif; ?>
                 <td style='text-align:left'><?php echo $aluno['Aluno']['nome']; ?></td>
                 <td style='text-align:center'><?php echo $aluno['Estagiario']['periodo']; ?></td>

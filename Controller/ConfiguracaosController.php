@@ -12,9 +12,9 @@ class ConfiguracaosController extends AppController {
 		// Admin
 		if ($this->Session->read('id_categoria') == '1') {
 			$this->Auth->allow();
-			$this->Session->setFlash("Administrador");
+			$this->Flash->usuario(__("Administrador"));
 		} else {
-			$this->Session->setFlash("Administração: Não autorizado");
+			$this->Flash->error(__("Administração: Não autorizado"));
 		}
 		// die(pr($this->Session->read('user')));
 	}

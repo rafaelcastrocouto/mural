@@ -34,6 +34,7 @@ class Alunonovo extends AppModel {
     public $validate = array(
         'nome' => array(
             'rule' => 'notBlank',
+            'required' => TRUE,
             'allowEmpty' => FALSE,
             'message' => 'Digite o nome completo'
         ),

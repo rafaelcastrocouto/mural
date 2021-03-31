@@ -25,7 +25,7 @@ class InstituicaosController extends AppController {
             // $this->Session->setFlash("Professor/Supervisor");
         } else {
             $this->Flash->error(__("Não autorizado"));
-            $this->redirect('/users/login/');
+            $this->redirect('/murals/index/');
         }
     }
 

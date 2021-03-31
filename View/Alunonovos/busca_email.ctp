@@ -2,13 +2,10 @@
 
 <?php if ($id_categoria == '1'): ?>
     <p>
-        <?php echo $this->Html->link('Busca por Nome', '/alunonovos/busca'); ?> 
-        <?php echo " | "; ?>
-        <?php echo $this->Html->link('Busca por DRE', '/alunonovos/busca_dre'); ?>
-        <?php echo " | "; ?>
-        <?php echo $this->Html->link('Busca por Email', '/alunonovos/busca_email'); ?>
-        <?php echo " | "; ?>
-        <?php echo $this->Html->link('Busca por CPF', '/alunonovos/busca_cpf'); ?>
+        <?php echo $this->Html->link('Busca por Nome', '/alunonovos/busca', ['role' => 'button', 'class' => 'btn btn-info']); ?>
+        <?php echo $this->Html->link('Busca por DRE', '/alunonovos/busca_dre', ['role' => 'button', 'class' => 'btn btn-info']); ?>
+        <?php echo $this->Html->link('Busca por Email', '/alunonovos/busca_email', ['role' => 'button', 'class' => 'btn btn-info']); ?>
+        <?php echo $this->Html->link('Busca por CPF', '/alunonovos/busca_cpf', ['role' => 'button', 'class' => 'btn btn-info']); ?>
     </p>
 <?php endif; ?>
 
