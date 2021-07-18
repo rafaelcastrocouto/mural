@@ -8,8 +8,8 @@ if ($professor['Professor']['siape']) {
 
 <?php echo $this->element('submenu_professores'); ?>
 
-<?php if ($id_categoria == '3'): ?>
-    <?= $this->Html->link('Meus estudantes', '/estagiarios/index?siape=' . $this->Session->read('numero')) ?>
+<?php if ($this->Session->read('id_categoria') == '3'): ?>
+    <?= $this->Html->link('Meus estudantes', '/estagiarios/index?siape=' . $this->Session->read('numero'), ['role' => 'button', 'class' => 'btn btn-info']) ?>
 <?php endif; ?> 
 
 <div class='row justify-content-left'>
@@ -111,3 +111,7 @@ if ($professor['Professor']['siape']) {
         </table>
     </div>
 </div>
+
+<?php if ($this->Session->read('id_categoria') == '3'): ?>
+    <?= $this->Html->link('Editar', '/professors/edit?siape=' . $this->Session->read('numero'), ['role' => 'button', 'class' => 'btn btn-info']) ?>
+<?php endif; ?> 

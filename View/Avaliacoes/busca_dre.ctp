@@ -14,7 +14,7 @@
             <h1>Avaliação discente on-line</h1>
 
             <?= $this->Form->create('Aluno', ['class' => 'form-inline']) ?>
-            <?php if ($id_categoria == '2'): ?>
+            <?php if ($this->Session->read('id_categoria') == '2'): ?>
                 <?= $this->Form->input('registro', ['type' => 'text', 'div' => 'form-group row', 'label' => ['text' => 'DRE', 'class' => 'label-control col-1'], 'value' => $this->Session->read('numero'), 'readonly', 'between' => '<div class ="form-inline col-8">', 'after' => '</div>', 'class' => 'form-control required']) ?>
             <?php else: ?>
                 <?= $this->Form->input('registro', ['type' => 'text', 'div' => 'form-group row', 'label' => ['text' => 'DRE', 'class' => 'label-control col-1'], 'placeholder' => 'Digite o DRE', 'between' => '<div class ="form-inline col-8">', 'after' => '</div>', 'class' => 'form-control required']) ?>

@@ -23,9 +23,7 @@ class UsersController extends AppController {
         $this->Session->delete('numero');
         $this->Session->delete('id_categoria');
         $this->Session->delete('categoria');
-
-        // pr($this->data);
-        // die();
+        
         if (!empty($this->data)) {
 
             $usuario = $this->User->find('first', array(
@@ -827,7 +825,7 @@ class UsersController extends AppController {
                         ]);
                         if (empty($professor)) {
                             $this->Flash->error(__("Não foram encontrdos registro da(o) professor(a)"));
-                            $this->redirect('/users/alternausuario');
+                            $this->redirect('/users/alternarusuario');
                             die();
                         } else {
                             $this->Session->write('id_categoria', 3);

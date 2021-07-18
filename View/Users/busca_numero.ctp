@@ -6,7 +6,7 @@
 
 <?= $this->element('submenu_usuarios') ?>
 
-<?php if ($id_categoria == '1'): ?>
+<?php if ($this->Session->read('id_categoria') == '1'): ?>
 
     <?= $this->Html->link('Configurações', '/configuracaos/view/1', ['role' => 'button', 'class' => 'btn btn-info']) ?>
     <?= $this->Html->link('Lista de usuários', '/users/listausuarios/', ['role' => 'button', 'class' => 'btn btn-info']) ?>

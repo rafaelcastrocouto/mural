@@ -27,18 +27,18 @@ class FolhadeatividadesController extends AppController {
         // Admin
         if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
-            $this->Flash->success(__("Administrador"));
+            // $this->Flash->success(__("Administrador"));
             // Estudantes
         } elseif ($this->Session->read('id_categoria') == '2') {
             $this->Auth->allow('add', 'addatividade', 'atividade', 'index', 'busca_dre', 'historico', 'imprimepdf', 'view', 'edit', 'delete');
-            $this->Flash->success(__("Estudante"));
+            // $this->Flash->success(__("Estudante"));
         } elseif ($this->Session->read('id_categoria') == '3') {
-            $this->Auth->allow('index', 'view', 'busca_dre', 'atividade');
-            $this->Flash->success(__("Professor"));
+            $this->Auth->allow('index', 'view', 'busca_dre', 'atividade', 'historico', 'imprimepdf');
+            // $this->Flash->success(__("Professor"));
             // Professores, Supervisores
         } elseif ($this->Session->read('id_categoria') == '4') {
-            $this->Auth->allow('index', 'view', 'busca_dre', 'historico', 'atividade');
-            $this->Flash->success(__("Supervisor"));
+            $this->Auth->allow('index', 'view', 'busca_dre', 'historico', 'addatividade', 'atividade', 'imprimepdf');
+            // $this->Flash->success(__("Supervisor"));
         } else {
             $this->Flash->error(__("Não autorizado"));
             $this->redirect('/murals/index/');
@@ -71,11 +71,11 @@ class FolhadeatividadesController extends AppController {
      * @return void
      */
     public function view($id = null) {
-
+/*
         if (!$this->Folhadeatividade->exists($id)) {
             throw new NotFoundException(__('Invalid folhadeatividade'));
         }
-
+*/
         $options = array('conditions' => array('Folhadeatividade.' . $this->Folhadeatividade->primaryKey => $id));
         // $options = array('conditions' => array('Folhadeatividade.estagiario_id' => $id));
         $folhadeatividades = $this->Folhadeatividade->find('first', $options);
@@ -94,18 +94,19 @@ class FolhadeatividadesController extends AppController {
 
     public function busca_dre($id = NULL) {
 
+        // die('busca_dre');
         if (!empty($this->data['Aluno']['registro'])) {
             $this->loadModel('Aluno');
             $alunos = $this->Aluno->find('first', [
                 'conditions' => ['Aluno.registro' => $this->data['Aluno']['registro']]
             ]);
-            pr($alunos);
-            die();
+            // pr($alunos);
+            // die();
             if (empty($alunos)) {
                 // Teria que buscar na tabela alunos_novos
                 $this->loadModel('Alunonovo');
                 $alunonovos = $this->Alunonovo->findFirstByRegistro($this->data['Aluno']['registro']);
-                pr($alunonovos);
+                // pr($alunonovos);
                 // die();
                 if (empty($alunonovos)) {
                     $this->Flash->error(__("Não foram encontrados registros do aluno"));
@@ -317,10 +318,11 @@ class FolhadeatividadesController extends AppController {
         // die();
         if (empty($folhadeatividades)) {
             $this->Flash->error(__('Sem folha de atividades cadastrada'));
-            if ($id_categoria == '2') {
+            if ($this->Session->read('id_categoria') == '1' || $this->Session->read('id_categoria') == '2' || $this->Session->read('id_categoria') == '4') {
                 $this->redirect('/folhadeatividades/addatividade?estagiario_id=' . $estagiario_id);
             } else {
-                $this->redirect('/avaliacoes/view?estagiario_id=' . $estagiario_id);
+                // die();
+                $this->redirect('/estagiarios/view/' . $estagiario_id);
             }
         }
 
@@ -375,6 +377,8 @@ class FolhadeatividadesController extends AppController {
      */
     public function addatividade($id = NULL) {
 
+        // die('Add atividade');
+        
         $estagiario_id = $this->request->query('estagiario_id');
         if ($estagiario_id) {
             $this->Session->write('estagiario_id', $estagiario_id);
@@ -408,6 +412,7 @@ class FolhadeatividadesController extends AppController {
         $this->Folhadeatividade->recursive = 2;
         $folhadeatividades = $this->Folhadeatividade->find('all', ['conditions' => ['Folhadeatividade.estagiario_id' => $estagiario_id], 'order' => 'dia']);
         $this->set(compact('folhadeatividades'));
+        
     }
 
     /**

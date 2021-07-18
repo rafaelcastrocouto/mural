@@ -34,6 +34,7 @@
         ]
     ]);
 
+    echo $this->Form->input('id', ['type' => 'hidden']);
     echo $this->Form->input('siape');
     echo $this->Form->input('nome');
 // echo $this->Form->input('cpf');
@@ -63,7 +64,7 @@
 // echo $this->Form->input('tipocargo', array('options'=>array('efetivo'=>'Efetivo', 'substituto'=>'Substituto')));
 // echo $this->Form->input('categoria', array('options'=>array('sem dados'=>'Sem dados', 'auxiliar'=>'Auxiliar', 'assistente'=>'Assistente', 'adjunto'=>'Adjunto', 'associado'=>'Associado', 'titular'=>'Titular', 'outro'=>'Outro'), 'default'=>0));
 // echo $this->Form->input('regimetrabalho', array('options'=>array('40DE'=>'40DE', '40'=>'40', '20'=>'20')));
-    echo $this->Form->input('departamento', array('options' => array('Fundamentos' => 'Fundamentos', 'Métodos' => 'Métodos e técnicas', 'Políticas' => 'Política Social')));
+    echo $this->Form->input('departamento', array('options' => array('Fundamentos' => 'Fundamentos', 'Métodos e técnicas' => 'Métodos e técnicas', 'Política social' => 'Política Social')));
 // echo $this->Form->input('dataegresso', array('dateFormat'=>'DMY', 'minYear'=>'1900', 'empty'=>TRUE));
     echo $this->Form->input('motivoegresso');
     echo $this->Form->input('observacoes');

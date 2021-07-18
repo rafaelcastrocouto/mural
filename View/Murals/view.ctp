@@ -194,7 +194,7 @@
             <!--
             Para o administrador as inscrições sempre estão abertas
             //-->
-            <?php if ($this->Session->read('categoria') === 'administrador'): ?>
+            <?php if ($this->Session->read('id_categoria') === '1'): ?>
                 <tr>
                     <td colspan = 2 style="text-align: center">
                         <?php echo $this->Form->create('Inscricao', array('url' => '/Inscricaos/add/' . $mural['Mural']['id'])); ?>

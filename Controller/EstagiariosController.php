@@ -25,17 +25,17 @@ class EstagiariosController extends AppController {
         // Admin
         if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
-            $this->Flash->usuario(__("Administrador"));
+            // $this->Flash->usuario(__("Administrador"));
             // Estudantes
         } elseif ($this->Session->read('id_categoria') == '2') {
             $this->Auth->allow('declaracaoestagio', 'declaracaoestagiopdf', 'index', 'view');
             // $this->Flash->success(__("Estudante"));
         } elseif ($this->Session->read('id_categoria') == '3') {
-            $this->Auth->allow('index', 'view', 'edit');
+            $this->Auth->allow('index', 'view', 'edit', 'declaracaoestagio', 'declaracaoestagiopdf');
             // $this->Flash->success(__("Professor"));
             // Professores, Supervisores
         } elseif ($this->Session->read('id_categoria') == '4') {
-            $this->Auth->allow('index', 'view');
+            $this->Auth->allow('index', 'view', 'declaracaoestagio', 'declaracaoestagiopdf');
             // $this->Flash->success(__("Supervisor"));
         } else {
             $this->Flash->error(__("Não autorizado"));
@@ -716,21 +716,21 @@ class EstagiariosController extends AppController {
 // die('estagiorealizado');
 
         if (empty($estagiorealizado['Aluno']['identidade'])) {
-            $this->Session->setFlash(__("Estudante sem RG"), "flash_notification");
+            $this->Flash->error(__("Estudante sem RG"));
             $this->redirect('/Alunos/view/' . $estagiorealizado['Aluno']['id']);
         }
 
         if (empty($estagiorealizado['Aluno']['orgao'])) {
-            $this->Session->setFlash(__("Estudante não especifica o orgão emisor do documento"), "flash_notification");
+            $this->Flash->error(__("Estudante não especifica o orgão emisor do documento"));
             $this->redirect('/Alunos/view/' . $estagiorealizado['Aluno']['id']);
         }
         if (empty($estagiorealizado['Aluno']['cpf'])) {
-            $this->Session->setFlash(__("Estudante sem CPF"), "flash_notification");
+            $this->Flash->error(__("Estudante sem CPF"));
             $this->redirect('/Alunos/view/' . $estagiorealizado['Aluno']['id']);
         }
 
         if (empty($estagiorealizado['Supervisor']['id'])) {
-            $this->Session->setFlash(__("Falta o supervisor de estágio"), "flash_notification");
+            $this->Flash->error(__("Falta o supervisor de estágio"));
             $this->redirect('/Alunos/view/' . $estagiorealizado['Aluno']['id']);
         }
 

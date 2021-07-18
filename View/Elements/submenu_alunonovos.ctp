@@ -27,7 +27,7 @@
                     <?php endif; ?>
                 <?php endif; ?>
             <?php endif; ?>
-        <?php elseif ($id_categoria != '2'): ?>
+        <?php elseif ($this->Session->read('id_categoria') != '2'): ?>
             <li class="nav-item"><?= $this->Html->link(__('Buscar'), ['controller' => 'alunonovos', 'action' => 'busca'], ['class' => 'nav-link']) ?></li>
             <li class="nav-item"><?= $this->Html->link(__('Estagiarios'), ['controller' => 'estagiarios', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
         <?php endif; ?>

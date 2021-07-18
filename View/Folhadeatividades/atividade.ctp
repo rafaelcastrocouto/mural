@@ -43,10 +43,10 @@ $estagio = $folhadeatividades[0];
                 <tr>
                     <th><?php echo $this->Paginator->sort('dia'); ?></th>
                     <th><?php echo $this->Paginator->sort('inicio'); ?></th>
-                    <th><?php echo $this->Paginator->sort('final'); ?></th>            
+                    <th><?php echo $this->Paginator->sort('final'); ?></th>
                     <th><?php echo $this->Paginator->sort('horario', 'Horas'); ?></th>
                     <th><?php echo $this->Paginator->sort('atividade'); ?></th>
-                    <?php if ($id_categoria == '3'): ?>                    
+                    <?php if ($this->Session->read('id_categoria') == '1' || $this->Session->read('id_categoria') == '4'): ?>
                         <th class="actions"><?php echo __('Ações'); ?></th>
                     <?php endif; ?>
                 </tr>
@@ -60,7 +60,7 @@ $estagio = $folhadeatividades[0];
                         <td><?php echo h($folhadeatividade['Folhadeatividade']['final']); ?>&nbsp;</td>
                         <td><?php echo h($folhadeatividade['Folhadeatividade']['horario']); ?>&nbsp;</td>
                         <td><?php echo h($folhadeatividade['Folhadeatividade']['atividade']); ?>&nbsp;</td>
-                        <?php if ($id_categoria == '3'): ?>
+                        <?php if ($this->Session->read('id_categoria') == '1' || $this->Session->read('id_categoria') == '4'): ?>
                             <td class="actions">
                                 <?php echo $this->Html->link(__('Ver'), array('action' => 'view', $folhadeatividade['Folhadeatividade']['id'])); ?>
                                 <?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $folhadeatividade['Folhadeatividade']['id'])); ?>

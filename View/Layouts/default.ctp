@@ -42,12 +42,12 @@
         echo $this->Js->writeBuffer();
         echo $scripts_for_layout;
         ?>
-        <!--
+
         <style>
             a {color: #000; font-weight: 500; text-decoration: underline}
-            a:hover {color: #003d4c; font-weight: 500; text-decoration: underline}
+            a:hover {color: #003d4c; font-weight: 500; /* text-decoration: underline blue */}
         </style>
-        //-->
+
     </head>
     <!--
         <body style="color:#003d4c; background: #2b6c9c">
@@ -85,7 +85,7 @@
             ?>
         </div>
 
-        <?php // echo $this->element('sql_dump'); ?>
+        <?php echo $this->element('sql_dump'); ?>
 
     </body>
 </html>

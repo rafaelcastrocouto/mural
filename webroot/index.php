@@ -15,7 +15,7 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
+// echo "Luis1";
 /**
  * Use the DS to separate the directories in other defines
  */
@@ -37,7 +37,7 @@ if (!defined('ROOT')) {
 	// print "ROOT " . ROOT . "<BR>";
 	// die('ROOT');
 }
-
+// echo 'Luis2';
 /**
  * The actual directory name for the "app".
  */
@@ -46,7 +46,8 @@ if (!defined('APP_DIR')) {
 	// define('APP_DIR', 'mural');
 	// print "APP_DIR " . APP_DIR . "<BR>";
 }
-
+// echo "Luis3";
+// die();
 /**
  * The absolute path to the "cake" directory, WITHOUT a trailing DS.
  *
@@ -64,7 +65,7 @@ if (!defined('APP_DIR')) {
 define('CAKE_CORE_INCLUDE_PATH', ROOT);
 // define('CAKE_CORE_INCLUDE_PATH', DS . 'home' . DS . 'luis' . DS . 'html' . DS . 'Cake');
 // print "CAKE_CORE_INCLUDE_PATH " . CAKE_CORE_INCLUDE_PATH . "<BR>";
-
+// die();
 /**
  * This auto-detects CakePHP as a composer installed library.
  * You may remove this if you are not planning to use composer (not recommended, though).
@@ -83,6 +84,7 @@ if (!defined('WEBROOT_DIR')) {
 	define('WEBROOT_DIR', basename(dirname(__FILE__)));
 	// print WEBROOT_DIR;
 }
+// die("Luis");
 if (!defined('WWW_ROOT')) {
 	define('WWW_ROOT', dirname(__FILE__) . DS);
 	// print WWW_ROOT . "<br>";
@@ -95,7 +97,7 @@ if (PHP_SAPI === 'cli-server') {
 	}
 	$_SERVER['PHP_SELF'] = '/' . basename(__FILE__);
 }
-// die("Luis");
+// die("Luis4");
 // echo "Cake: " . CAKE_CORE_INCLUDE_PATH;
 if (!defined('CAKE_CORE_INCLUDE_PATH')) {
 	if (function_exists('ini_set')) {
@@ -107,15 +109,19 @@ if (!defined('CAKE_CORE_INCLUDE_PATH')) {
 } elseif (!include CAKE_CORE_INCLUDE_PATH . DS . 'Cake' . DS . 'bootstrap.php') {
 	$failed = true;
 }
-
+// die("Luis5");
 if (!empty($failed)) {
 	trigger_error("CakePHP core could not be found. Check the value of CAKE_CORE_INCLUDE_PATH in APP/webroot/index.php. It should point to the directory containing your " . DS . "cake core directory and your " . DS . "vendors root directory.", E_USER_ERROR);
 }
-
+// die("Luis6");
 App::uses('Dispatcher', 'Routing');
 
 $Dispatcher = new Dispatcher();
+// die("Luis8");
 $Dispatcher->dispatch(
-	new CakeRequest(),
-	new CakeResponse()
+        new CakeRequest(),
+        // die("Luis10"),
+	new CakeResponse(),
+        // die("Luis11")
 );
+// die("Luis12");

@@ -39,7 +39,7 @@ class AlunosController extends AppController {
             // Supervisores
         } elseif ($this->Session->read('id_categoria') == '4') {
             $this->Auth->allow('index', 'view', 'busca', 'busca_cpf', 'busca_dre', 'busca_email', 'avaliacaosolicita', 'avaliacaoverifica', 'avaliacaoedita', 'avaliacaoimprime', 'avaliacaoimprimepdf', 'folhasolicita', 'folhadeatividades', 'folhadeatividadespdf');
-            $this->Flash->success(__("Supervisor"));
+            // $this->Flash->success(__("Supervisor"));
         } else {
             $this->Flash->error(__("Não autorizado"));
             $this->redirect('/murals/index/');
@@ -73,28 +73,30 @@ class AlunosController extends AppController {
         // Se eh estudante somente o próprio pode ver
         // echo $this->Session->read('numero');
         // die();
-        if (($this->Session->read('id_categoria') == '2') && ($this->Session->read('numero'))) {
-            // pr($this->Session->read('numero'));
-            // die();
-            if ($id) {
-                $verifica = $this->Aluno->find('first', [
-                    'conditions' => ['Aluno.id' => $id]
-                ]);
-            } elseif ($registro) {
-                $verifica = $this->Aluno->find('first', [
-                    'conditions' => ['Aluno.registro' => $this->Session->read('numero')]
-                ]);
-            }
-            // pr($verifica);
-            // die('verifica');
-            if (!$verifica) {
-                $this->Flash->error(__("Estudante não estágiario"));
-                $this->redirect("/Alunonovos/view?registro=" . $this->Session->read('numero'));
-            } else {
-                if ($this->Session->read('numero') != $verifica['Aluno']['registro']) {
-                    $this->Flash->error(__("Acesso não autorizado"));
-                    $this->redirect("/Murals/index");
-                    die("Não autorizado");
+        if ($this->Session->read('id_categoria') != 1) {
+            if (($this->Session->read('id_categoria') == '2') && ($this->Session->read('numero'))) {
+                // pr($this->Session->read('numero'));
+                // die();
+                if ($id) {
+                    $verifica = $this->Aluno->find('first', [
+                        'conditions' => ['Aluno.id' => $id]
+                    ]);
+                } elseif ($registro) {
+                    $verifica = $this->Aluno->find('first', [
+                        'conditions' => ['Aluno.registro' => $this->Session->read('numero')]
+                    ]);
+                }
+                // pr($verifica);
+                // die('verifica');
+                if (!$verifica) {
+                    $this->Flash->error(__("Estudante não estágiario"));
+                    $this->redirect("/Alunonovos/view?registro=" . $this->Session->read('numero'));
+                } else {
+                    if ($this->Session->read('numero') != $verifica['Aluno']['registro']) {
+                        $this->Flash->error(__("Acesso não autorizado"));
+                        $this->redirect("/Murals/index");
+                        die("Não autorizado");
+                    }
                 }
             }
         }
@@ -282,12 +284,14 @@ class AlunosController extends AppController {
             }
         }
 
-        if ($this->Session->read('numero')) {
-            $verifica = $this->Aluno->findByRegistro($this->Session->read('numero'));
-            if ($id != $verifica['Aluno']['id']) {
-                $this->Flash->error(__("Acesso não autorizado"));
-                $this->redirect("/Murals/index");
-                die("Não autorizado");
+        if ($this->Session->read('id_categoria') != 1) {
+            if ($this->Session->read('numero')) {
+                $verifica = $this->Aluno->findByRegistro($this->Session->read('numero'));
+                if ($id != $verifica['Aluno']['id']) {
+                    $this->Flash->error(__("Acesso não autorizado"));
+                    $this->redirect("/Murals/index");
+                    die("Não autorizado");
+                }
             }
         }
 

@@ -188,12 +188,14 @@ class InscricaosController extends AppController {
 
     public function add($id = NULL) {
 
+        // pr($id);
         // pr($this->data);
         $this->set('id_instituicao', $id);
-
+        // die();
         // Verifico se foi preenchido o numero de registro
         if (isset($this->data['Inscricao']['id_aluno'])) {
-
+            // pr($this->data);
+            // die();
             /* Verificacoes */
             if ((strlen($this->request->data['Inscricao']['id_aluno'])) < 9) {
                 $this->Session->setFlash("Registro incorreto");
@@ -205,6 +207,8 @@ class InscricaosController extends AppController {
             $this->loadModel('Aluno');
             $registro = $this->data['Inscricao']['id_aluno'];
             $aluno = $this->Aluno->findByRegistro($registro, array('fields' => 'id', 'registro'));
+            // pr($aluno);
+            // die();
             if ($aluno) {
                 // echo "Aluno estagiario";
                 $this->Session->delete('id_instituicao', $id);
@@ -227,14 +231,18 @@ class InscricaosController extends AppController {
                     // Se esta cadastrado como alunonovo redireciona para /Alunonovos/edit
                 } else {
                     // echo "Aluno novo cadastrado!";
+                    // die();
                     // Redireciono com um cookie para lembrar a origem do redirecionamento
                     $this->Session->delete('id_instituicao', $id);
                     $this->Session->write('id_instituicao', $id);
+                    // pr($alunonovo['Alunonovo']['id']);
                     $this->redirect("/Alunonovos/edit/" . $alunonovo['Alunonovo']['id']);
                     die("Stop");
                 }
             }
             /* Fim das verificacoes */
+        } else {
+          // die('Sem número de registro');
         }
     }
 
@@ -275,9 +283,11 @@ class InscricaosController extends AppController {
             // die();
 
             if ($this->Inscricao->save($this->request->data)) {
-                $this->Session->setFlash("Inscrição realizada");
+                $this->Flash->success(__("Inscrição realizada"));
                 $this->redirect('/Inscricaos/index/' . $id_instituicao);
             }
+        } else {
+          $this->Flash->error(__("Error! DRE inexistente!"));
         }
     }
 

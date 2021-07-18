@@ -1,6 +1,6 @@
 <?= $this->element('submenu_alunos'); ?>
 
-<?php if ($id_categoria == '1'): ?>
+<?php if ($this->Session->read('id_categoria') == '1'): ?>
     <p>
         <?php echo $this->Html->link('Busca por Nome', '/alunos/busca', ['role' => 'button', 'class' => 'btn btn-info']); ?>
         <?php echo $this->Html->link('Busca por DRE', '/alunos/busca_dre', ['role' => 'button', 'class' => 'btn btn-info']); ?>

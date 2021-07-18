@@ -12,8 +12,10 @@
                 <li class="nav-item"><?= $this->Html->link(__("Estagiários"), ['controller' => 'estagiarios', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Alunos em estágio'), ['controller' => 'alunos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
                 <?php if ($this->request->params['action'] === 'view'): ?>
-                    <li class="nav-item"><?= $this->Html->link(__('Editar'), ['controller' => 'alunos', 'action' => 'edit', $this->params['pass'][0]], ['class' => 'nav-link']) ?></li>
-                    <li class="nav-item"><?= $this->Html->link(__('Excluir'), ['controller' => 'alunos', 'action' => 'delete', $this->params['pass'][0]], ['confirm' => __('Confirma?'), 'class' => 'nav-link']) ?></li>
+                    <?php if (isset($this->params['pass'][0])): ?>
+                        <li class="nav-item"><?= $this->Html->link(__('Editar'), ['controller' => 'alunos', 'action' => 'edit', $this->params['pass'][0]], ['class' => 'nav-link']) ?></li>
+                        <li class="nav-item"><?= $this->Html->link(__('Excluir'), ['controller' => 'alunos', 'action' => 'delete', $this->params['pass'][0]], ['confirm' => __('Confirma?'), 'class' => 'nav-link']) ?></li>
+                    <?php endif; ?>                    
                 <?php endif; ?>
             <?php elseif ($this->Session->read('id_categoria') == '2'): ?>
                 <?php if ($this->request->params['action'] == 'view'): ?>

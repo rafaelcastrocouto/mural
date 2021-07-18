@@ -4,7 +4,7 @@ class InstituicaosController extends AppController {
 
     public $name = "Instituicaos";
     public $components = array('Auth', 'Paginator', 'Flash');
-   
+
     public function beforeFilter() {
 
         parent::beforeFilter();
@@ -178,7 +178,7 @@ class InstituicaosController extends AppController {
         // die();
         $this->set('id_area_instituicao', $area_instituicao);
         // $this->set('meses', $this->meses());
-        
+
         if ($this->data) {
             if ($this->Instituicao->save($this->data)) {
                 $this->Session->setFlash('Dados da instituição inseridos!');
@@ -220,9 +220,9 @@ class InstituicaosController extends AppController {
         ));
 
         $this->set('area_instituicao', $area_instituicao);
-        
+
         // $this->set('meses', $this->meses());
-        
+
         if (empty($this->data)) {
             $this->data = $this->Instituicao->read();
         } else {
@@ -430,6 +430,7 @@ class InstituicaosController extends AppController {
         $natureza = isset($parametros['natureza']) ? $parametros['natureza'] : NULL;
         // Para ordenar por periodos //
         // Nao implementado //
+        // pr($mudadirecao);
 
         if (!$linhas) {
             $linhas = $this->request->query('linhas');
@@ -472,20 +473,28 @@ class InstituicaosController extends AppController {
             $periodo = $periodoatual['Estagiario']['periodo'];
         endif;
 
+        // pr($paginas);
         // Matriz com os dados para ordenar e paginar //
         if ($natureza):
             $g_instituicoes = $this->Instituicao->find('all', array(
                 'conditions' => array('Instituicao.natureza' => $natureza),
-                'order' => 'Instituicao.instituicao'
+                'order' => $ordem,
+                'limit' => $linhas
                     )
             );
         else:
             $g_instituicoes = $this->Instituicao->find('all', array(
-                'order' => 'Instituicao.instituicao'
+                'order' => $ordem,
+                'limit' => $linhas
                     )
             );
         endif;
+        // $log = $this->Instituicao->getDataSource()->getLog(false, false);
+        // debug($log);
+
         // pr($g_instituicoes);
+        // die();
+
         $i = 0;
         foreach ($g_instituicoes as $c_instituicao):
             // pr($c_instituicao);
@@ -569,6 +578,7 @@ class InstituicaosController extends AppController {
                 $pagina = 1;
             }
         }
+        // pr($pagina);
 
         if ($linhas == NULL) {
             $linhas = $this->Session->read('linhas');

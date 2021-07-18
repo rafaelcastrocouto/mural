@@ -174,7 +174,7 @@ class MuralsController extends AppController {
                     $instituicao['Instituicao']['instituicao'] = substr($instituicao['Instituicao']['instituicao'], 0, 99);
             endif;
             echo $this->request->data['Mural']['instituicao'] = $instituicao['Instituicao']['instituicao'];
-            pr($this->data);
+            // pr($this->data);
             // die();
             if ($this->Mural->save($this->data)) {
                 $this->Session->setFlash('Mural inserido');

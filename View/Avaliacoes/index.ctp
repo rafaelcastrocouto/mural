@@ -20,7 +20,8 @@
             </thead>
             <tbody>
                 <?php foreach ($avaliacoes as $avaliacao): ?>
-                    <?php if ($id_categoria == '4' && $avaliacao['Estagiario']['Supervisor']['cress'] == $this->Session->read('numero')): ?>
+                <?php // pr($avaliacao['Estagiario']['Supervisor']) ?>
+                    <?php if ($this->Session->read('id_categoria') == '4' && isset($avaliacao['Estagiario']['Supervisor']['cress']) == $this->Session->read('numero')): ?>
                         <tr>
                             <td><?php echo h($avaliacao['Avaliacao']['id']); ?>&nbsp;</td>
                             <td>
@@ -38,7 +39,7 @@
                             <td><?php echo h($avaliacao['Estagiario']['nivel']); ?>&nbsp;</td>
                             <td><?php echo h($avaliacao['Estagiario']['periodo']); ?>&nbsp;</td>
                         </tr>
-                    <?php elseif ($id_categoria == '2' && $avaliacao['Estagiario']['registro'] == $this->Session->read('numero')): ?>
+                    <?php elseif ($this->Session->read('id_categoria') == '2' && $avaliacao['Estagiario']['registro'] == $this->Session->read('numero')): ?>
                         <tr>
                             <td><?php echo h($avaliacao['Avaliacao']['id']); ?>&nbsp;</td>
                             <td>
@@ -56,7 +57,7 @@
                             <td><?php echo h($avaliacao['Estagiario']['nivel']); ?>&nbsp;</td>
                             <td><?php echo h($avaliacao['Estagiario']['periodo']); ?>&nbsp;</td>
                         </tr>
-                    <?php elseif ($id_categoria == '1'): ?>
+                    <?php elseif ($this->Session->read('id_categoria') == '1'): ?>
                         <tr>
                             <td><?php echo h($avaliacao['Avaliacao']['id']); ?>&nbsp;</td>
                             <td>

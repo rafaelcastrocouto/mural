@@ -23,19 +23,19 @@ class AvaliacoesController extends AppController {
         // Admin
         if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
-            $this->Flash->success(__("Administrador"));
+            // $this->Flash->success(__("Administrador"));
             // Estudantes
         } elseif ($this->Session->read('id_categoria') == '2') {
-            $this->Auth->allow('view', 'busca_dre', 'imprimepdf', 'historico');
-            $this->Flash->success(__("Estudante"));
+            $this->Auth->allow('view', 'imprimepdf', 'historico', 'busca_dre');
+            // $this->Flash->success(__("Estudante"));
             // Professor
         } elseif ($this->Session->read('id_categoria') == '3') {
-            $this->Auth->allow('add', 'index', 'view', 'historico', 'view', 'edit', 'busca_dre', 'imprimepdf');
-            $this->Flash->success(__("Professor"));
+            $this->Auth->allow('index', 'view', 'historico', 'view', 'busca_dre', 'imprimepdf');
+            // $this->Flash->success(__("Professor"));
             // Supervisores
         } elseif ($this->Session->read('id_categoria') == '4') {
             $this->Auth->allow('add', 'historico', 'index', 'view', 'edit', 'delete', 'busca_dre', 'imprimepdf');
-            $this->Flash->success(__("Supervisor"));
+            // $this->Flash->success(__("Supervisor"));
             // $this->Auth->allow();
         } else {
             $this->Flash->error(__("Não autorizado"));
@@ -74,12 +74,23 @@ class AvaliacoesController extends AppController {
         // die('view');
         if (!is_numeric($id)) {
             $estagiario_id = $this->request->query('estagiario_id');
+            // pr($estagiario_id);
+            // die();
             if ($estagiario_id) {
                 $avaliacao = $this->Avaliacao->find('first', [
                     'conditions' => ['Avaliacao.estagiario_id' => $estagiario_id]
                 ]);
+                // pr($avaliacao);
+                // die();
                 if ($avaliacao) {
                     $id = $avaliacao['Avaliacao']['id'];
+                } else {
+                    $this->Flash->error(__('Estudante sem avaliação'));
+                    if ($this->Session->read('id_categoria') == '4'):
+                        $this->redirect(['controller' => 'avaliacoes', 'action' => 'add?estagiario_id=' . $estagiario_id]);
+                    else:
+                        $this->redirect(['controller' => 'estagiarios', 'action' => 'view/' . $estagiario_id]);
+                    endif;
                 }
                 $this->Session->write('estagiario_id', $estagiario_id);
             } else {
@@ -87,8 +98,9 @@ class AvaliacoesController extends AppController {
                 $this->redirect(['controller' => 'avaliacoes', 'action' => 'busca_dre']);
             }
         }
-        // pr($estagiario_id);
+        // pr($id);
         // die();
+
         $this->Avaliacao->recursive = 2;
         $avaliacao = $this->Avaliacao->find('first', [
             'conditions' => ['Avaliacao.id' => $id]

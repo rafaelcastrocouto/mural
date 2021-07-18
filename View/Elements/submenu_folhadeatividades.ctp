@@ -23,7 +23,10 @@
                     <li class="nav-item"><?= $this->Html->link(__('Editar'), ['controller' => 'folhadeatividades', 'action' => 'edit', $this->params['pass'][0]], ['class' => 'nav-link']) ?></li>
                     <li class="nav-item"><?= $this->Html->link(__('Excluir'), ['controller' => 'folhadeatividades', 'action' => 'delete', $this->params['pass'][0]], ['confirm' => __('Confirma?'), 'class' => 'nav-link']) ?></li>
                     <?php endif; ?>
-                <?php endif; ?>
+            <?php elseif ($this->Session->read('id_categoria') == '3'): ?>
+                <li class="nav-item"><?= $this->Html->link(__('Estudante'), ['controller' => 'estagiarios', 'action' => 'view/' . $this->Session->read('estagiario_id')], ['class' => 'nav-link']) ?></li>
+                <li class="nav-item"><?= $this->Html->link(__('Imprimir PDF'), ['controller' => 'folhadeatividades', 'action' => 'imprimepdf', '?' => ['estagiario_id' => $this->Session->read('estagiario_id')], 'ext' => 'pdf', 'atividadesdeestagio'], ['class' => 'nav-link']) ?></li>
+            <?php endif; ?>
         </ul>
     </div>
 </nav>

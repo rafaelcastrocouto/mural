@@ -7,11 +7,11 @@
 
             var categoria = $(this).val();
 
-            if (categoria == 2) {
+            if (categoria == '2') {
                 $("label:eq(1)").text("DRE");
-            } else if (categoria == 3) {
+            } else if (categoria == '3') {
                 $("label:eq(1)").text("SIAPE");
-            } else if (categoria == 4) {
+            } else if (categoria == '4') {
                 $("label:eq(1)").text("CRESS 7ª Região");
             }
 
@@ -55,7 +55,7 @@
         </tr>
 
     </table>
-    <div class='row justify-content-center'>
+    <div class='row justify-content-left'>
         <div class='col-auto'>
             <?php
             echo $this->Form->submit('Confirma', ['type' => 'Submit', 'label' => ['text' => 'Confirma', 'class' => 'col-4'], 'class' => 'btn btn-primary']);

@@ -1,9 +1,10 @@
 <?php
 // pr($instituicoes);
 // pr($q_paginas);
-// pr($pagina);
+// pr($paginas[4]);
 // pr($direcao);
 // pr($ordem);
+// pr($pagina);
 // die();
 ?>
 
@@ -38,42 +39,44 @@
 
     <br>
 
-    <div class="pagination justify-content-center">
+    <div class="row justify-content-center">
         <?php
 // Menu superior de Navegação //
         if ($linhas != 0):
 
-            echo "  " . $this->Html->link('<< Início ', ['lista/ordem:' . $ordem . '/pagina:' . 1 . '/direcao:' . $direcao], ['class' => 'page-link']);
+            echo $this->Html->link('<< Início ', 'lista/ordem:' . $ordem . '/pagina:' . 1 . '/direcao:' . $direcao, ['class' => 'page-link']);
 
             $retrocederpagina = $pagina - 1;
-            echo "  " . $this->Html->link('<- Retroceder ', ['lista/ordem:' . $ordem . '/pagina:' . $retrocederpagina . '/direcao:' . $direcao], ['class' => 'page-link']);
+            echo $this->Html->link('<- Retroceder |', 'lista/ordem:' . $ordem . '/pagina:' . $retrocederpagina . '/direcao:' . $direcao, ['class' => 'page-link']);
 
             $avancarpagina = $pagina + 1;
             if ($avancarpagina > $q_paginas) {
                 $avancarpagina = 0;
             }
-            echo "  " . $this->Html->link(' Avançar -> ', ['lista/ordem:' . $ordem . '/pagina:' . $avancarpagina . '/direcao:' . $direcao], ['class' => 'page-link']);
+            
+            echo $this->Html->link('| Avançar -> ', 'lista/ordem:' . $ordem . '/pagina:' . $avancarpagina . '/direcao:' . $direcao, ['class' => 'page-link']);
 
-            echo "  " . $this->Html->link('Última >> ', ['lista/ordem:' . $ordem . '/pagina:' . $q_paginas . '/direcao:' . $direcao], ['class' => 'page-link']);
-
-            echo "<br>";
+            echo $this->Html->link('Última >> ', 'lista/ordem:' . $ordem . '/pagina:' . $q_paginas . '/direcao:' . $direcao, ['class' => 'page-link']);
             ?>
         </div>
-        <div class="pagination justify-content-center">
-
+        <?php
+        $i = 1;
+        $j = 1;
+        // echo $j . "<br>";
+        ?>
+        <div class="row justify-content-center">
             <?php
-            $i = 1;
-            $j = 1;
-            // echo $j . "<br>";
             for ($k = 0; $k < 10; $k++):
-                echo " " . $this->Html->link(($pagina + $k), ['lista/ordem:' . $ordem . '/pagina:' . ($pagina + $k) . '/direcao:' . $direcao], ['class' => 'page-link']);
+                echo "&nbsp" . $this->Html->link(($pagina + $k), 'lista/ordem:' . $ordem . '/pagina:' . ($pagina + $k) . '/direcao:' . $direcao, ['class' => 'page-link']);
                 if (($pagina + $k) >= $q_paginas) {
                     break;
                 }
             endfor;
-        endif;
-        ?>
-    </div>
+            ?>
+        </div>        
+        <?php
+    endif;
+    ?>
 
     <div class='table-responsive'>
         <table class='table table-hover table-striped table-responsive'>

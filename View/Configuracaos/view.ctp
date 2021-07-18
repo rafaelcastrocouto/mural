@@ -78,5 +78,5 @@ Data de encerramento das inscrições para o curso de supervisores
 </table>
 
 <?php
-echo $this->Html->link('Editar','/Configuracaos/edit/'. $configuracao['Configuracao']['id']);
+echo $this->Html->link('Editar','/Configuracaos/edit/'. $configuracao['Configuracao']['id'], ['role' => 'button', 'class' => 'btn btn-info']);
 ?>

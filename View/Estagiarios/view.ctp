@@ -2,11 +2,14 @@
 
     <?= $this->element('submenu_estagiarios') ?>
 
-    <?= $this->Html->link('Declaração de estágio', ['action' => 'declaracaoestagiopdf', $estagio['Estagiario']['id'], 'ext' => 'pdf', 'declaracaodeestagio'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
-    <?= $this->Html->link('Avaliação discente', '/Avaliacoes/view?estagiario_id=' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
     <?= $this->Html->link('Folha de atividades', '/folhadeatividades/atividade?estagiario_id=' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
-    <?= $this->Html->link('Editar e lançar nota', '/estagiarios/edit/' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
+    <?= $this->Html->link('Avaliação discente', '/Avaliacoes/view?estagiario_id=' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
+    <?= $this->Html->link('Declaração de estágio', ['action' => 'declaracaoestagiopdf', $estagio['Estagiario']['id'], 'ext' => 'pdf', 'declaracaodeestagio'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
 
+    <?php if ($this->Session->read('id_categoria') == '3' || $this->Session->read('id_categoria') == '1'): ?>
+        <?= $this->Html->link('Editar e lançar nota', '/estagiarios/edit/' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
+    <?php endif; ?>
+    
     <h1>Estágiaria(o): <?php echo $estagio['Aluno']['nome']; ?></h1>
 
     <div class='table-responsive'>
