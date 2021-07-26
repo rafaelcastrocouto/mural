@@ -8,7 +8,6 @@
             <?php if ($this->Session->read('id_categoria') == '1'): ?>
                 <?php $parametros = $this->request->params['action']; ?>
                 <li class="nav-item"><?= $this->Html->link(__('Inserir'), ['controller' => 'areas', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
-                <li class="nav-item"><?= $this->Html->link(__('Áreas'), ['controller' => 'areas', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Lista'), ['controller' => 'areas', 'action' => 'lista'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Professores'), ['controller' => 'professors', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
                 <?php if ($this->request->params['action'] === 'view'): ?>
@@ -16,7 +15,6 @@
                     <li class="nav-item"><?= $this->Form->postLink(__('Excluir'), ['controller' => 'areas', 'action' => 'delete', $this->params['pass'][0]], ['confirm' => 'Está seguro?', 'class' => 'nav-link']) ?></li>
                 <?php endif; ?>
             <?php else: ?>
-                <li class="nav-item"><?= $this->Html->link(__('Áreas'), ['controller' => 'areas', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Professoras(es)'), ['controller' => 'professors', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
                 <?php endif; ?>
         </ul>

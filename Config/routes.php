@@ -30,7 +30,7 @@
 
 /*
  * Para trabalhar com o dompdf
-*/	
+*/
 	Router::parseExtensions('pdf');
 
 /**

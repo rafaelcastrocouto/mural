@@ -14,7 +14,6 @@
                 <li class="nav-item"><?= $this->Html->link(__('Excluir'), ['controller' => 'areainstituicaos', 'action' => 'delete', $this->params['pass'][0]], ['confirm' => __('Confirma?'), 'class' => 'nav-link']) ?></li>
             <?php endif; ?>
         <?php else: ?>
-            <li class="nav-item"><?= $this->Html->link(__('Área das instituições'), ['controller' => 'areainstituicaos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
             <li class="nav-item"><?= $this->Html->link(__('Instituições'), ['controller' => 'instituicaos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
         <?php endif; ?>    
         </ul>

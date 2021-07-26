@@ -30,6 +30,7 @@ if ($turno == 'D') {
 <div class='table-responsive'>
     <?= $this->element('submenu_inscricoes') ?>
     <h1>Termo de Compromisso para cursar estágio no período <?= $periodo ?></h1>
+
     <table class='table table-hover table-striped table-responsive'>
         <tbody>
             <tr>
@@ -66,8 +67,10 @@ if ($turno == 'D') {
     echo $this->Form->input('turno', array('type' => 'hidden', 'value' => $turno));
     echo $this->Form->input('id_professor', array('type' => 'hidden', 'label' => 'Professor', 'value' => $professor_atual));
     ?>
+
     <?php
-    echo $this->Form->input('id_instituicao', array('type' => 'select', 'label' => ['text' => 'Instituição (É obrigatório selecionar a instituição)', 'class' => 'col-12'], 'options' => $instituicoes, 'empty' => ['0' => 'Selecione'] ,'value' => $instituicao_atual, 'class' => 'form-control'));
+    echo $this->Form->input('tipo_de_estagio', array('type' => 'select', 'label' => ['text' => 'Seleciona tipo de estágio', 'class' => 'col-12'], 'options' => [1 => 'Presencial', 2 => 'Remoto'], 'default' => '1' ,'class' => 'form-control'));
+    echo $this->Form->input('id_instituicao', array('type' => 'select', 'label' => ['text' => 'Instituição (É obrigatório selecionar a instituição)', 'class' => 'col-12'], 'options' => $instituicoes, 'empty' => ['0' => 'Selecione'], 'value' => $instituicao_atual, 'class' => 'form-control'));
     echo $this->Form->input('id_supervisor', array('type' => 'select', 'label' => ['text' => 'Supervisor (Se não souber quem é o supervisor, deixar em branco)', 'class' => 'col-12'], 'options' => $supervisores, 'value' => $supervisor_atual, 'empty' => ['0' => 'Selecione'], 'class' => 'form-control'));
     ?>
     <div class='row justify-content-left'>

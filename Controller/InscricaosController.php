@@ -242,7 +242,7 @@ class InscricaosController extends AppController {
             }
             /* Fim das verificacoes */
         } else {
-          // die('Sem número de registro');
+            // die('Sem número de registro');
         }
     }
 
@@ -287,7 +287,7 @@ class InscricaosController extends AppController {
                 $this->redirect('/Inscricaos/index/' . $id_instituicao);
             }
         } else {
-          $this->Flash->error(__("Error! DRE inexistente!"));
+            $this->Flash->error(__("Error! DRE inexistente!"));
         }
     }
 
@@ -480,7 +480,7 @@ class InscricaosController extends AppController {
             // die("Alunonovo " . $alunonovo);
             // Aluno novo nao cadastrado: vai para cadastro e retorna
             if (!($alunonovo)) {
-                $this->Session->setFlash("Aluno não cadastrado");
+                $this->Flash->error(__("Aluno não cadastrado"));
                 $this->Session->write('termo', $id);
                 // die("Aluno novo nao cadastrado: " . $id);
                 $this->redirect('/Alunonovos/add?registro=' . $registro);
@@ -543,7 +543,7 @@ class InscricaosController extends AppController {
         $periodo_estagio = $this->Inscricao->Estagiario->find('first', array(
             'conditions' => array('Estagiario.periodo' => $this->data['Inscricao']['periodo'], 'Estagiario.registro' => $this->data['Inscricao']['id_aluno']),
             'fields' => array('Estagiario.id', 'Estagiario.id_aluno')));
-        pr($periodo_estagio);
+        // pr($periodo_estagio);
         // die('periodo estagio');
 
         /* Capturo os valores da area e professor da instituicao selecionada
@@ -555,10 +555,14 @@ class InscricaosController extends AppController {
         $this->Session->delete('id_area');
         $this->Session->delete('id_prof');
         // echo $id_area . " " . $id_prof . "<br>";
-        // die('531');
+        // die();
+        //
+        // pr($this->data);
+        // die();
+        //
         // Tem que ter o id da instituicao diferente de zero
         if (empty($this->data['Inscricao']['id_instituicao'])) {
-            $this->Session->setFlash(__('Selecione uma instituição de estágio'));
+            $this->Flash->error(__('Selecione uma instituição de estágio'));
             $this->redirect('/Inscricaos/termosolicita/');
             die('Faltou selecionar uma instituição');
         }
@@ -586,8 +590,8 @@ class InscricaosController extends AppController {
 
             $this->Inscricao->Estagiario->set($dados);
             if ($this->Inscricao->Estagiario->save($dados, array('validate' => TRUE))) {
-                $this->Session->setFlash(__('Registro de estágio atualizado'));
-                $this->redirect('/Inscricaos/termoimprime/' . $id_estagio);
+                $this->Flash->success(__('Registro de estágio atualizado'));
+                $this->redirect('/Inscricaos/termoimprime?estagiario_id=' . $id_estagio . '&tipo_de_estagio=' . $this->data['Inscricao']['tipo_de_estagio']);
             } else {
                 $errors = $this->Inscricao->Estagiario->invalidFields();
                 $this->Session->setFlash(implode(', ', $errors));
@@ -642,7 +646,7 @@ class InscricaosController extends AppController {
                 $this->loadModel('Aluno');
                 $this->Aluno->set($cadastroaluno);
                 if ($this->Aluno->save($cadastroaluno, array('validate' => TRUE))) {
-                    $this->Session->setFlash(__('Registro do aluno novo inserido'));
+                    $this->Flash->success(__('Registro do aluno novo inserido'));
                     $aluno_id = $this->Aluno->getLastInsertId();
                 } else {
                     $errors = $this->Aluno->invalidFields();
@@ -677,9 +681,9 @@ class InscricaosController extends AppController {
 
             $this->Inscricao->Estagiario->set($dados);
             if ($this->Inscricao->Estagiario->save($dados, array('validate' => TRUE))) {
-                $this->Session->setFlash('Registro de estágio inserido');
+                $this->Flash->success(__('Registro de estágio inserido'));
                 $estagiario_id = $this->Inscricao->Estagiario->getlastInsertId();
-                $this->redirect('/Inscricaos/termoimprime/' . $estagiario_id);
+                $this->redirect('/Inscricaos/termoimprime?estagiario_id=' . $estagiario_id . '&tipo_de_estagio=' . $this->data['Inscricao']['tipo_de_estagio']);
             } else {
                 $errors = $this->Inscricao->Estagiario->invalidFields();
                 $this->Session->setFlash(implode(',', $errors));
@@ -689,13 +693,16 @@ class InscricaosController extends AppController {
     }
 
     /* id eh o numero de estagiario */
-
     public function termoimprime($id = NULL) {
 
         ini_set('memory_limit', '512M');
         // echo "Estagiario id " . $id . "<br>";
         // Configure::write('debug', 2);
 
+        $id = $this->request->query['estagiario_id'];
+        $tipo_de_estagio = $this->request->query['tipo_de_estagio'];        
+        // die();
+        
         $estagiario = $this->Inscricao->Estagiario->find('first', array(
             'conditions' => array('Estagiario.id' => $id)
         ));
@@ -734,18 +741,24 @@ class InscricaosController extends AppController {
         $this->set('registro', $registro);
         $this->set('supervisor_cress', $supervisor_cress);
         // die();
+        
         /* Imprime PDF. */
-        $this->redirect(['action' => 'imprimepdf', $id, 'ext' => 'pdf', $registro]);
-        // echo $this->Html->link(__('Imprime PDF'), array('action' => 'imprimepdf', $id, 'ext' => 'pdf', $registro));
+        if ($tipo_de_estagio == "1") {
+            $this->redirect(['action' => 'imprimepdf', $id, 'ext' => 'pdf', $registro]);
+            // echo $this->Html->link(__('Imprime PDF'), array('action' => 'imprimepdf', $id, 'ext' => 'pdf', $registro));
+        } elseif ($tipo_de_estagio == "2") {
+            $this->redirect(['action' => 'imprimepdfremoto', $id, 'ext' => 'pdf', $registro]);
+        } else {
+            $this->Flash->error(__('Selecione o tipo de estágio que vai cursar'));
+            $this->redirect('termocompromisso');
+        }
     }
 
-    /* O método anterior, termoimprime, envia os dados para imprimir o PDF diretamente  */
-
+    /* Envia os dados para imprimir o PDF diretamente  */
     function imprimepdf($id = NULL) {
 
         // pr($id);
         // die('id');
-
         $estagiario = $this->Inscricao->Estagiario->find('first', array(
             'conditions' => array('Estagiario.id' => $id)
         ));
@@ -779,6 +792,45 @@ class InscricaosController extends AppController {
         $this->set('supervisor_cress', $supervisor_cress);
     }
 
+    /* Termo de compromisso para estágio remoto */
+    function imprimepdfremoto($id = NULL) {
+
+        // pr($id);
+        // die('id');
+        $estagiario = $this->Inscricao->Estagiario->find('first', array(
+            'conditions' => array('Estagiario.id' => $id)
+        ));
+        // pr($estagiario);
+        // die('estagiario');
+
+        $instituicao_nome = $estagiario['Instituicao']['instituicao'];
+        $supervisor_nome = $estagiario['Supervisor']['nome'];
+        $aluno_nome = $estagiario['Aluno']['nome'];
+        $nivel = $estagiario['Estagiario']['nivel'];
+        $registro = $estagiario['Estagiario']['registro'];
+        $supervisor_cress = $estagiario['Supervisor']['cress'];
+        // pr($nivel);
+        // die('nivel');
+        // Capturo o inicio e o fim do termo de compromisso
+        $this->loadModel("Configuracao");
+        $configuracao = $this->Configuracao->findById('1');
+        $termoinicio = $configuracao['Configuracao']['termo_compromisso_inicio'];
+        $termofinal = $configuracao['Configuracao']['termo_compromisso_final'];
+
+        $termoinicio_f = utf8_encode(strftime('%e de %B de %Y', strtotime($termoinicio)));
+        $termofinal_f = utf8_encode(strftime('%e de %B de %Y', strtotime($termofinal)));
+
+        $this->set('registro', $registro);
+        $this->set('instituicao_nome', $instituicao_nome);
+        $this->set('aluno_nome', $aluno_nome);
+        $this->set('supervisor_nome', $supervisor_nome);
+        $this->set('nivel', $nivel);
+        $this->set('termoinicio', $termoinicio_f);
+        $this->set('termofinal', $termofinal_f);
+        $this->set('supervisor_cress', $supervisor_cress);
+    }
+
+    
 }
 
 ?>

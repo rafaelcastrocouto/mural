@@ -19,7 +19,6 @@
                 <?php if ($this->request->params['action'] == 'view'): ?>
                     <li class="nav-item"><?= $this->Html->link(__('Editar'), ['controller' => 'estagiarios', 'action' => 'edit', $this->params['pass'][0]], ['class' => 'nav-link']) ?></li>
                 <?php endif; ?>
-                <li class="nav-item"><?= $this->Html->link(__('Estagiários'), ['controller' => 'estagiarios', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
            <?php endif; ?>
         </ul>
     </div>

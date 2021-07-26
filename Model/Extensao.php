@@ -45,6 +45,13 @@ class Extensao extends AppModel {
             'conditions' => '',
             'fields' => '',
             'order' => ''
+        ),
+        'Situacaopr5' => array(
+            'className' => 'Situacaopr5',
+            'foreignKey' => 'situacaopr5_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
         )
     );
 

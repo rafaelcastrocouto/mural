@@ -8,14 +8,12 @@
             <?php if ($this->Session->read('id_categoria') != '2'): ?>
                 <?php $parametros = $this->request->params['action']; ?>
                 <li class="nav-item"><?= $this->Html->link(__('Inserir'), ['controller' => 'complementos', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
-                <li class="nav-item"><?= $this->Html->link(__('Complemento de período'), ['controller' => 'complementos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Estagiários'), ['controller' => 'estagiarios', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
                 <?php if ($this->request->params['action'] === 'view'): ?>
                     <li class="nav-item"><?= $this->Html->link(__('Editar'), ['controller' => 'complementos', 'action' => 'edit', $this->params['pass'][0]], ['class' => 'nav-link']) ?></li>
                     <li class="nav-item"><?= $this->Html->link(__('Excluir'), ['controller' => 'complementos', 'action' => 'delete', $this->params['pass'][0]], ['confirm' => __('Confirma?'), 'class' => 'nav-link']) ?></li>
                 <?php endif; ?>
             <?php else: ?>
-                <li class="nav-item"><?= $this->Html->link(__('Complemento de período'), ['controller' => 'complementos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Estagiários'), ['controller' => 'estagiarios', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
             <?php endif; ?>
         </ul>

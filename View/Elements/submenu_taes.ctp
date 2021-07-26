@@ -8,7 +8,6 @@
         <?php if ($this->Session->read('id_categoria') == '1'): ?>
         <?php $parametros = $this->request->params['action']; ?>
         <li class="nav-item"><?= $this->Html->link(__('Inserir'), ['controller' => 'taes', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
-        <li class="nav-item"><?= $this->Html->link(__("Tae's"), ['controller' => 'taes', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
         <li class="nav-item"><?= $this->Html->link(__('Extensão'), ['controller' => 'extensaos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
 <!--
           <?php if (isset($tae['Tae']['id'])): ?>
@@ -20,7 +19,6 @@
                 <li class="nav-item"><?= $this->Form->postLink(__('Excluir'), ['controller' => 'taes', 'action' => 'delete', $tae['Tae']['id']], ['confirm' => __('Are you sure you want to delete # {0}?', $tae['Tae']['id']), 'class' => 'nav-link']) ?></li>
           <?php endif; ?>
         <?php else: ?>
-            <li class="nav-item"><?= $this->Html->link(__('Taes'), ['controller' => 'taes', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
             <li class="nav-item"><?= $this->Html->link(__('Extensão'), ['controller' => 'extensaos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
             <li class="nav-item"><?= $this->Html->link(__('Ver'), ['controller' => 'taes', 'action' => 'view', $tae['Tae']['id']], ['class' => 'nav-link']) ?></li>
         <?php endif; ?>

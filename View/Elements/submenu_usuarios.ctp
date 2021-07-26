@@ -8,7 +8,6 @@
         <?php if ($this->Session->read('id_categoria') == '1'): ?>
           <?php $parametros = $this->request->params['action']; ?>
           <li class="nav-item"><?= $this->Html->link(__('Lista'), ['controller' => 'users', 'action' => 'listausuarios'], ['class' => 'nav-link']) ?></li>
-          <li class="nav-item"><?= $this->Html->link(__('Usuários'), ['controller' => 'users', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
           <li class="nav-item"><?= $this->Html->link(__('Busca por número'), ['controller' => 'users', 'action' => 'busca_numero'], ['class' => 'nav-link']) ?></li>
           <li class="nav-item"><?= $this->Html->link(__('Busca por e-mail'), ['controller' => 'users', 'action' => 'busca_email'   ], ['class' => 'nav-link']) ?></li>
           <li class="nav-item"><?= $this->Html->link(__('Alternar usuário'), ['controller' => 'users', 'action' => 'alternarusuario'], ['class' => 'nav-link']) ?></li>

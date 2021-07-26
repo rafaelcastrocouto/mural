@@ -108,7 +108,10 @@ class ExtensaosController extends AppController {
         }
         $docentes = $this->Extensao->Professor->find('list', ['order' => 'nome']);
         $taes = $this->Extensao->Tae->find('list', ['order' => 'nome']);
-        $this->set(compact('docentes', 'taes'));
+        $situacaopr5 = $this->Extensao->Situacaopr5->find('list', ['order' => 'situacao']);
+        // pr($situacaopr5);
+        // die();
+        $this->set(compact('docentes', 'taes', 'situacaopr5'));
     }
 
     /**
@@ -150,7 +153,8 @@ class ExtensaosController extends AppController {
         }
         $docentes = $this->Extensao->Professor->find('list', ['order' => 'nome']);
         $taes = $this->Extensao->Tae->find('list', ['order' => 'nome']);
-        $this->set(compact('docentes', 'taes'));
+        $situacaopr5 = $this->Extensao->Situacaopr5->find('list', ['order' => 'situacao']);
+        $this->set(compact('docentes', 'taes', 'situacaopr5'));
     }
 
     /**

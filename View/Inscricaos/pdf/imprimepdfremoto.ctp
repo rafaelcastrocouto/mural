@@ -26,7 +26,7 @@ if (empty($supervisor_nome))
 </p>
 
 <p style="text-align:justify; font-size: 90%;">
-    O presente TERMO DE COMPROMISSO DE ESTÁGIO que entre si assinam a Coordenação de Estágio da Escola de Serviço Social/UFRJ, o (a) Estudante <?= $aluno_nome; ?>, a  instituição <?= $instituicao_nome; ?> e o (a) Supervisor (a) de Campo <?= $supervisor_nome; ?>, visa estabelecer condições gerais que regulam a realização de ESTÁGIO OBRIGATÓRIO. Ficam estabelecidas entre as partes as seguintes condições básicas para a realização do estágio:
+    O presente TERMO DE COMPROMISSO DE ESTÁGIO que entre si assinam a Coordenação de Estágio da Escola de Serviço Social/UFRJ, o (a) Estudante <?= $aluno_nome; ?>, a  instituição <?= $instituicao_nome; ?> e o (a) Supervisor (a) de Campo <?= $supervisor_nome; ?>, visa estabelecer condições gerais que regulam a realização de ESTÁGIO OBRIGATÓRIO REMOTO. Ficam estabelecidas entre as partes as seguintes condições básicas para a realização do estágio no período da Pandemia ocasionada pela propagação decorrente do novo Coronavírus (SARS-CoV-2).
 </p>
 
 <p style="text-align:justify; font-size: 90%;">

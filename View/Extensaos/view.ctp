@@ -18,10 +18,10 @@
         <dd class="col-9">
             <?php if ($extensao['Extensao']['segmento'] === 'tae'): ?>
                 <?php echo $this->Html->link($extensao['Extensao']['nome'], array('controller' => 'taes', 'action' => 'view', $extensao['Tae']['id'])); ?>
-                &nbsp;
+            &nbsp;
             <?php elseif ($extensao['Extensao']['segmento'] === 'docente'): ?>
                 <?php echo $this->Html->link($extensao['Extensao']['nome'], array('controller' => 'professors', 'action' => 'view', $extensao['Professor']['id'])); ?>
-                &nbsp;
+            &nbsp;
             <?php endif; ?>
         </dd>
 
@@ -33,6 +33,16 @@
             ?>
             &nbsp;
         </dd>
+        <dt class="col-3"><?php echo __('Versão'); ?></dt>
+        <dd class="col-9">
+            <?php echo h($extensao['Extensao']['versao']); ?>
+            &nbsp;
+        </dd>
+        <dt class="col-3"><?php echo __('Situação'); ?></dt>
+        <dd class="col-9">
+            <?php echo h($extensao['Situacaopr5']['situacao']); ?>
+            &nbsp;
+        </dd>        
         <dt class="col-3"><?php echo __('Observações'); ?></dt>
         <dd class="col-9">
             <?php echo h($extensao['Extensao']['observacoes']); ?>

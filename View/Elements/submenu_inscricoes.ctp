@@ -7,7 +7,6 @@
         <ul class="navbar-nav mr-auto">
         <?php if ($this->Session->read('id_categoria') == '1'): ?>
             <?php $parametros = $this->request->params['action']; ?>
-            <li class="nav-item"><?= $this->Html->link(__('Incrições'), ['controller' => 'inscricaos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
             <li class="nav-item"><?= $this->Html->link(__('Mural'), ['controller' => 'murals', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
             <?php if ($this->request->params['action'] === 'view'): ?>
             <?php if (isset($this->params['pass'][0])): ?>
@@ -16,7 +15,6 @@
                 <?php endif; ?>
             <?php endif; ?>
         <?php else: ?>
-            <li class="nav-item"><?= $this->Html->link(__('Inscricoes'), ['controller' => 'inscricaos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
             <li class="nav-item"><?= $this->Html->link(__('Mural'), ['controller' => 'murals', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
         <?php endif; ?>
         </ul>

@@ -8,18 +8,16 @@
         <?php if ($this->Session->read('id_categoria') == '1'): ?>
           <?php $parametros = $this->request->params['action']; ?>
           <li class="nav-item"><?= $this->Html->link(__('Inserir'), ['controller' => 'visitas', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
-          <li class="nav-item"><?= $this->Html->link(__('Visitas'), ['controller' => 'visitas', 'action' => 'index'   ], ['class' => 'nav-link']) ?></li>
 <!--
           <li class="nav-item"><?= $this->Html->link(__('Buscar'), ['controller' => 'visitas', 'action' => 'busca'], ['class' => 'nav-link']) ?></li>
 //-->
           <li class="nav-item"><?= $this->Html->link(__('Instituições'), ['controller' => 'instituicaos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
-           <?php if ($this->request->params['action'] === 'view'): ?>       
+           <?php if ($this->request->params['action'] === 'view'): ?>
                   <li class="nav-item"><?= $this->Html->link(__('Editar'), ['controller' => 'visitas', 'action' => 'edit', $this->params['pass'][0]], ['class' => 'nav-link']) ?></li>
                   <li class="nav-item"><?= $this->Form->postLink(__('Excluir'), ['controller' => 'visitas', 'action' => 'delete', $this->params['pass'][0]], ['confirm' => 'Está seguro?', 'class' => 'nav-link']) ?></li>
             <?php endif; ?>
         <?php else: ?>
-            <li class="nav-item"><?= $this->Html->link(__('Instituições'), ['controller' => 'instituicaos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>        
-            <li class="nav-item"><?= $this->Html->link(__('Visitas institucionais'), ['controller' => 'visitas', 'action' => 'lista'   ], ['class' => 'nav-link']) ?></li>
+            <li class="nav-item"><?= $this->Html->link(__('Instituições'), ['controller' => 'instituicaos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
         <?php endif; ?>
         </ul>
     </div>

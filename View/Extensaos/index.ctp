@@ -1,4 +1,8 @@
-<?php // pr($extensaos);        ?>
+<?php
+
+// pr($extensaos);
+
+?>
 <?php // die();        ?>
 
 <div class='row justify-content-center'>
@@ -27,17 +31,20 @@
                     <th><?php echo $this->Paginator->sort('segmento', 'Segmento'); ?></th>
                     <th><?php echo $this->Paginator->sort('nome', 'Coordenador[a]'); ?></th>
                     <th><?php echo $this->Paginator->sort('datacongregacao', 'Congregação'); ?></th>
+                    <th><?php echo $this->Paginator->sort('versao', 'Versão'); ?></th>
+                    <th><?php echo $this->Paginator->sort('Situacaopr5.situacao', 'Situação PR5'); ?></th>                    
                     <th><?php echo $this->Paginator->sort('observacoes', 'Observações'); ?></th>
                 </tr>
             </thead>
 
             <tbody>
                 <?php foreach ($extensaos as $extensao): ?>
-                    <tr>
-                        <td><?php echo h($extensao['Extensao']['id']); ?>&nbsp;</td>
-                        <td><?php echo $this->Html->link(h($extensao['Extensao']['titulo']), ['controll' => 'extensaos', 'action' => 'view', $extensao['Extensao']['id']]); ?>&nbsp;</td>
-                        <td><?php echo $this->Html->link(h($extensao['Extensao']['segmento']), ['controll' => 'extensaos', 'action' => 'view', $extensao['Extensao']['id']]); ?>&nbsp;</td>
-                        <td>
+                <?php // pr($extensao); ?>
+                <tr>
+                    <td><?php echo h($extensao['Extensao']['id']); ?>&nbsp;</td>
+                    <td><?php echo $this->Html->link($extensao['Extensao']['titulo'], ['controller' => 'extensaos', 'action' => 'view', $extensao['Extensao']['id']]); ?>&nbsp;</td>
+                    <td><?php echo $this->Html->link(h($extensao['Extensao']['segmento']), ['controller' => 'extensaos', 'action' => 'view', $extensao['Extensao']['id']]); ?>&nbsp;</td>
+                    <td>
                             <?php
                             if ($extensao['Extensao']['segmento'] === 'tae'):
                                 echo $this->Html->link($extensao['Extensao']['nome'], array('controller' => 'taes', 'action' => 'view', $extensao['Extensao']['tae_id']));
@@ -45,15 +52,17 @@
                                 echo $this->Html->link($extensao['Extensao']['nome'], array('controller' => 'professors', 'action' => 'view', $extensao['Extensao']['docente_id']));
                             endif;
                             ?>
-                        </td>
-                        <td><?php
+                    </td>
+                    <td><?php
                             if ($extensao['Extensao']['datacongregacao']):
                                 echo date('d-m-Y', strtotime($extensao['Extensao']['datacongregacao']));
                             endif;
                             ?>&nbsp;
-                        </td>
-                        <td><?php echo h($extensao['Extensao']['observacoes']); ?>&nbsp;</td>
-                    </tr>
+                    </td>
+                    <td><?php echo h($extensao['Extensao']['versao']); ?>&nbsp;</td>
+                    <td><?php echo h($extensao['Situacaopr5']['situacao']); ?>&nbsp;</td>                    
+                    <td><?php echo h($extensao['Extensao']['observacoes']); ?>&nbsp;</td>
+                </tr>
 <?php endforeach; ?>
             </tbody>
 
