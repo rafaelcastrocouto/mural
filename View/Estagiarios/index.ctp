@@ -1,10 +1,14 @@
 <?php
+// echo " Período atual: ";
 // pr($periodoatual);
+// echo " período: ";
+// pr($periodo);
 // pr($nivel);
-// pr($periodos_todos);
+// pr($periodos_total);
 // pr($id_supervisor);
 // pr($supervisores);
 // pr($estagiarios);
+// die();
 ?>
 
 <script>
@@ -74,7 +78,7 @@
         <tr>
             <td>
                 <?php echo $this->Form->create('Estagiario', array('url' => 'index', 'inputDefaults' => array('label' => false, 'div' => false))); ?>
-                <?php echo $this->Form->input('periodo', array('type' => 'select', 'options' => $periodos_todos, 'selected' => $periodo, 'empty' => array('0' => 'Período'), 'style' => 'width: 5em', 'class' => 'form-control form-control-sm')); ?>
+                <?php echo $this->Form->input('periodo', array('type' => 'select', 'options' => $periodos_total, 'selected' => $periodo, 'empty' => array('0' => 'Período'), 'style' => 'width: 5em', 'class' => 'form-control form-control-sm')); ?>
                 <?php // echo $this->Form->end(); ?>
             </td>
 
@@ -126,7 +130,7 @@
 <div class='row justify-content-center'>
     <div class='col-auto'>
 
-        <?php ($periodo == 0 ? $periodo = "Todos" : $periodo = $periodo); ?>
+        <?php ($periodo == '0' ? $periodo = "Todos" : $periodo = $periodo); ?>
         <h5>Estagiarios período: <?php echo $periodo; ?></h5>
 
         <div class='pagination justify-content-center'>
