@@ -59,7 +59,7 @@ if (empty($professores))
                         </tr>
 
                         <tr>
-                            <td><?php // echo $this->Form->input('vagas', ['label'=>['text'=>'Vagas (digitar somente números inteiros)', 'class' => 'col-4']);    ?></td>
+                            <td><?php echo $this->Form->input('vagas', ['label'=>['text'=>'Vagas (digitar somente números inteiros)', 'class' => 'col-4']]);    ?></td>
                         </tr>
 
                         <tr>

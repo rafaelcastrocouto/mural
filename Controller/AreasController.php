@@ -5,8 +5,6 @@ class AreasController extends AppController {
     public $name = "Areas";
     public $components = array('Auth', 'Paginator', 'Flash');
 
-    // var $scaffold;
-
     public function beforeFilter() {
 
         parent::beforeFilter();

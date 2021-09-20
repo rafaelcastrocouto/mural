@@ -116,8 +116,7 @@ class AreainstituicaosController extends AppController {
         // die("Área excluída");
         $this->redirect('/areainstituicaos/index/');
     }
-
-//    }
+    
 }
 
 ?>

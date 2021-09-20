@@ -128,7 +128,7 @@ class ProfessorsController extends AppController {
     public function edit($id = NULL) {
 
         // pr($id);
-        // pr($this->Session->read('numero')); 
+        // pr($this->Session->read('numero'));
         // Somente o próprio pode ver
         $id_categoria = $this->Session->read("id_categoria");
         if ($id_categoria != 1):
@@ -176,6 +176,61 @@ class ProfessorsController extends AppController {
                 $this->Session->setFlash(__('Dados inseridos'));
                 $this->Professor->getLastInsertId();
                 $this->redirect('/Professors/view/' . $this->Professor->getLastInsertId());
+            }
+        }
+    }
+
+    public function delete($id = NULL) {
+
+        $professores = $this->Professor->find('first', array(
+            'conditions' => array('Professor.id' => $id)
+        ));
+
+        // pr($professores);
+        // die();
+
+        if ($professores['Estagiario']) {
+            $this->Flash->error(__('Há estagiários vinculados a este professor'));
+            $this->redirect('/Professors/view/' . $id);
+            exit;
+        } else {
+            $this->Professor->delete($id);
+            $this->Flash->success(__("Supervisor excluido"));
+            $this->redirect('/Professors/index/');
+        }
+    }
+
+    public function busca($id = NULL) {
+
+        if (isset($id))
+            $this->request->data['Professor']['nome'] = $id;
+
+        // $id = isset($this->request->data['Supervisor']['nome']) ? $this->request->data['Supervisor']['nome'] : null;
+        // pr($id);
+        if (!empty($this->request->data['Professor']['nome'])) {
+            $condicao = ['Professor.nome like' => '%' . $this->request->data['Professor']['nome'] . '%'];
+            $professores = $this->Professor->find('all', [
+                'recursive' => -1, // Para excluir as associações
+                'conditions' => $condicao,
+                'order' => 'Professor.nome']);
+
+            // pr($professores);
+            // die('professores');
+
+            /* Nenhum resultado */
+            if (empty($professores)) {
+                $this->Session->setFlash(__("Não foram encontrados registros"), "flash_notification");
+            } else {
+                // pr($professores);
+                // die('professores');
+                $this->Paginator->settings = ['Professor' => [
+                        'recursive' => -1, // Para excluir as associações
+                        'conditions' => ['Professor.nome like' => '%' . $this->request->data['Professor']['nome'] . '%'],
+                        'order' => 'Professor.nome'
+                    ]
+                ];
+                $this->set('professores', $this->Paginator->paginate('Professor'));
+                $this->set('busca', $this->request->data['Professor']['nome']);
             }
         }
     }

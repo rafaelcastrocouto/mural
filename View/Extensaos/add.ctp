@@ -26,7 +26,7 @@ $this->element('submenu_extensaos') ?>
             <?php echo $this->Form->input('docente_id', ['label' => ['text' => 'Coordenador[a]: docente', 'class' => 'col-4'], 'empty' => TRUE]); ?>
             <?php echo $this->Form->input('datacongregacao', ['label' => ['text' => 'Aprovação na congregação', 'class' => 'col-4'], 'monthNames' => $meses, 'dateFormat' => 'DMY', 'empty' => TRUE, 'between' => "<div class = 'form-inline col-8'>"]); ?>
             <?php echo $this->Form->input('versao', ['label' => ['text' => 'Versão', 'class' => 'col-4'], 'empty' => TRUE]); ?>
-            <?php echo $this->Form->input('situacaopr5_id', ['label' => ['text' => 'Situação', 'class' => 'col-4'], 'options' => $situacaopr5,'empty' => FALSE]); ?>
+            <?php echo $this->Form->input('situacaopr5_id', ['label' => ['text' => 'Situação', 'class' => 'col-4'], 'options' => $situacaopr5,'empty' => TRUE]); ?>
             <?php echo $this->Form->input('observacoes', ['label' => ['text' => 'Observações', 'class' => 'col-4']]); ?>
         </fieldset>
         <div class='row justify-content-center'>
