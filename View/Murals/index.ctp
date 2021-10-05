@@ -30,6 +30,7 @@
             <?php endif; ?>
         </div>
     </div>
+    
     <div class="row justify-content-center">
         <div class="col-auto">
             <p>Há <?php echo $total_vagas; ?> vagas de estágio e <?php echo $total_alunos; ?> estudantes buscando estágio (<?php echo $alunos_novos; ?> pela primeira vez e <?php echo $alunos_estagiarios; ?> que mudam de estágio)</p>

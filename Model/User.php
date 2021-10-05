@@ -10,32 +10,24 @@ class User extends AppModel {
     public $useTable = 'users';
     public $displayField = 'email';
     public $actsAs = array('Containable');
-    public $belongsTo = array(
-        'Role' => array(
+    public $belongsTo = [
+        'Role' => [
             'className' => 'Role',
-            'foreignKey' => 'categoria')
-    );
-
-    /*
-      . '        'Aluno' => array(
-      'className' => 'Aluno',
-      'foreignKey' => FALSE,
-      'conditions' => array('User.numero' => 'Aluno.registro')),
-      'Alunonovo' => array(
-      'className' => 'Alunonovo',
-      'foreignKey' => FALSE,
-      'conditions' => array('User.numero' => 'Alunonovo.registro')),
-      'Professor' => array(
-      'className' => 'Professor',
-      'foreignKey' => FALSE,
-      'conditions' => array('User.numero' => 'Professor.siape')),
-      'Supervisor' => array(
-      'className' => 'Supervisor',
-      'foreignKey' => FALSE,
-      'conditions' => array('User.numero' => 'Supervisor.cress'))
-
-      );
-     */
+            'foreignKey' => 'categoria'
+        ],
+        'Alunonovo' => [
+            'className' => 'Alunonovo',
+            'foreignKey' => 'estudante_id'
+        ],
+        'Supervisor' => [
+            'className' => 'Supervisor',
+            'foreignKey' => 'supervisor_id',
+        ],
+        'Docente' => [
+            'className' => 'Docente',
+            'foreignKey' => 'docente_id',
+        ]
+    ];
 
     public function beforeValidate($options = array()) {
 

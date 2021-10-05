@@ -4,6 +4,7 @@
 // pr($alunonovo);
 // pr($professor);
 // pr($supervisor);
+// die();
 ?>
 
 <?= $this->element('submenu_usuarios') ?>
@@ -29,46 +30,37 @@
         <th>E-mail</th>
         </thead>
 
-        <?php if (isset($aluno) && !(empty($aluno))): ?>
+        <?php if ($usuario['User']['categoria'] == 2): ?>
 
             <tr>
-                <td>Estagiário</td>
-                <td><?php echo $aluno['Aluno']['nome']; ?></td>
-                <td><?php echo $this->Html->link($aluno['Aluno']['registro'], '/alunos/view/' . $aluno['Aluno']['id']); ?></td>
-                <td><?php echo $aluno['Aluno']['email']; ?></td>
+                <td>Estudante</td>
+                <td><?php echo $usuario['Alunonovo']['nome']; ?></td>
+                <td><?php echo $this->Html->link($usuario['Alunonovo']['registro'], '/alunonovos/view/' . $usuario['Alunonovo']['id']); ?></td>
+                <td><?php echo $usuario['Alunonovo']['email']; ?></td>
             </tr>
 
-        <?php elseif (isset($alunonovo) && !(empty($alunonovo))): ?>
-
-            <tr>
-                <td>Estudante sem estágio</td>
-                <td><?php echo $alunonovo['Alunonovo']['nome']; ?></td>
-                <td><?php echo $alunonovo['Alunonovo']['registro']; ?></td>
-                <td><?php echo $alunonovo['Alunonovo']['email']; ?></td>
-            </tr>
-
-        <?php elseif (isset($professor) && !(empty($professor))): ?>
+        <?php elseif ($usuario['User']['categoria'] == 3): ?>
 
             <tr>
                 <td>Professor</td>
-                <td><?= $this->Html->link($professor['Professor']['nome'], '/professors/view/' . $professor['Professor']['id']) ?></td>
-                <td><?php echo $professor['Professor']['siape']; ?></td>
-                <td><?php echo $professor['Professor']['email']; ?></td>
+                <td><?= $this->Html->link($usuario['Professor']['nome'], '/professors/view/' . $usuario['Professor']['id']) ?></td>
+                <td><?php echo $usuario['Professor']['siape']; ?></td>
+                <td><?php echo $usuario['Professor']['email']; ?></td>
             </tr>
 
-        <?php elseif (isset($supervisor) && !(empty($supervisor))): ?>
+        <?php elseif ($usuario['User']['categoria'] == 4): ?>
 
             <tr>
                 <td>Supervisor</td>
-                <td><?= $this->Html->link($supervisor['Supervisor']['nome'], '/supervisors/view/' . $supervisor['Supervisor']['id']) ?></td>
-                <td><?php echo $supervisor['Supervisor']['cress']; ?></td>
-                <td><?php echo $supervisor['Supervisor']['email']; ?></td>
+                <td><?= $this->Html->link($usuario['Supervisor']['nome'], '/supervisors/view/' . $usuario['Supervisor']['id']) ?></td>
+                <td><?php echo $usuario['Supervisor']['cress']; ?></td>
+                <td><?php echo $usuario['Supervisor']['email']; ?></td>
             </tr>
 
         <?php endif; ?>
 
         <tr>
-            <td>Usuário</td>
+            <td>Editar usuário</td>
             <td></td>
             <td><?php echo $this->Html->link($usuario['User']['numero'], '/users/edit/' . $usuario['User']['id']); ?></td>
             <td><?php echo $usuario['User']['email']; ?></td>

@@ -55,7 +55,7 @@
             <td style='text-align:left'><?php echo $aluno['Aluno']['nome']; ?></td>
 
             <?php if ($this->Session->read('categoria') != 'estudante'): ?>
-                <td style='text-align:center'><?php echo $aluno['Aluno']['nascimento']; ?></td>
+            <td style='text-align:center'><?php echo date('d-m-Y', strtotime($aluno['Aluno']['nascimento'])); ?></td>
                 <td style='text-align:left'><?php echo $aluno['Aluno']['cpf']; ?></td>
             <?php endif; ?>
 

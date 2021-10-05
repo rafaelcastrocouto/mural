@@ -17,6 +17,11 @@ class Estagiario extends AppModel {
             'foreignKey' => 'id_aluno',
             'joinTable' => 'alunos'
         ),
+        'Alunonovo' => array(
+            'className' => 'Alunonovo',
+            'foreignKey' => 'alunonovo_id',
+            'joinTable' => 'alunosnovos'
+        ),
         'Instituicao' => array(
             'className' => 'Instituicao',
             'foreignKey' => 'id_instituicao',

@@ -9,7 +9,15 @@ class Alunonovo extends AppModel {
     public $hasMany = array(
         'Inscricao' => array(
             'className' => 'Inscricao',
-            'foreignKey' => 'id_instituicao'
+            'foreignKey' => 'alunonovo_id'
+        ),
+        'Estagiario' => array(
+            'className' => 'Estagiario',
+            'foreignKey' => 'alunonovo_id'
+        ),
+        'User' => array(
+            'className' => 'User',
+            'foreignKey' => 'estudante_id'
         )
     );
 

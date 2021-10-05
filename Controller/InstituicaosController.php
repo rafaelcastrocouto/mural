@@ -317,7 +317,6 @@ class InstituicaosController extends AppController {
     /*
      * Seleciona supervisor em funcao da selecao da instituicao
      */
-
     public function seleciona_supervisor($id = NULL) {
 
         // $id = 1108;

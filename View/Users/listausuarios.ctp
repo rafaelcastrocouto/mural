@@ -106,7 +106,8 @@
                     <td>
                         <?php
                         if ($usuario['numero'] != 0):
-                            echo $this->Html->link('Editar', '/users/view/' . $usuario['numero']);
+                            echo $this->Html->link('Editar', '/users/view/' . $usuario['id']);
+                            // echo $this->Html->link('Editar', '/users/view/' . $usuario['numero']);
                         endif;
                         ?>
                     </td>

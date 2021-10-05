@@ -1,4 +1,7 @@
 <?php
+
+// pr($categoria);
+// die();
 // pr($usuarios);
 ?>
 
@@ -55,134 +58,46 @@
 
 <div class='row justify-content-center'>
     <div class='col-auto'>
+        <table class='table table-hover table-striped table-responsive'>
+            <thead class='thead-light'>
+                <tr>
+                    <th><?php echo $this->Paginator->sort('User.id', 'Id'); ?></th>
+                    <th><?php echo $this->Paginator->sort('User.categoria', 'Categoria'); ?></th>
+                    <th><?php echo $this->Paginator->sort('User.numero', 'Número'); ?></th>
+                    <th><?php echo $this->Paginator->sort('User.Alunonovo.nome', 'Nome'); ?></th>
+                    <th><?php echo $this->Paginator->sort('User.email', 'Email'); ?></th>
+
+                </tr>
+            </thead>
+            <tbody>
+
         <?php
-        switch ($categoria) {
-            case '2':
-                ?>
-                <table class='table table-hover table-striped table-responsive'>
-                    <thead class='thead-light'>
-                        <tr>
-                            <th><?php echo $this->Paginator->sort('User.id', 'Id'); ?></th>
-                            <th><?php echo $this->Paginator->sort('User.numero', 'Número'); ?></th>
-                            <th><?php echo $this->Paginator->sort('Estudante.nome', 'Nome'); ?></th>
-                            <th><?php echo $this->Paginator->sort('User.email', 'Email'); ?></th>
-                            <th><?php echo $this->Paginator->sort('User.categoria', 'Categoria'); ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ($usuarios as $c_usuarios) {
-                            ?>
-
-                            <tr>
-                                <td><?php echo $this->Html->link($c_usuarios['User']['id'], '/Users/delete/' . $c_usuarios['User']['id'], NULL, 'Tem certeza?'); ?></td>
-                                <td><?php echo $this->Html->link($c_usuarios['Estudante']['registro'], '/Alunonovos/view/' . $c_usuarios['Estudante']['id']); ?></td>
-                                <td><?php echo $c_usuarios['Estudante']['nome']; ?></td>
-                                <td><?php echo $c_usuarios['User']['email']; ?></td>
-                                <td><?php echo $c_usuarios['Role']['categoria']; ?></td>
-                            </tr>
-
-                            <?php
-                        }
-                        ?>
-                    <tbody>
-                </table>
-                <?php
-                break;
-            case '3':
-                ?>
-                <table class='table table-hover table-striped table-responsive'>
-                    <thead class='thead-light'>
-                        <tr>
-                            <th><?php echo $this->Paginator->sort('User.id', 'Id'); ?></th>
-                            <th><?php echo $this->Paginator->sort('User.numero', 'Número'); ?></th>
-                            <th><?php echo $this->Paginator->sort('Professor.nome', 'Nome'); ?></th>
-                            <th><?php echo $this->Paginator->sort('User.email', 'Email'); ?></th>
-                            <th><?php echo $this->Paginator->sort('User.categoria', 'Categoria'); ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ($usuarios as $c_usuarios) {
-                            ?>
-
-                            <tr>
-                                <td><?php echo $this->Html->link($c_usuarios['User']['id'], '/Users/delete/' . $c_usuarios['User']['id'], NULL, 'Tem certeza?'); ?></td>
-                                <td><?php echo $this->Html->link($c_usuarios['Professor']['siape'], '/Professors/view/' . $c_usuarios['Professor']['id']); ?></td>
-                                <td><?php echo $c_usuarios['Professor']['nome']; ?></td>
-                                <td><?php echo $c_usuarios['User']['email']; ?></td>
-                                <td><?php echo $c_usuarios['Role']['categoria']; ?></td>
-                            </tr>
-
-                            <?php
-                        }
-                        ?>
-                    <tbody>
-                </table>
-                <?php
-                break;
-            case '4':
-                ?>
-                <table class='table table-hover table-striped table-responsive'>
-                    <thead class='thead-light'>
-                        <tr>
-                            <th><?php echo $this->Paginator->sort('User.id', 'Id'); ?></th>
-                            <th><?php echo $this->Paginator->sort('User.numero', 'Número'); ?></th>
-                            <th><?php echo $this->Paginator->sort('Supervisor.nome', 'Nome'); ?></th>
-                            <th><?php echo $this->Paginator->sort('User.email', 'Email'); ?></th>
-                            <th><?php echo $this->Paginator->sort('User.categoria', 'Categoria'); ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ($usuarios as $c_usuarios) {
-                            ?>
-
-                            <tr>
-                                <td><?php echo $this->Html->link($c_usuarios['User']['id'], '/Users/delete/' . $c_usuarios['User']['id'], NULL, 'Tem certeza?'); ?></td>
-                                <td><?php echo $this->Html->link($c_usuarios['Supervisor']['cress'], '/supervisors/view/' . $c_usuarios['Supervisor']['id']); ?></td>
-                                <td><?php echo $c_usuarios['Supervisor']['nome']; ?></td>
-                                <td><?php echo $c_usuarios['User']['email']; ?></td>
-                                <td><?php echo $c_usuarios['Role']['categoria']; ?></td>
-                            </tr>
-
-                            <?php
-                        }
-                        ?>
-                    <tbody>
-                </table>
-                <?php
-                break;
-            default :
-                ?>
-                <table class='table table-hover table-striped table-responsive'>
-                    <thead class='thead-light'>
-                        <tr>
-                            <th><?php echo $this->Paginator->sort('User.id', 'Id'); ?></th>
-                            <th><?php echo $this->Paginator->sort('User.numero', 'Número'); ?></th>
-                            <th><?php echo $this->Paginator->sort('User.email', 'Email'); ?></th>
-                            <th><?php echo $this->Paginator->sort('User.categoria', 'Categoria'); ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ($usuarios as $c_usuarios) {
-                            ?>
-
-                            <tr>
-                                <td><?php echo $this->Html->link($c_usuarios['User']['id'], '/Users/delete/' . $c_usuarios['User']['id'], NULL, 'Tem certeza?'); ?></td>
-                                <td><?php echo $c_usuarios['User']['numero']; ?></td>
-                                <td><?php echo $c_usuarios['User']['email']; ?></td>
-                                <td><?php echo $c_usuarios['Role']['categoria']; ?></td>
-                            </tr>
-
-                            <?php
-                        }
-                        ?>
-                    <tbody>
-                </table>
-            <?php
-        };
+        foreach ($usuarios as $c_usuarios) {
         ?>
+                <?php // pr($c_usuarios) ?>
+                <tr>
+                    <td><?= $this->Html->link($c_usuarios['User']['id'], '/Users/delete/' . $c_usuarios['User']['id'], NULL, 'Tem certeza?'); ?></td>
+                    <td><?= $c_usuarios['Role']['categoria']; ?></td>
+                    <?php if ($c_usuarios['User']['categoria'] == 2): ?>
+                    <td><?= $this->Html->link($c_usuarios['Alunonovo']['registro'], '/Alunonovos/view/' . $c_usuarios['Alunonovo']['id']); ?></td>
+                    <td><?= $c_usuarios['Alunonovo']['nome']; ?></td>
+                    <td><?= $c_usuarios['Alunonovo']['email']; ?></td>
+                    <?php elseif ($c_usuarios['User']['categoria'] == 3): ?>
+                    <td><?= $this->Html->link($c_usuarios['Docente']['siape'], '/Docentes/view/' . $c_usuarios['Docente']['id']); ?></td>
+                    <td><?= $c_usuarios['Docente']['nome']; ?></td>
+                    <td><?= $c_usuarios['Docente']['email']; ?></td>
+                    <?php elseif ($c_usuarios['User']['categoria'] == 4): ?>
+                    <td><?= $this->Html->link($c_usuarios['Supervisor']['cress'], '/Supervisores/view/' . $c_usuarios['Supervisor']['id']); ?></td>
+                    <td><?= $c_usuarios['Supervisor']['nome']; ?></td>
+                    <td><?= $c_usuarios['Supervisor']['email']; ?></td>
+                    <?php endif; ?>
+                </tr>
+        <?php
+        }
+        ?>
+
+            </tbody>
+        </table>
+
     </div>
 </div>

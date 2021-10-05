@@ -14,7 +14,10 @@ class Supervisor extends AppModel {
     public $hasMany = array(
         'Estagiario' => array(
             'className' => 'Estagiario',
-            'foreignKey' => 'id_supervisor')
+            'foreignKey' => 'id_supervisor'),
+        'User' => array(
+            'className' => 'User',
+            'foreignKey' => 'supervisor_id')
     );
     public $hasAndBelongsToMany = array(
         'Instituicao' => array(

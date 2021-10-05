@@ -13,8 +13,8 @@ class Aluno extends AppModel {
     public $hasMany = array(
         'Estagiario' => array(
             'className' => 'Estagiario',
-            'foreignKey' => 'id_aluno', // nao eh o registro
-        ),
+            'foreignKey' => 'id_aluno', // nao eh o registro eh o id do aluno
+        )
     );
 
     public function beforeValidate($options = array()) {

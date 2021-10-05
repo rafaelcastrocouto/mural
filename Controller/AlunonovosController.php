@@ -174,11 +174,11 @@ class AlunonovosController extends AppController {
 
         /* Calculo o id a partir do registro */
         if ($registro) {
-            $aluno_id = $this->Alunonovo->find('first', [
+            $alunonovo_id = $this->Alunonovo->find('first', [
                 'conditions' => ['Alunonovo.registro' => $registro]
             ]);
-            if ($aluno_id) {
-                $id = $aluno_id['Alunonovo']['id'];
+            if ($alunonovo_id) {
+                $id = $alunonovo_id['Alunonovo']['id'];
             } else {
                 $this->Flash->error(__("Registro do estudante inexistente"));
                 $this->redirect('/alunonovos/index');
@@ -233,11 +233,11 @@ class AlunonovosController extends AppController {
         // die();
         /* Calculo o id a partir do registro */
         if ($registro) {
-            $aluno_id = $this->Alunonovo->find('first', [
+            $alunonovo_id = $this->Alunonovo->find('first', [
                 'conditions' => ['Alunonovo.registro' => $registro]
             ]);
-            if ($aluno_id) {
-                $id = $aluno_id['Alunonovo']['id'];
+            if ($alunonovo_id) {
+                $id = $alunonovo_id['Alunonovo']['id'];
             } else {
                 $this->Flash->error(__("Registro do estudante inexistente"));
                 $this->redirect('/alunonovos/index');
@@ -246,10 +246,10 @@ class AlunonovosController extends AppController {
         }
         // $log = $this->Alunonovo->getDataSource()->getLog(false, false);
         // debug($log);
-        // pr($aluno_id);
+        // pr($alunonovo_id);
         // die();
         if (!isset($id) && (!empty($id))) {
-            $id = $aluno_id['Alunonovo']['id'];
+            $id = $alunonovo_id['Alunonovo']['id'];
         }
 
         // pr($id);
@@ -497,6 +497,88 @@ class AlunonovosController extends AppController {
             endif;
 
         endforeach;
+    }
+
+    public function aluno() {
+
+        $this->loadModel('Aluno');
+        $this->Aluno->recursive = 0;
+        $alunos = $this->Aluno->find('all');
+
+        $i = 0;
+        foreach ($alunos as $c_aluno):
+
+            // echo $c_aluno['Aluno']['registro'] . " ";
+            $this->Alunonovo->recursive = 0;
+            $aluno = $this->Alunonovo->find('first', [
+                'conditions' => ['Alunonovo.registro' => $c_aluno['Aluno']['registro']]
+            ]);
+            // pr($aluno);
+            // die();
+            if (!$aluno) {
+                echo $c_aluno['Aluno']['registro'] . " Não cadastrado" . "<br>";
+                $nao_cadastrado[] = $c_aluno;
+                // cadastrar
+                // die();
+                if ($this->Alunonovo->save($c_aluno)) {
+                    $this->Flash->success(__("Cadastro realizado: " . $c_aluno['Aluno']['nome']));
+                }
+            } else {
+                // echo $c_aluno['Aluno']['registro'] . " Cadastrado" . "<br>";
+                $alunos[] = $aluno;
+                // pr($alunos);
+            }
+            // $log = $this->Aluno->getDataSource()->getLog(false, false);
+            // debug($log);
+            // die();
+
+        endforeach;
+        // $log = $this->Aluno->getDataSource()->getLog(false, false);
+        // debug($log);
+        // pr($nao_cadastrado);
+        die("Tarefa finalizada!");
+    }
+
+    public function alunonovos() {
+
+        $this->loadModel('Aluno');
+        $this->Alunonovo->recursive = 0;
+        $alunonovos = $this->Alunonovo->find('all');
+
+        $i = 0;
+        foreach ($alunonovos as $c_alunonovo):
+
+            // echo $c_alunonovo['Alunonovo']['registro'] . " ";
+            $this->Aluno->recursive = 0;
+            $aluno = $this->Aluno->find('first', [
+                'conditions' => ['Aluno.registro' => $c_alunonovo['Alunonovo']['registro']]
+            ]);
+            // pr($aluno);
+            // die();
+            if (!$aluno) {
+                echo $c_alunonovo['Alunonovo']['registro'] . " Não cadastrado" . "<br>";
+                $nao_cadastrado[] = $c_alunonovo;
+                // cadastrar
+                // die();
+                /*
+                if ($this->Alunonovo->save($c_aluno)) {
+                    $this->Flash->success(__("Cadastro realizado: " . $c_aluno['Aluno']['nome']));
+                }
+                */
+            } else {
+                // echo $c_alunonovo['Alunonovo']['registro'] . " Cadastrado" . "<br>";
+                $estudantes[] = $aluno;
+                // pr($alunos);
+            }
+            // $log = $this->Aluno->getDataSource()->getLog(false, false);
+            // debug($log);
+            // die();
+
+        endforeach;
+        // $log = $this->Aluno->getDataSource()->getLog(false, false);
+        // debug($log);
+        // pr($nao_cadastrado);
+        die("Tarefa finalizada!");
     }
 
 }

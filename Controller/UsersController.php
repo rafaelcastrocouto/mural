@@ -23,7 +23,7 @@ class UsersController extends AppController {
         $this->Session->delete('numero');
         $this->Session->delete('id_categoria');
         $this->Session->delete('categoria');
-        
+
         if (!empty($this->data)) {
 
             $usuario = $this->User->find('first', array(
@@ -48,14 +48,14 @@ class UsersController extends AppController {
                     case 2:
                         $this->Flash->success('Bem-vindo ' . $usuario['Role']['categoria'] . ': ' . $this->Session->read('user'));
                         $this->loadModel('Aluno');
-                        $aluno_id = $this->Aluno->findByRegistro($usuario['User']['numero']);
+                        $aluno_id = $this->User->Aluno->findByRegistro($usuario['User']['numero']);
                         if ($aluno_id) {
                             $this->Session->write('menu_aluno', 'estagiario');
                             $this->Session->write('menu_id_aluno', $aluno_id['Aluno']['id']);
                             $this->redirect('/Alunos/view/' . $aluno_id['Aluno']['id']);
                         } else {
                             $this->loadModel('Alunonovo');
-                            $aluno_id = $this->Alunonovo->findByRegistro($usuario['User']['numero']);
+                            $aluno_id = $this->User->Alunonovo->findByRegistro($usuario['User']['numero']);
                             if ($aluno_id) {
                                 $this->Session->write('menu_aluno', 'alunonovo');
                                 $this->Session->write('menu_id_aluno', $aluno_id['Alunonovo']['id']);
@@ -75,7 +75,7 @@ class UsersController extends AppController {
                         $this->Flash->success(__('Bem-vindo ' . $usuario['Role']['categoria'] . ': ' . $this->Session->read('user')));
                         // Verificar se cadastro do professor existe
                         $this->loadModel('Professor');
-                        $professor = $this->Professor->findBySiape($usuario['User']['numero']);
+                        $professor = $this->User->Professor->findBySiape($usuario['User']['numero']);
                         // pr($professor);
                         // die("3");
                         if ($professor) {
@@ -93,7 +93,7 @@ class UsersController extends AppController {
                         $this->Flash->success(__('Bem-vindo ' . $usuario['Role']['categoria'] . ': ' . $this->Session->read('user')));
                         // Verifica se o cadastro do supervisor existe
                         $this->loadModel('Supervisor');
-                        $supervisor = $this->Supervisor->findByCress($usuario['User']['numero']);
+                        $supervisor = $this->User->Supervisor->findByCress($usuario['User']['numero']);
                         // pr($supervisor);
                         // die();
                         if ($supervisor) {
@@ -195,7 +195,7 @@ class UsersController extends AppController {
                 case 2:
                     $grupo = 'alunos';
                     $this->loadModel('Aluno');
-                    $aluno = $this->Aluno->findByRegistro($this->data['User']['numero']);
+                    $aluno = $this->User->Aluno->findByRegistro($this->data['User']['numero']);
                     // pr($aluno);
                     //die(pr($this->data['User']['numero']));
                     if ($aluno) {
@@ -208,7 +208,7 @@ class UsersController extends AppController {
                         // echo "Estudante novo? ";
                         // die("Estudante novo?");
                         $this->loadModel('Alunonovo');
-                        $alunonovo = $this->Alunonovo->findByRegistro($this->data['User']['numero']);
+                        $alunonovo = $this->User->Alunonovo->findByRegistro($this->data['User']['numero']);
                         // die(pr($alunonovo));
                         if ($alunonovo) {
                             $situacao = 2; // Estudante novo que busca estágio
@@ -258,7 +258,7 @@ class UsersController extends AppController {
 
                     /* Agora asocio o usuario ao professor através do SIAPE */
                     $this->loadModel('Professor');
-                    $professor = $this->Professor->findBySiape($this->data['User']['numero']);
+                    $professor = $this->User->Professor->findBySiape($this->data['User']['numero']);
                     if (empty($professor)) {
                         $this->Flash->success(__("Cadastrar o SIAPE do usuário no professor"));
                         $this->redirect('/professors/usuarioprofessor?siape=' . $this->data['User']['numero'] . "&" . 'email=' . $this->data['User']['email']);
@@ -272,7 +272,7 @@ class UsersController extends AppController {
                 case 4:
                     $grupo = 'supervisores';
                     $this->loadModel('Supervisor');
-                    $supervisor = $this->Supervisor->findByCress($this->data['User']['numero']);
+                    $supervisor = $this->User->Supervisor->findByCress($this->data['User']['numero']);
 
                     // O supervisor ja tem que estar cadastrado
                     if ($supervisor) {
@@ -300,12 +300,12 @@ class UsersController extends AppController {
                     // pr($usuario['User']['numero']);
                     // pr($usuario['User']['categoria']);
                     $this->loadModel('Aluno');
-                    $aluno_id = $this->Aluno->findByRegistro($this->data['User']['numero']);
+                    $aluno_id = $this->User->Aluno->findByRegistro($this->data['User']['numero']);
                     if ($aluno_id) {
                         $this->redirect('/Alunos/view/' . $aluno_id['Aluno']['id']);
                     } else {
                         $this->loadModel('Alunonovo');
-                        $aluno_id = $this->Alunonovo->findByRegistro($this->data['User']['numero']);
+                        $aluno_id = $this->User->Alunonovo->findByRegistro($this->data['User']['numero']);
                         if ($aluno_id) {
                             $this->redirect('/Alunonovos/view/' . $aluno_id['Alunonovo']['id']);
                         } else {
@@ -316,13 +316,13 @@ class UsersController extends AppController {
 
                 case 3: // Professor
                     $this->loadModel('Professor');
-                    $professor_id = $this->Professor->findBySiape($this->data['User']['numero']);
+                    $professor_id = $this->User->Professor->findBySiape($this->data['User']['numero']);
                     $this->redirect('/Professors/view/' . $professor_id['Professor']['id']);
                     break;
 
                 case 4: // Supervisor
                     $this->loadModel('Supervisor');
-                    $supervisor_id = $this->Supervisor->findByCress($this->data['User']['numero']);
+                    $supervisor_id = $this->User->Supervisor->findByCress($this->data['User']['numero']);
                     $this->Session->write("menu_id_supervisor", $supervisor['Supervisor']['id']);
                     $this->redirect('/Supervisors/view/' . $supervisor_id['Supervisor']['id']);
                     break;
@@ -349,6 +349,7 @@ class UsersController extends AppController {
             $categoria = $this->Session->read('categoriadeusuario');
         };
 
+/*        
         switch ($categoria) {
             case '2': // Estudante
                 $this->Paginator->settings = array(
@@ -405,6 +406,7 @@ class UsersController extends AppController {
                 );
                 break;
         }
+*/        
         $this->Session->write('categoriadeusuario', $categoria);
 
         $this->set('categoria', $categoria);
@@ -458,7 +460,7 @@ class UsersController extends AppController {
                     break;
                 case 2:
                     // Busco entre os estudantes em estágio
-                    $estudante = $this->Aluno->find('first', array(
+                    $estudante = $this->User->Aluno->find('first', array(
                         'conditions' => 'Aluno.registro=' . $cadausuario['User']['numero']));
 
                     if ($estudante) {
@@ -468,7 +470,7 @@ class UsersController extends AppController {
                     } else {
                         // Se não está entre os estudantes em estágio busco entre os novos
                         // $estudantenovo = NULL;
-                        $estudantenovo = $this->Alunonovo->find('first', array(
+                        $estudantenovo = $this->User->Alunonovo->find('first', array(
                             'conditions' => 'Alunonovo.registro=' . $cadausuario['User']['numero']));
                         if ($estudantenovo) {
                             $nome = $estudantenovo['Alunonovo']['nome'];
@@ -483,7 +485,7 @@ class UsersController extends AppController {
                     }
                     break;
                 case 3:
-                    $professor = $this->Professor->find('first', array(
+                    $professor = $this->User->Professor->find('first', array(
                         'conditions' => 'Professor.siape=' . $cadausuario['User']['numero']));
                     if ($professor) {
                         $nome = $professor['Professor']['nome'];
@@ -494,7 +496,7 @@ class UsersController extends AppController {
                     $aluno_tipo = 3;
                     break;
                 case 4:
-                    $supervisor = $this->Supervisor->find('first', array(
+                    $supervisor = $this->User->Supervisor->find('first', array(
                         'conditions' => 'Supervisor.cress=' . $cadausuario['User']['numero']));
                     if ($supervisor) {
                         $nome = $supervisor['Supervisor']['nome'];
@@ -574,25 +576,20 @@ class UsersController extends AppController {
 
         // pr($id);
         // die();
-        $usuario_id = $this->User->find('first', array('conditions' => array('User.numero' => $id)));
-        // pr($usuario_id);
+        $usuario = $this->User->find('first', array('conditions' => array('User.numero' => $id)));
+        // pr($usuario);
         // die();
-
-        $this->loadModel('Aluno');
-        $aluno = $this->Aluno->find('first', array('conditions' => array('Aluno.registro' => $id)));
-        $this->loadModel('Alunonovo');
-        $alunonovo = $this->Alunonovo->find('first', array('conditions' => array('Alunonovo.registro' => $id)));
-        $this->loadModel('Professor');
-        $professor = $this->Professor->find('first', array('conditions' => array('Professor.siape' => $id)));
-        $this->loadModel('Supervisor');
-        $supervisor = $this->Supervisor->find('first', array('conditions' => array('Supervisor.cress' => $id)));
-
-        if ($aluno or $alunonovo or $professor or $supervisor) {
-            $this->Session->setFlash('Usuário existe como aluno, alunonovo, professor ou supervisor');
-            $this->redirect('/users/listausuarios');
+        if ($usuario) {
+            if ($usuario['Alunonovo'] or $usuario['Professor'] or $usuario['Supervisor']) {
+                $this->Session->setFlash(__('Usuário cadastrado como estudante, professor ou supervisor'));
+                $this->redirect('/users/listausuarios');
+            } else {
+                $this->User->delete($usuario['User']['id']);
+                $this->Flash->success(__('Registro excluído ' . $id));
+                $this->redirect('/users/listausuarios/');
+            }
         } else {
-            $this->User->delete($usuario_id['User']['id']);
-            $this->Flash->success(__('Registro excluído'));
+            echo 'Usuário não cadastrado' . "<br>";
             $this->redirect('/users/listausuarios/');
         }
     }
@@ -605,53 +602,7 @@ class UsersController extends AppController {
         // pr($id);
         // pr($usuario);
         // die();
-
-        if ($usuario['Role']['id'] == '2') {
-            // echo "Estudante";
-            $this->loadModel("Aluno");
-            $aluno = $this->Aluno->find('first', array(
-                'conditions' => array('Aluno.registro' => $usuario['User']['numero'])
-            ));
-            // pr($aluno);
-            if (!$aluno) {
-                $this->Flash->error(__('Estudante sem estágio'));
-                $this->loadModel("Alunonovo");
-                $alunonovo = $this->Alunonovo->find('first', array(
-                    'conditions' => array('Alunonovo.registro' => $usuario['User']['numero'])
-                ));
-                // pr($alunonovo);
-            }
-
-            if (isset($aluno) && !(empty($aluno))):
-            // pr($aluno);
-            elseif (isset($alunonovo) && !(empty($alunonovo))):
-            // pr($alunonovo);
-            endif;
-            // die();
-        } elseif ($usuario['Role']['id'] == '3') {
-            // echo "Professor";
-            $this->loadModel('Professor');
-            $professor = $this->Professor->find('first', array(
-                'conditions' => array('Professor.siape' => $id)
-            ));
-        } elseif ($usuario['Role']['id'] == '4') {
-            // echo "Supervisor";
-            $this->loadModel('Supervisor');
-            $supervisor = $this->Supervisor->find('first', array(
-                'conditions' => array('Supervisor.cress' => $id)
-            ));
-        }
-
         $this->set('usuario', $usuario);
-        if (isset($aluno) && !(empty($aluno))):
-            $this->set('aluno', $aluno);
-        elseif (isset($alunonovo) && !(empty($alunonovo))):
-            $this->set('alunonovo', $alunonovo);
-        elseif (isset($professor) && !(empty($professor))):
-            $this->set('professor', $professor);
-        elseif (isset($supervisor) && !(empty($supervisor))):
-            $this->set('supervisor', $supervisor);
-        endif;
     }
 
     public function edit($id = NULL) {
@@ -729,7 +680,7 @@ class UsersController extends AppController {
             switch ($usuarios['User']['categoria']) {
                 case '2':
                     $this->loadModel('Alunonovo');
-                    $alunonovos = $this->Alunonovo->find('first', [
+                    $alunonovos = $this->User->Alunonovo->find('first', [
                         'conditions' => ['Alunonovo.registro' => $this->data['User']['numero']]
                     ]);
                     // pr($alunonovos);
@@ -743,7 +694,7 @@ class UsersController extends AppController {
 
                 case '3':
                     $this->loadModel('Professor');
-                    $professor = $this->Professor->find('first', [
+                    $professor = $this->User->Professor->find('first', [
                         'conditions' => ['Professor.siape' => $this->data['User']['numero']]
                     ]);
                     if (empty($professor)) {
@@ -758,7 +709,7 @@ class UsersController extends AppController {
 
                 case '4':
                     $this->loadModel('Supervisor');
-                    $supervisor = $this->Supervisor->find('first', [
+                    $supervisor = $this->User->Supervisor->find('first', [
                         'conditions' => ['Supervisor.cress' => $this->data['User']['numero']]
                     ]);
                     if (empty($supervisor)) {
@@ -793,7 +744,7 @@ class UsersController extends AppController {
                         // die();
                         // $this->Session->setFlash('Bem-vindo ' . $usuario['Role']['categoria'] . ': ' . $this->Session->read('user'));
                         $this->loadModel('Aluno');
-                        $aluno_id = $this->Aluno->findByRegistro($this->data['User']['numero']);
+                        $aluno_id = $this->User->Aluno->findByRegistro($this->data['User']['numero']);
                         // pr($aluno_id);
                         // die();
                         if ($aluno_id) {
@@ -804,7 +755,7 @@ class UsersController extends AppController {
                             // $this->redirect('/alunos/view/' . $aluno_id['Aluno']['id']);
                         } else {
                             $this->loadModel('Alunonovo');
-                            $aluno_id = $this->Alunonovo->findByRegistro($this->data['User']['numero']);
+                            $aluno_id = $this->User->Alunonovo->findByRegistro($this->data['User']['numero']);
                             if ($aluno_id) {
                                 $this->Session->write('id_categoria', 2);
                                 $this->Session->write('numero', $this->data['User']['numero']);
@@ -820,7 +771,7 @@ class UsersController extends AppController {
                         break;
                     case 3:
                         $this->loadModel('Professor');
-                        $professor = $this->Professor->find('first', [
+                        $professor = $this->User->Professor->find('first', [
                             'conditions' => ['Professor.siape' => $this->data['User']['numero']]
                         ]);
                         if (empty($professor)) {
@@ -836,7 +787,7 @@ class UsersController extends AppController {
                         break;
                     case 4:
                         $this->loadModel('Supervisor');
-                        $supervisor = $this->Supervisor->find('first', [
+                        $supervisor = $this->User->Supervisor->find('first', [
                             'conditions' => ['Supervisor.cress' => $this->data['User']['numero']]
                         ]);
                         if (empty($supervisor)) {
@@ -869,6 +820,70 @@ class UsersController extends AppController {
             // pr(strtolower($c_email['User']['email']));
             // $this->User->query("UPDATE users set email = '" . strtolower($c_email['User']['email'] . "' where id = ". $c_email['User']['id']));
         endforeach;
+        die();
+    }
+
+    public function preencher() {
+
+        $user = $this->User->find('all');
+        foreach ($user as $c_user) {
+            // pr($c_user['User']['categoria']);
+            // Estudantes
+            if ($c_user['User']['categoria'] == 2) {
+                pr($c_user['User']['numero']);
+                $this->loadModel('Alunonovo');
+                $estudante = $this->Alunonovo->find('first', [
+                    'conditions' => ['Alunonovo.registro' => $c_user['User']['numero']]
+                ]);
+                // pr($estudante);
+                // die();
+                $c_user['User']['estudante_id'] = $estudante['Alunonovo']['id'];
+                if ($this->User->save($c_user)) {
+                    echo "Atualizado";
+                    $this->Flash->success(__('Registro atualizado!'));
+                } else {
+                    echo "Error!";
+                    $this->Flash->error(__('Registro NÃO atualizado!'));
+                }
+            }
+            // Professores
+            if ($c_user['User']['categoria'] == 3) {
+                pr($c_user['User']['numero']);
+                $this->loadModel('Professor');
+                $professor = $this->Professor->find('first', [
+                    'conditions' => ['Professor.siape' => $c_user['User']['numero']]
+                ]);
+                // pr($professor);
+                // die();
+                $c_user['User']['docente_id'] = $professor['Professor']['id'];
+                if ($this->User->save($c_user)) {
+                    echo "Atualizado";
+                    $this->Flash->success(__('Registro atualizado!'));
+                } else {
+                    echo "Error!";
+                    $this->Flash->error(__('Registro NÃO atualizado!'));
+                }
+            }
+            // Supervisores
+            if ($c_user['User']['categoria'] == 4) {
+                pr($c_user['User']['numero']);
+                $this->loadModel('Supervisor');
+                $supervisor = $this->Supervisor->find('first', [
+                    'conditions' => ['Supervisor.cress' => $c_user['User']['numero']]
+                ]);
+                // pr($supervisor);
+                // die();
+                $c_user['User']['supervisor_id'] = $supervisor['Supervisor']['id'];
+                if ($this->User->save($c_user)) {
+                    echo "Atualizado";
+                    echo $this->Flash->success(__('Registro atualizado!'));
+                } else {
+                    echo "Error!";
+                    echo $this->Flash->error(__('Registro NÃO atualizado!'));
+                }
+            }
+            // die();
+        }
         die();
     }
 
