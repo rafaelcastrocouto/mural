@@ -23,8 +23,8 @@ class User extends AppModel {
             'className' => 'Supervisor',
             'foreignKey' => 'supervisor_id',
         ],
-        'Docente' => [
-            'className' => 'Docente',
+        'Professor' => [
+            'className' => 'Professor',
             'foreignKey' => 'docente_id',
         ]
     ];

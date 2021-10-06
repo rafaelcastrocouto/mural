@@ -14,7 +14,9 @@ class Alunonovo extends AppModel {
         'Estagiario' => array(
             'className' => 'Estagiario',
             'foreignKey' => 'alunonovo_id'
-        ),
+        )
+    );
+    public $hasOne = array(
         'User' => array(
             'className' => 'User',
             'foreignKey' => 'estudante_id'

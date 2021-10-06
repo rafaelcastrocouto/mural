@@ -102,7 +102,7 @@
 ]);
 ?>
 
-<h1>Cadastro de estudante novo para estágio</h1>
+<h1>Cadastro de estudante novo</h1>
 
 <fieldset>
     <legend>Dados da(o) aluna(o)</legend>
@@ -116,7 +116,7 @@
             <tr>
                 <td colspan="2">
                     <label for="AlunonovoRegistro">Registro na UFRJ (DRE): <?php echo $this->Session->read('numero'); ?></label>
-                <?php echo $this->Form->input('registro', array('type'=>'text', 'label' => ['text' => 'Registro DRE', 'class' => 'col-4'], 'value'=>$registro, 'default'=>$this->Session->read('numero'))); ?>
+                <?php echo $this->Form->input('registro', array('type'=>'text', 'label' => ['text' => 'Registro DRE', 'class' => 'col-4'], 'value'=>$registro, 'default'=>$this->Session->read('numero'), 'readonly')); ?>
                 </td>
             </tr>
             <!--

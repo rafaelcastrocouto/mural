@@ -30,6 +30,12 @@ class Supervisor extends AppModel {
             'order' => '',
         )
     );
+    public $hasOne = array(
+        'User' => array(
+            'className' => 'User',
+            'foreignKey' => 'supervisor_id'
+        )
+    );
 
     /*
       public $virtualFields = array(

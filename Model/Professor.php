@@ -30,6 +30,13 @@ class Professor extends AppModel {
             'counterQuery' => ''
         )
     );
+        public $hasOne = array(
+        'User' => array(
+            'className' => 'User',
+            'foreignKey' => 'docente_id'
+        )
+    );
+
 
     public function beforeValidate($options = array()) {
 

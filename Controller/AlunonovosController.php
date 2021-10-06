@@ -79,58 +79,54 @@ class AlunonovosController extends AppController {
         }
         // pr($registro);
         // die('registro');
-        // $this->set('meses', $this->meses());
         $this->set('registro', $registro);
-        // die("Alunonovo add: " . $id);
-        /* Vejo se foi chamado desde cadastro
-          $cadastro = $this->Session->read('cadastro');
-          pr($cadastro);
-          // die();
-         */
         // pr($this->data);
         // die();
         if ($this->Alunonovo->save($this->data)) {
-            // die("Aluno novo save");
             // Capturo o id da instituicao (se foi chamada desde inscriacao add)
             $inscricao_selecao_estagio = $this->Session->read('id_instituicao');
-            // Ainda nao posso apagar
-            // $this->Session->delete('id_instituicao');
+
             // Capturo se foi chamado desde a solicitacao do termo
             $registro_termo = $this->Session->read('termo');
             // Acho que posso apagar aqui porque nao vai ser chamado novamente
             $this->Session->delete('termo');
 
-            // Vejo se foi chamado desde cadastro
+            // Vejo se foi chamado desde users/cadastro
             $cadastro = $this->Session->read('cadastro');
 
             $registro = $this->data['Alunonovo']['registro'];
             $this->Flash->success(__("Cadastro realizado: " . $registro));
-            // $this->redirect("/Inscricaos/solicitatermo/" . $registro);
-            // die(" Verificacao da rotina " . $registro);
+
+            /* Inserir o estudante_id na tabela User */
+            $this->loadModel('User');
+            $user = $this->User->find('first', ([
+                'conditions' => ['User.numero' => $this->data['Alunonovo']['registro']]
+            ]));
+            // Se há um user cadastrado, então atualiza com o estudante_id 
+            if ($user) {
+                $this->User->id = $user['User']['id'];
+                if ($this->User->id) {
+                    $this->User->saveField('estudante_id', $this->Alunonovo->getLastInsertId());
+                    $this->Flash->success(__("Atualizada tabela User: " . $registro));
+                }
+            }
 
             if ($inscricao_selecao_estagio) {
-                // Volta para a pagina de inscricao
-                // die("inscricao_seleciona_estagio");
                 $this->redirect("/Inscricaos/inscricao?registro=" . $registro);
             } elseif ($registro_termo) {
-                // Volta para a pagina de termo de compromisso
-                // die(" registro_termo " . $registro_termo);
                 $this->redirect("/Inscricaos/termocompromisso?registro=" . $registro_termo);
                 die("Redireciona para concluir solicitacao de termo de compromisso");
             } elseif ($cadastro) {
-                // die("cadastro");
                 $this->Session->delete('cadastro');
                 $id_alunonovo = $this->Alunonovo->getLastInsertId();
                 $this->Session->write('menu_aluno', 'alunonovo');
                 $this->Session->write('menu_id_aluno', $id_alunonovo);
                 $this->redirect("/Alunonovos/view/" . $id_alunonovo);
             } else {
-                // Mostra resultado da insercao
+                $id_alunonovo = $this->Alunonovo->getLastInsertId();
                 $this->Session->write('menu_aluno', 'alunonovo');
                 $this->Session->write('menu_id_aluno', $id_alunonovo);
                 $this->Flash->success(__('Dados inseridos'));
-                $id_alunonovo = $this->Alunonovo->getLastInsertId();
-                // die(" else " . $id_alunonovo);
                 $this->redirect("/Alunonovos/view/" . $id_alunonovo);
             }
         }
@@ -561,10 +557,10 @@ class AlunonovosController extends AppController {
                 // cadastrar
                 // die();
                 /*
-                if ($this->Alunonovo->save($c_aluno)) {
-                    $this->Flash->success(__("Cadastro realizado: " . $c_aluno['Aluno']['nome']));
-                }
-                */
+                  if ($this->Alunonovo->save($c_aluno)) {
+                  $this->Flash->success(__("Cadastro realizado: " . $c_aluno['Aluno']['nome']));
+                  }
+                 */
             } else {
                 // echo $c_alunonovo['Alunonovo']['registro'] . " Cadastrado" . "<br>";
                 $estudantes[] = $aluno;
