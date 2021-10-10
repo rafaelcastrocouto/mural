@@ -1,5 +1,4 @@
 <?php
-
 // pr($categoria);
 // die();
 // pr($usuarios);
@@ -14,7 +13,7 @@
 
         $("#UserCategoria").change(function () {
             var categoria = $(this).val();
-            /* alert(periodo); */
+            /* alert(categoria); */
             window.location = base_url + "/index?categoria=" + categoria;
         })
 
@@ -40,7 +39,7 @@
         <td>
             <?php echo $this->Form->create('User', array('inputDefaults' => array('label' => false, 'div' => false))); ?>
             <?php echo $this->Form->input('categoria', array('type' => 'select', 'options' => ['1' => 'Administrador', '2' => 'Estudante', '3' => 'Professor(a)', '4' => 'Supervisor(a)'], 'value' => $categoria, 'empty' => array('0' => 'Categoria'), 'style' => 'width: 15em', 'class' => 'form-control form-control-sm')); ?>
-            <?php // echo $this->Form->end(); ?>
+            <?php echo $this->Form->end(); ?>
         </td>
 </table>
 
@@ -62,38 +61,70 @@
                 <tr>
                     <th><?php echo $this->Paginator->sort('User.id', 'Id'); ?></th>
                     <th><?php echo $this->Paginator->sort('User.categoria', 'Categoria'); ?></th>
-                    <th><?php echo $this->Paginator->sort('User.numero', 'Número'); ?></th>
-                    <th><?php echo $this->Paginator->sort('User.Alunonovo.nome', 'Nome'); ?></th>
-                    <th><?php echo $this->Paginator->sort('User.email', 'Email'); ?></th>
-
+                    <?php
+                    switch ($categoria) {
+                        case 2:
+                            ?>
+                            <th><?php echo $this->Paginator->sort('Alunonovo.registro', 'Número'); ?></th>
+                            <th><?php echo $this->Paginator->sort('Alunonovo.nome', 'Nome'); ?></th>
+                            <th><?php echo $this->Paginator->sort('Alunonovo.email', 'Email'); ?></th>
+                            <?php
+                            break;
+                        case 3:
+                            ?>
+                            <th><?php echo $this->Paginator->sort('Professor.siape', 'Número'); ?></th>
+                            <th><?php echo $this->Paginator->sort('Professor.nome', 'Nome'); ?></th>
+                            <th><?php echo $this->Paginator->sort('Professor.email', 'Email'); ?></th>
+                            <?php
+                            break;
+                        case 4:
+                            ?>
+                            <th><?php echo $this->Paginator->sort('Supervisor.cress', 'Número'); ?></th>
+                            <th><?php echo $this->Paginator->sort('Supervisor.nome', 'Nome'); ?></th>
+                            <th><?php echo $this->Paginator->sort('Supervisor.email', 'Email'); ?></th>
+                            <?php
+                            break;
+                        default:
+                            ?>
+                            <th><?php echo $this->Paginator->sort('User.numero', 'Número'); ?></th>
+                            <th><?php echo $this->Paginator->sort('Supervisor.nome', 'Nome'); ?></th>
+                            <th><?php echo $this->Paginator->sort('User.email', 'Email'); ?></th>
+                            <?php
+                            break;
+                    };
+                    ?>
                 </tr>
             </thead>
             <tbody>
 
-        <?php
-        foreach ($usuarios as $c_usuarios) {
-        ?>
-                <?php // pr($c_usuarios) ?>
-                <tr>
-                    <td><?= $this->Html->link($c_usuarios['User']['id'], '/Users/delete/' . $c_usuarios['User']['id'], NULL, 'Tem certeza?'); ?></td>
-                    <td><?= $c_usuarios['Role']['categoria']; ?></td>
-                    <?php if ($c_usuarios['User']['categoria'] == 2): ?>
-                    <td><?= $this->Html->link($c_usuarios['Alunonovo']['registro'], '/Alunonovos/view/' . $c_usuarios['Alunonovo']['id']); ?></td>
-                    <td><?= $c_usuarios['Alunonovo']['nome']; ?></td>
-                    <td><?= $c_usuarios['Alunonovo']['email']; ?></td>
-                    <?php elseif ($c_usuarios['User']['categoria'] == 3): ?>
-                    <td><?= $this->Html->link($c_usuarios['Docente']['siape'], '/Docentes/view/' . $c_usuarios['Docente']['id']); ?></td>
-                    <td><?= $c_usuarios['Docente']['nome']; ?></td>
-                    <td><?= $c_usuarios['Docente']['email']; ?></td>
-                    <?php elseif ($c_usuarios['User']['categoria'] == 4): ?>
-                    <td><?= $this->Html->link($c_usuarios['Supervisor']['cress'], '/Supervisores/view/' . $c_usuarios['Supervisor']['id']); ?></td>
-                    <td><?= $c_usuarios['Supervisor']['nome']; ?></td>
-                    <td><?= $c_usuarios['Supervisor']['email']; ?></td>
-                    <?php endif; ?>
-                </tr>
-        <?php
-        }
-        ?>
+                <?php
+                foreach ($usuarios as $c_usuarios):
+                    // pr($c_usuarios);
+                    ?>
+                    <tr>
+                        <td><?= $this->Html->link($c_usuarios['User']['id'], '/Users/delete/' . $c_usuarios['User']['id'], NULL, 'Tem certeza?'); ?></td>
+                        <td><?= $c_usuarios['Role']['categoria']; ?></td>
+                        <?php if ($categoria == 2): ?>
+                            <td><?= $this->Html->link($c_usuarios['Alunonovo']['registro'], '/Alunonovos/view/' . $c_usuarios['Alunonovo']['id']); ?></td>
+                            <td><?= $c_usuarios['Alunonovo']['nome']; ?></td>
+                            <td><?= $c_usuarios['Alunonovo']['email']; ?></td>
+                        <?php elseif ($categoria == 3): ?>
+                            <td><?= $this->Html->link($c_usuarios['Professor']['siape'], '/Professors/view/' . $c_usuarios['Professor']['id']); ?></td>
+                            <td><?= $c_usuarios['Professor']['nome']; ?></td>
+                            <td><?= $c_usuarios['Professor']['email']; ?></td>
+                        <?php elseif ($categoria == 4): ?>
+                            <td><?= $this->Html->link($c_usuarios['Supervisor']['cress'], '/Supervisors/view/' . $c_usuarios['Supervisor']['id']); ?></td>
+                            <td><?= $c_usuarios['Supervisor']['nome']; ?></td>
+                            <td><?= $c_usuarios['Supervisor']['email']; ?></td>
+                        <?php else: ?>
+                            <td><?= $this->Html->link($c_usuarios['User']['numero'], '/Users/view/' . $c_usuarios['Supervisor']['id']); ?></td>
+                            <td><?= $c_usuarios['Supervisor']['nome']; ?></td>
+                            <td><?= $c_usuarios['User']['email']; ?></td>
+                        <?php endif; ?>
+                    </tr>
+                    <?php
+                endforeach;
+                ?>
 
             </tbody>
         </table>

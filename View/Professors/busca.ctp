@@ -29,7 +29,7 @@ echo $this->element('submenu_professores');
                     <?php foreach ($professores as $c_professor): ?>
                         <?php // pr($c_professor) ?>
                         <tr>
-                            <td style='text-align:left'><?php echo $this->Html->link($c_professor['Professor']['nome'], '/Professores/view/' . $c_professor['Professor']['id']); ?></td>
+                            <td style='text-align:left'><?php echo $this->Html->link($c_professor['Professor']['nome'], '/Professors/view/' . $c_professor['Professor']['id']); ?></td>
                             <td><?= $c_professor['Professor']['siape'] ?></td>
                             <td><?= $c_professor['Professor']['departamento']; ?></td>
                         </tr>

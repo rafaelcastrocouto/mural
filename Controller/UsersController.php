@@ -19,9 +19,9 @@ class UsersController extends AppController {
 
     public function login() {
 
+        $this->Session->delete('user');
         $this->Session->delete('categoria');
         $this->Session->delete('id_categoria');
-        $this->Session->delete('user');
         $this->Session->delete('numero');
 
         // pr($this->data);
@@ -29,36 +29,41 @@ class UsersController extends AppController {
         if (!empty($this->data)) {
 
             $usuario = $this->User->find('first', array(
-                'contain' => ['Role', 'Alunonovo'],
+                'contain' => ['Role', 'Alunonovo', 'Professor', 'Supervisor'],
                 'conditions' => array('User.email' => $this->data['User']['email'])));
 
             // pr($usuario);
-            if ($usuario['User']['password'] == sha1($this->data['User']['password'])) {
+            if (!empty($usuario) and ($usuario['User']['password'] == sha1($this->data['User']['password']))) {
                 // die(pr($usuario));
-                $this->Session->write('categoria', $usuario['Role']['categoria']);
-                $this->Session->write('id_categoria', $usuario['User']['categoria']);
-                $this->Session->write('user', $usuario['User']['email']);
-                $this->Session->write('numero', $usuario['User']['numero']);
-
                 // die();
                 switch ($usuario['User']['categoria']) {
                     case 1: // Administrador
-                        $this->Flash->success(__('Bem-vindo ' . $usuario['Role']['categoria'] . ': ' . $this->Session->read('user')));
                         $this->Session->write('user', 'Administrador');
+                        $this->Session->write('categoria', 'Administrador');
+                        $this->Session->write('id_categoria', 1);
+                        $this->Session->write('numero', 0);
+
+                        $this->Flash->success(__('Bem-vindo ' . $usuario['Role']['categoria'] . ': ' . $this->Session->read('user')));
                         $this->redirect('/estagiarios/index/');
                         break;
 
                     // Categoria 2 eh estudante
                     case 2:
-                        $this->Flash->success('Bem-vindo ' . $usuario['Role']['categoria'] . ': ' . $this->Session->read('user'));
+
+                        $this->Session->write('user', $usuario['Alunonovo']['nome']);
+                        $this->Session->write('categoria', $usuario['Role']['categoria']);
+                        $this->Session->write('id_categoria', $usuario['User']['categoria']);
+                        $this->Session->write('numero', $usuario['User']['numero']);
+
+                        $this->Flash->success('Bem-vinda{o} ' . $usuario['Role']['categoria'] . ': ' . $this->Session->read('user'));
 
                         /*
                          * Busco se há um estudante com esse número de user
                          */
                         $this->loadModel('Alunonovo');
                         $alunonovo = $this->Alunonovo->find('first', [
-                            'contain' => ['Alunonovo'],
-                            'fields' => ['Alunonovo.registro', 'Alunonovo.id'],
+                            'contain' => [],
+                            'fields' => ['Alunonovo.registro', 'Alunonovo.id', 'Alunonovo.nome'],
                             'conditions' => ['Alunonovo.registro' => $usuario['User']['numero']]
                         ]);
                         // pr($alunonovo['Alunonovo']);
@@ -66,13 +71,12 @@ class UsersController extends AppController {
                         /*
                          * Se não há um estudante vou para alunonovo/add para fazer cadastro
                          */
-                        if (empty($alunonovo)) {
-                            echo "Estudante não cadastrado " . "<br>";
-                            $this->Session->write('cadastro', 'cadastro'); // Não sei muito para que serve este cookie
+                        if ($alunonovo) {
+                            $this->Session->write('user', $alunonovo['Alunonovo']['nome']);
+                        } else {
+                            // echo "Estudante não cadastrado " . "<br>";
                             $this->redirect('/alunonovos/add?registro=' . $usuario['User']['numero']);
                             die();
-                        } else {
-                            $this->Session->write('user', $alunonovo['Alunonovo']['nome']);
                         }
 
                         // Se o campo User.estudante_id está vazio e há um estudante com o numero então tem que linkar
@@ -91,10 +95,18 @@ class UsersController extends AppController {
 
                     // Professor
                     case 3:
-                        $this->Flash->success(__('Bem-vindo ' . $usuario['Role']['categoria'] . ': ' . $this->Session->read('user')));
+
+                        $this->Session->write('user', $usuario['Professor']['nome']);
+                        $this->Session->write('categoria', $usuario['Role']['categoria']);
+                        $this->Session->write('id_categoria', $usuario['User']['categoria']);
+                        $this->Session->write('numero', $usuario['User']['numero']);
+
+                        $this->Flash->success(__('Bem-vindo{a} ' . $usuario['Role']['categoria'] . ': ' . $this->Session->read('user')));
 
                         // Verificar se cadastro do professor existe
-                        $professor = $this->User->Professor->find(['first',
+                        $this->loadModel('Professor');
+                        $professor = $this->Professor->find('first', [
+                            'contain' => [],
                             'conditions' => ['Professor.siape' => $usuario['User']['numero']]]);
                         // pr($professor);
                         // die("3");
@@ -102,7 +114,7 @@ class UsersController extends AppController {
                             $this->Session->write('user', $professor['Professor']['nome']);
                             $this->redirect('/Professors/view/' . $professor['Professor']['id']);
                         } else {
-                            $this->Flash->error(__('Professor sem cadastrado'));
+                            $this->Flash->error(__('Professor sem cadastrado. Somente a Cooredenação de Estágio cadastra professores.'));
                             $this->redirect('/users/login/');
                             // die("Professor não cadastrado");
                         }
@@ -111,10 +123,18 @@ class UsersController extends AppController {
 
                     // Supervisor
                     case 4:
-                        $this->Flash->success(__('Bem-vindo ' . $usuario['Role']['categoria'] . ': ' . $this->Session->read('user')));
+
+                        $this->Session->write('user', $usuario['Supervisor']['nome']);
+                        $this->Session->write('categoria', $usuario['Role']['categoria']);
+                        $this->Session->write('id_categoria', $usuario['User']['categoria']);
+                        $this->Session->write('numero', $usuario['User']['numero']);
+
+                        $this->Flash->success(__('Bem-vinda{o} ' . $usuario['Role']['categoria'] . ': ' . $this->Session->read('user')));
 
                         // Verifica se o cadastro do supervisor existe
-                        $supervisor = $this->User->Supervisor->find(['first',
+                        $this->loadModel('Supervisor');
+                        $supervisor = $this->Supervisor->find('first', [
+                            'contain' => [],
                             'conditions' => ['Supervisor.cress' => $usuario['User']['numero']]]);
                         // pr($supervisor);
                         // die();
@@ -122,8 +142,8 @@ class UsersController extends AppController {
                             $this->Session->write('user', $supervisor['Supervisor']['nome']);
                             $this->redirect('/Supervisors/view/' . $supervisor['Supervisor']['id']);
                         } else {
-                            $this->Flash->error(__('Supervisor sem cadastrado: entrar em contato com a Coordenação de Estágio & Extensão'));
-                            $this->redirect('/Supervisors/add/');
+                            $this->Flash->error(__('Supervisor sem cadastrado. Somente a Coordenação de Estágio cadastra supervisores.'));
+                            $this->redirect('/users/login/');
                         }
                         break;
 
@@ -144,9 +164,10 @@ class UsersController extends AppController {
     public function logout() {
 
         $this->Session->delete('user');
-        $this->Session->delete('numero');
         $this->Session->delete('categoria');
         $this->Session->delete('id_categoria');
+        $this->Session->delete('numero');
+
         $this->Session->setFlash(__('Até mais!'));
         $this->redirect($this->Auth->logout());
     }
@@ -154,6 +175,7 @@ class UsersController extends AppController {
     public function cadastro() {
 
         // pr($this->data);
+        // die();
         if (!empty($this->data)) {
             // pr($this->data);
             // die();
@@ -175,17 +197,16 @@ class UsersController extends AppController {
              * excluo o registro do usuer
              */
             if ($usuariocadastrado) {
-                echo "Recuperação de senha de usuário já cadastrado" . "<br>";
+                // echo "Recuperação de senha de usuário já cadastrado" . "<br>";
                 // pr($usuariocadastrado);
                 // pr($usuariocadastrado['User']['id']);
                 if ($this->User->delete($usuariocadastrado['User']['id'])) {
-                    echo "Usuario excluido";
+                    // echo "Usuario excluido";
                     // die("delete user");
                 }
                 // die("delete user");
             }
             // die("usuariocadastrado");
-
             // Primeiro verifico se o numero ja nao esta cadastrado no user
             $numero = $this->User->find('first', [
                 'conditions' => ['User.numero' => $this->data['User']['numero']]
@@ -198,7 +219,6 @@ class UsersController extends AppController {
                 die("Numero já cadastrado");
             }
             // die("Numero já cadastrado");
-
             // Segundo verifico se o email ja nao esta cadastrado no user
             $email = $this->User->find('first', [
                 'conditions' => ['User.email' => $this->data['User']['email']]
@@ -212,7 +232,6 @@ class UsersController extends AppController {
                 die("Email já cadastrado");
             }
             // die("Email já cadastrado");
-
             // Agora, tenho que cadastrar como alunos, professores, etc
             switch ($this->data['User']['categoria']) {
                 case 2:
@@ -223,26 +242,34 @@ class UsersController extends AppController {
                     if ($this->User->save($this->data)) {
                         $this->User->id = $this->User->getLastInsertId();
                         $this->Flash->success(__('Bem-vindo! Cadastro realizado'));
+
+                        $this->Session->write('user', strtolower($this->data['User']['email']));
                         $this->Session->write('categoria', 'estudante');
                         $this->Session->write('id_categoria', '2');
-                        $this->Session->write('user', strtolower($this->data['User']['email']));
                         $this->Session->write('numero', $this->data['User']['numero']);
 
                         // Verifica se já está cadastrado como estudante
+                        $this->loadModel('Alunonovo');
                         $alunonovo = $this->Alunonovo->find('first', [
-                          'contain' => [],
-                          'conditions' => ['Alunonovo.registro' => $this->data['User']['numero']]
+                            'contain' => [],
+                            'conditions' => ['Alunonovo.registro' => $this->data['User']['numero']]
                         ]);
+                        // pr($alunonovo['Alunonovo']['id']);
+                        // die();
 
                         if ($alunonovo) {
-                          // Se o estudante já está cadastrado preencho o campo estudante_id do User
-                          if ($this->User->id) {
-                              $this->User->saveField('estudante_id', $alunonovo['Alunonovo']['id']);
-                              $this->redirect('/alunonovo/view/', $alunonovo['Alunonovo']['id']);
-                          }
+                            // Se o estudante já está cadastrado preencho o campo estudante_id do User
+                            if ($this->User->id) {
+                                $this->User->saveField('estudante_id', $alunonovo['Alunonovo']['id']);
+                                $this->Session->write('user', $Alunonovo['alunonovo']['nome']);
+                                // die('user_id');
+                                $this->redirect('/alunonovos/view/' . $alunonovo['Alunonovo']['id']);
+                            }
                         } else {
-                          // Se nao está cadastrado vai para add alunonovo
-                          $this->redirect('/alunonovo/add/', $this->data['User']['numero']);
+                            // echo "Cadastra alunonovo" . "<br>";
+                            // die();
+                            // Se nao está cadastrado vai para add alunonovo
+                            $this->redirect('/alunonovos/add?registro=' . $this->data['User']['numero']);
                         }
                     } else {
                         $errors = $this->User->invalidFields();
@@ -256,65 +283,74 @@ class UsersController extends AppController {
                 case 3:
                     // Professor
                     /* Verifico se o usuario é um professor cadastrado através do SIAPE */
-                    $professor = $this->User->Professor->find(['first',
+                    $this->loadModel('Professor');
+                    $professor = $this->Professor->find('first', [
+                        'contain' => [],
                         'conditions' => ['Professor.siape' => $this->data['User']['numero']]
                     ]);
+                    // pr($professor);
+                    // die();
+
                     if ($professor) {
-                      if ($this->User->save($this->data)) {
-                        $this->User->id = $this->User->getLastInsertId();
-                        $this->Flash->success(__('Cadastro realizado!'));
-                        $this->Session->write('categoria', 'professor');
-                        $this->Session->write('id_categoria', '3');
-                        $this->Session->write('user', strtolower($this->data['User']['email']));
-                        $this->Session->write('numero', $this->data['User']['numero']);
-                        if ($this->User->id) {
-                            $this->User->saveField('docente_id', $professor['Professor']['id']);
-                            $this->redirect('/professors/view/'. $this->Professor->getLastInsertId());
+                        $this->request->data['User']['docente_id'] = $professor['Professor']['id'];
+                        // pr($this->data);
+                        // die();
+                        if ($this->User->save($this->data)) {
+                            $this->User->id = $this->User->getLastInsertId();
+                            // die(pr($this->User->getLastInsertId()));
+                            $this->Flash->success(__('Cadastro realizado!'));
+
+                            $this->Session->write('user', $professor['Professor']['nome']);
+                            $this->Session->write('categoria', 'professor');
+                            $this->Session->write('id_categoria', '3');
+                            $this->Session->write('numero', $this->data['User']['numero']);
+
+                            $this->redirect('/professors/view/' . $professor['Professor']['id']);
+                        } else {
+                            $errors = $this->User->invalidFields();
+                            // pr($errors);
+                            $this->Flash->error(__('Não foi possível completar seu cadastro.'));
+                            $this->redirect('/users/cadastro');
                         }
-                        $this->redirect('/professors/view/'. $this->Professor->getLastInsertId());
-                      } else {
-                        $errors = $this->User->invalidFields();
-                        // pr($errors);
-                        $this->Flash->error(__('Não foi possível completar seu cadastro.'));
-                        $this->redirect('/users/cadastro');
-                      }
                     } else {
                         $this->Flash->error(__("Somente podem criar conta os/as professores/as com o SIAPE cadastraado na Coordenação de Estágio."));
                         $this->redirect('/users/cadastro');
                         // $this->redirect('/professors/usuarioprofessor?siape=' . $this->data['User']['numero'] . "&" . 'email=' . $this->data['User']['email']);
                         die();
                     }
-                   $this->redirect('/users/login');
-                   break;
+                    $this->redirect('/users/login');
+                    break;
 
                 case 4:
 
-                    $supervisor = $this->User->Supervisor->find(['first',
+                    $this->loadModel('Supervisor');
+                    $supervisor = $this->Supervisor->find('first', [
+                        'contain' => [],
                         'conditions' => ['Supervisor.cress' => $this->data['User']['numero']]
                             ]
                     );
 
                     // O supervisor ja tem que estar cadastrado
                     if ($supervisor) {
+                        $this->request->data['User']['supervisor_id'] = $supervisor['Supervisor']['id'];
                         if ($this->User->save($this->data)) {
-                          $this->User->id = $this->User->getLastInsertId();
-                          $this->Flash->success(__('Bem-vindo! Cadastro realizado'));
-                          $this->Session->write('categoria', 'supervisor');
-                          $this->Session->write('id_categoria', '4');
-                          $this->Session->write('user', strtolower($this->data['User']['email']));
-                          $this->Session->write('numero', $this->data['User']['numero']);
-                          if ($this->User->id) {
-                              $this->User->saveField('supervisor_id', $supervisor['Supervisor']['id']);
-                              $this->redirect('/supervisors/view/', $$this->Supervisor->getLastInsertId());
-                            }
+                            $this->User->id = $this->User->getLastInsertId();
+                            $this->Flash->success(__('Bem-vindo! Cadastro realizado'));
+
+                            $this->Session->write('user', $supervisor['Supervisor']['nome']);
+                            $this->Session->write('categoria', 'supervisor');
+                            $this->Session->write('id_categoria', '4');
+                            $this->Session->write('numero', $this->data['User']['numero']);
+
+                            $this->redirect('/supervisors/view/' . $supervisor['Supervisor']['id']);
                         } else {
-                          $errors = $this->User->invalidFields();
-                          // pr($errors);
-                          $this->Flash->error(__('Não foi possível completar seu cadastro.'));
-                          $this->redirect('/Useres/cadastro');
+                            $errors = $this->User->invalidFields();
+                            // pr($errors);
+                            $this->Flash->error(__('Não foi possível completar seu cadastro.'));
+                            $this->redirect('/Useres/cadastro');
                         }
                     } else {
-                        $this->Flash->success(__("Supervisor ainda não cadastrado. Somente podem criar conta os/as supervisores/as com CRESS registrados na Coordenação de Estágio."));
+                        $this->Flash->error(__("Somente podem criar conta os/as supervisores/as com CRESS registrados na Coordenação de Estágio."));
                         $this->redirect('/users/login/');
                     }
                     break;
@@ -326,14 +362,15 @@ class UsersController extends AppController {
             }
             $this->redirect('/users/login/');
         } else {
-            $this->Session->setFlash(__('Não foi possível completar o cadastramento'));
-            $this->redirect('/users/login/');
+            $this->data = $this->User->read();
+            // $this->Session->setFlash(__('Não foi possível completar o cadastramento'));
+            // $this->redirect('/users/login/');
         }
     }
 
     public function contato() {
 
-      // echo "Enviar email para estagio@ess.ufrj.br";
+        // echo "Enviar email para estagio@ess.ufrj.br";
     }
 
     public function index($id = NULL) {
@@ -353,13 +390,13 @@ class UsersController extends AppController {
           'limit' => 10,
           'order' => array('User.email'),
           'conditions' => ['User.categoria' => $categoria],
-          'fields' => ['User.id', 'User.categoria', 'User.numero', 'User.email', 'Estudante.id', 'Estudante.nome', 'Estudante.registro', 'Role.categoria'],
+          'fields' => ['User.id', 'User.categoria', 'User.numero', 'User.email', 'Alunonovo.id', 'Alunonovo.nome', 'Alunonovo.registro', 'Role.categoria'],
           'joins' => [
           [
-          'alias' => 'Estudante',
+          'alias' => 'Alunonovo',
           'table' => 'alunosnovos',
           'type' => 'INNER',
-          'conditions' => 'User.numero = Estudante.registro'
+          'conditions' => 'User.estudante_id = Alunonvo.id'
           ]
           ]
           )
@@ -377,7 +414,7 @@ class UsersController extends AppController {
           'alias' => 'Professor',
           'table' => 'docentes',
           'type' => 'INNER',
-          'conditions' => 'User.numero = Professor.siape'
+          'conditions' => 'User.docente_id = Professor.id'
           ]
           ]
           )
@@ -395,7 +432,7 @@ class UsersController extends AppController {
           'alias' => 'Supervisor',
           'table' => 'supervisores',
           'type' => 'INNER',
-          'conditions' => 'User.numero = Supervisor.cress'
+          'conditions' => 'User.supervisor_id = Supervisor.id'
           ]
           ]
           )
@@ -403,9 +440,28 @@ class UsersController extends AppController {
           break;
           }
          */
+        if ($categoria) {
+            $usuario = $this->User->find('all', [
+                'contain' => ['Role', 'Alunonovo', 'Professor', 'Supervisor'],
+                'conditions' => ['User.categoria' => $categoria]
+            ]);
+        } else {
+            $usuario = $this->User->find('all', [
+                'contain' => ['Alunonovo', 'Professor', 'Supervisor']
+            ]);
+        }
+
+        $this->Paginator->settings = array(
+            'User' => array(
+                'order' => array('User.email'),
+                'contain' => ['Role', 'Alunonovo', 'Professor', 'Supervisor'],
+                'conditions' => ['User.categoria' => $categoria],
+                'fields' => ['User.id', 'User.categoria', 'User.numero', 'User.email', 'Alunonovo.id', 'Alunonovo.registro', 'Alunonovo.nome', 'Alunonovo.email', 'Professor.id', 'Professor.siape', 'Professor.nome', 'Professor.email', 'Supervisor.id', 'Supervisor.cress', 'Supervisor.nome', 'Supervisor.email', 'Role.categoria']
+        ));
 
         $this->set('categoria', $categoria);
         $this->set('usuarios', $this->Paginator->paginate('User'));
+        // $this->set('usuarios', $usuario);
     }
 
     public function listausuarios() {
@@ -733,8 +789,8 @@ class UsersController extends AppController {
                         // pr($this->data);
                         // die();
                         $aluno_id = $this->User->Alunonovo->find('first', [
-                          'contain' => [],
-                          'conditions' => ['User.numero' => $this->data['User']['numero']]
+                            'contain' => [],
+                            'conditions' => ['User.numero' => $this->data['User']['numero']]
                         ]);
                         // pr($aluno_id);
                         // die();
@@ -757,16 +813,16 @@ class UsersController extends AppController {
                             'conditions' => ['Professor.siape' => $this->data['User']['numero']]
                         ]);
                         if ($professor) {
-                          $this->Session->write('categoria', 'professor/a');
-                          $this->Session->write('id_categoria', 3);
-                          $this->Session->write('user', $professor['Professor']['nome']);
-                          $this->Session->write('numero', $this->data['User']['numero']);
-                          $this->redirect('/professors/view/' . $professor['Professor']['id']);
-                          die();
+                            $this->Session->write('categoria', 'professor/a');
+                            $this->Session->write('id_categoria', 3);
+                            $this->Session->write('user', $professor['Professor']['nome']);
+                            $this->Session->write('numero', $this->data['User']['numero']);
+                            $this->redirect('/professors/view/' . $professor['Professor']['id']);
+                            die();
                         } else {
-                          $this->Flash->error(__("Não foram encontrdos registro da(o) professor(a)"));
-                          $this->redirect('/users/alternarusuario');
-                          die();
+                            $this->Flash->error(__("Não foram encontrdos registro da(o) professor(a)"));
+                            $this->redirect('/users/alternarusuario');
+                            die();
                         }
                         break;
                     case 4:
@@ -775,16 +831,16 @@ class UsersController extends AppController {
                             'conditions' => ['Supervisor.cress' => $this->data['User']['numero']]
                         ]);
                         if ($supervisor) {
-                          $this->Session->write('categoria', 'Supervisor');
-                          $this->Session->write('id_categoria', 4);
-                          $this->Session->write('user', $supervisor['Supervisor']['nome']);
-                          $this->Session->write('numero', $this->data['User']['numero']);
-                          $this->redirect('/supervisors/view/' . $supervisor['Supervisor']['id']);
-                          die();
+                            $this->Session->write('categoria', 'Supervisor');
+                            $this->Session->write('id_categoria', 4);
+                            $this->Session->write('user', $supervisor['Supervisor']['nome']);
+                            $this->Session->write('numero', $this->data['User']['numero']);
+                            $this->redirect('/supervisors/view/' . $supervisor['Supervisor']['id']);
+                            die();
                         } else {
-                          $this->Flash->error(__("Não foram encontrdos registro da(o) supervisor(a)"));
-                          $this->redirect('/users/alternarusuario');
-                          die();
+                            $this->Flash->error(__("Não foram encontrdos registro da(o) supervisor(a)"));
+                            $this->redirect('/users/alternarusuario');
+                            die();
                         }
                         break;
                 }
@@ -797,7 +853,7 @@ class UsersController extends AppController {
     public function padroniza() {
 
         $emails = $this->User->find('all', array('fields' => array('id', 'email', 'timestamp')));
-// pr($emails);
+        // pr($emails);
         foreach ($emails as $c_email):
             if ($c_email['User']['timestamp'] === '0000-00-00 00:00:00'):
                 // pr($c_email['User']['timestamp']);
@@ -816,7 +872,7 @@ class UsersController extends AppController {
             // pr($c_user['User']['categoria']);
             // Estudantes
             if ($c_user['User']['categoria'] == 2) {
-                pr($c_user['User']['numero']);
+                // pr($c_user['User']['numero']);
                 $this->loadModel('Alunonovo');
                 $estudante = $this->Alunonovo->find('first', [
                     'conditions' => ['Alunonovo.registro' => $c_user['User']['numero']]
@@ -834,7 +890,7 @@ class UsersController extends AppController {
             }
             // Professores
             if ($c_user['User']['categoria'] == 3) {
-                pr($c_user['User']['numero']);
+                // pr($c_user['User']['numero']);
                 $this->loadModel('Professor');
                 $professor = $this->Professor->find('first', [
                     'conditions' => ['Professor.siape' => $c_user['User']['numero']]
@@ -852,7 +908,7 @@ class UsersController extends AppController {
             }
             // Supervisores
             if ($c_user['User']['categoria'] == 4) {
-                pr($c_user['User']['numero']);
+                // pr($c_user['User']['numero']);
                 $this->loadModel('Supervisor');
                 $supervisor = $this->Supervisor->find('first', [
                     'conditions' => ['Supervisor.cress' => $c_user['User']['numero']]

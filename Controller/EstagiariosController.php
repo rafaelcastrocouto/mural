@@ -104,7 +104,8 @@ class EstagiariosController extends AppController {
         $turno = isset($parametros['turno']) ? $parametros['turno'] : NULL;
 
         // pr($periodo);
-
+        // die();
+        
         $siape = $this->request->query('siape');
         if ($siape) {
             $this->loadModel('Professor');

@@ -69,59 +69,56 @@ class ProfessorsController extends AppController {
     public function view($id = NULL) {
 
         $siape = $this->request->query("siape");
-
         if ($siape) {
             $professor_id = $this->Professor->find('first', [
+                'contain' => [],
                 'conditions' => ['Professor.siape' => $this->request->query('siape')]]
             );
             if ($professor_id) {
                 $id = $professor_id['Professor']['id'];
-                // echo $id;
             } else {
                 $this->Flash->error(__('Erro em localizar o índice do/a professor/a!'));
                 $this->redirect('/Murals/index');
             }
         }
-        // pr($id);
-        // die();
+
         // Somente o próprio pode ver
         $id_categoria = $this->Session->read('id_categoria');
         if ($id_categoria != 1):
             if ($this->Session->read('numero')) {
                 // die(pr($this->Session->read('numero')));
                 $verifica = $this->Professor->find('first', [
+                    'contain' => [],
                     'conditions' => ['Professor.siape' => $this->Session->read('numero')]
                 ]);
                 // pr($verifica);
                 // die();
-                if ($id != $verifica['Professor']['id']) {
+                if (!$verifica) {
                     $this->Flash->error(__("Acesso não autorizado"));
                     $this->redirect("/Professors/index");
                     die("Não autorizado");
                 }
             }
         endif;
+        // die('verifica');
 
         $siape = $this->request->query('siape');
+        // pr($siape);
         if ($siape) {
+            // die('siape');
             $professor = $this->Professor->find('first', [
-                'conditions' => ['Professor.siape' => $siape],
-                'order' => 'Professor.nome'
+                'contain' => [],
+                'conditions' => ['Professor.siape' => $siape]
             ]);
         } elseif ($id) {
+            // die('id');
             $professor = $this->Professor->find('first', [
-                'conditions' => ['Professor.id' => $id],
-                'order' => 'Professor.nome'
+                'contain' => [],
+                'conditions' => ['Professor.id' => $id]
             ]);
         }
         // pr($professor);
-
-        $proximo = $this->Professor->find('neighbors', array(
-            'field' => 'nome', 'value' => $professor['Professor']['nome']));
-
-        $this->set('registro_next', $proximo['next']['Professor']['id']);
-        $this->set('registro_prev', $proximo['prev']['Professor']['id']);
-
+        // die();
         $this->set('professor', $professor);
     }
 
@@ -224,7 +221,7 @@ class ProfessorsController extends AppController {
                 // pr($professores);
                 // die('professores');
                 $this->Paginator->settings = ['Professor' => [
-                        'recursive' => -1, // Para excluir as associações
+                        'contain' => [], // Para excluir as associações
                         'conditions' => ['Professor.nome like' => '%' . $this->request->data['Professor']['nome'] . '%'],
                         'order' => 'Professor.nome'
                     ]
@@ -266,7 +263,7 @@ class ProfessorsController extends AppController {
                 // pr($this->data);
                 // die();
                 $this->Session->setFlash('Dados inseridos');
-                $this->Session->write('user', strtolower($this->data['Professor']['email']));
+                $this->Session->write('user', $nome['Professor']['nome']);
                 $this->Session->write('numero', $this->data['Professor']['siape']);
                 $this->Session->write('categoria', 'professor');
                 $this->Session->write('id_categoria', '3');
@@ -291,13 +288,16 @@ class ProfessorsController extends AppController {
             'order' => array('Estagiario.periodo')
         ));
         // pr($todosPeriodo);
+        // die();
 
         if (!$periodo)
             $periodo = end($todosPeriodo);
 
-        $this->Professor->recursive = 1;
-        $estagiarios = $this->Professor->find('all');
+        $estagiarios = $this->Professor->find('all', [
+          'contain' => ['Estagiario']
+        ]);
         // pr($estagiarios);
+        // die();
 
         $k = 0;
         foreach ($estagiarios as $c_professor) {
@@ -313,9 +313,13 @@ class ProfessorsController extends AppController {
             // echo '<br>';
             $p = 1;
             foreach ($c_professor['Estagiario'] as $estagiariodoprofessor) {
-
+                // pr($estagiariodoprofessor['periodo']);
+                // die();
+                // echo "Periodo selecionado " . $periodo . "<br>";
+                // pr($estagiariodoprofessor['periodo']);
+                // die();
                 if ($estagiariodoprofessor['periodo'] == $periodo) {
-
+                    // echo $estagiariodoprofessor['periodo'] . " " . $periodo . "<br>";
                     $this->loadModel('Area');
                     $this->Area->recursive = -1;
                     $area = $this->Area->find('first', array('conditions' => array('Area.id' => $estagiariodoprofessor['id_area'])));
@@ -335,16 +339,25 @@ class ProfessorsController extends AppController {
                     }
                     $pauta[$k]['estagiariosperiodo'] = $p;
                     $p++;
+                    // pr($pauta);
+                } else {
+                    // echo "Sem estagiários no periódo: " . $periodo . "<br>";
                 }
+                // pr($pauta);
+                // die();
                 // echo "Periodo " . $p . "<br>";
                 $i++;
             }
         }
 
+        // pr($pauta);
+        // die();
         $this->set('todosPeriodo', $todosPeriodo);
         $this->set('periodo', $periodo);
-        $this->set('professores', $pauta);
-    }
+        if (isset($pauta)) {
+            $this->set('professores', $pauta);
+        }
+      }
 
 }
 

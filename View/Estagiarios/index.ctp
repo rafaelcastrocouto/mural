@@ -79,7 +79,7 @@
             <td>
                 <?php echo $this->Form->create('Estagiario', array('url' => 'index', 'inputDefaults' => array('label' => false, 'div' => false))); ?>
                 <?php echo $this->Form->input('periodo', array('type' => 'select', 'options' => $periodos_total, 'selected' => $periodo, 'empty' => array('0' => 'Período'), 'style' => 'width: 5em', 'class' => 'form-control form-control-sm')); ?>
-                <?php // echo $this->Form->end(); ?>
+                <?php echo $this->Form->end(); ?>
             </td>
 
             <td>
@@ -175,8 +175,8 @@
                     <td style='text-align:center'><?php echo $this->Html->link($aluno['Estagiario']['registro'], "/alunos/view/" . $aluno['Aluno']['id']); ?></td>
                 <?php elseif ($this->Session->read('id_categoria') == '4'): ?>
                     <td style='text-align:center'><?php echo $this->Html->link($aluno['Estagiario']['registro'], "/estagiarios/view/" . $aluno['Estagiario']['id']); ?></td>
-                <?php elseif ($this->Session->read('id_categoria') == '3'): ?> 
-                    <td style='text-align:center'><?php echo $this->Html->link($aluno['Estagiario']['registro'], "/estagiarios/view/" . $aluno['Estagiario']['id']); ?></td>                    
+                <?php elseif ($this->Session->read('id_categoria') == '3'): ?>
+                    <td style='text-align:center'><?php echo $this->Html->link($aluno['Estagiario']['registro'], "/estagiarios/view/" . $aluno['Estagiario']['id']); ?></td>
                 <?php endif; ?>
                 <td style='text-align:left'><?php echo $aluno['Aluno']['nome']; ?></td>
                 <td style='text-align:center'><?php echo $aluno['Estagiario']['periodo']; ?></td>

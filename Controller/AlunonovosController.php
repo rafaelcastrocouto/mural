@@ -91,18 +91,19 @@ class AlunonovosController extends AppController {
             // Acho que posso apagar aqui porque nao vai ser chamado novamente
             $this->Session->delete('termo');
 
-            // Vejo se foi chamado desde users/cadastro
+            // Vejo se foi chamado desde users/cadastro. Acho que já não tem nenhuma função
             $cadastro = $this->Session->read('cadastro');
-
-            $registro = $this->data['Alunonovo']['registro'];
-            $this->Flash->success(__("Cadastro realizado: " . $registro));
+            $this->Session->write('user', $this->data['Alunonovo']['nome']);
+            
+            $nome = $this->data['Alunonovo']['nome'];
+            $this->Flash->success(__("Cadastro realizado: " . $nome));
 
             /* Inserir o estudante_id na tabela User */
             $this->loadModel('User');
             $user = $this->User->find('first', ([
                 'conditions' => ['User.numero' => $this->data['Alunonovo']['registro']]
             ]));
-            // Se há um user cadastrado, então atualiza com o estudante_id 
+            // Se há um user cadastrado, então atualiza com o estudante_id
             if ($user) {
                 $this->User->id = $user['User']['id'];
                 if ($this->User->id) {
@@ -119,13 +120,9 @@ class AlunonovosController extends AppController {
             } elseif ($cadastro) {
                 $this->Session->delete('cadastro');
                 $id_alunonovo = $this->Alunonovo->getLastInsertId();
-                $this->Session->write('menu_aluno', 'alunonovo');
-                $this->Session->write('menu_id_aluno', $id_alunonovo);
                 $this->redirect("/Alunonovos/view/" . $id_alunonovo);
             } else {
                 $id_alunonovo = $this->Alunonovo->getLastInsertId();
-                $this->Session->write('menu_aluno', 'alunonovo');
-                $this->Session->write('menu_id_aluno', $id_alunonovo);
                 $this->Flash->success(__('Dados inseridos'));
                 $this->redirect("/Alunonovos/view/" . $id_alunonovo);
             }

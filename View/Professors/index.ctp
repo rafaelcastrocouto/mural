@@ -83,7 +83,7 @@
                     </td>
                         <?php endif; ?>
                     <td>
-                            <?php if (($this->Session->read('categoria') === 'administrador') || ($this->Session->read('categoria') === 'professor')): ?>
+                            <?php if (($this->Session->read('id_categoria') === 1) || ($this->Session->read('id_categoria') === 3)): ?>
                                 <?php echo $this->Html->link($c_professor['Professor']['nome'], '/Professors/view/' . $c_professor['Professor']['id']); ?>
                             <?php else: ?>
                                 <?php echo $c_professor['Professor']['nome']; ?>

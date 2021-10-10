@@ -867,7 +867,6 @@ class InscricaosController extends AppController {
     }
 
     /* Preencho a tabela inscrição com o id da tabela alunosnovos (alias estudantes) */
-
     public function estudante() {
 
         $this->loadModel('Alunonovo');
@@ -909,7 +908,6 @@ class InscricaosController extends AppController {
     }
 
     /* Preencho a tabela inscrição com o id da tabela alunosnovos (alias estudantes) */
-
     public function aluno() {
 
         $this->loadModel('Aluno');
@@ -917,7 +915,7 @@ class InscricaosController extends AppController {
         $alunos = $this->Aluno->find('all', [
             'fields' => ['id', 'registro']
         ]);
-        // pr($estudantes);
+        // pr($alunos);
         // die();
 
         foreach ($alunos as $c_aluno) {

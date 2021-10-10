@@ -33,7 +33,6 @@
 <?php endif; ?>
 
 <?php if ($inscricoes): ?>
-
 <div align="center">
 <h2>Inscrições para seleção de estágio</h2>
 </div>
@@ -55,16 +54,12 @@
 
         </tr>
 <?php endforeach; ?>
-
     </table>
 </div>
-<?php else: ?>
-
-<h2>Sem inscrições para seleção de estágio!</h2>
 
 <?php endif; ?>
 
-
+<?php if ($estagios): ?>
 <div align="center">
     <h2>Estágios cursados</h2>
 </div>
@@ -122,6 +117,8 @@
     <?php endforeach; ?>
     </table>
 </div>
+<?php endif; ?>
+
 
 <?php if (isset($nao_obrigatorio) && !(empty($nao_obrigatorio))): ?>
 <h2>Estágios não obrigatórios</h2>
@@ -149,7 +146,6 @@
 
         </tr>
         <?php endforeach; ?>
-    <?php endif; ?>
-
     </table>
+    <?php endif; ?>
 </div>
