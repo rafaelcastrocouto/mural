@@ -46259,3 +46259,63 @@ Request URL: /muralold/inscricao/
 Stack Trace:
 #0 /home/luis/html/mural/webroot/index.php(124): Dispatcher->dispatch()
 #1 {main}
+2021-10-13 15:32:50 Error: [ParseError] syntax error, unexpected ':'
+Request URL: /muralold/Murals/view/941
+Stack Trace:
+#0 /home/luis/html/Cake/View/View.php(933): View->_evaluate()
+#1 /home/luis/html/Cake/View/View.php(473): View->_render()
+#2 /home/luis/html/Cake/Controller/Controller.php(968): View->render()
+#3 /home/luis/html/Cake/Routing/Dispatcher.php(200): Controller->render()
+#4 /home/luis/html/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#5 /home/luis/html/mural/webroot/index.php(124): Dispatcher->dispatch()
+#6 {main}
+2021-10-13 15:39:28 Error: [ParseError] syntax error, unexpected ';', expecting ')'
+Request URL: /muralold/Murals/view/940
+Stack Trace:
+#0 /home/luis/html/Cake/View/View.php(933): View->_evaluate()
+#1 /home/luis/html/Cake/View/View.php(473): View->_render()
+#2 /home/luis/html/Cake/Controller/Controller.php(968): View->render()
+#3 /home/luis/html/Cake/Routing/Dispatcher.php(200): Controller->render()
+#4 /home/luis/html/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#5 /home/luis/html/mural/webroot/index.php(124): Dispatcher->dispatch()
+#6 {main}
+2021-10-13 15:41:34 Error: [ParseError] syntax error, unexpected '<'
+Request URL: /muralold/Murals/view/940
+Stack Trace:
+#0 /home/luis/html/Cake/View/View.php(933): View->_evaluate()
+#1 /home/luis/html/Cake/View/View.php(473): View->_render()
+#2 /home/luis/html/Cake/Controller/Controller.php(968): View->render()
+#3 /home/luis/html/Cake/Routing/Dispatcher.php(200): Controller->render()
+#4 /home/luis/html/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#5 /home/luis/html/mural/webroot/index.php(124): Dispatcher->dispatch()
+#6 {main}
+2021-10-13 15:42:01 Error: [ParseError] syntax error, unexpected '<'
+Request URL: /muralold/Murals/view/940
+Stack Trace:
+#0 /home/luis/html/Cake/View/View.php(933): View->_evaluate()
+#1 /home/luis/html/Cake/View/View.php(473): View->_render()
+#2 /home/luis/html/Cake/Controller/Controller.php(968): View->render()
+#3 /home/luis/html/Cake/Routing/Dispatcher.php(200): Controller->render()
+#4 /home/luis/html/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#5 /home/luis/html/mural/webroot/index.php(124): Dispatcher->dispatch()
+#6 {main}
+2021-10-13 15:42:02 Error: [ParseError] syntax error, unexpected '<'
+Request URL: /muralold/Murals/view/940
+Stack Trace:
+#0 /home/luis/html/Cake/View/View.php(933): View->_evaluate()
+#1 /home/luis/html/Cake/View/View.php(473): View->_render()
+#2 /home/luis/html/Cake/Controller/Controller.php(968): View->render()
+#3 /home/luis/html/Cake/Routing/Dispatcher.php(200): Controller->render()
+#4 /home/luis/html/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#5 /home/luis/html/mural/webroot/index.php(124): Dispatcher->dispatch()
+#6 {main}
+2021-10-13 15:43:20 Error: [ParseError] syntax error, unexpected '<'
+Request URL: /muralold/Murals/view/940
+Stack Trace:
+#0 /home/luis/html/Cake/View/View.php(933): View->_evaluate()
+#1 /home/luis/html/Cake/View/View.php(473): View->_render()
+#2 /home/luis/html/Cake/Controller/Controller.php(968): View->render()
+#3 /home/luis/html/Cake/Routing/Dispatcher.php(200): Controller->render()
+#4 /home/luis/html/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#5 /home/luis/html/mural/webroot/index.php(124): Dispatcher->dispatch()
+#6 {main}

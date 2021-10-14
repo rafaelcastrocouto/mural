@@ -194,7 +194,12 @@
             <!--
             Para o administrador as inscrições sempre estão abertas
             //-->
-            <?php if ($this->Session->read('id_categoria') === '1'): ?>
+            <?php
+            // pr($this->Session->read('id_categoria'));
+            // die();
+            ?>
+            <?php if ($this->Session->read('id_categoria') === 1): ?>
+                          <?php // die('id_categoria'); ?>
                 <tr>
                     <td colspan = 2 style="text-align: center">
                         <?php echo $this->Form->create('Inscricao', array('url' => '/Inscricaos/add/' . $mural['Mural']['id'])); ?>
@@ -211,12 +216,12 @@
                         </div>
                     </td>
                 </tr>
-                
-            <?php elseif (($this->Session->read('id_categoria') == '2') || ($this->Session->read('id_categoria') == '3') || ($this->Session->read('id_categoria') == '4')): ?>
+
+            <?php elseif (($this->Session->read('id_categoria') == 2) || ($this->Session->read('id_categoria') == 3) || ($this->Session->read('id_categoria') == '4')): ?>
                 <!--
                 Para os outros usuários as inscrições dependem da data de encerramento
                 //-->
-                <?php if (date('Y-m-d') < $mural['Mural']['dataInscricao']): ?>
+                <?php if (date('Y-m-d') <= (date('Y-m-d', strtotime($mural['Mural']['dataInscricao'])))): ?>
                     <tr>
                         <td colspan = 2 style="text-align: center">
 
