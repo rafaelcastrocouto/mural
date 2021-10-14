@@ -224,9 +224,6 @@ class AlunosController extends AppController {
 
         $proximo = $this->Aluno->find('neighbors', array(
             'field' => 'nome', 'value' => $aluno['nome']));
-
-        $this->set('registro_next', $proximo['next']['Aluno']['id']);
-        $this->set('registro_prev', $proximo['prev']['Aluno']['id']);
         // $this->set('alunos', $this->paginate('Aluno', array('id'=>$id)));
         $this->set('alunos', $aluno);
         $this->set('estagios', $estagios);

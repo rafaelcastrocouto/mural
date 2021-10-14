@@ -5,10 +5,11 @@
     </button>
     <div class='collapse navbar-collapse' id='navbarMural'>
         <ul class="navbar-nav mr-auto">
-            <?php if ($this->Session->read('id_categoria') == '1'): ?>
+            <?php if ($this->Session->read('id_categoria') == 1): ?>
                 <?php $parametros = $this->request->params['action']; ?>
                 <li class="nav-item"><?= $this->Html->link(__('Alunos'), ['controller' => 'inscricaos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Inserir'), ['controller' => 'murals', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
+                <li class="nav-item"><?= $this->Html->link(__('Inscrições'), ['controller' => 'inscricaos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Sem inscrição'), ['controller' => 'inscricaos', 'action' => 'orfao'], ['class' => 'nav-link']) ?></li>
                 <?php if ($this->request->params['action'] === 'view'): ?>
                     <li class="nav-item"><?= $this->Html->link(__('Editar'), ['controller' => 'murals', 'action' => 'edit', $this->params['pass'][0]], ['class' => 'nav-link']) ?></li>

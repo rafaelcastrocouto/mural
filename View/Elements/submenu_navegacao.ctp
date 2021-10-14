@@ -81,7 +81,7 @@
                 case 2: // Estudante
                     ?>
                     <li class="nav-item">
-                        <?php echo $this->Html->link("Meus dados", "/Alunos/view?registro=" . $this->Session->read('numero'), ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>
+                        <?php echo $this->Html->link("Meus dados", "/Alunonovos/view?registro=" . $this->Session->read('numero'), ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                     </li>
                     <li class = "nav-item">
                         <?php echo $this->Html->link('Sair', '/Users/logout/', ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>

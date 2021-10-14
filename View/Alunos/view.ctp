@@ -13,13 +13,6 @@
         <?php echo $this->Html->link('Usuários', '/Users/listausuarios', ['role' => 'button', 'class' => 'btn btn-info']); ?>
     <?php endif; ?>
 
-    <?php if ($this->Session->read('id_categoria') != '2'): ?>
-        <div align="center">
-            <?php echo $this->Html->link('Retroceder', array('action' => 'view', $registro_prev)) . " "; ?> |
-            <?php echo $this->Html->link('Avançar', array('action' => 'view', $registro_next)); ?>
-        </div>
-    <?php endif; ?>
-
     <div align="center">
         <h2><?php echo $alunos['nome']; ?></h2>
     </div>
@@ -127,7 +120,7 @@
 
 <?php endif; ?>
 
-<?php if ($nao_obrigatorio): ?>
+<?php if (isset($nao_obrigatorio) || (!empty($nao_obrigatorio))): ?>
 
     <div class="table-responsive">
         <?php if (isset($nao_obrigatorio) && !(empty($nao_obrigatorio))): ?>

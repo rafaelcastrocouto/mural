@@ -43,11 +43,12 @@
 <?php foreach ($inscricoes as $c_inscricao): ?>
         <tr>
 
-    <?php if ($this->Session->read('categoria') === 'administrador'): ?>
-            <td><?php echo $this->Html->link('X','/Inscricaos/delete/' . $c_inscricao['Inscricao']['id'], NULL, 'Confirma?'); ?></td>
+    <?php if ($this->Session->read('id_categoria') === 1): ?>
+            <td><?php echo $this->Html->link('Excluir','/Inscricaos/delete/' . $c_inscricao['Inscricao']['id'], NULL, 'Confirma?'); ?></td>
             <td><?php echo $this->Html->link($c_inscricao['Mural']['instituicao'], '/Inscricaos/index/' . $c_inscricao['Mural']['id']); ?></td>
             <td><?php echo $c_inscricao['Mural']['periodo']; ?></td>
     <?php else: ?>
+            <td><?php echo $this->Html->link('Inscrição','/Inscricaos/view/' . $c_inscricao['Inscricao']['id']); ?></td>
             <td><?php echo $this->Html->link($c_inscricao['Mural']['instituicao'], '/Inscricaos/index/' . $c_inscricao['Mural']['id']); ?></td>
             <td><?php echo $c_inscricao['Mural']['periodo']; ?></td>
     <?php endif; ?>

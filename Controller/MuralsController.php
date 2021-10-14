@@ -102,6 +102,7 @@ class MuralsController extends AppController {
             'conditions' => array('Inscricao.periodo' => $periodo))
         );
         // pr($total_alunos);
+        // die();
         /* Finaliza conta de alunos inscritos */
 
         /* Discrimina os alunos estagiarios */
@@ -174,8 +175,6 @@ class MuralsController extends AppController {
                     $instituicao['Instituicao']['instituicao'] = substr($instituicao['Instituicao']['instituicao'], 0, 99);
             endif;
             echo $this->request->data['Mural']['instituicao'] = $instituicao['Instituicao']['instituicao'];
-            // pr($this->data);
-            // die();
             if ($this->Mural->save($this->data)) {
                 $this->Session->setFlash('Mural inserido');
                 $id_estagio = $this->Mural->getLastInsertId();
