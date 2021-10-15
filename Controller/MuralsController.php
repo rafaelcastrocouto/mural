@@ -79,6 +79,9 @@ class MuralsController extends AppController {
         $total_estagiarios = NULL;
         foreach ($mural as $c_mural) {
             $inscricoes = sizeof($c_mural['Inscricao']);
+            // pr($c_mural['Inscricao']);
+            // pr($inscricoes);
+            // die();
             // Calculo a quantidade de estagiarios desse mural
             $estagiarios = $this->Estagiario->find('all', [
                 'conditions' => ['Estagiario.id_instituicao' => $c_mural["Mural"]["id_estagio"],

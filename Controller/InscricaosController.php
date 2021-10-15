@@ -52,6 +52,7 @@ class InscricaosController extends AppController {
             $inscritos = $this->Inscricao->find('all', array(
                 'conditions' => array('Inscricao.id_instituicao' => $id),
                 'fields' => array('Inscricao.periodo', 'Inscricao.data', 'Inscricao.id_instituicao', 'Inscricao.id', 'Inscricao.id_aluno', 'Inscricao.aluno_id', 'Aluno.id', 'Aluno.nome', 'Aluno.nascimento', 'Aluno.telefone', 'Aluno.celular', 'Aluno.email', 'Estagiario.id', 'Estagiario.periodo', 'Estagiario.id_instituicao', 'Mural.id_estagio', 'Mural.vagas', 'Mural.instituicao', 'Alunonovo.id', 'Alunonovo.nome', 'Alunonovo.nascimento', 'Alunonovo.telefone', 'Alunonovo.celular', 'Alunonovo.email'),
+                'group' => ['Inscricao.id'],
                 'order' => array('Aluno.nome' => 'asc'),
                     )
             );
@@ -99,7 +100,7 @@ class InscricaosController extends AppController {
                     $inscritos_ordem[$i]['id_inscricao'] = $c_inscritos['Inscricao']['id'];
                     $inscritos_ordem[$i]['id_aluno'] = $c_inscritos['Inscricao']['id_aluno'];
                     $inscritos_ordem[$i]['nascimento'] = (!is_null($c_inscritos['Aluno']['nascimento'])) ? $c_inscritos['Aluno']['nascimento'] : 's/d';
-        /*            
+        /*
                     // print_r($c_inscritos['Aluno']['nascimento']);
                     if (!is_null($c_inscritos['Aluno']['nascimento'])) {
                         $inscritos_ordem[$i]['nascimento'] = $c_inscritos['Aluno']['nascimento'];
@@ -158,7 +159,7 @@ class InscricaosController extends AppController {
             }
             // pr($inscritos_ordem);
             // die();
-            
+
             if (isset($criterio))
                 array_multisort($criterio, SORT_ASC, $inscritos_ordem);
 
