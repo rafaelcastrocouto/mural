@@ -77,7 +77,7 @@
                                 }
                                 ?>
                             </td>
-                            <td><?php echo date('d-m-Y', strtotime($c_inscrito['nascimento'])); ?></td>
+                            <td><?php echo $c_inscrito['nascimento'] ? date('d-m-Y', strtotime($c_inscrito['nascimento'])) : ''; ?></td>
                             <td><?php echo $c_inscrito['telefone']; ?></td>
                             <td><?php echo $c_inscrito['celular']; ?></td>
                             <td><?php echo $c_inscrito['email']; ?></td>
