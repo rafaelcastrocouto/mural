@@ -277,7 +277,7 @@ class InscricaosController extends AppController {
             $data['Inscricao']['id_instituicao'] = $id;
             $data['Inscricao']['data'] = date('Y-m-d');
             $data['Inscricao']['id_aluno'] = $this->data['Inscricao']['id_aluno'];
-            $data['Inscricao']['aluno_id'] = (isset($aluno_id['Aluno']['id'])) ? $aluno_id['Aluno']['id'] : $alunonovo_id['Alunonovo']['id'];
+            $data['Inscricao']['aluno_id'] = isset($aluno_id['Aluno']['id']) ? $aluno_id['Aluno']['id'] : NULL ;
             $data['Inscricao']['alunonovo_id'] = $alunonovo_id['Alunonovo']['id'];
             // pr($data);
             // die();
