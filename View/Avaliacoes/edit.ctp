@@ -93,7 +93,7 @@ $ano = strftime('%Y', time());
 
         <p>
             Fundamente se achar necessário:
-            <?= $this->Form->input('avaliacao9-1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60]); ?>
+            <?= $this->Form->input('avaliacao9_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60]); ?>
         </p>
 
         <legend style='font-size: 90%'>
@@ -104,7 +104,7 @@ $ano = strftime('%Y', time());
         <p>
             Justifique a resposta se achar necessário:
         </p>
-        <?= $this->Form->input('avaliacao10-1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60]); ?>
+        <?= $this->Form->input('avaliacao10_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60]); ?>
 
         <legend style='font-size: 90%'>
             11) Quanto à integração Disciplina de OTP/Coordenação de Estágio da ESS/Campo de Estágio: houve algum tipo de interlocução entre os 3 segmentos: aluno(a), professor(a) e supervisor(a)?
@@ -114,7 +114,7 @@ $ano = strftime('%Y', time());
         <p>
             Como você avalia esta interação? (Responda se achar necessário)
         </p>
-        <?= $this->Form->input('avaliacao11-1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60]); ?>
+        <?= $this->Form->input('avaliacao11_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60]); ?>
 
         <legend style='font-size: 90%'>
             12) Você recebeu e acompanhou o programa da Disciplina OTP?
@@ -124,7 +124,7 @@ $ano = strftime('%Y', time());
         <p>
             Sugestões ao que foi desenvolvido?
         </p>
-        <?= $this->Form->input('avaliacao12-1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60]); ?>
+        <?= $this->Form->input('avaliacao12_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60]); ?>
 
         <legend style='font-size: 90%'>
             13) Há questões que você considera que devam ser mais enfatizadas na disciplina de OTP?
@@ -134,7 +134,7 @@ $ano = strftime('%Y', time());
         <p>
             Se sim, quais?
         </p>
-        <?= $this->Form->input('avaliacao13-1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60]); ?>
+        <?= $this->Form->input('avaliacao13_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60]); ?>
 
         <p>
             14) Como avalia a experiência do estágio remoto neste semestre? Será possível a continuidade do estágio na modalidade remota no próximo semestre?
