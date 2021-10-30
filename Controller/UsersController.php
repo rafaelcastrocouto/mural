@@ -261,7 +261,7 @@ class UsersController extends AppController {
                             // Se o estudante já está cadastrado preencho o campo estudante_id do User
                             if ($this->User->id) {
                                 $this->User->saveField('estudante_id', $alunonovo['Alunonovo']['id']);
-                                $this->Session->write('user', $Alunonovo['alunonovo']['nome']);
+                                $this->Session->write('user', $alunonovo['Alunonovo']['nome']);
                                 // die('user_id');
                                 $this->redirect('/alunonovos/view/' . $alunonovo['Alunonovo']['id']);
                             }
