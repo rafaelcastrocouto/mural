@@ -1,4 +1,7 @@
-<?php ?>
+<?php
+// pr($estagiario_id);
+// die();
+?>
 
 <script>
 
@@ -42,7 +45,7 @@ if ($turno == 'D') {
                 <td><?= $aluno ?></td>
             </tr>
             <tr>
-                <td>Nível de estágio</td>          
+                <td>Nível de estágio</td>
                 <td><?= $nivel ?></td>
             </tr>
             <tr>
@@ -58,18 +61,29 @@ if ($turno == 'D') {
     </table>
 
     <?php
-    echo $this->Form->create('Inscricao', ['url' => 'termocadastra?registro=' . $registro]);
-
-    echo $this->Form->input('id_aluno', array('type' => 'hidden', 'label' => 'Registro', 'value' => $registro));
+//     echo $this->Form->create('Inscricao', ['url' => 'termocadastra?registro=' . $registro]);
+    echo $this->Form->create('Estagiario');
+    if (isset($estagiario_id)):
+        echo $this->Form->input('id', array('type' => 'hidden', 'label' => 'Estagiario', 'value' => $estagiario_id));
+    endif;
+    if (isset($aluno_atual_id)):
+        echo $this->Form->input('id_aluno', array('type' => 'hidden', 'label' => 'Aluno', 'value' => $aluno_atual_id));
+    else:
+        echo $this->Form->input('id_aluno', array('type' => 'hidden', 'label' => 'Aluno', 'value' => 0));
+    endif;
+    echo $this->Form->input('alunonovo_id', array('type' => 'hidden', 'label' => 'Estudante', 'value' => $alunonovo_atual_id));
+    echo $this->Form->input('registro', array('type' => 'hidden', 'label' => 'Registro', 'value' => $registro));
     echo $this->Form->input('aluno_nome', array('type' => 'hidden', 'value' => $aluno));
     echo $this->Form->input('nivel', array('type' => 'hidden', 'value' => $nivel));
     echo $this->Form->input('periodo', array('type' => 'hidden', 'value' => $periodo));
     echo $this->Form->input('turno', array('type' => 'hidden', 'value' => $turno));
     echo $this->Form->input('id_professor', array('type' => 'hidden', 'label' => 'Professor', 'value' => $professor_atual));
+    echo $this->Form->input('tc_solicitacao', array('type' => 'hidden', 'label' => 'Data', 'value' => date('Y-m-d')));
+    echo $this->Form->input('tc', array('type' => 'hidden', 'label' => 'TC', 'value' => 1));
     ?>
 
     <?php
-    echo $this->Form->input('tipo_de_estagio', array('type' => 'select', 'label' => ['text' => 'Seleciona tipo de estágio', 'class' => 'col-12'], 'options' => [1 => 'Presencial', 2 => 'Remoto'], 'default' => '1' ,'class' => 'form-control'));
+    echo $this->Form->input('tipo_de_estagio', array('type' => 'select', 'label' => ['text' => 'Seleciona tipo de estágio', 'class' => 'col-12'], 'value' => $tipo_de_estagio, 'options' => [1 => 'Presencial', 2 => 'Remoto'], 'default' => '1', 'class' => 'form-control'));
     echo $this->Form->input('id_instituicao', array('type' => 'select', 'label' => ['text' => 'Instituição (É obrigatório selecionar a instituição)', 'class' => 'col-12'], 'options' => $instituicoes, 'empty' => ['0' => 'Selecione'], 'value' => $instituicao_atual, 'class' => 'form-control'));
     echo $this->Form->input('id_supervisor', array('type' => 'select', 'label' => ['text' => 'Supervisor (Se não souber quem é o supervisor, deixar em branco)', 'class' => 'col-12'], 'options' => $supervisores, 'value' => $supervisor_atual, 'empty' => ['0' => 'Selecione'], 'class' => 'form-control'));
     ?>

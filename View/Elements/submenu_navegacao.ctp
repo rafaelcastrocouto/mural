@@ -74,7 +74,7 @@
                 case 1: // Administrador
                     ?>
                     <li class = "nav-item">
-                        <?php echo $this->Html->link('Sair', '/Userestagios/logout/', ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>
+                        <?php echo $this->Html->link('Sair', '/users/logout/', ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                     </li>
                     <?php
                     break;
@@ -84,7 +84,7 @@
                         <?php echo $this->Html->link("Meus dados", "/Alunonovos/view?registro=" . $this->Session->read('numero'), ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                     </li>
                     <li class = "nav-item">
-                        <?php echo $this->Html->link('Sair', '/Userestagios/logout/', ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>
+                        <?php echo $this->Html->link('Sair', '/users/logout/', ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                     </li>
                     <?php
                     break;
@@ -94,7 +94,7 @@
                         <?php echo $this->Html->link("Meus dados", "/Professors/view?siape=" . $this->Session->read('numero'), ['class' => 'nav-link', 'style' => 'color: white']); ?>
                     </li>
                     <li class = "nav-item">
-                        <?php echo $this->Html->link('Sair', '/Userestagios/logout/', ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>
+                        <?php echo $this->Html->link('Sair', '/users/logout/', ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                     </li>
                     <?php
                     break;
@@ -104,14 +104,14 @@
                         <?php echo $this->Html->link("Meus dados", "/Supervisors/view?cress=" . $this->Session->read('numero'), ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                     </li>
                     <li class = "nav-item">
-                        <?php echo $this->Html->link('Sair', '/Userestagios/logout/', ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>
+                        <?php echo $this->Html->link('Sair', '/users/logout/', ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                     </li>
                     <?php
                     break;
                 default:
                     ?>
                     <li class="nav-item">
-                        <?php echo $this->Html->link("Entrar", ['controller' => 'Userestagios', 'action' => 'login'], ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>
+                        <?php echo $this->Html->link("Entrar", ['controller' => 'users', 'action' => 'login'], ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                     </li>
                 <?php
             }
