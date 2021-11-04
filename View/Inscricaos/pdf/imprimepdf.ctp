@@ -13,8 +13,14 @@ if ($nivel === '9'):
     $nivel = ' <b>não obrigatório</b> ';
 endif;
 
-if (empty($supervisor_nome))
+if (empty($supervisor_nome)): 
     $supervisor_nome = "___________________";
+endif;
+
+if (empty($supervisor_cress)): 
+    $supervisor_cress = "_____";
+endif;
+
 ?>
 
 <p style="text-align:center">

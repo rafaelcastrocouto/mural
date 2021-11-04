@@ -493,7 +493,7 @@ class InscricaosController extends AppController {
         /* Busca em estagiarios o ultimo estagio do aluno */
         $estagiario = $this->Inscricao->Estagiario->find('first', array(
             'conditions' => array('Estagiario.registro' => $registro),
-            'fields' => array('Estagiario.id', 'Estagiario.registro', 'Estagiario.periodo', 'Estagiario.tipo_de_estagio', 'Estagiario.turno', 'Estagiario.id_aluno', 'Estagiario.alunonovo_id', 'Estagiario.registro', 'Estagiario.nivel', 'Estagiario.id_instituicao', 'Estagiario.id_supervisor', 'Estagiario.id_professor', 'Aluno.id', 'Aluno.registro', 'Aluno.nome'),
+            'fields' => array('Estagiario.id', 'Estagiario.registro', 'Estagiario.periodo', 'Estagiario.tipo_de_estagio', 'Estagiario.ajuste2020', 'Estagiario.turno', 'Estagiario.id_aluno', 'Estagiario.alunonovo_id', 'Estagiario.registro', 'Estagiario.nivel', 'Estagiario.id_instituicao', 'Estagiario.id_supervisor', 'Estagiario.id_professor', 'Aluno.id', 'Aluno.registro', 'Aluno.nome'),
             'order' => array('periodo' => 'DESC')
                 )
         );
@@ -527,10 +527,14 @@ class InscricaosController extends AppController {
                 /* Se o periodo de estágio atual é maior que o último estágio então é uma insernção */
                 unset($estagiario['Estagiario']['id']);
                 /*
-                 * Inserir aqui o ajuste2020 em lugar do número 4
-                 *
+                 * Inserir aqui o ajuste2020 em lugar do número 4                 *
                  */
-                if ($estagiario['Estagiario']['nivel'] < 4):
+                if ($estagiario['Estagiario']['ajuste2020'] == 0):
+                    $nivelfinal = 4;
+                else:
+                    $nivelfinal = 3;
+                endif; 
+                if ($estagiario['Estagiario']['nivel'] < $nivelfinal):
                     $estagiario['Estagiario']['nivel']++;
                 else:
                     /* Para além do 4 nível é estágio não obrigatorio */
@@ -542,6 +546,7 @@ class InscricaosController extends AppController {
             endif;
             // die();
 
+            $ajuste2020 = $estagiario['Estagiario']['ajuste2020'];
             $aluno_atual_id = $estagiario['Estagiario']['id_aluno'];
             $alunonovo_atual_id = $estagiario['Estagiario']['alunonovo_id'];
             $periodo_ultimo = $estagiario['Estagiario']['periodo'];
@@ -566,6 +571,7 @@ class InscricaosController extends AppController {
             endif;
             
             $this->set('estagiario', $estagiario);
+            $this->set('ajuste2020', $ajuste2020);
             $this->set('aluno_atual_id', $aluno_atual_id);
             $this->set('alunonovo_atual_id', $alunonovo_atual_id);
             $this->set('tipo_de_estagio', $tipo_de_estagio);
@@ -597,6 +603,7 @@ class InscricaosController extends AppController {
                 $this->set('alunonovo_atual_id', $alunonovo['Alunonovo']['id']);
             }
 
+            $this->set('ajuste2020', 1); // Alunos estagiarios novos já estão com o ajuste 2020
             $this->set('instituicao_atual', 0);
             $this->set('supervisor_atual', 0);
             $this->set('professor_atual', 0);
@@ -647,8 +654,8 @@ class InscricaosController extends AppController {
 
     /*
      * O id eh o numero de registro do aluno
+     * Função obsoleta
      */
-
     public function termocadastra($id = NULL) {
 
         $registro = $this->request->query('registro');
@@ -816,7 +823,6 @@ class InscricaosController extends AppController {
     }
 
     /* id eh o numero de estagiario */
-
     public function termoimprime($id = NULL) {
 
         ini_set('memory_limit', '512M');

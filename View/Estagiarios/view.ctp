@@ -14,7 +14,7 @@
     <?php if ($this->Session->read('id_categoria') == '3' || $this->Session->read('id_categoria') == '1'): ?>
         <?= $this->Html->link('Editar e lançar nota', '/estagiarios/edit/' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
     <?php endif; ?>
-    
+
     <h1>Estágiaria(o): <?php echo $estagio['Aluno']['nome']; ?></h1>
 
     <div class='table-responsive'>
@@ -36,15 +36,26 @@
 
                 <tr>
                     <td>Tipo de estágio (na pandemia)</td>
-                    <td><?php 
-                    if ($estagio['Estagiario']['tipo_de_estagio'] == 1): 
-                        echo 'Presencial';
-                    elseif ($estagio['Estagiario']['tipo_de_estagio'] == 2):
-                        echo 'Remoto';
-                    else:
-                        echo 'Sem dados';
-                    endif;
-                    ?></td>
+                    <td><?php
+                        if ($estagio['Estagiario']['tipo_de_estagio'] == 1):
+                            echo 'Presencial';
+                        elseif ($estagio['Estagiario']['tipo_de_estagio'] == 2):
+                            echo 'Remoto';
+                        else:
+                            echo 'Sem dados';
+                        endif;
+                        ?></td>
+                </tr>
+
+                <tr>
+                    <td>Ajuste curricular 2020</td>
+                    <td><?php
+                        if ($estagio['Estagiario']['ajuste2020'] == 0):
+                            echo 'Não';
+                        elseif ($estagio['Estagiario']['ajuste2020'] == 1):
+                            echo 'Sim';
+                        endif;
+                        ?></td>
                 </tr>
 
                 <tr>
@@ -83,20 +94,6 @@
                     </td>
                 </tr>
 
-                <tr>
-                    <td>TC (Devolução do TC)</td>
-                    <td>
-                        <?php
-                        switch ($estagio['Estagiario']['tc']) {
-                            case 0: echo "Não";
-                                break;
-                            case 1: echo "Sim";
-                                break;
-                        }
-                        ?>
-                    </td>
-                </tr>
-                
                 <tr>
                     <td>Professor</td>
                     <td><?php echo $estagio['Professor']['nome']; ?></td>

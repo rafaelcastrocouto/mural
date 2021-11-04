@@ -3,16 +3,16 @@
 // die();
 ?>
 
-<script>
+<script type="text/javascript">
 
     $(document).ready(function () {
 
         var base_url = "<?= $this->Html->url(array('controller' => 'Instituicaos', 'action' => 'seleciona_supervisor')); ?>";
         /* alert(base_url); */
 
-        $("#InscricaoIdInstituicao").change(function () {
+        $("#EstagiarioIdInstituicao").change(function () {
             var id_instituicao = $(this).val();
-            $("#InscricaoIdSupervisor").load(base_url + "/" + id_instituicao);
+            $("#EstagiarioIdSupervisor").load(base_url + "/" + id_instituicao);
             /* alert(id_instituicao); */
         })
     });
@@ -83,6 +83,8 @@ if ($turno == 'D') {
     ?>
 
     <?php
+    echo $this->Form->input('ajuste2020', array('type' => 'select', 'label' => ['text' => 'Ajuste curricular 2020?', 'class' => 'col-12'], 'value' => $ajuste2020, 'options' => [0 => 'Não', 1 => 'Sim'], 'default' => '1', 'class' => 'form-control'));
+    echo "<small id='EstagiarioAjuste2020' class='form-text text-muted'>O ajuste curricular do ano 2020 mudou o estágio de 4 níveis de 120 horas cada para 3 níveis de 135 cada.</small>";
     echo $this->Form->input('tipo_de_estagio', array('type' => 'select', 'label' => ['text' => 'Seleciona tipo de estágio', 'class' => 'col-12'], 'value' => $tipo_de_estagio, 'options' => [1 => 'Presencial', 2 => 'Remoto'], 'default' => '1', 'class' => 'form-control'));
     echo $this->Form->input('id_instituicao', array('type' => 'select', 'label' => ['text' => 'Instituição (É obrigatório selecionar a instituição)', 'class' => 'col-12'], 'options' => $instituicoes, 'empty' => ['0' => 'Selecione'], 'value' => $instituicao_atual, 'class' => 'form-control'));
     echo $this->Form->input('id_supervisor', array('type' => 'select', 'label' => ['text' => 'Supervisor (Se não souber quem é o supervisor, deixar em branco)', 'class' => 'col-12'], 'options' => $supervisores, 'value' => $supervisor_atual, 'empty' => ['0' => 'Selecione'], 'class' => 'form-control'));
