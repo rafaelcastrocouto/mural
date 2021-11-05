@@ -5,8 +5,8 @@
 <div class="table-responsive">
 
     <?= $this->element('submenu_estagiarios') ?>
-
-    <?= $this->Html->link('Imprimir termo de compromisso', '/inscricaos/termoimprime?estagiario_id=' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
+    <?php $tipo_de_estagio = isset($tipo_de_estagio) ? $tipo_de_estagio : 1 ?>
+    <?= $this->Html->link('Imprimir termo de compromisso', '/inscricaos/termoimprime?estagiario_id=' . $estagio['Estagiario']['id'] .'&tipo_de_estagio='. $tipo_de_estagio, ['role' => 'button', 'class' => 'btn btn-info']); ?>
     <?= $this->Html->link('Folha de atividades', '/folhadeatividades/atividade?estagiario_id=' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
     <?= $this->Html->link('Avaliação discente', '/Avaliacoes/view?estagiario_id=' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
     <?= $this->Html->link('Declaração de estágio', ['action' => 'declaracaoestagiopdf', $estagio['Estagiario']['id'], 'ext' => 'pdf', 'declaracaodeestagio'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
@@ -32,19 +32,6 @@
                 <tr>
                     <td>Período</td>
                     <td><?php echo $estagio['Estagiario']['periodo']; ?></td>
-                </tr>
-
-                <tr>
-                    <td>Tipo de estágio (na pandemia)</td>
-                    <td><?php
-                        if ($estagio['Estagiario']['tipo_de_estagio'] == 1):
-                            echo 'Presencial';
-                        elseif ($estagio['Estagiario']['tipo_de_estagio'] == 2):
-                            echo 'Remoto';
-                        else:
-                            echo 'Sem dados';
-                        endif;
-                        ?></td>
                 </tr>
 
                 <tr>

@@ -446,7 +446,7 @@ class InscricaosController extends AppController {
     // Se nao esta cadastrado em alunonovo faço o cadastramento
     // Se nao eh estagiario eh um alunonovo entao faço cadastramento
     public function termocompromisso($id = NULL) {
-        
+
         if ($this->data):
             // pr($this->data);
             // die();
@@ -475,10 +475,10 @@ class InscricaosController extends AppController {
                 $this->Flash->success(__("Estagiaria(o) atualizada(o)"));
                 if (isset($this->data['Estagiario']['id'])):
                     /* Se é uma atualização então vai para view com o id */
-                    return $this->redirect('/estagiarios/view/' . $this->data['Estagiario']['id']);
+                    return $this->redirect('/estagiarios/view/' . $this->data['Estagiario']['id'] . '/' . $this->data['Estagiario']['tipo_de_estagio']);
                 else:
                     /* Se é uma inserção vai com o novo ID */
-                    return $this->redirect('/estagiarios/view/' . $this->Inscricao->Estagiario->getLastInsertID());
+                    return $this->redirect('/estagiarios/view/' . $this->Inscricao->Estagiario->getLastInsertID()  . '/' . $this->data['Estagiario']['tipo_de_estagio']);
                 endif;
             }
         endif;
@@ -493,7 +493,7 @@ class InscricaosController extends AppController {
         /* Busca em estagiarios o ultimo estagio do aluno */
         $estagiario = $this->Inscricao->Estagiario->find('first', array(
             'conditions' => array('Estagiario.registro' => $registro),
-            'fields' => array('Estagiario.id', 'Estagiario.registro', 'Estagiario.periodo', 'Estagiario.tipo_de_estagio', 'Estagiario.ajuste2020', 'Estagiario.turno', 'Estagiario.id_aluno', 'Estagiario.alunonovo_id', 'Estagiario.registro', 'Estagiario.nivel', 'Estagiario.id_instituicao', 'Estagiario.id_supervisor', 'Estagiario.id_professor', 'Aluno.id', 'Aluno.registro', 'Aluno.nome'),
+            'fields' => array('Estagiario.id', 'Estagiario.registro', 'Estagiario.periodo', 'Estagiario.ajuste2020', 'Estagiario.turno', 'Estagiario.id_aluno', 'Estagiario.alunonovo_id', 'Estagiario.registro', 'Estagiario.nivel', 'Estagiario.id_instituicao', 'Estagiario.id_supervisor', 'Estagiario.id_professor', 'Aluno.id', 'Aluno.registro', 'Aluno.nome'),
             'order' => array('periodo' => 'DESC')
                 )
         );
@@ -533,7 +533,7 @@ class InscricaosController extends AppController {
                     $nivelfinal = 4;
                 else:
                     $nivelfinal = 3;
-                endif; 
+                endif;
                 if ($estagiario['Estagiario']['nivel'] < $nivelfinal):
                     $estagiario['Estagiario']['nivel']++;
                 else:
@@ -550,7 +550,6 @@ class InscricaosController extends AppController {
             $aluno_atual_id = $estagiario['Estagiario']['id_aluno'];
             $alunonovo_atual_id = $estagiario['Estagiario']['alunonovo_id'];
             $periodo_ultimo = $estagiario['Estagiario']['periodo'];
-            $tipo_de_estagio = $estagiario['Estagiario']['tipo_de_estagio'];
             $nivel_ultimo = $estagiario['Estagiario']['nivel'];
             $turno_ultimo = $estagiario['Estagiario']['turno'];
             $instituicao_atual = $estagiario['Estagiario']['id_instituicao'];
@@ -569,12 +568,11 @@ class InscricaosController extends AppController {
             else:
                 $this->set('estagiario_id', NULL);
             endif;
-            
+
             $this->set('estagiario', $estagiario);
             $this->set('ajuste2020', $ajuste2020);
             $this->set('aluno_atual_id', $aluno_atual_id);
             $this->set('alunonovo_atual_id', $alunonovo_atual_id);
-            $this->set('tipo_de_estagio', $tipo_de_estagio);
             $this->set('instituicao_atual', $instituicao_atual);
             $this->set('instituicao_atual', $instituicao_atual);
             $this->set('supervisor_atual', $supervisor_atual);
@@ -586,7 +584,7 @@ class InscricaosController extends AppController {
             $turno_ultimo = 'I';
             // Nivel eh I
             $nivel_ultimo = 1;
-            
+
             $this->loadModel('Alunonovo');
             $alunonovo = $this->Alunonovo->find('first', [
                 'conditions' => ['Alunonovo.registro' => $registro]
@@ -656,6 +654,7 @@ class InscricaosController extends AppController {
      * O id eh o numero de registro do aluno
      * Função obsoleta
      */
+
     public function termocadastra($id = NULL) {
 
         $registro = $this->request->query('registro');
@@ -825,60 +824,19 @@ class InscricaosController extends AppController {
     /* id eh o numero de estagiario */
     public function termoimprime($id = NULL) {
 
-        ini_set('memory_limit', '512M');
-        // echo "Estagiario id " . $id . "<br>";
-        // Configure::write('debug', 2);
-
-        $id = $this->request->query['estagiario_id'];
-        // $tipo_de_estagio = $this->request->query['tipo_de_estagio'];
-        // die($id);
-
-        $estagiario = $this->Inscricao->Estagiario->find('first', array(
-            'conditions' => array('Estagiario.id' => $id)
-        ));
-        // pr($estagiario);
-        // die("estagiario");
-
-        $instituicao_nome = $estagiario['Instituicao']['instituicao'];
-        $tipo_de_estagio = $estagiario['Estagiario']['tipo_de_estagio'];
-        $supervisor_nome = $estagiario['Supervisor']['nome'];
-        if (empty($supervisor_nome)) {
-            $supervisor_nome = NULL;
-        }
-        $aluno_nome = $estagiario['Aluno']['nome'];
-        $nivel = $estagiario['Estagiario']['nivel'];
-        $registro = $estagiario['Estagiario']['registro'];
-        $supervisor_cress = $estagiario['Supervisor']['cress'];
-        // pr($nivel);
-        // die("nivel");
-        // Capturo o inicio e o fim do termo de compromisso
-        $this->loadModel("Configuracao");
-        $configuracao = $this->Configuracao->findById('1');
-        $termoinicio = $configuracao['Configuracao']['termo_compromisso_inicio'];
-        $termofinal = $configuracao['Configuracao']['termo_compromisso_final'];
-
-        $termoinicio_f = utf8_encode(strftime('%e de %B de %Y', strtotime($termoinicio)));
-        $termofinal_f = utf8_encode(strftime('%e de %B de %Y', strtotime($termofinal)));
-        // die('termoimprime');
-
-        $this->set('id', $id);
-        $this->set('registro', $registro);
-        $this->set('instituicao_nome', $instituicao_nome);
-        $this->set('aluno_nome', $aluno_nome);
-        $this->set('supervisor_nome', $supervisor_nome);
-        $this->set('nivel', $nivel);
-        $this->set('termoinicio', $termoinicio_f);
-        $this->set('termofinal', $termofinal_f);
-        $this->set('registro', $registro);
-        $this->set('supervisor_cress', $supervisor_cress);
-        // die();
+        if (isset($id) && $id):
+        else:
+            $id = $this->request->query['estagiario_id'];
+        endif;
+                
+        $tipo_de_estagio = $this->request->query['tipo_de_estagio'];
 
         /* Imprime PDF. */
         if ($tipo_de_estagio == "1") {
-            $this->redirect(['action' => 'imprimepdf', $id, 'ext' => 'pdf', $registro]);
+            $this->redirect(['action' => 'imprimepdf', $id, 'ext' => 'pdf', $id]);
             // echo $this->Html->link(__('Imprime PDF'), array('action' => 'imprimepdf', $id, 'ext' => 'pdf', $registro));
         } elseif ($tipo_de_estagio == "2") {
-            $this->redirect(['action' => 'imprimepdfremoto', $id, 'ext' => 'pdf', $registro]);
+            $this->redirect(['action' => 'imprimepdfremoto', $id, 'ext' => 'pdf', $id]);
         } else {
             $this->Flash->error(__('Selecione o tipo de estágio que vai cursar'));
             $this->redirect('termocompromisso');
@@ -886,8 +844,11 @@ class InscricaosController extends AppController {
     }
 
     /* Envia os dados para imprimir o PDF diretamente  */
-
     function imprimepdf($id = NULL) {
+
+        // pr($id);
+        // die();
+        $id = isset($id) ? $id : $this->request->query['estagiario_id'];
 
         // pr($id);
         // die('id');
@@ -922,12 +883,13 @@ class InscricaosController extends AppController {
         $this->set('termoinicio', $termoinicio_f);
         $this->set('termofinal', $termofinal_f);
         $this->set('supervisor_cress', $supervisor_cress);
+
     }
 
     /* Termo de compromisso para estágio remoto */
-
     function imprimepdfremoto($id = NULL) {
 
+        $id = isset($id) ? $id : $this->request->query['estagiario_id'];
         // pr($id);
         // die('id');
         $estagiario = $this->Inscricao->Estagiario->find('first', array(

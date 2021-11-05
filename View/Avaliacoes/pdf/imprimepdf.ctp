@@ -83,7 +83,7 @@
         </dd>
         <dt class="col-9"><?php echo __('Fundamente se achar necessário:'); ?></dt>
         <dd class="col-3">
-<?= $this->Form->input('avaliacao9-1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao9-1'], 'readonly']) ?>
+<?= $this->Form->input('avaliacao9_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao9-1'], 'readonly']) ?>
         </dd>
         <dt class="col-9"><?php echo __('10) O desempenho das atividades desenvolvidas pelo(a) estagiário(a) e o processo de supervisão foram afetados pelas condições de trabalho no campo de estágio e, em particular, pelas condições estabelecidas pelo estágio remoto?'); ?></dt>
         <dd class="col-3">
@@ -91,7 +91,7 @@
         </dd>
         <dt class="col-9"><?php echo __('Justifique a resposta se achar necessário:'); ?></dt>
         <dd class="col-3">
-<?= $this->Form->input('avaliacao10-1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao10-1'], 'readonly']) ?>
+<?= $this->Form->input('avaliacao10_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao10-1'], 'readonly']) ?>
         </dd>
         <dt class="col-9"><?php echo __('11) Quanto à integração Disciplina de OTP/Coordenação de Estágio da ESS/Campo de Estágio: houve algum tipo de interlocução entre os 3 segmentos: aluno(a), professor(a) e supervisor(a)?'); ?></dt>
         <dd class="col-3">
@@ -99,7 +99,7 @@
         </dd>
         <dt class="col-9"><?php echo __('Como você avalia esta interação? (Responda se achar necessário)'); ?></dt>
         <dd class="col-3">
-<?= $this->Form->input('avaliacao11-1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao11-1'], 'readonly']) ?>
+<?= $this->Form->input('avaliacao11_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao11-1'], 'readonly']) ?>
         </dd>
         <dt class="col-9"><?php echo __('12) Você recebeu e acompanhou o programa da Disciplina OTP?'); ?></dt>
         <dd class="col-3">
@@ -107,7 +107,7 @@
         </dd>
         <dt class="col-9"><?php echo __('Sugestões ao que foi desenvolvido?') ?></dt>
         <dd class="col-3">
-<?= $this->Form->input('avaliacao12-1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao12-1'], 'readonly']) ?>
+<?= $this->Form->input('avaliacao12_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao12-1'], 'readonly']) ?>
         </dd>
         <dt class="col-9"><?php echo __('13) Há questões que você considera que devam ser mais enfatizadas na disciplina de OTP?'); ?></dt>
         <dd class="col-3">
@@ -115,7 +115,7 @@
         </dd>
         <dt class="col-9"><?php echo __('Se sim, quais?'); ?></dt>
         <dd class="col-3">
-<?= $this->Form->input('avaliacao13-1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao13-1'], 'readonly']) ?>
+<?= $this->Form->input('avaliacao13_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao13-1'], 'readonly']) ?>
         </dd>
         <dt class="col-9"><?php echo __('14) Como avalia a experiência do estágio remoto neste semestre? Será possível a continuidade do estágio na modalidade remota no próximo semestre?'); ?></dt>
         <dd class="col-3">
