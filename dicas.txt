@@ -4,6 +4,10 @@ debug($this->User->lastQuery());
 $log = $this->Votacao->getDataSource()->getLog(false, false);
 debug($log);
 
+Composer
+========
+--ignore-platform-reqs
+
 Paginação
 =========
 

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -317,11 +318,10 @@ class EstagiariosController extends AppController {
     }
 
     public function view($id = NULL) {
-        /*
-          if (!$this->Estagiario->exists($id)) {
-          throw new NotFoundException(__('Invalid Estagiário'));
-          }
-         */
+
+        if (!$this->Estagiario->exists($id)) {
+            throw new NotFoundException(__('Invalid Estagiário'));
+        }
 
         if (is_numeric($id)) {
             $estagio = $this->Estagiario->find('first', array(
@@ -369,6 +369,8 @@ class EstagiariosController extends AppController {
             // die();
 
             $aluno = $estagiario['Aluno']['nome'];
+            // pr($aluno);
+            // die();
             $this->set('aluno', $aluno);
 
             // Periodos para o select
@@ -447,6 +449,8 @@ class EstagiariosController extends AppController {
             // pr($this->data);
             // die();
         } else {
+            // pr($this->data);
+            // die();
             if ($this->request->data['Estagiario']['complemento_id'] == '0') {
                 $this->request->data['Estagiario']['complemento_id'] = NULL;
             }
@@ -456,22 +460,26 @@ class EstagiariosController extends AppController {
             // pr($this->request->data);
             // die();
             $this->Estagiario->set($this->data);
+            
+            /* Cuidado! Só valida note e ch. Pode ser que tenha outros errors de validação */
             if ($this->Estagiario->validates(['fieldList' => ['note', 'ch']])) {
+                // pr('Tudo certo');
                 // $this->Flash->success(__("Está tudo ok!"));
             } else {
                 $this->Flash->error(__("Erros de validação!"));
-                $errors = $this->ModelName->validationErrors;
+                // $errors = $this->Estagiario->validationErrors;
                 // pr($errors);
-                $this->redirect('/Estagiarios/view/ ' . $this->data['Estagiario']['id']);
+                $this->redirect('/Estagiarios/view/' . $this->data['Estagiario']['id']);
             }
+            // die('Validação concluída');
             if ($this->Estagiario->save($this->request->data)) {
-                ?>
-                <div class="alert alert-success">
-                    <strong>Success!</strong> Indicates a successful or positive action.
-                </div>
-                <?php
                 $this->Flash->success(__("Atualizado"));
-                $this->redirect('/Estagiarios/view/ ' . $this->data['Estagiario']['id']);
+                $this->redirect('/Estagiarios/view/' . $this->data['Estagiario']['id']);
+            } else {
+                debug($this->Estagiario->invalidFields());
+                // die();
+                $this->Flash->error(__("Não foi possível atualizar o registro"));
+                $this->redirect('/Estagiarios/view/' . $this->data['Estagiario']['id']);
             }
         }
     }
@@ -822,4 +830,5 @@ class EstagiariosController extends AppController {
     }
 
 }
+
 ?>

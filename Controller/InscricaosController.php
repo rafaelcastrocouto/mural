@@ -478,7 +478,7 @@ class InscricaosController extends AppController {
                     return $this->redirect('/estagiarios/view/' . $this->data['Estagiario']['id'] . '/' . $this->data['Estagiario']['tipo_de_estagio']);
                 else:
                     /* Se é uma inserção vai com o novo ID */
-                    return $this->redirect('/estagiarios/view/' . $this->Inscricao->Estagiario->getLastInsertID()  . '/' . $this->data['Estagiario']['tipo_de_estagio']);
+                    return $this->redirect('/estagiarios/view/' . $this->Inscricao->Estagiario->getLastInsertID() . '/' . $this->data['Estagiario']['tipo_de_estagio']);
                 endif;
             }
         endif;
@@ -822,13 +822,14 @@ class InscricaosController extends AppController {
     }
 
     /* id eh o numero de estagiario */
+
     public function termoimprime($id = NULL) {
 
         if (isset($id) && $id):
         else:
             $id = $this->request->query['estagiario_id'];
         endif;
-                
+
         $tipo_de_estagio = $this->request->query['tipo_de_estagio'];
 
         /* Imprime PDF. */
@@ -843,7 +844,8 @@ class InscricaosController extends AppController {
         }
     }
 
-    /* Envia os dados para imprimir o PDF diretamente  */
+    /* Envia os dados para imprimir o PDF */
+
     function imprimepdf($id = NULL) {
 
         // pr($id);
@@ -883,10 +885,10 @@ class InscricaosController extends AppController {
         $this->set('termoinicio', $termoinicio_f);
         $this->set('termofinal', $termofinal_f);
         $this->set('supervisor_cress', $supervisor_cress);
-
     }
 
     /* Termo de compromisso para estágio remoto */
+
     function imprimepdfremoto($id = NULL) {
 
         $id = isset($id) ? $id : $this->request->query['estagiario_id'];

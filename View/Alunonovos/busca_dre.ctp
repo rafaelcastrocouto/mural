@@ -18,7 +18,7 @@
 <h1>Busca por DRE</h1>
 
 <?php echo $this->Form->create('Alunonovo'); ?>
-<?php if ($ithis->Session->read('d_categoria') == '2'): ?>
+<?php if ($this->Session->read('id_categoria') == '2'): ?>
     <?php echo $this->Form->input('registro', array('label' => 'Digite o DRE do aluno', 'value' => $this->Session->read('numero'), 'readonly', 'maxsize' => 9, 'class' => 'form-control')); ?>
 <?php else: ?>
     <?php echo $this->Form->input('registro', array('label' => 'Digite o DRE do aluno', 'placeholder' => 'Digite o DRE', 'maxsize' => 9, 'class' => 'form-control')); ?>

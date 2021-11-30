@@ -73,7 +73,7 @@ class Estagiario extends AppModel {
         'ajuste2020' => array(
             'rule' => array('inList', array('0', '1')),
             'required' => TRUE,
-            'allowEmpty' => FALSE,
+            'allowEmpty' => TRUE,
             'message' => 'Seleciona se está incluido no ajuste curricular 2020 com 3 níveis de estágio'
         ),
         'turno' => array(

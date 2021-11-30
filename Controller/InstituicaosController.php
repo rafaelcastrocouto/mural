@@ -319,10 +319,6 @@ class InstituicaosController extends AppController {
      */
     public function seleciona_supervisor($id = NULL) {
 
-        // $id = 1108;
-        // pr($id);
-        // die("id");
-        // Configure::write('debug', 2);
         if ($id != 0) {
             $supervisores = $this->Instituicao->find('all', array(
                 'conditions' => ['Instituicao.id' => $id],
