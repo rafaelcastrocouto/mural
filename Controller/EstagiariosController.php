@@ -319,10 +319,6 @@ class EstagiariosController extends AppController {
 
     public function view($id = NULL) {
 
-        if (!$this->Estagiario->exists($id)) {
-            throw new NotFoundException(__('Invalid Estagiário'));
-        }
-
         if (is_numeric($id)) {
             $estagio = $this->Estagiario->find('first', array(
                 'conditions' => array('Estagiario.id' => $id)));

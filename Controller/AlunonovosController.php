@@ -94,7 +94,7 @@ class AlunonovosController extends AppController {
             // Vejo se foi chamado desde users/cadastro. Acho que já não tem nenhuma função
             $cadastro = $this->Session->read('cadastro');
             $this->Session->write('user', $this->data['Alunonovo']['nome']);
-            
+
             $nome = $this->data['Alunonovo']['nome'];
             $this->Flash->success(__("Cadastro realizado: " . $nome));
 
@@ -257,18 +257,10 @@ class AlunonovosController extends AppController {
                 // pr($verifica);
                 // die('verifica');
                 // pr($this->Session->read('numero'));
-                if ($id) {
-                    if ($id != $verifica['Alunonovo']['id']) {
-                        $this->Flash->error(__("Acesso não autorizado"));
-                        $this->redirect("/Alunonovos/index/");
-                        die("Não autorizado");
-                    }
-                } elseif ($registro) {
-                    if ($registro != $verifica['Alunonovo']['registro']) {
-                        $this->Flash->error(__("Acesso não autorizado"));
-                        $this->redirect("/Alunonovos/index");
-                        die("Não autorizado");
-                    }
+                if ($id != $verifica['Alunonovo']['id']) {
+                    $this->Flash->error(__("Acesso não autorizado"));
+                    $this->redirect("/Alunonovos/index");
+                    die("Não autorizado");
                 }
             } else {
                 $this->Flash->error(__("Acesso não autorizado"));

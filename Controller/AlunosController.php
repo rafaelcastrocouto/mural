@@ -66,37 +66,22 @@ class AlunosController extends AppController {
         if (!$registro) {
             $registro = $this->request->query('registro');
         }
-        // pr($registro);
-        // die('registro');
-        // echo "Aluno";
-        // die(pr($this->Session->read('numero')));
+        
         // Se eh estudante somente o próprio pode ver
-        // echo $this->Session->read('numero');
-        // die();
         if ($this->Session->read('id_categoria') != 1) {
             if (($this->Session->read('id_categoria') == '2') && ($this->Session->read('numero'))) {
                 // pr($this->Session->read('numero'));
                 // die();
-                if ($id) {
-                    $verifica = $this->Aluno->find('first', [
-                        'conditions' => ['Aluno.id' => $id]
-                    ]);
-                } elseif ($registro) {
-                    $verifica = $this->Aluno->find('first', [
-                        'conditions' => ['Aluno.registro' => $this->Session->read('numero')]
-                    ]);
-                }
-                // pr($verifica);
+                $verifica = $this->Aluno->find('first', [
+                    'conditions' => ['Aluno.registro' => $this->Session->read('numero')]
+                ]);
+                // pr($id);
+                // pr($verifica['Aluno']['id']);
                 // die('verifica');
-                if (!$verifica) {
-                    $this->Flash->error(__("Estudante não estágiario"));
-                    $this->redirect("/Alunonovos/view?registro=" . $this->Session->read('numero'));
-                } else {
-                    if ($this->Session->read('numero') != $verifica['Aluno']['registro']) {
-                        $this->Flash->error(__("Acesso não autorizado"));
-                        $this->redirect("/Murals/index");
-                        die("Não autorizado");
-                    }
+                if ($id != $verifica['Aluno']['id']) {
+                    $this->Flash->error(__("Acesso não autorizado"));
+                    $this->redirect("/Murals/index");
+                    die("Não autorizado");
                 }
             }
         }

@@ -71,11 +71,11 @@ class FolhadeatividadesController extends AppController {
      * @return void
      */
     public function view($id = null) {
-/*
-        if (!$this->Folhadeatividade->exists($id)) {
-            throw new NotFoundException(__('Invalid folhadeatividade'));
-        }
-*/
+        /*
+          if (!$this->Folhadeatividade->exists($id)) {
+          throw new NotFoundException(__('Invalid folhadeatividade'));
+          }
+         */
         $options = array('conditions' => array('Folhadeatividade.' . $this->Folhadeatividade->primaryKey => $id));
         // $options = array('conditions' => array('Folhadeatividade.estagiario_id' => $id));
         $folhadeatividades = $this->Folhadeatividade->find('first', $options);
@@ -341,7 +341,7 @@ class FolhadeatividadesController extends AppController {
         if ($estagiario_id) {
             $this->Session->write('estagiario_id', $estagiario_id);
         } else {
-            $this->Session->setFlash(__('Sem parâmetros para imprimir a folha de atividades'));
+            $this->Session->setFlash(__('Sem parâmetros para preencher a folha de atividades'));
             $this->redirect(['controller' => 'folhadeatividades', 'action' => 'busca_dre']);
         }
 
@@ -353,6 +353,18 @@ class FolhadeatividadesController extends AppController {
             $this->set('aluno', $aluno['Aluno']['nome']);
             $this->set('estagiario_id', $estagiario_id);
             // die();
+        }
+
+        if ($this->Session->read('id_categoria') == '2') {
+
+            $verifica = $this->Estagiario->find('first', ['conditions' => ['Estagiario.registro' => $this->Session->read('numero')]]);
+            if ($estagiario_id != $verifica['Estagiario']['id']) {
+                $this->Flash->error(__('Não autorizado'));
+                $this->redirect('/Estagiarios/index');
+            }
+        } elseif ($this->Session->read('id_categoria') == '3') {
+            $this->Flash->error(__('Não autorizado'));
+            $this->redirect('/Estagiarios/index');
         }
 
         if ($this->request->is('post')) {
@@ -377,8 +389,6 @@ class FolhadeatividadesController extends AppController {
      */
     public function addatividade($id = NULL) {
 
-        // die('Add atividade');
-        
         $estagiario_id = $this->request->query('estagiario_id');
         if ($estagiario_id) {
             $this->Session->write('estagiario_id', $estagiario_id);
@@ -398,6 +408,19 @@ class FolhadeatividadesController extends AppController {
             $this->set('estagiario_id', $aluno['Estagiario']['id']);
         }
 
+        // Verifica
+        if ($this->Session->read('id_categoria') == '2') {
+
+            $verifica = $this->Estagiario->find('first', ['conditions' => ['Estagiario.registro' => $this->Session->read('numero')]]);
+            if ($estagiario_id != $verifica['Estagiario']['id']) {
+                $this->Flash->error(__('Não autorizado'));
+                $this->redirect('/Estagiarios/index');
+            }
+        } elseif ($this->Session->read('id_categoria') == '3') {
+            $this->Flash->error(__('Não autorizado'));
+            $this->redirect('/Estagiarios/index');
+        }
+
         if ($this->request->is('post')) {
             // pr($this->request->data);
             // die();
@@ -412,7 +435,6 @@ class FolhadeatividadesController extends AppController {
         $this->Folhadeatividade->recursive = 2;
         $folhadeatividades = $this->Folhadeatividade->find('all', ['conditions' => ['Folhadeatividade.estagiario_id' => $estagiario_id], 'order' => 'dia']);
         $this->set(compact('folhadeatividades'));
-        
     }
 
     /**
@@ -427,6 +449,21 @@ class FolhadeatividadesController extends AppController {
         if (!$this->Folhadeatividade->exists($id)) {
             throw new NotFoundException(__('Invalid folhadeatividade'));
         }
+
+        // Verifica
+        if ($this->Session->read('id_categoria') == '2') {
+
+            $this->loadModel('Estagiario');
+            $verifica = $this->Folhadeatividade->find('first', ['conditions' => ['Folhadeatividade.id' => $id]]);
+            if ($this->Session->read('numero') != $verifica['Estagiario']['registro']) {
+                $this->Flash->error(__('Não autorizado'));
+                $this->redirect('/Estagiarios/index');
+            }
+        } elseif ($this->Session->read('id_categoria') == '3') {
+            $this->Flash->error(__('Não autorizado'));
+            $this->redirect('/Estagiarios/index');
+        }
+
         if ($this->request->is(array('post', 'put'))) {
             // pr($this->request->data);
             // die();

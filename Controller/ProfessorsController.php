@@ -93,7 +93,7 @@ class ProfessorsController extends AppController {
                 ]);
                 // pr($verifica);
                 // die();
-                if (!$verifica) {
+                if ($id != $verifica['Professor']['id']) {
                     $this->Flash->error(__("Acesso não autorizado"));
                     $this->redirect("/Professors/index");
                     die("Não autorizado");
@@ -124,32 +124,41 @@ class ProfessorsController extends AppController {
 
     public function edit($id = NULL) {
 
-        // pr($id);
+        $siape = $this->request->query("siape");
         // pr($this->Session->read('numero'));
+        // die($id);
         // Somente o próprio pode ver
         $id_categoria = $this->Session->read("id_categoria");
         if ($id_categoria != 1):
             if ($this->Session->read('numero')) {
                 // pr($this->Session->read('numero'));
+                $this->Professor->recursive = -1;
                 $verifica = $this->Professor->findBySiape($this->Session->read('numero'));
                 // pr($verifica);
+                // pr($this->request->query('siape'));
                 // die();
-                if ($this->request->query('siape') != $verifica['Professor']['siape']) {
+                if ($id != $verifica['Professor']['id']) {
                     $this->Flash->error(__("Acesso não autorizado"));
                     $this->redirect("/Professors/view/" . $id);
                     die("Não autorizado");
                 }
             }
         endif;
-// die();
 
         if (empty($this->data)) {
-            $this->Professor->recursive = -1;
-            $professor = $this->Professor->find('first', [
-                'conditions' => ['Professor.id' => $id]
-            ]);
-            // pr($professor);
-            // die();
+
+            if (isset($id)):
+                $this->Professor->recursive = -1;
+                $professor = $this->Professor->find('first', [
+                    'conditions' => ['Professor.id' => $id]
+                ]);
+            elseif ($siape):
+                $this->Professor->recursive = -1;
+                $professor = $this->Professor->find('first', [
+                    'conditions' => ['Professor.siape' => $siape]
+                ]);
+            endif;
+
             $this->Professor->id = $professor['Professor']['id'];
             $this->data = $this->Professor->read();
         } else {
@@ -294,7 +303,7 @@ class ProfessorsController extends AppController {
             $periodo = end($todosPeriodo);
 
         $estagiarios = $this->Professor->find('all', [
-          'contain' => ['Estagiario']
+            'contain' => ['Estagiario']
         ]);
         // pr($estagiarios);
         // die();
@@ -357,7 +366,7 @@ class ProfessorsController extends AppController {
         if (isset($pauta)) {
             $this->set('professores', $pauta);
         }
-      }
+    }
 
 }
 

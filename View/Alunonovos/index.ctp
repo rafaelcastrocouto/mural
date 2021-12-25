@@ -27,17 +27,23 @@
             </thead>
             <tbody>
                 <?php foreach ($alunonovo as $c_aluno): ?>
-                    <?php if ($c_aluno['Alunonovo']['id']) {
+                    <?php
+                    if ($c_aluno['Alunonovo']['id']) {
                         ;
                         ?>
                         <tr>
                             <td style='text-align:center'>
-        <?php echo $this->Html->link($c_aluno['Alunonovo']['registro'], '/Alunonovos/view/' . $c_aluno['Alunonovo']['id']); ?>
+                                <?php if ($this->Session->read('id_categoria') == '1'): ?>
+                                    <?php echo $this->Html->link($c_aluno['Alunonovo']['registro'], '/Alunonovos/view/' . $c_aluno['Alunonovo']['id']) ?>
+                                <?php else: ?>
+                                    <?php echo $c_aluno['Alunonovo']['registro'] ?>
+                                <?php endif; ?>                                
+                            </td>
                             <td style='text-align:left'><?php echo $c_aluno['Alunonovo']['nome']; ?></td>
                             <td style='text-align:left'><?php echo $c_aluno['Alunonovo']['email']; ?></td>
                         </tr>
                     <?php }; ?>
-<?php endforeach; ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

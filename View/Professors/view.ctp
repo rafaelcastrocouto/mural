@@ -10,7 +10,7 @@ if ($professor['Professor']['siape']) {
 
 <?php if ($this->Session->read('id_categoria') == '3'): ?>
     <?= $this->Html->link('Meus estudantes', '/estagiarios/index?siape=' . $this->Session->read('numero'), ['role' => 'button', 'class' => 'btn btn-info']) ?>
-<?php endif; ?> 
+<?php endif; ?>
 
 <div class='row justify-content-left'>
     <div class='col-auto'>
@@ -54,6 +54,7 @@ if ($professor['Professor']['siape']) {
                 <td>Email</td>
                 <td><?php echo $professor['Professor']['email']; ?></td>
             </tr>
+            
             <tr>
                 <td>Currículo lattes</td>
                 <td>
@@ -113,5 +114,5 @@ if ($professor['Professor']['siape']) {
 </div>
 
 <?php if ($this->Session->read('id_categoria') == '3'): ?>
-    <?= $this->Html->link('Editar', '/professors/edit?siape=' . $this->Session->read('numero'), ['role' => 'button', 'class' => 'btn btn-info']) ?>
+    <?= $this->Html->link('Editar', '/professors/edit/' . $professor['Professor']['id'], ['role' => 'button', 'class' => 'btn btn-info']) ?>
 <?php endif; ?> 

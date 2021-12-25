@@ -47,9 +47,9 @@
             <tr>
                 <td>
                     <?php if ($this->Session->read('id_categoria') == '1'): ?>
-                        <?= $this->Html->link('Ver', '/folhadeatividades/atividade?estagiario_id=' . $aluno_estagio['id']); ?>
+                        <?= $this->Html->link('Folha', '/folhadeatividades/atividade?estagiario_id=' . $aluno_estagio['id']); ?>
                     <?php elseif ($this->Session->read('id_categoria') != '1'): ?>    
-                        <?= $this->Html->link('Ver', '/folhadeatividades/atividade?estagiario_id=' . $aluno_estagio['id']); ?>
+                        <?= $this->Html->link('Folha', '/folhadeatividades/atividade?estagiario_id=' . $aluno_estagio['id'], ['class' => 'btn btn-primary']); ?>
                     <?php endif; ?>
                 </td>
                 <td><?php echo $aluno_estagio['periodo'] ?></td>

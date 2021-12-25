@@ -92,6 +92,25 @@ class SupervisorsController extends AppController {
             ));
         }
 
+        // Somente o próprio pode ver
+        $id_categoria = $this->Session->read('id_categoria');
+        if ($id_categoria != 1):
+            if ($this->Session->read('numero')) {
+                // die(pr($this->Session->read('numero')));
+                $verifica = $this->Supervisor->find('first', [
+                    'contain' => [],
+                    'conditions' => ['Supervisor.cress' => $this->Session->read('numero')]
+                ]);
+                // pr($verifica);
+                // die();
+                if ($id != $verifica['Supervisor']['id']) {
+                    $this->Flash->error(__("Acesso não autorizado"));
+                    $this->redirect("/Supervisors/index");
+                    die("Não autorizado");
+                }
+            }
+        endif;
+
         /* Para o select de inserir uma nova instituicao */
         $this->loadModel('Instituicao');
         $instituicoes = $this->Instituicao->find('list', array('order' => 'Instituicao.instituicao'));
@@ -172,6 +191,25 @@ class SupervisorsController extends AppController {
         } else {
             $this->Supervisor->id = $id;
         }
+
+        // Somente o próprio pode ver
+        $id_categoria = $this->Session->read('id_categoria');
+        if ($id_categoria != 1):
+            if ($this->Session->read('numero')) {
+                // die(pr($this->Session->read('numero')));
+                $verifica = $this->Supervisor->find('first', [
+                    'contain' => [],
+                    'conditions' => ['Supervisor.cress' => $this->Session->read('numero')]
+                ]);
+                // pr($verifica);
+                // die();
+                if ($id != $verifica['Supervisor']['id']) {
+                    $this->Flash->error(__("Acesso não autorizado"));
+                    $this->redirect("/Supervisors/index");
+                    die("Não autorizado");
+                }
+            }
+        endif;
 
         if (empty($this->data)) {
             $this->data = $this->Supervisor->read();
