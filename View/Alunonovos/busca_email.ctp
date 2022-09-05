@@ -27,8 +27,6 @@
     
 <?php else: ?>
 
-    <h1>Busca por Email</h1>
-
     <?php echo $this->Form->create('Alunonovo'); ?>
     <?php echo $this->Form->input('email', array('label' => 'Digite o email', 'maxsize' => 70, 'size' => 70, 'class' => 'form-control')); ?>
 

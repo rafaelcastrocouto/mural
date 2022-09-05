@@ -98,27 +98,43 @@
             'error' => false
         ]
     ]);
+    ?>
 
-    echo $this->Form->input('regiao', array('default' => 7));
-    echo $this->Form->input('cress');
-    echo $this->Form->input('nome');
-    echo $this->Form->input('cpf');
-    echo $this->Form->input('codigo_tel', array('default' => 21));
-    echo $this->Form->input('telefone');
-    echo $this->Form->input('codigo_cel', array('default' => 21));
-    echo $this->Form->input('celular');
+    <div class='form-group row' form-type='text'>
+        <label class='col-3 control-label'>Nome</label>
+        <div class='col-8'>
+            <input list='supervisores' name= 'data[Supervisor][nome]' id='SupervisorNome' class='form-control' maxlength='50'>
+            <small>Digite o nome do(a) supervisor(a)</small>
+            <datalist id='supervisores'>
+                <?php
+                foreach ($supervisores as $supervisor) {
+                    echo "<option value='" . $supervisor . "'>";
+                };
+                ?>
+            </datalist>
+        </div>
+    </div>
+
+    <?php
+    echo $this->Form->input('regiao', ['between' => '<div class = "col-1">', 'default' => 7]);
+    echo $this->Form->input('cress', ['between' => '<div class = "col-2">', 'required']);
+    echo $this->Form->input('cpf', ['between' => '<div class = "col-3">']);
+    echo $this->Form->input('codigo_tel', ['type' => 'number', 'label' => ['text' => 'DDD', 'class' => 'col-3 control-label'], 'between' => '<div class = "col-1">', 'default' => 21]);
+    echo $this->Form->input('telefone', ['between' => '<div class = "col-3">']);
+    echo $this->Form->input('codigo_cel', ['type' => 'number', 'label' => ['text' => 'DDD', 'class' => 'col-3 control-label'], 'between' => '<div class = "col-1">', 'default' => 21]);
+    echo $this->Form->input('celular', ['between' => '<div class = "col-3">']);
     echo $this->Form->input('email');
-    echo $this->Form->input('cep');
+    echo $this->Form->input('cep', ['between' => '<div class = "col-3">']);
     echo $this->Form->input('endereco');
     echo $this->Form->input('bairro');
     echo $this->Form->input('municipio');
-    echo $this->Form->input('escola');
-    echo $this->Form->input('ano_formatura');
+    echo $this->Form->input('escola', ['label' => ['text' => 'Escola de formação', 'class' => 'col-3 control-label']]);
+    echo $this->Form->input('ano_formatura', ['between' => '<div class = "col-3">']);
     echo $this->Form->input('outros_estudos');
     echo $this->Form->input('area_curso');
-    echo $this->Form->input('ano_curso');
+    echo $this->Form->input('ano_curso', ['between' => '<div class = "col-3">']);
     echo $this->Form->input('observacoes', array('textarea', array('rows' => 5, 'cols' => 60)));
-    echo $this->Form->input('Instituicao.id', array('label' => ['text' => 'Instituição', 'class' => 'col-3'], 'options' => $instituicoes, 'default' => 0));
+    echo $this->Form->input('Instituicao.id', array('label' => ['text' => 'Instituição', 'class' => 'col-3'], 'options' => $instituicoes, 'empty' => [0 => 'Seleciona instituição'], 'required'));
     ?>
     <div class='row justify-content-center'>
         <div class='col-auto'>

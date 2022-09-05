@@ -1,6 +1,9 @@
+<?php
+// pr($inscricao);
+?>
 <div class='table-responsive'>
     <?= $this->element('submenu_inscricoes') ?>
-    <?php echo $this->Html->link('Listar', '/Inscricaos/index/'); ?>
+    <?php echo $this->Html->link('Listar', '/Inscricaos/index/', ['class' => 'btn btn-primary']); ?>
 
     <h1>Inscrição para seleção de estágio</h1>
 
@@ -8,7 +11,7 @@
 
         <tr>
             <td>Registro</td>
-            <td><?php echo $inscricao['Inscricao']['id_aluno']; ?></td>
+            <td><?php echo $this->Html->link($inscricao['Inscricao']['id_aluno'], ['controller' => 'alunonovos', 'action' => 'view', $inscricao['Inscricao']['alunonovo_id']]); ?></td>
         </tr>
 
         <tr>
@@ -43,6 +46,6 @@
 
     <hr>
 
-    <?php echo $this->Html->link('Excluir', '/Inscricaos/delete/' . $inscricao['Inscricao']['id'], NULL, 'Tem certeza?'); ?>
+    <?php echo $this->Html->link('Excluir', '/Inscricaos/delete/' . $inscricao['Inscricao']['id'], ['class' => 'btn btn-danger'], NULL, 'Tem certeza?'); ?>
 
 </div>

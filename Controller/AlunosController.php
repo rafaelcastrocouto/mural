@@ -51,6 +51,7 @@ class AlunosController extends AppController {
 
         $this->Paginator->settings = [
             'Aluno' => [
+                'contain' => ['Estagiario' => ['Alunonovo']],
                 'limit' => 10,
                 'order' => [
                     'Aluno.nome' => 'asc']
@@ -62,26 +63,39 @@ class AlunosController extends AppController {
 
     public function view($id = NULL) {
 
+        // pr('id 0 ' . $id);
         $registro = isset($this->params['named']['registro']) ? $this->params['named']['registro'] : NULL;
         if (!$registro) {
             $registro = $this->request->query('registro');
         }
-        
-        // Se eh estudante somente o próprio pode ver
+
         if ($this->Session->read('id_categoria') != 1) {
+            // die($this->Session->read('id_categoria'));
             if (($this->Session->read('id_categoria') == '2') && ($this->Session->read('numero'))) {
                 // pr($this->Session->read('numero'));
                 // die();
-                $verifica = $this->Aluno->find('first', [
-                    'conditions' => ['Aluno.registro' => $this->Session->read('numero')]
-                ]);
-                // pr($id);
-                // pr($verifica['Aluno']['id']);
+                if ($id) {
+                    $this->Aluno->contain();
+                    $verifica = $this->Aluno->find('first', [
+                        'conditions' => ['Aluno.id' => $id]
+                    ]);
+                } elseif ($registro) {
+                    $this->Aluno->contain();
+                    $verifica = $this->Aluno->find('first', [
+                        'conditions' => ['Aluno.registro' => $this->Session->read('numero')]
+                    ]);
+                }
+                // pr($verifica);
                 // die('verifica');
-                if ($id != $verifica['Aluno']['id']) {
-                    $this->Flash->error(__("Acesso não autorizado"));
-                    $this->redirect("/Murals/index");
-                    die("Não autorizado");
+                if (!$verifica) {
+                    $this->Flash->error(__("Estudante não estágiario"));
+                    $this->redirect("/Alunonovos/view?registro=" . $this->Session->read('numero'));
+                } else {
+                    if ($this->Session->read('numero') != $verifica['Aluno']['registro']) {
+                        $this->Flash->error(__("Acesso não autorizado"));
+                        $this->redirect("/Murals/index");
+                        die("Não autorizado");
+                    }
                 }
             }
         }
@@ -99,119 +113,43 @@ class AlunosController extends AppController {
                 die();
             }
         }
-        // pr($id);
-        // die();
+        // pr('id ' . $id);
+        // die('id');
         $this->Aluno->id = $id;
 
         if ($id):
+            $this->Aluno->contain(['Estagiario' => ['Instituicao', 'Supervisor', 'Professor', 'Area']]);
             $instituicao = $this->Aluno->find('first', [
                 'conditions' => ['Aluno.id' => $id]
             ]);
+
         elseif ($registro):
+            $this->Aluno->contain(['Estagiario' => ['Instituicao', 'Supervisor', 'Professor', 'Area']]);
             $instituicao = $this->Aluno->find('first', [
                 'conditions' => ['Aluno.registro' => $registro]
             ]);
         endif;
+        // pr($instituicao);
+        // die();
 
         if (!isset($instituicao) || empty($instituicao)) {
-            $this->Flash->error(__('Estudante sem estágio'));
-            $this->redirect('/Alunos/index');
-            die();
+            $this->Flash->error(__('Estudante não cadastrado em estágio'));
+            // $this->redirect('/Estagiarios/index');
+            // die('não cadastrado');
         }
+        $this->set('estagiario', $instituicao);
+    }
 
-        $aluno = $instituicao['Aluno'];
-        $estagios = $instituicao['Estagiario'];
+    /* Captura os orgaos para fazer a datalist no input do orgao */
+    private function orgao() {
 
-        if ($id):
-            $instituicoes = $this->Aluno->Estagiario->find('all', [
-                'conditions' => ['Estagiario.id_aluno' => $id]
-            ]);
-        elseif ($registro):
-            $instituicoes = $this->Aluno->Estagiario->find('all', [
-                'conditions' => ['Estagiario.registro' => $registro]
-            ]);
-        endif;
-        // pr($instituicoes);
-        // die('instituicoes');
-        // Para ordernar o array por nivel de estágio
-        $i = 0;
-        $y = 0;
-        foreach ($instituicoes as $c_instituicao) {
-
-            // pr($c_instituicao);
-            // die('c_instituicao');
-
-            if ($c_instituicao['Estagiario']['nivel'] < 9):
-
-                $ordem = 'nivel';
-                $c_estagios[$i]['id'] = $c_instituicao['Estagiario']['id'];
-                $c_estagios[$i]['periodo'] = $c_instituicao['Estagiario']['periodo'];
-                $c_estagios[$i]['complemento_periodo_especial'] = $c_instituicao['Complemento']['periodo_especial'];
-                $c_estagios[$i]['nivel'] = $c_instituicao['Estagiario']['nivel'];
-                $c_estagios[$i]['turno'] = $c_instituicao['Estagiario']['turno'];
-                $c_estagios[$i]['tc'] = $c_instituicao['Estagiario']['tc'];
-                $c_estagios[$i]['id_instituicao'] = $c_instituicao['Instituicao']['id'];
-                $c_estagios[$i]['instituicao'] = $c_instituicao['Instituicao']['instituicao'];
-                $c_estagios[$i]['id_professor'] = $c_instituicao['Professor']['id'];
-                $c_estagios[$i]['professor'] = $c_instituicao['Professor']['nome'];
-                $c_estagios[$i]['id_supervisor'] = $c_instituicao['Supervisor']['id'];
-                $c_estagios[$i]['supervisor'] = $c_instituicao['Supervisor']['nome'];
-                $c_estagios[$i]['id_area'] = $c_instituicao['Area']['id'];
-                $c_estagios[$i]['area'] = $c_instituicao['Area']['area'];
-                $c_estagios[$i]['nota'] = $c_instituicao['Estagiario']['nota'];
-                $c_estagios[$i]['ch'] = $c_instituicao['Estagiario']['ch'];
-                $criterio[$i] = $c_estagios[$i][$ordem];
-
-                $i++;
-
-            elseif ($c_instituicao['Estagiario']['nivel'] == 9):
-
-                $ordem = 'periodo';
-                // die('periodo');
-                $nao_estagios[$y]['id'] = $c_instituicao['Estagiario']['id'];
-                $nao_estagios[$y]['periodo'] = $c_instituicao['Estagiario']['periodo'];
-                $nao_estagios[$y]['complemento_periodo_especial'] = $c_instituicao['Complemento']['periodo_especial'];
-                $nao_estagios[$y]['nivel'] = $c_instituicao['Estagiario']['nivel'];
-                $nao_estagios[$y]['turno'] = $c_instituicao['Estagiario']['turno'];
-                $nao_estagios[$y]['tc'] = $c_instituicao['Estagiario']['tc'];
-                $nao_estagios[$y]['id_instituicao'] = $c_instituicao['Instituicao']['id'];
-                $nao_estagios[$y]['instituicao'] = $c_instituicao['Instituicao']['instituicao'];
-                $nao_estagios[$y]['id_professor'] = $c_instituicao['Professor']['id'];
-                $nao_estagios[$y]['professor'] = $c_instituicao['Professor']['nome'];
-                $nao_estagios[$y]['id_supervisor'] = $c_instituicao['Supervisor']['id'];
-                $nao_estagios[$y]['supervisor'] = $c_instituicao['Supervisor']['nome'];
-                $nao_estagios[$y]['id_area'] = $c_instituicao['Area']['id'];
-                $nao_estagios[$y]['area'] = $c_instituicao['Area']['area'];
-                $nao_estagios[$y]['nota'] = $c_instituicao['Estagiario']['nota'];
-                $nao_estagios[$y]['ch'] = $c_instituicao['Estagiario']['ch'];
-                // $nao_criterio[$y] = $nao_estagios[$y][$ordem];
-                $y++;
-
-            endif;
-        }
-        // pr(array_column($c_estagios, 'nivel'));
-        // die('array_column');
-        if (isset($c_estagios) && !(empty($c_estagios))):
-            array_multisort(array_column($c_estagios, 'nivel'), SORT_ASC, $c_estagios);
-        // array_multisort($criterio, SORT_ASC, $c_estagios);
-        elseif (isset($nao_estagios) && !(empty($nao_estagios))):
-            array_multisort(array_column($nao_estagios, 'periodo'), SORT_ASC, $nao_estagios);
-            $this->set('nao_obrigatorio', $nao_estagios);
-        else:
-            $this->Flash->error(__("Não há registros."));
-            $this->redirect('/alunos/index');
-            die();
-        endif;
-        // pr($c_estagios);
-        // pr($nao_estagios);
-
-        $this->set('c_estagios', $c_estagios);
-
-        $proximo = $this->Aluno->find('neighbors', array(
-            'field' => 'nome', 'value' => $aluno['nome']));
-        // $this->set('alunos', $this->paginate('Aluno', array('id'=>$id)));
-        $this->set('alunos', $aluno);
-        $this->set('estagios', $estagios);
+        $this->Aluno->contain();
+        $orgao = $this->Aluno->find('list', [
+            'fields' => ['orgao'],
+            'order' => ['orgao'],
+            'group' => ['orgao']
+        ]);
+        return $orgao;
     }
 
     public function planilhacress($id = NULL) {
@@ -279,7 +217,11 @@ class AlunosController extends AppController {
 
         $this->Aluno->id = $id;
 
-        // $this->set('meses', $this->meses());
+        // Capturo os dados do orgão para enviar para o formulário
+        $e_orgao = $this->Aluno->find('first', ['conditions' => ['Aluno.id' => $id]]);
+        $this->set('e_orgao', $e_orgao);
+        // Envio a lista dos orgãos para a datalist
+        $this->set('orgaos', $this->orgao());
 
         if (empty($this->data)) {
             $this->data = $this->Aluno->read();
@@ -318,11 +260,12 @@ class AlunosController extends AppController {
         $estagiario = $this->Aluno->Estagiario->findById_aluno($id);
         if ($estagiario) {
             $this->Flash->error(__('Aluno com estágios não foi excluido. Exclua os estágios primeiro.'));
-            $this->redirect(array('url' => 'view/' . $id));
+            $this->redirect(['controller' => 'Alunos', 'action' => 'view', $id]);
         } else {
             $this->Aluno->delete($id);
             $this->Flash->success(__('O registro ' . $id . ' foi excluido.'));
-            $this->redirect(array('url' => 'index'));
+            // die();
+            $this->redirect(['controller' => 'Alunos', 'action' => 'index']);
         }
     }
 
@@ -457,6 +400,8 @@ class AlunosController extends AppController {
         }
         // pr($registro);
         // die('registro');
+        // Para construir o datalist
+        $this->set('orgaos', $this->orgao());
 
         if (!empty($this->data)) {
             // pr($this->data);
@@ -512,22 +457,27 @@ class AlunosController extends AppController {
         // pr($this->data);
         // die('this->data');
         if ($this->data) {
-            $aluno = $this->Aluno->Estagiario->find('first', array(
-                'conditions' => array('Estagiario.registro' => $this->data['Aluno']['registro']),
-                'order' => array('Estagiario.nivel DESC')
-            ));
-            // pr($aluno['Supervisor']);
-            // die("avaliacao");
+
+            $aluno = $this->Aluno->Estagiario->find('first', [
+                'contain' => ['Aluno', 'Supervisor'],
+                'conditions' => ['Estagiario.registro' => $this->data['Aluno']['registro']],
+                'order' => ['Estagiario.nivel DESC']
+            ]);
+
             if ($aluno) {
-                if (!empty($aluno['Supervisor']['id'])) {
-                    $this->Flash->error(__("Verificar e completar dados do supervisor da instituicao."));
-                    // die('Verificar dados do supervisor');
-                    $this->redirect('/Alunos/avaliacaoedita?supervisor_id=' . $aluno['Supervisor']['id'] . '&registro=' . $this->data['Aluno']['registro']);
-                } else {
-                    $this->Flash->error(__("Não foi indicado supervisor da instituicao."));
-                    // die('Retorna para solicitar termo de compromisso');
-                    $this->redirect('/alunos/view?registro=' . $aluno['Aluno']['registro']);
-                }
+                $this->redirect('/Alunos/avaliacaoedita?instituicao_id=' . $aluno['Estagiario']['id_instituicao'] . '&registro=' . $this->data['Aluno']['registro'] . '&estagiario_id=' . $aluno['Estagiario']['id']);
+                // $this->redirect('/alunos/view?registro=' . $aluno['Aluno']['registro']);
+                /*
+                  if (!empty($aluno['Supervisor']['id'])) {
+                  $this->Flash->error(__("Verificar e completar dados do supervisor da instituicao."));
+                  // die('Verificar dados do supervisor');
+                  $this->redirect('/Alunos/avaliacaoedita?supervisor_id=' . $aluno['Supervisor']['id'] . '&registro=' . $this->data['Aluno']['registro']);
+                  } else {
+                  $this->Flash->error(__("Não foi indicada a supervisora da instituicao."));
+                  $this->redirect('/alunos/view?registro=' . $aluno['Aluno']['registro']);
+                  }
+                 *
+                 */
             } else {
                 $this->Flash->error(__("Não há estágios cadastrados para este estudante"));
             }
@@ -635,23 +585,44 @@ class AlunosController extends AppController {
 
     public function avaliacaoedita() {
 
-        // pr($this->data);
-
         $supervisor_id = isset($this->params['named']['supervisor_id']) ? $this->params['named']['supervisor_id'] : NULL;
         if (!$supervisor_id) {
             $supervisor_id = $this->request->query('supervisor_id');
+        }
+
+        $estagiario_id = isset($this->params['named']['estagiario_id']) ? $this->params['named']['estagiario_id'] : NULL;
+        if (!$estagiario_id) {
+            $estagiario_id = $this->request->query('estagiario_id');
         }
 
         $registro = isset($this->params['named']['registro']) ? $this->params['named']['registro'] : NULL;
         if (!$registro) {
             $registro = $this->request->query('registro');
         }
-        // pr($supervisor_id);
-        // pr($registro);
-        // die('registro');
+
+        $instituicao_id = isset($this->params['named']['instituicao_id']) ? $this->params['named']['instituicao_id'] : NULL;
+        if (!$instituicao_id) {
+            $instituicao_id = $this->request->query('instituicao_id');
+        }
+
+        if ($instituicao_id) {
+            $this->loadModel('Instituicao');
+            $this->Instituicao->contain(['Supervisor' => ['fields' => ['id', 'nome'], 'order' => 'nome']]);
+            $supervisores = $this->Instituicao->find('first', [
+                'conditions' => ['Instituicao.id' => $instituicao_id]
+            ]);
+        } else {
+            $this->Flash->error(__('Estagiário sem instituição de estágio'));
+            $this->redirect(['controller' => 'Estagiarios', 'action' => 'view?registro=' . $registro]);
+        }
+
+        foreach ($supervisores['Supervisor'] as $c_supervisor) {
+            $listasupervisores[$c_supervisor['id']] = trim($c_supervisor['nome']);
+        }
+        asort($listasupervisores); // Ordena pelo valor
 
         $estagiario = $this->Aluno->Estagiario->find('first', array(
-            'conditions' => array('Estagiario.registro' => $registro),
+            'conditions' => array('Estagiario.id' => $estagiario_id),
             'order' => array('Estagiario.nivel DESC')
         ));
         // pr($estagiario);
@@ -667,62 +638,48 @@ class AlunosController extends AppController {
             $this->set('mes', $mes);
             $this->set('ano', $ano);
 
-            $this->set('estagiario', $estagiario);
+            $this->set('supervisores', $listasupervisores);
+            // $this->set('estagiario', $estagiario);
             $this->set('aluno', $estagiario['Aluno']['nome']);
             $this->set('estudante', $estagiario['Aluno']['nome']);
             $this->set('registro', $estagiario['Aluno']['registro']);
             $this->set('professor', $estagiario['Professor']['nome']);
             $this->set('instituicao', $estagiario['Instituicao']['instituicao']);
+            $this->set('instituicao_id', $estagiario['Instituicao']['id']);
             $this->set('supervisor', $estagiario['Supervisor']['nome']);
             $this->set('supervisor_id', $estagiario['Supervisor']['id']);
             $this->set('cress', $estagiario['Supervisor']['cress']);
+            $this->set('estagiario_id', $estagiario['Estagiario']['id']);
             $this->set('nivel', $estagiario['Estagiario']['nivel']);
             $this->set('periodo', $estagiario['Estagiario']['periodo']);
             // die("empty");
         }
-        // die("avaliacaoedita");
-
-        $this->loadModel('Supervisor');
-        $this->Supervisor->id = $supervisor_id;
 
         if (empty($this->data)) {
             // die("empty");
-            $this->data = $this->Supervisor->read();
+            $this->loadModel('Estagiario');
+            $this->data = $this->Estagiario->read();
         } else {
-            // print_r($this->data);
-            // die("avaliacaoedita");
 
-            if (!$this->data['Supervisor']['cress']) {
-                $this->Flash->error("O número de CRESS é obrigatório");
-                $this->redirect(__('/Alunos/avaliacaosolicita?supervisor_id=' . $supervisor_id . '&' . 'registro=' . $registro));
-                die("O número de Cress é obrigatório");
-            }
+            /* Capturo o estagiario para atualizar com o supervisor id */
+            $this->Aluno->Estagiario->contain();
+            $estagiario = $this->Aluno->Estagiario->find('first', [
+                'conditions' => ['Estagiario.id' => $this->data['Estagiario']['estagiario_id']]
+            ]);
+            // pr($this->data);
 
-            if (!$this->data['Supervisor']['nome']) {
-                $this->Flash->error(__("O nome do supervisor é obrigatório"));
-                $this->redirect('/Alunos/avaliacaosolicita?supervisor_id=' . $supervisor_id . '&' . 'registro=' . $registro);
-                die("O nome do supervisor é obrigatório");
-            }
+            $estagiario['Estagiario']['id_supervisor'] = $this->data['Estagiario']['supervisor_id'];
 
-            if ((!$this->data['Supervisor']['celular']) && (!$this->data['Supervisor']['telefone'])) {
-                $this->Flash->error(__("O número de telefone ou celular é obrigatório"));
-                $this->redirect('/Alunos/avaliacaosolicita?supervisor_id=' . $supervisor_id . '&' . 'registro=' . $registro);
-                die("O número de telefone ou celular é obrigatório");
-            }
-
-            if (!$this->data['Supervisor']['email']) {
-                $this->Flash->error(__("O endereço de email é obrigatório"));
-                $this->redirect('/Alunos/avaliacaosolicita?supervisor_id=' . $supervisor_id . '&' . 'registro=' . $registro);
-                die("O email é obrigatório");
-            }
-
-            if ($this->Supervisor->save($this->data)) {
-                // die();
-                // pr($this->data);
+            $this->loadModel('Estagiario');
+            $this->Estagiario->contain();
+            if ($this->Estagiario->save($estagiario)) {
                 $this->Flash->success(__("Atualizado"));
                 // $this->redirect(['action' => 'folhadeatividadespdf', $registro, 'ext' => 'pdf', $registro]);
-                $this->redirect(['action' => 'avaliacaoimprimepdf', '?' => ['registro' => $registro], 'ext' => 'pdf', $registro]);
-                die();
+                $this->redirect(['action' => 'avaliacaoimprimepdf', '?' => ['estagiario_id' => $this->data['Estagiario']['estagiario_id']], 'ext' => 'pdf', $registro]);
+            } else {
+                // debug($this->Estagiario->validationErrors);
+                $log = $this->Estagiario->getDataSource()->getLog(false, false);
+                // debug($log);
             }
         }
     }
@@ -740,8 +697,6 @@ class AlunosController extends AppController {
             'conditions' => array('Estagiario.registro' => $registro),
             'order' => array('Estagiario.nivel DESC')
         ));
-        // pr($aluno);
-        // die();
 
         $estudante = $aluno['Aluno']['nome'];
         // $registro = $aluno['Aluno']['registro'];
@@ -772,19 +727,17 @@ class AlunosController extends AppController {
 
     public function avaliacaoimprimepdf($id = NULL) {
 
-        $registro = isset($this->request->params['named']['registro']) ? $this->request->params['named']['registro'] : NULL;
-        if (!$registro) {
-            $registro = $this->request->query('registro');
+        $estagiario = isset($this->request->params['named']['estagiario_id']) ? $this->request->params['named']['estagiario_id'] : NULL;
+        if (!$estagiario) {
+            $estagiario = $this->request->query('estagiario_id');
         }
-        // pr($registro);
-        // die('registro');
+        // pr($estagiario_id);
+        // die('estagiario_id');
 
         $aluno = $this->Aluno->Estagiario->find('first', array(
-            'conditions' => array('Estagiario.registro' => $registro),
+            'conditions' => array('Estagiario.id' => $estagiario),
             'order' => array('Estagiario.nivel DESC')
         ));
-        // pr($aluno);
-        // die();
 
         $estudante = $aluno['Aluno']['nome'];
         $registro = $aluno['Aluno']['registro'];

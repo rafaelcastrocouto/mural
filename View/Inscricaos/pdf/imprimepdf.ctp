@@ -11,16 +11,11 @@
 <?php
 if ($nivel === '9'):
     $nivel = ' <b>não obrigatório</b> ';
+    $nao_obrigatorio = "NAÕ";
 endif;
 
-if (empty($supervisor_nome)): 
+if (empty($supervisor_nome))
     $supervisor_nome = "___________________";
-endif;
-
-if (empty($supervisor_cress)): 
-    $supervisor_cress = "_____";
-endif;
-
 ?>
 
 <p style="text-align:center">
@@ -32,7 +27,7 @@ endif;
 </p>
 
 <p style="text-align:justify; font-size: 90%;">
-    O presente TERMO DE COMPROMISSO DE ESTÁGIO que entre si assinam a Coordenação de Estágio da Escola de Serviço Social/UFRJ, o (a) Estudante <?= $aluno_nome; ?>, a  instituição <?= $instituicao_nome; ?> e o (a) Supervisor (a) de Campo <?= $supervisor_nome; ?>, visa estabelecer condições gerais que regulam a realização de ESTÁGIO OBRIGATÓRIO. Ficam estabelecidas entre as partes as seguintes condições básicas para a realização do estágio:
+    O presente TERMO DE COMPROMISSO DE ESTÁGIO que entre si assinam a Coordenação de Estágio da Escola de Serviço Social/UFRJ, o (a) Estudante <?= $aluno_nome; ?>, a  instituição <?= $instituicao_nome; ?> e o (a) Supervisor (a) de Campo <?= $supervisor_nome; ?>, visa estabelecer condições gerais que regulam a realização de ESTÁGIO <?= $nao_obrigatorio = isset($nao_obrigatorio) ? $nao_obrigatorio : "" ?> OBRIGATÓRIO. Ficam estabelecidas entre as partes as seguintes condições básicas para a realização do estágio:
 </p>
 
 <p style="text-align:justify; font-size: 90%;">

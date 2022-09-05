@@ -1,3 +1,39 @@
+<?= $this->Html->script("jquery.maskedinput"); ?>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/translations/pt.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#MuralCargaHoraria").mask("99");
+        $("#MuralHorarioSelecao").mask("99:99");
+
+        ClassicEditor
+                .create(document.querySelector('#MuralRequisitos'), {
+                    // The language code is defined in the https://en.wikipedia.org/wiki/ISO_639-1 standard.
+                    language: 'pt'
+                })
+                .then(editor => {
+                    console.log(editor);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        ClassicEditor
+                .create(document.querySelector('#MuralOutras'), {
+                    language: 'pt'
+                })
+                .then(editor => {
+                    console.log(editor);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+    });
+</script>
+
 <?php
 if (empty($instituicoes))
     $instituicoes = "Sem dados";
@@ -9,13 +45,26 @@ if (empty($professores))
 <div class="container">
     <div class='row justify-content-left'>
         <div class='col-auto'>
-            <?= $this->element("submenu_mural") ?>
+        <?php
+        if ($this->Session->read('id_categoria') == '2'):
+            if ($this->Session->read('numero') !== null):
+                $estagiario = $this->Session->read('estagiario');
+                if (($estagiario !== null) && ($estagiario === '1')):
+                    echo $this->element("submenu_nav_estudante");
+                elseif (($estagiario !== null) && ($estagiario === '0')):
+                    echo $this->element("submenu_nav_aluno");
+                endif;
+            endif;
+        elseif ($this->Session->read('id_categoria') == '1'):
+            echo $this->element("submenu_mural");
+        endif;
+        ?>
             <?php
             echo $this->Form->create('Mural', [
                 'class' => 'form-horizontal',
                 'role' => 'form',
                 'inputDefaults' => [
-                    'format' => ['before', 'label', 'between', 'input', 'error', 'after'],
+                    'format' => ['before', 'label', 'between', 'input', 'after', 'error'],
                     'div' => ['class' => 'form-group row'],
                     'label' => ['class' => 'col-4'],
                     'between' => "<div class = 'col-8'>",
@@ -59,7 +108,7 @@ if (empty($professores))
                         </tr>
 
                         <tr>
-                            <td><?php echo $this->Form->input('vagas', ['label'=>['text'=>'Vagas (digitar somente números inteiros)', 'class' => 'col-4']]);    ?></td>
+                            <td><?php echo $this->Form->input('vagas', ['label' => ['text' => 'Vagas (digitar somente números inteiros)', 'class' => 'col-4']]); ?></td>
                         </tr>
 
                         <tr>
@@ -98,7 +147,6 @@ if (empty($professores))
                             <td>
                                 <?php echo $this->Form->input('dataInscricao', array('type' => 'date', 'dateFormat' => 'DMY', 'monthNames' => $meses, 'empty' => TRUE, 'between' => "<div class = 'form-inline col-8'>")); ?>
                             </td>
-                            </div
                         </tr>
 
                         <tr>
@@ -130,7 +178,7 @@ if (empty($professores))
                         </tr>
 
                         <tr>
-                            <td><?php echo $this->Form->input('localInscricao', array('label' => ['text' => 'Local da inscrição', 'class' => 'col-4'], 'type' => 'select', 'options' => array("0" => 'Mural da Coordenação de Estágio e Extensão/ESS', "1" => 'Diretamente na Instituição'))); ?></td>
+                            <td><?php echo $this->Form->input('localInscricao', array('label' => ['text' => 'Local da inscrição', 'class' => 'col-4'], 'type' => 'select', 'options' => array("0" => 'Mural da Coordenação de Estágio', "1" => 'Mural da Coordenação de Estágio e na Instituição'))); ?></td>
                         </tr>
 
                         <tr>

@@ -6,13 +6,13 @@
 
 <div class='row justify-content-center'>
     <div class='col-auto'>
-        <h2><?php echo __('Complemento período especial'); ?></h2>
+        <h2><?php echo __('Modalidade período especial'); ?></h2>
 
         <table class='table table-hover table-striped table-responsive'>
             <thead class='thead-light'>
                 <tr>
                     <th><?php echo $this->Paginator->sort('id'); ?></th>
-                    <th><?php echo $this->Paginator->sort('periodo_especial', "Complemento período especial"); ?></th>
+                    <th><?php echo $this->Paginator->sort('periodo_especial', "Modalidade período especial"); ?></th>
                 </tr>
             </thead>
             <tbody>

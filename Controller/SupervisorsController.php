@@ -57,20 +57,18 @@ class SupervisorsController extends AppController {
             $this->paginate = array(
                 'Estagiario' => array(
                     'limit' => 10,
-                    'fields' => array('Supervisor.id', 'Supervisor.cress', 'Supervisor.nome', 'count("Estagiario.registro") as "Supervisor__virtualestagiarios"', 'count(Distinct Estagiario.registro) as `Supervisor__virtualestudantes`', 'count(Distinct Estagiario.periodo) as "Supervisor__virtualperiodos"', 'max(periodo) as "Supervisor__virtualmaxperiodo"'),
+                    // 'fields' => array('Supervisor.id', 'Supervisor.cress', 'Supervisor.nome', 'count("Estagiario.registro") as "Supervisor__virtualestagiarios"', 'count(Distinct Estagiario.registro) as `Supervisor__virtualestudantes`', 'count(Distinct Estagiario.periodo) as "Supervisor__virtualperiodos"', 'max(periodo) as "Supervisor__virtualmaxperiodo"'),
                     'conditions' => array('Estagiario.periodo' => $periodo),
                     'group' => array('Estagiario.id_supervisor'),
-                    'order' => array(
-                        'Supervisor.nome' => 'asc'))
+                    'order' => array('Supervisor.nome' => 'asc'))
             );
         else:
             $this->paginate = array(
                 'Estagiario' => array(
                     'limit' => 10,
-                    'fields' => array('Supervisor.id', 'Supervisor.cress', 'Supervisor.nome', 'count("Estagiario.registro") as "Supervisor__virtualestagiarios"', 'count(Distinct Estagiario.registro) as `Supervisor__virtualestudantes`', 'count(Distinct Estagiario.periodo) as "Supervisor__virtualperiodos"', 'max(periodo) as "Supervisor__virtualmaxperiodo"'),
+                    // 'fields' => array('Supervisor.id', 'Supervisor.cress', 'Supervisor.nome', 'count("Estagiario.registro") as "Supervisor__virtualestagiarios"', 'count(Distinct Estagiario.registro) as `Supervisor__virtualestudantes`', 'count(Distinct Estagiario.periodo) as "Supervisor__virtualperiodos"', 'max(periodo) as "Supervisor__virtualmaxperiodo"'),
                     'group' => array('Estagiario.id_supervisor'),
-                    'order' => array(
-                        'Supervisor.nome' => 'asc'))
+                    'order' => array('Supervisor.nome' => 'asc'))
             );
         endif;
 
@@ -92,25 +90,6 @@ class SupervisorsController extends AppController {
             ));
         }
 
-        // Somente o próprio pode ver
-        $id_categoria = $this->Session->read('id_categoria');
-        if ($id_categoria != 1):
-            if ($this->Session->read('numero')) {
-                // die(pr($this->Session->read('numero')));
-                $verifica = $this->Supervisor->find('first', [
-                    'contain' => [],
-                    'conditions' => ['Supervisor.cress' => $this->Session->read('numero')]
-                ]);
-                // pr($verifica);
-                // die();
-                if ($id != $verifica['Supervisor']['id']) {
-                    $this->Flash->error(__("Acesso não autorizado"));
-                    $this->redirect("/Supervisors/index");
-                    die("Não autorizado");
-                }
-            }
-        endif;
-
         /* Para o select de inserir uma nova instituicao */
         $this->loadModel('Instituicao');
         $instituicoes = $this->Instituicao->find('list', array('order' => 'Instituicao.instituicao'));
@@ -131,17 +110,49 @@ class SupervisorsController extends AppController {
     public function add() {
 
         $this->loadModel('Instituicao');
-        $instituicoes = $this->Instituicao->find('list', array('order' => 'Instituicao.instituicao'));
-        $instituicoes[0] = '- Seleciona -';
-        asort($instituicoes);
+        $this->Instituicao->contain();
+        $instituicoes = $this->Instituicao->find('list', [
+            'order' => ['Instituicao.instituicao']
+        ]);
         $this->set('instituicoes', $instituicoes);
 
+        $this->Supervisor->contain();
+        $supervisores = $this->Supervisor->find('list', [
+            'order' => ['nome' => 'ASC'],
+            'fields' => ['nome']
+        ]);
+        $this->set('supervisores', $supervisores);
+
         if ($this->data) {
-            // pr($this->data);
-            // die();
-            if ($this->Supervisor->save($this->data)) {
-                $this->Session->setFlash('Dados inseridos');
-                $this->redirect('/Supervisors/view/' . $this->Supervisor->getLastInsertId());
+            /* O supervisor tem que estar numa instituição */
+            if ($this->data['Instituicao']['id'] == 0) {
+                $this->Flash->error(__('Selecione a instituição na que trabalha o(a) supervisor(a)'));
+                $this->redirect('/Supervisors/add');
+            }
+
+            /* Verifico o nome do supervisor */
+            $this->Supervisor->contain();
+            $nome = $this->Supervisor->find('first', [
+                'conditions' => ['Supervisor.nome' => $this->data['Supervisor']['nome']]
+            ]);
+            if ($nome) {
+                $this->Flash->error(__('Já há um(a) supervisor(a) cadastrado(a) com esse mesmo nome'));
+                $this->redirect(['controller' => 'supervisors', 'action' => 'view', $nome['Supervisor']['id']]);
+            }
+
+            /* O supervisor não pode estar repetido */
+            $this->Supervisor->contain();
+            $cress = $this->Supervisor->find('first', [
+                'conditions' => ['Supervisor.cress' => $this->data['Supervisor']['cress']]
+            ]);
+            if ($cress) {
+                $this->Flash->error(__('Cress do(a) supervisor(a) já cadastrado'));
+                $this->redirect('/Supervisors/view/' . $cress['Supervisor']['id']);
+            } else {
+                if ($this->Supervisor->save($this->data)) {
+                    $this->Flash->success(__('Dados inseridos'));
+                    $this->redirect('/Supervisors/view/' . $this->Supervisor->getLastInsertId());
+                }
             }
         }
     }
@@ -191,25 +202,6 @@ class SupervisorsController extends AppController {
         } else {
             $this->Supervisor->id = $id;
         }
-
-        // Somente o próprio pode ver
-        $id_categoria = $this->Session->read('id_categoria');
-        if ($id_categoria != 1):
-            if ($this->Session->read('numero')) {
-                // die(pr($this->Session->read('numero')));
-                $verifica = $this->Supervisor->find('first', [
-                    'contain' => [],
-                    'conditions' => ['Supervisor.cress' => $this->Session->read('numero')]
-                ]);
-                // pr($verifica);
-                // die();
-                if ($id != $verifica['Supervisor']['id']) {
-                    $this->Flash->error(__("Acesso não autorizado"));
-                    $this->redirect("/Supervisors/index");
-                    die("Não autorizado");
-                }
-            }
-        endif;
 
         if (empty($this->data)) {
             $this->data = $this->Supervisor->read();

@@ -31,57 +31,92 @@
             <td>Nível:</td><td><?php echo $nivel; ?></td>
         </tr>
         <tr>
-            <td>Professor:</td><td><?php echo $professor; ?></td>
+            <td>Professor(a):</td><td><?php echo $professor; ?></td>
         </tr>
         <tr>
             <td>Instituição:</td><td><?php echo $instituicao; ?></td>
         </tr>
-        <tr>
-            <td>Supervisor:</td><td><?php echo $supervisor; ?></td>
-        </tr>
+        <?php
+        if (!empty($supervisor)):
+            ?>
+
+            <tr>
+                <td>Supervisor(a):</td><td><?php echo $supervisor; ?></td>
+            </tr>
+            <?php
+        endif;
+        ?>
+
+        <?php
+        if (empty($supervisor)):
+            ?>
+            <tr>
+                <td colspan="2">
+                    <?php
+                    echo $this->Form->create('Estagiario', [
+                        'class' => 'form-horizontal',
+                        'role' => 'form',
+                        'inputDefaults' => [
+                            'format' => ['before', 'label', 'between', 'input', 'after', 'error'],
+                            'div' => ['class' => 'form-group'],
+                            'label' => [false],
+                            'between' => "<div class = 'col-12'>",
+                            'class' => ['form-control'],
+                            'after' => "</div>",
+                            'error' => false
+                        ]
+                    ]);
+
+                    echo $this->Form->input('supervisor_id', ['label' => false, 'type' => 'select', 'options' => $supervisores, 'empty' => 'Seleciona supervisor(a)']);
+                    echo $this->Form->input('registro', ['type' => 'hidden', 'value' => $registro]);
+                    echo $this->Form->input('estagiario_id', ['type' => 'hidden', 'value' => $estagiario_id]);
+                    ?>
+
+                    <div class='row justify-content-center'>
+                        <div class='col-auto'>
+                            <?= $this->Form->submit('Confirma', ['type' => 'Submit', 'label' => ['text' => 'Confirma', 'class' => 'col-4'], 'class' => 'btn btn-primary']); ?>
+                            <?= $this->Form->end(); ?>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <?php
+        else:
+            ?>
+            <tr>
+                <td>
+                    <?php
+                    echo $this->Form->create('Estagiario', [
+                        'class' => 'form-horizontal',
+                        'role' => 'form',
+                        'inputDefaults' => [
+                            'format' => ['before', 'label', 'between', 'input', 'after', 'error'],
+                            'div' => ['class' => 'form-group row'],
+                            'label' => ['class' => 'col-4'],
+                            'between' => "<div class = 'col-8'>",
+                            'class' => ['form-control'],
+                            'after' => "</div>",
+                            'error' => false
+                        ]
+                    ]);
+
+                    echo $this->Form->input('supervisor', ['type' => 'hidden', 'value' => $supervisor, 'readonly']);
+                    echo $this->Form->input('supervisor_id', ['type' => 'hidden', 'value' => $supervisor_id]);
+                    echo $this->Form->input('registro', ['type' => 'hidden', 'value' => $registro]);
+                    echo $this->Form->input('estagiario_id', ['type' => 'hidden', 'value' => $estagiario_id]);
+                    ?>
+
+                    <div class='row justify-content-center'>
+                        <div class='col-auto'>
+                            <?= $this->Form->submit('Confirma', ['type' => 'Submit', 'label' => ['text' => 'Confirma', 'class' => 'col-4'], 'class' => 'btn btn-primary']); ?>
+                            <?= $this->Form->end(); ?>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        <?php
+        endif;
+        ?>
     </table>
 
-</div>
-
-<h1>Preencha todos os campos do formulário</h1>
-
-<?php
-// die();
-echo $this->Form->create('Supervisor', [
-  'class' => 'form-horizontal',
-  'role' => 'form',
-    'inputDefaults' => [
-        'format' => ['before', 'label', 'between', 'input', 'error', 'after'],
-        'div' => ['class' => 'form-group row'],
-        'label' => ['class' => 'col-4'],
-        'between' => "<div class = 'col-8'>",
-        'class' => ['form-control'],
-        'after' => "</div>",
-        'error' => false
-    ]
-]);
-
-echo $this->Form->input('regiao', array('label' => ['text' => 'Região', 'class' => 'col-4'], 'default'=>7));
-echo $this->Form->input('cress');
-echo $this->Form->input('nome');
-?>
-
-<?php
-echo $this->Form->input('codigo_tel', array('value'=>21));
-echo $this->Form->input('telefone');
-echo $this->Form->input('codigo_cel', array('value'=>21));
-echo $this->Form->input('celular');
-echo $this->Form->input('email');
-?>
-
-<?php
-echo $this->Form->input('registro', array('type' => 'hidden', 'value' => $registro));
-echo $this->Form->input('supervisor_id', array('type' => 'hidden', 'value' => $supervisor_id));
-?>
-
-<div class='row justify-content-center'>
-    <div class='col-auto'>
-    <?= $this->Form->submit('Confirma', ['type' => 'Submit', 'label' => ['text' => 'Confirma', 'class' => 'col-4'], 'class' => 'btn btn-primary']); ?>
-    <?= $this->Form->end(); ?>
-    </div>
 </div>

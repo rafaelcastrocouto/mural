@@ -12,7 +12,19 @@
         $("#InstituicaoPeriodo").change(function () {
             var periodo = $(this).val();
             /* alert(periodo +  " " + limite); */
-            window.location = base_url + "/periodo:" + periodo;
+            window.location = base_url + "?periodo=" + periodo;
+        })
+
+        $("#AreaArea").change(function () {
+            var area_id = $(this).val();
+            /* alert(periodo +  " " + limite); */
+            window.location = base_url + "?area_id=" + area_id;
+        })
+
+        $("#NaturezaNatureza").change(function () {
+            var natureza_id = $(this).val();
+            /* alert(periodo +  " " + limite); */
+            window.location = base_url + "?natureza_id=" + natureza_id;
         })
 
     })
@@ -22,15 +34,23 @@
 <div class="table-responsive">
 
     <?php echo $this->element('submenu_instituicoes'); ?>
+    <div class='row justify-content-center'>
+        <?php if ($this->Session->read('id_categoria') == '1'): ?>
 
-    <?php if ($this->Session->read('id_categoria') == '1'): ?>
+            <?php echo $this->Form->create('Instituicao', ['controller' => 'Instituicao', 'url' => 'index', 'class' => 'form-inline']); ?>
+            <?php echo $this->Form->input('periodo', array('type' => 'select', 'label' => false, 'options' => $todosPeriodos, 'default' => $periodo, 'empty' => [0 => 'Selecione período'], 'class' => 'form-control')); ?>
+            <?php echo $this->Form->end(); ?>
 
-        <?php echo $this->Form->create('Instituicao', ['controller' => 'Instituicao', 'url' => 'index', 'class' => 'form-inline']); ?>
-        <?php echo $this->Form->input('periodo', array('type' => 'select', 'label' => array('text' => 'Período ', 'style' => 'display: inline'), 'options' => $todosPeriodos, 'default' => $periodo, 'empty' => 'Selecione', 'class' => 'form-control')); ?>
-        <?php echo $this->Form->end(); ?>
+            <?php echo $this->Form->create('Area', ['controller' => 'Instituicao', 'url' => 'index', 'class' => 'form-inline']); ?>
+            <?php echo $this->Form->input('area', array('type' => 'select', 'label' => false, 'options' => $areas, 'default' => $area_id, 'empty' => [0 => 'Selecione área'], 'class' => 'form-control')); ?>
+            <?php echo $this->Form->end(); ?>
 
-    <?php endif; ?>
+            <?php echo $this->Form->create('Natureza', ['controller' => 'Instituicao', 'url' => 'index', 'class' => 'form-inline']); ?>
+            <?php echo $this->Form->input('natureza', array('type' => 'select', 'label' => false, 'options' => $naturezas, 'default' => $natureza_id, 'empty' => [0 => 'Selecione natureza'], 'class' => 'form-control')); ?>
+            <?php echo $this->Form->end(); ?>
 
+        <?php endif; ?>
+    </div>
     <div class='pagination justify-content-center'>
         <?= $this->Paginator->first('<< Primeiro ', array('class' => 'page-link')) ?>
         <?= $this->Paginator->prev('< Anterior ', array('class' => 'page-link'), null, array()) ?>
@@ -55,13 +75,13 @@
                     <?php echo $this->Paginator->sort('Instituicao.expira', 'Expira'); ?>
                 </th>
                 <th>
-                    <?php echo $this->Paginator->sort('Instituicao.virtualMaxPeriodo', 'Último estágio'); ?>
+                    <?php echo $this->Paginator->sort('Instituicao.Periodo', 'Último estágio'); ?>
                 </th>
                 <th>
-                    <?php echo $this->Paginator->sort('Instituicao.virtualEstudantes', 'Estudantes'); ?>
+                    <?php echo $this->Paginator->sort('Instituicao.Estudantes', 'Estudantes'); ?>
                 </th>
                 <th>
-                    <?php echo $this->Paginator->sort('Instituicao.virtualSupervisores', 'Supervisores'); ?>
+                    <?php echo $this->Paginator->sort('Instituicao.Supervisores', 'Supervisores'); ?>
                 </th>
                 <th>
                     <?php echo $this->Paginator->sort('Areainstituicao.area', 'Área'); ?>
@@ -82,9 +102,9 @@
                             echo date('d-m-Y', strtotime($c_instituicao['Instituicao']['expira']));
                         endif;
                         ?></td>
-                    <td><?php echo $c_instituicao['Instituicao']['virtualMaxPeriodo']; ?></td>
-                    <td><?php echo $c_instituicao['Instituicao']['virtualEstudantes']; ?></td>
-                    <td><?php echo $c_instituicao['Instituicao']['virtualSupervisores']; ?></td>
+                    <td><?php echo $c_instituicao['Instituicao']['Periodo']; ?></td>
+                    <td><?php echo $c_instituicao['Instituicao']['Estudantes']; ?></td>
+                    <td><?php echo $c_instituicao['Instituicao']['Supervisores']; ?></td>
                     <td><?php echo $c_instituicao['Areainstituicao']['area']; ?></td>
                     <td><?php echo $c_instituicao['Instituicao']['natureza']; ?></td>
                 </tr>

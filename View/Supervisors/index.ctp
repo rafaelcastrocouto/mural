@@ -20,7 +20,7 @@
 
 <div class='row justify-content-left'>
     <div class='col-auto'>
-        <?= $this->element('submenu_supervisores') ?>    
+        <?= $this->element('submenu_supervisores') ?>
     </div>
 </div>
 <div class='row justify-content-left'>
@@ -95,7 +95,7 @@
                     if ($c_supervisor['Supervisor']['nome']):
                         echo $this->Html->link($c_supervisor['Supervisor']['virtualestagiarios'], '/Estagiarios/index/periodo:' . '0' . '/id_supervisor:' . $c_supervisor['Supervisor']['id']);
                     else:
-                        echo $this->Html->link($c_supervisor['Supervisor']['virtualestagiarios'], '/Estagiarios/index/periodo:' . '0', '/id_supervisor:' . 'IS NULL');
+                        echo $this->Html->link($c_supervisor['Supervisor']['virtualestagiarios'], '/Estagiarios/index/periodo:' . $c_supervisor['Supervisor']['virtualmaxperiodo'] . '/sort:' . 'Supervisor.nome/direction:asc');
                     endif;
                     ?>
                 </td>
@@ -105,7 +105,7 @@
                     if ($c_supervisor['Supervisor']['nome']):
                         echo $this->Html->link($c_supervisor['Supervisor']['virtualestudantes'], '/Estagiarios/index/periodo:' . '0' . '/id_supervisor:' . $c_supervisor['Supervisor']['id']);
                     else:
-                        echo $this->Html->link($c_supervisor['Supervisor']['virtualestudantes'], '/Estagiarios/index/periodo:' . '0', '/id_supervisor:' . 'IS NULL');
+                        echo $this->Html->link($c_supervisor['Supervisor']['virtualestudantes'], '/Estagiarios/index/periodo:' . $c_supervisor['Supervisor']['virtualmaxperiodo'] . '/sort:' . 'Supervisor.nome/direction:asc');
                     endif;
                     ?>
                 </td>
@@ -115,7 +115,7 @@
                     if ($c_supervisor['Supervisor']['nome']):
                         echo $this->Html->link($c_supervisor['Supervisor']['virtualperiodos'], '/Estagiarios/index/periodo:' . '0' . '/id_supervisor:' . $c_supervisor['Supervisor']['id']);
                     else:
-                        echo $this->Html->link($c_supervisor['Supervisor']['virtualperiodos'], '/Estagiarios/index/periodo:' . '0', '/id_supervisor:' . 'IS NULL');
+                        echo $this->Html->link($c_supervisor['Supervisor']['virtualperiodos'], '/Estagiarios/index/periodo:' . $c_supervisor['Supervisor']['virtualmaxperiodo'] . '/sort:' . 'Supervisor.nome/direction:asc');
                     endif;
                     ?>
                 </td>
@@ -132,7 +132,7 @@
 <div class='justify-content-center'>
     <?php
     echo $this->Paginator->counter(array(
-        'format' => 'Página %page% de %pages%, 
+        'format' => 'Página %page% de %pages%,
 exibindo %current% registros do %count% total,
 começando no registro %start%, finalizando no %end%'
     ));

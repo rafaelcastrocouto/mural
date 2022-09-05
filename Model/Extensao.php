@@ -14,7 +14,7 @@ class Extensao extends AppModel {
      *
      * @var mixed False or table name
      */
-    public $useTable = 'extensao';
+    public $useTable = 'extensoes';
 
     /**
      * Display field
@@ -37,14 +37,14 @@ class Extensao extends AppModel {
             'foreignKey' => 'docente_id',
             'conditions' => '',
             'fields' => '',
-            'order' => ''
+            'order' => 'Professor.nome'
         ),
         'Tae' => array(
             'className' => 'Tae',
             'foreignKey' => 'tae_id',
             'conditions' => '',
             'fields' => '',
-            'order' => ''
+            'order' => 'Tae.nome'
         ),
         'Situacaopr5' => array(
             'className' => 'Situacaopr5',

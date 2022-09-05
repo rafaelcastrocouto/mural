@@ -1,6 +1,8 @@
 <?php ?>
 
 <?= $this->Html->script("jquery.maskedinput"); ?>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/translations/pt.js"></script>
 
 <script>
 
@@ -9,8 +11,28 @@
         $("#MuralCargaHoraria").mask("99");
         $("#MuralHorarioSelecao").mask("99:99");
 
+        ClassicEditor
+                .create(document.querySelector('#MuralRequisitos'), {
+                    // The language code is defined in the https://en.wikipedia.org/wiki/ISO_639-1 standard.
+                    language: 'pt'
+                })
+                .then(editor => {
+                    console.log(editor);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        ClassicEditor
+                .create(document.querySelector('#MuralOutras'), {
+                    language: 'pt'
+                })
+                .then(editor => {
+                    console.log(editor);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
     });
-
 </script>
 
 <div class="container">
@@ -26,7 +48,7 @@
                 'class' => 'form-horizontal',
                 'role' => 'form',
                 'inputDefaults' => [
-                    'format' => ['before', 'label', 'between', 'input', 'error', 'after'],
+                    'format' => ['before', 'label', 'between', 'input', 'after', 'error'],
                     'div' => ['class' => 'form-group row'],
                     'label' => ['class' => 'col-4'],
                     'between' => '<div class = col-8>',
@@ -75,9 +97,9 @@
 
             <?php echo $this->Form->input('datafax', array('label' => ['class' => 'col-4', 'text' => 'Data de envio do email (preenchimento automático)'], 'dateFormat' => 'DMY', 'monthNames' => $meses, 'empty' => TRUE, 'between' => "<div class = 'form-inline col-8'>")); ?>
 
-            <?php echo $this->Form->input('localInscricao', array('label' => ['class' => 'col-4', 'text' => 'Inscrição na Coordenação de Estágio ou diretamente na instituição'], 'type' => 'select', 'options' => array('0' => 'Mural da Coordenação de Estágio/ESS', '1' => 'Diretamente na Instituição'))); ?>
+            <?php echo $this->Form->input('localInscricao', array('label' => ['class' => 'col-4', 'text' => 'Inscrição'], 'type' => 'select', 'options' => array('0' => 'Mural da Coordenação de Estágio/ESS', '1' => 'Mural de Coordenação de Estágio e na Instituição'))); ?>
 
-<?php echo $this->Form->input('outras', array('label' => ['class' => 'col-4', 'text' => 'Outras informações'])); ?>
+            <?php echo $this->Form->input('outras', array('label' => ['class' => 'col-4 ckeditor', 'text' => 'Outras informações'])); ?>
 
             <div class='row justify-content-center'>
                 <div class='col-auto'>

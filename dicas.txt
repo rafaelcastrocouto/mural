@@ -1,8 +1,10 @@
 Dica
 ====
-debug($this->User->lastQuery());
-$log = $this->Votacao->getDataSource()->getLog(false, false);
+debug($this->Model->lastQuery());
+$log = $this->Model->getDataSource()->getLog(false, false);
 debug($log);
+
+debug($this->Model->invalidFields());
 
 Composer
 ========

@@ -33,21 +33,31 @@
         </title>
         <?php
         echo $this->Html->meta('icon');
-
-        echo $this->Html->css('bootstrap.min');
-        echo $this->Html->script(['jquery-3.6.0', 'popper.min', 'bootstrap.min', 'bootstrap.bundle.min']);
+        ?>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <?php
+        // echo $this->Html->css('bootstrap.min');
+        // echo $this->Html->script(['jquery-3.6.0', 'popper.min', 'bootstrap.min', 'bootstrap.bundle.min']);
         // echo $this->Html->css('cake.generic');
         // echo $this->Html->css('abas');
         // echo $this->Html->script('jquery-1.9.1.min'); // Include jQuery library
+
         echo $this->Js->writeBuffer();
         echo $scripts_for_layout;
         ?>
-
         <style>
-            a {color: #000; font-weight: 500; text-decoration: underline;}
-            a:hover {color: #003d4c; font-weight: 500; /* text-decoration: underline blue */}
-            h1 {font-size: 14px;}
-            h2 {font-size: 14px;}            
+            a {
+                color: #000;
+                font-weight: 500;
+                /* text-decoration: underline; */
+            }
+            a:hover {
+                color: #003d4c;
+                font-weight: 500; /* text-decoration: underline blue */
+            }
         </style>
 
     </head>
@@ -55,34 +65,65 @@
         <body style="color:#003d4c; background: #2b6c9c">
     //-->
     <body style="font-size: 95%;">
+        <!<!-- Menu superior -->
         <div class='container'>
             <div class='row justify-content-center'>
                 <!--
                 <div class='col-auto'>
                 //-->
-                <?= $this->element('submenu_navegacao'); ?>
+                <?php
+                $id_categoria = $this->Session->read('id_categoria');
+                if (isset($id_categoria)) {
+                    switch ($id_categoria) {
+                        case 1: // Administrador
+                            echo $this->element('submenu_navegacao');
+                            break;
+                        case 2: // Estudante
+                            // pr($this->Session->read('estagiario'));
+                            // die();
+                            if ($this->Session->read('estagiario') === '1'):
+                                echo $this->element('submenu_nav_estudante');
+                            elseif ($this->Session->read('estagiario') === '0'):
+                                echo $this->element('submenu_nav_aluno');
+                            endif;
+                            break;
+                        case 3: // Docente
+                            echo $this->element('submenu_nav_docente');
+                            break;
+                        case 4: // Supervisora
+                            echo $this->element('submenu_navegacao');
+                            break;
+                        default:
+                            echo $this->element('submenu_navegacao');
+                            break;
+                    }
+                } else {
+                    echo $this->element('submenu_navegacao');
+                }
+                ?>
+
             </div>
         </div>
-        <!--
-        </div>
-        //-->
-        <div class='container'>
-            <div class='row justify-content-left'>
-                <div class='col-12'>
-                    <div id="content">
+        <!<!-- Corpo com o conteúdo -->
+        <main>
+            <div class='container'>
+                <div class='row justify-content-left'>
+                    <div class='col-12'>
+                        <div id="content">
 
-                        <?php echo $this->Session->flash(); ?>
+                            <?php echo $this->Session->flash(); ?>
 
-                        <?php echo $content_for_layout; ?>
+                            <?php echo $content_for_layout; ?>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div id="footer">
+        </main>
+        <!<!-- Pé de pagina -->
+        <div id="footer" class="text-center text-white">
             <?php
             echo $this->Html->link(
-                    $this->Html->image('cake.power.gif', array('alt' => __("CakePHP: the rapid development php framework", true), 'border' => "0")), 'http://www.cakephp.org/', array('target' => '_blank', 'escape' => false)
+                    $this->Html->image('cake.power.gif', array('alt' => __("Coordenação de Estágio da ESS/UFRJ: ", true), 'border' => "0")), 'http://ess.ufrj.br/', array('target' => '_blank', 'escape' => false)
             );
             ?>
         </div>

@@ -23,8 +23,6 @@
     </table>
 <?php else: ?>
 
-    <h1>Busca por CPF</h1>
-
     <?= $this->Html->script("jquery.maskedinput"); ?>
 
     <script>

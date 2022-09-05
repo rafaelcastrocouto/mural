@@ -3,7 +3,7 @@
 <?php echo $this->Html->link('Planilha seguro','/alunos/planilhaseguro/', ['role' => 'button', 'class' => 'btn btn-info']); ?>
 <?php echo $this->Html->link('Planilha CRESS','/alunos/planilhacress/', ['role' => 'button', 'class' => 'btn btn-info']); ?>
 <?php echo $this->Html->link('Carga horária','/alunos/cargahoraria/', ['role' => 'button', 'class' => 'btn btn-info']); ?>
-<?php echo $this->Html->link('Complemento período especial','/complementos/index/', ['role' => 'button', 'class' => 'btn btn-info']); ?>
+<?php echo $this->Html->link('Modalidade período especial','/complementos/index/', ['role' => 'button', 'class' => 'btn btn-info']); ?>
 <!--
     <?php echo $this->Html->link('Planejamento','/configuraplanejamentos/index/'); ?>
 //-->

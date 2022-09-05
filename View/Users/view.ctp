@@ -59,10 +59,11 @@
         <?php endif; ?>
 
         <tr>
-            <td>Editar usuário</td>
+            <td>Usuário</td>
             <td></td>
             <td><?php echo $this->Html->link($usuario['User']['numero'], '/users/edit/' . $usuario['User']['id']); ?></td>
             <td><?php echo $usuario['User']['email']; ?></td>
+            <td><?= $this->Html->link('Excluir', ['controller' => 'Users',  'action' => 'excluir', $usuario['User']['id']], ['class' => 'btn btn-danger']) ?></td>
         </tr>
 
     </table>

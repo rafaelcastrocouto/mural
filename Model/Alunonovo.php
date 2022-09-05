@@ -6,6 +6,7 @@ class Alunonovo extends AppModel {
     public $useTable = 'alunosnovos';
     public $primaryKey = 'id';
     public $displayField = 'nome';
+    public $actsAs = array('Containable');
     public $hasMany = array(
         'Inscricao' => array(
             'className' => 'Inscricao',
@@ -31,13 +32,12 @@ class Alunonovo extends AppModel {
 
     public function beforeValidate($options = array()) {
 
-        // pr($this->data);
         $this->data['Alunonovo']['email'] = mb_convert_case($this->data['Alunonovo']['email'], MB_CASE_LOWER, 'utf-8');
         $this->data['Alunonovo']['nome'] = mb_convert_case($this->data['Alunonovo']['nome'], MB_CASE_TITLE, 'utf-8');
+        $this->data['Alunonovo']['nomesocial'] = mb_convert_case($this->data['Alunonovo']['nomesocial'], MB_CASE_TITLE, 'utf-8');
         $this->data['Alunonovo']['endereco'] = mb_convert_case($this->data['Alunonovo']['endereco'], MB_CASE_TITLE, 'utf-8');
         $this->data['Alunonovo']['bairro'] = mb_convert_case($this->data['Alunonovo']['bairro'], MB_CASE_TITLE, 'utf-8');
-        // pr($this->data);
-        // die();
+
         return true;
     }
 
@@ -48,17 +48,18 @@ class Alunonovo extends AppModel {
             'allowEmpty' => FALSE,
             'message' => 'Digite o nome completo'
         ),
+        'nomesocial' => array(
+            'rule' => 'notBlank',
+            'required' => FALSE,
+            'allowEmpty' => TRUE,
+            'message' => 'Digite o nome social se for o caso'
+        ),
         'registro' => array(
             'registro1' => array(
                 'rule' => 'numeric',
                 'required' => TRUE,
                 'allowEmpty' => FALSE,
                 'message' => 'Digite o número de DRE'
-            ),
-            'registro2' => array(
-                'rule' => array('between', 9, 9),
-                'on' => 'create',
-                'message' => 'Registro inválido'
             ),
             'registro3' => array(
                 'rule' => 'registro_verifica',
@@ -80,6 +81,18 @@ class Alunonovo extends AppModel {
                 'message' => 'Data nascimento inválida'
             )
         ),
+        'ingresso' => [
+            'rule' => '/^\d{4}-\d{1}$/i',
+            'required' => TRUE,
+            'on' => 'create',
+            'message' => 'Digite o ano e semestre de ingresso'
+        ],
+        'turno' => [
+            'rule' => 'notBlank',
+            'required' => TRUE,
+            'on' => 'create',
+            'message' => 'Digite diurno ou noturno',
+        ],
         'email' => array(
             'email1' => array(
                 'rule' => 'email',
@@ -119,6 +132,12 @@ class Alunonovo extends AppModel {
             'on' => 'create',
             'message' => 'Digite o orgão expedidor da sua carteira de identidade'
         ),
+        'cep' => array(
+            'rule' => '/^\d{5}-\d{3}$/i',
+            'required' => TRUE,
+            'on' => 'create',
+            'message' => 'Digite o número de CEP corretamente formatado'
+        ),
         'endereco' => array(
             'rule' => 'notBlank',
             'required' => TRUE,
@@ -137,26 +156,19 @@ class Alunonovo extends AppModel {
             'on' => 'create',
             'message' => 'Digite seu município'
         ),
-        'cep' => array(
-            'rule' => '/^\d{5}-\d{3}$/i',
-            'required' => TRUE,
-            'on' => 'create',
-            'message' => 'Digite o número de CEP corretamente formatado'
-        )
     );
 
     public function registro_verifica($check) {
 
-        $value = array_values($check);
-        $value = $value[0];
-
+        $values = array_values($check);
+        $value = $values[0];
         if (strlen($value) < 9) {
             return FALSE;
         }
 
         if ($value) {
             // echo "Modelo - Consulta tabela alunosnovos ";
-            $registro = $this->find('first', array('conditions' => 'Alunonovo.registro = ' . $value));
+            $registro = $this->find('first', ['conditions' => ['Alunonovo.registro' => $value]]);
         }
 
         if ($value) {
@@ -223,11 +235,10 @@ class Alunonovo extends AppModel {
         $value = NULL;
         $value = array_values($check);
         $value = $value[0];
-        // pr($value);
 
         $cpf = NULL;
         if (!empty($value)) {
-            $cpf = $this->query('select cpf from alunos as Aluno where cpf = ' . "'" . $value . "'" . ' limit 1');
+            $cpf = $this->query('select cpf from alunosnovos as Alunonovo where cpf = ' . "'" . $value . "'" . ' limit 1');
         }
 
         if ($cpf) {

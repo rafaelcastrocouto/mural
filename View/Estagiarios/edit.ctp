@@ -1,5 +1,6 @@
-<?php // pr($periodos);     ?>
-<?php // pr($id);     ?>
+<?php // pr($periodos);        ?>
+<?php // pr($aluno);        ?>
+<?php // pr($id);        ?>
 
 <?php /* echo $this->Html->script("jquery.maskedinput"); */ ?>
 <?php echo $this->Html->script("jquery.mask.min"); ?>
@@ -42,14 +43,13 @@ echo $this->Form->create('Estagiario', [
     'class' => 'form-horizontal was-validated',
     'role' => 'form',
     'inputDefaults' => [
-        'format' => ['before', 'label', 'between', 'input', 'error', 'after'],
+        'format' => ['before', 'label', 'between', 'input', 'after', 'error'],
         'div' => ['class' => 'form-group row'],
-        'label' => ['class' => 'col-4'],
-        'between' => "<div class = 'col-8'>",
+        'label' => ['class' => 'col-3'],
+        'between' => "<div class = 'col-7'>",
         'class' => ['form-control'],
-        'after' => "<div class='valid-feedback'>Válido.</div>
-    <div class='invalid-feedback'>Digite um valor correto neste campo.</div>
-    </div>"
+        'after' => '</div>',
+        'error' => '<div class="invalid-feedback">Digite um valor correto neste campo.</div>'
     ]
 ]);
 ?>
@@ -58,7 +58,7 @@ echo $this->Form->create('Estagiario', [
 <?php echo $this->Form->input('Estagiario.complemento_id', array('label' => ['text' => 'Complemento período especial', 'class' => 'col-4'], 'options' => $complemento_periodo_especial_total, 'empty' => ['Seleciona'])); ?>
 <?php echo $this->Form->input('Estagiario.nivel', array('label' => ['text' => 'Nível', 'class' => 'col-4'], 'options' => array('1' => 'I', '2' => 'II', '3' => 'III', '4' => 'IV', '9' => 'Não obrigatório'))); ?>
 <?php echo $this->Form->input('Estagiario.turno', array('label' => ['text' => 'Turno', 'class' => 'col-4'], 'options' => array('D' => 'Diurno', 'N' => 'Noturno', 'I' => 'Indefinido'))); ?>
-<?php echo $this->Form->input('Estagiario.ajuste2020', array('label' => ['text' => 'Ajuste curricular 2020?', 'class' => 'col-4'], 'options' => array('0' => 'Não', '1' => 'Sim'), 'default' => '0')); ?>
+<?php echo $this->Form->input('Estagiario.ajuste2020', array('label' => ['text' => 'Ajuste 2020', 'class' => 'col-4'], 'options' => array('0' => 'Não', '1' => 'Sim'))); ?>
 <?php echo $this->Form->input('Estagiario.tc', array('label' => ['text' => 'TC (Aluno entrogou o TC assinado na Coordenação de Estágio?', 'class' => 'col-4'], 'options' => array('0' => 'Não', '1' => 'Sim'))); ?>
 <?php echo $this->Form->input('Estagiario.tc_solicitacao', array('type' => 'hidden', 'label' => ['text' => 'Data de solicitação do TC', 'class' => 'col-4'], 'dateFormat' => 'DMY', 'empty' => TRUE)); ?>
 <?php echo $this->Form->input('Estagiario.id_instituicao', array('label' => ['text' => 'Instituição', 'class' => 'col-4'], 'options' => $instituicoes, 'empty' => ['0' => 'Seleciona'])); ?>

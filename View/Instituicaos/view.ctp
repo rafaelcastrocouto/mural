@@ -37,7 +37,7 @@
             <tr>
                 <td>Página web</td>
                 <td>
-                    <?php echo $this->Html->link($instituicao['Instituicao']['url'], $instituicao['Instituicao']['url']); ?>
+                    <?php echo $this->Html->link($instituicao['Instituicao']['url'], $instituicao['Instituicao']['url'], ['target' => '_blank', 'escape' => false]); ?>
                 </td>
             </tr>
 
@@ -46,7 +46,7 @@
                 <td>
                     <?php
                     if (!empty($instituicao['Instituicao']['convenio'])) {
-                        echo $this->Html->link($instituicao['Instituicao']['convenio'], "http://www.pr1.ufrj.br/estagios/info.php?codEmpresa=" . $instituicao['Instituicao']['convenio']);
+                        echo $this->Html->link($instituicao['Instituicao']['convenio'], "http://www.pr1.ufrj.br/estagios/info.php?codEmpresa=" . $instituicao['Instituicao']['convenio'],['target' => '_blank', 'escape' => false]);
                     } else {
                         echo "Sem dados";
                     }
@@ -243,7 +243,7 @@
                         <th>
                             Nome
                         </th>
-                        <?php if ($this->Session->read('categoria') === 'administrador'): ?>
+                        <?php if ($this->Session->read('id_categoria') == '1'): ?>
                             <th>
                                 Ação
                             </th>
@@ -264,7 +264,7 @@
                                 ?>
                             </td>
 
-                            <?php if ($this->Session->read('categoria') === 'administrador'): ?>
+                            <?php if ($this->Session->read('id_categoria') == '1'): ?>
                                 <td>
                                     <?php
                                     echo $this->Html->link('Excluir', '/Instituicaos/deleteassociacao/' . $c_supervisor['id_superinst'], NULL, 'Tem certeza?');
@@ -303,13 +303,13 @@
             <table>
                 <caption>Estagiários</caption>
             <?php foreach ($instituicao['Estagiario'] as $c_estagiario): ?>
-                                                        
-                                                        <tr>
-                                                        <td><?php echo $this->Html->link($c_estagiario['registro'], '/Estagiarios/view/' . $c_estagiario['id_aluno']); ?></td>
-                                                        <td><?php echo $c_estagiario['id_supervisor']; ?></td>
-                                                        <td><?php echo $c_estagiario['periodo']; ?></td>
-                                                        </tr>
-                                                        
+                                                                
+                                                                <tr>
+                                                                <td><?php echo $this->Html->link($c_estagiario['registro'], '/Estagiarios/view/' . $c_estagiario['id_aluno']); ?></td>
+                                                                <td><?php echo $c_estagiario['id_supervisor']; ?></td>
+                                                                <td><?php echo $c_estagiario['periodo']; ?></td>
+                                                                </tr>
+                                                                
             <?php endforeach; ?>
             </table>
             //-->

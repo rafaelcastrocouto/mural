@@ -1,4 +1,6 @@
-<?php ?>
+<?php 
+// pr($user['User']['categoria']);
+?>
 
 <script>
 
@@ -7,11 +9,11 @@
 
             var categoria = $(this).val();
 
-            if (categoria == '2') {
+            if (categoria === '2') {
                 $("label:eq(1)").text("DRE");
-            } else if (categoria == '3') {
+            } else if (categoria === '3') {
                 $("label:eq(1)").text("SIAPE");
-            } else if (categoria == '4') {
+            } else if (categoria === '4') {
                 $("label:eq(1)").text("CRESS 7ª Região");
             }
 
@@ -29,10 +31,10 @@
 
         <tr>
             <td>
-                <?php echo $this->Form->input('categoria', array('options' => array('9' => '- Selecione -', '2' => 'Estudante', '3' => 'Professor', '4' => 'Supervisor'), 'default' => '9', 'class' => 'form-control')); ?>
+                <?php echo $this->Form->input('categoria', ['options' => ['9' => '- Selecione -', '2' => 'Estudante', '3' => 'Professor', '4' => 'Supervisor'], 'default' => '9', 'class' => 'form-control']); ?>
             </td>
             <td>
-                <?php echo $this->Form->input('numero', array('label' => 'Selecione a categoria de usuário no box anterior', 'class' => 'form-control')); ?>
+                <?php echo $this->Form->input('numero', ['label' => 'Selecione a categoria de usuário no box anterior', 'class' => 'form-control']); ?>
             </td>
         </tr>
 
@@ -44,12 +46,12 @@
 
         <tr>
             <td colspan='2'>
-                <?php echo $this->Form->input('password', array('label' => 'Senha', 'class' => 'form-control')); ?>
+                <?php echo $this->Form->input('password', ['label' => 'Senha', 'class' => 'form-control']); ?>
             </td>
         </tr>
         <!--
             <td colspan='2'>
-        <?php echo $this->Form->input('Confirmar a senha', array('type' => 'password')); ?>
+        <?php echo $this->Form->input('Confirmar a senha', ['type' => 'password']); ?>
             </td>
         -->
         </tr>

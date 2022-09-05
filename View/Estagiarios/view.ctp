@@ -1,12 +1,8 @@
-<?php
-// pr($estagio);
-// die();
-?>
 <div class="table-responsive">
 
     <?= $this->element('submenu_estagiarios') ?>
-    <?php $tipo_de_estagio = isset($tipo_de_estagio) ? $tipo_de_estagio : 1 ?>
-    <?= $this->Html->link('Imprimir termo de compromisso', '/inscricaos/termoimprime?estagiario_id=' . $estagio['Estagiario']['id'] .'&tipo_de_estagio='. $tipo_de_estagio, ['role' => 'button', 'class' => 'btn btn-info']); ?>
+
+    <?= $this->Html->link('Termo de compromisso', '/Inscricaos/termoimprime?estagiario_id=' . $estagio['Estagiario']['id']. '&tipo_de_estagio=' . $estagio['Estagiario']['complemento_id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
     <?= $this->Html->link('Folha de atividades', '/folhadeatividades/atividade?estagiario_id=' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
     <?= $this->Html->link('Avaliação discente', '/Avaliacoes/view?estagiario_id=' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
     <?= $this->Html->link('Declaração de estágio', ['action' => 'declaracaoestagiopdf', $estagio['Estagiario']['id'], 'ext' => 'pdf', 'declaracaodeestagio'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
@@ -35,14 +31,8 @@
                 </tr>
 
                 <tr>
-                    <td>Ajuste curricular 2020</td>
-                    <td><?php
-                        if ($estagio['Estagiario']['ajuste2020'] == 0):
-                            echo 'Não';
-                        elseif ($estagio['Estagiario']['ajuste2020'] == 1):
-                            echo 'Sim';
-                        endif;
-                        ?></td>
+                    <td>Complemento período especial</td>
+                    <td><?php echo $estagio['Complemento']['periodo_especial']; ?></td>
                 </tr>
 
                 <tr>
@@ -54,6 +44,11 @@
                             echo $estagio['Estagiario']['nivel'];
                         endif;
                         ?></td>
+                </tr>
+
+                <tr>
+                    <td>Ajuste 2020</td>
+                    <td><?php echo $estagio['Estagiario']['ajuste2020'] == 0 ? 'Não' : 'Sim'; ?></td>
                 </tr>
 
                 <tr>
@@ -78,6 +73,20 @@
                         <?php if ($estagio['Estagiario']['tc_solicitacao']): ?>
                             <?php echo date('d-m-Y', strtotime($estagio['Estagiario']['tc_solicitacao'])); ?>
                         <?php endif; ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>TC (Devolução do TC)</td>
+                    <td>
+                        <?php
+                        switch ($estagio['Estagiario']['tc']) {
+                            case 0: echo "Não";
+                                break;
+                            case 1: echo "Sim";
+                                break;
+                        }
+                        ?>
                     </td>
                 </tr>
 

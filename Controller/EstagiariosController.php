@@ -309,7 +309,7 @@ class EstagiariosController extends AppController {
             // die();
         }
 
-        $this->Estagiario->contain = -1;
+        $this->Estagiario->contain(['Aluno', 'Alunonovo', 'Instituicao' => ['Mural' => ['conditions' => ['Mural.periodo' => $periodo]]], 'Professor', 'Supervisor', 'Area', 'Complemento']);
         if (isset($condicoes)) {
             $this->set('estagiarios', $this->Paginate($condicoes));
         } else {
@@ -317,8 +317,84 @@ class EstagiariosController extends AppController {
         }
     }
 
-    public function view($id = NULL) {
+    public function lista() {
 
+        $parametros = $this->params['named'];
+        // pr($parametros);
+        $sort = isset($parametros['sort']) ? $parametros['sort'] : NULL;
+        $direcao = isset($parametros['direction']) ? $parametros['direction'] : NULL;
+
+        if (is_null($sort)) {
+            $sort = 'nome';
+            $direcao = 'asc';
+        }
+
+        $periodo = $this->request->query('periodo');
+        if (is_null($periodo)) {
+            $periodo = $this->request->query('periodo');
+        }
+        // die();
+        /* Função periodo */
+        $condicoes = NULL;
+        $periodos = $this->periodo($periodo, $condicoes);
+        $periodo = $periodos[0];
+        $condicoes = $periodos[1];
+
+        if ($periodo == 0) {
+            $this->loadModel('Configuracao');
+            $configuracoes = $this->Configuracao->find('first');
+            $periodo = $configuracoes['Configuracao']['mural_periodo_atual'];
+        }
+        $periodo_atual = $periodo;
+        $ano_semestre = explode('-', $periodo_atual);
+        if ($ano_semestre[1] == 1) {
+            $ano = intval($ano_semestre[0]) - 1;
+            $semestre = intval($ano_semestre[1]) + 1;
+            $periodo_anterior = $ano . '-' . $semestre;
+        } elseif ($ano_semestre[1] == 2) {
+            $ano = intval($ano_semestre[0]);
+            $semestre = intval($ano_semestre[1]) - 1;
+            $periodo_anterior = $ano . '-' . $semestre;
+        }
+        $anosemestre = $ano_semestre[0] . $ano_semestre[1];
+        // pr($anosemestre);
+
+        $ultimo_nivel = 4;
+        $this->Estagiario->contain(['Alunonovo']);
+        $estagiario = $this->Estagiario->find('all', [
+            'conditions' => ['periodo' => $periodo_anterior, ['NOT' => ['nivel >=' => $ultimo_nivel]]],
+            'order' => [$sort => $direcao]
+        ]);
+        foreach ($estagiario as $c_estagiario) {
+            // pr($c_estagiario);
+            $this->Estagiario->contain(['Alunonovo']);
+            $q_estagiario = $this->Estagiario->find('first', [
+                'conditions' => ['Estagiario.registro' => $c_estagiario['Estagiario']['registro'], 'Estagiario.periodo >' => $periodo_anterior]
+            ]);
+            // pr($q_estagiario);
+            if (empty($q_estagiario)) {
+                if ($c_estagiario['Estagiario']['ajuste2020'] == 1 && $c_estagiario['Estagiario']['nivel'] >= 3) {
+                    // pr($c_estagiario);
+                } else {
+                    // pr($c_estagiario);
+                    $sem_estagio[] = $c_estagiario;
+                }
+                // pr($c_estagiario);
+            }
+        }
+        // $log = $this->Estagiario->getDataSource()->getLog(false, false);
+        // debug($log);
+        // pr($sem_estagio);
+        $this->set('direcao', $direcao);
+        $this->set('estagiarios', isset($sem_estagio) ? $sem_estagio : NULL);
+    }
+
+    public function view($id = NULL) {
+        /*
+          if (!$this->Estagiario->exists($id)) {
+          throw new NotFoundException(__('Invalid Estagiário'));
+          }
+         */
         if (is_numeric($id)) {
             $estagio = $this->Estagiario->find('first', array(
                 'conditions' => array('Estagiario.id' => $id)));
@@ -339,22 +415,35 @@ class EstagiariosController extends AppController {
             }
         }
         // die();
-        if (isset($this->request->params['pass'][1])):
-            $this->set('tipo_de_estagio', $this->request->params['pass'][1]);
-        endif;
         $this->set('estagio', $estagio);
     }
 
     public function alunorfao() {
 
-        $this->set('orfaos', $this->Estagiario->alunorfao());
+        $this->loadModel('Aluno');
+        $orfao = $this->Aluno->find('all', [
+            'order' => ['Aluno.nome']
+                ]
+        );
+        foreach ($orfao as $c_orfao) {
+            if (empty($c_orfao['Estagiario'])) {
+                // pr($c_orfao['Aluno']);
+                $orfaos[] = $c_orfao['Aluno'];
+            }
+        }
+        if (empty($orfaos)) {
+            $this->Flash->success(__('Não há erros no cadastramento dos estudantes de estágio'));
+            $this->redirect(['controller' => 'Estagiarios', 'action' => 'index']);
+        } else {
+            $this->set('orfaos', $orfaos);
+        }
     }
 
     public function edit($id = NULL) {
 
         if (empty($this->data)) {
 
-            $this->Estagiario->recursive = 2;
+            $this->Estagiario->contain(['Aluno', 'Instituicao', 'Supervisor', 'Professor', 'Area']);
             $estagiario = $this->Estagiario->find('first', array(
                 'conditions' => array('Estagiario.id' => $id),
                 'fields' => array('Estagiario.periodo', 'Estagiario.complemento_id', 'Estagiario.nivel', 'Estagiario.id_professor', 'Estagiario.id_instituicao', 'Estagiario.id_supervisor', 'Estagiario.id_area', 'Estagiario.nota', 'Estagiario.ch', 'Aluno.id', 'Aluno.nome', 'Instituicao.id', 'Instituicao.instituicao', 'Supervisor.id', 'Supervisor.nome', 'Professor.id', 'Professor.nome', 'Area.id', 'Area.area')
@@ -366,7 +455,7 @@ class EstagiariosController extends AppController {
 
             $aluno = $estagiario['Aluno']['nome'];
             // pr($aluno);
-            // die();
+            // die('aluno');
             $this->set('aluno', $aluno);
 
             // Periodos para o select
@@ -375,7 +464,8 @@ class EstagiariosController extends AppController {
                 'group' => ('Estagiario.periodo'),
                 'order' => ('Estagiario.periodo')
             ));
-
+            // pr($periodos_total);
+            // die('periodos');
             // Para acrescenter os próximos periodos carrego a configuracao do planejamento
             $this->loadModel('Configuraplanejamento');
             $periodo_planejamento = $this->Configuraplanejamento->find('all');
@@ -385,6 +475,7 @@ class EstagiariosController extends AppController {
                 $periodos_novo[$c_periodoplanejamento['Configuraplanejamento']['semestre']] = $c_periodoplanejamento['Configuraplanejamento']['semestre'];
             }
             // pr($periodos_novo);
+            // die('periodos novos');
             $semestres = array_unique(array_merge($periodos_total, $periodos_novo));
             // pr($semestres);
             // die();
@@ -397,14 +488,14 @@ class EstagiariosController extends AppController {
             asort($instituicoes);
             // pr($instituicoes);
             $this->set('instituicoes', $instituicoes);
-            // die();
+            // die('Instituicoes');
 
             /* Supervisores da instituicao para o select */
             $supervisores = $this->Instituicao->find('first', array(
                 'conditions' => array('Instituicao.id' => $estagiario['Estagiario']['id_instituicao'])
             ));
             // pr($supervisores);
-            // die();
+            // die('Supervisores');
 
             /* Crio a lista de supervisores da instituicao para o select */
             if (isset($supervisores['Supervisor']) || !(empty($supervisores['Supervisor']))) {
@@ -421,6 +512,8 @@ class EstagiariosController extends AppController {
                 'order' => 'Professor.nome'));
             asort($professores);
             $this->set('professores', $professores);
+            // pr($professores);
+            // die('Professores');
 
             /* Areas para o select */
             $this->loadModel('Area');
@@ -428,7 +521,8 @@ class EstagiariosController extends AppController {
                 'order' => 'area'));
             asort($areas);
             $this->set('areas', $areas);
-
+            // pr($areas);
+            // die('Area');
             /* Complemento período especial  */
             /* $this->loadModel('Area'); */
             $complemento_periodo_especial_total = $this->Estagiario->Complemento->find('list', array(
@@ -445,37 +539,24 @@ class EstagiariosController extends AppController {
             // pr($this->data);
             // die();
         } else {
-            // pr($this->data);
-            // die();
             if ($this->request->data['Estagiario']['complemento_id'] == '0') {
                 $this->request->data['Estagiario']['complemento_id'] = NULL;
             }
             // pr($this->data);
             // die();
-            $this->request->data['Estagiario']['nota'] = str_replace(",", ".", $this->data['Estagiario']['nota']);
-            // pr($this->request->data);
-            // die();
+            $this->request->data['Estagiario']['nota'] = floatval($this->data['Estagiario']['nota']);
+            // pr($this->data);
+            // die('Alteração da pontuação da nota');
             $this->Estagiario->set($this->data);
-            
-            /* Cuidado! Só valida note e ch. Pode ser que tenha outros errors de validação */
-            if ($this->Estagiario->validates(['fieldList' => ['note', 'ch']])) {
-                // pr('Tudo certo');
-                // $this->Flash->success(__("Está tudo ok!"));
-            } else {
-                $this->Flash->error(__("Erros de validação!"));
-                // $errors = $this->Estagiario->validationErrors;
-                // pr($errors);
-                $this->redirect('/Estagiarios/view/' . $this->data['Estagiario']['id']);
-            }
-            // die('Validação concluída');
-            if ($this->Estagiario->save($this->request->data)) {
+            // die('set->this->data');
+            if ($this->Estagiario->save($this->data)) {
                 $this->Flash->success(__("Atualizado"));
                 $this->redirect('/Estagiarios/view/' . $this->data['Estagiario']['id']);
             } else {
-                debug($this->Estagiario->invalidFields());
-                // die();
-                $this->Flash->error(__("Não foi possível atualizar o registro"));
-                $this->redirect('/Estagiarios/view/' . $this->data['Estagiario']['id']);
+                $this->Flash->error(__("Erros de validação! Preencha corretamente todos os campos."));
+                $errors = $this->Estagiario->validationErrors;
+                $this->redirect('/Estagiarios/view/ ' . $this->data['Estagiario']['id']);
+                die('errors');
             }
         }
     }
@@ -538,96 +619,59 @@ class EstagiariosController extends AppController {
         // pr($registro);
         // die('registro');
         if ($registro) {
-            $estagiarios = $this->Estagiario->find('all', array(
-                'conditions' => array('Estagiario.registro' => $registro)
-            ));
+            $this->Estagiario->contain(['Alunonovo', 'Instituicao', 'Supervisor', 'Professor', 'Area']);
+            $estagiarios = $this->Estagiario->find('all', [
+                'conditions' => ['Estagiario.registro' => $registro],
+                'order' => ['Estagiario.nivel' => 'asc']
+            ]);
             // pr($estagiario);
             // die('estagiario_registro');
         } elseif ($id) {
-            $estagiarios = $this->Estagiario->find('all', array(
-                'conditions' => array('Estagiario.id_aluno' => $id)
-            ));
+            $this->Estagiario->contain(['Alunonovo', 'Instituicao', 'Supervisor', 'Professor', 'Area']);
+            $estagiarios = $this->Estagiario->find('all', [
+                'conditions' => ['Estagiario.id_aluno' => $id],
+                'order' => ['Estagiario.nivel' => 'asc']
+            ]);
             // pr($estagiarios);
             // die('estagiario_id');
         } else {
             echo "Sem parámetros para identificaro o estudante";
-            $this->Session->setFlash('Digite o DRE do estudante.');
+            $this->Flash->error(__('Digite o DRE do estudante.'));
             $this->redirect('/Alunos/busca');
             die();
         }
         // pr($estagiarios);
         // die("estagiarios");
-        if (!$estagiarios) {
-            echo "Estudante sem estágio. Vai para estágio I.";
-            die('Estudante sem estágio');
-        }
-        // die("estagiarios");
-        // Não sei se isto eh necessario aqui
-        $nivel_periodo_atual = NULL;
+        $proximo_nivel = NULL;
 
         if ($estagiarios) {
+            $estagiario = end($estagiarios);
             // Calculo o nivel de estagio para o proximo periodo
-            foreach ($estagiarios as $c_estagio) {
-                // pr($c_estagio['Estagiario']['periodo']);
-                if ($c_estagio['Estagiario']['periodo'] == $periodo_atual) {
-                    // echo "Nivel do periodo atual";
-                    $nivel_periodo_atual = $c_estagio['Estagiario']['nivel'];
-                    // die("nivel_periodo_atual");
+            if ($estagiario['Estagiario']['periodo'] == $periodo_atual) {
+                // echo "Nivel do periodo atual";
+                $proximo_nivel = $estagiario['Estagiario']['nivel'];
+                // die("nivel_periodo_atual");
+            } else {
+                if ($estagiario['Estagiario']['ajuste2020'] == 0) {
+                    $ultimo_nivel = 4;
                 } else {
-                    $nivel[$c_estagio['Estagiario']['nivel']] = $c_estagio['Estagiario']['nivel'];
+                    $ultimo_nivel = 3;
+                }
+                if ($estagiario['Estagiario']['nivel'] < $ultimo_nivel) {
+                    $proximo_nivel = $estagiario['Estagiario']['nivel'] + 1;
                     // die('nivel estagio atual');
+                } else {
+                    $proximo_nivel = 9; // Estagio não obrigatorio
                 }
             }
-            // echo "Nível período atual " . $nivel_periodo_atual . "<br>";
-            // echo "Nível " . $nivel[$c_estagio['Estagiario']['nivel']] . "<br>";
-            // die();
-            // Não deveria acontecer, mas se acontecer ...
+            // echo "Próximo nível " . $proximo_nivel . "<br>";
         } else {
-            // echo "Estudante sem estágio: " . $id;
-            $this->loadModel('Aluno');
-            if ($id) {
-                $estagiario_sem_estagio = $this->Aluno->find('first', array(
-                    'conditions' => array('Aluno.id' => $id))
-                );
-            } elseif ($registro) {
-                $estagiario_sem_estagio = $this->Aluno->find('first', array(
-                    'conditions' => array('Aluno.registro' => $registro))
-                );
-            }
-            // pr($estagiario_sem_estagio);
-            // die('estagiario_sem_estagio');
-            if (!$estagiario_sem_estagio) {
-                echo "Estudante sem estágio";
-                $this->Session->setFlash('Estagiário cadastrado sem nível de estágio definido.');
-                $this->redirect('/Alunos/busca_dre/');
-                die('Estudante estagiário sem nível definido');
-            }
+            /* Se não é estagiario então nivel de estagio é 1 */
+            $proximo_nivel = 1;
         }
-
-        // Ordeno os niveis (estagios anteriores ao periodo atual)
-        $ultimo_nivel = NULL;
-        if (isset($nivel)) {
-            asort($nivel);
-            // Passo o valor do ultimo
-            $ultimo_nivel = end($nivel);
-            // Incremento em 1 para o próximo estágio
-            $ultimo_nivel = $ultimo_nivel + 1;
-            // Se eh maior de 4 coloco 0 (estágio não obrigatório)
-            if ($ultimo_nivel > 4) {
-                $ultimo_nivel = 9;
-            }
-            // Se nao existe o nivel entao eh 1
-        } else {
-            $ultimo_nivel = 1;
-        }
-
-        // Se o nivel eh do periodo atual entao nao muda
-        if ($nivel_periodo_atual)
-            $ultimo_nivel = $nivel_periodo_atual;
-        // pr($ultimo_nivel);
 
         $this->set('estagiarios', $estagiarios);
-        $this->set('proximo_nivel', $ultimo_nivel);
+        $this->set('proximo_nivel', $proximo_nivel);
 
         /* Para fazer o select dos alunos */
         $this->loadModel('Aluno');
@@ -644,8 +688,6 @@ class EstagiariosController extends AppController {
         /* Select dos supervisores */
         $this->loadModel('Supervisor');
         $supervisores = $this->Supervisor->find('list', array('order' => 'Supervisor.nome'));
-        // $supervisores[0] = '- Seleciona -';
-        // asort($supervisores);
         $this->set('supervisores', $supervisores);
 
         /* Select dos professores */
@@ -661,8 +703,6 @@ class EstagiariosController extends AppController {
         $this->loadModel('Area');
         $areas = $this->Area->find('list', array(
             'order' => 'area'));
-        // $areas[0] = '- Seleciona -';
-        // asort($areas);
         $this->set('areas', $areas);
 
         /* Select complemento periodo especical */
@@ -671,9 +711,8 @@ class EstagiariosController extends AppController {
 
         $this->set('periodos', $semestres);
         $this->set('periodo_atual', $periodo_atual);
-        if (isset($estagiario_sem_estagio)) {
-            $this->set('estagiario_sem_estagio', $estagiario_sem_estagio);
-        }
+        // pr($this->data);
+        // die();
         if ($this->data) {
             /*
               $aluno = $this->Aluno->findById($this->data['Estagiario']['id_aluno']);
@@ -681,8 +720,14 @@ class EstagiariosController extends AppController {
              */
             if ($this->Estagiario->save($this->data, array('validates' => TRUE))) {
 
-                $this->Session->setFlash('Registro de estágio inserido!');
+                $this->Flash->success(__('Registro de estágio inserido!'));
                 $this->redirect('/Alunos/view/' . $this->data['Estagiario']['id_aluno']);
+            } else {
+                $this->Flash->error(__("Erros de validação! Preencha corretamente todos os campos."));
+                $errors = $this->Estagiario->validationErrors;
+                pr($errors);
+                $this->redirect('/Alunos/view/ ' . $this->data['Estagiario']['id_aluno']);
+                die('error');
             }
         }
     }
@@ -714,10 +759,9 @@ class EstagiariosController extends AppController {
 
             if (empty($periodo_estagio)) {
                 // echo "Aluno  novo sem estágio";
-                $this->Session->setFlash("Aluno novo sem cadastro");
+                $this->tFlash->error(__("Aluno novo sem cadastro"));
                 $this->redirect('/alunos/add/' . $registro);
             } else {
-
                 $this->redirect('/alunos/view/' . $periodo_estagio['Estagiario']['id_aluno']);
             }
         }

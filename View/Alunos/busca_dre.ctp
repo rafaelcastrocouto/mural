@@ -17,13 +17,11 @@
     </p>
 <?php endif; ?>
 
-<h1>Busca por DRE</h1>
-
-<?php echo $this->Form->create('Aluno', ['class' => 'form-inline']); ?>
+<?php echo $this->Form->create('Aluno'); ?>
 <?php if ($this->Session->read('id_categoria') == '2'): ?>
-    <?= $this->Form->input('registro', ['type' => 'text', 'div' => 'form-group row', 'label' => ['text' => 'DRE', 'class' => 'label-control col-1'], 'value' => $this->Session->read('numero'), 'readonly', 'placeholder' => 'Digite o DRE', 'between' => '<div class ="form-inline col-8">', 'after' => '</div>', 'class' => 'form-control required']) ?>
+    <?= $this->Form->input('registro', ['type' => 'text', 'label' => ['text' => 'DRE'], 'value' => $this->Session->read('numero'), 'readonly', 'placeholder' => 'Digite o DRE', 'class' => 'form-control']) ?>
 <?php else: ?>
-    <?= $this->Form->input('registro', ['type' => 'text', 'div' => 'form-group row', 'label' => ['text' => 'DRE', 'class' => 'label-control col-1'], 'placeholder' => 'Digite o DRE', 'between' => '<div class ="form-inline col-8">', 'after' => '</div>', 'class' => 'form-control required']) ?>
+    <?= $this->Form->input('registro', ['type' => 'text', 'label' => ['text' => 'DRE'], 'placeholder' => 'Digite o DRE', 'class' => 'form-control']) ?>
 <?php endif; ?>
 <div class='row justify-content-between'>
     <div class='col-auto'>

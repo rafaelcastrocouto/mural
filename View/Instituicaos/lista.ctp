@@ -104,7 +104,7 @@
                         <?php echo $this->html->link('Supervisores', 'lista/ordem:supervisores/mudadirecao:' . $direcao . '/ṕagina:' . $pagina . '/linhas:' . $linhas); ?>
                     </th>
                     <th>
-                        <?php echo $this->html->link('Área', 'lista/ordem:area/mudadirecao:' . $direcao . '/ṕagina:' . $pagina . '/linhas:' . $linhas); ?>
+                        <?php echo $this->html->link('Áreas', 'lista/ordem:area/mudadirecao:' . $direcao . '/ṕagina:' . $pagina . '/linhas:' . $linhas); ?>
                     </th>
                     <th>
                         <?php echo $this->html->link('Natureza', 'lista/ordem:natureza/mudadirecao:' . $direcao . '/ṕagina:' . $pagina . '/linhas:' . $linhas); ?>

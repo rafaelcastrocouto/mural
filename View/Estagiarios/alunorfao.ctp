@@ -1,6 +1,9 @@
+<?php
+// pr($orfaos);
+?>
 <div class='table-responsive'>
     <?= $this->element('submenu_estagiarios') ?>
-    <p>Alunos sem estágios (para excluir)</p>
+    <p>Alunos sem estágios</p>
 
     <?php if (!empty($orfaos)): ?>
 
@@ -12,31 +15,23 @@
                     <tr>
 
                         <td>
-                            <?php echo $c_orfaos['Aluno']['id']; ?>
+                            <?php echo $c_orfaos['id']; ?>
                         </td>
 
                         <td>
-                            <?php echo $c_orfaos['Aluno']['registro']; ?>
+                            <?php echo $this->Html->link($c_orfaos['registro'], '/alunonovos/view?registro=' . $c_orfaos['registro']); ?>
                         </td>
 
                         <td>
-                            <?php echo $this->Html->link($c_orfaos['Aluno']['nome'], '/alunos/view/' . $c_orfaos['Aluno']['id']); ?>
+                            <?php echo $this->Html->link($c_orfaos['nome'], '/alunos/view/' . $c_orfaos['id']); ?>
                         </td>
 
                         <td>
-                            <?php echo $c_orfaos['Aluno']['celular']; ?>
+                            <?php echo $c_orfaos['celular']; ?>
                         </td>
 
                         <td>
-                            <?php echo $c_orfaos['Aluno']['email']; ?>
-                        </td>
-
-                        <td>
-                            <?php echo $c_orfaos['Estagiario']['periodo']; ?>
-                        </td>
-
-                        <td>
-                            <?php echo $this->Html->link('X', '/alunos/delete/' . $c_orfaos['Aluno']['id'], NULL, 'Tem certeza?'); ?>
+                            <?php echo $c_orfaos['email']; ?>
                         </td>
 
                     </tr>
@@ -47,9 +42,9 @@
         </div>
 
     <?php else: ?>
-
-        <p>Não há alunos sem estágio: <?php echo $this->Html->link('retornar', '/estagiarios/index'); ?></p>
-
+    <div class="alert alert-success" role="alert">
+        <p>Não há erros no cadastramento de estudantes em estágio!</p>
+    </div>
     <?php endif; ?>
 
 </div>

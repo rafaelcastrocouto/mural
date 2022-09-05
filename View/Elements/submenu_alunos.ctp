@@ -29,7 +29,7 @@
                 <li class="nav-item"><?= $this->Html->link(__('Estudantes'), ['controller' => 'alunos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Buscar'), ['controller' => 'alunos', 'action' => 'busca'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Estagiarios'), ['controller' => 'estagiarios', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
-                <?php endif; ?>
+            <?php endif; ?>
         </ul>
     </div>
 </nav>

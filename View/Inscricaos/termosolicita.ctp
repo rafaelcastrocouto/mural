@@ -3,7 +3,7 @@
 <script>
     $(document).ready(function () {
 
-// $("#InscricaoIdAluno").mask("999999999");
+        $("#InscricaoIdAluno").mask("999999999");
 
     });
 
@@ -16,9 +16,9 @@
 <?php
 echo $this->Form->create('Inscricao', ['class' => 'form-inline']);
 if ($this->Session->read('id_categoria') != '2'):
-    echo $this->Form->input('registro', ['type' => 'text', 'div' => 'form-group row', 'label' => ['text' => 'DRE', 'class' => 'label-control col-1'], 'placeholder' => 'Digite o DRE', 'between' => '<div class ="form-inline col-8">', 'after' => '</div>', 'class' => 'form-control required']);
+    echo $this->Form->input('registro', ['type' => 'text', 'div' => 'form-group row', 'label' => ['text' => 'DRE', 'class' => 'label-control col-1'], 'placeholder' => 'Digite o DRE', 'required', 'between' => '<div class ="form-inline col-8">', 'after' => '</div>', 'class' => 'form-control']);
 else:
-    echo $this->Form->input('registro', ['type' => 'text', 'div' => 'form-group row', 'label' => ['text' => 'DRE', 'class' => 'label-control col-1'], 'value' => $this->Session->read('numero'), 'readonly' ,'between' => '<div class ="form-inline col-8">', 'after' => '</div>', 'class' => 'form-control required']);
+    echo $this->Form->input('registro', ['type' => 'text', 'div' => 'form-group row', 'label' => ['text' => 'DRE', 'class' => 'label-control col-1'], 'value' => $this->Session->read('numero'), 'readonly', 'required', 'between' => '<div class ="form-inline col-8">', 'after' => '</div>', 'class' => 'form-control']);
 endif;
 ?>
 <div class='row justify-content-between'>

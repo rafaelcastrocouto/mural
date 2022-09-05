@@ -50,6 +50,7 @@ class ProfessorsController extends AppController {
             // pr($departamento);
             $this->Paginator->settings = [
                 'Professor' => [
+                    'contain' => false,
                     'order' => ['nome'],
                     'conditions' => ['Professor.departamento' => $departamento],
                     'limit' => 10
@@ -58,6 +59,7 @@ class ProfessorsController extends AppController {
         } else {
             $this->Paginator->settings = [
                 'Professor' => [
+                    'contain' => false,
                     'order' => ['nome'],
                     'limit' => 10
                 ]
@@ -93,7 +95,7 @@ class ProfessorsController extends AppController {
                 ]);
                 // pr($verifica);
                 // die();
-                if ($id != $verifica['Professor']['id']) {
+                if (!$verifica) {
                     $this->Flash->error(__("Acesso não autorizado"));
                     $this->redirect("/Professors/index");
                     die("Não autorizado");
@@ -124,41 +126,32 @@ class ProfessorsController extends AppController {
 
     public function edit($id = NULL) {
 
-        $siape = $this->request->query("siape");
+        // pr($id);
         // pr($this->Session->read('numero'));
-        // die($id);
         // Somente o próprio pode ver
         $id_categoria = $this->Session->read("id_categoria");
         if ($id_categoria != 1):
             if ($this->Session->read('numero')) {
                 // pr($this->Session->read('numero'));
-                $this->Professor->recursive = -1;
                 $verifica = $this->Professor->findBySiape($this->Session->read('numero'));
                 // pr($verifica);
-                // pr($this->request->query('siape'));
                 // die();
-                if ($id != $verifica['Professor']['id']) {
+                if ($this->request->query('siape') != $verifica['Professor']['siape']) {
                     $this->Flash->error(__("Acesso não autorizado"));
                     $this->redirect("/Professors/view/" . $id);
                     die("Não autorizado");
                 }
             }
         endif;
+// die();
 
         if (empty($this->data)) {
-
-            if (isset($id)):
-                $this->Professor->recursive = -1;
-                $professor = $this->Professor->find('first', [
-                    'conditions' => ['Professor.id' => $id]
-                ]);
-            elseif ($siape):
-                $this->Professor->recursive = -1;
-                $professor = $this->Professor->find('first', [
-                    'conditions' => ['Professor.siape' => $siape]
-                ]);
-            endif;
-
+            $this->Professor->recursive = -1;
+            $professor = $this->Professor->find('first', [
+                'conditions' => ['Professor.id' => $id]
+            ]);
+            // pr($professor);
+            // die();
             $this->Professor->id = $professor['Professor']['id'];
             $this->data = $this->Professor->read();
         } else {

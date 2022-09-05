@@ -70,12 +70,6 @@ class Estagiario extends AppModel {
             'on' => 'create',
             'message' => 'Selecionar nível de estágio. Para estágio não obrigatório selecionar 9'
         ),
-        'ajuste2020' => array(
-            'rule' => array('inList', array('0', '1')),
-            'required' => TRUE,
-            'allowEmpty' => TRUE,
-            'message' => 'Seleciona se está incluido no ajuste curricular 2020 com 3 níveis de estágio'
-        ),
         'turno' => array(
             'rule' => array('inList', array('D', 'N', 'I')),
             'required' => TRUE,
@@ -99,7 +93,7 @@ class Estagiario extends AppModel {
                 'message' => 'Digite um número'
             ],
             'nota2' => [
-                'rule' => ['range', '1', '10'],
+                'rule' => ['between', 0, 10],
                 'requiered' => TRUE,
                 'allowEmpty' => TRUE,
                 'on' => 'update',

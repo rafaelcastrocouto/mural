@@ -77,51 +77,55 @@
     <table 'class="table table-hover table-striped table-responsive">
         <tr>
             <td>
-                <?php echo $this->Form->create('Estagiario', array('url' => 'index', 'inputDefaults' => array('label' => false, 'div' => false))); ?>
+                <?php
+                echo $this->Form->create('Estagiario', array('url' => 'index',
+                    'inputDefaults' => array('label' => false,
+                        'div' => false)));
+                ?>
                 <?php echo $this->Form->input('periodo', array('type' => 'select', 'options' => $periodos_total, 'selected' => $periodo, 'empty' => array('0' => 'Período'), 'style' => 'width: 5em', 'class' => 'form-control form-control-sm')); ?>
-                <?php echo $this->Form->end(); ?>
+                <?php echo $this->Form->end();  ?>
             </td>
 
             <td>
                 <?php echo $this->Form->create('Estagiario', array('url' => 'index', 'inputDefaults' => array('label' => false, 'div' => false))); ?>
-                <?php echo $this->Form->input('complemento_periodo_especial', array('type' => 'select', 'options' => $complemento_periodo_especial_total, 'selected' => $complemento_periodo_especial, 'empty' => array('0' => 'Complemento'), 'style' => 'width: 5em', 'class' => 'form-control form-control-sm')); ?>
-                <?php // echo $this->Form->end(); ?>
+                <?php echo $this->Form->input('complemento_periodo_especial', array('type' => 'select', 'options' => $complemento_periodo_especial_total, 'selected' => $complemento_periodo_especial, 'empty' => array('0' => 'Modalidade'), 'style' => 'width: 5em', 'class' => 'form-control form-control-sm')); ?>
+                <?php echo $this->Form->end();  ?>
             </td>
 
             <td>
                 <?php echo $this->Form->create('Estagiario', array('url' => 'index', 'inputDefaults' => array('label' => false, 'div' => false))); ?>
                 <?php echo $this->Form->input('nivel', array('type' => 'select', 'options' => array('1' => 'OTP 1', '2' => 'OTP 2', '3' => 'OTP 3', '4' => 'OTP 4', '9' => 'Não obrigatório'), 'selected' => $nivel, 'default' => 0, 'empty' => array('0' => 'OTP'), 'style' => 'width: 5em', 'class' => 'form-control form-control-sm')); ?>
-                <?php // echo $this->Form->end(); ?>
+                <?php echo $this->Form->end();  ?>
             </td>
 
             <td>
                 <?php echo $this->Form->create('Estagiario', array('url' => 'index', 'inputDefaults' => array('label' => false, 'div' => false))); ?>
                 <?php echo $this->Form->input('turno', array('type' => 'select', 'options' => array('D' => 'Diurno', 'N' => 'Noturno'), 'selected' => $turno, 'empty' => array('0' => 'Turno'), 'style' => '5em', 'class' => 'form-control form-control-sm')); ?>
-                <?php // echo $this->Form->end(); ?>
+                <?php echo $this->Form->end();  ?>
             </td>
 
             <td>
                 <?php echo $this->Form->create('Estagiario', array('url' => 'index', 'inputDefaults' => array('label' => false, 'div' => false))); ?>
                 <?php echo $this->Form->input('id_area', array('type' => 'select', 'options' => $areas, 'selected' => $id_area, 'empty' => array('0' => 'Áreas'), 'style' => 'width: 15em', 'class' => 'form-control form-control-sm')); ?>
-                <?php // echo $this->Form->end(); ?>
+                <?php echo $this->Form->end();  ?>
             </td>
 
             <td>
                 <?php echo $this->Form->create('Estagiario', array('url' => 'index', 'inputDefaults' => array('label' => false, 'div' => false))); ?>
                 <?php echo $this->Form->input('id_professor', array('type' => 'select', 'options' => $professores, 'selected' => $id_professor, 'default' => 0, 'empty' => array('0' => 'Professoras(es)'), 'style' => 'width: 15em', 'class' => 'form-control form-control-sm')); ?>
-                <?php // echo $this->Form->end(); ?>
+                <?php echo $this->Form->end();  ?>
             </td>
 
             <td>
                 <?php echo $this->Form->create('Estagiario', array('url' => 'index', 'inputDefaults' => array('label' => false, 'div' => false))); ?>
                 <?php echo $this->Form->input('id_supervisor', array('type' => 'select', 'options' => $supervisores, 'selected' => $id_supervisor, 'default' => 0, 'empty' => array('0' => 'Supervisoras(es)'), 'style' => 'width: 15em', 'class' => 'form-control form-control-sm')); ?>
-                <?php // echo $this->Form->end(); ?>
+                <?php echo $this->Form->end();  ?>
             </td>
 
             <td>
                 <?php echo $this->Form->create('Estagiario', array('url' => 'index', 'inputDefaults' => array('label' => false, 'div' => false))); ?>
                 <?php echo $this->Form->input('id_instituicao', array('type' => 'select', 'options' => $instituicoes, 'selected' => $id_instituicao, 'default' => 0, 'empty' => array('0' => 'Instituições'), 'style' => 'width: 15em', 'class' => 'form-control form-control-sm')); ?>
-                <?php // echo $this->Form->end(); ?>
+                <?php echo $this->Form->end();  ?>
             </td>
         </tr>
     </table>
@@ -155,7 +159,7 @@
                 <?php endif; ?>
                 <th><?php echo $this->Paginator->sort('Aluno.nome', 'Nome'); ?></th>
                 <th><?php echo $this->Paginator->sort('Estagiario.periodo', 'Periodo'); ?></th>
-                <th><?php echo $this->Paginator->sort('Estagiario.complemento_id', 'Especial'); ?></th>
+                <th><?php echo $this->Paginator->sort('Estagiario.complemento_id', 'Estágio'); ?></th>
                 <th><?php echo $this->Paginator->sort('Estagiario.nivel', 'Nível'); ?></th>
                 <th><?php echo $this->Paginator->sort('Estagiario.turno', 'Turno'); ?></th>
                 <th><?php echo $this->Paginator->sort('Estagiario.tc', 'TC'); ?></th>
@@ -172,14 +176,18 @@
         <?php foreach ($estagiarios as $aluno): ?>
             <tr>
                 <?php if ($this->Session->read('id_categoria') == '1'): ?>
-                    <td style='text-align:center'><?php echo $this->Html->link($aluno['Estagiario']['registro'], "/alunos/view/" . $aluno['Aluno']['id']); ?></td>
+                    <td style='text-align:center'><?php echo $this->Html->link($aluno['Estagiario']['registro'], "/estagiarios/view/" . $aluno['Estagiario']['id']); ?></td>
                 <?php elseif ($this->Session->read('id_categoria') == '4'): ?>
                     <td style='text-align:center'><?php echo $this->Html->link($aluno['Estagiario']['registro'], "/estagiarios/view/" . $aluno['Estagiario']['id']); ?></td>
-                <?php elseif ($this->Session->read('id_categoria') == '3'): ?>
-                    <td style='text-align:center'><?php echo $this->Html->link($aluno['Estagiario']['registro'], "/estagiarios/view/" . $aluno['Estagiario']['id']); ?></td>
+                <?php elseif ($this->Session->read('id_categoria') == '3'): ?> 
+                    <td style='text-align:center'><?php echo $this->Html->link($aluno['Estagiario']['registro'], "/estagiarios/view/" . $aluno['Estagiario']['id']); ?></td>                    
                 <?php endif; ?>
-                <td style='text-align:left'><?php echo $aluno['Aluno']['nome']; ?></td>
-                <td style='text-align:center'><?php echo $aluno['Estagiario']['periodo']; ?></td>
+                <?php if ($this->Session->read('id_categoria') == '1'): ?>
+                    <td style='text-align:left'><?php echo $this->Html->link($aluno['Alunonovo']['nome'], ['controller' => 'Alunonovos', 'action' => 'view/', $aluno['Alunonovo']['id']]); ?></td>
+                <?php else: ?> 
+                    <td style='text-align:left'><?php echo $aluno['Alunonovo']['nome']; ?></td>
+                <?php endif; ?>
+                <td style='text-align:left'><?php echo $aluno['Estagiario']['periodo']; ?></td>
                 <td style='text-align:center'><?php echo $aluno['Complemento']['periodo_especial']; ?></td>
                 <?php if ($aluno['Estagiario']['nivel'] == 9): ?>
                     <td style='text-align:center'><?php echo 'Não obrigatório'; ?></td>

@@ -5,7 +5,7 @@
     <legend><?php echo __('Editar'); ?></legend>
     <?php
     echo $this->Form->input('id', ['class' => 'form-control']);
-    echo $this->Form->input('periodo_especial', ['class' => 'form-control']);
+    echo $this->Form->input('periodo_especial', ['label' => ['text' => 'Modalidade', 'class' => 'col-form-label col-1'] ,'class' => 'form-control']);
     ?>
 </fieldset>
 <div class='row justify-content-between'>

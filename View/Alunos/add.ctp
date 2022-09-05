@@ -9,6 +9,7 @@
     $(document).ready(function () {
 
         $("#AlunoRegistro").mask("999999999");
+        $("#AlunoIngresso").mask("9999-9");
         $("#AlunoCpf").mask("999999999-99");
         $("#AlunoTelefone").mask("9999.9999");
         $("#AlunoCelular").mask("99999.9999");
@@ -94,10 +95,14 @@
 
 if (!isset($alunonovo['Alunonovo']['nome']))
     $alunonovo['Alunonovo']['nome'] = NULL;
+if (!isset($alunonovo['Alunonovo']['nomesocial']))
+    $alunonovo['Alunonovo']['nomesocial'] = NULL;
 if (!isset($alunonovo['Alunonovo']['registro']))
     $alunonovo['Alunonovo']['registro'] = NULL;
-if (!isset($registro))
-    $registro = NULL;
+if (!isset($alunonovo['Alunonovo']['ingresso']))
+    $alunonovo['Alunonovo']['ingresso'] = NULL;
+if (!isset($alunonovo['Alunonovo']['turno']))
+    $alunonovo['Alunonovo']['turno'] = NULL;
 if (!isset($alunonovo['Alunonovo']['nascimento']))
     $alunonovo['Alunonovo']['nascimento'] = NULL;
 if (!isset($alunonovo['Alunonovo']['cpf']))
@@ -133,9 +138,9 @@ echo $this->Form->create('Aluno', [
     'class' => 'form-horizontal',
     'role' => 'form',
     'inputDefaults' => [
-        'format' => ['before', 'label', 'between', 'input', 'error', 'after'],
+        'format' => ['before', 'label', 'between', 'input', 'after', 'error'],
         'div' => ['class' => 'form-group row'],
-        'label' => ['class' => 'col-4'],
+        'label' => ['class' => 'col-4 control-label'],
         'between' => "<div class = 'col-8'>",
         'class' => ['form-control'],
         'after' => "</div>",
@@ -153,7 +158,19 @@ echo $this->Form->create('Aluno', [
                 <?php echo $this->Form->input('nome', array('value' => $alunonovo['Alunonovo']['nome'])); ?>
             </td>
         </tr>
-
+        <tr>
+            <td colspan="2">
+                <?php echo $this->Form->input('ingresso', array('value' => $alunonovo['Alunonovo']['ingresso'])); ?>
+            </td>
+            <td>
+                <?php echo $this->Form->input('turno', ['options' => ['diurno' => 'Diurno', 'noturno' => 'Noturno'], 'empty' => 'Seleciona']); ?>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <?php echo $this->Form->input('nomesocial', ['label' => ['text' => 'Nome social', 'class' => 'col-4 control-label'], 'value' => $alunonovo['Alunonovo']['nomesocial']]); ?>
+            </td>
+        </tr>
         <tr>
             <td colspan="2">
                 <?php echo $this->Form->input('registro', array('type' => 'text', 'value' => $registro, 'size' => '9', 'maxLenght' => '9')); ?>
@@ -162,28 +179,41 @@ echo $this->Form->create('Aluno', [
 
         <tr>
             <td colspan="2">
-                <?php echo $this->Form->input('nascimento', array('label' => ['text' => 'Data de nascimento', 'class' => 'col-4'], 'value' => $alunonovo['Alunonovo']['nascimento'], 'dateFormat' => 'DMY', 'minYear' => '1910', 'empty' => TRUE, 'between' => "<div class = 'form-inline col-8'>")); ?>
+                <?php echo $this->Form->input('nascimento', array('label' => ['text' => 'Data de nascimento', 'class' => 'col-4 control-label'], 'value' => $alunonovo['Alunonovo']['nascimento'], 'dateFormat' => 'DMY', 'minYear' => '1910', 'empty' => TRUE, 'between' => "<div class = 'form-inline col-8'>")); ?>
             </td>
         </tr>
 
         <tr>
             <td colspan="2">
-<?php // echo $this->Form->input('cpf', array('value'=>$alunonovo['Alunonovo']['cpf']));  ?>
+                <?php echo $this->Form->input('cpf', array('label' => ['text' => 'CPF', 'class' => 'col-4 control-label'], 'value' => $alunonovo['Alunonovo']['cpf'])); ?>
             </td>
         </tr>
 
         <tr>
             <td>
-<?php echo $this->Form->input('identidade', array('label' => ['text' => 'Cartera de identidade', 'class' => 'col-4'], 'value' => $alunonovo['Alunonovo']['identidade'])); ?>
+                <?php echo $this->Form->input('identidade', array('label' => ['text' => 'Cartera de identidade', 'class' => 'col-4'], 'value' => $alunonovo['Alunonovo']['identidade'])); ?>
             </td>
             <td>
-                <?php echo $this->Form->input('orgao', array('label' => 'Orgão', 'legend' => false, 'value' => $alunonovo['Alunonovo']['orgao'])); ?>
+                <div class='form-group row' form-type='text'>
+                    <label for='AlunoOrgao' class='col-2 control-label'>Orgão expedidor</label>
+                    <div class='col-8'>
+                        <input list='orgaos' name= 'data[Aluno][orgao]' id='AlunoOrgao' class='form-control' maxlength='30'>
+                        <small>Selecione ou digite o orgão</small>
+                        <datalist id='orgaos'>
+                            <?php
+                            foreach ($orgaos as $c_orgao) {
+                                echo "<option value='" . $c_orgao . "'>";
+                            };
+                            ?>
+                        </datalist>
+                    </div>
+                </div>
             </td>
         </tr>
 
         <tr>
             <td colspan="2">
-<?php echo $this->Form->input('email', array('value' => $alunonovo['Alunonovo']['email'])); ?>
+                <?php echo $this->Form->input('email', array('value' => $alunonovo['Alunonovo']['email'])); ?>
             </td>
         </tr>
 
@@ -192,7 +222,7 @@ echo $this->Form->create('Aluno', [
                 <?php echo $this->Form->input('codigo_telefone', array('default' => 21, 'value' => $alunonovo['Alunonovo']['codigo_telefone'])); ?>
             </td>
             <td>
-<?php echo $this->Form->input('telefone', array('value' => $alunonovo['Alunonovo']['telefone'])); ?>
+                <?php echo $this->Form->input('telefone', array('value' => $alunonovo['Alunonovo']['telefone'])); ?>
             </td>
         </tr>
 
@@ -201,7 +231,7 @@ echo $this->Form->create('Aluno', [
                 <?php echo $this->Form->input('codigo_celular', array('default' => 21, 'value' => $alunonovo['Alunonovo']['codigo_celular'])); ?>
             </td>
             <td>
-<?php echo $this->Form->input('celular', array('value' => $alunonovo['Alunonovo']['celular'])); ?>
+                <?php echo $this->Form->input('celular', array('value' => $alunonovo['Alunonovo']['celular'])); ?>
             </td>
         </tr>
 
@@ -210,16 +240,16 @@ echo $this->Form->create('Aluno', [
                 <?php echo $this->Form->input('cep', array('value' => $alunonovo['Alunonovo']['cep'], 'required')); ?>
             </td>
             <td>
-<?php echo $this->Form->input('endereco', array('label' => 'Endereço', 'value' => $alunonovo['Alunonovo']['endereco'])); ?>
+                <?php echo $this->Form->input('endereco', array('label' => 'Endereço', 'value' => $alunonovo['Alunonovo']['endereco'])); ?>
             </td>
         </tr>
 
         <tr>
             <td>
-        <?php echo $this->Form->input('bairro', array('value' => $alunonovo['Alunonovo']['bairro'])); ?>
+                <?php echo $this->Form->input('bairro', array('value' => $alunonovo['Alunonovo']['bairro'])); ?>
             </td>
             <td>
-        <?php echo $this->Form->input('municipio', array('value' => $alunonovo['Alunonovo']['municipio'], 'default' => 'Rio de Janeiro, RJ')); ?>
+                <?php echo $this->Form->input('municipio', array('value' => $alunonovo['Alunonovo']['municipio'], 'default' => 'Rio de Janeiro, RJ')); ?>
             </td>
         </tr>
 
@@ -229,11 +259,11 @@ echo $this->Form->create('Aluno', [
 
 <div class='row justify-content-center'>
     <div class='col-auto'>
-<?php
-echo $this->Form->submit('Confirma', ['type' => 'Submit', 'label' => ['text' => 'Confirma', 'class' => 'col-4'], 'class' => 'btn btn-primary']);
-?>
-<?php
-echo $this->Form->end();
-?>
+        <?php
+        echo $this->Form->submit('Confirma', ['type' => 'Submit', 'label' => ['text' => 'Confirma', 'class' => 'col-4'], 'class' => 'btn btn-primary']);
+        ?>
+        <?php
+        echo $this->Form->end();
+        ?>
     </div>
 </div>

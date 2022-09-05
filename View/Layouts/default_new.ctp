@@ -41,6 +41,24 @@
         echo $this->Js->writeBuffer();
         echo $scripts_for_layout;
         ?>
+                <style>
+            a {
+                color: #000;
+                font-weight: 500;
+                text-decoration: underline;
+            }
+            a:hover {
+                color: #003d4c;
+                font-weight: 500; /* text-decoration: underline blue */
+            }
+            h1 {
+                font-size: 14px;
+            }
+            h2 {
+                font-size: 14px;
+            }
+        </style>
+
     </head>
     <body>
         <div id="container">

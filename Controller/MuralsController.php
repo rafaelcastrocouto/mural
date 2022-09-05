@@ -14,19 +14,19 @@ class MuralsController extends AppController {
         // Admin
         if ($this->Session->read('id_categoria') == '1') {
             $this->Auth->allow();
-            // $this->Session->setFlash('Administrador');
+            // $this->Flash->success(__('Administrador'));
             // Estudantes podem somente fazer inscricao
         } elseif ($this->Session->read('id_categoria') == '2') {
-            $this->Auth->allow('edit', 'index', 'view');
-            // $this->Session->setFlash('Estudante');
+            $this->Auth->allow('index', 'view');
+            // $this->Flash->sucess(__('Estudante'));
             // Professores podem atualizar murais
         } elseif ($this->Session->read('id_categoria') == '3') {
             $this->Auth->allow('edit', 'index', 'view');
-            // $this->Session->setFlash('Professor');
+            // $this->Flash->sucess(__('Professor'));
             // No futuro os supervisores poderao lançar murals
         } elseif ($this->Session->read('id_categoria') == '4') {
             $this->Auth->allow('add', 'edit', 'index', 'view');
-            // $this->Session->setFlash('Supervisor');
+            // $this->Flash->sucess(__('Supervisor'));
             // Todos
         } else {
             $this->Auth->allow('index', 'view');
@@ -43,7 +43,7 @@ class MuralsController extends AppController {
             $periodo = $this->request->query('periodo');
         }
 
-        // Se o periodo não veio como parametro
+        /* Se o periodo não veio como parametro */
         if (!$periodo) {
             // Capturo o periodo atual de estagio para o mural
             $periodo = $this->Session->read('mural_periodo');
@@ -53,111 +53,128 @@ class MuralsController extends AppController {
                 $configuracao = $this->Configuracao->findById('1');
                 $periodo = $configuracao['Configuracao']['mural_periodo_atual'];
             }
-            // pr($periodo);
-            // die();
         }
+        // pr($periodo);
+        // die();
 
         $this->Session->write('mural_periodo', $periodo);
 
-        // Capturo todos os periodos para fazer o select
+        /* Capturo todos os periodos para fazer o select */
+        $this->Mural->contain();
         $todos_periodos = $this->Mural->find('list', array(
             'fields' => array('Mural.periodo', 'Mural.periodo'),
             'group' => array('Mural.periodo'),
             'order' => array('Mural.periodo DESC')));
         // pr($todos_periodos);
         // die();
-        // Capturo todas as ofertas do periodo
-        $mural = $this->Mural->find('all', array(
-            'conditions' => array('Mural.periodo' => $periodo),
-            'order' => array('Mural.dataInscricao DESC')));
+
+        /* Capturo todos os inscritos no mural */
+        $mural = $this->Mural->find('all', [
+            'contain' => ['Inscricao' => ['Alunonovo' => ['Estagiario']], 'Instituicao' => ['Estagiario.periodo = ' . "'" . $periodo . "'"]],
+            'conditions' => ['Mural.periodo' => $periodo],
+            'order' => ['Mural.dataInscricao' => 'DESC']
+                ]
+        );
         // pr($mural);
-        // pr($mural['Inscricao']);
-        // die();
-        // Capturo os inscritos e estagiários para cada oferta de vaga de estágio
-        $this->loadModel('Estagiario');
-        $i = 0;
-        $total_estagiarios = NULL;
+        // die('mural');
+
+        /* Capturo as vagas e discrimino os inscritos e estagiários para cada oferta de vaga de estágio */
+        $total_vagas = 0;
+        $total_inscricao = 0;
+        $atual = 0;
         foreach ($mural as $c_mural) {
-            $inscricoes = sizeof($c_mural['Inscricao']);
-            // pr($c_mural['Inscricao']);
-            // pr($inscricoes);
+
+            $total_vagas = $total_vagas + $c_mural['Mural']['vagas'];
+
+            if (isset($c_mural['Inscricao'])):
+                $c_inscricao = sizeof($c_mural['Inscricao']);
+                $total_inscricao = $total_inscricao + $c_inscricao;
+            endif;
             // die();
-            // Calculo a quantidade de estagiarios desse mural
-            $estagiarios = $this->Estagiario->find('all', [
-                'conditions' => ['Estagiario.id_instituicao' => $c_mural["Mural"]["id_estagio"],
-                    'Estagiario.periodo' => $c_mural["Mural"]["periodo"]
-                ]
-            ]);
-            // pr($estagiarios);
-            $mural[$i]['Mural']['estagiarios'] = sizeof($estagiarios);
-            $mural[$i]['Mural']['inscricoes'] = $inscricoes;
 
-            $total_estagiarios = $total_estagiarios + sizeof($estagiarios);
+            /* Captura os alunos inscritos estagiarios e não estagiarios */
+            if (isset($c_mural['Instituicao']['Estagiario'])):
+                $c_inscricao = sizeof($c_mural['Instituicao']['Estagiario']);
+                $atual = $atual + $c_inscricao;
+            endif;
+            // die();
 
-            $i++;
-        }
+            foreach ($c_mural['Inscricao'] as $inscricao) {
+                // pr($inscricao);
 
-        /* Conta o total de alunos inscritos (sem repeticoes) */
-        $total_alunos = $this->Mural->Inscricao->find('count', array(
-            'fields' => array('Inscricao.id_aluno', 'Aluno.registro', 'Alunonovo.registro'),
-            'group' => 'Inscricao.id_aluno',
-            'order' => array('Inscricao.id_aluno'),
-            'conditions' => array('Inscricao.periodo' => $periodo))
-        );
-        // pr($total_alunos);
-        // die();
-        /* Finaliza conta de alunos inscritos */
-
-        /* Discrimina os alunos estagiarios */
-        $alunos_estagiarios = $this->Mural->Inscricao->find('count', array(
-            'conditions' => array('Inscricao.periodo' => $periodo,
-                'NOT' => array('Aluno.registro' => '')),
-            'fields' => array('Aluno.registro)'),
-            'group' => array('Aluno.registro'),
-            'order' => array('Aluno.registro' => 'ASC')
-        ));
-        // pr($alunos_estagiarios);
-
-        /* Discrimina os alunos novos */
-        $alunos_novos = $this->Mural->Inscricao->find('count', array(
-            'conditions' => array('Inscricao.periodo' => $periodo,
-                'NOT' => array('Alunonovo.registro' => ''),
-                'Aluno.registro' => ''),
-            'fields' => array('Alunonovo.registro'),
-            'group' => array('Alunonovo.registro'),
-            'order' => array('Alunonovo.registro' => 'ASC')
-        ));
-        // pr($alunos_novos);
-
-        /* Aluno estagiario que não está na tabela Alunonovo */
-        $alunos_nao_novos = $this->Mural->Inscricao->find('count', array(
-            'conditions' => array('Inscricao.periodo' => $periodo,
-                'Alunonovo.registro' => '',
-                'NOT' => array('Aluno.registro' => '')),
-            'fields' => array('Aluno.registro'),
-            'group' => array('Aluno.registro'),
-            'order' => array('Aluno.registro' => 'ASC')
-        ));
-        // pr($alunos_nao_novos);
-        /* Fim da descriminacao entre estagiarios e novos */
-
-        /* Conta a quantidade total de vagas oferecidas */
-        $vagas = $this->Mural->find('all', [
-            'fields' => 'Sum(vagas) as total_vagas',
-            'conditions' => ['Mural.periodo' => $periodo]
-                ]
-        );
-        $total_vagas = $vagas[0][0]['total_vagas'];
-        /* Finaliza conta das vagas */
+                if (isset($inscricao['Alunonovo']) && !empty($inscricao['Alunonovo'])):
+                    if (isset($inscricao['Alunonovo']['Estagiario']) && sizeof($inscricao['Alunonovo']['Estagiario']) > 0):
+                        // pr($inscricao);
+                        // pr('Estagiario ' . $inscricao['Alunonovo']['registro']);
+                        $alunoestagiario[] = $inscricao['Alunonovo']['registro'];
+                    else:
+                        // pr($inscricao);
+                        // pr('Não estagiário ' . $inscricao['Alunonovo']['registro']);
+                        $alunonaoestagiario[] = $inscricao['Alunonovo']['registro'];
+                    endif;
+                else:
+                    // pr($inscricao);
+                    // pr('Não cadastrado ' . $inscricao['id_aluno']);
+                    // pr('Inscrição sem Alunonovo');
+                    $alunosnaocadastrados[] = $inscricao['id_aluno'];
+                endif;
+            }
+        };
+        $q_alunoestagiario = isset($alunoestagiario) ? count(array_unique($alunoestagiario)) : NULL;
+        $q_alunonaoestagiario = isset($alunonaoestagiario) ? count(array_unique($alunonaoestagiario)) : NULL;
+        $q_alunosnaocadastrados = isset($alunosnaocadastrados) ? count(array_unique($alunosnaocadastrados)) : NULL;
+        // pr($q_alunoestagiario);
+        // pr($q_alunonaoestagiario);
+        // pr($q_alunosnaocadastrados);
 
         $this->set('todos_periodos', $todos_periodos);
         $this->set('periodo', $periodo);
-        $this->set('total_alunos', $total_alunos);
         $this->set('total_vagas', $total_vagas);
-        $this->set('total_estagiarios', $total_estagiarios);
-        $this->set('alunos_novos', $alunos_novos);
-        $this->set('alunos_estagiarios', $alunos_estagiarios);
-        $this->set('mural', $mural);
+        $this->set('total_alunos', $q_alunonaoestagiario + $q_alunoestagiario);
+        $this->set('alunos_novos', $q_alunonaoestagiario);
+        $this->set('alunos_estagiarios', $q_alunoestagiario);
+        $this->set('alunosnaocadastrados', isset($alunosnaocadastrados) ? array_unique($alunosnaocadastrados) : NULL);
+        $this->set('atual', $atual);
+        $this->set('inscricao', $total_inscricao);
+        $this->Paginator->settings = [
+            'contain' => ['Inscricao' => 'Alunonovo', 'Instituicao' => ['Estagiario.periodo = ' . "'" . $periodo . "'"]],
+            'conditions' => ['Mural.periodo' => $periodo],
+            'limit' => 10,
+            'order' => ['Mural.dataInscricao' => 'DESC']
+        ];
+        $this->set('mural', $this->Paginator->paginate('Mural'));
+    }
+
+    public function inscricaosemaluno() {
+
+        /* Capturo todos os inscritos no mural */
+        $this->loadModel('Inscricao');
+        $mural = $this->Inscricao->find('all', [
+            'contain' => ['Alunonovo'],
+            'group' => ['Inscricao.id_aluno'],
+            'order' => ['Inscricao.periodo' => 'asc']
+                ]
+        );
+        // pr($mural);
+        // die('mural');
+
+        /* Capturo os inscritos sem cadastro em alunonovos */
+        $i = 0;
+        if (is_array($mural) || is_object($mural)) {
+            foreach ($mural as $c_mural) {
+                //pr($c_mural['Alunonovo']);
+                if (isset($c_mural['Alunonovo']) && empty($c_mural['Alunonovo']['registro'])):
+                    $this->Inscricao->contain(['Estagiario' => ['Aluno', 'Alunonovo']]);
+                    $estagiario = $this->Inscricao->find('all', [
+                        'conditions' => ['Inscricao.id_aluno' => $c_mural['Inscricao']['id_aluno']]
+                    ]);
+                    $estagiarios[$i] = $estagiario;
+                endif;
+
+                $i++;
+            }
+        }
+        $this->set('alunosnaocadastrados', $estagiarios);
     }
 
     public function add() {
@@ -165,24 +182,28 @@ class MuralsController extends AppController {
         // pr($this->data);
 
         if (!empty($this->data)) {
-            // Instituicao
+
+            /* Verifica que o mural esteja cadastrada como Instituicao */
             $this->loadModel('Instituicao');
             $instituicao = $this->Instituicao->find('first', array(
-                'conditions' => array('Instituicao.id =' . $this->data['Mural']['id_estagio']),
+                'conditions' => array('Instituicao.id' => $this->data['Mural']['id_estagio']),
                 'fields' => 'Instituicao.instituicao'
             ));
             // pr($instituicao['Instituicao']);
-            if ($instituicao)
-            // pr($instituicao['Instituicao']['instituicao']);
+            if ($instituicao):
+                // pr($instituicao['Instituicao']['instituicao']);
                 if (strlen($instituicao['Instituicao']['instituicao']) > 99):
                     $instituicao['Instituicao']['instituicao'] = substr($instituicao['Instituicao']['instituicao'], 0, 99);
+                endif;
+
+                $this->request->data['Mural']['instituicao'] = $instituicao['Instituicao']['instituicao'];
+
+                if ($this->Mural->save($this->data)):
+                    $this->Flash->success(__('Mural inserido'));
+                    $id_estagio = $this->Mural->getLastInsertId();
+                    $this->redirect('/Murals/view/' . $id_estagio);
+                endif;
             endif;
-            echo $this->request->data['Mural']['instituicao'] = $instituicao['Instituicao']['instituicao'];
-            if ($this->Mural->save($this->data)) {
-                $this->Session->setFlash('Mural inserido');
-                $id_estagio = $this->Mural->getLastInsertId();
-                $this->redirect('/Murals/view/' . $id_estagio);
-            }
         } else {
 
             // Capturo o periodo atual de estagio para o mural
@@ -268,13 +289,14 @@ class MuralsController extends AppController {
         } else {
 
             /* Coloquei para ignorar as validações. Eh ruin mas senao nao funcionava */
-            if ($this->Mural->save($this->data, FALSE)) {
-                $this->Session->setFlash("Dados atualizados");
-                //  die();
+            if ($this->Mural->save($this->data, ['validade' => TRUE])) {
+                $this->Flash->success(__("Dados atualizados"));
                 $this->redirect('/Murals/view/' . $id);
             } else {
+                $errors = $this->Mural->invalidFields();
+                $this->Session->setFlash(implode(', ', $errors));
                 // pr($this->validationErrors);
-                $this->Session->setFlash("Error: Dados não atualizados");
+                $this->Flash->error("Error: Dados não atualizados. Tente novamente.");
                 // $this->redirect('/Murals/view/' . $id);
             }
         }
@@ -283,7 +305,7 @@ class MuralsController extends AppController {
     public function delete($id = NULL) {
 
         // Busco se ha inscricoes nesse mural
-        $inscricoes = $this->Mural->find('first', array(
+        $inscricoes = $this->Mural->find(' first', array(
             'conditions' => array('Mural.id' => $id)
         ));
         // print_r($id);
@@ -291,12 +313,12 @@ class MuralsController extends AppController {
         // Se ha inscricoes entao primeiro tem que ser excluidas
         if ($inscricoes['Inscricao']) {
 
-            $this->Session->setFlash('Tem que excluir primeiro todos os alunos inscritos para este estágio');
+            $this->Flash->error(__('Tem que excluir primeiro todos os alunos inscritos para este estágio'));
             $this->redirect('/Inscricaos/index/' . $id);
         } else {
 
             $this->Mural->delete($id);
-            $this->Session->setFlash('Registro excluído');
+            $this->Flash->success(__('Registro excluído'));
             $this->redirect('/Murals/index/');
         }
     }

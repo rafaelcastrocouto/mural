@@ -45,10 +45,8 @@
 
 <?php else: ?>
 
-    <h1>Busca por nome</h1>
-
-    <?php echo $this->Form->create('Aluno', ['class' => 'form-inline']) ?>
-    <?php echo $this->Form->input('nome', array('label' => ['text' => 'Digite o nome do aluno', 'style' => 'display: inline'], 'class' => 'form-control')); ?>
+    <?php echo $this->Form->create('Aluno') ?>
+    <?php echo $this->Form->input('nome', array('label' => ['text' => 'Digite o nome do aluno'], 'class' => 'form-control')); ?>
     <div class='row justify-content-between'>
         <div class='col-auto'>
             <?php echo $this->Form->submit('Confirma', ['type' => 'Submit', 'label' => ['text' => 'Confirma'], 'class' => 'btn btn-primary']); ?>

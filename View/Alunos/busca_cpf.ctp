@@ -27,10 +27,8 @@
         });
     </script>
 
-    <h1>Busca por CPF</h1>
-
-    <?php echo $this->Form->create('Aluno', ['class' => 'form-inline']); ?>
-    <?php echo $this->Form->input('cpf', ['div' => 'form-group form-inline', 'label' => ['text' => 'Digite o CPF', 'class' => 'col-4 col-form-label'], 'between' => '<div class ="col-6 form-inline">', 'after' => '</div>', 'class' => 'form-control required']); ?>
+    <?php echo $this->Form->create('Aluno'); ?>
+    <?php echo $this->Form->input('cpf', ['label' => ['text' => 'Digite o CPF'], 'class' => 'form-control']); ?>
     <div class='row justify-content-left'>
         <div class='col-auto'>
             <?php echo $this->Form->submit('Confirma', ['type' => 'Submit', 'label' => ['text' => 'Confirma', 'class' => 'col-4 col-form-label'], 'class' => 'btn btn-primary']); ?>

@@ -19,10 +19,8 @@
 
 <?php else: ?>
 
-    <h1>Busca por Email</h1>
-
-    <?php echo $this->Form->create('Aluno', ['class' => 'form-inline']); ?>
-    <?php echo $this->Form->input('email', array('label' => ['text' => 'Digite o email', 'style' => 'display: inline;'], 'maxsize' => 70, 'size' => 70, 'class' => 'form-control')); ?>
+    <?php echo $this->Form->create('Aluno'); ?>
+    <?php echo $this->Form->input('email', ['label' => ['text' => 'Digite o email'], 'maxsize' => 70, 'size' => 70, 'class' => 'form-control']); ?>
 
     <div class='row justify-content-left'>
         <div class='col-auto'>

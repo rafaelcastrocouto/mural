@@ -22,6 +22,7 @@ class Aluno extends AppModel {
         // pr($this->data);
         $this->data['Aluno']['email'] = mb_convert_case($this->data['Aluno']['email'], MB_CASE_LOWER, 'utf-8');
         $this->data['Aluno']['nome'] = mb_convert_case($this->data['Aluno']['nome'], MB_CASE_TITLE, 'utf-8');
+        $this->data['Aluno']['nomesocial'] = mb_convert_case($this->data['Aluno']['nomesocial'], MB_CASE_TITLE, 'utf-8');
         $this->data['Aluno']['endereco'] = mb_convert_case($this->data['Aluno']['endereco'], MB_CASE_TITLE, 'utf-8');
         $this->data['Aluno']['bairro'] = mb_convert_case($this->data['Aluno']['bairro'], MB_CASE_TITLE, 'utf-8');
         // pr($this->data);
@@ -31,8 +32,15 @@ class Aluno extends AppModel {
     public $validate = array(
         'nome' => array(
             'rule' => 'notBlank',
+            'required' => TRUE,
             'allowEmpty' => FALSE,
             'message' => 'Digite o nome completo'
+        ),
+        'nomesocial' => array(
+            'rule' => 'notBlank',
+            'required' => FALSE,
+            'allowEmpty' => TRUE,
+            'message' => 'Digite o nome social se for o caso'
         ),
         'registro' => array(
             'registro1' => array(
@@ -40,11 +48,6 @@ class Aluno extends AppModel {
                 'required' => TRUE,
                 'allowEmpty' => FALSE,
                 'message' => 'Digite o número de DRE'
-            ),
-            'registro2' => array(
-                'rule' => array('between', 9, 9),
-                'on' => 'create',
-                'message' => 'Registro inválido'
             ),
             'registro3' => array(
                 'rule' => 'registro_verifica',
@@ -66,6 +69,14 @@ class Aluno extends AppModel {
                 'message' => 'Data nascimento inválida'
             )
         ),
+        /*
+        'ingresso' => [
+            'rule' => '/^\d{4}-\d{1}$/i',
+            'required' => FALSE,
+            'message' => 'Digite o ano e semestre de ingresso'
+        ],
+         * 
+         */
         'email' => array(
             'email1' => array(
                 'rule' => 'email',
@@ -85,6 +96,7 @@ class Aluno extends AppModel {
                 'rule' => '/^\d{9}-\d{2}$/i',
                 'required' => TRUE,
                 'on' => 'create',
+                'allowEmpty' => FALSE,
                 'message' => 'Digite o número de CPF'
             ),
             'cpf2' => array(

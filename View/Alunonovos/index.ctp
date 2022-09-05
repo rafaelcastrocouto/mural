@@ -22,7 +22,16 @@
                 <tr>
                     <th><?= $this->Paginator->sort('registro', 'DRE') ?></th>
                     <th><?= $this->Paginator->sort('nome', 'Nome') ?></th>
+                    <?php if ($this->Session->read('id_categoria') != '2'): ?>
+                        <th><?= $this->Paginator->sort('nascimento', 'Nascimento') ?></th>
+                        <th><?= $this->Paginator->sort('cpf', 'CPF') ?></th>
+                    <?php endif; ?>
                     <th><?= $this->Paginator->sort('email', 'E-mail') ?></th>
+
+                    <?php if ($this->Session->read('id_categoria') != '2'): ?>
+                        <th><?= $this->Paginator->sort('telefone', 'Telefone') ?></th>
+                        <th><?= $this->Paginator->sort('celular', 'Celular') ?></th>
+                    <?php endif; ?>
                 </tr>
             </thead>
             <tbody>
@@ -33,14 +42,22 @@
                         ?>
                         <tr>
                             <td style='text-align:center'>
-                                <?php if ($this->Session->read('id_categoria') == '1'): ?>
-                                    <?php echo $this->Html->link($c_aluno['Alunonovo']['registro'], '/Alunonovos/view/' . $c_aluno['Alunonovo']['id']) ?>
+                                <?php if ($this->Session->read('id_categoria') == '2'): ?>
+                                    <?php echo $c_aluno['Alunonovo']['registro']; ?>
                                 <?php else: ?>
-                                    <?php echo $c_aluno['Alunonovo']['registro'] ?>
-                                <?php endif; ?>                                
+                                    <?php echo $this->Html->link($c_aluno['Alunonovo']['registro'], '/Alunonovos/view/' . $c_aluno['Alunonovo']['id']); ?>                                
+                                <?php endif; ?>
                             </td>
                             <td style='text-align:left'><?php echo $c_aluno['Alunonovo']['nome']; ?></td>
+                            <?php if ($this->Session->read('id_categoria') != '2'): ?>
+                                <td style='text-align:left'><?php echo $c_aluno['Alunonovo']['nascimento']; ?></td>
+                                <td style='text-align:left'><?php echo $c_aluno['Alunonovo']['cpf']; ?></td>
+                            <?php endif; ?>
                             <td style='text-align:left'><?php echo $c_aluno['Alunonovo']['email']; ?></td>
+                            <?php if ($this->Session->read('id_categoria') != '2'): ?>
+                                <td style='text-align:left'><?php echo $c_aluno['Alunonovo']['telefone']; ?></td>
+                                <td style='text-align:left'><?php echo $c_aluno['Alunonovo']['celular']; ?></td>
+                            <?php endif; ?>
                         </tr>
                     <?php }; ?>
                 <?php endforeach; ?>

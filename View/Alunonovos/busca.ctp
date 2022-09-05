@@ -50,7 +50,6 @@
 <?php else: ?>
 
     <div class='table-responsive'>
-        <h1>Busca por nome</h1>
        
         <?php echo $this->Form->create('Alunonovo'); ?>
 

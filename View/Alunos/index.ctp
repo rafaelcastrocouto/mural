@@ -1,9 +1,9 @@
-<?php ?>
+<?php
+// pr($alunos);
+?>
 
 <div class='table-responsive'>
     <?= $this->element('submenu_alunos'); ?>
-
-    <?= $this->Html->link('Estagiários', '/Estagiarios/index') ?>
 
     <div class='row justify-content-center'>
         <h1>Estagiários</h1>
@@ -44,18 +44,27 @@
     </tr>
 
     <?php foreach ($alunos as $aluno): ?>
-        <tr>
-
+        <?php if (empty($aluno['Estagiario'])): ?>
+            <tr class='table-danger'>
+            <?php else: ?>
+            <tr>
+            <?php endif; ?>
             <?php if ($this->Session->read('categoria') != 'estudante'): ?>
                 <td style='text-align:center'>
                     <?php echo $this->Html->link($aluno['Aluno']['registro'], '/Alunos/view/' . $aluno['Aluno']['id']); ?>
                 </td>
             <?php endif; ?>
-
-            <td style='text-align:left'><?php echo $aluno['Aluno']['nome']; ?></td>
-
+            <?php if ($this->Session->read('id_categoria') != '2'): ?>
+                <?php if (empty($aluno['Estagiario'])): ?>
+                    <td style='text-align:left'><?php echo $aluno['Aluno']['nome']; ?></td>            
+                <?php else: ?>
+                    <td style='text-align:left'><?php echo $this->Html->link($aluno['Aluno']['nome'], '/Alunonovos/view/' . $aluno['Estagiario'][0]['Alunonovo']['id']); ?></td>
+                <?php endif; ?>
+            <?php else: ?>
+                <td style='text-align:left'><?php echo $aluno['Aluno']['nome']; ?></td>            
+            <?php endif; ?>
             <?php if ($this->Session->read('categoria') != 'estudante'): ?>
-            <td style='text-align:center'><?php echo date('d-m-Y', strtotime($aluno['Aluno']['nascimento'])); ?></td>
+                <td style='text-align:center'><?php echo isset($aluno['Aluno']['nascimento']) ? date('d-m-Y', strtotime($aluno['Aluno']['nascimento'])) : NULL; ?></td>
                 <td style='text-align:left'><?php echo $aluno['Aluno']['cpf']; ?></td>
             <?php endif; ?>
 
@@ -67,6 +76,7 @@
             <?php endif; ?>
 
         </tr>
+
     <?php endforeach; ?>
 </table>
 

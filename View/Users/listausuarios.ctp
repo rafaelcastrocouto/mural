@@ -1,9 +1,9 @@
-<?php // pr($listausuarios);         ?>
-<?php // pr($direcao);         ?>
-<?php // pr($linhas);         ?>
-<?php // pr($ordem);         ?>
-<?php // pr($q_paginas);        ?>
-<?php // pr($pagina);        ?>
+<?php // pr($listausuarios);  ?>
+<?php // pr($direcao);           ?>
+<?php // pr($linhas);           ?>
+<?php // pr($ordem);           ?>
+<?php // pr($q_paginas);          ?>
+<?php // pr($pagina);          ?>
 
 <script>
 
@@ -97,7 +97,7 @@
                     <td>
                         <?php
                         if ($usuario['numero'] != 0):
-                            echo $this->Html->link('X', '/users/delete/' . $usuario['numero'], NULL, 'Tem certeza?');
+                            echo $this->Html->link('X', '/users/delete/' . $usuario['id'], NULL, 'Tem certeza?');
                         endif;
                         ?>
                     </td>
@@ -106,16 +106,24 @@
                         <?php
                         if ($usuario['numero'] != 0):
                             echo $this->Html->link('Editar', '/users/view/' . $usuario['id']);
-                            // echo $this->Html->link('Editar', '/users/view/' . $usuario['numero']);
+                        // echo $this->Html->link('Editar', '/users/view/' . $usuario['numero']);
                         endif;
                         ?>
                     </td>
 
                     <td>
                         <?php if ($usuario['aluno_tipo'] == 0): ?>
-                            <?php echo $this->Html->link($usuario['numero'], '/alunos/view/' . $usuario['aluno_id']); ?>
+                            <?php if ($usuario['aluno_id']): ?>
+                                <?php echo $this->Html->link($usuario['numero'], '/alunonovos/view/' . $usuario['aluno_id']); ?>
+                            <?php else: ?>
+                                <?php echo $usuario['numero']; ?>
+                            <?php endif; ?>
                         <?php elseif ($usuario['aluno_tipo'] == 1): ?>
-                            <?php echo $this->Html->link($usuario['numero'], '/alunonovos/view/' . $usuario['aluno_id']); ?>
+                            <?php if ($usuario['aluno_id']): ?>
+                                <?php echo $this->Html->link($usuario['numero'], '/alunonovos/view/' . $usuario['aluno_id']); ?>
+                            <?php else: ?>
+                                <?php echo $usuario['numero']; ?>
+                            <?php endif; ?>
                         <?php elseif ($usuario['aluno_tipo'] == 2): ?>
                             <?php echo $usuario['numero']; ?>
                         <?php elseif ($usuario['aluno_tipo'] == 3): ?>

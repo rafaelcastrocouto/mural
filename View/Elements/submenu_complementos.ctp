@@ -1,5 +1,5 @@
 <nav class="nav nav-tabs navbar-expand-lg navbar-light bg-light">
-    <?= $this->Html->link("Complemento de período", ["controller" => 'complementos', 'action' => 'index'], ['class' => 'navbar-brand']) ?>
+    <?= $this->Html->link("Modalidade período especial", ["controller" => 'complementos', 'action' => 'index'], ['class' => 'navbar-brand']) ?>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarComplementos">
         <span class="navbar-toggler-icon"></span>
     </button>

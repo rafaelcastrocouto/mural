@@ -23,6 +23,7 @@ class UsersController extends AppController {
         $this->Session->delete('categoria');
         $this->Session->delete('id_categoria');
         $this->Session->delete('numero');
+        $this->Session->delete('estagiario');
 
         // pr($this->data);
         // die();
@@ -50,7 +51,7 @@ class UsersController extends AppController {
                     // Categoria 2 eh estudante
                     case 2:
 
-                        $this->Session->write('user', $usuario['Alunonovo']['nome']);
+                        $this->Session->write('user', $usuario['Alunonovo']['email']);
                         $this->Session->write('categoria', $usuario['Role']['categoria']);
                         $this->Session->write('id_categoria', $usuario['User']['categoria']);
                         $this->Session->write('numero', $usuario['User']['numero']);
@@ -61,6 +62,7 @@ class UsersController extends AppController {
                          * Busco se há um estudante com esse número de user
                          */
                         $this->loadModel('Alunonovo');
+                        $this->Alunonovo->contain(['Estagiario']);
                         $alunonovo = $this->Alunonovo->find('first', [
                             'contain' => [],
                             'fields' => ['Alunonovo.registro', 'Alunonovo.id', 'Alunonovo.nome'],
@@ -68,6 +70,13 @@ class UsersController extends AppController {
                         ]);
                         // pr($alunonovo['Alunonovo']);
                         // die();
+
+                        if (sizeof($alunonovo['Estagiario']) > 0):
+                            $this->Session->write('estagiario', '1');
+                        else:
+                            $this->Session->write('estagiario', '0');
+                        endif;
+
                         /*
                          * Se não há um estudante vou para alunonovo/add para fazer cadastro
                          */
@@ -80,7 +89,7 @@ class UsersController extends AppController {
                         }
 
                         // Se o campo User.estudante_id está vazio e há um estudante com o numero então tem que linkar
-                        if ($alunonovo['Alunonovo'] and empty($usuario['User']['estudante_id'])) {
+                        if ($alunonovo['Alunonovo'] && empty($usuario['User']['estudante_id'])) {
                             $this->User->id = $usuario['User']['id'];
                             if ($this->User->id) {
                                 $this->User->saveField('estudante_id', $alunonovo['Alunonovo']['id']);
@@ -96,7 +105,7 @@ class UsersController extends AppController {
                     // Professor
                     case 3:
 
-                        $this->Session->write('user', $usuario['Professor']['nome']);
+                        $this->Session->write('user', $usuario['Professor']['email']);
                         $this->Session->write('categoria', $usuario['Role']['categoria']);
                         $this->Session->write('id_categoria', $usuario['User']['categoria']);
                         $this->Session->write('numero', $usuario['User']['numero']);
@@ -105,8 +114,8 @@ class UsersController extends AppController {
 
                         // Verificar se cadastro do professor existe
                         $this->loadModel('Professor');
+                        $this->Professor > contain();
                         $professor = $this->Professor->find('first', [
-                            'contain' => [],
                             'conditions' => ['Professor.siape' => $usuario['User']['numero']]]);
                         // pr($professor);
                         // die("3");
@@ -124,7 +133,7 @@ class UsersController extends AppController {
                     // Supervisor
                     case 4:
 
-                        $this->Session->write('user', $usuario['Supervisor']['nome']);
+                        $this->Session->write('user', $usuario['Supervisor']['email']);
                         $this->Session->write('categoria', $usuario['Role']['categoria']);
                         $this->Session->write('id_categoria', $usuario['User']['categoria']);
                         $this->Session->write('numero', $usuario['User']['numero']);
@@ -213,6 +222,7 @@ class UsersController extends AppController {
             ]);
             // pr($numero);
             // die('numero');
+
             if ($numero) {
                 $this->Flash->error(__("Número (DRE, CRESS ou SIAPE) já cadastrado"));
                 $this->redirect("/Users/login/");
@@ -362,9 +372,35 @@ class UsersController extends AppController {
             }
             $this->redirect('/users/login/');
         } else {
-            $this->data = $this->User->read();
             // $this->Session->setFlash(__('Não foi possível completar o cadastramento'));
             // $this->redirect('/users/login/');
+        }
+    }
+
+    public function excluir($id = NULL) {
+
+        $this->User->recursive = -1;
+        $user = $this->User->find('first',
+                ['conditions' => ['User.id' => $id]]);
+
+        if ($user['User']['estudante_id']) {
+            $estudante_id = $user['User']['estudante_id'];
+        } elseif ($user['User']['supervisor_id']) {
+            $supervisor_id = $user['User']['supervisor_id'];
+        } elseif ($user['User']['docente_id']) {
+            $docente_id = $user['User']['docente_id'];
+        } else {
+            $this->Flash->error(__("Não tem cadastro"));
+        }
+
+        $this->User->delete($id);
+        $this->Flash->success(__('Registro excluído ' . $id));
+        if (isset($estudante_id)) {
+            $this->redirect('/Alunonovos/view/' . $estudante_id);
+        } elseif (isset($supervisor_id)) {
+            $this->redirect('/Supervisors/view/' . $supervisor_id);
+        } elseif (isset($docente_id)) {
+            $this->redirect('/Professors/view/' . $docente_id);
         }
     }
 
@@ -622,13 +658,13 @@ class UsersController extends AppController {
 
         // pr($id);
         // die();
-        $usuario = $this->User->find('first', array('conditions' => array('User.numero' => $id)));
+        $usuario = $this->User->find('first', array('conditions' => array('User.id' => $id)));
         // pr($usuario);
         // die();
         if ($usuario) {
-            if ($usuario['Alunonovo'] or $usuario['Professor'] or $usuario['Supervisor']) {
-                $this->Session->setFlash(__('Usuário cadastrado como estudante, professor ou supervisor'));
-                $this->redirect('/users/listausuarios');
+            if ($usuario['Alunonovo']['registro'] or $usuario['Professor']['siape'] or $usuario['Supervisor']['cress']) {
+                $this->Flash->error(__('Usuário cadastrado como estudante, professor ou supervisor'));
+                $this->redirect('/users/view/' . $id);
             } else {
                 $this->User->delete($usuario['User']['id']);
                 $this->Flash->success(__('Registro excluído ' . $id));
@@ -659,10 +695,11 @@ class UsersController extends AppController {
             $this->data = $this->User->read();
         } else {
             // pr($this->data);
+            // die();
             $this->User->save($this->data);
             // print_r($this->data);
             $this->Flash->success(__("Atualizado"));
-            $this->redirect('/users/view/' . $this->data['User']['numero']);
+            $this->redirect('/users/view/' . $this->data['User']['id']);
         }
     }
 
@@ -788,22 +825,37 @@ class UsersController extends AppController {
                     case 2:
                         // pr($this->data);
                         // die();
-                        $aluno_id = $this->User->Alunonovo->find('first', [
-                            'contain' => [],
+                        $aluno_id = $this->User->find('first', [
+                            'contain' => ['Alunonovo'],
                             'conditions' => ['User.numero' => $this->data['User']['numero']]
                         ]);
-                        // pr($aluno_id);
+                        // pr($aluno_id['Alunonovo']);
                         // die();
                         if ($aluno_id) {
                             $this->Session->write('categoria', 'estudante');
                             $this->Session->write('id_categoria', 2);
-                            $this->Session->write('user', $aluno_id['Alunonovo']['nome']);
+                            $this->Session->write('user', $aluno_id['Alunonovo']['email']);
                             $this->Session->write('numero', $this->data['User']['numero']);
+
+                            $this->loadModel('Estagiario');
+                            $this->Estagiario->contain();
+                            $estagiario = $this->Estagiario->find('first', [
+                                'conditions' => ['Estagiario.registro' => $this->data['User']['numero']]
+                            ]);
+                            // pr($estagiario);
+                            // die();
+                            if (isset($estagiario) && !empty($estagiario)) {
+                                $this->Session->write('estagiario', '1');
+                                // pr($this->Session->read('estagiario'));
+                            } else {
+                                $this->Session->write('estagiario', '0');
+                                // pr($this->Session->read('estagiario'));
+                            }
                             // die();
                             $this->redirect('/murals/index');
                             // $this->redirect('/alunos/view/' . $aluno_id['Aluno']['id']);
                         } else {
-                            $this->Flash->error(__("Não foram encontrdos registros da(o) estudante(a)"));
+                            $this->Flash->error(__("Sem registros da(o) estudante(a)"));
                             $this->redirect('/users/alternarusuario');
                         }
                         break;
@@ -815,7 +867,7 @@ class UsersController extends AppController {
                         if ($professor) {
                             $this->Session->write('categoria', 'professor/a');
                             $this->Session->write('id_categoria', 3);
-                            $this->Session->write('user', $professor['Professor']['nome']);
+                            $this->Session->write('user', $professor['Professor']['email']);
                             $this->Session->write('numero', $this->data['User']['numero']);
                             $this->redirect('/professors/view/' . $professor['Professor']['id']);
                             die();
@@ -833,7 +885,7 @@ class UsersController extends AppController {
                         if ($supervisor) {
                             $this->Session->write('categoria', 'Supervisor');
                             $this->Session->write('id_categoria', 4);
-                            $this->Session->write('user', $supervisor['Supervisor']['nome']);
+                            $this->Session->write('user', $supervisor['Supervisor']['email']);
                             $this->Session->write('numero', $this->data['User']['numero']);
                             $this->redirect('/supervisors/view/' . $supervisor['Supervisor']['id']);
                             die();
