@@ -1,14 +1,9 @@
 Dica
 ====
-debug($this->Model->lastQuery());
 $log = $this->Model->getDataSource()->getLog(false, false);
 debug($log);
 
-debug($this->Model->invalidFields());
-
-Composer
-========
---ignore-platform-reqs
+pr($this->Model->validationErrors);
 
 Paginação
 =========

@@ -2,13 +2,14 @@
 
     <?= $this->element('submenu_estagiarios') ?>
 
-    <?= $this->Html->link('Termo de compromisso', '/Inscricaos/termoimprime?estagiario_id=' . $estagio['Estagiario']['id']. '&tipo_de_estagio=' . $estagio['Estagiario']['complemento_id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
-    <?= $this->Html->link('Folha de atividades', '/folhadeatividades/atividade?estagiario_id=' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
-    <?= $this->Html->link('Avaliação discente', '/Avaliacoes/view?estagiario_id=' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
-    <?= $this->Html->link('Declaração de estágio', ['action' => 'declaracaoestagiopdf', $estagio['Estagiario']['id'], 'ext' => 'pdf', 'declaracaodeestagio'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
+    <?= $this->Html->link('Declaração de período', ['controller' => 'Alunonovos', 'action' => 'certificadoperiodo', $estagio['Estagiario']['alunonovo_id']], ['role' => 'button', 'class' => 'btn btn-info btn-sm']); ?>
+    <?= $this->Html->link('Termo de compromisso', '/Inscricaos/termoimprime?estagiario_id=' . $estagio['Estagiario']['id'] . '&tipo_de_estagio=' . $estagio['Estagiario']['complemento_id'], ['role' => 'button', 'class' => 'btn btn-info btn-sm']); ?>
+    <?= $this->Html->link('Folha de atividades', '/folhadeatividades/atividade?estagiario_id=' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info btn-sm']); ?>
+    <?= $this->Html->link('Avaliação discente', '/Avaliacoes/view?estagiario_id=' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info btn-sm']); ?>
+    <?= $this->Html->link('Declaração de estágio', ['action' => 'declaracaoestagiopdf', $estagio['Estagiario']['id'], 'ext' => 'pdf', 'declaracaodeestagio'], ['role' => 'button', 'class' => 'btn btn-info btn-sm']); ?>
 
     <?php if ($this->Session->read('id_categoria') == '3' || $this->Session->read('id_categoria') == '1'): ?>
-        <?= $this->Html->link('Editar e lançar nota', '/estagiarios/edit/' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-info']); ?>
+        <?= $this->Html->link('Editar e lançar nota', '/estagiarios/edit/' . $estagio['Estagiario']['id'], ['role' => 'button', 'class' => 'btn btn-danger btn-sm']); ?>
     <?php endif; ?>
 
     <h1>Estágiaria(o): <?php echo $estagio['Aluno']['nome']; ?></h1>

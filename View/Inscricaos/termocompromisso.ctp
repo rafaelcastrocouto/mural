@@ -39,14 +39,14 @@ if ($inserir == 0) {
 
 <div class='table-responsive'>
     <?= $this->element('submenu_inscricoes') ?>
-    <h1>Termo de Compromisso para cursar estágio no período <?= $periodo ?></h1>
+    <h1>Termo de Compromisso período <?= $periodo ?></h1>
 
     <table class='table table-hover table-striped table-responsive'>
         <tbody>
             <tr>
-                <td>Registro</td>
+                <td>Registro:</td>
                 <td><?= $registro ?></td>
-                <td>Estudante</td>
+                <td>Estudante:</td>
                 <td><?= $aluno ?></td>
             </tr>
             <tr>

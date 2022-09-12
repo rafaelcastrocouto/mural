@@ -39,7 +39,7 @@ b) View: Editar, Excluir e Listar (volta para Index)
 No modelo Alunonovo poderia verificar o DRE tanto entre os alunosnovos como entre os alunos (feito)
 
 Sessoes:
-Escrebo um cookie? em Inscricaos/termocompromisso se o aluno não é estagiario e não está em alunonovo e encaminho para Alunonovos/add.
+Escrevo um cookie? em Inscricaos/termocompromisso se o aluno não é estagiario e não está em alunonovo e encaminho para Alunonovos/add.
     uma vez cadastrado como alunonovo é redirecionado para Inscricaos/termocompromisso. Posso apagar o cookie em Alunonovo/add
 
 Escrebe um cookie: em Inscricaos/add
@@ -60,3 +60,9 @@ Verificar que não existam dois cress iguais no inserção de um novo registro (
 
 Padronizar que o número de registro ou o cress seja enviado sempre como parametro nomeado: registro ou cress.
 e o Id vai como parametro simples.
+
+2 de agosto de 2022
+* Alunos que não continuam estágio no período subsiguiente
+* Aba para que a instituição manifeste interesse em fazer convêncio para estagio
+* Declaração de inscrição
+

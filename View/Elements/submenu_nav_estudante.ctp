@@ -13,8 +13,12 @@
             </li>
 
             <li class="nav-item">
+                <?php echo $this->Html->link("Declaração de período", "/Alunonovos/certificadoperiodo?registro=" . $this->Session->read('numero'), ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white;']); ?>
+            </li>
+            <li class="nav-item">
                 <?php echo $this->Html->link("Termo de compromisso", "/Inscricaos/termosolicita", ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white;']); ?>
             </li>
+
             <li class="nav-item">
                 <?php echo $this->Html->link("Folha de avaliação discente", "/Alunos/avaliacaosolicita", ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>
             </li>

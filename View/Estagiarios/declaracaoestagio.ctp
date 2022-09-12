@@ -23,9 +23,9 @@ if (empty($supervisora))
 if (empty($carga_horaria) or $carga_horaria === 0)
     $carga_horaria = "_____";
 
-$dia = strftime('%e', mktime());
-$mes = strftime('%B', mktime());
-$ano = strftime('%Y', mktime());
+$dia = strftime('%e', time());
+$mes = strftime('%B', time());
+$ano = strftime('%Y', time());
 
 $texto = <<<EOD
 

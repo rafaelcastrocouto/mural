@@ -507,11 +507,11 @@ class InscricaosController extends AppController {
         // Envio os dados
         $this->set('estagiario_id', $estagiario_id = isset($estagiario['Estagiario']['id']) ? $estagiario['Estagiario']['id'] : NULL);
         $this->set('inserir', $inserir);
-        $this->set('ingresso', $ingresso = isset($estagiario['Alunonovo']['ingresso']) ? $estagiario['Alunonovo']['ingresso'] : NULL);
-        $this->set('alunonovoturno', $alunonovoturno = isset($estagiario['Alunonovo']['turno']) ? $estagiario['Alunonovo']['turno'] : NULL);
+        $this->set('ingresso', $ingresso = isset($estagiario['Alunonovo']['ingresso']) ? $estagiario['Alunonovo']['ingresso'] : $alunonovo['Alunonovo']['ingresso']);
+        $this->set('alunonovoturno', $alunonovoturno = isset($estagiario['Alunonovo']['turno']) ? $estagiario['Alunonovo']['turno'] : $alunonovo['Alunonovo']['turno']);
         $this->set('id_aluno', $id_aluno = isset($estagiario['Estagiario']['id_aluno']) ? $estagiario['Estagiario']['id_aluno'] : NULL);
         $this->set('registro', $registro);
-        $this->set('aluno', $aluno_nome = isset($estagiario['Alunonovo']['nome']) ? $estagiario['Alunonovo']['nome'] : NULL);
+        $this->set('aluno', $aluno_nome = isset($estagiario['Alunonovo']['nome']) ? $estagiario['Alunonovo']['nome'] : $alunonovo['Alunonovo']['nome']);
         $this->set('turno', $turno_ultimo = isset($turno_ultimo) ? $turno_ultimo : 'I');
         $this->set('nivel', $nivel_ultimo);
         $this->set('professor_atual', $professor_atual = isset($estagiario['Estagiario']['id_professor']) ? $estagiario['Estagiario']['id_professor'] : 0);
@@ -585,7 +585,7 @@ class InscricaosController extends AppController {
                 /* Guardo o valor do id do Alunonovo */
                 $alunonovo_id = $alunonovo['Alunonovo']['id'];
                 $alunonovo['Alunonovo']['id'] = NULL;
-                pr($alunonovo['Alunonovo']);
+                // pr($alunonovo['Alunonovo']);
                 // die('Insere');
                 $this->Aluno->save($alunonovo['Alunonovo'], array('validate' => TRUE));
                 $this->Flash->success(__("Aluno inserido"));

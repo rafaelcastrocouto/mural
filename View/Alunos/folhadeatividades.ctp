@@ -1,8 +1,8 @@
 <?php
 
-$dia = strftime('%e', mktime());
-$mes = utf8_encode(strftime('%B', mktime()));
-$ano = strftime('%Y', mktime());
+$dia = strftime('%e', time());
+$mes = utf8_encode(strftime('%B', time()));
+$ano = strftime('%Y', time());
 
 $data = $dia . " de " . $mes . " de " . $ano . ".";
 

@@ -7,10 +7,10 @@
     <?= $this->element('submenu_alunonovos') ?>
     <?php if ($alunos['Alunonovo']['nomesocial']): ?>
         <h1 class='h2'><?php echo $alunos['Alunonovo']['nome'] . " - Nome social: " . $alunos['Alunonovo']['nomesocial']; ?></h1>
-        <h1 class='h4'><?php echo "Ingresso: " . $alunos['Alunonovo']['ingresso'] . " - "  . ' Turno: ' . $alunos['Alunonovo']['turno']; ?></h1>
+        <h1 class='h4'><?php echo "Ingresso: " . $alunos['Alunonovo']['ingresso'] . " - " . ' Turno: ' . $alunos['Alunonovo']['turno']; ?></h1>
     <?php else: ?>
         <h1 class='h2'><?php echo $alunos['Alunonovo']['nome']; ?></h1>
-        <h1 class='h4'><?php echo "Ingresso: " . $alunos['Alunonovo']['ingresso'] . " - "  . ' Turno: ' . $alunos['Alunonovo']['turno']; ?></h1>
+        <h1 class='h4'><?php echo "Ingresso: " . $alunos['Alunonovo']['ingresso'] . " - " . ' Turno: ' . $alunos['Alunonovo']['turno']; ?></h1>
     <?php endif; ?>
 
     <div class="row">
@@ -54,7 +54,7 @@
 
                 <?php if (($this->Session->read('categoria') === 'estudante') && ($this->Session->read('numero') === $alunos['Alunonovo']['registro'])): ?>
                     <p>
-                        <?php echo $this->Html->link('Editar', '/Alunonovos/edit/' . $alunos['Alunonovo']['id']); ?>
+                        <?php echo $this->Html->link('Editar', '/Alunonovos/edit/' . $alunos['Alunonovo']['id'], ['role' => 'button', 'type'=> 'button', 'class' => 'btn btn-danger']); ?>
                     </p>
                 <?php endif; ?>
             </div>
@@ -147,6 +147,8 @@
                             <?php endforeach; ?>
                         </table>
                     </div>
+                <?php else: ?>
+                <p><?= $this->Html->link('Declaração de período', ['controller' => 'Alunonovos', 'action' => 'certificadoperiodo', $alunos['Alunonovo']['id']], ['role' => 'button', 'type' => 'button', 'class' => 'btn btn-warning']); ?></p>
                 <?php endif; ?>
 
                 <?php if (isset($nao_obrigatorio) && !(empty($nao_obrigatorio))): ?>
@@ -178,6 +180,7 @@
                         </table>
                     </div>
                 <?php endif; ?>
+
             </div>
         </div>
     </div>

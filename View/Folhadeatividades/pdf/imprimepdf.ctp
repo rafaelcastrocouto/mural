@@ -7,9 +7,9 @@
 <?php
 $estagio = $folhadeatividades[0];
 
-$dia = strftime('%e', mktime());
-$mes = strftime('%B', mktime());
-$ano = strftime('%Y', mktime());
+$dia = strftime('%e', time());
+$mes = strftime('%B', time());
+$ano = strftime('%Y', time());
 
 // pr($estagio);
 // die();

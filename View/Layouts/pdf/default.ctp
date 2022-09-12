@@ -23,7 +23,7 @@ $dompdf->set_paper('A4', 'portrait');
 $dompdf->render();
 
 // Output the generated PDF to Browser
-$dompdf->stream("termo_de_compromisso.pdf", array("Attachment" => false));
+$dompdf->stream("declaracao_estagio_ess_ufrj.pdf", array("Attachment" => false));
 // echo $dompdf->output();
 
 exit(0);

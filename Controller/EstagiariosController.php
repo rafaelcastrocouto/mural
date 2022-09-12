@@ -807,27 +807,31 @@ class EstagiariosController extends AppController {
         // pr($estagiorealizado);
         // die('estagiorealizado');
 
-        if (empty($estagiorealizado['Aluno']['identidade'])) {
-            $this->Session->setFlash(__("Estudante sem RG"), "flash_notification");
-            $this->redirect('/Alunos/view/' . $estagiorealizado['Aluno']['id']);
+        if (empty($estagiorealizado['Alunonovo']['identidade'])) {
+            $this->Flash->error(__("Estudante sem RG"));
+            $this->redirect('/Alunonovos/view/' . $estagiorealizado['Alunonovo']['id']);
         }
 
-        if (empty($estagiorealizado['Aluno']['orgao'])) {
-            $this->Session->setFlash(__("Estudante não especifica o orgão emisor do documento"), "flash_notification");
-            $this->redirect('/Alunos/view/' . $estagiorealizado['Aluno']['id']);
+        if (empty($estagiorealizado['Alunonovo']['orgao'])) {
+            $this->Flash->error(__("Estudante não especifica o orgão emisor do documento"));
+            $this->redirect('/Alunonovos/view/' . $estagiorealizado['Alunonovo']['id']);
         }
-        if (empty($estagiorealizado['Aluno']['cpf'])) {
-            $this->Session->setFlash(__("Estudante sem CPF"), "flash_notification");
-            $this->redirect('/Alunos/view/' . $estagiorealizado['Aluno']['id']);
+
+        if (empty($estagiorealizado['Alunonovo']['cpf'])) {
+            $this->Flash->error(__("Estudante sem CPF"));
+            $this->redirect('/Alunonovos/view/' . $estagiorealizado['Alunonovo']['id']);
         }
 
         if (empty($estagiorealizado['Supervisor']['id'])) {
-            $this->Session->setFlash(__("Falta o supervisor de estágio"), "flash_notification");
-            $this->redirect('/Alunos/view/' . $estagiorealizado['Aluno']['id']);
+            $this->Flash->error(__("Falta o supervisor de estágio"));
+            $this->redirect('/Estagiarios/view/' . $estagiorealizado['Estagiario']['id']);
         }
 
-        // pr($estagiorealizado['Aluno']['cpf']);
-        // die('estagiario');
+        if (empty($estagiorealizado['Estagiario']['ch'])) {
+            $this->Flash->error(__("Falta a carga horária de estágio"));
+            $this->redirect('/Estagiarios/view/' . $estagiorealizado['Estagiario']['id']);
+        }
+
         $this->set('estagiorealizado', $estagiorealizado);
     }
 

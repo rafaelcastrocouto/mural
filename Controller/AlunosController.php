@@ -63,7 +63,6 @@ class AlunosController extends AppController {
 
     public function view($id = NULL) {
 
-        // pr('id 0 ' . $id);
         $registro = isset($this->params['named']['registro']) ? $this->params['named']['registro'] : NULL;
         if (!$registro) {
             $registro = $this->request->query('registro');

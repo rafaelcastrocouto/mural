@@ -87,7 +87,7 @@
 
     <?= $this->element('submenu_alunonovos') ?>
 
-    <h2>Editar alunos novos</h2>
+    <h2>Editar estudante</h2>
 
     <?php
     echo $this->Form->create('Alunonovo', [

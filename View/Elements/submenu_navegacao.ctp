@@ -29,6 +29,9 @@
                         <?php elseif (($this->Session->read('id_categoria') == '3') || ($this->Session->read('id_categoria') == '4')): ?>
                             <?php echo $this->Html->link("Declaração de estágio", "/Alunos/busca_dre", ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                         <?php endif; ?>
+                        <?php if ($this->Session->read('id_categoria') == '1'): ?>
+                            <?php echo $this->Html->link("Declaração de periodo", "/Alunonovos/busca_dre", ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>                        
+                        <?php endif; ?>
                     </div>
                 </li>
 
