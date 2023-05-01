@@ -1,13 +1,15 @@
 <?php
 
-class AreainstituicaosController extends AppController {
+class AreainstituicaosController extends AppController
+{
 
     public $name = "Areainstituicaos";
     public $components = array('Auth', 'Paginator', 'Flash');
 
     // var $scaffold;
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
 
         parent::beforeFilter();
         // Admin
@@ -32,20 +34,21 @@ class AreainstituicaosController extends AppController {
         // die(pr($this->Session->read('user')));
     }
 
-    public function index() {
+    public function index()
+    {
 
         $this->Areainstituicao->virtualFields['quantidadeArea'] = 'count(Instituicao.area_instituicoes_id)';
 
         $this->Paginator->settings = [
             'Areainstituicao' => [
-                'joins' => array(
-                    array(
+                'joins' => [
+                    [
                         'table' => 'estagio',
                         'alias' => 'Instituicao',
                         'type' => 'left',
                         'conditions' => array('Instituicao.area_instituicoes_id = Areainstituicao.id')
-                    )
-                ),
+                    ]
+                ],
                 'fields' => array('Areainstituicao.id', 'Areainstituicao.area', 'count(Instituicao.area_instituicoes_id) as Areainstituicao__quantidadeArea'),
                 'group' => array('Areainstituicao.id'),
                 'order' => array('Areainstituicao.area'),
@@ -57,17 +60,20 @@ class AreainstituicaosController extends AppController {
         $this->set('areas', $this->Paginator->paginate('Areainstituicao'));
     }
 
-    public function view($id = NULL) {
+    public function view($id = null)
+    {
 
         $area = $this->Areainstituicao->find('first', array(
             'conditions' => array('Areainstituicao.id' => $id)
-        ));
+        )
+        );
         // pr($supervisor);
 
         $this->set('area', $area);
     }
 
-    public function edit($id = NULL) {
+    public function edit($id = NULL)
+    {
 
         $this->Areainstituicao->id = $id;
 
@@ -83,7 +89,8 @@ class AreainstituicaosController extends AppController {
         }
     }
 
-    public function add() {
+    public function add()
+    {
 
         if ($this->data) {
             if ($this->Areainstituicao->save($this->data)) {
@@ -93,30 +100,30 @@ class AreainstituicaosController extends AppController {
         }
     }
 
-    public function delete($id = NULL) {
+    public function delete($id = NULL)
+    {
 
-        $area = $this->Areainstituicao->find('first', array(
+        $area = $this->Areainstituicao->find('first', [
             'conditions' => array('Areainstituicao.id' => $id)
-        ));
+        ]);
 
         // $this->loadModel('Estagiario');
         /*
-          $estagiarios = $this->Areainstituicao->Estagiario->find('first', array(
-          'conditions' => 'Estagiario.id_area = ' . $id));
-          // pr($estagiarios);
-
-          if ($estagiarios) {
-          $this->Session->setFlash("Error: Há estagiários vinculados com esta área");
-          // die("Estagiarios vinculados com essa área");
-          $this->redirect('/Areainstituicao/view/' . $id);
-          } else {
-         */
+        $estagiarios = $this->Areainstituicao->Estagiario->find('first', array(
+        'conditions' => 'Estagiario.id_area = ' . $id));
+        // pr($estagiarios);
+        if ($estagiarios) {
+        $this->Session->setFlash("Error: Há estagiários vinculados com esta área");
+        // die("Estagiarios vinculados com essa área");
+        $this->redirect('/Areainstituicao/view/' . $id);
+        } else {
+        */
         $this->Areainstituicao->delete($id);
         $this->Flash->success(__("Área excluída"));
         // die("Área excluída");
         $this->redirect('/areainstituicaos/index/');
     }
-    
+
 }
 
 ?>

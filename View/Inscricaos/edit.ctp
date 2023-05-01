@@ -1,10 +1,7 @@
 <div class='table-responsive'>
     <?= $this->element('submenu_inscricoes') ?>
     <h1>Editar inscrição para seleção de estágio</h1>
-    <br>    
-    <div class='alert-info'>
-        <h5>Não editar. <?= $this->Html->link('Excluir', ['controller' => 'inscricaos', 'action' => 'delete', $this->params['pass'][0]]) ?> e fazer nova inscrição!</h5>
-    </div>
+    <br>
     <?php
     echo $this->Form->create('Inscricao');
     echo $this->Form->input('id_aluno', array('type' => 'hidden'));

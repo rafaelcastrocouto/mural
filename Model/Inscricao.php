@@ -20,7 +20,8 @@ class Inscricao extends AppModel {
         ),
         'Alunonovo' => array(
             'className' => 'Alunonovo',
-            'foreignKey' => 'alunonovo_id'
+            'foreignKey' => 'alunonovo_id',
+            'counterCache' => true
         ),
         'Estagiario' => array(
             'className' => 'Estagiario',

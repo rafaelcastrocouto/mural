@@ -56,7 +56,7 @@ class ExtensaosController extends AppController {
             ]
         ];
 
-        $this->Extensao->recursive = 0;
+        $this->Extensao->contain(['Essextensoes']);
         $this->set('extensaos', $this->Paginator->paginate('Extensao'));
     }
 

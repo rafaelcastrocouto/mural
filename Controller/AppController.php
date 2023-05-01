@@ -31,20 +31,28 @@ App::uses('Controller', 'Controller');
  * @package       app.Controller
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
-class AppController extends Controller {
+class AppController extends Controller
+{
 
-    public $components = array(
+    public $components = [
         'Session',
         'Acl',
-        'Auth' => array(
+        'Auth' => [
             // O certo eh redirecionar para o perfil do usuario
-            'loginRedirect' => array('controller' => 'murals', 'url' => 'index'),
-            'logoutRedirect' => array('controller' => 'murals', 'url' => 'index')
-        ),
+            'loginRedirect' => [
+                'controller' => 'murals',
+                'url' => 'index'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'murals',
+                'url' => 'index'
+            ],
+        ],
         'DebugKit.Toolbar'
-    );
+    ];
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
 
         $this->Auth->allow('index');
 

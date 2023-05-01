@@ -15,8 +15,8 @@
     <legend class='w-auto'>Mural</legend>
     <?php
     echo $this->Form->input('mural_periodo_atual', ['div' => 'form-group row', 'label' => ['text' => 'Período atual do mural', 'class' => 'col-form-label col-4'], 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control']);
-    echo $this->Form->input('termo_compromisso_periodo', ['div' => 'form-group row', 'label' => ['text' => 'Período atual do termo de compromisso', 'class' => 'col-form-label col-4'], 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control']);
     echo $this->Form->input('periodo_calendario_academico', ['div' => 'form-group row', 'label' => ['text' => 'Período atual do calendário acadêmico', 'class' => 'col-form-label col-4'], 'between' => '<div class = "form-inline col-8">', 'after' => '<small>Para fazer a declaração de periódo que o aluno está cursando</small></div>', 'class' => 'form-control']);
+    echo $this->Form->input('termo_compromisso_periodo', ['div' => 'form-group row', 'label' => ['text' => 'Período atual do termo de compromisso', 'class' => 'col-form-label col-4'], 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control']);
     echo $this->Form->input('termo_compromisso_inicio', array('type' => 'date', 'div' => 'form-group row', 'label' => ['text' => 'Data de inicio do termo de compromisso', 'class' => 'col-form-label col-4'], 'dateFormat' => 'DMY', 'monthNames' => $meses, 'between' => '<div class = "form-inline col-8">', 'after' => '</div>', 'class' => 'form-control'));
     echo $this->Form->input('termo_compromisso_final', array('type' => 'date', 'div' => 'form-group row', 'label' => ['text' => 'Data de finalização do termo de compromisso', 'class' => 'col-form-label col-4'], 'dateFormat' => 'DMY', 'monthNames' => $meses, 'between' => '<div class ="form-inline col-8">', 'after' => '</div>', 'class' => 'form-control'));
     ?>

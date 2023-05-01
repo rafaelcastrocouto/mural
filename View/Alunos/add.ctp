@@ -94,41 +94,41 @@
  */
 
 if (!isset($alunonovo['Alunonovo']['nome']))
-    $alunonovo['Alunonovo']['nome'] = NULL;
+    $alunonovo['Alunonovo']['nome'] = null;
 if (!isset($alunonovo['Alunonovo']['nomesocial']))
-    $alunonovo['Alunonovo']['nomesocial'] = NULL;
+    $alunonovo['Alunonovo']['nomesocial'] = null;
 if (!isset($alunonovo['Alunonovo']['registro']))
-    $alunonovo['Alunonovo']['registro'] = NULL;
+    $alunonovo['Alunonovo']['registro'] = null;
 if (!isset($alunonovo['Alunonovo']['ingresso']))
-    $alunonovo['Alunonovo']['ingresso'] = NULL;
+    $alunonovo['Alunonovo']['ingresso'] = null;
 if (!isset($alunonovo['Alunonovo']['turno']))
-    $alunonovo['Alunonovo']['turno'] = NULL;
+    $alunonovo['Alunonovo']['turno'] = null;
 if (!isset($alunonovo['Alunonovo']['nascimento']))
-    $alunonovo['Alunonovo']['nascimento'] = NULL;
+    $alunonovo['Alunonovo']['nascimento'] = null;
 if (!isset($alunonovo['Alunonovo']['cpf']))
-    $alunonovo['Alunonovo']['cpf'] = NULL;
+    $alunonovo['Alunonovo']['cpf'] = null;
 if (!isset($alunonovo['Alunonovo']['identidade']))
-    $alunonovo['Alunonovo']['identidade'] = NULL;
+    $alunonovo['Alunonovo']['identidade'] = null;
 if (!isset($alunonovo['Alunonovo']['orgao']))
-    $alunonovo['Alunonovo']['orgao'] = NULL;
+    $alunonovo['Alunonovo']['orgao'] = null;
 if (!isset($alunonovo['Alunonovo']['email']))
-    $alunonovo['Alunonovo']['email'] = NULL;
+    $alunonovo['Alunonovo']['email'] = null;
 if (!isset($alunonovo['Alunonovo']['codigo_telefone']))
     $alunonovo['Alunonovo']['codigo_telefone'] = 21;
 if (!isset($alunonovo['Alunonovo']['telefone']))
-    $alunonovo['Alunonovo']['telefone'] = NULL;
+    $alunonovo['Alunonovo']['telefone'] = null;
 if (!isset($alunonovo['Alunonovo']['codigo_celular']))
-    $alunonovo['Alunonovo']['codigo_celular'] = NULL;
+    $alunonovo['Alunonovo']['codigo_celular'] = null;
 if (!isset($alunonovo['Alunonovo']['celular']))
-    $alunonovo['Alunonovo']['celular'] = NULL;
+    $alunonovo['Alunonovo']['celular'] = null;
 if (!isset($alunonovo['Alunonovo']['endereco']))
-    $alunonovo['Alunonovo']['endereco'] = NULL;
+    $alunonovo['Alunonovo']['endereco'] = null;
 if (!isset($alunonovo['Alunonovo']['bairro']))
-    $alunonovo['Alunonovo']['bairro'] = NULL;
+    $alunonovo['Alunonovo']['bairro'] = null;
 if (!isset($alunonovo['Alunonovo']['municipio']))
-    $alunonovo['Alunonovo']['municipio'] = NULL;
+    $alunonovo['Alunonovo']['municipio'] = null;
 if (!isset($alunonovo['Alunonovo']['cep']))
-    $alunonovo['Alunonovo']['cep'] = NULL;
+    $alunonovo['Alunonovo']['cep'] = null;
 ?>
 
 <h1>Inserir aluno</h1>
@@ -144,7 +144,7 @@ echo $this->Form->create('Aluno', [
         'between' => "<div class = 'col-8'>",
         'class' => ['form-control'],
         'after' => "</div>",
-        'error' => false
+        'error' => ['attributes' => ['wrap' => 'span', 'class' => 'help-inline']]
     ]
 ]);
 ?>

@@ -32,7 +32,7 @@
                 <td>
                     <?php echo $instituicao['Instituicao']['email']; ?>
                 </td>
-            </tr>    
+            </tr>
 
             <tr>
                 <td>Página web</td>
@@ -185,27 +185,21 @@
 
         <?php if ($this->Session->read('id_categoria') == '1'): ?>
             <?php
-            echo $this->Html->link('Excluir', '/Instituicaos/delete/' . $instituicao['Instituicao']['id'], NULL, 'Tem certeza?');
-            echo " | ";
-            echo $this->Html->link('Editar', '/Instituicaos/edit/' . $instituicao['Instituicao']['id']);
-            echo " | ";
+            echo $this->Html->link('Excluir', ['controller' => 'Instituicaos', 'action' => 'delete', $instituicao['Instituicao']['id'], null, 'Tem certeza?'], ['class' => 'btn btn-danger']);
+            echo $this->Html->link('Editar', ['controller' => 'Instituicaos', 'action' => 'edit', $instituicao['Instituicao']['id']], ['class' => 'btn btn-primary']);
+
             if (sizeof($instituicao['Visita']) == '0') {
-                echo $this->Html->link('Visita', '/Visitas/add/' . $instituicao['Instituicao']['id']);
-                echo " | ";
+                echo $this->Html->link('Visita', ['controller' => 'Visitas', 'action' => 'add', $instituicao['Instituicao']['id']], ['class' => 'btn btn-primary']);
             }
-            echo $this->Html->link('Inserir', '/Instituicaos/add/');
-            echo " | ";
-            echo $this->Html->link('Buscar', '/Instituicaos/busca/');
-            echo " | ";
-            echo $this->Html->link('Listar', '/Instituicaos/index/');
+            echo $this->Html->link('Inserir', ['controller' => 'Instituicaos', 'action' => 'add'], ['class' => 'btn btn-primary']);
+            echo $this->Html->link('Buscar', ['controller' => 'Instituicaos', 'action' => 'busca'], ['class' => 'btn btn-primary']);
+            echo $this->Html->link('Listar', ['controller' => 'Instituicaos', 'action' => 'index'], ['class' => 'btn btn-primary']);
             ?>
         <?php else: ?>
             <?php
-            echo $this->Html->link('Editar', '/Instituicaos/edit/' . $instituicao['Instituicao']['id']);
-            echo " | ";
-            echo $this->Html->link('Buscar', '/Instituicaos/busca/');
-            echo " | ";
-            echo $this->Html->link('Listar', '/Instituicaos/index/');
+            echo $this->Html->link('Editar', ['controller' => 'Instituicaos', 'action' => 'edit', $instituicao['Instituicao']['id'], 'class' => 'btn bnt-primary']);
+            echo $this->Html->link('Buscar', ['controller' => 'Instituicaos', 'action' => 'busca', 'class' => 'btn btn-primary']);
+            echo $this->Html->link('Listar', ['controller' => 'Instituicaos', 'action' => 'index', 'class' => 'btn btn-primary']);
             ?>
         <?php endif; ?>
 
@@ -267,7 +261,7 @@
                             <?php if ($this->Session->read('id_categoria') == '1'): ?>
                                 <td>
                                     <?php
-                                    echo $this->Html->link('Excluir', '/Instituicaos/deleteassociacao/' . $c_supervisor['id_superinst'], NULL, 'Tem certeza?');
+                                    echo $this->Html->link('Excluir', ['controller' => 'Instituicaos', 'action' => 'deleteassociacao', $c_supervisor['id_superinst'], null, 'Tem certeza?'], ['class' => 'btn btn-danger']);
                                     ?>
                                 </td>
                             <?php endif; ?>
@@ -304,11 +298,11 @@
                 <caption>Estagiários</caption>
             <?php foreach ($instituicao['Estagiario'] as $c_estagiario): ?>
                                                                 
-                                                                <tr>
-                                                                <td><?php echo $this->Html->link($c_estagiario['registro'], '/Estagiarios/view/' . $c_estagiario['id_aluno']); ?></td>
-                                                                <td><?php echo $c_estagiario['id_supervisor']; ?></td>
-                                                                <td><?php echo $c_estagiario['periodo']; ?></td>
-                                                                </tr>
+                <tr>
+                    <td><?php echo $this->Html->link($c_estagiario['registro'], '/Estagiarios/view/' . $c_estagiario['id_aluno']); ?></td>
+                    <td><?php echo $c_estagiario['id_supervisor']; ?></td>
+                    <td><?php echo $c_estagiario['periodo']; ?></td>
+                </tr>
                                                                 
             <?php endforeach; ?>
             </table>
@@ -316,4 +310,3 @@
         <?php endif; ?>
     </div>
 </div>
-

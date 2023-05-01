@@ -47,7 +47,7 @@
 
     echo $this->Form->input('registro', ['type' => 'text', 'value' => $estudante['Alunonovo']['registro'], 'readonly']);
 
-    if (empty($estudante['Alunonovo']['ingresso'])):
+    if (empty($estudante['Alunonovo']['ingresso']) || strlen($estudante['Alunonovo']['ingresso'] < 6)):
         echo $this->Form->input('ingresso', ['label' => ['text' => 'Ano e semestre de ingresso no curso', 'class' => 'col-2 control-label'], 'required']);
     else:
         echo $this->Form->input('ingresso', ['label' => ['text' => 'Ano e semestre de ingresso no curso', 'class' => 'col-2 control-label'], 'value' => $estudante['Alunonovo']['ingresso'], 'required', 'readonly']);

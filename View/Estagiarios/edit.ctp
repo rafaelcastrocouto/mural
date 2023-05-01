@@ -1,6 +1,6 @@
-<?php // pr($periodos);        ?>
-<?php // pr($aluno);        ?>
-<?php // pr($id);        ?>
+<?php // pr($periodos);         ?>
+<?php // pr($aluno);         ?>
+<?php // pr($id);         ?>
 
 <?php /* echo $this->Html->script("jquery.maskedinput"); */ ?>
 <?php echo $this->Html->script("jquery.mask.min"); ?>
@@ -22,10 +22,9 @@
 
     $(document).ready(function () {
 
-        /*        $("#EstagiarioNota").mask("00.00", {reverse: true, placeholder: "__.__"});*/
+        /* $("#EstagiarioNota").mask("00.00", {reverse: true, placeholder: "__.__"});*/
         $("#EstagiarioCh").mask("000", {placeholder: "___"});
-        $("#EstagiarioNota").mask("00.00", {reverse: true, placeholder: "__.__"});
-        $("#EstagiarioNota1").mask("00.00", {reverse: true, placeholder: "__.__"});
+        $("#EstagiarioNota").mask("99.99", {reverse:true, placeholder: "__.__"});
         /*
          $("#EstagiarioNota").mask("99,99");
          $("#EstagiarioCh").mask("999");
@@ -61,6 +60,9 @@ echo $this->Form->create('Estagiario', [
 <?php echo $this->Form->input('Estagiario.ajuste2020', array('label' => ['text' => 'Ajuste 2020', 'class' => 'col-4'], 'options' => array('0' => 'Não', '1' => 'Sim'))); ?>
 <?php echo $this->Form->input('Estagiario.tc', array('label' => ['text' => 'TC (Aluno entrogou o TC assinado na Coordenação de Estágio?', 'class' => 'col-4'], 'options' => array('0' => 'Não', '1' => 'Sim'))); ?>
 <?php echo $this->Form->input('Estagiario.tc_solicitacao', array('type' => 'hidden', 'label' => ['text' => 'Data de solicitação do TC', 'class' => 'col-4'], 'dateFormat' => 'DMY', 'empty' => TRUE)); ?>
+<?php echo $this->Form->input('Estagiario.benetransporte', array('label' => ['text' => 'Transporte', 'class' => 'col-4'], 'options' => ['0' => 'Não', '1' => 'Sim'])); ?>
+<?php echo $this->Form->input('Estagiario.benealimentacao', array('label' => ['text' => 'Alimentação', 'class' => 'col-4'], 'options' => ['0' => 'Não', '1' => 'Sim'])); ?>
+<?php echo $this->Form->input('Estagiario.benebolsa', array('label' => ['text' => 'Bolsa (digite o valor em números inteiros ou o número 0)', 'class' => 'col-4'])); ?>
 <?php echo $this->Form->input('Estagiario.id_instituicao', array('label' => ['text' => 'Instituição', 'class' => 'col-4'], 'options' => $instituicoes, 'empty' => ['0' => 'Seleciona'])); ?>
 <?php echo $this->Form->input('Estagiario.id_supervisor', array('label' => ['text' => 'Supervisor', 'class' => 'col-4'], 'options' => $supervisores, 'empty' => ['0' => 'Seleciona'])); ?>
 <?php echo $this->Form->input('Estagiario.id_professor', array('label' => ['text' => 'Professor', 'class' => 'col-4'], 'options' => $professores, 'empty' => ['0' => 'Seleciona'])); ?>

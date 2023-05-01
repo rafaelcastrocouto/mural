@@ -9,7 +9,7 @@
     }
 </style>
 <?php
-if ($nivel === '9'):
+if ($nivel == '9'):
     $nivel = ' <b>não obrigatório</b> ';
 endif;
 
@@ -57,7 +57,7 @@ if (empty($supervisor_nome))
 <h2 style="font-size: 120%; font-weight: bold;">DO(A) SUPERVISOR(A) DE CAMPO</h2>
 <p style="text-align:justify; font-size: 90%;">
     Art. 12. É de responsabilidade do Assistente Social supervisor(a) o acompanhamento, orientação e avaliação do estudante no campo de estágio, em conformidade com o plano de estágio, elaborado em consonância com o projeto pedagógico e com programas institucionais vinculados aos campos de estágio; garantindo diálogo permanente com o (a) supervisor (a) acadêmico (a), no processo de supervisão.<br>
-    Art. 13. Ao  término de cada mês, o (a) supervisor(a) atestará à unidade de ensino, em formulário próprio, a carga horária cumprida pelo estagiário.<br>
+    Art. 13. Ao término de cada mês, o (a) supervisor(a) atestará à unidade de ensino, em formulário próprio, a carga horária cumprida pelo estagiário.<br>
     Art. 14. No final de cada período letivo, o (a) supervisor(a) encaminhará, ao professor(a) da disciplina de Orientação e Treinamento Profissional, avaliação do processo vivenciado pelo aluno durante o período, Instrumento este utilizado pelo professor(a) na avaliação final do aluno.
 </p>
 

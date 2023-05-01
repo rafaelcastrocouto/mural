@@ -1,4 +1,4 @@
-<?php 
+<?php
 // pr($user['User']['categoria']);
 ?>
 
@@ -20,10 +20,19 @@
         })
     })
 
+    $(document).ready(function () {
+        $('input').tooltip();
+    });
+
 </script>
 
 <div class='table-responsive'>
-    <h1>Cadastro de usuário</h1>
+
+    <?php if (isset($recadastro)): ?>
+        <h1>Recadastramento de usuário</h1>
+    <?php else: ?>
+        <h1>Cadastro de usuário</h1>    
+    <?php endif; ?>
 
     <?php echo $this->Form->create("User"); ?>
 
@@ -40,7 +49,11 @@
 
         <tr>
             <td colspan='2'>
-                <?php echo $this->Form->input('email', ['class' => 'form-control']); ?>
+                <?php if (isset($recadastro)): ?>
+                    <?php echo $this->Form->input('email', ['placeholder' => 'Digite o e-mail com o qual fez cadastro', 'class' => 'form-control', 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "E-mail cadastrado inicialmente"]); ?>
+                <?php else: ?>
+                    <?php echo $this->Form->input('email', ['class' => 'form-control']); ?>
+                <?php endif; ?>
             </td>
         </tr>
 

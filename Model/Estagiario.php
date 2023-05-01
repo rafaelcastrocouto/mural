@@ -20,7 +20,8 @@ class Estagiario extends AppModel {
         'Alunonovo' => array(
             'className' => 'Alunonovo',
             'foreignKey' => 'alunonovo_id',
-            'joinTable' => 'alunosnovos'
+            'joinTable' => 'alunosnovos',
+            'counterCache' => true
         ),
         'Instituicao' => array(
             'className' => 'Instituicao',
@@ -50,8 +51,12 @@ class Estagiario extends AppModel {
         )
     );
     public $validate = array(
+        'registro' => [
+            'rule' => ['isUnique', ['registro', 'periodo'], false],
+            'menssage' => 'Estudante só pode ser cadastrado uma vez a cada período de estágio'
+        ],
         'id_instituicao' => array(
-            'rule' => array('comparison', 'not equal', 0),
+            'rule' => ['comparison', 'not equal', 0],
             'required' => TRUE,
             'allowEmpty' => FALSE,
             'message' => 'Selecionar instituição de estágio'
@@ -64,14 +69,14 @@ class Estagiario extends AppModel {
             'message' => 'Digitar o periodo de estágio'
         ),
         'nivel' => array(
-            'rule' => array('inList', array('1', '2', '3', '4', '9')),
+            'rule' => ['inList', ['1', '2', '3', '4', '9']],
             'required' => TRUE,
             'allowEmpty' => FALSE,
             'on' => 'create',
             'message' => 'Selecionar nível de estágio. Para estágio não obrigatório selecionar 9'
         ),
         'turno' => array(
-            'rule' => array('inList', array('D', 'N', 'I')),
+            'rule' => ['inList', ['D', 'N', 'I']],
             'required' => TRUE,
             'allowEmpty' => FALSE,
             'on' => 'create',
@@ -86,11 +91,11 @@ class Estagiario extends AppModel {
         ),
         'nota' => [
             'nota1' => [
-                'rule' => ['numeric'],
+                'rule' => ['decimal'],
                 'requiered' => TRUE,
                 'allowEmpty' => TRUE,
                 'on' => 'update',
-                'message' => 'Digite um número'
+                'message' => 'Digite um número decimal'
             ],
             'nota2' => [
                 'rule' => ['between', 0, 10],

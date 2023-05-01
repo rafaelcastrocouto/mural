@@ -6,12 +6,14 @@
  * and open the template in the editor.
  */
 
-class VisitasController extends AppController {
+class VisitasController extends AppController
+{
 
     public $name = "Visitas";
     public $components = array('Auth', 'Paginator', 'Flash');
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
 
         parent::beforeFilter();
         // Admin
@@ -35,7 +37,8 @@ class VisitasController extends AppController {
         }
     }
 
-    public function index() {
+    public function index()
+    {
 
         $this->Paginator->settings = [
             'Visita' => [
@@ -47,7 +50,8 @@ class VisitasController extends AppController {
         $this->set('visitas', $this->Paginator->paginate('Visita'));
     }
 
-    public function add($id = NULL) {
+    public function add($id = NULL)
+    {
 
         $parametros = $this->params['named'];
         $instituicao_id = isset($parametros['instituicao_id']) ? $parametros['instituicao_id'] : NULL;
@@ -57,23 +61,26 @@ class VisitasController extends AppController {
         }
 
         // Capturo e envio o id da instituicao se houver
-        if ($instituicao_id == NULL) {
+        if ($instituicao_id == null) {
             $instituicao_id = $id;
             // pr($instituicao_id);
             $this->set('instituicao_id', $instituicao_id);
         } else {
-            $this->Session->setFlash('Selecione uma instituição');
+            $this->Flash->error(__('Selecione uma instituição'));
             $this->redirect('/instituicaos/lista');
         }
         // Mostar as visitas anteriores
-        $visitas = $this->Visita->find('all', array(
-            'conditions' => array('Visita.estagio_id' => $instituicao_id)
-                )
+        $visitas = $this->Visita->find(
+            'all',
+            [
+                'conditions' => ['Visita.estagio_id' => $instituicao_id]
+            ]
         );
 
         if (!empty($visitas)) {
             $this->set('visitas', $visitas);
-        };
+        }
+        ;
         // pr($visitas);
         // $log = $this->Visita->getDataSource()->getLog(false, false);
         // debug($log);
@@ -84,8 +91,7 @@ class VisitasController extends AppController {
 
         if ($this->data) {
             if ($this->Visita->save($this->data)) {
-                $this->Session->setFlash('Dados da visita institucional inseridos!');
-                // $this->Visita->getLastInsertId();
+                $this->Flash->success(__('Dados da visita institucional inseridos!'));
                 $this->redirect('/Visitas/view/' . $this->Visita->getLastInsertId());
             }
         }
@@ -93,7 +99,8 @@ class VisitasController extends AppController {
         $this->set('instituicoes', $instituicoes);
     }
 
-    public function edit($id = NULL) {
+    public function edit($id = null)
+    {
 
         $this->Visita->id = $id;
 
@@ -108,15 +115,19 @@ class VisitasController extends AppController {
         }
     }
 
-    public function excluir($id = NULL) {
+    public function excluir($id = NULL)
+    {
         $this->Visita->delete($id);
         $this->Session->setFlash('Visita institucional excluída');
         $this->redirect('/Visitas/index/');
     }
 
-    public function view($id = NULL) {
+    public function view($id = NULL)
+    {
         $visita = $this->Visita->find('first', array(
-            'conditions' => array('Visita.id' => $id)));
+            'conditions' => array('Visita.id' => $id)
+        )
+        );
         // pr($visita);
         $this->set('visita', $visita);
     }

@@ -181,10 +181,13 @@ class UsersController extends AppController {
         $this->redirect($this->Auth->logout());
     }
 
-    public function cadastro() {
+    public function cadastro($id = NULL) {
 
-        // pr($this->data);
-        // die();
+        $recadastro = $this->request->query('recadastro');
+        if ($recadastro) {
+            $this->set('recadastro', $recadastro);
+        }
+        
         if (!empty($this->data)) {
             // pr($this->data);
             // die();
@@ -377,9 +380,9 @@ class UsersController extends AppController {
         }
     }
 
-    public function excluir($id = NULL) {
+    public function excluir($id = null) {
 
-        $this->User->recursive = -1;
+        $this->User->contain();
         $user = $this->User->find('first',
                 ['conditions' => ['User.id' => $id]]);
 

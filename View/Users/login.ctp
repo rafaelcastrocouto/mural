@@ -11,7 +11,7 @@
         <?= $this->Form->input('Login', ['label' => false, 'type' => 'submit', 'class' => 'btn btn-primary position-static']); ?>
         <?= $this->Form->end(); ?>
         <div class="nav nav-tabs justify-content-center">
-            <?= $this->Html->link('Esqueceu a senha?', '/Users/cadastro/', ['class' => ['nav-item', 'nav-link']]); ?>
+            <?= $this->Html->link('Esqueceu a senha?', '/Users/cadastro?recadastro=1', ['class' => ['nav-item', 'nav-link']]); ?>
             <?= $this->Html->link('Fazer cadastro', '/Users/cadastro/', ['class' => ['nav-item', 'nav-link']]); ?>
         </div>
     </div>

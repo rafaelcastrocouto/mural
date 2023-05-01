@@ -29,7 +29,7 @@
 
         <tr>
             <td>Instituição</td>
-            <td><?php echo $inscricao['Mural']['instituicao']; ?></td>
+            <td><?php echo $this->Html->link($inscricao['Mural']['instituicao'], ['controller' => 'inscricaos', 'action' => 'index', $inscricao['Inscricao']['id_instituicao']]); ?></td>
         </tr>
 
         <tr>
@@ -45,6 +45,8 @@
     </table>
 
     <hr>
+
+    <?php echo $this->Html->link('Editar', '/Inscricaos/edit/' . $inscricao['Inscricao']['id'], ['class' => 'btn btn-info']); ?>
 
     <?php echo $this->Html->link('Excluir', '/Inscricaos/delete/' . $inscricao['Inscricao']['id'], ['class' => 'btn btn-danger'], NULL, 'Tem certeza?'); ?>
 

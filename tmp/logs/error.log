@@ -46319,3 +46319,96 @@ Stack Trace:
 #4 /home/luis/html/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
 #5 /home/luis/html/mural/webroot/index.php(124): Dispatcher->dispatch()
 #6 {main}
+2021-11-30 02:44:36 Error: [Error] Call to undefined method EstagiariosController::invalidFields()
+Request URL: /muralold/estagiarios/edit/1532
+Stack Trace:
+#0 [internal function]: EstagiariosController->edit()
+#1 /home/luis/html/Cake/Controller/Controller.php(499): ReflectionMethod->invokeArgs()
+#2 /home/luis/html/Cake/Routing/Dispatcher.php(193): Controller->invokeAction()
+#3 /home/luis/html/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#4 /home/luis/html/mural/webroot/index.php(124): Dispatcher->dispatch()
+#5 {main}
+2021-12-24 23:13:16 Error: [NotFoundException] Invalid Estagiário
+Request URL: /muralold/Estagiarios/view?registro=110116846
+Stack Trace:
+#0 [internal function]: EstagiariosController->view()
+#1 /home/luis/html/Cake/Controller/Controller.php(499): ReflectionMethod->invokeArgs(Object(EstagiariosController), Array)
+#2 /home/luis/html/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 /home/luis/html/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(EstagiariosController), Object(CakeRequest))
+#4 /home/luis/html/mural/webroot/index.php(124): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2021-12-24 23:13:36 Error: [NotFoundException] Invalid Estagiário
+Request URL: /muralold/Estagiarios/view?registro=110116846
+Stack Trace:
+#0 [internal function]: EstagiariosController->view()
+#1 /home/luis/html/Cake/Controller/Controller.php(499): ReflectionMethod->invokeArgs(Object(EstagiariosController), Array)
+#2 /home/luis/html/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 /home/luis/html/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(EstagiariosController), Object(CakeRequest))
+#4 /home/luis/html/mural/webroot/index.php(124): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2021-12-24 23:49:24 Error: [PDOException] SQLSTATE[HY000]: General error: 1364 Field 'id' doesn't have a default value
+Request URL: /muralold/folhadeatividades/addatividade?estagiario_id=5554
+Stack Trace:
+#0 /home/luis/html/Cake/Model/Datasource/DboSource.php(502): PDOStatement->execute(Array)
+#1 /home/luis/html/Cake/Model/Datasource/DboSource.php(468): DboSource->_execute('INSERT INTO `es...', Array)
+#2 /home/luis/html/Cake/Model/Datasource/DboSource.php(1132): DboSource->execute('INSERT INTO `es...')
+#3 /home/luis/html/Cake/Model/Model.php(1942): DboSource->create(Object(Folhadeatividade), Array, Array)
+#4 /home/luis/html/Cake/Model/Model.php(1760): Model->_doSave(Array, Array)
+#5 /home/luis/html/mural/Controller/FolhadeatividadesController.php(430): Model->save(Array)
+#6 [internal function]: FolhadeatividadesController->addatividade()
+#7 /home/luis/html/Cake/Controller/Controller.php(499): ReflectionMethod->invokeArgs(Object(FolhadeatividadesController), Array)
+#8 /home/luis/html/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#9 /home/luis/html/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(FolhadeatividadesController), Object(CakeRequest))
+#10 /home/luis/html/mural/webroot/index.php(124): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2021-12-25 00:16:45 Error: [Error] Call to undefined method SessionComponent::numero()
+Request URL: /muralold/folhadeatividades/edit/61
+Stack Trace:
+#0 [internal function]: FolhadeatividadesController->edit('61')
+#1 /home/luis/html/Cake/Controller/Controller.php(499): ReflectionMethod->invokeArgs(Object(FolhadeatividadesController), Array)
+#2 /home/luis/html/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 /home/luis/html/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(FolhadeatividadesController), Object(CakeRequest))
+#4 /home/luis/html/mural/webroot/index.php(124): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2022-01-14 12:31:49 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'id_aluno' cannot be null
+Request URL: /muralold/Inscricaos/termocompromisso?registro=117223717
+Stack Trace:
+#0 /home/luis/html/Cake/Model/Datasource/DboSource.php(502): PDOStatement->execute(Array)
+#1 /home/luis/html/Cake/Model/Datasource/DboSource.php(468): DboSource->_execute('INSERT INTO `es...', Array)
+#2 /home/luis/html/Cake/Model/Datasource/DboSource.php(1132): DboSource->execute('INSERT INTO `es...')
+#3 /home/luis/html/Cake/Model/Model.php(1942): DboSource->create(Object(Estagiario), Array, Array)
+#4 /home/luis/html/Cake/Model/Model.php(1760): Model->_doSave(Array, Array)
+#5 /home/luis/html/mural/Controller/InscricaosController.php(474): Model->save(Array)
+#6 [internal function]: InscricaosController->termocompromisso()
+#7 /home/luis/html/Cake/Controller/Controller.php(499): ReflectionMethod->invokeArgs(Object(InscricaosController), Array)
+#8 /home/luis/html/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#9 /home/luis/html/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(InscricaosController), Object(CakeRequest))
+#10 /home/luis/html/mural/webroot/index.php(124): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2022-01-14 13:11:19 Error: [Error] Call to a member function invalidFields() on null
+Request URL: /muralold/Inscricaos/termocompromisso?registro=117223717
+Stack Trace:
+#0 [internal function]: InscricaosController->termocompromisso()
+#1 /home/luis/html/Cake/Controller/Controller.php(499): ReflectionMethod->invokeArgs(Object(InscricaosController), Array)
+#2 /home/luis/html/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 /home/luis/html/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(InscricaosController), Object(CakeRequest))
+#4 /home/luis/html/mural/webroot/index.php(124): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2023-03-05 19:37:27 Error: [MissingControllerException] Controller class DebugKitController could not be found.
+Exception Attributes: array (
+  'class' => 'DebugKitController',
+  'plugin' => NULL,
+)
+Request URL: /muralold/DebugKit/ToolbarAccess/history_state/1
+Stack Trace:
+#0 /home/luis/html/mural/webroot/index.php(120): Dispatcher->dispatch()
+#1 {main}
+2023-03-05 19:38:32 Error: [MissingControllerException] Controller class MuralestagiosController could not be found.
+Exception Attributes: array (
+  'class' => 'MuralestagiosController',
+  'plugin' => NULL,
+)
+Request URL: /muralold/muralestagios/add
+Stack Trace:
+#0 /home/luis/html/mural/webroot/index.php(120): Dispatcher->dispatch()
+#1 {main}

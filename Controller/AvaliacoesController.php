@@ -1,14 +1,14 @@
 <?php
 
 App::uses('AppController', 'Controller');
-
 /**
  * Avaliacoes Controller
  *
  * @property Avaliacao $Avaliacao
  * @property PaginatorComponent $Paginator
  */
-class AvaliacoesController extends AppController {
+class AvaliacoesController extends AppController
+{
 
     /**
      * Components
@@ -17,7 +17,8 @@ class AvaliacoesController extends AppController {
      */
     public $components = array('Paginator', 'Flash', 'Auth', 'RequestHandler');
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
 
         parent::beforeFilter();
         // Admin
@@ -49,7 +50,8 @@ class AvaliacoesController extends AppController {
      *
      * @return void
      */
-    public function index() {
+    public function index()
+    {
 
         $this->Paginator->settings = [
             'Avaliacao' => [
@@ -69,7 +71,8 @@ class AvaliacoesController extends AppController {
      * @param string $id
      * @return void
      */
-    public function view($id = null) {
+    public function view($id = null)
+    {
 
         // die('view');
         if (!is_numeric($id)) {
@@ -137,7 +140,8 @@ class AvaliacoesController extends AppController {
      * @param string $id
      * @return void
      */
-    public function imprimepdf($id = null) {
+    public function imprimepdf($id = null)
+    {
 
         if (!is_numeric($id)) {
 
@@ -191,7 +195,8 @@ class AvaliacoesController extends AppController {
      *
      * @return void
      */
-    public function add() {
+    public function add()
+    {
 
         $estagiario_id = $this->request->query('estagiario_id');
         // pr($estagiario_id);
@@ -258,7 +263,8 @@ class AvaliacoesController extends AppController {
      * @param string $id
      * @return void
      */
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
 
         if (!is_numeric($id)) {
             $estagiario_id = $this->request->query('estagiario_id');
@@ -305,7 +311,8 @@ class AvaliacoesController extends AppController {
      * @param string $id
      * @return void
      */
-    public function delete($id = null) {
+    public function delete($id = null)
+    {
 
         if (!$this->Avaliacao->exists($id)) {
             throw new NotFoundException(__('Registro não existe'));
@@ -320,7 +327,8 @@ class AvaliacoesController extends AppController {
         return $this->redirect(array('action' => 'index'));
     }
 
-    public function busca_dre() {
+    public function busca_dre()
+    {
 
         if (!empty($this->data['Aluno']['registro'])) {
             $this->loadModel('Aluno');
@@ -351,7 +359,8 @@ class AvaliacoesController extends AppController {
         }
     }
 
-    public function historico($id = NULL) {
+    public function historico($id = NULL)
+    {
 
         $registro = isset($this->params['named']['registro']) ? $this->params['named']['registro'] : NULL;
         if (!$registro) {

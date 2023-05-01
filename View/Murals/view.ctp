@@ -205,19 +205,8 @@
             <?php if ($this->Session->read('id_categoria') === 1): ?>
 
                 <tr>
-                    <td colspan = "2" style="text-align: 'center'">
-                        <?php echo $this->Form->create('Inscricao', array('url' => '/Inscricaos/add/' . $mural['Mural']['id'])); ?>
-                        <?php echo $this->Form->input('id_instituicao', array('type' => 'hidden', 'value' => $mural['Mural']['id'])); ?>
-                        <div class='row justify-content-center'>
-                            <div class='col-auto'>
-                                <?php
-                                echo $this->Form->submit('Inscrição', ['type' => 'Submit', 'label' => ['text' => 'Inscrição', 'class' => 'col-4'], 'class' => 'btn btn-primary']);
-                                ?>
-                                <?php
-                                echo $this->Form->end();
-                                ?>
-                            </div>
-                        </div>
+                    <td colspan = '2' class="text-center">
+                        <?php echo $this->Html->link('Inscrição', ['controller' => 'inscricaos', 'action' => 'add', $mural['Mural']['id']], ['role' => 'button', 'class' => 'btn btn-primary']); ?>
                     </td>
                 </tr>
 
@@ -233,33 +222,21 @@
 
                         <tr>
                             <td colspan = 2>
-                                <p style="text-align: center; color: red">Não esqueça de também fazer inscrição na instituição. Ambas são necessárias!</p>
+                                <p class="text-center text-danger">Não esqueça de também fazer inscrição na instituição. Ambas são necessárias!</p>
                             </td>
                         </tr>
 
                     <?php endif; ?>
 
                     <tr>
-                        <td colspan = 2 style="text-align: center">
-
-                            <?php echo $this->Form->create('Inscricao', array('url' => '/Inscricaos/add/' . $mural['Mural']['id'])); ?>
-                            <?php echo $this->Form->input('id_instituicao', array('type' => 'hidden', 'value' => $mural['Mural']['id'])); ?>
-                            <div class='row justify-content-center'>
-                                <div class='col-auto'>
-                                    <?php
-                                    echo $this->Form->submit('Inscrição', ['type' => 'Submit', 'label' => ['text' => 'Inscrição', 'class' => 'col-4'], 'class' => 'btn btn-primary']);
-                                    ?>
-                                    <?php
-                                    echo $this->Form->end();
-                                    ?>
-                                </div>
-                            </div>
+                        <td colspan = 2 class="text-center">
+                            <?php echo $this->Html->link('Inscrição', ['controller' => 'inscricaos', 'action' => 'add', $mural['Mural']['id']], ['role' => 'button', 'class' => 'btn btn-primary']); ?>
                         </td>
                     </tr>
                 <?php else: ?>
                     <tr>
                         <td colspan = 2>
-                            <p style="text-align: center; color: red">Inscrições encerradas!</p>
+                            <p class="text-center text-danger">Inscrições encerradas!</p>
                         </td>
                     </tr>
                 <?php endif; ?>

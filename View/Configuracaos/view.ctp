@@ -23,21 +23,20 @@
 
     <tr>
         <td>
-            Período do termo de compromisso
-        </td>
-        <td>
-            <?php echo $configuracao['Configuracao']['termo_compromisso_periodo']; ?>
-        </td>
-    </tr>
-
-    <tr>
-        <td>
             Período do calendário acadêmico atual<br>
             <small>Para fazer a declaração de período que o aluno está cursando</small>
         </td>
         <td>
             <?php echo $configuracao['Configuracao']['periodo_calendario_academico']; ?>
+        </td>
+    </tr>
 
+    <tr>
+        <td>
+            Período do termo de compromisso
+        </td>
+        <td>
+            <?php echo $configuracao['Configuracao']['termo_compromisso_periodo']; ?>
         </td>
     </tr>
 

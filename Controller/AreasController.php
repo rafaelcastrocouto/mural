@@ -1,11 +1,13 @@
 <?php
 
-class AreasController extends AppController {
+class AreasController extends AppController
+{
 
     public $name = "Areas";
     public $components = array('Auth', 'Paginator', 'Flash');
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
 
         parent::beforeFilter();
         // Admin
@@ -30,7 +32,8 @@ class AreasController extends AppController {
         // die(pr($this->Session->read('user')));
     }
 
-    public function index() {
+    public function index()
+    {
 
         $this->Area->virtualFields['virtualMinPeriodo'] = 'min(Estagiario.periodo)';
         $this->Area->virtualFields['virtualMaxPeriodo'] = 'max(Estagiario.periodo)';
@@ -39,13 +42,15 @@ class AreasController extends AppController {
             'fields' => array('Area.id', 'Area.area', 'Professor.id', 'Professor.nome', 'Professor.departamento', 'min(Estagiario.periodo) as Area__virtualMinPeriodo', 'max(Estagiario.periodo) as Area__virtualMaxPeriodo'),
             'limit' => 10,
             'order' => 'Area.area',
-            'group' => array('Estagiario.id_professor', 'Estagiario.id_area'));
+            'group' => array('Estagiario.id_professor', 'Estagiario.id_area')
+        );
 
         $this->set('areas', $this->Paginator->paginate($this->Area->Estagiario));
         // $this->set('areas', $areas);
     }
 
-    public function lista() {
+    public function lista()
+    {
 
         $this->Paginator->settings = [
             'Area' => [
@@ -53,21 +58,24 @@ class AreasController extends AppController {
                 'limit' => 10
             ]
         ];
-       
+
         $this->set("areas", $this->Paginator->paginate('Area'));
     }
 
-    public function view($id = NULL) {
+    public function view($id = NULL)
+    {
 
         $area = $this->Area->find('first', array(
             'conditions' => array('Area.id' => $id)
-        ));
+        )
+        );
         // pr($supervisor);
 
         $this->set('area', $area);
     }
 
-    public function edit($id = NULL) {
+    public function edit($id = NULL)
+    {
 
         $this->Area->id = $id;
 
@@ -82,7 +90,8 @@ class AreasController extends AppController {
         }
     }
 
-    public function add() {
+    public function add()
+    {
 
         if ($this->data) {
             if ($this->Area->save($this->data)) {
@@ -92,15 +101,19 @@ class AreasController extends AppController {
         }
     }
 
-    public function delete($id = NULL) {
+    public function delete($id = NULL)
+    {
 
         $area = $this->Area->find('first', array(
             'conditions' => array('Area.id' => $id)
-        ));
+        )
+        );
 
         // $this->loadModel('Estagiario');
         $estagiarios = $this->Area->Estagiario->find('first', array(
-            'conditions' => 'Estagiario.id_area = ' . $id));
+            'conditions' => 'Estagiario.id_area = ' . $id
+        )
+        );
         // pr($estagiarios);
 
         if ($estagiarios) {

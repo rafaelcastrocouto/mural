@@ -98,14 +98,14 @@ echo $this->Form->create('Estagiario', [
         'after' => "<div class='valid-feedback'>Válido.</div>
     <div class='invalid-feedback'>Digite um valor correto neste campo.</div>
     </div>",
-        'error' => false
+        'error' => ['attributes' => ['wrap' => 'span', 'class' => 'help-inline']]
     ]
 ]);
 ?>
 
 <?php echo $this->Form->input('Estagiario.periodo', array('label' => ['text' => 'Período', 'class' => 'col-4'], 'options' => $periodos, 'default' => $periodo_atual)); ?>
 <?php echo $this->Form->input('Estagiario.complemento_id', array('label' => ['text' => 'Modalidade período especial', 'class' => 'col-4'], 'options' => $complemento_periodo_especial_total, 'empty' => ['Seleciona'])); ?>
-<?php echo $this->Form->input('Estagiario.nivel', array('label' => ['text' => 'Nível', 'class' => 'col-4'], 'options' => array('1' => 'I', '2' => 'II', '3' => 'III', '4' => 'IV', '9' => 'Não obrigatório'), 'default' => $proximo_nivel)); ?>
+<?php echo $this->Form->input('Estagiario.nivel', array('label' => ['text' => 'Nível', 'class' => 'col-4'], 'options' => array('1' => 'I', '2' => 'II', '3' => 'III', '4' => 'IV', '9' => 'Não obrigatório'), 'selected' => $proximo_nivel)); ?>
 <?php echo $this->Form->input('Estagiario.ajuste2020', array('label' => ['text' => 'Ajuste 2020', 'class' => 'col-4'], 'options' => ['0' => 'Não', '1' => 'Sim'])); ?>
 <?php echo $this->Form->input('Estagiario.turno', array('label' => ['text' => 'Turno', 'class' => 'col-4'], 'options' => ['D' => 'Diurno', 'N' => 'Noturno'], 'default' => 'I')); ?>
 <?php echo $this->Form->input('Estagiario.tc', array('label' => ['text' => 'TC (Aluno entrogou o TC assinado na Coordenação de Estágio?', 'class' => 'col-4'], 'options' => array('0' => 'Não', '1' => 'Sim'))); ?>
@@ -121,10 +121,14 @@ echo $this->Form->create('Estagiario', [
 <?php echo $this->Form->input('Estagiario.alunonovo_id', array('type' => 'hidden', 'value' => $estagiario['Alunonovo']['id'])); ?>
 <?php echo $this->Form->input('Estagiario.registro', array('type' => 'hidden', 'value' => $estagiario['Estagiario']['registro'])); ?>
 <?php
-if ($proximo_nivel == 1):
-    echo $this->Form->input('Estagiario.id', array('type' => 'hidden', 'value' => NULL));
-else:
+$estagio = end($estagiarios);
+// pr($estagio['Estagiario']['nivel']);
+// pr($proximo_nivel);
+if (($estagio['Estagiario']['nivel']) == $proximo_nivel):
+    // echo "Mesmo nivel";
     echo $this->Form->input('Estagiario.id', array('type' => 'hidden', 'value' => $estagiario['Estagiario']['id']));
+else:
+    echo $this->Form->input('Estagiario.id', array('type' => 'hidden', 'value' => NULL));
 endif;
 ?>
 <div class='row justify-content-center'>

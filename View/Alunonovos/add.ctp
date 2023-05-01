@@ -98,12 +98,12 @@ echo $this->Form->create('Alunonovo', [
         'between' => "<div class = 'col-8'>",
         'class' => ['form-control'],
         'after' => "</div>",
-        'error' => false
+        'error' => ['attributes' => ['wrap' => 'span', 'class' => 'help-inline']]
     ]
 ]);
 ?>
 
-<h1>Cadastro de estudante novo</h1>
+<h1 class="h2">Cadastro de estudante novo</h1>
 
 <fieldset>
     <legend>Dados da(o) aluna(o)</legend>
@@ -153,7 +153,11 @@ echo $this->Form->create('Alunonovo', [
 
             <tr>
                 <td>
-                    <?php echo $this->Form->input('ingresso', ['label' => ['text' => 'Ano e semestre de ingresso no curso', 'class' => 'col-4 control-label']]); ?>
+                    <?php if ($this->Session->read('id_categoria') == 2): ?>
+                        <?php echo $this->Form->input('ingresso', ['label' => ['text' => 'Ano e semestre de ingresso no curso', 'class' => 'col-4 control-label'], 'pattern' => '20' . substr($this->Session->read('numero'), 1, 2) . '-[1-2]']); ?>
+                    <?php else: ?>
+                        <?php echo $this->Form->input('ingresso', ['label' => ['text' => 'Ano e semestre de ingresso no curso', 'class' => 'col-4 control-label'], 'pattern' => '\d{4}-[1-2]']); ?>
+                    <?php endif; ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('turno', ['label' => ['text' => 'Turno', 'class' => 'col-4 control-label'], 'options' => ['diurno' => 'Diurno', 'noturno' => 'Noturno']]); ?>

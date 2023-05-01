@@ -104,6 +104,10 @@
         ]
     ]);
 
+    /* Acrescento um 0 no registro para visualização */
+    if (strlen($this->data['Alunonovo']['registro']) == 8) {
+        $this->request->data['Alunonovo']['registro'] = '0' . $this->data['Alunonovo']['registro'];
+    }
     if ($this->Session->read('id_categoria') == '1'):
         echo $this->Form->input('registro', ['type' => 'text']);
     else:
@@ -112,6 +116,9 @@
     echo $this->Form->input('nome');
     echo $this->Form->input('nomesocial', ['label' => ['text' => 'Nome social', 'class' => 'col-4 control-label']]);
     echo $this->Form->input('nascimento', ['label' => ['text' => 'Data de nascimento', 'class' => 'col-4 control-label'], 'dateFormat' => 'DMY', 'monthNames' => $meses, 'minYear' => '1910', 'empty' => TRUE, 'between' => "<div class = 'form-inline col-8'>"]);
+    if (strlen($this->data['Alunonovo']['ingresso']) == 4) {
+        $this->request->data['Alunonovo']['ingresso'] = $this->data['Alunonovo']['ingresso'] . '-0';
+    }
     echo $this->Form->input('ingresso', ['label' => ['text' => 'Ano e semestre de ingresso no curso', 'class' => 'col-4 control-label']]);
     echo $this->Form->input('turno', ['label' => ['text' => 'Turno', 'class' => 'col-4 control-label'], 'options' => ['diurno' => 'Diurno', 'noturno' => 'Noturno'], 'empty' => 'Seleciona']);
     echo $this->Form->input('cpf', ['label' => ['text' => 'CPF', 'class' => 'col-4 control-label']]);
