@@ -71,17 +71,17 @@ class UsersController extends AppController {
                         // pr($alunonovo['Alunonovo']);
                         // die();
 
-                        if (sizeof($alunonovo['Estagiario']) > 0):
-                            $this->Session->write('estagiario', '1');
-                        else:
-                            $this->Session->write('estagiario', '0');
-                        endif;
-
                         /*
                          * Se não há um estudante vou para alunonovo/add para fazer cadastro
                          */
                         if ($alunonovo) {
                             $this->Session->write('user', $alunonovo['Alunonovo']['nome']);
+                            // Verifico se é estagiário
+                            if (sizeof($alunonovo['Estagiario']) > 0):
+                                $this->Session->write('estagiario', '1');
+                            else:
+                                $this->Session->write('estagiario', '0');
+                            endif;
                         } else {
                             // echo "Estudante não cadastrado " . "<br>";
                             $this->redirect('/alunonovos/add?registro=' . $usuario['User']['numero']);
@@ -187,39 +187,43 @@ class UsersController extends AppController {
         if ($recadastro) {
             $this->set('recadastro', $recadastro);
         }
-        
+        // pr($recadastro);
+        // die();
         if (!empty($this->data)) {
             // pr($this->data);
             // die();
-            /*
-             * Para recuperar a senha faz um novo cadastro
-             */
-            $usuariocadastrado = $this->User->find('first', array(
-                'conditions' => array(
-                    'User.categoria' => $this->data['User']['categoria'],
-                    'User.email' => $this->data['User']['email'],
-                    'User.numero' => $this->data['User']['numero'])
-                    )
-            );
-            // pr($usuariocadastrado);
-            // die();
-
-            /*
-             * Se está recuperando a senha
-             * excluo o registro do usuer
-             */
-            if ($usuariocadastrado) {
-                // echo "Recuperação de senha de usuário já cadastrado" . "<br>";
+            if ($recadastro == 1) {
+                /*
+                 * Para recuperar a senha faz um novo cadastro
+                 */
+                $usuariocadastrado = $this->User->find('first', array(
+                    'conditions' => array(
+                        'User.categoria' => $this->data['User']['categoria'],
+                        'User.email' => $this->data['User']['email'],
+                        'User.numero' => $this->data['User']['numero'])
+                        )
+                );
                 // pr($usuariocadastrado);
-                // pr($usuariocadastrado['User']['id']);
-                if ($this->User->delete($usuariocadastrado['User']['id'])) {
-                    // echo "Usuario excluido";
+                // die();
+
+                /*
+                 * Se está recuperando a senha
+                 * excluo o registro do usuer
+                 */
+                if ($usuariocadastrado) {
+                    // echo "Recuperação de senha de usuário já cadastrado" . "<br>";
+                    // pr($usuariocadastrado);
+                    // pr($usuariocadastrado['User']['id']);
+                    if ($this->User->delete($usuariocadastrado['User']['id'])) {
+                        // echo "Usuario excluido";
+                        // die("delete user");
+                    }
                     // die("delete user");
                 }
-                // die("delete user");
             }
             // die("usuariocadastrado");
             // Primeiro verifico se o numero ja nao esta cadastrado no user
+            // O numero é o DRE, CRESS ou SIAPE
             $numero = $this->User->find('first', [
                 'conditions' => ['User.numero' => $this->data['User']['numero']]
             ]);
@@ -334,7 +338,7 @@ class UsersController extends AppController {
                     $this->redirect('/users/login');
                     break;
 
-                case 4:
+                case 4: // Supervisor
 
                     $this->loadModel('Supervisor');
                     $supervisor = $this->Supervisor->find('first', [
@@ -983,7 +987,6 @@ class UsersController extends AppController {
         }
         die();
     }
-
 }
 
 ?>

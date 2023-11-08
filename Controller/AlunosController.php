@@ -520,10 +520,12 @@ class AlunosController extends AppController
         if ($this->Session->read('id_categoria') != '2') {
 
             // pr($this->data);
+            // die();
             if (empty($this->data)) {
                 $this->data = $this->Aluno->read();
             } else {
-                // pr($this->data());
+                // pr($this->data);
+                // die();
                 // $this->Session->write('menu_aluno', 'estagiario');
                 $this->Session->write('numero', $this->data['Aluno']['registro']);
                 // $this->redirect('folhadeatividades');
@@ -534,11 +536,13 @@ class AlunosController extends AppController
         }
     }
 
-    public function folhadeatividades()
+    public function folhadeatividades($id = null)
     {
 
         if ($this->Session->read('id_categoria') == '2') {
             $dre = $this->Session->read('numero');
+        } else {
+            $dre = $id;
         }
 
         if (!isset($dre) || empty($dre)) {
@@ -584,11 +588,13 @@ class AlunosController extends AppController
         }
     }
 
-    public function folhadeatividadespdf($id = NULL)
+    public function folhadeatividadespdf($id = null)
     {
 
         if ($this->Session->read('id_categoria') == '2') {
             $dre = $this->Session->read('numero');
+        } else {
+            $dre = $id;
         }
 
         if (!isset($dre) || empty($dre)) {

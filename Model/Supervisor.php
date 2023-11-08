@@ -1,6 +1,7 @@
 <?php
 
-class Supervisor extends AppModel {
+class Supervisor extends AppModel
+{
     /*
      * @var Estagiario
      * @var Instituicao
@@ -14,10 +15,8 @@ class Supervisor extends AppModel {
     public $hasMany = array(
         'Estagiario' => array(
             'className' => 'Estagiario',
-            'foreignKey' => 'id_supervisor'),
-        'User' => array(
-            'className' => 'User',
-            'foreignKey' => 'supervisor_id')
+            'foreignKey' => 'id_supervisor'
+        )
     );
     public $hasAndBelongsToMany = array(
         'Instituicao' => array(
@@ -45,7 +44,8 @@ class Supervisor extends AppModel {
       );
      */
 
-    public function beforeValidate($options = array()) {
+    public function beforeValidate($options = array())
+    {
 
         // pr($this->data);
         $this->data['Supervisor']['nome'] = mb_convert_case($this->data['Supervisor']['nome'], MB_CASE_TITLE, 'utf-8');
@@ -93,7 +93,8 @@ class Supervisor extends AppModel {
         )
     );
 
-    public function verifica_cress($check) {
+    public function verifica_cress($check)
+    {
 
         $value = array_values($check);
         $valor = $value[0];
@@ -111,7 +112,8 @@ class Supervisor extends AppModel {
         return TRUE;
     }
 
-    public function cpf_verifica($check) {
+    public function cpf_verifica($check)
+    {
 
         $value = NULL;
         $value = array_values($check);

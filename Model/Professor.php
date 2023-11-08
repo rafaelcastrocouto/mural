@@ -16,6 +16,7 @@ class Professor extends AppModel {
             'className' => 'User',
             'foreignKey' => 'docente_id'
         ),
+        /*
         'Extensao' => array(
             'className' => 'Extensao',
             'foreignKey' => 'docente_id',
@@ -29,6 +30,8 @@ class Professor extends AppModel {
             'finderQuery' => '',
             'counterQuery' => ''
         )
+         * 
+         */
     );
         public $hasOne = array(
         'User' => array(
