@@ -721,6 +721,8 @@ class EstagiariosController extends AppController
             ]
         );
         // die();
+
+        // Obsoleto
         // Para acrescenter os próximos periodos carrego a configuracao do planejamento
         $this->loadModel('Configuraplanejamento');
         $periodo_planejamento = $this->Configuraplanejamento->find('all');
@@ -734,6 +736,7 @@ class EstagiariosController extends AppController
         // pr($semestres);
         // die();
         // $this->set('periodos', $semestres);
+
         // Captura o periodo de estagio atual
         $this->loadModel("Configuracao");
         $configuracao = $this->Configuracao->findById('1');
@@ -846,7 +849,7 @@ class EstagiariosController extends AppController
         );
         $this->set('areas', $areas);
 
-        /* Select complemento periodo especical */
+        /* Select complemento periodo especical. Criado durante a pandemia. */
         $complemento_periodo_especial_total = $this->Estagiario->Complemento->find('list');
         $this->set('complemento_periodo_especial_total', $complemento_periodo_especial_total);
 

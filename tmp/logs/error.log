@@ -46412,3 +46412,86 @@ Request URL: /muralold/muralestagios/add
 Stack Trace:
 #0 /home/luis/html/mural/webroot/index.php(120): Dispatcher->dispatch()
 #1 {main}
+2023-11-08 01:17:05 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Extensao.docente_id' in 'field list'
+Request URL: /muralold/users/listausuarios/
+Stack Trace:
+#0 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(502): PDOStatement->execute()
+#1 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(468): DboSource->_execute()
+#2 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(715): DboSource->execute()
+#3 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(1564): DboSource->fetchAll()
+#4 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(1398): DboSource->_fetchHasMany()
+#5 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(1257): DboSource->queryAssociation()
+#6 /home/luis/html/Cake/lib/Cake/Model/Model.php(3053): DboSource->read()
+#7 /home/luis/html/Cake/lib/Cake/Model/Model.php(3025): Model->_readDataSource()
+#8 /home/luis/html/mural/Controller/UsersController.php(575): Model->find()
+#9 [internal function]: UsersController->listausuarios()
+#10 /home/luis/html/Cake/lib/Cake/Controller/Controller.php(499): ReflectionMethod->invokeArgs()
+#11 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction()
+#12 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#13 /home/luis/html/mural/webroot/index.php(121): Dispatcher->dispatch()
+#14 {main}
+2023-11-08 01:18:24 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Extensao.docente_id' in 'field list'
+Request URL: /muralold/users/listausuarios/
+Stack Trace:
+#0 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(502): PDOStatement->execute()
+#1 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(468): DboSource->_execute()
+#2 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(715): DboSource->execute()
+#3 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(1564): DboSource->fetchAll()
+#4 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(1398): DboSource->_fetchHasMany()
+#5 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(1257): DboSource->queryAssociation()
+#6 /home/luis/html/Cake/lib/Cake/Model/Model.php(3053): DboSource->read()
+#7 /home/luis/html/Cake/lib/Cake/Model/Model.php(3025): Model->_readDataSource()
+#8 /home/luis/html/mural/Controller/UsersController.php(575): Model->find()
+#9 [internal function]: UsersController->listausuarios()
+#10 /home/luis/html/Cake/lib/Cake/Controller/Controller.php(499): ReflectionMethod->invokeArgs()
+#11 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction()
+#12 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#13 /home/luis/html/mural/webroot/index.php(121): Dispatcher->dispatch()
+#14 {main}
+2023-11-08 01:18:27 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Extensao.docente_id' in 'field list'
+Request URL: /muralold/users/listausuarios/
+Stack Trace:
+#0 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(502): PDOStatement->execute()
+#1 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(468): DboSource->_execute()
+#2 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(715): DboSource->execute()
+#3 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(1564): DboSource->fetchAll()
+#4 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(1398): DboSource->_fetchHasMany()
+#5 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(1257): DboSource->queryAssociation()
+#6 /home/luis/html/Cake/lib/Cake/Model/Model.php(3053): DboSource->read()
+#7 /home/luis/html/Cake/lib/Cake/Model/Model.php(3025): Model->_readDataSource()
+#8 /home/luis/html/mural/Controller/UsersController.php(575): Model->find()
+#9 [internal function]: UsersController->listausuarios()
+#10 /home/luis/html/Cake/lib/Cake/Controller/Controller.php(499): ReflectionMethod->invokeArgs()
+#11 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction()
+#12 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#13 /home/luis/html/mural/webroot/index.php(121): Dispatcher->dispatch()
+#14 {main}
+2023-11-08 01:19:14 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Extensao.docente_id' in 'field list'
+Request URL: /muralold/users/listausuarios/
+Stack Trace:
+#0 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(502): PDOStatement->execute()
+#1 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(468): DboSource->_execute()
+#2 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(715): DboSource->execute()
+#3 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(1564): DboSource->fetchAll()
+#4 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(1398): DboSource->_fetchHasMany()
+#5 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(1257): DboSource->queryAssociation()
+#6 /home/luis/html/Cake/lib/Cake/Model/Model.php(3053): DboSource->read()
+#7 /home/luis/html/Cake/lib/Cake/Model/Model.php(3025): Model->_readDataSource()
+#8 /home/luis/html/mural/Controller/UsersController.php(575): Model->find()
+#9 [internal function]: UsersController->listausuarios()
+#10 /home/luis/html/Cake/lib/Cake/Controller/Controller.php(499): ReflectionMethod->invokeArgs()
+#11 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction()
+#12 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#13 /home/luis/html/mural/webroot/index.php(121): Dispatcher->dispatch()
+#14 {main}
+2023-11-10 14:41:27 Error: [MissingActionException] Action UsersController::Users() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'Users',
+)
+Request URL: /muralold/users/Users/login
+Stack Trace:
+#0 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction()
+#1 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#2 /home/luis/html/mural/webroot/index.php(121): Dispatcher->dispatch()
+#3 {main}

@@ -124,7 +124,7 @@ class AlunonovosController extends AppController {
         // die('registro');
         $this->set('registro', $registro);
 
-        // Para construir o datalist
+        // Para construir o datalist consulto a função orgao()
         $this->set('orgaos', $this->orgao());
 
         // pr($this->data);
@@ -135,12 +135,12 @@ class AlunonovosController extends AppController {
             $this->Session->write('id_categoria', '2');
             $this->Session->write('numero', $registro);
             // die();
+
+            // Isto pode estar obsoleto
             // Capturo o id da instituicao (se foi chamada desde inscriacao add)
             $inscricao_selecao_estagio = $this->Session->read('id_instituicao');
-
             // Capturo se foi chamado desde a solicitacao do termo
             $registro_termo = $this->Session->read('termo');
-
             // Vejo se foi chamado desde users/cadastro. Acho que já não tem nenhuma função
             $cadastro = $this->Session->read('cadastro');
             $this->Session->write('user', $this->data['Alunonovo']['nome']);

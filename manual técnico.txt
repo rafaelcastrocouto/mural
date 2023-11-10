@@ -1,0 +1,36 @@
+# 1) Cadastramento de usuários
+Tabelas relacionadas:
+User (user): Alunonovo, Professor, Supervisor
+
+O usuário da tabela User pode ser um Alunonovo, um Professor ou um Supervisor.
+Por essa razão exitem três campos: estudante_id, docente_id, supervisor_id.
+Nesses campos é colocado o id da ficha (alunonovo, professor, supervisor) respectiva.
+
+## Função cadastro no UsersController
+
+Para recuperar a senha é realizada a exclusão do registro anterior e substituida por um novo registro (o aluno -professor ou superivsor- tem que digitar o mesmo número de DRE, SIAPE ou CRESS e do usuário. Caso contrário receberá uma mensagem de error. Isto é muito comun, o estudante reclama que não consegue recuperar a senha porque de fato está digitanto um e-mail diferente daquele com o qual fez o cadastro. Neste caso a única solução e fazer a exclusão do cadastro anterior manualmente por parte do administrador.).
+
+A função cadastro no UsersController é realizada a verfificação campo por campo se o usuário já está cadastrado. 
+Uma vez cadastrado são gravados os cookies para seguir ao usuário: user, categoria, id_categoria, numero.
+Ato seguido verifica se já está cadastrada a ficha como alunonovo, professor ou supervisor. 
+Se está cadastrado (situação fora do comum, mas que pode acontecer quando por exemplo o usuário muda a senha e o registro do usuário anterior é excluido) então capturo o id da ficha do usuário e gravo no user correspondente (p. ex. estudante_id).
+Se não está (o que deberia ser normal) então é encaminhado ('redirect') para a função add do controller correspondente.
+Feita a ficha correspondente no controller (p. ex. na funação add da classe AlunonovosController), também precisa gravar o id no User correspondente.
+
+2) Divulgação de vagas no Mural e Inscricao do Alunonovo para vaga de estágio
+Tabelas relacionadas:
+Murals (mural_estagio): Instituições (estagio), Alunonovos (alunosnovos), Inscricaos (mural_inscricao)
+A tabela Instituições está relacionada com Visitas e com Supervisores.
+
+3) Inscrição do aluno para estágio: termo de compromisso
+Tabelas relacionadas:
+Estagario (estagariarios): alunonovo, Professor, Supervisor, instituição
+
+Processos para a função add do controller EstagariariosController:
+Verifica se é estágiario
+Se não é estagiario então o nivel de estágio é I
+Se é estagiario o nível de estágio é calculado em funação do periodo atual e do periódo de estágio
+Também tem que calcular se é do curriculo novo o velho porque muda a quantidade de periódos
+Finalmente se excede a quantidade periódos 3 ou 4 segundo seja do curriculo novo ou velho, então o nivel é 9 que quer dizer estágio não-obrigatório. E vai ser sempre assim nas sucessivas inscrições.
+
+4) Complemntos: folha de atividades e avalição do supervisor

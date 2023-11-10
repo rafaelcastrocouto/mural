@@ -63,6 +63,6 @@ e o Id vai como parametro simples.
 
 2 de agosto de 2022
 * Alunos que não continuam estágio no período subsiguiente ok!
-* Aba para que a instituição manifeste interesse em fazer convêncio para estagio
+* Aba para que a instituição manifeste interesse em fazer convênio para estágio
 * Declaração de inscrição Ok!
 
