@@ -23,10 +23,10 @@
             Para fazer inscrição para seleção de estágio, assim como também para solicitar o termo de compromisso, é necessário estar <?php echo $this->Html->link('cadastrado', '/users/cadastro/'); ?> como usuária(o) do sistema.
             <br />
             <br />
-            As(os) estudantes cadastrados poderão, além de fazer inscrição para seleção de estágio, solicitar <strong>termo de compromisso</strong>, formulário de <strong>avaliação discente</strong> de parte do supervisor, <strong>declaração de estágio</strong>, atualizar a informação sobre seus dados pessoais, assim como também, atualizar informação sobre as instituições campos de estágio da ESS/UFRJ.
+            As(os) estudantes cadastrados podem, fazer inscrição para seleção de estágio, solicitar <strong>termo de compromisso</strong>, formulário de <strong>avaliação discente</strong> de parte do supervisor, <strong>declaração de estágio</strong>, atualizar a informação sobre seus dados pessoais, assim como também, atualizar informação sobre as instituições campos de estágio da ESS/UFRJ.
             <br />
             <br />
-            Supervisores e professores também podem realizar cadastro, e contribuir para atualizar dados das instituições, assim como manter atualizada a informação sobre seus dados profissionais. Agora supervisores também podem fazer a <strong>avaliação discente <i>on-line</i></strong>
+            Supervisores e professores também podem realizar cadastro e contribuir para atualizar dados das instituições, assim como manter atualizada a informação sobre seus dados profissionais. Agora supervisores também podem fazer a <strong>avaliação discente <i>on-line</i></strong>
             <br />
             <br />
             Agora também está disponível para preenchimento <i>on-line</i> a <strong>Folha de atividades!</p>

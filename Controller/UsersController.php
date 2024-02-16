@@ -183,20 +183,18 @@ class UsersController extends AppController {
 
     public function cadastro($id = NULL) {
 
-        // Verifico se está procurando fazer recadastramento.
-        // Se é um recadastramento envio a informação para a view
         $recadastro = $this->request->query('recadastro');
         if ($recadastro) {
             $this->set('recadastro', $recadastro);
         }
         // pr($recadastro);
         // die();
-        if ($this->data) {
+        if (!empty($this->data)) {
             // pr($this->data);
             // die();
             if ($recadastro == 1) {
                 /*
-                 * Para recuperar a senha faz um novo cadastro com os MESMOS dados
+                 * Para recuperar a senha faz um novo cadastro
                  */
                 $usuariocadastrado = $this->User->find('first', array(
                     'conditions' => array(
@@ -213,7 +211,6 @@ class UsersController extends AppController {
                  * excluo o registro do usuer
                  */
                 if ($usuariocadastrado) {
-                    $this->Flash->success(__("Alteração da senha do usuário"));
                     // echo "Recuperação de senha de usuário já cadastrado" . "<br>";
                     // pr($usuariocadastrado);
                     // pr($usuariocadastrado['User']['id']);
@@ -222,9 +219,6 @@ class UsersController extends AppController {
                         // die("delete user");
                     }
                     // die("delete user");
-                } else {
-                    $this->Flash->error(__("Usuário não localizado no cadastro. Tente novamente ou informe à Coordenação de Estágio do problema."));
-                    $this->redirect("/Users/login");
                 }
             }
             // die("usuariocadastrado");
@@ -241,7 +235,8 @@ class UsersController extends AppController {
                 $this->redirect("/Users/login/");
                 die("Numero já cadastrado");
             }
-            // Depois verifico se o email ja nao esta cadastrado no user
+            // die("Numero já cadastrado");
+            // Segundo verifico se o email ja nao esta cadastrado no user
             $email = $this->User->find('first', [
                 'conditions' => ['User.email' => $this->data['User']['email']]
                     ]
@@ -254,7 +249,6 @@ class UsersController extends AppController {
                 die("Email já cadastrado");
             }
             // die("Email já cadastrado");
-            
             // Agora, tenho que cadastrar como alunos, professores, etc
             switch ($this->data['User']['categoria']) {
                 case 2:
@@ -385,7 +379,8 @@ class UsersController extends AppController {
             }
             $this->redirect('/users/login/');
         } else {
-            // $this->Flash->error(__('Preencha o formulário'));
+            // $this->Session->setFlash(__('Não foi possível completar o cadastramento'));
+            // $this->redirect('/users/login/');
         }
     }
 
