@@ -67,8 +67,8 @@ class AlunonovosController extends AppController {
  
         $this->Alunonovo->contain(['Estagiario', 'Inscricao']);
 
-        /* Conta as inscrições e os estágios cursados. O servidor não suporta todos os registros, faço por lotes de 1000 */ 
         $estudantes = $this->Alunonovo->find('all');
+        /* Conta as inscrições e os estágios cursados. O servidor não suporta todos os registros, faço por lotes de 1000 */ 
         // $estudantes = $this->Alunonovo->find('all', ['limit' => 1000, 'offset' => 0]);
  
         if ($estudantes) {
@@ -656,7 +656,7 @@ class AlunonovosController extends AppController {
             $ingresso = explode('-', $this->data['Alunonovo']['ingresso']);
         } else {
             $this->Flash->error(__('Digite o ano e semestre de ingresso no curso'));
-            $this->redirect(['controller' => 'Alunonovo', 'action' => 'view', $id]);
+            $this->redirect(['controller' => 'Alunonovos', 'action' => 'view', $id]);
         }
         $totalperiodo = (intval($periodoacademico[0]) - intval($ingresso[0])) * 2;
 
