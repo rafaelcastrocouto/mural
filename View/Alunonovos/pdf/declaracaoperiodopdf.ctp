@@ -1,9 +1,9 @@
 <?php
-// pr($estagiorealizado);
+
 $dia = strftime('%e', time());
 $mes = strftime('%B', time());
 $ano = strftime('%Y', time());
-// pr($estudante['Alunonovo']['turno']);
+
 if ($estudante['Alunonovo']['turno'] == 'diurno'):
     $duracaocurso = '8';
 elseif ($estudante['Alunonovo']['turno'] == 'noturno'):

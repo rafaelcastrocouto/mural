@@ -832,9 +832,10 @@ class UsersController extends AppController {
                     case 2:
                         // pr($this->data);
                         // die();
-                        $aluno_id = $this->User->find('first', [
-                            'contain' => ['Alunonovo'],
-                            'conditions' => ['User.numero' => $this->data['User']['numero']]
+                        $this->loadModel('Alunonovo');
+                        $this->Alunonovo->contain();
+                        $aluno_id = $this->Alunonovo->find('first', [
+                            'conditions' => ['Alunonovo.registro' => $this->data['User']['numero']]
                         ]);
                         // pr($aluno_id['Alunonovo']);
                         // die();
@@ -977,10 +978,10 @@ class UsersController extends AppController {
                 $c_user['User']['supervisor_id'] = $supervisor['Supervisor']['id'];
                 if ($this->User->save($c_user)) {
                     echo "Atualizado";
-                    echo $this->Flash->success(__('Registro atualizado!'));
+                    $this->Flash->success(__('Registro atualizado!'));
                 } else {
                     echo "Error!";
-                    echo $this->Flash->error(__('Registro NÃO atualizado!'));
+                    $this->Flash->error(__('Registro NÃO atualizado!'));
                 }
             }
             // die();

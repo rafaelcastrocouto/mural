@@ -329,12 +329,9 @@ class AvaliacoesController extends AppController
 
     public function busca_dre()
     {
-
         if (!empty($this->data['Aluno']['registro'])) {
             $this->loadModel('Aluno');
             $alunos = $this->Aluno->findFirstByRegistro($this->data['Aluno']['registro']);
-            // pr($alunos);
-            // die();
             if (empty($alunos)) {
                 // Teria que buscar na tabela alunos_novos
                 $this->loadModel('Alunonovo');

@@ -64,23 +64,23 @@ class AlunonovosController extends AppController {
     }
 
     public function estudantes() {
- 
+
         $this->Alunonovo->contain(['Estagiario', 'Inscricao']);
 
+        /* Conta as inscrições e os estágios cursados. O servidor não suporta todos os registros, faço por lotes de 1000 */
         $estudantes = $this->Alunonovo->find('all');
-        /* Conta as inscrições e os estágios cursados. O servidor não suporta todos os registros, faço por lotes de 1000 */ 
         // $estudantes = $this->Alunonovo->find('all', ['limit' => 1000, 'offset' => 0]);
- 
+
         if ($estudantes) {
             foreach ($estudantes as $estudante) {
                 if ($estudante['Alunonovo']['inscricao_count'] == 0 || $estudante['Alunonovo']['estagiario_count'] == 0) {
                     $estudante['Alunonovo']['inscricao_count'] = count($estudante['Inscricao']);
                     $estudante['Alunonovo']['estagiario_count'] = count($estudante['Estagiario']);
- 
+
                     /* Atualiza o registro com os novos dados */
                     if ($this->Alunonovo->save($estudante['Alunonovo'], ['validates' => true])) {
                         // echo $id = $this->Alunonovo->id;
-                     } else {
+                    } else {
                         // echo $errors = $this->Alunonovo->validationErrors;
                     }
                 }
@@ -89,7 +89,7 @@ class AlunonovosController extends AppController {
                     // Se o DRE tem 9 dígitos então os dígitos 1 e 2 correspondem ao século XXI
                     if (strlen(trim($estudante['Alunonovo']['registro'])) == 9) {
                         $estudante['Alunonovo']['ingresso'] = '20' . substr($estudante['Alunonovo']['registro'], 1, 2);
-                    // Se o DRE tem 8 dígitos então os dois primeiros dígitos corresponde ao século XX
+                        // Se o DRE tem 8 dígitos então os dois primeiros dígitos corresponde ao século XX
                     } elseif (strlen(trim($estudante['Alunonovo']['registro'])) == 8) {
                         // pr($aluno);
                         $estudante['Alunonovo']['ingresso'] = '19' . substr($estudante['Alunonovo']['registro'], 0, 2);
@@ -120,6 +120,7 @@ class AlunonovosController extends AppController {
      * esta funcao eh chamada desde inscricao para selecao de estagio
      * e tambem desde termo de compromisso
      */
+
     public function add($id = null) {
 
         $registro = isset($this->params['named']['registro']) ? $this->params['named']['registro'] : NULL;
@@ -199,6 +200,7 @@ class AlunonovosController extends AppController {
      * esta funcao eh chamada desde inscricao para selecao de estagio
      * e tambem desde termo de compromisso     *
      */
+
     public function edit($id = null) {
 
         /** Verifica autorização: somente o administrador e o próprio aluno podem editar */
@@ -351,7 +353,7 @@ class AlunonovosController extends AppController {
             }
         }
 
-        /** Obtenho o registro do aluno com o Id ou com o Registro */ 
+        /** Obtenho o registro do aluno com o Id ou com o Registro */
         if ($id) {
             $aluno = $this->Alunonovo->find(
                     'first',
@@ -370,7 +372,7 @@ class AlunonovosController extends AppController {
             die();
         }
 
-        /** Inscricoes realizadas */ 
+        /** Inscricoes realizadas */
         $this->loadModel('Inscricao');
         $this->Inscricao->contain(['Mural']);
         $inscricoes = $this->Inscricao->findAllByIdAluno($aluno['Alunonovo']['registro']);
@@ -626,12 +628,14 @@ class AlunonovosController extends AppController {
 
     public function declaracaoperiodopdf($id = NULL) {
 
+        
         if ($this->data) {
             if ($this->Alunonovo->save($this->data)):
                 $this->Flash->success(__('Atualizado!'));
             else:
                 $errors = $this->Alunonovo->invalidFields();
-                // pr($errors);
+                pr($errors);
+                die();
                 $this->Flash->error(__('Não atualizado!'));
             endif;
         }
@@ -651,8 +655,9 @@ class AlunonovosController extends AppController {
             }
         }
 
+        $ingresso = explode('-', $this->data['Alunonovo']['ingresso']);
         $periodoacademico = explode('-', $this->data['Alunonovo']['periodoacademico']);
-        if (strlen($this->data['Alunonovo']['ingresso'] == 6)) {
+        if (strlen($this->data['Alunonovo']['ingresso']) == 6) {
             $ingresso = explode('-', $this->data['Alunonovo']['ingresso']);
         } else {
             $this->Flash->error(__('Digite o ano e semestre de ingresso no curso'));

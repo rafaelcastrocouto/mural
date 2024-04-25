@@ -3,7 +3,7 @@
     <?php echo $message; ?>
 </div>
 //-->
-<div id="<?php echo $key; ?>Message" class="alert alert-success">
+<div id="<?php echo $key; ?>Message" class="alert alert-success alert-dismissible">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <p>
         <strong>
