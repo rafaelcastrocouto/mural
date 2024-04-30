@@ -44,5 +44,3 @@ class Visita extends AppModel {
     );
 
 }
-
-?>
