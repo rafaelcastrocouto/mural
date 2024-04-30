@@ -16,11 +16,11 @@ class AlunosController extends AppController
 {
 
     public $name = 'Alunos';
-    public $components = array('Auth', 'Paginator', 'RequestHandler', 'Flash');
-    public $paginate = array(
+    public $components = ['Auth', 'Paginator', 'RequestHandler', 'Flash'];
+    public $paginate = [
         'limit' => 15,
-        'contain' => array('Estagiario')
-    );
+        'contain' => ['Estagiario']
+    ];
 
     public function beforeFilter()
     {
@@ -57,7 +57,7 @@ class AlunosController extends AppController
                 'contain' => ['Estagiario' => ['Alunonovo']],
                 'limit' => 10,
                 'order' => [
-                    'Aluno.nome' => 'asc'
+                    'Aluno.nome' => 'ASC'
                 ]
             ]
         ];

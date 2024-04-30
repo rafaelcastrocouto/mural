@@ -62,8 +62,8 @@ if (!defined('APP_DIR')) {
  * /lib/Cake/Console/Templates/skel/webroot/index.php
  */
 // define('CAKE_CORE_INCLUDE_PATH', ROOT);
+// define('CAKE_CORE_INCLUDE_PATH', DS . 'home' . DS . 'luis' . DS . 'html' . DS . 'lib');
 define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'Cake' . DS . 'lib');
-// define('CAKE_CORE_INCLUDE_PATH', DS . 'home' . DS . 'luis' . DS . 'html' . DS . 'Cake');
 // print "CAKE_CORE_INCLUDE_PATH " . CAKE_CORE_INCLUDE_PATH . "<BR>";
 
 /**

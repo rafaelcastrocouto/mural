@@ -75,28 +75,28 @@
 * For MySQL, MySQLi, Postgres and DB2, specifies the character encoding to use when connecting to the
 * database.  Uses database default.
 *
-*/
+ */
 class DATABASE_CONFIG {
 
-	public $default = array(
-			'datasource' => 'Database/Mysql',
-			'persistent' => false,
-			'host' => 'localhost',
-			'login' => 'ess_apps',
-			'password' => 'SGCSdM35pmKkrqiatkUzhicppp5NZD',
-			'database' => 'ess_apps',
-			'prefix' => '',
-			'encoding' => 'utf8',
-	);
+        public $default = array(
+                        'datasource' => 'Database/Mysql',
+                        'persistent' => false,
+                        'host' => 'localhost',
+                        'login' => 'ess_apps',
+                        'password' => 'SGCSdM35pmKkrqiatkUzhicppp5NZD',
+                        'database' => 'ess_apps',
+                        'prefix' => '',
+                        'encoding' => 'utf8',
+        );
 
-	public $test = array(
-			'datasource' => 'Database/Mysql',
-			'persistent' => false,
-			'host' => 'localhost',
-			'login' => 'ess_drupal',
-			'password' => '5j3UMKcLMrZHs7kMhrRfU62ACg4EMy',
-			'database' => 'ess_drupal',
-			'prefix' => 'utf8',
-	);
+        public $test = array(
+                        'datasource' => 'Database/Mysql',
+                        'persistent' => false,
+                        'host' => 'localhost',
+                        'login' => 'ess_drupal',
+                        'password' => '5j3UMKcLMrZHs7kMhrRfU62ACg4EMy',
+                        'database' => 'ess_drupal',
+                        'prefix' => 'utf8',
+        );
 }
 ?>

@@ -18,11 +18,11 @@
 
     <?= $this->element('submenu_alunonovos') ?>
 
-    <h2>Declaração de periódo em curso</h2>
+    <h2>Declaração de período em curso</h2>
 
     <?php
     echo $this->Form->create('Alunonovo', [
-        'url' => ['controller' => 'Alunonovos', 'action' => 'declaracaoperiodopdf', $estudante['Alunonovo']['id'], 'ext' => 'pdf', 'declaracaoperiodopdf'],
+        'url' => ['controller' => 'Alunonovos', 'action' => 'declaracaoperiodopdf', $estudante['Alunonovo']['id'], 'ext' => 'pdf', 'declaracaoperiodo'],
         'class' => 'form-horizontal',
         'role' => 'form',
         'inputDefaults' => [
@@ -47,8 +47,8 @@
 
     echo $this->Form->input('registro', ['type' => 'text', 'value' => $estudante['Alunonovo']['registro'], 'readonly']);
 
-    if (empty($estudante['Alunonovo']['ingresso']) || strlen($estudante['Alunonovo']['ingresso'] < 6)):
-        echo $this->Form->input('ingresso', ['label' => ['text' => 'Ano e semestre de ingresso no curso', 'class' => 'col-2 control-label'], 'required']);
+    if (empty($estudante['Alunonovo']['ingresso']) || (strlen(trim($estudante['Alunonovo']['ingresso'])) < 6)):
+        echo $this->Form->input('ingresso', ['label' => ['text' => 'Digitar ano e semestre de ingresso no curso', 'class' => 'col-2 control-label'], 'required']);
     else:
         echo $this->Form->input('ingresso', ['label' => ['text' => 'Ano e semestre de ingresso no curso', 'class' => 'col-2 control-label'], 'value' => $estudante['Alunonovo']['ingresso'], 'required', 'readonly']);
     endif;

@@ -44,20 +44,10 @@
                     <td><?= $this->Html->link($estudante['Alunonovo']['nome'], ['controller' => 'alunonovos', 'action' => 'view', $estudante['Alunonovo']['id']]) ?></td>
                     <td><?= $estudante['Alunonovo']['celular'] ?></td>
                     <td><?= $estudante['Alunonovo']['email'] ?></td>
-                    <td><?= $estudante['Alunonovo']['ingresso'] ?></td>
-                    <?php if ($estudante['Alunonovo']['inscricao_count'] != count($estudante['Inscricao'])): ?> 
-                        <td class='bg-warning text-dark'><?= $estudante['Alunonovo']['inscricao_count'] ?></td>
-                    <?php else: ?>
-                        <td><?= $estudante['Alunonovo']['inscricao_count'] ?></td>                    
-                    <?php endif; ?>
-
-                    <?php if ($estudante['Alunonovo']['estagiario_count'] != count($estudante['Estagiario'])): ?> 
-                        <td class='bg-warning text-dark'><?= $estudante['Alunonovo']['estagiario_count'] ?></td>
-                    <?php else: ?>
-                        <td><?= $estudante['Alunonovo']['estagiario_count'] ?></td>                    
-                    <?php endif; ?>
+                    <td><?= $estudante['Alunonovo']['ingresso'] ?></td>    
+                    <td><?= $estudante['Alunonovo']['inscricao_count'] ?></td>
+                    <td><?= $estudante['Alunonovo']['estagiario_count'] ?></td>
                 </tr>
-
             <?php endforeach; ?>
         </tbody>
     </table>

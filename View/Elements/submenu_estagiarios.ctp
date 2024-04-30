@@ -7,6 +7,8 @@
         <ul class="navbar-nav mr-auto">
             <?php if ($this->Session->read('id_categoria') == '1'): ?>
                 <li class="nav-item"><?= $this->Html->link(__('Estudantes'), ['controller' => 'alunonovos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
+                <li class="nav-item"><?= $this->Html->link(__('E-mails dos estudantes'), ['controller' => 'estagiarios', 'action' => 'email'], ['class' => 'nav-link']) ?></li>
+                <li class="nav-item"><?= $this->Html->link(__('E-mails dos supervisores'), ['controller' => 'estagiarios', 'action' => 'emailsupervisor'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Inserir'), ['controller' => 'estagiarios', 'action' => 'add_estagiario'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Buscar'), ['controller' => 'alunos', 'action' => 'busca'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Não obrigatório'), ['controller' => 'estagiarios', 'action' => 'index?nivel=9'], ['class' => 'nav-link']) ?></li>

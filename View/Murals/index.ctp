@@ -1,4 +1,5 @@
 <?php
+
 // pr($alunosnaocadastrados);
 // pr($mural);
 // die();
@@ -46,7 +47,7 @@
                 <?php echo $this->Form->input('periodo', array('type' => 'select', 'label' => ['text' => 'Mural de estágios da ESS/UFRJ&nbsp', 'style' => 'display: inline;'], 'options' => $todos_periodos, 'default' => $periodo, 'class' => 'form-control')); ?>
                 <?php echo $this->Form->end(); ?>
             <?php else: ?>
-                <h1 style="text-align: center;">Mural de estágios da ESS/UFRJ. Período: <?php echo $periodo; ?></h1>
+            <h1 style="text-align: center;">Mural de estágios da ESS/UFRJ. Período: <?php echo $periodo; ?></h1>
             <?php endif; ?>
         </div>
     </div>
@@ -54,7 +55,7 @@
     <div class="row justify-content-center">
         <div class="col-auto">
             <?php if ($this->Session->read('id_categoria') == '1'): ?>
-                <p>Há <?php echo $total_vagas; ?> vagas de estágio e <?php echo $total_alunos; ?> estudantes buscando estágio (<?php echo $alunos_novos; ?> pela primeira vez e <?php echo $alunos_estagiarios; ?> que mudam de estágio)</p>
+            <p>Há <?php echo $total_vagas; ?> vagas de estágio e <?php echo $total_alunos; ?> estudantes buscando estágio (<?php echo $alunos_novos; ?> pela primeira vez e <?php echo $alunos_estagiarios; ?> que mudam de estágio)</p>
             <?php endif; ?>
         </div>
     </div>
@@ -77,19 +78,19 @@
         <thead class="thead-light">
             <tr>
                 <?php if ($this->Session->read('id_categoria') == '1'): ?>
-                    <th><?= $this->Paginator->sort('id', 'Id') ?></th>
+                <th><?= $this->Paginator->sort('id', 'Id') ?></th>
                 <?php endif; ?>
                 <th style="width: 25%"><?= $this->Paginator->sort('instituicao', 'Instituição') ?></th>
                 <th><?= $this->Paginator->sort('vagas', 'Vagas') ?></th>
                 <?php if ($this->Session->read('id_categoria') == '1'): ?>
-                    <th>Atual</th>
+                <th>Atual</th>
                 <?php endif; ?>
                 <th>Inscritos</th>
                 <th style="width: 25%"><?= $this->Paginator->sort('beneficios', 'Benefícios') ?></th>
                 <th><?= $this->Paginator->sort('dataInscricao', 'Encerramento') ?></th>
                 <th><?= $this->Paginator->sort('dataSelecao', 'Seleção') ?></th>
                 <?php if ($this->Session->read('id_categoria') == '1' || $this->Session->read('id_categoria') == '3' || $this->Session->read('id_categoria') == '4'): ?>
-                    <th><?= $this->Paginator->sort('dataFax', 'Email enviado') ?></th>
+                <th><?= $this->Paginator->sort('dataFax', 'Email enviado') ?></th>
                 <?php endif; ?>
             </tr>
         </thead>
@@ -98,21 +99,21 @@
             <?php $estagiarios = NULL; ?>
             <?php foreach ($mural as $data): ?>
                 <?php // pr($data) ?>
-                <tr>
+            <tr>
                     <?php if ($this->Session->read('id_categoria') == '1'): ?>
-                        <td><?php echo $this->Html->link($data['Mural']['id'], '/Murals/view/' . $data['Mural']['id']); ?></td>
+                <td><?php echo $this->Html->link($data['Mural']['id'], '/Murals/view/' . $data['Mural']['id']); ?></td>
                     <?php endif; ?>
 
                     <?php if ($this->Session->read('id_categoria') == '1' || $this->Session->read('id_categoria') == '2' || $this->Session->read('id_categoria') == '3' || $this->Session->read('id_categoria') == '4'): ?>
-                        <td><?php echo $this->Html->link($data['Mural']['instituicao'], '/Murals/view/' . $data['Mural']['id']); ?></td>
+                <td><?php echo $this->Html->link($data['Mural']['instituicao'], '/Murals/view/' . $data['Mural']['id']); ?></td>
                     <?php else: ?>
-                        <td><?php echo $data['Mural']['instituicao']; ?></td>
+                <td><?php echo $data['Mural']['instituicao']; ?></td>
                     <?php endif; ?>
 
-                    <td style="text-align: center"><?php echo $data['Mural']['vagas']; ?></td>
+                <td style="text-align: center"><?php echo $data['Mural']['vagas']; ?></td>
 
                     <?php if ($this->Session->read('id_categoria') == '1' || $this->Session->read('id_categoria') == '3' || $this->Session->read('id_categoria') == '4'): ?>
-                        <td style="text-align: center">
+                <td style="text-align: center">
                             <?php if (isset($data['Instituicao']['Estagiario']) && sizeof($data['Instituicao']['Estagiario']) === 0): ?>
                                 <?php echo 'Sem estagiários'; ?>
                             <?php elseif (isset($data['Instituicao']['Estagiario'])): ?>
@@ -120,10 +121,10 @@
                             <?php else: ?>
                                 <?= 'Sem estagiários' ?>
                             <?php endif; ?>
-                        </td>
+                </td>
                     <?php endif; ?>
 
-                    <td style="text-align: center">
+                <td style="text-align: center">
                         <?php if (isset($data['Inscricao']) && sizeof($data['Inscricao']) == 0): ?>
                             <?php echo 0; ?>
                         <?php else: ?>
@@ -133,11 +134,11 @@
                                 <?php echo sizeof($data['Inscricao']); ?>
                             <?php endif; ?>
                         <?php endif; ?>
-                    </td>
+                </td>
 
-                    <td><?php echo $data['Mural']['beneficios']; ?></td>
+                <td><?php echo $data['Mural']['beneficios']; ?></td>
 
-                    <td>
+                <td>
                         <?php
                         if (empty($data['Mural']['dataInscricao'])) {
                             echo "Sem data";
@@ -145,9 +146,9 @@
                             echo date('d-m-Y', strtotime($data['Mural']['dataInscricao']));
                         }
                         ?>
-                    </td>
+                </td>
 
-                    <td>
+                <td>
                         <?php
                         if (empty($data['Mural']['dataSelecao'])) {
                             echo "Sem data";
@@ -155,10 +156,10 @@
                             echo date('d-m-Y', strtotime($data['Mural']['dataSelecao'])) . " Horário: " . $data['Mural']['horarioSelecao'];
                         }
                         ?>
-                    </td>
+                </td>
 
                     <?php if ($this->Session->read('id_categoria') == '1' || $this->Session->read('id_categoria') == '3' || $this->Session->read('id_categoria') == '4'): ?>
-                        <td>
+                <td>
                             <?php
                             if (empty($data['Mural']['datafax'])) {
                                 echo "Sem data";
@@ -166,9 +167,9 @@
                                 echo date('d-m-Y', strtotime($data['Mural']['datafax']));
                             }
                             ?>
-                        </td>
+                </td>
                     <?php endif; ?>
-                </tr>
+            </tr>
                 <?php
                 if (isset($data['Instituicao']['Estagiario'])):
                     $estagiarios = $estagiarios + sizeof($data['Instituicao']['Estagiario']);
@@ -179,14 +180,15 @@
         <tfoot>
             <tr>
                 <?php if ($this->Session->read('id_categoria') == '1'): ?>
-                    <td>&nbsp</td>
+                <td>&nbsp</td>
                 <?php endif; ?>
                 <td style="text-align: center">Total</td>
                 <td style="text-align: center"><?php echo $total_vagas; ?></td>
-                <td style="text-align: center"><?php echo $atual; ?></td>
                 <?php if ($this->Session->read('id_categoria') == '1'): ?>
-                    <td style="text-align: center"><?php echo $inscricao; ?></td>
+                    <td style="text-align: center"><?php echo $atual; ?></td>
                 <?php endif; ?>
+                <td style="text-align: center"><?php echo $inscricao; ?></td>
+
             </tr>
         </tfoot>
     </table>
