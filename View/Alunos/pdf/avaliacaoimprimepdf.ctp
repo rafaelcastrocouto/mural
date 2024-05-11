@@ -20,166 +20,118 @@ Supervisor(a) Acadêmico(a): <?= $professor; ?>
 <b>Leia atentamente cada item e marque um X na posição que melhor descreva os resultados alcançados com a inserção do(a) aluno(a) no campo de estágio.</b>
 </p>
 
-<table style="border:1px solid; font-size: 80%; text-align:justify;"> 
-                <tr style="vertical-align:middle; border:1px solid;">
-                    <td style="width: 76%; border:1px solid;">
-                        Inserção e desenvolvimento do(a) Aluno(a) no Espaço Sócio institucional/ocupacional
-                    </td>
-                    <td style="width: 8%; border:1px solid;">
-                        Ruim 
-                    </td>
-                    <td style="width: 8%; border:1px solid;">
-                        Regular 
-                    </td>
-                    <td style="width: 8%; border:1px solid;">
-                        Bom 
-                    </td>
-                    <td style="width: 8%; border:1px solid;">
-                        Excelente
-                    </td>
-                </tr>
-        
-                <tr style="border: 1px solid">
-                    <td style="border:1px solid">
-                        1 - ASSIDUIDADE: É freqüênte, ausentando-se apenas com conhecimento e acordado com o(a) supervisor(a) de campo e ou acadêmico(a), seja por motivo de saúde, seja por situações estabelecidas na Lei 11788/2008, entre outras.
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                </tr>
-
-                <tr style="border: 1px solid;">
-                    <td style="border:1px solid;">
-                        2 - PONTUALIDADE: cumpre horário estabelecido no Plano de Estágio.
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                </tr>
-
-                <tr style="border: 1px solid;">
-                    <td style="border: 1px solid;">
-                        3 - COMPROMISSO: com as ações e estratégias previstas no Plano de Estágio
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                </tr>
-
-                <tr style="border: 1px solid;">
-                    <td style="border: 1px solid;">
-                        4 - Na relação com o(a) usuário(a): compromisso ético-político no atendimento direto ao usuário(a).
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                </tr>
-
-                <tr style="border: 1px solid;">
-                    <td style="border: 1px solid;">
-                        5 - Na relação com outro(a)s profissionais: Integração e articulação à equipe da área de estágio, cooperação e habilidade de trabalhar em equipe multiprofissional.
-                    </td>
-                    <td style="border:1px solid;">
-                    </td>
-                    <td style="border:1px solid">
-                    </td>
-                    <td style="border:1px solid">
-                    </td>
-                    <td style="border:1px solid">
-                    </td>
-                </tr>
-
-                <tr style="border: 1px solid">
-                    <td style="border: 1px solid;">
-                        6 - CRITICIDADE E INICATIVA: Capacidade crítica, interventiva, propositiva e investigativa no enfrentamento das diversas questões existentes no campo de estágio.
-                    </td>
-                    <td style="border:1px solid">
-                    </td>
-                    <td style="border:1px solid">
-                    </td>
-                    <td style="border:1px solid">
-                    </td>
-                    <td style="border:1px solid">
-                    </td>
-                </tr>
-
-                <tr style="border: 1px solid">
-                    <td style="border: 1px solid;">
-                        7- Apreensão do referencial teórico-metodológico, ético-político e investigativo e aplicação nas atividades inerentes ao campo e previstas no Plano de Estágio.
-                    </td>
-                    <td style="border:1px solid">
-                    </td>
-                    <td style="border:1px solid">
-                    </td>
-                    <td style="border:1px solid">
-                    </td>
-                    <td style="border:1px solid">
-                    </td>
-                </tr>
-
-                <tr style="border: 1px solid">
-                    <td style="border: 1px solid;">
-                        8 - Avaliação do desempenho do(a) estagiário(a) na elaboração de relatórios, pesquisas, projetos de pesquisa e intervenção, etc.
-                    </td>
-                    <td style="border:1px solid">
-                    </td>
-                    <td style="border:1px solid">
-                    </td>
-                    <td style="border:1px solid">
-                    </td>
-                    <td style="border:1px solid">
-                    </td>
-                </tr>
-</table>
+<div style='text-align: center; background-color: 009900;' >
+<p style="line-height: 100%; font-size:100%; font-">Desempenho discente no espaço ocupacional</p>
+</div>
 
 <p style="line-height: 1; text-align:justify; font-size:80%">
-9) As atividades previstas no Plano de Estágio em articulação com o nível de formação acadêmica foram efetuadas plenamente?
+1) Sobre assiduidade: manteve a frequência, ausentando-se apenas com conhecimento da supervisão de campo e acadêmica, seja por motivo de saúde ou por situações estabelecidas na Lei 11788/2008, entre outras:
 <br style="line-height: 100%;">
-(   ) sim   (   ) não. Fundamente se achar necessário: 
+(  ) Ruim   (   ) Regular  (  ) Bom (  ) Excelente
 </p>
-<br />
 <hr>
-<br />
-<hr>
-<br />
-<hr>
-<br />
+
 <p style="line-height: 1; text-align:justify; font-size:80%">
-10) O desempenho das atividades desenvolvidas pelo(a) estagiário(a) e o processo de supervisão foram afetados pelas  condições de trabalho do campo de estágio?
-<br />
-(   ) sim   (   ) não. Justifique a resposta se achar necessário. 
+2) Sobre pontualidade: cumpre o horário estabelecido no Plano de Estágio:
+<br style="line-height: 100%;">
+(  ) Ruim   (   ) Regular  (  ) Bom (  ) Excelente
 </p>
-<br />
 <hr>
-<br />
-<hr>
-<br />
-<hr>
-<br />
+
 <p style="line-height: 1; text-align:justify; font-size:80%">
-11) Quanto à integração Universidade / campo de estágio: Há discussão conjunta do trabalho entre os 3 segmentos: aluno(a), professor(a) e supervisor(a)?
+3)  Sobre compromisso: possui compromisso com as ações e estratégias previstas no Plano de Estágio:
+<br style="line-height: 100%;">
+(  ) Ruim   (   ) Regular  (  ) Bom (  ) Excelente
+</p>
+<hr>
+
+<p style="line-height: 1; text-align:justify; font-size:80%">
+4 ) Na relação com usuários(as): compromisso ético-político no atendimento:
+<br style="line-height: 100%;">
+(  ) Ruim   (   ) Regular  (  ) Bom (  ) Excelente
+</p>
+<hr>
+
+<p style="line-height: 1; text-align:justify; font-size:80%">
+5) Na relação com profissionais: integração e articulação à equipe de estágio, cooperação e habilidade para trabalhar em equipe multiprofissional:
+<br style="line-height: 100%;">
+(  ) Ruim   (   ) Regular  (  ) Bom (  ) Excelente
+</p>
+<hr>
+
+<p style="line-height: 1; text-align:justify; font-size:80%">
+6) Sobre criticidade e iniciativa: possui capacidade crítica, interventiva, propositiva e investigativa no enfrentamento das diversas questões existentes no campo de estágio:
+<br style="line-height: 100%;">
+(  ) Ruim   (   ) Regular  (  ) Bom (  ) Excelente
+</p>
+<hr>
+
+<p style="line-height: 1; text-align:justify; font-size:80%">
+7) Apreensão do referencial teórico-metodológico, ético-político e investigativo, e aplicação nas atividades inerentes ao campo e previstas no Plano de Estágio:
+<br style="line-height: 100%;">
+(  ) Ruim   (   ) Regular  (  ) Bom (  ) Excelente
+</p>
+<hr>
+
+<p style="line-height: 1; text-align:justify; font-size:80%">
+8)  Avaliação do desempenho na elaboração de relatórios, pesquisas, projetos de pesquisa e intervenção, etc:
+<br style="line-height: 100%;">
+(  ) Ruim   (   ) Regular  (  ) Bom (  ) Excelente
+</p>
+<hr>
+
+<p style="line-height: 1; text-align:justify; font-size:80%">
+9) O plano de estágio foi elaborado pela supervisão de campo, estudante e com apoio da supervisão acadêmica no início do semestre?
+<br style="line-height: 100%;">
+(   ) sim   (   ) não. 
+</p>
+<hr>
+
+<p style="line-height: 1; text-align:justify; font-size:80%">
+10) As atividades previstas no Plano de Estágio em articulação com o nível de formação acadêmica foram efetuadas plenamente?
+<br style="line-height: 100%;">
+(   ) sim   (   ) não. 
+</p>
+<hr>
+
+<p style="line-height: 1; text-align:justify; font-size:80%">
+11) O desempenho das atividades desenvolvidas pelo/a discente e o processo de supervisão foram afetados pelas condições de trabalho?
+<br style="line-height: 100%;">
+(   ) sim   (   ) não. 
+</p>
+
 <br />
-(   ) sim   (   ) não. Justifique a resposta se achar necessário. 
+<br />
+
+<div style='text-align: center; background-color: 009900'>
+<p style="line-height: 100%; font-size:100%">Relação interinstitucional</p>
+</div>
+
+<p style="line-height: 1; text-align:justify; font-size:80%">
+1) Quanto à integração sala de aula/campo de estágio, houve alguma interlocução entre discente, docente e supervisão de campo?
+<br style="line-height: 100%;">
+(   ) sim   (   ) não.
+</p>
+<hr>
+<p style="line-height: 1; text-align:justify; font-size:80%;">
+2) Quanto à integração Coordenação de estágio/campo de estágio: houve algum tipo de interlocução?
+<br style="line-height: 100%;">
+(   ) sim   (   ) não. 
+</p>
+<hr>
+<p style="line-height: 1; text-align:justify; font-size:80%;">
+3) Você tomou conhecimento do conteúdo da Disciplina de OTP?
+<br style="line-height: 100%;">
+(  ) Sim     (   ) Não
+</p>
+<hr>
+<p style="line-height: 1; text-align:justify; font-size:80%;">
+4) Você participou de alguma atividade promovida e/ou convocada por docente ou Coordenação de Estágio (reuniões, Fórum Local de Estágio, cursos, eventos, entre outros)?
+(  ) Sim     (   ) Não
+<br style="line-height: 100%;">
+</p>
+<p style="line-height: 1; text-align:justify; font-size:80%;">
+Caso positivo, por favor, informe qual:
 </p>
 <br />
 <hr>
@@ -189,7 +141,12 @@ Supervisor(a) Acadêmico(a): <?= $professor; ?>
 <hr>
 <br />
 <p style="line-height: 1; text-align:justify; font-size:80%;">
-Se a resposta foi não. Como poderia ser desenvolvida
+5) Há questões que você considera que devam ser mais enfatizadas na disciplina de OTP?
+<br style="line-height: 100%;">
+(  ) Sim     (   ) Não
+</p>
+<p style="line-height: 1; text-align:justify; font-size:80%;">
+Caso positivo, por favor, informe quais:
 </p>
 <br />
 <hr>
@@ -198,11 +155,9 @@ Se a resposta foi não. Como poderia ser desenvolvida
 <br />
 <hr>
 <br />
-<p style="line-height: 1; text-align:justify; font-size:80%">
-12) Há questões que você considera que devam ser mais enfatizadas na disciplina de OTP?
-<br />
-(   ) sim   (   ) não. Quais?
-</p>
+<p style="line-height: 1; text-align:justify; font-size:80%;">
+6) De modo geral, como avalia a experiência do estágio neste semestre? Será possível a continuidade no próximo? Aproveite este espaço para deixar suas críticas, sugestões e/ou observações:
+</p>    
 <br />
 <hr>
 <br />
@@ -210,21 +165,6 @@ Se a resposta foi não. Como poderia ser desenvolvida
 <br />
 <hr>
 <br />
-<p style="line-height: 1; text-align:justify; font-size:80%">
-Sugestões e observações:
-</p>
-<br />
-<hr>
-<br />
-<hr>
-<br />
-<hr>
-<br />
-<hr>
-<br />
-<hr>
-<br />
-</p>
 
 <br />
 <br />
@@ -237,19 +177,18 @@ Sugestões e observações:
 
 <table style="width:100%">
 <tr>
-<td><span style="font-size: 90%; text-decoration: overline;">Coordenação de Estágio</span></td>
 <td><span style="font-size: 90%; text-decoration: overline;"><?= $estudante; ?></span></td>
 <td><span style="font-size: 90%; text-decoration: overline;"><?= $supervisor; ?></span></td>
+<td><span style="font-size: 90%; text-decoration: overline;"></span></td>
 </tr>
 
 <tr>
-<td>Escola de Serviço Social</td>
 <td><span style="font-size: 90%;">DRE: <?= $registro; ?></span></td>
-<td><span style="font-size: 90%;">CRESS 7ª Região: <?= $cress; ?></span></td>
+<td><span style="font-size: 90%;">Supervisão de campo<br> CRESS: <?= $cress; ?></span></td>
+<td><span style="font-size: 90%;">Supervisão acadêmica<br> CRESS:</span></td>
 </tr>
 
 <tr>
-<td>UFRJ</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
