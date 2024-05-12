@@ -179,18 +179,19 @@ Caso positivo, por favor, informe quais:
 <tr>
 <td><span style="font-size: 90%; text-decoration: overline;"><?= $estudante; ?></span></td>
 <td><span style="font-size: 90%; text-decoration: overline;"><?= $supervisor; ?></span></td>
-<td><span style="font-size: 90%; text-decoration: overline;"></span></td>
+<td><span style="font-size: 90%; text-decoration: overline;"><?= $professor; ?></span></td>
 </tr>
-
+ 
 <tr>
 <td><span style="font-size: 90%;">DRE: <?= $registro; ?></span></td>
-<td><span style="font-size: 90%;">Supervisão de campo<br> CRESS: <?= $cress; ?></span></td>
-<td><span style="font-size: 90%;">Supervisão acadêmica<br> CRESS:</span></td>
+<td><span style="font-size: 90%;">CRESS: <?= $cress . '/ 7ª região'; ?></span></td>
+<td><span style="font-size: 90%;">CRESS: <?= $professor_cress . '/' . $professor_regiao .'ª região'; ?></span></td>
 </tr>
 
 <tr>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<td>Discente</td>
+<td>Supervisão de campo</td>
+<td>Supervisão acadêmica</td>
 </tr>
 
 </table>
