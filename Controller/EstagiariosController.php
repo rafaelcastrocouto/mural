@@ -6,8 +6,7 @@
  * and open the template in the editor.
  */
 
-class EstagiariosController extends AppController
-{
+class EstagiariosController extends AppController {
 
     public $name = 'Estagiarios';
     public $components = ['Auth', 'Paginator', 'RequestHandler', 'Flash'];
@@ -20,8 +19,7 @@ class EstagiariosController extends AppController
         ]
     ];
 
-    public function beforeFilter()
-    {
+    public function beforeFilter() {
 
         parent::beforeFilter();
         // echo $this->Session->read('id_cateogria');
@@ -48,17 +46,16 @@ class EstagiariosController extends AppController
         // die(pr($this->Session->read('user')));
     }
 
-    private function periodo($periodo = null, $condicoes = null)
-    {
+    private function periodo($periodo = null, $condicoes = null) {
 
         // Para fazer a lista para o select dos estagios anteriores
         $periodos_estagio = $this->Estagiario->find(
-            'list',
-            [
-                'fields' => ['Estagiario.periodo', 'Estagiario.periodo'],
-                'group' => ('Estagiario.periodo'),
-                'order' => ['Estagiario.periodo' => 'DESC']
-            ]
+                'list',
+                [
+                    'fields' => ['Estagiario.periodo', 'Estagiario.periodo'],
+                    'group' => ('Estagiario.periodo'),
+                    'order' => ['Estagiario.periodo' => 'DESC']
+                ]
         );
         // pr($periodos_estagio);
         // die();
@@ -97,8 +94,7 @@ class EstagiariosController extends AppController
         return [$periodo, $condicoes];
     }
 
-    public function index()
-    {
+    public function index() {
 
         $parametros = $this->params['named'];
         // pr($parametros);
@@ -186,11 +182,11 @@ class EstagiariosController extends AppController
 
         /* Áreas */
         $areas = $this->Estagiario->Area->find(
-            'list',
-            [
-                'fields' => ['Area.area'],
-                'order' => 'Area.area'
-            ]
+                'list',
+                [
+                    'fields' => ['Area.area'],
+                    'order' => 'Area.area'
+                ]
         );
         // Guardo o valor do id_area ate que seja selecionada outra
         if ($id_area == null) {
@@ -218,8 +214,8 @@ class EstagiariosController extends AppController
         ];
         $options['order'] = ['Professor.nome'];
         $professores = $this->Estagiario->Professor->find(
-            'list',
-            $options
+                'list',
+                $options
         );
         // Guardo o valor do id_professor ate que seja selecionado outro
         if ($id_professor == null) {
@@ -238,11 +234,11 @@ class EstagiariosController extends AppController
 
         /* Instituicoes */
         $instituicoes = $this->Estagiario->Instituicao->find(
-            'list',
-            [
-                'fields' => ['Instituicao.instituicao'],
-                'order' => ['Instituicao.instituicao']
-            ]
+                'list',
+                [
+                    'fields' => ['Instituicao.instituicao'],
+                    'order' => ['Instituicao.instituicao']
+                ]
         );
         // Guardo o valor do id_instituicao ate que seja selecionado outro
         if ($id_instituicao == null) {
@@ -261,11 +257,11 @@ class EstagiariosController extends AppController
 
         /* Supervisores */
         $supervisores = $this->Estagiario->Supervisor->find(
-            'list',
-            [
-                'fields' => ['Supervisor.nome'],
-                'order' => ['Supervisor.nome']
-            ]
+                'list',
+                [
+                    'fields' => ['Supervisor.nome'],
+                    'order' => ['Supervisor.nome']
+                ]
         );
         // Guardo o valor do id_supervisor ate que seja selecionado outro
         if ($id_supervisor === null) {
@@ -327,8 +323,7 @@ class EstagiariosController extends AppController
         }
     }
 
-    public function email()
-    {
+    public function email() {
         $parametros = $this->params['named'];
         // pr($parametros);
         $periodo = isset($parametros['periodo']) ? $parametros['periodo'] : null;
@@ -336,12 +331,12 @@ class EstagiariosController extends AppController
         // Para fazer a lista para o select dos estagios anteriores
         $this->Estagiario->contain();
         $periodos_estagio = $this->Estagiario->find(
-            'list',
-            [
-                'fields' => ['Estagiario.periodo', 'Estagiario.periodo'],
-                'group' => ('Estagiario.periodo'),
-                'order' => ['Estagiario.periodo' => 'DESC']
-            ]
+                'list',
+                [
+                    'fields' => ['Estagiario.periodo', 'Estagiario.periodo'],
+                    'group' => ('Estagiario.periodo'),
+                    'order' => ['Estagiario.periodo' => 'DESC']
+                ]
         );
 
         if (empty($periodo)) {
@@ -359,8 +354,7 @@ class EstagiariosController extends AppController
         // die();
     }
 
-    public function emailsupervisor()
-    {
+    public function emailsupervisor() {
         $parametros = $this->params['named'];
         // pr($parametros);
         $periodo = isset($parametros['periodo']) ? $parametros['periodo'] : null;
@@ -368,12 +362,12 @@ class EstagiariosController extends AppController
         // Para fazer a lista para o select dos estagios anteriores
         $this->Estagiario->contain();
         $periodos_estagio = $this->Estagiario->find(
-            'list',
-            [
-                'fields' => ['Estagiario.periodo', 'Estagiario.periodo'],
-                'group' => ('Estagiario.periodo'),
-                'order' => ['Estagiario.periodo' => 'DESC']
-            ]
+                'list',
+                [
+                    'fields' => ['Estagiario.periodo', 'Estagiario.periodo'],
+                    'group' => ('Estagiario.periodo'),
+                    'order' => ['Estagiario.periodo' => 'DESC']
+                ]
         );
 
         if (empty($periodo)) {
@@ -392,9 +386,7 @@ class EstagiariosController extends AppController
         // die();
     }
 
-
-    public function lista()
-    {
+    public function lista() {
 
         $parametros = $this->params['named'];
         // pr($parametros);
@@ -467,54 +459,51 @@ class EstagiariosController extends AppController
         $this->set('estagiarios', isset($sem_estagio) ? $sem_estagio : null);
     }
 
-    public function view($id = NULL)
-    {
+    public function view($id = NULL) {
         /*
           if (!$this->Estagiario->exists($id)) {
           throw new NotFoundException(__('Invalid Estagiário'));
           }
          */
+        /* Localiza o estagiario pelo id ou pelo registro */
         if (is_numeric($id)) {
             $estagio = $this->Estagiario->find(
-                'first',
-                [
-                    'conditions' => ['Estagiario.id' => $id]
-                ]
+                    'first',
+                    [
+                        'conditions' => ['Estagiario.id' => $id]
+                    ]
             );
         } elseif (!empty($this->request->query('registro'))) {
             $registro = $this->request->query('registro');
             $estagio = $this->Estagiario->find(
-                'first',
-                [
-                    'conditions' => ['Estagiario.registro' => $registro]
-                ]
+                    'first',
+                    [
+                        'conditions' => ['Estagiario.registro' => $registro]
+                    ]
             );
         }
         // pr($estagio);
+        // pr('registro ' . $registro);
+        // pr('id ' . $id);
         // die();
-        if (empty($estagio)) {
+        if (!isset($estagio)) {
             $this->Flash->error(__('Estudante sem estágio'));
-            if ($registro) {
-                $this->redirect(['controller' => 'alunos', 'action' => 'view', '?' => 'registro', $registro]);
-            } elseif ($id) {
-                $this->redirect(['controller' => 'alunos', 'action' => 'view', $id]);
-            }
+            $this->redirect(['controller' => 'alunonovos', 'action' => 'index']);
         }
         // pr($estagio);
         // die();
         $this->set('estagio', $estagio);
     }
 
-    public function alunorfao()
-    {
+    public function alunorfao() {
 
         $this->loadModel('Aluno');
         $this->Aluno->contain();
         $orfao = $this->Aluno->find(
-            'all',
-            [
-                'order' => ['Aluno.nome']
-            ]
+                'all',
+                [
+                    'order' => ['Aluno.nome']
+                ]
         );
         foreach ($orfao as $c_orfao) {
             if (empty($c_orfao['Estagiario'])) {
@@ -530,18 +519,17 @@ class EstagiariosController extends AppController
         }
     }
 
-    public function edit($id = NULL)
-    {
+    public function edit($id = NULL) {
 
         if (empty($this->data)) {
 
             $this->Estagiario->contain(['Aluno', 'Instituicao', 'Supervisor', 'Professor', 'Area']);
             $estagiario = $this->Estagiario->find(
-                'first',
-                [
-                    'conditions' => ['Estagiario.id' => $id],
-                    'fields' => ['Estagiario.periodo', 'Estagiario.complemento_id', 'Estagiario.nivel', 'Estagiario.id_professor', 'Estagiario.id_instituicao', 'Estagiario.id_supervisor', 'Estagiario.id_area', 'Estagiario.nota', 'Estagiario.ch', 'Aluno.id', 'Aluno.nome', 'Instituicao.id', 'Instituicao.instituicao', 'Supervisor.id', 'Supervisor.nome', 'Professor.id', 'Professor.nome', 'Area.id', 'Area.area']
-                ]
+                    'first',
+                    [
+                        'conditions' => ['Estagiario.id' => $id],
+                        'fields' => ['Estagiario.periodo', 'Estagiario.complemento_id', 'Estagiario.nivel', 'Estagiario.id_professor', 'Estagiario.id_instituicao', 'Estagiario.id_supervisor', 'Estagiario.id_area', 'Estagiario.nota', 'Estagiario.ch', 'Aluno.id', 'Aluno.nome', 'Instituicao.id', 'Instituicao.instituicao', 'Supervisor.id', 'Supervisor.nome', 'Professor.id', 'Professor.nome', 'Area.id', 'Area.area']
+                    ]
             );
             // $log = $this->Estagiario->getDataSource()->getLog(false, false);
             // debug($log);
@@ -555,12 +543,12 @@ class EstagiariosController extends AppController
 
             // Periodos para o select
             $periodos_total = $this->Estagiario->find(
-                'list',
-                [
-                    'fields' => ['Estagiario.periodo', 'Estagiario.periodo'],
-                    'group' => ('Estagiario.periodo'),
-                    'order' => ('Estagiario.periodo')
-                ]
+                    'list',
+                    [
+                        'fields' => ['Estagiario.periodo', 'Estagiario.periodo'],
+                        'group' => ('Estagiario.periodo'),
+                        'order' => ('Estagiario.periodo')
+                    ]
             );
             // pr($periodos_total);
             // die('periodos');
@@ -582,10 +570,10 @@ class EstagiariosController extends AppController
             /* Instituicoes para o select. Nao colocar a opcao 0 */
             $this->loadModel('Instituicao');
             $instituicoes = $this->Instituicao->find(
-                'list',
-                [
-                    'order' => 'Instituicao.instituicao'
-                ]
+                    'list',
+                    [
+                        'order' => 'Instituicao.instituicao'
+                    ]
             );
             asort($instituicoes);
             // pr($instituicoes);
@@ -594,10 +582,10 @@ class EstagiariosController extends AppController
 
             /* Supervisores da instituicao para o select */
             $supervisores = $this->Instituicao->find(
-                'first',
-                [
-                    'conditions' => ['Instituicao.id' => $estagiario['Estagiario']['id_instituicao']]
-                ]
+                    'first',
+                    [
+                        'conditions' => ['Instituicao.id' => $estagiario['Estagiario']['id_instituicao']]
+                    ]
             );
             // pr($supervisores);
             // die('Supervisores');
@@ -614,10 +602,10 @@ class EstagiariosController extends AppController
             /* Professores para o select */
             $this->loadModel('Professor');
             $professores = $this->Professor->find(
-                'list',
-                [
-                    'order' => 'Professor.nome'
-                ]
+                    'list',
+                    [
+                        'order' => 'Professor.nome'
+                    ]
             );
             asort($professores);
             $this->set('professores', $professores);
@@ -627,10 +615,10 @@ class EstagiariosController extends AppController
             /* Areas para o select */
             $this->loadModel('Area');
             $areas = $this->Area->find(
-                'list',
-                [
-                    'order' => 'area'
-                ]
+                    'list',
+                    [
+                        'order' => 'area'
+                    ]
             );
             asort($areas);
             $this->set('areas', $areas);
@@ -639,10 +627,10 @@ class EstagiariosController extends AppController
             /* Complemento período especial  */
             /* $this->loadModel('Area'); */
             $complemento_periodo_especial_total = $this->Estagiario->Complemento->find(
-                'list',
-                [
-                    'order' => 'periodo_especial'
-                ]
+                    'list',
+                    [
+                        'order' => 'periodo_especial'
+                    ]
             );
             // pr($complemento_periodo_especial_total);
             // die('complemento_periodo_especial_total');
@@ -679,16 +667,15 @@ class EstagiariosController extends AppController
         }
     }
 
-    public function delete($id = NULL)
-    {
+    public function delete($id = NULL) {
 
         // pr($id);
         $estagiario = $this->Estagiario->find(
-            'first',
-            [
-                'conditions' => ['Estagiario.id' => $id],
-                'fields' => ['Estagiario.id', 'Estagiario.id_aluno', 'Estagiario.alunonovo_id', 'Estagiario.registro']
-            ]
+                'first',
+                [
+                    'conditions' => ['Estagiario.id' => $id],
+                    'fields' => ['Estagiario.id', 'Estagiario.id_aluno', 'Estagiario.alunonovo_id', 'Estagiario.registro']
+                ]
         );
         // pr($estagiario['Estagiario']['id_aluno']);
         $alunonovoId = $estagiario['Estagiario']['alunonovo_id'];
@@ -708,17 +695,16 @@ class EstagiariosController extends AppController
      * O id eh o id do Aluno e não o DRE
      */
 
-    public function add($id = NULL)
-    {
+    public function add($id = NULL) {
 
         // Para fazer a lista dos estagios anteriores
         $periodos_total = $this->Estagiario->find(
-            'list',
-            [
-                'fields' => ['Estagiario.periodo', 'Estagiario.periodo'],
-                'group' => ('Estagiario.periodo'),
-                'order' => ('Estagiario.periodo')
-            ]
+                'list',
+                [
+                    'fields' => ['Estagiario.periodo', 'Estagiario.periodo'],
+                    'group' => ('Estagiario.periodo'),
+                    'order' => ('Estagiario.periodo')
+                ]
         );
         // die();
         // Para acrescenter os próximos periodos carrego a configuracao do planejamento
@@ -826,11 +812,11 @@ class EstagiariosController extends AppController
         /* Select dos professores */
         $this->loadModel('Professor');
         $professores = $this->Professor->find(
-            'list',
-            [
-                'order' => ['Professor.nome'],
-                'conditions' => ['motivoegresso' => '']
-            ]
+                'list',
+                [
+                    'order' => ['Professor.nome'],
+                    'conditions' => ['motivoegresso' => '']
+                ]
         );
         // $professores[0] = '- Seleciona -';
         // asort($professores);
@@ -839,10 +825,10 @@ class EstagiariosController extends AppController
         /* Select das areas tematicas */
         $this->loadModel('Area');
         $areas = $this->Area->find(
-            'list',
-            [
-                'order' => 'area'
-            ]
+                'list',
+                [
+                    'order' => 'area'
+                ]
         );
         $this->set('areas', $areas);
 
@@ -872,8 +858,7 @@ class EstagiariosController extends AppController
         }
     }
 
-    public function add_estagiario()
-    {
+    public function add_estagiario() {
 
         if (!empty($this->data)) {
 
@@ -894,11 +879,11 @@ class EstagiariosController extends AppController
 
             // Com o registro consulto a tabela de estagiarios
             $periodo_estagio = $this->Estagiario->find(
-                'first',
-                [
-                    'conditions' => ['Estagiario.registro' => $registro],
-                    'fields' => ['Estagiario.id', 'Estagiario.id_aluno', 'Estagiario.registro']
-                ]
+                    'first',
+                    [
+                        'conditions' => ['Estagiario.registro' => $registro],
+                        'fields' => ['Estagiario.id', 'Estagiario.id_aluno', 'Estagiario.registro']
+                    ]
             );
 
             if (empty($periodo_estagio)) {
@@ -911,8 +896,7 @@ class EstagiariosController extends AppController
         }
     }
 
-    public function declaracaoestagio($id = NULL)
-    {
+    public function declaracaoestagio($id = NULL) {
 
         $estagiorealizado = $this->Estagiario->find('first', [
             'conditions' => ['Estagiario.id' => $id]
@@ -944,8 +928,7 @@ class EstagiariosController extends AppController
         $this->set('estagiorealizado', $estagiorealizado);
     }
 
-    public function declaracaoestagiopdf($id)
-    {
+    public function declaracaoestagiopdf($id) {
 
         $estagiorealizado = $this->Estagiario->find('first', [
             'conditions' => ['Estagiario.id' => $id]
@@ -981,8 +964,7 @@ class EstagiariosController extends AppController
         $this->set('estagiorealizado', $estagiorealizado);
     }
 
-    public function estudante()
-    {
+    public function estudante() {
 
         $this->loadModel('Alunonovo');
         $this->Alunonovo->contain();
@@ -1002,10 +984,10 @@ class EstagiariosController extends AppController
             // pr($estagiario);
             if ($estagiario) {
                 if (
-                    $this->Estagiario->updateAll(
-                        ['Estagiario.alunonovo_id' => $c_estudante['Alunonovo']['id']],
-                        ['Estagiario.registro' => $estagiario['Estagiario']['registro']]
-                    )
+                        $this->Estagiario->updateAll(
+                                ['Estagiario.alunonovo_id' => $c_estudante['Alunonovo']['id']],
+                                ['Estagiario.registro' => $estagiario['Estagiario']['registro']]
+                        )
                 )
                     ;
             } else {
@@ -1021,8 +1003,7 @@ class EstagiariosController extends AppController
         die("Tarefa finalizada!");
     }
 
-    public function atualiza()
-    {
+    public function atualiza() {
 
         $this->loadModel('Alunonovo');
         $this->Alunonovo->contain(['Inscricao']);
@@ -1058,5 +1039,4 @@ class EstagiariosController extends AppController
         }
         die("Tarefa finalizada!");
     }
-
 }
