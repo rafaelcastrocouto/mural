@@ -1,4 +1,5 @@
 <?php
+
 // pr($avaliacao);
 ?>
 <div class="table-responsive">
@@ -42,8 +43,11 @@
 
     <h2><?php echo __('Avaliação'); ?></h2>
 
-    <dl class="row">
-        <dt class="col-9"><?php echo __('1) ASSIDUIDADE: Desenvolveu as atividades propostas com frequência, ausentando-se apenas com conhecimento e acordado com o(a) supervisor(a) de campo e ou acadêmico(a), seja por motivo de saúde, seja por situações estabelecidas na Lei 11788/2008, entre outras:'); ?></dt>
+    <dl>
+
+        <dt class="col-9"><?php echo __('Desempenho discente no espaço ocupacional'); ?></dt>
+        
+        <dt class="col-9"><?php echo __('1) Sobre assiduidade: manteve a frequência, ausentando-se apenas com conhecimento da supervisão de campo e acadêmica, seja por motivo de saúde ou por situações estabelecidas na Lei 11788/2008, entre outras:'); ?></dt>
         <dd class="col-3">
             <?php
             switch ($avaliacao['Avaliacao']['avaliacao1']):
@@ -64,9 +68,9 @@
                     break;
             endswitch;
             ?>
-
         </dd>
-        <dt class="col-9"><?php echo __('2) PONTUALIDADE: cumpre horário estabelecido no Plano de Estágio:'); ?></dt>
+
+        <dt class="col-9"><?php echo __('2) Sobre pontualidade: cumpre o horário estabelecido no Plano de Estágio:'); ?></dt>
         <dd class="col-3">
             <?php
             switch ($avaliacao['Avaliacao']['avaliacao2']):
@@ -89,7 +93,8 @@
             ?>
 
         </dd>
-        <dt class="col-9"><?php echo __('3) COMPROMISSO: com as ações e estratégias previstas no Plano de Estágio:'); ?></dt>
+
+        <dt class="col-9"><?php echo __('3) Sobre compromisso: possui compromisso com as ações e estratégias previstas no Plano de Estágio:'); ?></dt>
         <dd class="col-3">
             <?php
             switch ($avaliacao['Avaliacao']['avaliacao3']):
@@ -112,7 +117,8 @@
             ?>
 
         </dd>
-        <dt class="col-9"><?php echo __('4) Na relação com o(a) usuário(a): compromisso ético-político no atendimento ao usuário(a):'); ?></dt>
+
+        <dt class="col-9"><?php echo __('4) Na relação com usuários(as): compromisso ético-político no atendimento:'); ?></dt>
         <dd class="col-3">
             <?php
             switch ($avaliacao['Avaliacao']['avaliacao4']):
@@ -135,7 +141,8 @@
             ?>
 
         </dd>
-        <dt class="col-9"><?php echo __('5) Na relação com outro(a)s profissionais: Integração e articulação à equipe da área de estágio, cooperação e habilidade de trabalhar em equipe multiprofissional:'); ?></dt>
+
+        <dt class="col-9"><?php echo __('5) Na relação com profissionais: integração e articulação à equipe de estágio, cooperação e habilidade para trabalhar em equipe multiprofissional:'); ?></dt>
         <dd class="col-3">
             <?php
             switch ($avaliacao['Avaliacao']['avaliacao5']):
@@ -158,7 +165,8 @@
             ?>
 
         </dd>
-        <dt class="col-9"><?php echo __('6) CRITICIDADE E INICATIVA: Capacidade crítica, interventiva, propositiva e investigativa no enfrentamento das diversas questões existentes no campo de estágio:'); ?></dt>
+
+        <dt class="col-9"><?php echo __('6) Sobre criticidade e iniciativa: possui capacidade crítica, interventiva, propositiva e investigativa no enfrentamento das diversas questões existentes no campo de estágio:'); ?></dt>
         <dd class="col-3">
             <?php
             switch ($avaliacao['Avaliacao']['avaliacao6']):
@@ -180,7 +188,8 @@
             endswitch;
             ?>
         </dd>
-        <dt class="col-9"><?php echo __('7) Apreensão do referencial teórico-metodológico, ético-político e investigativo e aplicação nas atividades inerentes ao campo e previstas no Plano de Estágio:'); ?></dt>
+
+        <dt class="col-9"><?php echo __('7) Apreensão do referencial teórico-metodológico, ético-político e investigativo, e aplicação nas atividades inerentes ao campo e previstas no Plano de Estágio:'); ?></dt>
         <dd class="col-3">
             <?php
             switch ($avaliacao['Avaliacao']['avaliacao7']):
@@ -203,7 +212,8 @@
             ?>
 
         </dd>
-        <dt class="col-9"><?php echo __('8) Avaliação do desempenho do(a) estagiário(a) na elaboração de relatórios, pesquisas, projetos de pesquisa e intervenção, etc:'); ?></dt>
+
+        <dt class="col-9"><?php echo __('8) Avaliação do desempenho na elaboração de relatórios, pesquisas, projetos de pesquisa e intervenção, etc:'); ?></dt>
         <dd class="col-3">
             <?php
             switch ($avaliacao['Avaliacao']['avaliacao8']):
@@ -224,9 +234,9 @@
                     break;
             endswitch;
             ?>
-
         </dd>
-        <dt class="col-9"><?php echo __('9) As atividades previstas no Plano de Estágio em articulação com o nível de formação acadêmica foram efetuadas plenamente?'); ?></dt>
+
+        <dt class="col-9"><?php echo __('9) O plano de estágio foi elaborado pela supervisão de campo, estudante e com apoio da supervisão acadêmica no início do semestre?'); ?></dt>
         <dd class="col-3">
             <?php
             switch ($avaliacao['Avaliacao']['avaliacao9']):
@@ -242,12 +252,8 @@
             endswitch;
             ?>
         </dd>
-        <dt class="col-9"><?php echo __('Fundamente se achar necessário:'); ?></dt>
-        <dd class="col-3">
-            <?= $this->Form->input('avaliacao9_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao9-1'], 'readonly']); ?>
-            &nbsp;
-        </dd>
-        <dt class="col-9"><?php echo __('10) O desempenho das atividades desenvolvidas pelo(a) estagiário(a) e o processo de supervisão foram afetados pelas condições de trabalho no campo de estágio e, em particular, pelas condições estabelecidas pelo estágio remoto?'); ?></dt>
+
+        <dt class="col-9"><?php echo __('10) As atividades previstas no Plano de Estágio em articulação com o nível de formação acadêmica foram efetuadas plenamente?'); ?></dt>
         <dd class="col-3">
             <?php
             switch ($avaliacao['Avaliacao']['avaliacao10']):
@@ -262,14 +268,9 @@
                     break;
             endswitch;
             ?>
+        </dd>
 
-        </dd>
-        <dt class="col-9"><?php echo __('Justifique a resposta se achar necessário:'); ?></dt>
-        <dd class="col-3">
-            <?= $this->Form->input('avaliacao10_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao10-1'], 'readonly']); ?>
-            &nbsp;
-        </dd>
-        <dt class="col-9"><?php echo __('11) Quanto à integração Disciplina de OTP/Coordenação de Estágio da ESS/Campo de Estágio: houve algum tipo de interlocução entre os 3 segmentos: aluno(a),  professor(a) e supervisor(a)?'); ?></dt>
+        <dt class="col-9"><?php echo __('11) O desempenho das atividades desenvolvidas pelo/a discente e o processo de supervisão foram afetados pelas condições de trabalho?'); ?></dt>
         <dd class="col-3">
             <?php
             switch ($avaliacao['Avaliacao']['avaliacao11']):
@@ -285,12 +286,13 @@
             endswitch;
             ?>
         </dd>
-        <dt class="col-9"><?php echo __('Como você avalia esta interação? (Responda se achar necessário)'); ?></dt>
-        <dd class="col-3">
-            <?= $this->Form->input('avaliacao11_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao11-1'], 'readonly']); ?>
-            &nbsp;
-        </dd>
-        <dt class="col-9"><?php echo __('12) Você recebeu e acompanhou o programa da Disciplina OTP?'); ?></dt>
+
+    </dl>
+
+    <dl>
+        <dt class="col-9">Relação interinstitucional</dt>
+
+        <dt class="col-9"><?php echo __('1) Quanto à integração sala de aula/campo de estágio, houve alguma interlocução entre discente, docente e supervisão de campo?'); ?></dt>
         <dd class="col-3">
             <?php
             switch ($avaliacao['Avaliacao']['avaliacao12']):
@@ -305,15 +307,9 @@
                     break;
             endswitch;
             ?>
+        </dd>
 
-            &nbsp;
-        </dd>
-        <dt class="col-9"><?php echo __('Sugestões ao que foi desenvolvido?'); ?></dt>
-        <dd class="col-3">
-            <?= $this->Form->input('avaliacao12_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao12-1'], 'readonly']); ?>
-            &nbsp;
-        </dd>
-        <dt class="col-9"><?php echo __('13) Há questões que você considera que devam ser mais enfatizadas na disciplina de OTP?'); ?></dt>
+        <dt class="col-9"><?php echo __('2) Quanto à integração Coordenação de estágio/campo de estágio: houve algum tipo de interlocução?'); ?></dt>
         <dd class="col-3">
             <?php
             switch ($avaliacao['Avaliacao']['avaliacao13']):
@@ -329,22 +325,78 @@
             endswitch;
             ?>
         </dd>
-        <dt class="col-9"><?php echo __('Se sim, quais?'); ?></dt>
+
+        <dt class="col-9"><?php echo __('3) Você tomou conhecimento do conteúdo da Disciplina de OTP?'); ?></dt>
         <dd class="col-3">
-            <?= $this->Form->input('avaliacao13_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao13-1'], 'readonly']); ?>
+            <?php
+            switch ($avaliacao['Avaliacao']['avaliacao14']):
+                case 0:
+                    echo "Sim";
+                    break;
+                case 1:
+                    echo "Não";
+                    break;
+                default:
+                    echo "Sem avaliação";
+                    break;
+            endswitch;
+            ?>
+        </dd>
+
+        <dt class="col-9"><?php echo __('4) Você participou de alguma atividade promovida e/ou convocada por docente ou Coordenação de Estágio (reuniões, Fórum Local de Estágio, cursos, eventos, entre outros)?'); ?></dt>
+        <dd class="col-3">
+            <?php
+            switch ($avaliacao['Avaliacao']['avaliacao15']):
+                case 0:
+                    echo "Sim";
+                    break;
+                case 1:
+                    echo "Não";
+                    break;
+                default:
+                    echo "Sem avaliação";
+                    break;
+            endswitch;
+            ?>
+        </dd>
+
+        <dt class="col-9"><?php echo __('Caso positivo, por favor, informe qual:'); ?></dt>
+        <dd class="col-3">
+            <?= $this->Form->input('avaliacao15_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao15_1'], 'readonly']); ?>
             &nbsp;
         </dd>
-        <dt class="col-9"><?php echo __('14) Como avalia a experiência do estágio remoto neste semestre? Será possível a continuidade do estágio na modalidade remota no próximo semestre?'); ?></dt>
+
+        <dt class="col-9"><?php echo __('5) Há questões que você considera que devam ser mais enfatizadas na disciplina de OTP?'); ?></dt>
         <dd class="col-3">
-            <?= $this->Form->input('avaliacao14', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao14'], 'readonly' => 'readonly']); ?>
+            <?php
+            switch ($avaliacao['Avaliacao']['avaliacao16']):
+                case 0:
+                    echo "Sim";
+                    break;
+                case 1:
+                    echo "Não";
+                    break;
+                default:
+                    echo "Sem avaliação";
+                    break;
+            endswitch;
+            ?>
+        </dd>
+
+        <dt class="col-9"><?php echo __('Caso positivo, por favor, informe quais:'); ?></dt>
+        <dd class="col-3">
+            <?= $this->Form->input('avaliacao16_1', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao16_1'], 'readonly']); ?>
             &nbsp;
         </dd>
-        <dt class="col-9"><?php echo __('Sugestões e observações:'); ?></dt>
+
+        <dt class="col-9"><?php echo __('De modo geral, como avalia a experiência do estágio neste semestre? Será possível a continuidade no próximo? Aproveite este espaço para deixar suas críticas, sugestões e/ou observações:'); ?></dt>
         <dd class="col-3">
-            <?= $this->Form->input('observacoes', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['observacoes'], 'readonly']); ?>
+            <?= $this->Form->input('avaliacao17', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60, 'value' => $avaliacao['Avaliacao']['avaliacao17'], 'readonly']); ?>
             &nbsp;
         </dd>
+
     </dl>
+
 </div>
 <!--
 <div class="actions">
