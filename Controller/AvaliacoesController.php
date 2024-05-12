@@ -89,7 +89,7 @@ class AvaliacoesController extends AppController
                     $id = $avaliacao['Avaliacao']['id'];
                 } else {
                     $this->Flash->error(__('Estudante sem avaliação'));
-                    if ($this->Session->read('id_categoria') == '4'):
+                    if ($this->Session->read('id_categoria') == '1' || $this->Session->read('id_categoria') == '4'):
                         $this->redirect(['controller' => 'avaliacoes', 'action' => 'add?estagiario_id=' . $estagiario_id]);
                     else:
                         $this->redirect(['controller' => 'estagiarios', 'action' => 'view/' . $estagiario_id]);
