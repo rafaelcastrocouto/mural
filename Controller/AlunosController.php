@@ -511,61 +511,10 @@ class AlunosController extends AppController {
                 // $this->Session->write('menu_aluno', 'estagiario');
                 $this->Session->write('numero', $this->data['Aluno']['registro']);
                 // $this->redirect('folhadeatividades');
-                $this->redirect(['action' => 'folhadeatividadespdf', $this->data['Aluno']['registro'], 'ext' => 'pdf', 'folhadeatividades']);
+                $this->redirect(['action' => 'folhadeatividadespdf', $this->data['Aluno']['registro'], 'ext' => 'pdf', 'Folha de atividades']);
             }
         } elseif ($this->Session->read('id_categoria') == '2') {
-            $this->redirect(['action' => 'folhadeatividadespdf', $this->Session->read('numero'), 'ext' => 'pdf', 'folhadeatividades']);
-        }
-    }
-
-    public function folhadeatividades($id = null) {
-
-        if ($this->Session->read('id_categoria') == '2') {
-            $dre = $this->Session->read('numero');
-        } else {
-            $dre = $id;
-        }
-
-        if (!isset($dre) || empty($dre)) {
-            $this->Flash->error(__("Precisa do númeo do DRE"));
-            $this->redirect(['action' => 'folhasolicita']);
-        } else {
-            // pr($dre);
-            $estagiario = $this->Aluno->Estagiario->find(
-                    'first',
-                    [
-                        'conditions' => ['Estagiario.registro' => $dre],
-                        'order' => ['Estagiario.nivel DESC']
-                    ]
-            );
-            // pr($estagiario);
-            // die('estagiario');
-            if (!$estagiario) {
-                $this->Flash->error(__("Estudante sem estágio"));
-                $this->redirect(['controller' => 'Alunonovos', 'action' => 'view?registro=' . $dre]);
-            }
-            // $this->Session->delete('numero');
-            // die('estagiario');
-
-            $dia = strftime('%e', time());
-            $mes = strftime('%B', time());
-            $ano = strftime('%Y', time());
-
-            $this->set('dia', $dia);
-            $this->set('mes', $mes);
-            $this->set('ano', $ano);
-            $this->set('registro', $estagiario['Aluno']['registro']);
-            $this->set('estudante', $estagiario['Aluno']['nome']);
-            $this->set('nivel', $estagiario['Estagiario']['nivel']);
-            $this->set('periodo', $estagiario['Estagiario']['periodo']);
-            $this->set('supervisor', $estagiario['Supervisor']['nome']);
-            $this->set('cress', $estagiario['Supervisor']['cress']);
-            $this->set('celular', $estagiario['Supervisor']['celular']);
-            $this->set('instituicao', $estagiario['Instituicao']['instituicao']);
-            $this->set('professor', $estagiario['Professor']['nome']);
-
-            $this->redirect(['action' => 'folhadeatividadespdf', $dre, 'ext' => 'pdf', $dre]);
-            // echo $this->Html->link(__('Imprime PDF'), array('action' => 'folhadeatividadespdf', "?" => ["registro" => $registro], 'ext' => 'pdf', $registro));
+            $this->redirect(['action' => 'folhadeatividadespdf', $this->Session->read('numero'), 'ext' => 'pdf', 'Minha folha de atividades']);
         }
     }
 
@@ -607,6 +556,8 @@ class AlunosController extends AppController {
             $this->set('celular', $estagiario['Supervisor']['celular']);
             $this->set('instituicao', $estagiario['Instituicao']['instituicao']);
             $this->set('professor', $estagiario['Professor']['nome']);
+            $this->set('professor_cress', $estagiario['Professor']['cress']);
+            $this->set('professor_regiao', $estagiario['Professor']['regiao']);
             // die();
         }
     }
@@ -675,6 +626,8 @@ class AlunosController extends AppController {
             $this->set('estudante', $estagiario['Aluno']['nome']);
             $this->set('registro', $estagiario['Aluno']['registro']);
             $this->set('professor', $estagiario['Professor']['nome']);
+            $this->set('professor_cress', $estagiario['Professor']['cress']);
+            $this->set('professor_regiao', $estagiario['Professor']['regiao']);
             $this->set('instituicao', $estagiario['Instituicao']['instituicao']);
             $this->set('instituicao_id', $estagiario['Instituicao']['id']);
             $this->set('supervisor', $estagiario['Supervisor']['nome']);
@@ -698,66 +651,26 @@ class AlunosController extends AppController {
                 'conditions' => ['Estagiario.id' => $this->data['Estagiario']['estagiario_id']]
             ]);
             // pr($this->data);
+            // pr($estagiario);
+            // die();
 
             $estagiario['Estagiario']['id_supervisor'] = $this->data['Estagiario']['supervisor_id'];
 
             $this->loadModel('Estagiario');
             $this->Estagiario->contain();
+            /* Atualizo com a informacao do supervisor */
             if ($this->Estagiario->save($estagiario)) {
                 $this->Flash->success(__("Atualizado"));
-                // $this->redirect(['action' => 'folhadeatividadespdf', $registro, 'ext' => 'pdf', $registro]);
+                // die("atualizado");
+                // Imprime o PDF que esta na pasta PDF da view Alunos
                 $this->redirect(['action' => 'avaliacaoimprimepdf', '?' => ['estagiario_id' => $this->data['Estagiario']['estagiario_id']], 'ext' => 'pdf', $registro]);
             } else {
                 $this->Flash->error(__("Tente novamente"));
                 // debug($this->Estagiario->validationErrors);
-                $log = $this->Estagiario->getDataSource()->getLog(false, false);
+                // $log = $this->Estagiario->getDataSource()->getLog(false, false);
                 // debug($log);
             }
         }
-    }
-
-    public function avaliacaoimprime() {
-
-        $registro = isset($this->request->params['named']['registro']) ? $this->request->params['named']['registro'] : NULL;
-        if (!$registro) {
-            $registro = $this->request->query('registro');
-        }
-        // pr($registro);
-        // die('registro');
-
-        $aluno = $this->Aluno->Estagiario->find(
-                'first',
-                [
-                    'conditions' => ['Estagiario.registro' => $registro],
-                    'order' => ['Estagiario.nivel DESC']
-                ]
-        );
-        /*
-          $estudante = $aluno['Aluno']['nome'];
-          // $registro = $aluno['Aluno']['registro'];
-          $nivel = $aluno['Estagiario']['nivel'];
-          $periodo = $aluno['Estagiario']['periodo'];
-          $supervisor = $aluno['Supervisor']['nome'];
-          $cress = $aluno['Supervisor']['cress'];
-          $telefone = $aluno['Supervisor']['telefone'];
-          $celular = $aluno['Supervisor']['celular'];
-          $email = $aluno['Supervisor']['email'];
-          $instituicao = $aluno['Instituicao']['instituicao'];
-          $endereco_inst = $aluno['Instituicao']['endereco'];
-          $professor = $aluno['Professor']['nome'];
-         */
-        $this->set('estudante', $aluno['Aluno']['nome']);
-        $this->set('registro', $registro);
-        $this->set('nivel', $aluno['Estagiario']['nivel']);
-        $this->set('periodo', $aluno['Estagiario']['periodo']);
-        $this->set('supervisor', $aluno['Supervisor']['nome']);
-        $this->set('cress', $aluno['Supervisor']['cress']);
-        $this->set('telefone', $aluno['Supervisor']['telefone']);
-        $this->set('celular', $aluno['Supervisor']['celular']);
-        $this->set('email', $aluno['Supervisor']['email']);
-        $this->set('instituicao', $aluno['Instituicao']['instituicao']);
-        $this->set('endereco_inst', $aluno['Instituicao']['endereco']);
-        $this->set('professor', $aluno['Professor']['nome']);
     }
 
     public function avaliacaoimprimepdf($id = NULL) {
@@ -776,20 +689,8 @@ class AlunosController extends AppController {
                     'order' => ['Estagiario.nivel DESC']
                 ]
         );
-        /*
-          $estudante = $aluno['Aluno']['nome'];
-          $registro = $aluno['Aluno']['registro'];
-          $nivel = $aluno['Estagiario']['nivel'];
-          $periodo = $aluno['Estagiario']['periodo'];
-          $supervisor = $aluno['Supervisor']['nome'];
-          $cress = $aluno['Supervisor']['cress'];
-          $telefone = $aluno['Supervisor']['telefone'];
-          $celular = $aluno['Supervisor']['celular'];
-          $email = $aluno['Supervisor']['email'];
-          $instituicao = $aluno['Instituicao']['instituicao'];
-          $endereco_inst = $aluno['Instituicao']['endereco'];
-          $professor = $aluno['Professor']['nome'];
-         */
+        // pr($aluno);
+        // die();
         $this->set('estudante', $aluno['Aluno']['nome']);
         $this->set('registro', $aluno['Aluno']['registro']);
         $this->set('nivel', $aluno['Estagiario']['nivel']);
@@ -802,6 +703,8 @@ class AlunosController extends AppController {
         $this->set('instituicao', $aluno['Instituicao']['instituicao']);
         $this->set('endereco_inst', $aluno['Instituicao']['endereco']);
         $this->set('professor', $aluno['Professor']['nome']);
+        $this->set('professor_cress', $aluno['Professor']['cress']);
+        $this->set('professor_regiao', $aluno['Professor']['regiao']);
     }
 
     public function planilhaseguro($id = null) {
