@@ -1056,12 +1056,18 @@ Assinam (este documento só pode ser entregue à Coordenação de Estágio após
 <tr class="auxiliar">
 <td class="auxiliar"><span style="font-size: 100%; text-decoration: overline"><?= $estudante; ?></span></td>
 <td class="auxiliar"><span style="font-size: 100%; text-decoration: overline"><?= $supervisor; ?></span></td>
-<td class="auxiliar"><span style="font-size: 100%; text-decoration: overline"></span></td>
+<td class="auxiliar"><span style="font-size: 100%; text-decoration: overline"><?= $professor; ?></span></td>
 </tr>
 
 <tr class="auxiliar">
 <td class="auxiliar"><span style="font-size: 100%">DRE: <?= $registro; ?></span></td>
-<td class="auxiliar"><span style="font-size: 100%">Supervisão de campo</span><br><span>CRESS: <?= $cress; ?></span></td>
-<td class="auxiliar"><span style="font-size: 100%">Supervisão acadêmica</span><br><span>CRESS: </span></td>
+<td class="auxiliar"><span style="font-size: 100%">CRESS: <?= $cress . '/7ª região'; ?></span></td>
+<td class="auxiliar"><span style="font-size: 100%">CRESS: <?= $professor_cress . '/' . $professor_regiao . 'região'; ?></span></td>
+</tr>
+
+<tr class="auxiliar">
+<td class="auxiliar">Discente</td>
+<td class="auxiliar">Supervisão de campo</td>
+<td class="auxiliar">Supervisão acadêmica</td>
 </tr>
 </table>
