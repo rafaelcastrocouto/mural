@@ -1,4 +1,7 @@
-<?php ?>
+<?php
+// pr('Supervisor: '. $supervisor);
+// die();
+?>
 
 <?= $this->Html->script("jquery.maskedinput") ?>
 
