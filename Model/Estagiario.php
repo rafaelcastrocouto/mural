@@ -32,7 +32,7 @@ class Estagiario extends AppModel {
             'className' => 'Professor',
             'foreignKey' => 'id_professor',
             'joinTable' => 'professores',
-            'fields' => array('id', 'nome', 'telefone', 'celular', 'email', 'cpf', 'siape', 'departamento')
+            'fields' => array('id', 'nome', 'telefone', 'celular', 'email', 'cpf', 'siape', 'cress', 'regiao', 'departamento')
         ),
         'Supervisor' => array(
             'className' => 'Supervisor',
