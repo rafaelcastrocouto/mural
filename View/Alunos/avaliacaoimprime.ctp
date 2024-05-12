@@ -21,14 +21,6 @@ Avaliação final do(a) supervisor(a) de campo do desempenho discente
 </h2>
 
 <p style="line-height:100%; font-size: 90%">
-Nome do(a) Estudante: $estudante<br>
-Supervisor(a) de Campo: $supervisor CRESS: $cress <br />
-E-mail: $email Telefone: $telefone Celular: $celular<br />
-Campo de Estágio: $instituicao<br />
-Endereço Institucional: $endereco_inst<br />
-Período de realização do estágio: $periodo<br />
-Nível de Estágio: $nivel<br />
-Supervisor(a) Acadêmico(a): $professor
 </p>
 
 <p>
@@ -237,14 +229,13 @@ ________________________________________________________________________________
 <table>
 <tr>
 <td>Coordenação de Estágio e Extensão</td>
-<td>$estudante <br> (DRE: $registro)</td>
-<td>$supervisor <br> (CRESS 7ª Região: $cress)</td>
+
 </tr>
 
-</table>
+</table> 
 EOD;
 
-// pr($texto);
+pr($texto);
+die();
 echo $this->Html->link(__("Imprime PDF"), array("action" => "avaliacaoimprimepdf", "?" => ['registro' => $registro], 'ext' => 'pdf', $registro));
 
-?>
