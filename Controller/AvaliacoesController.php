@@ -1,14 +1,14 @@
 <?php
 
 App::uses('AppController', 'Controller');
+
 /**
  * Avaliacoes Controller
  *
  * @property Avaliacao $Avaliacao
  * @property PaginatorComponent $Paginator
  */
-class AvaliacoesController extends AppController
-{
+class AvaliacoesController extends AppController {
 
     /**
      * Components
@@ -17,8 +17,7 @@ class AvaliacoesController extends AppController
      */
     public $components = array('Paginator', 'Flash', 'Auth', 'RequestHandler');
 
-    public function beforeFilter()
-    {
+    public function beforeFilter() {
 
         parent::beforeFilter();
         // Admin
@@ -50,8 +49,7 @@ class AvaliacoesController extends AppController
      *
      * @return void
      */
-    public function index()
-    {
+    public function index() {
 
         $this->Paginator->settings = [
             'Avaliacao' => [
@@ -71,8 +69,7 @@ class AvaliacoesController extends AppController
      * @param string $id
      * @return void
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
 
         // die('view');
         if (!is_numeric($id)) {
@@ -140,8 +137,7 @@ class AvaliacoesController extends AppController
      * @param string $id
      * @return void
      */
-    public function imprimepdf($id = null)
-    {
+    public function imprimepdf($id = null) {
 
         if (!is_numeric($id)) {
 
@@ -161,7 +157,7 @@ class AvaliacoesController extends AppController
         }
         // pr($estagiario_id);
         // die();
-        $this->Avaliacao->recursive = 2;
+        $this->Avaliacao->contain(['Estagiario' => ['Alunonovo', 'Aluno', 'Instituicao', 'Supervisor', 'Professor']]);
         $avaliacao = $this->Avaliacao->find('first', [
             'conditions' => ['Avaliacao.id' => $id]
         ]);
@@ -178,16 +174,18 @@ class AvaliacoesController extends AppController
                 die('estagiario');
             }
         else: // Com avaliação
-            if (isset($avaliacao['Estagiario']['Supervisor']['nome'])) {
-                $this->set('supervisor', $avaliacao['Estagiario']['Supervisor']['nome']);
-            } else {
+            if (empty($avaliacao['Estagiario']['Supervisor']['nome'])) {
                 $this->Flash->error(__('Completar dados da supervisora'));
+                // die();
+            } elseif (empty($avaliacao['Estagiario']['Professor']['cress'])) {
+                $this->Flash->error(__('Completar dados do(a) professor(a)'));
             }
+
         endif;
         // $log = $this->Avaliacao->getDataSource()->getLog(false, false);
         // debug($log);
-        $options = array('conditions' => array('Avaliacao.' . $this->Avaliacao->primaryKey => $avaliacao['Avaliacao']['id']));
-        $this->set('avaliacao', $this->Avaliacao->find('first', $options));
+
+        $this->set('avaliacao', $avaliacao);
     }
 
     /**
@@ -195,8 +193,7 @@ class AvaliacoesController extends AppController
      *
      * @return void
      */
-    public function add()
-    {
+    public function add() {
 
         $estagiario_id = $this->request->query('estagiario_id');
         // pr($estagiario_id);
@@ -223,7 +220,7 @@ class AvaliacoesController extends AppController
         if ($this->request->is('post')) {
 
             /* Verifico que não tenha uma avaliação já realzada */
-            // pr($this->request->data);
+            pr($this->request->data);
             $avaliacao = $this->Avaliacao->find('first', [
                 'conditions' => ['Avaliacao.estagiario_id' => $this->request->data['Avaliacao']['estagiario_id']]
             ]);
@@ -247,7 +244,7 @@ class AvaliacoesController extends AppController
             if ($this->Avaliacao->save($this->request->data)) {
                 $this->Flash->success(__('Avaliação realizada!'));
                 return $this->redirect(array('action' => 'view/' . $this->Avaliacao->id));
-                die();
+                // die();
             } else {
                 $this->Flash->error(__('Não foi possível completar a oporação. Tente novamente.'));
             }
@@ -263,8 +260,7 @@ class AvaliacoesController extends AppController
      * @param string $id
      * @return void
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
 
         if (!is_numeric($id)) {
             $estagiario_id = $this->request->query('estagiario_id');
@@ -311,8 +307,7 @@ class AvaliacoesController extends AppController
      * @param string $id
      * @return void
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
 
         if (!$this->Avaliacao->exists($id)) {
             throw new NotFoundException(__('Registro não existe'));
@@ -327,8 +322,7 @@ class AvaliacoesController extends AppController
         return $this->redirect(array('action' => 'index'));
     }
 
-    public function busca_dre()
-    {
+    public function busca_dre() {
         if (!empty($this->data['Aluno']['registro'])) {
             $this->loadModel('Aluno');
             $alunos = $this->Aluno->findFirstByRegistro($this->data['Aluno']['registro']);
@@ -356,8 +350,7 @@ class AvaliacoesController extends AppController
         }
     }
 
-    public function historico($id = NULL)
-    {
+    public function historico($id = NULL) {
 
         $registro = isset($this->params['named']['registro']) ? $this->params['named']['registro'] : NULL;
         if (!$registro) {
@@ -490,5 +483,4 @@ class AvaliacoesController extends AppController
             $this->set('estagios', $estagios);
         }
     }
-
 }
