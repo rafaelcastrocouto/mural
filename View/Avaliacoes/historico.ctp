@@ -29,7 +29,7 @@
     <table class='table table-striped table-hover table-responsive'>
         <thead class='thead-light'>
             <tr>
-                <th>Ver</th>
+                <th>Ações</th>
                 <th>Período</th>
                 <th>Complemento</th>
                 <th>Nível</th>
@@ -46,7 +46,7 @@
         <?php foreach ($c_estagios as $aluno_estagio): ?>
             <tr>
                 <td>
-                    <?= $this->Html->link('Ver', '/estagiarios/view/' . $aluno_estagio['id']) ?>
+                    <?= $this->Html->link('Ação', '/estagiarios/view/' . $aluno_estagio['id']) ?>
                 </td>
                 <td><?php echo $aluno_estagio['periodo'] ?></td>
                 <td><?php echo $aluno_estagio['complemento_periodo_especial'] ?></td>
