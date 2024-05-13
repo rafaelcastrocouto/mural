@@ -8,7 +8,7 @@
             <?php if ($this->Session->read('id_categoria') == '1'): ?> 
                 <li class="nav-item"><?= $this->Html->link(__("Avaliações"), ['controller' => 'avaliacoes', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
             <?php endif; ?>            
-            <?php if ($this->Session->read('id_categoria') == '4'): ?>
+            <?php if ($this->Session->read('id_categoria') == '1' || $this->Session->read('id_categoria') == '4'): ?>
                 <li class="nav-item"><?= $this->Html->link(__('Inserir'), ['controller' => 'avaliacoes', 'action' => 'busca_dre'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__('Buscar'), ['controller' => 'avaliacoes', 'action' => 'busca_dre'], ['class' => 'nav-link']) ?></li>
                 <li class="nav-item"><?= $this->Html->link(__("Folha de atividades"), ['controller' => 'folhadeatividades', 'action' => 'atividade', '?' => ['estagiario_id' => $this->request->query('estagiario_id')]], ['class' => 'nav-link']) ?></li>
