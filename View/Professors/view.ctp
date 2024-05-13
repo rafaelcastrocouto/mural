@@ -26,18 +26,28 @@ if ($professor['Professor']['siape']) {
                 <?php
                 if ($professor['Professor']['siape']):
                     ?>
-                    <td width='75%'>
+                <td width='75%'>
                         <?= $this->Html->link($professor['Professor']['nome'], '/Estagiarios/index?siape=' . $professor['Professor']['siape'] . '&' . 'periodo=0') ?>
-                    </td>    
+                </td>    
                     <?php
                 else:
                     ?>
-                    <td width='75%'>
+                <td width='75%'>
                         <?= $professor['Professor']['nome'] ?>
-                    </td>    
+                </td>    
                 <?php
                 endif;
                 ?>
+            </tr>
+
+            <tr>
+                <td>CRESS</td>
+                <td><?php echo $professor['Professor']['cress']; ?></td>
+            </tr>
+
+            <tr>
+                <td>Região do CRESS</td>
+                <td><?php echo $professor['Professor']['regiao']; ?></td>
             </tr>
 
             <tr>
