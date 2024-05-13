@@ -39,7 +39,8 @@
 
     echo $this->Form->input('nome');
     echo $this->Form->input('siape');
-// echo $this->Form->input('cpf');
+    echo $this->Form->input('cress');
+    echo $this->Form->input('regiao');
 // echo $this->Form->input('datanascimento', array('dateFormat'=>'DMY', 'empty'=>TRUE));
 // echo $this->Form->input('localnascimento');
 // echo $this->Form->input('sexo', array('options'=>array('1'=>'Masculino', '2'=>'Feminino')));
