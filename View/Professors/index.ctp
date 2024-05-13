@@ -51,6 +51,12 @@
                         <?php echo $this->Paginator->sort('Professor.email', 'Email'); ?>
                     </th>
                     <th>
+                        <?php echo $this->Paginator->sort('Professor.cress', 'CRESS'); ?>
+                    </th>
+                    <th>
+                        <?php echo $this->Paginator->sort('Professor.regiao', 'Região'); ?>
+                    </th>
+                    <th>
                         <?php echo $this->Paginator->sort('Professor.curriculolattes', 'Lattes'); ?>
                     </th>
                     <th>
@@ -78,10 +84,12 @@
                 <?php foreach ($professores as $c_professor): ?>
                 <tr>
                         <?php if ($this->Session->read('id_categoria') == '1'): ?>
+
                     <td>
                                 <?php echo $c_professor['Professor']['siape']; ?>
                     </td>
                         <?php endif; ?>
+
                     <td>
                             <?php if (($this->Session->read('id_categoria') === 1) || ($this->Session->read('id_categoria') === 3)): ?>
                                 <?php echo $this->Html->link($c_professor['Professor']['nome'], '/Professors/view/' . $c_professor['Professor']['id']); ?>
@@ -89,9 +97,19 @@
                                 <?php echo $c_professor['Professor']['nome']; ?>
                             <?php endif; ?>
                     </td>
+
                     <td>
                             <?php echo $c_professor['Professor']['email']; ?>
                     </td>
+
+                    <td>
+                            <?php echo $c_professor['Professor']['cress']; ?>
+                    </td>
+                    
+                    <td>
+                            <?php echo $c_professor['Professor']['regiao']; ?>
+                    </td>
+
                     <td>
                             <?php
                             if ($c_professor['Professor']['curriculolattes']) {
@@ -101,9 +119,11 @@
                             }
                             ?>
                     </td>
+
                     <td>
                             <?php echo $c_professor['Professor']['departamento']; ?>
                     </td>
+
                     <td>
                             <?php echo $c_professor['Professor']['tipocargo']; ?>
                     </td>
@@ -112,6 +132,7 @@
                     <td>
                                 <?php echo $c_professor['Professor']['celular']; ?>
                     </td>
+
                     <td>
                                 <?php
                                 if ($c_professor['Professor']['dataegresso']):
@@ -122,7 +143,7 @@
                     <td>
                                 <?php
                                 if ($c_professor['Professor']['motivoegresso']):
-                                echo date('d-m-Y', strtotime($c_professor['Professor']['motivoegresso'])); 
+                                echo date('d-m-Y', strtotime($c_professor['Professor']['motivoegresso']));
                                 endif;
                                 ?>
                     </td>
