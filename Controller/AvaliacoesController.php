@@ -220,7 +220,7 @@ class AvaliacoesController extends AppController {
         if ($this->request->is('post')) {
 
             /* Verifico que não tenha uma avaliação já realzada */
-            pr($this->request->data);
+            // pr($this->request->data);
             $avaliacao = $this->Avaliacao->find('first', [
                 'conditions' => ['Avaliacao.estagiario_id' => $this->request->data['Avaliacao']['estagiario_id']]
             ]);
@@ -291,7 +291,7 @@ class AvaliacoesController extends AppController {
             $options = array('conditions' => array('Avaliacao.' . $this->Avaliacao->primaryKey => $id));
             $this->request->data = $this->Avaliacao->find('first', $options);
         }
-        $this->Avaliacao->recursive = 2;
+        $this->Avaliacao->contain(['Estagiario' => ['Alunonovo', 'Aluno', 'Professor', 'Supervisor', 'Instituicao']]);
         $estagiario = $this->Avaliacao->find('first', [
             'conditions' => ['Avaliacao.id' => $id],
         ]);
