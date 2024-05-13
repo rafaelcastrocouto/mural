@@ -220,7 +220,7 @@ class Alunonovo extends AppModel {
 
         $emails = NULL;
         if (!empty($cadastro_email)) {
-            $emails = $this->query('select email from alunos as Aluno where email = ' . "'" . $cadastro_email . "'");
+            $emails = $this->query('select email from alunonovos as Alunonovo where email = ' . "'" . $cadastro_email . "'");
         }
 
         if ($emails) {

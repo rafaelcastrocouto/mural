@@ -58,7 +58,7 @@ class AvaliacoesController extends AppController {
             ]
         ];
 
-        $this->Avaliacao->recursive = 2;
+        $this->Avaliacao->contain(['Estagiario' => ['Alunonovo', 'Supervisor', 'Professor', 'Instituicao', 'Complemento']]);
         $this->set('avaliacoes', $this->Paginator->paginate('Avaliacao'));
     }
 
@@ -101,7 +101,7 @@ class AvaliacoesController extends AppController {
         // pr($id);
         // die();
 
-        $this->Avaliacao->recursive = 2;
+        $this->Avaliacao->contain(['Estagiario' => ['Alunonovo', 'Supervisor', 'Professor', 'Instituicao', 'Complemento']]);
         $avaliacao = $this->Avaliacao->find('first', [
             'conditions' => ['Avaliacao.id' => $id]
         ]);
@@ -126,8 +126,9 @@ class AvaliacoesController extends AppController {
         endif;
         // $log = $this->Avaliacao->getDataSource()->getLog(false, false);
         // debug($log);
-        $options = array('conditions' => array('Avaliacao.' . $this->Avaliacao->primaryKey => $avaliacao['Avaliacao']['id']));
-        $this->set('avaliacao', $this->Avaliacao->find('first', $options));
+        // $options = array('conditions' => array('Avaliacao.' . $this->Avaliacao->primaryKey => $avaliacao['Avaliacao']['id']));
+        // $this->set('avaliacao', $this->Avaliacao->find('first', $options));
+        $this->set('avaliacao', $avaliacao);
     }
 
     /**

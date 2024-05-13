@@ -146,7 +146,7 @@ class ProfessorsController extends AppController {
 // die();
 
         if (empty($this->data)) {
-            $this->Professor->recursive = -1;
+            $this->Professor->contain();
             $professor = $this->Professor->find('first', [
                 'conditions' => ['Professor.id' => $id]
             ]);
@@ -208,8 +208,8 @@ class ProfessorsController extends AppController {
         // pr($id);
         if (!empty($this->request->data['Professor']['nome'])) {
             $condicao = ['Professor.nome like' => '%' . $this->request->data['Professor']['nome'] . '%'];
+            $this->Professor->contain();
             $professores = $this->Professor->find('all', [
-                'recursive' => -1, // Para excluir as associações
                 'conditions' => $condicao,
                 'order' => 'Professor.nome']);
 
@@ -323,7 +323,7 @@ class ProfessorsController extends AppController {
                 if ($estagiariodoprofessor['periodo'] == $periodo) {
                     // echo $estagiariodoprofessor['periodo'] . " " . $periodo . "<br>";
                     $this->loadModel('Area');
-                    $this->Area->recursive = -1;
+                    $this->Area->contain();
                     $area = $this->Area->find('first', array('conditions' => array('Area.id' => $estagiariodoprofessor['id_area'])));
                     // pr($area);
                     // echo $k . " " . $professor . " -> " . " " . $periodo . " " . $p++ . "<br>";

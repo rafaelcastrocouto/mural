@@ -223,7 +223,7 @@ class InstituicaosController extends AppController {
         // pr($area_instituicao);
         // die();
         // Capturo a natureza dos instituições para o Datalist
-        $this->Instituicao->recursive = -1;
+        $this->Instituicao->contain();
         $q_natureza = $this->Instituicao->find('all',
                 ['fields' => ['DISTINCT natureza'],
                     'conditions' => ['natureza IS NOT NULL'],
@@ -234,7 +234,7 @@ class InstituicaosController extends AppController {
         $this->set('naturezas', $natureza);
 
         // Capturo as instituicoes das instituições para o Datalist
-        $this->Instituicao->recursive = -1;
+        $this->Instituicao->contain();
         $q_instituicao = $this->Instituicao->find('all',
                 ['fields' => ['DISTINCT instituicao'],
                     'conditions' => ['instituicao IS NOT NULL'],
@@ -244,7 +244,7 @@ class InstituicaosController extends AppController {
         };
 
         // Capturo os bairros das instituições para o Datalist
-        $this->Instituicao->recursive = -1;
+        $this->Instituicao->contain();
         $q_bairro = $this->Instituicao->find('all',
                 ['fields' => ['DISTINCT bairro'],
                     'conditions' => ['bairro IS NOT NULL'],
@@ -299,7 +299,7 @@ class InstituicaosController extends AppController {
         $this->Instituicao->id = $id;
 
         // Capturo a natureza dos instituições para o Datalist
-        $this->Instituicao->recursive = -1;
+        $this->Instituicao->contain();
         $q_natureza = $this->Instituicao->find('all',
                 ['fields' => ['DISTINCT natureza'],
                     'conditions' => ['natureza IS NOT NULL'],
@@ -310,7 +310,7 @@ class InstituicaosController extends AppController {
         $this->set('naturezas', $naturezas);
 
         // Capturo as instituicoes das instituições para o Datalist
-        $this->Instituicao->recursive = -1;
+        $this->Instituicao->contain();
         $q_instituicao = $this->Instituicao->find('all',
                 ['fields' => ['DISTINCT instituicao'],
                     'conditions' => ['instituicao IS NOT NULL'],
@@ -320,7 +320,7 @@ class InstituicaosController extends AppController {
         };
 
         // Capturo os bairros das instituições para o Datalist
-        $this->Instituicao->recursive = -1;
+        $this->Instituicao->contain();
         $q_bairro = $this->Instituicao->find('all',
                 ['fields' => ['DISTINCT bairro'],
                     'conditions' => ['bairro IS NOT NULL'],
@@ -496,7 +496,7 @@ class InstituicaosController extends AppController {
             $natureza = $this->request->query('natureza');
         }
 
-        $this->Instituicao->recursive = -1;
+        $this->Instituicao->contain();
         $natureza = $this->Instituicao->find('all', array(
             'fields' => array('Instituicao.natureza', "count('Instituicao.natureza') as qnatureza"),
             'order' => array('Instituicao.natureza'),
