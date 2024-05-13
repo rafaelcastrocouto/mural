@@ -47,7 +47,8 @@ $ano = strftime('%Y', time());
         ]
     ]);
     ?>
-    <fieldset  class="border p-2">
+    <fieldset class="border p-2">
+        
         
         <?= $this->Form->input('estagiario_id', ['type' => 'hidden', 'value' => $estagiario_id]); ?>
 
@@ -174,18 +175,18 @@ $ano = strftime('%Y', time());
         <div class='col-auto'>
             <table class='table table-responsive table-borderless'>
                 <tr>
-                    <td><span style="font-size: 90%; text-decoration: overline;"><?= $estagiario['Supervisor']['nome']; ?></span></td>
-                    <td><span style="font-size: 90%; text-decoration: overline;"><?= $estagiario['Aluno']['nome']; ?></span></td>
-                    <td><span style="font-size: 90%; text-decoration: overline;"></span></td>
+                    <td><span style="font-size: 90%; text-decoration: overline;"><?= isset($estagiario['Supervisor']['nome']) ? $estagiario['Supervisor']['nome'] : NULL; ?></span></td>
+                    <td><span style="font-size: 90%; text-decoration: overline;"><?= $estagiario['Alunonovo']['nome']; ?></span></td>
+                    <td><span style="font-size: 90%; text-decoration: overline;"><?= isset($estagiario['Professor']['nome']) ? $estagiario['Professor']['nome'] : NULL; ?><</span></td>
                 </tr>
 
                 <tr>
-                    <td><span style="font-size: 90%;">CRESS: <?= $estagiario['Supervisor']['cress']; ?></span></td>
-                    <td><span style="font-size: 90%;">DRE: <?= $estagiario['Aluno']['registro']; ?></span></td>
-                    <td><span style="font-size: 90%;">CRESS: </span></td>
+                    <td><span style="font-size: 90%;">CRESS: <?= isset($estagiario['Supervisor']['cress']) ? $estagiario['Supervisor']['cress'] . '/7ª região': NULL; ?></span></td>
+                    <td><span style="font-size: 90%;">DRE: <?= $estagiario['Alunonovo']['registro']; ?></span></td>
+                    <td><span style="font-size: 90%;">CRESS: <?= isset($estagiario['Professor']['cress']) ? $estagiario['Professor']['cress'] . '/' . $estagiario['Professor']['regiao'] . 'ª região': NULL; ?></span></td>
                 </tr>
 
-                <tr>
+~                <tr>
                     <td>Supervisor(a) de campo</td>
                     <td>Discente</td>
                     <td>Supervisor(a) acadêmica</td>
