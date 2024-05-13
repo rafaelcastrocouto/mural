@@ -37,7 +37,8 @@
     echo $this->Form->input('id', ['type' => 'hidden']);
     echo $this->Form->input('siape');
     echo $this->Form->input('nome');
-// echo $this->Form->input('cpf');
+    echo $this->Form->input('cress', ['label' => ['text' => 'CRESS', 'class' => 'col-4']]);
+    echo $this->Form->input('regiao', ['label' => ['text' => 'Região', 'class' => 'col-4']]);
 // echo $this->Form->input('datanascimento', array('dateFormat'=>'DMY', 'minYear'=>'1900', 'empty'=>TRUE));
 // echo $this->Form->input('localnascimento');
 // echo $this->Form->input('sexo', array('options'=>array('1'=>'Masculino', '2'=>'Feminino')));
