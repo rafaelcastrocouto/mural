@@ -67,8 +67,8 @@ class HistoryPanel extends DebugPanel {
 				$historyStates[] = array(
 					'title' => $title,
 					'url' => array_merge($prefix, array(
-						'plugin' => 'DebugKit',
-						'controller' => 'ToolbarAccess',
+						'plugin' => 'debug_kit',
+						'controller' => 'toolbar_access',
 						'action' => 'history_state',
 						$i + 1))
 				);

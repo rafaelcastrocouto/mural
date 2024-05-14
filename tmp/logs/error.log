@@ -479,3 +479,30 @@ Stack Trace:
 #12 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(EstagiariosController), Object(CakeRequest))
 #13 /home/luis/html/mural/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #14 {main}
+2024-05-14 14:14:36 Error: [MissingControllerException] Controller class MuralController could not be found.
+Exception Attributes: array (
+  'class' => 'MuralController',
+  'plugin' => NULL,
+)
+Request URL: /mural/
+Stack Trace:
+#0 /var/www/html/cakephp/mural/webroot/index.php(121): Dispatcher->dispatch()
+#1 {main}
+2024-05-14 14:14:43 Error: [MissingControllerException] Controller class MuralController could not be found.
+Exception Attributes: array (
+  'class' => 'MuralController',
+  'plugin' => NULL,
+)
+Request URL: /mural/
+Stack Trace:
+#0 /var/www/html/cakephp/mural/webroot/index.php(121): Dispatcher->dispatch()
+#1 {main}
+2024-05-14 14:14:49 Error: [MissingControllerException] Controller class SssController could not be found.
+Exception Attributes: array (
+  'class' => 'SssController',
+  'plugin' => NULL,
+)
+Request URL: /sss/
+Stack Trace:
+#0 /var/www/html/cakephp/mural/webroot/index.php(121): Dispatcher->dispatch()
+#1 {main}

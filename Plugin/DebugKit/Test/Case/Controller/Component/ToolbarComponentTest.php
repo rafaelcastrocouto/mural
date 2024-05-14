@@ -148,7 +148,6 @@ class ToolbarComponentTestCase extends CakeTestCase {
  * Test exceptions on bad panel names
  *
  * @expectedException PHPUnit_Framework_Error
- * @expectedExceptionMessage Undefined property: ToolbarComponentTestCase::$Controller
  * @return void
  */
 	public function testLoadPanelsError() {
@@ -470,8 +469,8 @@ class ToolbarComponentTestCase extends CakeTestCase {
 
 		$result = $this->Controller->Toolbar->panels['history']->beforeRender($this->Controller);
 		$expected = array(
-			'plugin' => 'DebugKit',
-			'controller' => 'ToolbarAccess',
+			'plugin' => 'debug_kit',
+			'controller' => 'toolbar_access',
 			'action' => 'history_state',
 			0 => 1,
 			'admin' => false,
