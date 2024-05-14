@@ -56,7 +56,7 @@ class TaesController extends AppController {
             ]
         ];
         
-        $this->Tae->recursive = 0;
+        $this->Tae->contain(['Extensao']);
         $this->set('taes', $this->Paginator->paginate('Tae'));
 
     }

@@ -59,7 +59,7 @@ class FolhadeatividadesController extends AppController {
                 'limit' => 10
             ]
         ];
-        $this->Folhadeatividade->recursive = 2;
+        $this->Folhadeatividade->contain(['Estagiario' => ['Alunonovo', 'Supervisor', 'Professor', 'Instituicao', 'Complemento']]);
         $this->set('folhadeatividades', $this->Paginator->paginate('Folhadeatividade'));
     }
 
@@ -290,7 +290,7 @@ class FolhadeatividadesController extends AppController {
         /* Para pegar o nome e o id do estagiario */
         $this->loadModel('Aluno');
         $this->set('estudante', $this->Aluno->find('first', ['conditions' => ['Aluno.id' => $folhadeatividade['Estagiario']['id_aluno']]]));
-        $this->Folhadeatividade->recursive = 2;
+        $this->Folhadeatividade->contain(['Estagiario' => ['Alunonovo', 'Supervisor', 'Professor', 'Instituicao', 'Complemento']]);
         $this->set('folhadeatividades', $this->Folhadeatividade->find('all', $options));
     }
 
@@ -326,7 +326,7 @@ class FolhadeatividadesController extends AppController {
             }
         }
 
-        $this->Folhadeatividade->recursive = 2;
+        $this->Folhadeatividade->contain(['Estagiario' => ['Alunonovo', 'Supervisor', 'Professor', 'Instituicao', 'Complemento']]);
         $this->set('folhadeatividades', $this->Folhadeatividade->find('all', $options));
     }
 
@@ -409,7 +409,7 @@ class FolhadeatividadesController extends AppController {
                 $this->Flash->error(__('Processo falhou. Tente novamente.'));
             }
         }
-        $this->Folhadeatividade->recursive = 2;
+        $this->Folhadeatividade->contain(['Estagiario' => ['Alunonovo', 'Supervisor', 'Professor', 'Instituicao', 'Complemento']]);
         $folhadeatividades = $this->Folhadeatividade->find('all', ['conditions' => ['Folhadeatividade.estagiario_id' => $estagiario_id], 'order' => 'dia']);
         $this->set(compact('folhadeatividades'));
         
@@ -441,7 +441,7 @@ class FolhadeatividadesController extends AppController {
             $options = array('conditions' => array('Folhadeatividade.' . $this->Folhadeatividade->primaryKey => $id));
             $this->request->data = $this->Folhadeatividade->find('first', $options);
         }
-        $this->Folhadeatividade->recursive = 2;
+        $this->Folhadeatividade->contain(['Estagiario' => ['Alunonovo', 'Supervisor', 'Professor', 'Instituicao', 'Complemento']]);
         $estagiarios = $this->Folhadeatividade->find('first', ['conditions' => ['Folhadeatividade.id' => $id]]);
         $this->set(compact('estagiarios'));
     }

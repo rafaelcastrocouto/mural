@@ -39,7 +39,7 @@ class ComplementosController extends AppController {
      */
     public function index() {
         
-        $this->Complemento->recursive = 0;
+        $this->Complemento->contain(['Estagiario']);
         $this->set('complementos', $this->Paginator->paginate());
     }
 

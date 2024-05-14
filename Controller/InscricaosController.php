@@ -245,7 +245,6 @@ class InscricaosController extends AppController {
      * Inscreve o aluno para seleção de estágio por parte do administrador, supervisor ou professor
      * O Id e o numero de registro
      */
-
     public function inscricao($id = null) {
 
         $id_instituicao = $this->request->query('id_instituicao');
@@ -607,7 +606,6 @@ class InscricaosController extends AppController {
      * O id eh o registro do aluno
      * Está com um problema na hora de avançar um nível de estágio
      */
-
     public function termocadastra($id = null) {
 
         $registro = $this->request->query('registro');
@@ -710,7 +708,6 @@ class InscricaosController extends AppController {
     }
 
     /* id eh o id do estagiario */
-
     public function termoimprime($id = null) {
 
         ini_set('memory_limit', '512M');
@@ -772,7 +769,6 @@ class InscricaosController extends AppController {
     }
 
     /* Envia os dados para imprimir o PDF diretamente  */
-
     function imprimepdf($id = null) {
 
         $this->Inscricao->Estagiario->contain('Alunonovo', 'Instituicao', 'Supervisor');
@@ -803,7 +799,6 @@ class InscricaosController extends AppController {
     }
 
     /* Termo de compromisso para estágio remoto */
-
     function imprimepdfremoto($id = null) {
 
         $this->Inscricao->Estagiario->contain('Alunonovo', 'Instituicao', 'Supervisor');
@@ -833,9 +828,10 @@ class InscricaosController extends AppController {
         $this->set('termofinal', $termofinal_f);
     }
 
-    /* Preencho a tabela inscrição com o id da tabela alunosnovos (alias estudantes) */
-
-    public function estudante() {
+    /* Preencho a tabela inscrição com o id da tabela alunosnovos (alias estudantes) 
+    * É uma tarefa para ser realizada uma única vez
+    */
+    private function estudante() {
 
         $this->loadModel('Alunonovo');
         $this->Alunonovo->contain();
@@ -879,12 +875,13 @@ class InscricaosController extends AppController {
         die("Tarefa finalizada!");
     }
 
-    /* Preencho a tabela inscrição com o id da tabela alunos */
-
-    public function aluno() {
+    /* Preencho a tabela inscrição com o id da tabela alunos
+     * E para fazer uma única vez
+     *  */
+    private function aluno() {
 
         $this->loadModel('Aluno');
-        $this->Aluno->recursive = 0;
+        $this->Aluno->contain(['Inscricao']);
         $alunos = $this->Aluno->find('all', [
             'fields' => ['id', 'registro']
         ]);
@@ -894,7 +891,7 @@ class InscricaosController extends AppController {
         foreach ($alunos as $c_aluno) {
             // pr($c_aluno);
             // die();
-            $this->Inscricao->recursive = -1;
+            $this->Inscricao->contain();
             $inscricao = $this->Inscricao->find('first', [
                 'conditions' => ['Inscricao.id_aluno' => $c_aluno['Aluno']['registro']],
                 'fields' => ['id', 'id_aluno']
@@ -922,7 +919,7 @@ class InscricaosController extends AppController {
         die("Tarefa finalizada!");
     }
 
-    public function atualiza() {
+    private function atualiza() {
 
         $this->loadModel('Alunonovo');
         $this->Alunonovo->contain(['Inscricao']);

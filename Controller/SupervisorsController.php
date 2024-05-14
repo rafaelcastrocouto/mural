@@ -189,7 +189,7 @@ class SupervisorsController extends AppController {
         $cress = $this->request->query('cress');
         // pr($cress);
         // die();
-        $this->Supervisor->recursive = -1;
+        $this->Supervisor->contain();
         $supervisor = $this->Supervisor->find('first', [
             'conditions' => ['Supervisor.cress' => $cress]
         ]);
