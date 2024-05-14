@@ -35,7 +35,7 @@ cd /var/www/html/cakephp
 sudo git checkout tags/2.10.24
 echo "cake vs 2.x loaded"
 
-sudo git clone "https://gitee.com/luiseduacosta/mural"
+sudo git clone "https://github.com/rafaelcastrocouto/mural"
 echo "mural repository cloned"
 
 sudo chown -R www-data /var/www/html/cakephp
