@@ -595,10 +595,16 @@ class AlunosController extends AppController {
             $this->redirect(['controller' => 'Estagiarios', 'action' => 'view?registro=' . $registro]);
         }
 
+        // pr($supervisores);
+        // die();
+
         foreach ($supervisores['Supervisor'] as $c_supervisor) {
             $listasupervisores[$c_supervisor['id']] = trim($c_supervisor['nome']);
         }
         asort($listasupervisores); // Ordena pelo valor
+
+        // pr($listasupervisores);
+        // die();
 
         $estagiario = $this->Aluno->Estagiario->find(
                 'first',
@@ -639,6 +645,9 @@ class AlunosController extends AppController {
             // die("empty");
         }
 
+        // pr($this->data);
+        // die();
+        
         if (empty($this->data)) {
             // die("empty");
             $this->loadModel('Estagiario');

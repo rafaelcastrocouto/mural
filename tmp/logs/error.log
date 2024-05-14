@@ -347,3 +347,135 @@ Stack Trace:
 #4 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
 #5 /home/luis/html/mural/webroot/index.php(119): Dispatcher->dispatch()
 #6 {main}
+2024-05-12 23:31:10 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+Exception Attributes: array (
+  'class' => 'Mysql',
+  'message' => 'Selected driver is not enabled',
+  'enabled' => false,
+)
+Request URL: /muralold/users/login
+Stack Trace:
+#0 /home/luis/html/Cake/lib/Cake/Model/ConnectionManager.php(105): DboSource->__construct()
+#1 /home/luis/html/Cake/lib/Cake/Model/Model.php(3659): ConnectionManager::getDataSource()
+#2 /home/luis/html/Cake/lib/Cake/Model/Model.php(1162): Model->setDataSource()
+#3 /home/luis/html/Cake/lib/Cake/Model/Model.php(3686): Model->setSource()
+#4 /home/luis/html/Cake/lib/Cake/Model/Model.php(1394): Model->getDataSource()
+#5 /home/luis/html/Cake/lib/Cake/View/Helper/FormHelper.php(215): Model->schema()
+#6 /home/luis/html/Cake/lib/Cake/View/Helper/FormHelper.php(480): FormHelper->_introspectModel()
+#7 /home/luis/html/mural/View/Users/login.ctp(4): FormHelper->create()
+#8 /home/luis/html/Cake/lib/Cake/View/View.php(971): include('...')
+#9 /home/luis/html/Cake/lib/Cake/View/View.php(933): View->_evaluate()
+#10 /home/luis/html/Cake/lib/Cake/View/View.php(473): View->_render()
+#11 /home/luis/html/Cake/lib/Cake/Controller/Controller.php(968): View->render()
+#12 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(200): Controller->render()
+#13 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#14 /home/luis/html/mural/webroot/index.php(121): Dispatcher->dispatch()
+#15 {main}
+2024-05-12 23:32:17 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+Exception Attributes: array (
+  'class' => 'Mysql',
+  'message' => 'Selected driver is not enabled',
+  'enabled' => false,
+)
+Request URL: /muralold/users/login
+Stack Trace:
+#0 /home/luis/html/Cake/lib/Cake/Model/ConnectionManager.php(105): DboSource->__construct()
+#1 /home/luis/html/Cake/lib/Cake/Model/Model.php(3659): ConnectionManager::getDataSource()
+#2 /home/luis/html/Cake/lib/Cake/Model/Model.php(1162): Model->setDataSource()
+#3 /home/luis/html/Cake/lib/Cake/Model/Model.php(3686): Model->setSource()
+#4 /home/luis/html/Cake/lib/Cake/Model/Model.php(1394): Model->getDataSource()
+#5 /home/luis/html/Cake/lib/Cake/View/Helper/FormHelper.php(215): Model->schema()
+#6 /home/luis/html/Cake/lib/Cake/View/Helper/FormHelper.php(480): FormHelper->_introspectModel()
+#7 /home/luis/html/mural/View/Users/login.ctp(4): FormHelper->create()
+#8 /home/luis/html/Cake/lib/Cake/View/View.php(971): include('...')
+#9 /home/luis/html/Cake/lib/Cake/View/View.php(933): View->_evaluate()
+#10 /home/luis/html/Cake/lib/Cake/View/View.php(473): View->_render()
+#11 /home/luis/html/Cake/lib/Cake/Controller/Controller.php(968): View->render()
+#12 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(200): Controller->render()
+#13 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#14 /home/luis/html/mural/webroot/index.php(121): Dispatcher->dispatch()
+#15 {main}
+2024-05-12 23:32:24 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+Exception Attributes: array (
+  'class' => 'Mysql',
+  'message' => 'Selected driver is not enabled',
+  'enabled' => false,
+)
+Request URL: /muralold/users/login
+Stack Trace:
+#0 /home/luis/html/Cake/lib/Cake/Model/ConnectionManager.php(105): DboSource->__construct()
+#1 /home/luis/html/Cake/lib/Cake/Model/Model.php(3659): ConnectionManager::getDataSource()
+#2 /home/luis/html/Cake/lib/Cake/Model/Model.php(1162): Model->setDataSource()
+#3 /home/luis/html/Cake/lib/Cake/Model/Model.php(3686): Model->setSource()
+#4 /home/luis/html/Cake/lib/Cake/Model/Model.php(1394): Model->getDataSource()
+#5 /home/luis/html/Cake/lib/Cake/View/Helper/FormHelper.php(215): Model->schema()
+#6 /home/luis/html/Cake/lib/Cake/View/Helper/FormHelper.php(480): FormHelper->_introspectModel()
+#7 /home/luis/html/mural/View/Users/login.ctp(4): FormHelper->create()
+#8 /home/luis/html/Cake/lib/Cake/View/View.php(971): include('...')
+#9 /home/luis/html/Cake/lib/Cake/View/View.php(933): View->_evaluate()
+#10 /home/luis/html/Cake/lib/Cake/View/View.php(473): View->_render()
+#11 /home/luis/html/Cake/lib/Cake/Controller/Controller.php(968): View->render()
+#12 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(200): Controller->render()
+#13 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#14 /home/luis/html/mural/webroot/index.php(121): Dispatcher->dispatch()
+#15 {main}
+2024-05-12 23:37:16 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+Exception Attributes: array (
+  'class' => 'Mysql',
+  'message' => 'Selected driver is not enabled',
+  'enabled' => false,
+)
+Request URL: /muralold/users/login
+Stack Trace:
+#0 /home/luis/html/Cake/lib/Cake/Model/ConnectionManager.php(105): DboSource->__construct()
+#1 /home/luis/html/Cake/lib/Cake/Model/Model.php(3659): ConnectionManager::getDataSource()
+#2 /home/luis/html/Cake/lib/Cake/Model/Model.php(1162): Model->setDataSource()
+#3 /home/luis/html/Cake/lib/Cake/Model/Model.php(3686): Model->setSource()
+#4 /home/luis/html/Cake/lib/Cake/Model/Model.php(1394): Model->getDataSource()
+#5 /home/luis/html/Cake/lib/Cake/View/Helper/FormHelper.php(215): Model->schema()
+#6 /home/luis/html/Cake/lib/Cake/View/Helper/FormHelper.php(480): FormHelper->_introspectModel()
+#7 /home/luis/html/mural/View/Users/login.ctp(4): FormHelper->create()
+#8 /home/luis/html/Cake/lib/Cake/View/View.php(971): include('...')
+#9 /home/luis/html/Cake/lib/Cake/View/View.php(933): View->_evaluate()
+#10 /home/luis/html/Cake/lib/Cake/View/View.php(473): View->_render()
+#11 /home/luis/html/Cake/lib/Cake/Controller/Controller.php(968): View->render()
+#12 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(200): Controller->render()
+#13 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke()
+#14 /home/luis/html/mural/webroot/index.php(121): Dispatcher->dispatch()
+#15 {main}
+2024-05-12 23:39:16 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Professor.cress' in 'field list'
+Request URL: /muralold/estagiarios/index/
+Stack Trace:
+#0 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(502): PDOStatement->execute(Array)
+#1 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(468): DboSource->_execute('SELECT `Estagia...', Array)
+#2 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(715): DboSource->execute('SELECT `Estagia...', Array, Array)
+#3 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(1226): DboSource->fetchAll('SELECT `Estagia...', Array)
+#4 /home/luis/html/Cake/lib/Cake/Model/Model.php(3053): DboSource->read(Object(Estagiario), Array)
+#5 /home/luis/html/Cake/lib/Cake/Model/Model.php(3025): Model->_readDataSource('all', Array)
+#6 /home/luis/html/Cake/lib/Cake/Controller/Component/PaginatorComponent.php(212): Model->find('all', Array)
+#7 /home/luis/html/Cake/lib/Cake/Controller/Controller.php(1107): PaginatorComponent->paginate(Object(Estagiario), Array, Array)
+#8 /home/luis/html/mural/Controller/EstagiariosController.php(320): Controller->paginate(Array)
+#9 [internal function]: EstagiariosController->index()
+#10 /home/luis/html/Cake/lib/Cake/Controller/Controller.php(499): ReflectionMethod->invokeArgs(Object(EstagiariosController), Array)
+#11 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#12 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(EstagiariosController), Object(CakeRequest))
+#13 /home/luis/html/mural/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2024-05-12 23:41:08 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Professor.cress' in 'field list'
+Request URL: /muralold/estagiarios/index/
+Stack Trace:
+#0 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(502): PDOStatement->execute(Array)
+#1 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(468): DboSource->_execute('SELECT `Estagia...', Array)
+#2 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(715): DboSource->execute('SELECT `Estagia...', Array, Array)
+#3 /home/luis/html/Cake/lib/Cake/Model/Datasource/DboSource.php(1226): DboSource->fetchAll('SELECT `Estagia...', Array)
+#4 /home/luis/html/Cake/lib/Cake/Model/Model.php(3053): DboSource->read(Object(Estagiario), Array)
+#5 /home/luis/html/Cake/lib/Cake/Model/Model.php(3025): Model->_readDataSource('all', Array)
+#6 /home/luis/html/Cake/lib/Cake/Controller/Component/PaginatorComponent.php(212): Model->find('all', Array)
+#7 /home/luis/html/Cake/lib/Cake/Controller/Controller.php(1107): PaginatorComponent->paginate(Object(Estagiario), Array, Array)
+#8 /home/luis/html/mural/Controller/EstagiariosController.php(320): Controller->paginate(Array)
+#9 [internal function]: EstagiariosController->index()
+#10 /home/luis/html/Cake/lib/Cake/Controller/Controller.php(499): ReflectionMethod->invokeArgs(Object(EstagiariosController), Array)
+#11 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#12 /home/luis/html/Cake/lib/Cake/Routing/Dispatcher.php(167): Dispatcher->_invoke(Object(EstagiariosController), Object(CakeRequest))
+#13 /home/luis/html/mural/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
