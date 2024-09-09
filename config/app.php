@@ -3,7 +3,6 @@
 use Cake\Cache\Engine\FileEngine;
 use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;
-use Cake\Error\ExceptionRenderer;
 use Cake\Log\Engine\FileLog;
 use Cake\Mailer\Transport\MailTransport;
 
@@ -26,7 +25,7 @@ return [
      * - defaultLocale - The default locale for translation, formatting currencies and numbers, date and time.
      * - encoding - The encoding used for HTML + database connections.
      * - base - The base directory the app resides in. If false this
-     *   will be auto detected.
+     *   will be auto-detected.
      * - dir - Name of app directory.
      * - webroot - The webroot directory.
      * - wwwRoot - The file path to webroot.
@@ -40,10 +39,10 @@ return [
      *   CakePHP generates required value based on `HTTP_HOST` environment variable.
      *   However, you can define it manually to optimize performance or if you
      *   are concerned about people manipulating the `Host` header.
-     * - imageBaseUrl - Web path to the public images directory under webroot.
-     * - cssBaseUrl - Web path to the public css directory under webroot.
-     * - jsBaseUrl - Web path to the public js directory under webroot.
-     * - paths - Configure paths for non class based resources. Supports the
+     * - imageBaseUrl - Web path to the public images/ directory under webroot.
+     * - cssBaseUrl - Web path to the public css/ directory under webroot.
+     * - jsBaseUrl - Web path to the public js/ directory under webroot.
+     * - paths - Configure paths for non class-based resources. Supports the
      *   `plugins`, `templates`, `locales` subkeys, which allow the definition of
      *   paths for plugins, view templates and locale files respectively.
      */
@@ -130,21 +129,8 @@ return [
             'serialize' => true,
             'duration' => '+1 years',
             'url' => env('CACHE_CAKEMODEL_URL', null),
-        ],
+        ]
 
-        /*
-         * Configure the cache for routes. The cached routes collection is built the
-         * first time the routes are processed through `config/routes.php`.
-         * Duration will be set to '+2 seconds' in bootstrap.php when debug = true
-         */
-        '_cake_routes_' => [
-            'className' => FileEngine::class,
-            'prefix' => 'myapp_cake_routes_',
-            'path' => CACHE,
-            'serialize' => true,
-            'duration' => '+1 years',
-            'url' => env('CACHE_CAKEROUTES_URL', null),
-        ],
     ],
 
     /*
@@ -161,30 +147,35 @@ return [
      * Options:
      *
      * - `errorLevel` - int - The level of errors you are interested in capturing.
-     * - `trace` - boolean - Whether or not backtraces should be included in
+     * - `trace` - boolean - Whether backtraces should be included in
      *   logged errors/exceptions.
-     * - `log` - boolean - Whether or not you want exceptions logged.
-     * - `exceptionRenderer` - string - The class responsible for rendering
-     *   uncaught exceptions. If you choose a custom class you should place
-     *   the file for that class in src/Error. This class needs to implement a
-     *   render method.
+     * - `log` - boolean - Whether you want exceptions logged.
+     * - `exceptionRenderer` - string - The class responsible for rendering uncaught exceptions.
+     *   The chosen class will be used for both CLI and web environments. If you want different
+     *   classes used in CLI and web environments you'll need to write that conditional logic as well.
+     *   The conventional location for custom renderers is in `src/Error`. Your exception renderer needs to
+     *   implement the `render()` method and return either a string or Http\Response.
+     *   `errorRenderer` - string - The class responsible for rendering PHP errors. The selected
+     *   class will be used for both web and CLI contexts. If you want different classes for each environment
+     *   you'll need to write that conditional logic as well. Error renderers need to
+     *   to implement the `Cake\Error\ErrorRendererInterface`.
      * - `skipLog` - array - List of exceptions to skip for logging. Exceptions that
      *   extend one of the listed exceptions will also be skipped for logging.
      *   E.g.:
      *   `'skipLog' => ['Cake\Http\Exception\NotFoundException', 'Cake\Http\Exception\UnauthorizedException']`
-     * - `extraFatalErrorMemory` - int - The number of megabytes to increase
-     *   the memory limit by when a fatal error is encountered. This allows
+     * - `extraFatalErrorMemory` - int - The number of megabytes to increase the memory limit by
+     *   when a fatal error is encountered. This allows
      *   breathing room to complete logging or error handling.
      */
     'Error' => [
         'errorLevel' => E_ALL,
-        'exceptionRenderer' => ExceptionRenderer::class,
         'skipLog' => [],
         'log' => true,
         'trace' => true,
+        'ignoredDeprecationPaths' => [],
     ],
 
-    /**
+    /*
      * Debugger configuration
      *
      * Define development error values for Cake\Error\Debugger
@@ -246,7 +237,7 @@ return [
      * Delivery profiles allow you to predefine various properties about email
      * messages from your application and give the settings a name. This saves
      * duplication across your application and makes maintenance and development
-     * easier. Each profile accepts a number of keys. See `Cake\Mailer\Email`
+     * easier. Each profile accepts a number of keys. See `Cake\Mailer\Mailer`
      * for more information.
      */
     'Email' => [
@@ -267,23 +258,23 @@ return [
      *
      * ### Notes
      * - Drivers include Mysql Postgres Sqlite Sqlserver
-     *   See vendor\cakephp\cakephp\src\Database\Driver for complete list
-     * - Do not use periods in database name - it may lead to error.
+     *   See vendor\cakephp\cakephp\src\Database\Driver for the complete list
+     * - Do not use periods in database name - it may lead to errors.
      *   See https://github.com/cakephp/cakephp/issues/6471 for details.
      * - 'encoding' is recommended to be set to full UTF-8 4-Byte support.
      *   E.g set it to 'utf8mb4' in MariaDB and MySQL and 'utf8' for any
      *   other RDBMS.
      */
     'Datasources' => [
-        /**
+        /*
          * These configurations should contain permanent settings used
          * by all environments.
          *
          * The values in app_local.php will override any values set here
          * and should be used for local and per-environment configurations.
          *
-         * Environment variable based configurations can be loaded here or
-         * in app_local.php depending on the applications needs.
+         * Environment variable-based configurations can be loaded here or
+         * in app_local.php depending on the application's needs.
          */
         'default' => [
             'className' => Connection::class,
@@ -291,12 +282,12 @@ return [
             'persistent' => false,
             'timezone' => 'UTC',
 
-            /**
-             * For MariaDB/MySQL the internal default changed from utf8 to utf8mb4, aka full utf-8 support, in CakePHP 3.6
+            /*
+             * For MariaDB/MySQL the internal default changed from utf8 to utf8mb4, aka full utf-8 support
              */
-            //'encoding' => 'utf8mb4',
+            'encoding' => 'utf8mb4',
 
-            /**
+            /*
              * If your MySQL server is configured with `skip-character-set-client-handshake`
              * then you MUST use the `flags` config to set your charset encoding.
              * For e.g. `'flags' => [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4']`
@@ -333,7 +324,7 @@ return [
             'driver' => Mysql::class,
             'persistent' => false,
             'timezone' => 'UTC',
-            //'encoding' => 'utf8mb4',
+            'encoding' => 'utf8mb4',
             'flags' => [],
             'cacheMetadata' => true,
             'quoteIdentifiers' => false,
@@ -351,7 +342,7 @@ return [
             'path' => LOGS,
             'file' => 'debug',
             'url' => env('LOG_DEBUG_URL', null),
-            'scopes' => false,
+            'scopes' => null,
             'levels' => ['notice', 'info', 'debug'],
         ],
         'error' => [
@@ -359,7 +350,7 @@ return [
             'path' => LOGS,
             'file' => 'error',
             'url' => env('LOG_ERROR_URL', null),
-            'scopes' => false,
+            'scopes' => null,
             'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
         ],
         // To enable this dedicated query log, you need set your datasource's log flag to true
@@ -368,7 +359,7 @@ return [
             'path' => LOGS,
             'file' => 'queries',
             'url' => env('LOG_QUERIES_URL', null),
-            'scopes' => ['queriesLog'],
+            'scopes' => ['cake.database.queries'],
         ],
     ],
 
@@ -385,18 +376,23 @@ return [
      *    Avoid using `.` in cookie names, as PHP will drop sessions from cookies with `.` in the name.
      * - `cookiePath` - The url path for which session cookie is set. Maps to the
      *   `session.cookie_path` php.ini config. Defaults to base path of app.
-     * - `timeout` - The time in minutes the session should be valid for.
-     *    Pass 0 to disable checking timeout.
-     *    Please note that php.ini's session.gc_maxlifetime must be equal to or greater
-     *    than the largest Session['timeout'] in all served websites for it to have the
-     *    desired effect.
+     * - `timeout` - The time in minutes a session can be 'idle'. If no request is received in
+     *    this duration, the session will be expired and rotated. Pass 0 to disable idle timeout checks.
      * - `defaults` - The default configuration set to use as a basis for your session.
      *    There are four built-in options: php, cake, cache, database.
      * - `handler` - Can be used to enable a custom session handler. Expects an
      *    array with at least the `engine` key, being the name of the Session engine
      *    class to use for managing the session. CakePHP bundles the `CacheSession`
      *    and `DatabaseSession` engines.
-     * - `ini` - An associative array of additional ini values to set.
+     * - `ini` - An associative array of additional 'session.*` ini values to set.
+     *
+     * Within the `ini` key, you will likely want to define:
+     *
+     * - `session.cookie_lifetime` - The number of seconds that cookies are valid for. This
+     *    should be longer than `Session.timeout`.
+     * - `session.gc_maxlifetime` - The number of seconds after which a session is considered 'garbage'
+     *    that can be deleted by PHP's session cleanup behavior. This value should be greater than both
+     *    `Sesssion.timeout` and `session.cookie_lifetime`.
      *
      * The built-in `defaults` options are:
      *
@@ -405,7 +401,7 @@ return [
      * - 'database' - Uses CakePHP's database sessions.
      * - 'cache' - Use the Cache class to save sessions.
      *
-     * To define a custom session handler, save it at src/Network/Session/<name>.php.
+     * To define a custom session handler, save it at src/Http/Session/<name>.php.
      * Make sure the class implements PHP's `SessionHandlerInterface` and set
      * Session.handler to <name>
      *
@@ -414,4 +410,9 @@ return [
     'Session' => [
         'defaults' => 'php',
     ],
+    'DebugKit' => [
+        'forceEnable' => filter_var(env('DEBUG_KIT_FORCE_ENABLE', false), FILTER_VALIDATE_BOOLEAN),
+        'safeTld' => env('DEBUG_KIT_SAFE_TLD', null),
+        'ignoreAuthorization' => env('DEBUG_KIT_IGNORE_AUTHORIZATION', false)
+    ]
 ];

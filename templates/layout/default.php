@@ -25,10 +25,8 @@ $cakeDescription = 'Mural de estágios da ESS/UFRJ';
             <?= $this->fetch('title') ?>
         </title>
         <?= $this->Html->meta('icon') ?>
-
-        <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
         
-        <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake', 'home', 'bootstrap.min']) ?>
+        <?= $this->Html->css(['normalize.min', 'milligram.min', 'fonts', 'cake', 'home', 'bootstrap.min']) ?>
         <?= $this->Html->script(['jquery-3.6.0.js', 'popper.min.js', 'bootstrap.min.js', 'bootstrap.bundle.min.js']) ?>
 
         <?= $this->fetch('meta') ?>
