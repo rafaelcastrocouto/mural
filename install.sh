@@ -24,12 +24,6 @@ sudo apt-get -y dist-upgrade
 sudo apt -y install software-properties-common php php-common php-mysql php-sqlite3 php-xml mariadb-server composer
 sudo apt-get -y install php-curl
 
-#sudo add-apt-repository ppa:ondrej/php
-#sudo add-apt-repository ppa:ondrej/apache2
-#sudo apt install php7.1
-#echo -e "choose php7.1"
-#sudo update-alternatives --config php
-
 # CONFIGURE DATABASE
 
 sudo systemctl start mariadb.service
@@ -72,14 +66,6 @@ echo -e "enter to proceed to nano"
 read
 sudo nano /etc/apache2/apache2.conf
 
-# SET APACHE ROOT DIR
-
-echo nano /etc/apache2/sites-available/000-default.conf
-echo "DocumentRoot /var/www/html/mural4/webroot <<<<<<<< CHANGE THIS"
-echo -e "enter to proceed to nano"
-read
-sudo nano /etc/apache2/sites-available/000-default.conf
-
 # CREATE CONFIG .ENV
 
 sudo cp /var/www/html/mural4/config/.env.example /var/www/html/mural4/config/.env
@@ -104,3 +90,10 @@ sudo a2enmod rewrite
 echo "mod rewrite configured"
 sudo systemctl restart apache2
 echo "systemctl apache server restarted"
+
+# CONFIG PHPMYADMIN
+
+sudo apt install phpmyadmin
+sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
+sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
+echo "phpmyadmin configured"
