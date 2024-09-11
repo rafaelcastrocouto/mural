@@ -2,7 +2,6 @@
 
 # chmod +x install.sh
 
-
 # READ VARS
 
 echo -e "database name?"
@@ -45,14 +44,9 @@ sudo mariadb -e "FLUSH PRIVILEGES;"
 sudo mariadb $database < $dump
 echo "mariadb database configured"
 
-
-sudo chmod -R a+w /var/www/html
-
-cd /var/www/html
-
-
 # CLONE MURAL
 
+cd /var/www/html
 git clone "https://github.com/rafaelcastrocouto/mural4"
 echo "mural repository cloned"
 
@@ -60,23 +54,13 @@ cd /var/www/html/mural4
 composer update
 echo "composer requirements installed"
 
-# INSTALL CAKEPHP
+# SET USERS PERMISSIONS
 
-#git clone "https://github.com/cakephp/cakephp"
-#echo "cakephp repository cloned"
+sudo chown -R www-data /var/www/html
+sudo usermod -a -G www-data $username
+sudo chmod -R a+w /var/www/html
 
-#cd /var/www/html/cakephp
-#git checkout tags/5.0.10
-#echo "cake vs 5.x loaded"
-
-#sudo chown -R www-data /var/www/html/cakephp
-#sudo usermod -a -G www-data $username
-#sudo a2enmod rewrite
-#echo "mod rewrite configured"
-
-composer require cakephp/cakephp
-
-# EDIT CONF FILES
+# EDIT APACHE CONF PERMISSION
 
 echo nano /etc/apache2/apache2.conf
 echo "<Directory /var/www>"
@@ -88,43 +72,35 @@ echo -e "enter to proceed to nano"
 read
 sudo nano /etc/apache2/apache2.conf
 
+# SET APACHE ROOT DIR
+
 echo nano /etc/apache2/sites-available/000-default.conf
 echo "DocumentRoot /var/www/html/mural4/webroot <<<<<<<< CHANGE THIS"
 echo -e "enter to proceed to nano"
 read
 sudo nano /etc/apache2/sites-available/000-default.conf
 
-#echo nano /var/www/html/cakephp/index.php
-#echo "define('APP_DIR', 'mural'); <<<<<<<< change this"
-#echo -e "enter to proceed to nano"
-#read
-#sudo nano /var/www/html/cakephp/index.php
+# CREATE CONFIG .ENV
 
-#echo nano /var/www/html/mural/Config/database.php.default
-#echo "public $default = array("
-#echo "	'datasource' => 'Database/Mysql',"
-#echo "	'host' => 'localhost',     <<<<<<<< CHANGE THIS"
-#echo "	'login' => '$username',    <<<<<<<< CHANGE THIS"
-#echo "	'password' => '$password', <<<<<<<< CHANGE THIS"
-#echo "	'database' => '$database',  <<<<<<<< CHANGE THIS"
-#echo "save as database.php"
-#echo -e "enter to proceed to nano"
-#read
-#sudo nano /var/www/html/mural/Config/database.php.default
+sudo cp /var/www/html/mural4/config/.env.example /var/www/html/mural4/config/.env
+echo "export SECURITY_SALT="12345678901234567890123456789012" <<<<<<<< CHANGE THIS"
+echo "export PASSWORD => "$password", <<<<<<<< CHANGE THIS"
+echo -e "enter to proceed to nano"
+read
+sudo nano /var/www/html/mural/config/.env
 
-#echo nano /var/www/html/mural/webroot/index.php
-#echo "define('CAKE_CORE_INCLUDE_PATH', ROOT  . DS . 'lib'); <<<<<<<< change this"
-#echo -e "enter to proceed to nano"
-#read
-#sudo nano /var/www/html/mural/webroot/index.php
+# CREATE CONFIG app_local.php
 
-#echo nano /var/www/html/cakephp/mural/Config/core.php
-#echo "Configure::write('Security.salt', '');       <<<<<<<< CHANGE THIS"
-#echo "Configure::write('Security.cipherSeed', ''); <<<<<<<< CHANGE THIS"
-#echo -e "enter to proceed to nano"
-#read
-#sudo nano /var/www/html/cakephp/mural/Config/core.php
+sudo cp /var/www/html/mural4/config/app_local.example.php /var/www/html/mural4/config/app_local.php
+echo "'database' => '"$database"', <<<<<<<< CHANGE THIS"
+echo "'username' => '"$username"', <<<<<<<< CHANGE THIS"
+echo -e "enter to proceed to nano"
+read
+sudo nano /var/www/html/mural/config/app_local.php
 
+# CONFIG APACHE MOD REWRITE
+
+sudo a2enmod rewrite
+echo "mod rewrite configured"
 sudo systemctl restart apache2
-echo systemctl restart apache2
-echo "apache server restarted"
+echo "systemctl apache server restarted"
