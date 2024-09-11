@@ -1,6 +1,6 @@
 # Mural de estágios
 
-Mural de estágios da ESS/UFRJ com o Cakephp 4
+Mural de estágios da ESS/UFRJ com o Cakephp
 
 ## CakePHP Application
 
