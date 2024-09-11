@@ -60,7 +60,7 @@ class Docente extends Entity
      *
      * @var array
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'nome' => true,
         'cpf' => true,
         'siape' => true,

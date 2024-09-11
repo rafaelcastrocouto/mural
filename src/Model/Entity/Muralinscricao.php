@@ -30,7 +30,7 @@ class Muralinscricao extends Entity
      *
      * @var array
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'id_aluno' => true, // registro 
         'aluno_id' => true,
         'alunonovo_id' => true,

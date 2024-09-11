@@ -41,7 +41,7 @@ class Estudante extends Entity
      *
      * @var array
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'nome' => true,
         'registro' => true,
         'codigo_telefone' => true,

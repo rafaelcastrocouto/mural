@@ -29,7 +29,7 @@ class Visita extends Entity
      *
      * @var array
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'estagio_id' => true,
         'data' => true,
         'motivo' => true,

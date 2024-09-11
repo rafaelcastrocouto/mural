@@ -49,7 +49,7 @@ class Instituicaoestagio extends Entity
      *
      * @var array
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'instituicao' => true,
         'area_instituicoes_id' => true,
         'area' => true,

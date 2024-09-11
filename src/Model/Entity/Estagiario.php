@@ -44,7 +44,7 @@ class Estagiario extends Entity
      *
      * @var array
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'id_aluno' => true,
         'alunonovo_id' => true,
         'registro' => true,
