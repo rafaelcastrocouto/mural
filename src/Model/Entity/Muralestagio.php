@@ -37,6 +37,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Docente $docente
  * @property \App\Model\Entity\Muralinscricao[] $muralinscricoes
  */
+
 class Muralestagio extends Entity
 {
     /**
@@ -48,6 +49,7 @@ class Muralestagio extends Entity
      *
      * @var array
      */
+	 
     protected array $_accessible = [
         'id_estagio' => true,
         'instituicao' => true,

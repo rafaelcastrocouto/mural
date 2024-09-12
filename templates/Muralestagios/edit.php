@@ -4,8 +4,8 @@
  * @var \App\Model\Entity\Muralestagio $muralestagio
  */
 ?>
-<div class="row">
-    <aside class="column">
+<div>
+    <aside>
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Form->postLink(
@@ -22,7 +22,7 @@
             <fieldset>
                 <legend><?= __('Edit Muralestagio') ?></legend>
                 <?php
-                    echo $this->Form->control('id_estagio', ['options' => $instituicaoestagios]);
+                    echo $this->Form->control('id_estagio', ['options' => $instituicaoestagios, 'empty' => true]);
                     echo $this->Form->control('instituicao');
                     echo $this->Form->control('convenio');
                     echo $this->Form->control('vagas');

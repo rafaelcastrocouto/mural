@@ -3,26 +3,25 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Muralestagio[]|\Cake\Collection\CollectionInterface $muralestagios
  */
+ 
 ?>
-<?php
-/*
-  var url = "<?= $this->Html->url(['controller' => 'Murals', 'action' => 'index/periodo:']); ?>";
- */
-?>
+
 <script type="text/javascript">
-    $(document).ready(function () {
-
-        var url = "<?= $this->Html->Url->build(['controller' => 'muralestagios', 'action' => 'index']); ?>";
-        // alert(url);
-        $("#MuralestagioPeriodo").change(function () {
+	$(document).ready(function () {
+        var url = "<?= $this->Html->Url->build(['controller' => 'muralestagios']); ?>";
+        var muralestagioperiodo = $("#MuralestagioPeriodo");
+		var pathname = location.pathname.split('/').filter(Boolean);
+		var selected_option = pathname[pathname.length - 1];
+		if (selected_option !== 'index') muralestagioperiodo.val(selected_option);
+		muralestagioperiodo.on('change', function () {
             var periodo = $(this).val();
-            // alert(url + '/index/' + periodo);
             window.location = url + '/index/' + periodo;
-        })
-
-    })
+        });
+    });
 </script>
+
 <?php
+
 $session = $this->request->getSession();
 $session->write('id_categoria', 1);
 // echo $session->read('id_categoria');
@@ -31,8 +30,16 @@ $session->write('id_categoria', 1);
 <div class="row justify-content-center">
     <div class="col-auto">
         <?php if ($session->read('id_categoria') == 1): ?>
-            <?= $this->Form->create($muralestagios, ['class' => 'form-inline']); ?>
-            <?= $this->Form->input('periodo', ['id' => 'MuralestagioPeriodo', 'type' => 'select', 'label' => ['text' => 'Mural de estágios da ESS/UFRJ'], 'options' => $periodos, 'value' => $periodo], ['class' => 'form-control']); ?>
+            <?= $this->Form->create($muralestagios, ['class' => 'form-inline',]); ?>
+				<?= $this->Form->label('Periodo'); ?>
+				<?= $this->Form->input('periodo', [
+						'default'=> $periodo->periodo,
+						'id' => 'MuralestagioPeriodo', 
+						'type' => 'select', 
+						'options' => $periodos,
+						'class' => 'form-control'
+					]); 
+				?>
             <?= $this->Form->end(); ?>
         <?php else: ?>
             <h1 style="text-align: center;">Mural de estágios da ESS/UFRJ. Período: <?= '2020-1'; ?></h1>

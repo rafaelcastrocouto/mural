@@ -31,6 +31,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Muralestagio[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\Muralestagio[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
+ 
 class MuralestagiosTable extends Table {
 
     /**

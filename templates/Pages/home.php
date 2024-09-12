@@ -81,8 +81,11 @@ endif;
                 <img alt="CakePHP" src="https://cakephp.org/v2/img/logos/CakePHP_Logo.svg" width="350" />
             </a>
             <h1>
-                Welcome to CakePHP <?= h(Configure::version()) ?> Chiffon (🍰)
+                Welcome to <a href="muralestagios">Mural de Estágios</a>
             </h1>
+            <h2>
+                Built with CakePHP <?= h(Configure::version()) ?> Chiffon (🍰)
+            </h2>
         </div>
     </header>
     <main class="main">

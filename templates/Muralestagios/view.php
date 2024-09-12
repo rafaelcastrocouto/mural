@@ -80,7 +80,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Docente') ?></th>
-                    <td><?= $muralestagio->has('docente') ? $this->Html->link($muralestagio->docente ? $muralestagio->docente : '', ['controller' => 'Docentes', 'action' => 'view', $muralestagio->docente]) : '' ?></td>
+                    <td><?= $muralestagio->has('docente') ? $this->Html->link($muralestagio->docente ? $muralestagio->docente->nome : '', ['controller' => 'Docentes', 'action' => 'view', $muralestagio->docente]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('HorarioSelecao') ?></th>

@@ -4,8 +4,8 @@
  * @var \App\Model\Entity\Muralestagio $muralestagio
  */
 ?>
-<div class="row">
-    <aside class="column">
+<div>
+    <aside>
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Html->link(__('List Muralestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
