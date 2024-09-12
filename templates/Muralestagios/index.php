@@ -32,7 +32,7 @@ $session->write('id_categoria', 1);
     <div class="col-auto">
         <?php if ($session->read('id_categoria') == 1): ?>
             <?= $this->Form->create($muralestagios, ['class' => 'form-inline']); ?>
-            <?= $this->Form->input('periodo', ['id' => 'MuralestagioPeriodo', 'type' => 'select', 'label' => ['text' => 'Mural de estágios da ESS/UFRJ &nbsp', 'style' => 'display: inline;'], 'options' => $periodos, 'value' => $periodo], ['class' => 'form-control']); ?>
+            <?= $this->Form->input('periodo', ['id' => 'MuralestagioPeriodo', 'type' => 'select', 'label' => ['text' => 'Mural de estágios da ESS/UFRJ'], 'options' => $periodos, 'value' => $periodo], ['class' => 'form-control']); ?>
             <?= $this->Form->end(); ?>
         <?php else: ?>
             <h1 style="text-align: center;">Mural de estágios da ESS/UFRJ. Período: <?= '2020-1'; ?></h1>

@@ -22,7 +22,7 @@
             <fieldset>
                 <legend><?= __('Edit Muralestagio') ?></legend>
                 <?php
-                    echo $this->Form->control('id_estagio', ['options' => $instituicaoestagios, 'empty' => true]);
+                    echo $this->Form->control('id_estagio', ['options' => $instituicaoestagios]);
                     echo $this->Form->control('instituicao');
                     echo $this->Form->control('convenio');
                     echo $this->Form->control('vagas');

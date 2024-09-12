@@ -3,8 +3,14 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Muralestagio $muralestagio
  */
+
+//pr($muralestagio);
+//die();
+
+
 ?>
-<div class="row">
+
+<div>
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
@@ -16,19 +22,17 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="muralestagios view content">
-            <h3><?= h($muralestagio->id) ?></h3>
+            <h3><?= h($muralestagio->instituicao) ?></h3>
             <table>
                 <tr>
-                    <th><?= __('Instituicaoestagio') ?></th>
-                    <td><?= $muralestagio->has('instituicaoestagio') ? $this->Html->link($muralestagio->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $muralestagio->instituicaoestagio->id]) : '' ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Instituicao') ?></th>
-                    <td><?= h($muralestagio->instituicao) ?></td>
+                    <td><?= $muralestagio->has('instituicaoestagio') ? $this->Html->link($muralestagio->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $muralestagio->instituicaoestagio]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Convenio') ?></th>
-                    <td><?= h($muralestagio->convenio) ?></td>
+                    <td>
+						<?= h($muralestagio->convenio) ? 'Sim' : 'Não'; ?>
+					</td>
                 </tr>
                 <tr>
                     <th><?= __('Beneficios') ?></th>
@@ -36,7 +40,19 @@
                 </tr>
                 <tr>
                     <th><?= __('Final De Semana') ?></th>
-                    <td><?= h($muralestagio->final_de_semana) ?></td>
+                    <td>
+						<?php
+						switch ( h($muralestagio->final_de_semana) ) {
+							case 0: $final_de_semana = 'Não';
+								break;
+							case 1: $final_de_semana = 'Sim';
+								break;
+							case 2: $final_de_semana = 'Parcialmente';
+								break;
+						}
+						echo $final_de_semana;
+						?>
+					</td>
                 </tr>
                 <tr>
                     <th><?= __('Requisitos') ?></th>
@@ -44,15 +60,27 @@
                 </tr>
                 <tr>
                     <th><?= __('Areaestagio') ?></th>
-                    <td><?= $muralestagio->has('areaestagio') ? $this->Html->link($muralestagio->areaestagio->id, ['controller' => 'Areaestagios', 'action' => 'view', $muralestagio->areaestagio->id]) : '' ?></td>
+                    <td><?= $muralestagio->has('areaestagio') ? $this->Html->link($muralestagio->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $muralestagio->areaestagio]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Horario') ?></th>
-                    <td><?= h($muralestagio->horario) ?></td>
+                    <td>
+						<?php
+						switch ( h($muralestagio->horario) ) {
+							case 'D': $horario = 'Diurno';
+								break;
+							case 'N': $horario = 'Noturno';
+								break;
+							case 'A': $horario = 'Ambos';
+								break;
+						}
+						echo $horario;
+						?>
+					</td>
                 </tr>
                 <tr>
                     <th><?= __('Docente') ?></th>
-                    <td><?= $muralestagio->has('docente') ? $this->Html->link($muralestagio->docente->id, ['controller' => 'Docentes', 'action' => 'view', $muralestagio->docente->id]) : '' ?></td>
+                    <td><?= $muralestagio->has('docente') ? $this->Html->link($muralestagio->docente ? $muralestagio->docente : '', ['controller' => 'Docentes', 'action' => 'view', $muralestagio->docente]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('HorarioSelecao') ?></th>
@@ -64,7 +92,21 @@
                 </tr>
                 <tr>
                     <th><?= __('FormaSelecao') ?></th>
-                    <td><?= h($muralestagio->formaSelecao) ?></td>
+                    <td>
+						<?php
+						switch ( h($muralestagio->formaSelecao) ) {
+							case 0: $formaselecao = 'Entrevista';
+								break;
+							case 1: $formaselecao = 'CR';
+								break;
+							case 2: $formaselecao = 'Prova';
+								break;
+							case 3: $formaselecao = 'Outra';
+								break;
+						}
+						echo $formaselecao;
+						?>
+					</td>
                 </tr>
                 <tr>
                     <th><?= __('Contato') ?></th>
@@ -76,7 +118,7 @@
                 </tr>
                 <tr>
                     <th><?= __('LocalInscricao') ?></th>
-                    <td><?= h($muralestagio->localInscricao) ?></td>
+                    <td><?= h($muralestagio->localInscricao) ? "Inscrição somente no mural da Coordenação de Estágio da ESS" : "Inscrição no mural da Coordenação de Estágio da ESS e na Instituição" ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Email') ?></th>
