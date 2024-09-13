@@ -1,11 +1,11 @@
 <nav class='navbar navbar-expand-lg navbar-light py-0 navbar-fixed-top' style="background-color: #2b6c9c;">
     <?php $logo = $this->Html->image('logoess_horizontal-azul.svg', ['height' => '50', 'width' => '150', 'alt' => 'ESS']); ?>
-    <?= $this->Html->link($logo, "http://www.ess.ufrj.br", ['class' => 'navbar-brand', 'escape' => false]) ?>
+    <?= $this->Html->link($logo, "http://www.ess.ufrj.br", ['class' => 'navbar-brand', 'style' => 'color: white', 'escape' => false]) ?>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPrincipal">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class='collapse navbar-collapse' id='navbarPrincipal'>
+    <div style='font-size: 90%', class='collapse navbar-collapse' id='navbarPrincipal'>
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item active">
@@ -55,7 +55,7 @@
                     <a style='color: white' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administração</a>
                     <div class="dropdown-menu">
                         <?php echo $this->Html->link('Configuração', '/Configuracaos/view/1', ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
-                        <?php echo $this->Html->link('Usuários', '/Userestagios/', ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
+                        <?php echo $this->Html->link('Usuários', '/Userestagios/listausuarios/', ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                         <?php echo $this->Html->link('Planilha seguro', '/Alunos/planilhaseguro/', ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                         <?php echo $this->Html->link('Planilha CRESS', '/Alunos/planilhacress/', ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                         <?php echo $this->Html->link('Carga horária', '/Alunos/cargahoraria/', ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
@@ -82,7 +82,7 @@
                     </li>
                     <?php
                     break;
-                case 2: // Estudante
+                case 2: // Aluno
                     ?>
                     <li class="nav-item">
                         <?php echo $this->Html->link("Meus dados", "/Alunos/view?registro=" . $this->Session->read('numero'), ['class' => 'nav-link', 'style' => 'background-color: #2b6c9c; color: white']); ?>

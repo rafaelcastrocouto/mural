@@ -12,7 +12,7 @@ use Cake\Validation\Validator;
 /**
  * Muralinscricoes Model
  *
- * @property \App\Model\Table\EstudantesTable&\Cake\ORM\Association\BelongsTo $Estudantes
+ * @property \App\Model\Table\AlunosTable&\Cake\ORM\Association\BelongsTo $Alunos
  * @property \App\Model\Table\MuralestagiosTable&\Cake\ORM\Association\BelongsTo $Muralestagios
  *
  * @method \App\Model\Entity\Muralinscricao newEmptyEntity()
@@ -50,9 +50,6 @@ class MuralinscricoesTable extends Table {
         ]);
         $this->belongsTo('Alunos', [
             'foreignKey' => 'aluno_id',
-        ]);
-        $this->belongsTo('Estudantes', [
-            'foreignKey' => 'alunonovo_id',
         ]);
         $this->belongsTo('Muralestagios', [
             'foreignKey' => 'id_instituicao',
@@ -109,7 +106,7 @@ class MuralinscricoesTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules): RulesChecker {
-        $rules->add($rules->existsIn(['registro'], 'Estudantes'), ['errorField' => 'registro']);
+        $rules->add($rules->existsIn(['registro'], 'Alunos'), ['errorField' => 'registro']);
         $rules->add($rules->existsIn(['id_instituicao'], 'Muralestagios'), ['errorField' => 'id_instituicao']);
 
         return $rules;

@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  * Estagiarios Model
  *
  * @property \App\Model\Table\AlunosTable&\Cake\ORM\Association\BelongsTo $Alunos
- * @property \App\Model\Table\EstudantesTable&\Cake\ORM\Association\BelongsTo $Estudantes
  * @property \App\Model\Table\InstituicaoestagiosTable&\Cake\ORM\Association\BelongsTo $Instituicaoestagios
  * @property \App\Model\Table\SupervisoresTable&\Cake\ORM\Association\BelongsTo $Supervisores
  * @property \App\Model\Table\DocentesTable&\Cake\ORM\Association\BelongsTo $Docentes
@@ -52,9 +51,6 @@ class EstagiariosTable extends Table
         $this->belongsTo('Alunos', [
             'foreignKey' => 'id_aluno',
             'joinType' => 'INNER',
-        ]);
-        $this->belongsTo('Estudantes', [
-            'foreignKey' => 'alunonovo_id',
         ]);
         $this->belongsTo('Instituicaoestagios', [
             'foreignKey' => 'id_instituicao',
@@ -139,7 +135,6 @@ class EstagiariosTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn(['aluno_id'], 'Alunos'), ['errorField' => 'aluno_id']);
-        $rules->add($rules->existsIn(['estudante_id'], 'Estudantes'), ['errorField' => 'estudante_id']);
         $rules->add($rules->existsIn(['instituicaoestagio_id'], 'Instituicaoestagios'), ['errorField' => 'instituicaoestagio_id']);
         $rules->add($rules->existsIn(['supervisor_id'], 'Supervisores'), ['errorField' => 'supervisor_id']);
         $rules->add($rules->existsIn(['docente_id'], 'Docentes'), ['errorField' => 'docente_id']);

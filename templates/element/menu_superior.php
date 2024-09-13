@@ -6,7 +6,7 @@
  */
 ?>
 <ul class="navbar-nav mr-auto">
-  <li class="nav-item"><?= $this->Html->link(__('Estudantes'), ['controller' => 'estudantes', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
+  <li class="nav-item"><?= $this->Html->link(__('Alunos'), ['controller' => 'alunos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
   <li class="nav-item"><?= $this->Html->link(__('Responsáveis'), ['controller' => 'atendentes', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
   <li class="nav-item"><?= $this->Html->link(__('Taes'), ['controller' => 'taes', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
   <li class="nav-item"><?= $this->Html->link(__('Docentes'), ['controller' => 'docentes', 'action' => 'index'], ['class' => 'nav-link']) ?></li>

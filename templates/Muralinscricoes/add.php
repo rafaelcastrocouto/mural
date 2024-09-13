@@ -18,7 +18,7 @@
                 <legend><?= __('Add Muralinscricao') ?></legend>
                 <?php
                     echo $this->Form->control('registro');
-                    echo $this->Form->control('estudante_id', ['options' => $estudantes, 'empty' => true]);
+                    echo $this->Form->control('aluno_id', ['options' => $alunos, 'empty' => true]);
                     echo $this->Form->control('muralestagio_id', ['options' => $muralestagios]);
                     echo $this->Form->control('data');
                     echo $this->Form->control('periodo');

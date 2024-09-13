@@ -23,7 +23,6 @@
                 <legend><?= __('Edit Estagiario') ?></legend>
                 <?php
                     echo $this->Form->control('aluno_id', ['options' => $alunos]);
-                    echo $this->Form->control('estudante_id', ['options' => $estudantes, 'empty' => true]);
                     echo $this->Form->control('registro');
                     echo $this->Form->control('ajustecurricular2020');
                     echo $this->Form->control('turno');

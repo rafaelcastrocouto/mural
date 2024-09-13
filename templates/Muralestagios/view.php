@@ -26,7 +26,7 @@
             <table>
                 <tr>
                     <th><?= __('Instituicao') ?></th>
-                    <td><?= $muralestagio->has('instituicaoestagio') ? $this->Html->link($muralestagio->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $muralestagio->id_estagio]) : '' ?></td>
+                    <td><?= $muralestagio->has('instituicaoestagio') ? $this->Html->link($muralestagio->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $muralestagio->instituicaoestagio]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Convenio') ?></th>
@@ -60,7 +60,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Areaestagio') ?></th>
-                    <td><?= $muralestagio->has('areaestagio') ? $this->Html->link($muralestagio->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $muralestagio->id_area]) : '' ?></td>
+                    <td><?= $muralestagio->has('areaestagio') ? $this->Html->link($muralestagio->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $muralestagio->areaestagio]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Horario') ?></th>
@@ -163,7 +163,7 @@
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Registro') ?></th>
-                            <th><?= __('Estudante Id') ?></th>
+                            <th><?= __('Aluno Id') ?></th>
                             <th><?= __('Muralestagio Id') ?></th>
                             <th><?= __('Data') ?></th>
                             <th><?= __('Periodo') ?></th>
@@ -175,7 +175,7 @@
                             <?php // pr($muralinscricoes) ?>
                             <td><?= h($muralinscricoes->id) ?></td>
                             <td><?= h($muralinscricoes->id_aluno) ?></td>
-                            <td><?= $this->Html->link($muralinscricoes->estudante->nome, ['controller' => 'Estudantes', 'action' => 'view', $muralinscricoes->alunonovo_id]); ?></td>
+                            <td><?= $this->Html->link($muralinscricoes->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $muralinscricoes->alunonovo_id]); ?></td>
                             <td><?= h($muralinscricoes->id_instituicao) ?></td>
                             <td><?= h($muralinscricoes->data) ?></td>
                             <td><?= h($muralinscricoes->periodo) ?></td>

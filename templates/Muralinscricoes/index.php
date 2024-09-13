@@ -13,7 +13,7 @@
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('registro') ?></th>
-                    <th><?= $this->Paginator->sort('estudante_id') ?></th>
+                    <th><?= $this->Paginator->sort('aluno_id') ?></th>
                     <th><?= $this->Paginator->sort('muralestagio_id') ?></th>
                     <th><?= $this->Paginator->sort('data') ?></th>
                     <th><?= $this->Paginator->sort('periodo') ?></th>
@@ -26,7 +26,7 @@
                 <tr>
                     <td><?= $this->Number->format($muralinscricao->id) ?></td>
                     <td><?= $this->Number->format($muralinscricao->registro) ?></td>
-                    <td><?= $muralinscricao->has('estudante') ? $this->Html->link($muralinscricao->estudante->id, ['controller' => 'Estudantes', 'action' => 'view', $muralinscricao->estudante->id]) : '' ?></td>
+                    <td><?= $muralinscricao->has('aluno') ? $this->Html->link($muralinscricao->aluno->id, ['controller' => 'Alunos', 'action' => 'view', $muralinscricao->aluno->id]) : '' ?></td>
                     <td><?= $muralinscricao->has('muralestagio') ? $this->Html->link($muralinscricao->muralestagio->id, ['controller' => 'Muralestagios', 'action' => 'view', $muralinscricao->muralestagio->id]) : '' ?></td>
                     <td><?= h($muralinscricao->data) ?></td>
                     <td><?= h($muralinscricao->periodo) ?></td>

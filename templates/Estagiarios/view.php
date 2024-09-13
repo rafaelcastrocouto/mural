@@ -23,10 +23,6 @@
                     <td><?= $estagiario->has('aluno') ? $this->Html->link($estagiario->aluno->id, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Estudante') ?></th>
-                    <td><?= $estagiario->has('estudante') ? $this->Html->link($estagiario->estudante->id, ['controller' => 'Estudantes', 'action' => 'view', $estagiario->estudante->id]) : '' ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Ajustecurricular2020') ?></th>
                     <td><?= h($estagiario->ajustecurricular2020) ?></td>
                 </tr>

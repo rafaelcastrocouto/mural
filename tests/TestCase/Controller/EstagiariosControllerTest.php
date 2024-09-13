@@ -24,7 +24,6 @@ class EstagiariosControllerTest extends TestCase
     protected $fixtures = [
         'app.Estagiarios',
         'app.Alunos',
-        'app.Estudantes',
         'app.Instituicaoestagios',
         'app.Supervisores',
         'app.Docentes',

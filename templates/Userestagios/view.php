@@ -31,8 +31,8 @@
                     <td><?= h($userestagio->categoria) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Estudante') ?></th>
-                    <td><?= $userestagio->has('estudante') ? $this->Html->link($userestagio->estudante->id, ['controller' => 'Estudantes', 'action' => 'view', $userestagio->estudante->id]) : '' ?></td>
+                    <th><?= __('Aluno') ?></th>
+                    <td><?= $userestagio->has('aluno') ? $this->Html->link($userestagio->aluno->id, ['controller' => 'Alunos', 'action' => 'view', $userestagio->aluno->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Supervisor') ?></th>

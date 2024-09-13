@@ -10,7 +10,6 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $aluno_id
- * @property int|null $estudante_id
  * @property int $registro
  * @property string $ajustecurricular2020
  * @property string $turno
@@ -27,7 +26,6 @@ use Cake\ORM\Entity;
  * @property string|null $observacoes
  *
  * @property \App\Model\Entity\Aluno $aluno
- * @property \App\Model\Entity\Estudante $estudante
  * @property \App\Model\Entity\Instituicaoestagio $instituicaoestagio
  * @property \App\Model\Entity\Supervisor $supervisor
  * @property \App\Model\Entity\Docente $docente
@@ -63,7 +61,6 @@ class Estagiario extends Entity
         'observacoes' => true,
         'complemento_id' => true,
         'aluno' => true,
-        'estudante' => true,
         'instituicaoestagio' => true,
         'supervisor' => true,
         'docente' => true,

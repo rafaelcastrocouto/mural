@@ -23,7 +23,7 @@ class MuralinscricoesControllerTest extends TestCase
      */
     protected $fixtures = [
         'app.Muralinscricoes',
-        'app.Estudantes',
+        'app.Alunos',
         'app.Muralestagios',
     ];
 

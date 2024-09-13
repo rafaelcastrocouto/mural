@@ -23,8 +23,8 @@
                     <td><?= $this->Number->format($muralinscricao->id) ?></td>
                 </tr>               
                 <tr>
-                    <th><?= __('Estudante') ?></th>
-                    <td><?= $muralinscricao->has('estudante') ? $this->Html->link($muralinscricao->estudante->nome, ['controller' => 'Estudantes', 'action' => 'view', $muralinscricao->alunonovo->id]) : '' ?></td>
+                    <th><?= __('Aluno') ?></th>
+                    <td><?= $muralinscricao->has('aluno') ? $this->Html->link($muralinscricao->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $muralinscricao->alunonovo->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Muralestagio') ?></th>

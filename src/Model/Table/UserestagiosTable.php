@@ -11,7 +11,7 @@ use Cake\Validation\Validator;
 /**
  * Userestagios Model
  *
- * @property \App\Model\Table\EstudantesTable&\Cake\ORM\Association\BelongsTo $Estudantes
+ * @property \App\Model\Table\AlunosTable&\Cake\ORM\Association\BelongsTo $Alunos
  * @property \App\Model\Table\SupervisoresTable&\Cake\ORM\Association\BelongsTo $Supervisores
  * @property \App\Model\Table\DocentesTable&\Cake\ORM\Association\BelongsTo $Docentes
  *
@@ -46,7 +46,7 @@ class UserestagiosTable extends Table
         $this->setDisplayField('email');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Estudantes', [
+        $this->belongsTo('Alunos', [
             'foreignKey' => 'id_aluno',
         ]);
         
@@ -109,7 +109,7 @@ class UserestagiosTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['estudante_id'], 'Estudantes'), ['errorField' => 'estudante_id']);
+        $rules->add($rules->existsIn(['aluno_id'], 'Alunos'), ['errorField' => 'aluno_id']);
         $rules->add($rules->existsIn(['supervisor_id'], 'Supervisores'), ['errorField' => 'supervisor_id']);
         $rules->add($rules->existsIn(['docente_id'], 'Docentes'), ['errorField' => 'docente_id']);
 

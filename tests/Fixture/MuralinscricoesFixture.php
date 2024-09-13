@@ -19,7 +19,7 @@ class MuralinscricoesFixture extends TestFixture
     public $fields = [
         'id' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'registro' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => '0', 'comment' => 'O id é o registro', 'precision' => null, 'autoIncrement' => null],
-        'estudante_id' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'aluno_id' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'muralestagio_id' => ['type' => 'smallinteger', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => '0', 'comment' => '', 'precision' => null],
         'data' => ['type' => 'date', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'periodo' => ['type' => 'char', 'length' => 6, 'null' => false, 'default' => '', 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
@@ -47,7 +47,7 @@ class MuralinscricoesFixture extends TestFixture
             [
                 'id' => 1,
                 'registro' => 1,
-                'estudante_id' => 1,
+                'aluno_id' => 1,
                 'muralestagio_id' => 1,
                 'data' => '2020-08-10',
                 'periodo' => '',

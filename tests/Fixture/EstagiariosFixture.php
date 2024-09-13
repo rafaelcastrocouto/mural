@@ -19,7 +19,6 @@ class EstagiariosFixture extends TestFixture
     public $fields = [
         'id' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'aluno_id' => ['type' => 'smallinteger', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => '0', 'comment' => '', 'precision' => null],
-        'estudante_id' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'registro' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => '0', 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'ajustecurricular2020' => ['type' => 'char', 'length' => 1, 'null' => false, 'default' => '0', 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         'turno' => ['type' => 'char', 'length' => 1, 'null' => false, 'default' => '', 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
@@ -54,7 +53,6 @@ class EstagiariosFixture extends TestFixture
             [
                 'id' => 1,
                 'aluno_id' => 1,
-                'estudante_id' => 1,
                 'registro' => 1,
                 'ajustecurricular2020' => '',
                 'turno' => '',

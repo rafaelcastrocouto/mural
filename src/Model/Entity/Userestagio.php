@@ -13,12 +13,12 @@ use Cake\ORM\Entity;
  * @property string|null $password
  * @property string $categoria
  * @property int $numero
- * @property int|null $estudante_id
+ * @property int|null $aluno_id
  * @property int|null $supervisor_id
  * @property int|null $docente_id
  * @property \Cake\I18n\FrozenTime $timestamp
  *
- * @property \App\Model\Entity\Estudante $estudante
+ * @property \App\Model\Entity\Aluno $aluno
  * @property \App\Model\Entity\Supervisor $supervisor
  * @property \App\Model\Entity\Docente $docente
  */

@@ -57,7 +57,6 @@ $session->write('id_categoria', 1);
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('Alunos.nome', 'Nome') ?></th>
-                    <th><?= $this->Paginator->sort('Estudantes.nome', 'Estudante') ?></th>
                     <th><?= $this->Paginator->sort('registro') ?></th>
                     <th><?= $this->Paginator->sort('ajustecurricular2020') ?></th>
                     <th><?= $this->Paginator->sort('turno') ?></th>
@@ -80,7 +79,6 @@ $session->write('id_categoria', 1);
                 <tr>
                     <td><?= $this->Number->format($estagiario->id) ?></td>
                     <td><?= $estagiario->has('aluno') ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
-                    <td><?= $estagiario->has('estudante') ? $this->Html->link($estagiario->estudante->nome, ['controller' => 'Estudantes', 'action' => 'view', $estagiario->estudante->id]) : '' ?></td>
                     <td><?= $estagiario->registro ?></td>
                     <td><?= h($estagiario->ajustecurricular2020) ?></td>
                     <td><?= h($estagiario->turno) ?></td>

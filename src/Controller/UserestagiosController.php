@@ -18,9 +18,9 @@ class UserestagiosController extends AppController {
      * @return \Cake\Http\Response|null|void Renders view
      */
     public function index() {
-        //this->paginate = [
-        //    'contain' => ['Estudantes', 'Supervisores', 'Docentes'],
-        //];
+        $this->paginate = [
+            'contain' => ['Alunos', 'Supervisores', 'Docentes'],
+        ];
         $userestagios = $this->paginate($this->Userestagios);
 
         $this->set(compact('userestagios'));
@@ -35,7 +35,7 @@ class UserestagiosController extends AppController {
      */
     public function view($id = null) {
         $userestagio = $this->Userestagios->get($id, [
-            'contain' => ['Estudantes', 'Supervisores', 'Docentes'],
+            'contain' => ['Alunos', 'Supervisores', 'Docentes'],
         ]);
 
         $this->set(compact('userestagio'));
@@ -57,10 +57,10 @@ class UserestagiosController extends AppController {
             }
             $this->Flash->error(__('The userestagio could not be saved. Please, try again.'));
         }
-        $estudantes = $this->Userestagios->Estudantes->find('list', ['limit' => 200]);
+        $alunos = $this->Userestagios->Alunos->find('list', ['limit' => 200]);
         $supervisores = $this->Userestagios->Supervisores->find('list', ['limit' => 200]);
         $docentes = $this->Userestagios->Docentes->find('list', ['limit' => 200]);
-        $this->set(compact('userestagio', 'estudantes', 'supervisores', 'docentes'));
+        $this->set(compact('userestagio', 'alunos', 'supervisores', 'docentes'));
     }
 
     /**
@@ -83,10 +83,10 @@ class UserestagiosController extends AppController {
             }
             $this->Flash->error(__('The userestagio could not be saved. Please, try again.'));
         }
-        $estudantes = $this->Userestagios->Estudantes->find('list', ['limit' => 200]);
+        $alunos = $this->Userestagios->Alunos->find('list', ['limit' => 200]);
         $supervisores = $this->Userestagios->Supervisores->find('list', ['limit' => 200]);
         $docentes = $this->Userestagios->Docentes->find('list', ['limit' => 200]);
-        $this->set(compact('userestagio', 'estudantes', 'supervisores', 'docentes'));
+        $this->set(compact('userestagio', 'alunos', 'supervisores', 'docentes'));
     }
 
     /**
@@ -118,14 +118,14 @@ class UserestagiosController extends AppController {
             // pr($c_user->categoria);
             if ($c_user->categoria == 2) {
                 // pr($c_user->numero);
-                $this->loadModel('Estudantes');
-                $estudante = $this->Estudantes->find()
+                $this->loadModel('Alunos');
+                aluno = $this->Alunos->find()
                         ->contain([])
-                        ->where(['estudantes.registro' => $c_user->numero]);
-                // pr($estudante);
-                // pr($estudante->first()->registro);
-                $c_user->estudante_id = $estudante->first()->id;
-                // pr($c_user->estudante_id);
+                        ->where(['alunos.registro' => $c_user->numero]);
+                // pr($aluno);
+                // pr($aluno->first()->registro);
+                $c_user->aluno_id = $aluno->first()->id;
+                // pr($c_user->aluno_id);
                 // pr($c_user->id);
                 if ($this->Userestagios->save($c_user)) {
                     // echo "Atualizado!" . "</br>";
@@ -136,7 +136,7 @@ class UserestagiosController extends AppController {
                 };
                 // die();
             }
-            // die('Estudantes');
+            // die('Alunos');
             // Professores
             if ($c_user->categoria == 3) {
                 // pr($c_user->numero);

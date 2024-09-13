@@ -19,7 +19,7 @@ class MuralinscricoesController extends AppController
     public function index()
     {
         //$this->paginate = [
-        //    'contain' => ['Estudantes', 'Muralestagios'],
+        //    'contain' => ['Alunos', 'Muralestagios'],
         //];
         $muralinscricoes = $this->paginate($this->Muralinscricoes);
 
@@ -36,7 +36,7 @@ class MuralinscricoesController extends AppController
     public function view($id = null)
     {
         $muralinscricao = $this->Muralinscricoes->get($id, [
-            'contain' => ['Estudantes', 'Muralestagios'],
+            'contain' => ['Alunos', 'Muralestagios'],
         ]);
 
         $this->set(compact('muralinscricao'));
@@ -59,9 +59,9 @@ class MuralinscricoesController extends AppController
             }
             $this->Flash->error(__('The muralinscricao could not be saved. Please, try again.'));
         }
-        $estudantes = $this->Muralinscricoes->Estudantes->find('list', ['limit' => 200]);
+        $alunos = $this->Muralinscricoes->Alunos->find('list', ['limit' => 200]);
         $muralestagios = $this->Muralinscricoes->Muralestagios->find('list', ['limit' => 200]);
-        $this->set(compact('muralinscricao', 'estudantes', 'muralestagios'));
+        $this->set(compact('muralinscricao', 'alunos', 'muralestagios'));
     }
 
     /**
@@ -85,9 +85,9 @@ class MuralinscricoesController extends AppController
             }
             $this->Flash->error(__('The muralinscricao could not be saved. Please, try again.'));
         }
-        $estudantes = $this->Muralinscricoes->Estudantes->find('list', ['limit' => 200]);
+        $alunos = $this->Muralinscricoes->Alunos->find('list', ['limit' => 200]);
         $muralestagios = $this->Muralinscricoes->Muralestagios->find('list', ['limit' => 200]);
-        $this->set(compact('muralinscricao', 'estudantes', 'muralestagios'));
+        $this->set(compact('muralinscricao', 'alunos', 'muralestagios'));
     }
 
     /**

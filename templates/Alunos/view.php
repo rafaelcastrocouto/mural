@@ -95,7 +95,6 @@
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Aluno Id') ?></th>
-                            <th><?= __('Estudante Id') ?></th>
                             <th><?= __('Registro') ?></th>
                             <th><?= __('Ajustecurricular2020') ?></th>
                             <th><?= __('Turno') ?></th>
@@ -116,7 +115,6 @@
                         <tr>
                             <td><?= h($estagiarios->id) ?></td>
                             <td><?= h($estagiarios->aluno_id) ?></td>
-                            <td><?= h($estagiarios->estudante_id) ?></td>
                             <td><?= h($estagiarios->registro) ?></td>
                             <td><?= h($estagiarios->ajustecurricular2020) ?></td>
                             <td><?= h($estagiarios->turno) ?></td>
@@ -135,6 +133,41 @@
                                 <?= $this->Html->link(__('View'), ['controller' => 'Estagiarios', 'action' => 'view', $estagiarios->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Estagiarios', 'action' => 'edit', $estagiarios->id]) ?>
                                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Estagiarios', 'action' => 'delete', $estagiarios->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiarios->id)]) ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+                <?php endif; ?>
+            </div>
+            <div class="related">
+                <h4><?= __('Related Muralinscricoes') ?></h4>
+                <?php if (!empty($aluno->muralinscricoes)) : ?>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Registro') ?></th>
+                            <th><?= __('Aluno Id') ?></th>
+                            <th><?= __('Muralestagio Id') ?></th>
+                            <th><?= __('Data') ?></th>
+                            <th><?= __('Periodo') ?></th>
+                            <th><?= __('Timestamp') ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                        <?php foreach ($aluno->muralinscricoes as $muralinscricoes) : ?>
+                        <tr>
+                            <td><?= h($muralinscricoes->id) ?></td>
+                            <td><?= h($muralinscricoes->registro) ?></td>
+                            <td><?= h($muralinscricoes->aluno_id) ?></td>
+                            <td><?= h($muralinscricoes->muralestagio_id) ?></td>
+                            <td><?= h($muralinscricoes->data) ?></td>
+                            <td><?= h($muralinscricoes->periodo) ?></td>
+                            <td><?= h($muralinscricoes->timestamp) ?></td>
+                            <td class="actions">
+                                <?= $this->Html->link(__('View'), ['controller' => 'Muralinscricoes', 'action' => 'view', $muralinscricoes->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Muralinscricoes', 'action' => 'edit', $muralinscricoes->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Muralinscricoes', 'action' => 'delete', $muralinscricoes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralinscricoes->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

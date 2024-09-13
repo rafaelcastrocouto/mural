@@ -173,7 +173,6 @@
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Aluno Id') ?></th>
-                            <th><?= __('Estudante Id') ?></th>
                             <th><?= __('Registro') ?></th>
                             <th><?= __('Ajustecurricular2020') ?></th>
                             <th><?= __('Turno') ?></th>
@@ -194,7 +193,6 @@
                         <tr>
                             <td><?= h($estagiarios->id) ?></td>
                             <td><?= h($estagiarios->aluno_id) ?></td>
-                            <td><?= h($estagiarios->estudante_id) ?></td>
                             <td><?= h($estagiarios->registro) ?></td>
                             <td><?= h($estagiarios->ajustecurricular2020) ?></td>
                             <td><?= h($estagiarios->turno) ?></td>
@@ -298,7 +296,7 @@
                             <th><?= __('Password') ?></th>
                             <th><?= __('Categoria') ?></th>
                             <th><?= __('Numero') ?></th>
-                            <th><?= __('Estudante Id') ?></th>
+                            <th><?= __('Aluno Id') ?></th>
                             <th><?= __('Supervisor Id') ?></th>
                             <th><?= __('Docente Id') ?></th>
                             <th><?= __('Timestamp') ?></th>
@@ -311,7 +309,7 @@
                             <td><?= h($userestagios->password) ?></td>
                             <td><?= h($userestagios->categoria) ?></td>
                             <td><?= h($userestagios->numero) ?></td>
-                            <td><?= h($userestagios->estudante_id) ?></td>
+                            <td><?= h($userestagios->aluno_id) ?></td>
                             <td><?= h($userestagios->supervisor_id) ?></td>
                             <td><?= h($userestagios->docente_id) ?></td>
                             <td><?= h($userestagios->timestamp) ?></td>
