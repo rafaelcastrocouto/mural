@@ -18,9 +18,6 @@ class InstituicaoestagiosController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Supervisores', 'Areainstituicoes'],
-        ];
         $instituicaoestagios = $this->paginate($this->Instituicaoestagios);
 
         $this->set(compact('instituicaoestagios'));

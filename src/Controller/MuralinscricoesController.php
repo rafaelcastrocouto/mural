@@ -18,9 +18,9 @@ class MuralinscricoesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Estudantes', 'Muralestagios'],
-        ];
+        //$this->paginate = [
+        //    'contain' => ['Estudantes', 'Muralestagios'],
+        //];
         $muralinscricoes = $this->paginate($this->Muralinscricoes);
 
         $this->set(compact('muralinscricoes'));

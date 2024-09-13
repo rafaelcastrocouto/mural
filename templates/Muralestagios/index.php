@@ -11,8 +11,7 @@
         var url = "<?= $this->Html->Url->build(['controller' => 'muralestagios']); ?>";
         var muralestagioperiodo = $("#MuralestagioPeriodo");
 		var pathname = location.pathname.split('/').filter(Boolean);
-		var selected_option = pathname[pathname.length - 1];
-		if (selected_option !== 'index') muralestagioperiodo.val(selected_option);
+		if (pathname[pathname.length - 2] == 'index') muralestagioperiodo.val(pathname[pathname.length - 1]);
 		muralestagioperiodo.on('change', function () {
             var periodo = $(this).val();
             window.location = url + '/index/' + periodo;
@@ -30,7 +29,7 @@ $session->write('id_categoria', 1);
 <div class="row justify-content-center">
     <div class="col-auto">
         <?php if ($session->read('id_categoria') == 1): ?>
-            <?= $this->Form->create($muralestagios, ['class' => 'form-inline',]); ?>
+            <?= $this->Form->create($muralestagios, ['class' => 'form-inline']); ?>
 				<?= $this->Form->label('Periodo'); ?>
 				<?= $this->Form->input('periodo', [
 						'default'=> $periodo->periodo,

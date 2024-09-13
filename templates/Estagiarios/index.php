@@ -9,16 +9,15 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-
-        var url = "<?= $this->Html->Url->build(['controller' => 'estagiarios', 'action' => 'index']); ?>";
-        // alert(url);
+        var url = "<?= $this->Html->Url->build(['controller' => 'estagiarios']); ?>";
+        var estagiarioperiodo = $("#EstagiarioPeriodo");
+		var pathname = location.pathname.split('/').filter(Boolean);
+		if (pathname[pathname.length - 2] == 'index') estagiarioperiodo.val(pathname[pathname.length - 1]);
         $("#EstagiarioPeriodo").change(function () {
             var periodo = $(this).val();
-            // alert(url + '/index/' + periodo);
             window.location = url + '/index/' + periodo;
-        })
-
-    })
+        });
+    });
 </script>
 
 <?php
@@ -33,7 +32,15 @@ $session->write('id_categoria', 1);
     <div class="col-auto">
         <?php if ($session->read('id_categoria') == 1): ?>
             <?= $this->Form->create($estagiarios, ['class' => 'form-inline']); ?>
-            <?= $this->Form->input('periodo', ['id' => 'EstagiarioPeriodo', 'type' => 'select', 'label' => ['text' => 'Período ', 'style' => 'display: inline;'], 'options' => $periodos, 'selected' => $periodo], ['class' => 'form-control']); ?>
+			<?= $this->Form->input('periodo', [
+					'id' => 'EstagiarioPeriodo', 
+					'type' => 'select', 
+					'label' => ['text' => 'Período ', 'style' => 'display: inline;'], 
+					'options' => $periodos, 
+					'selected' => $periodo, 
+					'class' => 'form-control'
+				]); 
+			?>
             <?= $this->Form->end(); ?>
         <?php else: ?>
             <h1 style="text-align: center;">Mural de estágios da ESS/UFRJ. Período: <?= '2020-1'; ?></h1>
@@ -81,7 +88,7 @@ $session->write('id_categoria', 1);
                     <td><?= $estagiario->tc ?></td>
                     <td><?= h($estagiario->tc_solicitacao) ?></td>
                     <td><?= $estagiario->has('instituicaoestagio') ? $this->Html->link($estagiario->instituicaoestagio->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $estagiario->instituicaoestagio->id]) : '' ?></td>
-                    <td><?= $estagiario->has('supervisor') ? $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : '' ?></td>
+                    <td><?= ($estagiario->supervisor and $estagiario->supervisor->has('nome')) ? $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : 'Sem supervisor' ?></td>
                     <td><?= $estagiario->has('docente') ? $this->Html->link($estagiario->docente->nome, ['controller' => 'Docentes', 'action' => 'view', $estagiario->docente->id]) : '' ?></td>
                     <td><?= h($estagiario->periodo) ?></td>
                     <td><?= $estagiario->has('areaestagio') ? $this->Html->link($estagiario->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $estagiario->areaestagio->id]) : '' ?></td>

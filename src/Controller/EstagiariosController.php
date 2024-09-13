@@ -28,8 +28,8 @@ class EstagiariosController extends AppController
             $query = $this->Estagiarios->find('all')
             ->contain(['Alunos', 'Estudantes', 'Docentes', 'Supervisores', 'Instituicaoestagios']);
         }
-        $config = $this->paginate =['sortWhitelist' => ['id', 'Alunos.nome', 'Estudantes.nome', 'registro', 'turno', 'nivel', 'Instituicaoestagios.instituicao', 'Supervisores.nome', 'Docentes.nome']];
-        $estagiarios = $this->paginate($query, $config);
+        //$config = $this->paginate = ['sortWhitelist' => ['id', 'Alunos.nome', 'Estudantes.nome', 'registro', 'turno', 'nivel', 'Instituicaoestagios.instituicao', 'Supervisores.nome', 'Docentes.nome']];
+        $estagiarios = $this->paginate($query);
 
         $query = $this->Estagiarios->find('all', [
             'fields' => ['periodo'],

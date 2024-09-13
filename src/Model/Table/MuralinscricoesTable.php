@@ -42,14 +42,14 @@ class MuralinscricoesTable extends Table {
 
         $this->setTable('mural_inscricao');
         $this->setAlias('muralinscricoes');
-        $this->setDisplayField('id_aluno');
+        $this->setDisplayField('registro');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Alunos', [
-            'foreignKey' => 'id_aluno', // registro
+            'foreignKey' => 'registro', 
         ]);
         $this->belongsTo('Alunos', [
-            'foreignKey' => 'aluno_id', // aluno id
+            'foreignKey' => 'aluno_id',
         ]);
         $this->belongsTo('Estudantes', [
             'foreignKey' => 'alunonovo_id',
@@ -69,10 +69,12 @@ class MuralinscricoesTable extends Table {
         $validator
                 ->integer('id')
                 ->allowEmptyString('id', null, 'create');
-
         $validator
-                ->integer('id_aluno')
-                ->notEmptyString('id_aluno');
+                ->integer('registro')
+                ->notEmptyString('registro');
+        $validator
+                ->integer('aluno_id')
+                ->notEmptyString('aluno_id');
 
         $validator
                 ->integer('alunonovo_id')
@@ -107,7 +109,7 @@ class MuralinscricoesTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules): RulesChecker {
-        $rules->add($rules->existsIn(['alunonovo_id'], 'Estudantes'), ['errorField' => 'alunonovo_id']);
+        $rules->add($rules->existsIn(['registro'], 'Estudantes'), ['errorField' => 'registro']);
         $rules->add($rules->existsIn(['id_instituicao'], 'Muralestagios'), ['errorField' => 'id_instituicao']);
 
         return $rules;
