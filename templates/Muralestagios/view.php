@@ -26,7 +26,7 @@
             <table>
                 <tr>
                     <th><?= __('Instituicao') ?></th>
-                    <td><?= $muralestagio->has('instituicaoestagio') ? $this->Html->link($muralestagio->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $muralestagio->instituicaoestagio]) : '' ?></td>
+                    <td><?= $muralestagio->has('instituicaoestagio') ? $this->Html->link($muralestagio->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $muralestagio->id_estagio]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Convenio') ?></th>
@@ -60,7 +60,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Areaestagio') ?></th>
-                    <td><?= $muralestagio->has('areaestagio') ? $this->Html->link($muralestagio->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $muralestagio->areaestagio]) : '' ?></td>
+                    <td><?= $muralestagio->has('areaestagio') ? $this->Html->link($muralestagio->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $muralestagio->id_area]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Horario') ?></th>

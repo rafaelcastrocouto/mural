@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Areainstituicao') ?></th>
-                    <td><?= $instituicaoestagio->has('areainstituicao') ? $this->Html->link($instituicaoestagio->areainstituicao->id, ['controller' => 'Areainstituicoes', 'action' => 'view', $instituicaoestagio->areainstituicao->id]) : '' ?></td>
+                    <td><?= $instituicaoestagio->has('area_instituicao_id') ? $this->Html->link($instituicaoestagio->area_instituicao_id, ['controller' => 'Areainstituicoes', 'action' => 'view', $instituicaoestagio->areainstituicao->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Natureza') ?></th>
@@ -211,8 +211,8 @@
                             <td><?= h($estagiarios->tc) ?></td>
                             <td><?= h($estagiarios->tc_solicitacao) ?></td>
                             <td><?= $estagiarios->has('instituicaoestagio') ? $this->Html->link($estagiarios->instituicaoestagio->instituicao, ['controller' => 'instituicaoestagios', 'action' => 'view', $estagiarios->id_instituicao]) : '' ?></td>
-                            <td><?= $estagiarios->has('supervisor') ? $this->Html->link(h($estagiarios->supervisor->nome), ['controller' => 'supervisores', 'action' => 'view', $estagiarios->id_supervisor]) : '' ?></td>
-                            <td><?= $estagiarios->has('docente') ? $this->Html->link(h($estagiarios->docente->nome), ['controller' => 'docentes', 'action' => 'view', $estagiarios->id_docente]) : '' ?></td>
+                            <td><?= $estagiarios->has('id_supervisor') ? $this->Html->link(h($estagiarios->id_supervisor), ['controller' => 'supervisores', 'action' => 'view', $estagiarios->id_supervisor]) : '' ?></td>
+                            <td><?= $estagiarios->has('id_professor') ? $this->Html->link('' . h($estagiarios->id_professor), ['controller' => 'professores', 'action' => 'view', $estagiarios->id_professor]) : '' ?></td>
                             <td><?= h($estagiarios->periodo) ?></td>
                             <td><?= h($estagiarios->id_area) ?></td>
                             <td><?= h($estagiarios->nota) ?></td>

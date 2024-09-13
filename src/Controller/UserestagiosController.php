@@ -18,9 +18,9 @@ class UserestagiosController extends AppController {
      * @return \Cake\Http\Response|null|void Renders view
      */
     public function index() {
-        $this->paginate = [
-            'contain' => ['Estudantes', 'Supervisores', 'Docentes'],
-        ];
+        //this->paginate = [
+        //    'contain' => ['Estudantes', 'Supervisores', 'Docentes'],
+        //];
         $userestagios = $this->paginate($this->Userestagios);
 
         $this->set(compact('userestagios'));

@@ -18,9 +18,9 @@ class VisitasController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Instituicaoestagios'],
-        ];
+        //$this->paginate = [
+        //    'contain' => ['Instituicaoestagios'],
+        //];
         $visitas = $this->paginate($this->Visitas);
 
         $this->set(compact('visitas'));

@@ -46,7 +46,7 @@ class Userestagio extends Entity
      *
      * @var array
      */
-    protected $_hidden = [
-        'password',
+    protected array $_hidden = [
+        'password'
     ];
 }
