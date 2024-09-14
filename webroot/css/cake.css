@@ -271,29 +271,28 @@ input[type='color'] {
     justify-content: center;
 }
 
-@media screen and (max-width: 640px) {
-    /* Fix milligram not having a responsive column system */
-    .row .column[class*='column-'] {
-        flex: 0 0 100%;
-        max-width: 100%
-    }
-    .top-nav {
-        margin: 0 auto;
-    }
-    .side-nav {
-        margin-bottom: 1rem;
-    }
-    .heading {
-        margin-bottom: 1rem;
-    }
-    .side-nav-item {
-        display: inline;
-        margin: 0 1.5rem 0 0;
-    }
-    .asc:after {
-        content: " \2192";
-    }
-    .desc:after {
-        content: " \2190";
-    }
+/* Fix milligram not having a responsive column system */
+.row .column[class*='column-'] {
+    flex: 0 0 100%;
+    max-width: 100%
 }
+.top-nav {
+    margin: 0 auto;
+}
+.side-nav {
+    margin-bottom: 1rem;
+}
+.heading {
+    margin-bottom: 1rem;
+}
+.side-nav-item {
+    display: inline;
+    margin: 0 1.5rem 0 0;
+}
+.asc:after {
+    content: " \2192";
+}
+.desc:after {
+    content: " \2190";
+}
+

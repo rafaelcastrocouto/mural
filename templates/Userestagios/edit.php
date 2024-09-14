@@ -28,7 +28,7 @@
                     echo $this->Form->control('numero');
                     echo $this->Form->control('aluno_id', ['options' => $alunos, 'empty' => true]);
                     echo $this->Form->control('supervisor_id', ['options' => $supervisores, 'empty' => true]);
-                    echo $this->Form->control('docente_id', ['options' => $docentes, 'empty' => true]);
+                    echo $this->Form->control('professor_id', ['options' => $professores, 'empty' => true]);
                     echo $this->Form->control('timestamp');
                 ?>
             </fieldset>

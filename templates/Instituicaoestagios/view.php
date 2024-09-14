@@ -3,9 +3,11 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Instituicaoestagio $instituicaoestagio
  */
+//pr($instituicaoestagio)
+//die();
 ?>
-<div class="row">
-    <aside class="column">
+<div>
+    <aside>
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Html->link(__('Edit Instituicaoestagio'), ['action' => 'edit', $instituicaoestagio->id], ['class' => 'side-nav-item']) ?>
@@ -24,7 +26,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Areainstituicao') ?></th>
-                    <td><?= $instituicaoestagio->has('areainstituicao') ? $this->Html->link($instituicaoestagio->areainstituicao->id, ['controller' => 'Areainstituicoes', 'action' => 'view', $instituicaoestagio->areainstituicao->id]) : '' ?></td>
+                    <td><?= $instituicaoestagio->has('areainstituicao') ? $this->Html->link(''.$instituicaoestagio->areainstituicao->id, ['controller' => 'Areainstituicoes', 'action' => 'view', $instituicaoestagio->areainstituicao->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Natureza') ?></th>
@@ -190,7 +192,7 @@
                             <th><?= __('Tc Solicitacao') ?></th>
                             <th><?= __('Instituicaoestagio Id') ?></th>
                             <th><?= __('Supervisor Id') ?></th>
-                            <th><?= __('Docente Id') ?></th>
+                            <th><?= __('Professor Id') ?></th>
                             <th><?= __('Periodo') ?></th>
                             <th><?= __('Areaestagio Id') ?></th>
                             <th><?= __('Nota') ?></th>
@@ -210,8 +212,8 @@
                             <td><?= h($estagiarios->tc) ?></td>
                             <td><?= h($estagiarios->tc_solicitacao) ?></td>
                             <td><?= $estagiarios->has('instituicaoestagio') ? $this->Html->link($estagiarios->instituicaoestagio->instituicao, ['controller' => 'instituicaoestagios', 'action' => 'view', $estagiarios->id_instituicao]) : '' ?></td>
-                            <td><?= $estagiarios->has('supervisor') ? $this->Html->link(h($estagiarios->supervisor->nome), ['controller' => 'supervisores', 'action' => 'view', $estagiarios->id_supervisor]) : '' ?></td>
-                            <td><?= $estagiarios->has('docente') ? $this->Html->link(h($estagiarios->docente->nome), ['controller' => 'docentes', 'action' => 'view', $estagiarios->id_docente]) : '' ?></td>
+                            <td><?= $estagiarios->has('supervisor') ? $this->Html->link(''.h($estagiarios->supervisor->nome), ['controller' => 'supervisores', 'action' => 'view', $estagiarios->id_supervisor]) : '' ?></td>
+                            <td><?= $estagiarios->has('professor') ? $this->Html->link(''.h($estagiarios->professor->nome), ['controller' => 'professores', 'action' => 'view', $estagiarios->id_profesores]) : '' ?></td>
                             <td><?= h($estagiarios->periodo) ?></td>
                             <td><?= h($estagiarios->id_area) ?></td>
                             <td><?= h($estagiarios->nota) ?></td>
@@ -245,7 +247,7 @@
                             <th><?= __('Requisitos') ?></th>
                             <th><?= __('Areaestagio Id') ?></th>
                             <th><?= __('Horario') ?></th>
-                            <th><?= __('Docente Id') ?></th>
+                            <th><?= __('Professor Id') ?></th>
                             <th><?= __('DataSelecao') ?></th>
                             <th><?= __('DataInscricao') ?></th>
                             <th><?= __('HorarioSelecao') ?></th>
@@ -272,7 +274,7 @@
                             <td><?= h($muralestagios->requisitos) ?></td>
                             <td><?= h($muralestagios->areaestagio_id) ?></td>
                             <td><?= h($muralestagios->horario) ?></td>
-                            <td><?= h($muralestagios->docente_id) ?></td>
+                            <td><?= h($muralestagios->professor_id) ?></td>
                             <td><?= h($muralestagios->dataSelecao) ?></td>
                             <td><?= h($muralestagios->dataInscricao) ?></td>
                             <td><?= h($muralestagios->horarioSelecao) ?></td>

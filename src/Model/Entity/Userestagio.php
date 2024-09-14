@@ -15,12 +15,12 @@ use Cake\ORM\Entity;
  * @property int $numero
  * @property int|null $aluno_id
  * @property int|null $supervisor_id
- * @property int|null $docente_id
+ * @property int|null $professor_id
  * @property \Cake\I18n\FrozenTime $timestamp
  *
  * @property \App\Model\Entity\Aluno $aluno
  * @property \App\Model\Entity\Supervisor $supervisor
- * @property \App\Model\Entity\Docente $docente
+ * @property \App\Model\Entity\Professor $professor
  */
 class Userestagio extends Entity
 {

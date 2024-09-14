@@ -17,7 +17,7 @@
                     <th><?= $this->Paginator->sort('numero') ?></th>
                     <th><?= $this->Paginator->sort('aluno_id') ?></th>
                     <th><?= $this->Paginator->sort('supervisor_id') ?></th>
-                    <th><?= $this->Paginator->sort('docente_id') ?></th>
+                    <th><?= $this->Paginator->sort('professor_id') ?></th>
                     <th><?= $this->Paginator->sort('timestamp') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
@@ -31,7 +31,7 @@
                     <td><?= $this->Number->format($userestagio->numero) ?></td>
                     <td><?= $userestagio->has('aluno') ? $this->Html->link($userestagio->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $userestagio->aluno->id]) : '' ?></td>
                     <td><?= $userestagio->has('supervisor') ? $this->Html->link($userestagio->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $userestagio->supervisor->id]) : '' ?></td>
-                    <td><?= $userestagio->has('docente') ? $this->Html->link($userestagio->docente->nome, ['controller' => 'Docentes', 'action' => 'view', $userestagio->docente->id]) : '' ?></td>
+                    <td><?= $userestagio->has('professor') ? $this->Html->link($userestagio->professor->nome, ['controller' => 'Professores', 'action' => 'view', $userestagio->professor->id]) : '' ?></td>
                     <td><?= h($userestagio->timestamp) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $userestagio->id]) ?>

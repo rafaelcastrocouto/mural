@@ -103,7 +103,7 @@
                             <th><?= __('Tc Solicitacao') ?></th>
                             <th><?= __('Instituicaoestagio Id') ?></th>
                             <th><?= __('Supervisor Id') ?></th>
-                            <th><?= __('Docente Id') ?></th>
+                            <th><?= __('Professor Id') ?></th>
                             <th><?= __('Periodo') ?></th>
                             <th><?= __('Areaestagio Id') ?></th>
                             <th><?= __('Nota') ?></th>
@@ -123,7 +123,7 @@
                             <td><?= h($estagiarios->tc_solicitacao) ?></td>
                             <td><?= h($estagiarios->instituicaoestagio_id) ?></td>
                             <td><?= h($estagiarios->supervisor_id) ?></td>
-                            <td><?= h($estagiarios->docente_id) ?></td>
+                            <td><?= h($estagiarios->professor_id) ?></td>
                             <td><?= h($estagiarios->periodo) ?></td>
                             <td><?= h($estagiarios->areaestagio_id) ?></td>
                             <td><?= h($estagiarios->nota) ?></td>

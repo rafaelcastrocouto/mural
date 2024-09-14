@@ -9,27 +9,27 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Docentes Model
+ * Professores Model
  *
  * @property \App\Model\Table\EstagiariosTable&\Cake\ORM\Association\HasMany $Estagiarios
  * @property \App\Model\Table\MuralestagiosTable&\Cake\ORM\Association\HasMany $Muralestagios
  * @property \App\Model\Table\UserestagiosTable&\Cake\ORM\Association\HasMany $Userestagios
  *
- * @method \App\Model\Entity\Docente newEmptyEntity()
- * @method \App\Model\Entity\Docente newEntity(array $data, array $options = [])
- * @method \App\Model\Entity\Docente[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Docente get($primaryKey, $options = [])
- * @method \App\Model\Entity\Docente findOrCreate($search, ?callable $callback = null, $options = [])
- * @method \App\Model\Entity\Docente patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Docente[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\Docente|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Docente saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Docente[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Docente[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \App\Model\Entity\Docente[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Docente[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Professor newEmptyEntity()
+ * @method \App\Model\Entity\Professor newEntity(array $data, array $options = [])
+ * @method \App\Model\Entity\Professor[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Professor get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Professor findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Professor patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Professor[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Professor|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Professor saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Professor[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Professor[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Professor[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Professor[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class DocentesTable extends Table
+class ProfessoresTable extends Table
 {
     /**
      * Initialize method
@@ -41,8 +41,8 @@ class DocentesTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('docentes');
-        $this->setAlias('docentes');
+        $this->setTable('professores');
+        $this->setAlias('professores');
         $this->setDisplayField('nome');
         $this->setPrimaryKey('id');
 
@@ -54,7 +54,7 @@ class DocentesTable extends Table
         ]);
         /*
         $this->hasMany('Userestagios', [
-            'foreignKey' => 'docente_id',
+            'foreignKey' => 'professor_id',
         ]);
         */
     }

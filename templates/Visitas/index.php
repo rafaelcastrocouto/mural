@@ -5,7 +5,7 @@
  */
 ?>
 <div class="visitas index content">
-    <?= $this->Html->link(__('New Visita'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <?= $this->Html->link(__('Nova Visita'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Visitas') ?></h3>
     <div class="table-responsive">
         <table>
@@ -30,9 +30,9 @@
                     <td><?= h($visita->responsavel) ?></td>
                     <td><?= h($visita->avaliacao) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $visita->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $visita->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $visita->id], ['confirm' => __('Are you sure you want to delete # {0}?', $visita->id)]) ?>
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $visita->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $visita->id]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $visita->id], ['confirm' => __('Are you sure you want to delete # {0}?', $visita->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

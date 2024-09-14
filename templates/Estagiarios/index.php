@@ -65,7 +65,7 @@ $session->write('id_categoria', 1);
                     <th><?= $this->Paginator->sort('tc_solicitacao') ?></th>
                     <th><?= $this->Paginator->sort('Instituicaoestagios.instituicao', 'Instituicao') ?></th>
                     <th><?= $this->Paginator->sort('Supervisores.nome', 'Supervisor') ?></th>
-                    <th><?= $this->Paginator->sort('Docentes.nome', 'Professor/a') ?></th>
+                    <th><?= $this->Paginator->sort('Profesdsores.nome', 'Professor/a') ?></th>
                     <th><?= $this->Paginator->sort('periodo') ?></th>
                     <th><?= $this->Paginator->sort('areaestagio_id') ?></th>
                     <th><?= $this->Paginator->sort('nota') ?></th>
@@ -87,7 +87,7 @@ $session->write('id_categoria', 1);
                     <td><?= h($estagiario->tc_solicitacao) ?></td>
                     <td><?= $estagiario->has('instituicaoestagio') ? $this->Html->link($estagiario->instituicaoestagio->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $estagiario->instituicaoestagio->id]) : '' ?></td>
                     <td><?= ($estagiario->supervisor and $estagiario->supervisor->has('nome')) ? $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : 'Sem supervisor' ?></td>
-                    <td><?= $estagiario->has('docente') ? $this->Html->link($estagiario->docente->nome, ['controller' => 'Docentes', 'action' => 'view', $estagiario->docente->id]) : '' ?></td>
+                    <td><?= $estagiario->has('professor') ? $this->Html->link($estagiario->professor->nome, ['controller' => 'Professores', 'action' => 'view', $estagiario->professor->id]) : '' ?></td>
                     <td><?= h($estagiario->periodo) ?></td>
                     <td><?= $estagiario->has('areaestagio') ? $this->Html->link($estagiario->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $estagiario->areaestagio->id]) : '' ?></td>
                     <td><?= $this->Number->format($estagiario->nota) ?></td>

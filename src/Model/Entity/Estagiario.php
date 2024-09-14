@@ -18,7 +18,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenDate|null $tc_solicitacao
  * @property int $instituicaoestagio_id
  * @property int|null $supervisor_id
- * @property int|null $docente_id
+ * @property int|null $professor_id
  * @property string $periodo
  * @property int|null $areaestagio_id
  * @property string|null $nota
@@ -28,7 +28,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Aluno $aluno
  * @property \App\Model\Entity\Instituicaoestagio $instituicaoestagio
  * @property \App\Model\Entity\Supervisor $supervisor
- * @property \App\Model\Entity\Docente $docente
+ * @property \App\Model\Entity\Professor $professor
  * @property \App\Model\Entity\Areaestagio $areaestagio
  */
 class Estagiario extends Entity
@@ -63,7 +63,7 @@ class Estagiario extends Entity
         'aluno' => true,
         'instituicaoestagio' => true,
         'supervisor' => true,
-        'docente' => true,
+        'professor' => true,
         'areaestagio' => true,
     ];
 }

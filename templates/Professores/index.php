@@ -1,12 +1,12 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Docente[]|\Cake\Collection\CollectionInterface $docentes
+ * @var \App\Model\Entity\Professor[]|\Cake\Collection\CollectionInterface $professores
  */
 ?>
-<div class="docentes index content">
-    <?= $this->Html->link(__('New Docente'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Docentes') ?></h3>
+<div class="professores index content">
+    <?= $this->Html->link(__('Novo Professor'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <h3><?= __('Professores') ?></h3>
     <div class="table-responsive">
         <table>
             <thead>
@@ -50,47 +50,47 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($docentes as $docente): ?>
+                <?php foreach ($professores as $professor): ?>
                 <tr>
-                    <td><?= $this->Number->format($docente->id) ?></td>
-                    <td><?= h($docente->nome) ?></td>
-                    <td><?= h($docente->cpf) ?></td>
-                    <td><?= $this->Number->format($docente->siape) ?></td>
-                    <td><?= h($docente->datanascimento) ?></td>
-                    <td><?= h($docente->localnascimento) ?></td>
-                    <td><?= h($docente->sexo) ?></td>
-                    <td><?= h($docente->ddd_telefone) ?></td>
-                    <td><?= h($docente->telefone) ?></td>
-                    <td><?= h($docente->ddd_celular) ?></td>
-                    <td><?= h($docente->celular) ?></td>
-                    <td><?= h($docente->email) ?></td>
-                    <td><?= h($docente->homepage) ?></td>
-                    <td><?= h($docente->redesocial) ?></td>
-                    <td><?= h($docente->curriculolattes) ?></td>
-                    <td><?= h($docente->atualizacaolattes) ?></td>
-                    <td><?= h($docente->curriculosigma) ?></td>
-                    <td><?= h($docente->pesquisadordgp) ?></td>
-                    <td><?= h($docente->formacaoprofissional) ?></td>
-                    <td><?= h($docente->universidadedegraduacao) ?></td>
-                    <td><?= $this->Number->format($docente->anoformacao) ?></td>
-                    <td><?= h($docente->mestradoarea) ?></td>
-                    <td><?= h($docente->mestradouniversidade) ?></td>
-                    <td><?= $this->Number->format($docente->mestradoanoconclusao) ?></td>
-                    <td><?= h($docente->doutoradoarea) ?></td>
-                    <td><?= h($docente->doutoradouniversidade) ?></td>
-                    <td><?= $this->Number->format($docente->doutoradoanoconclusao) ?></td>
-                    <td><?= h($docente->dataingresso) ?></td>
-                    <td><?= h($docente->formaingresso) ?></td>
-                    <td><?= h($docente->tipocargo) ?></td>
-                    <td><?= h($docente->categoria) ?></td>
-                    <td><?= h($docente->regimetrabalho) ?></td>
-                    <td><?= h($docente->departamento) ?></td>
-                    <td><?= h($docente->dataegresso) ?></td>
-                    <td><?= h($docente->motivoegresso) ?></td>
+                    <td><?= $this->Number->format($professor->id) ?></td>
+                    <td><?= h($professor->nome) ?></td>
+                    <td><?= h($professor->cpf) ?></td>
+                    <td><?= $this->Number->format($professor->siape) ?></td>
+                    <td><?= h($professor->datanascimento) ?></td>
+                    <td><?= h($professor->localnascimento) ?></td>
+                    <td><?= h($professor->sexo) ?></td>
+                    <td><?= h($professor->ddd_telefone) ?></td>
+                    <td><?= h($professor->telefone) ?></td>
+                    <td><?= h($professor->ddd_celular) ?></td>
+                    <td><?= h($professor->celular) ?></td>
+                    <td><?= h($professor->email) ?></td>
+                    <td><?= h($professor->homepage) ?></td>
+                    <td><?= h($professor->redesocial) ?></td>
+                    <td><?= h($professor->curriculolattes) ?></td>
+                    <td><?= h($professor->atualizacaolattes) ?></td>
+                    <td><?= h($professor->curriculosigma) ?></td>
+                    <td><?= h($professor->pesquisadordgp) ?></td>
+                    <td><?= h($professor->formacaoprofissional) ?></td>
+                    <td><?= h($professor->universidadedegraduacao) ?></td>
+                    <td><?= $this->Number->format($professor->anoformacao) ?></td>
+                    <td><?= h($professor->mestradoarea) ?></td>
+                    <td><?= h($professor->mestradouniversidade) ?></td>
+                    <td><?= $this->Number->format($professor->mestradoanoconclusao) ?></td>
+                    <td><?= h($professor->doutoradoarea) ?></td>
+                    <td><?= h($professor->doutoradouniversidade) ?></td>
+                    <td><?= $this->Number->format($professor->doutoradoanoconclusao) ?></td>
+                    <td><?= h($professor->dataingresso) ?></td>
+                    <td><?= h($professor->formaingresso) ?></td>
+                    <td><?= h($professor->tipocargo) ?></td>
+                    <td><?= h($professor->categoria) ?></td>
+                    <td><?= h($professor->regimetrabalho) ?></td>
+                    <td><?= h($professor->departamento) ?></td>
+                    <td><?= h($professor->dataegresso) ?></td>
+                    <td><?= h($professor->motivoegresso) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $docente->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $docente->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $docente->id], ['confirm' => __('Are you sure you want to delete # {0}?', $docente->id)]) ?>
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $professor->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $professor->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $professor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $professor->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

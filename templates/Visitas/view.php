@@ -3,24 +3,23 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Visita $visita
  */
+//pr($visita);
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Visita'), ['action' => 'edit', $visita->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Visita'), ['action' => 'delete', $visita->id], ['confirm' => __('Are you sure you want to delete # {0}?', $visita->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Visitas'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Visita'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
+<div>
     <div class="column-responsive column-80">
         <div class="visitas view content">
-            <h3><?= h($visita->id) ?></h3>
+            <aside>
+                <div class="side-nav">
+                    <?= $this->Html->link(__('Editar Visita'), ['action' => 'edit', $visita->id], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Form->postLink(__('Deletar Visita'), ['action' => 'delete', $visita->id], ['confirm' => __('Are you sure you want to delete # {0}?', $visita->id), 'class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Listar Visitas'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Nova Visita'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                </div>
+            </aside>
             <table>
                 <tr>
-                    <th><?= __('Instituicaoestagio') ?></th>
-                    <td><?= $visita->has('instituicaoestagio') ? $this->Html->link($visita->instituicaoestagio->id, ['controller' => 'Instituicaoestagios', 'action' => 'view', $visita->instituicaoestagio->id]) : '' ?></td>
+                    <th><?= __('Instituicao estagio') ?></th>
+                    <td><?= $visita->has('instituicaoestagio') ? $this->Html->link($visita->instituicaoestagio->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $visita->instituicaoestagio->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Motivo') ?></th>
@@ -44,7 +43,7 @@
                 </tr>
             </table>
             <div class="text">
-                <strong><?= __('Descricao') ?></strong>
+                <h2><?= __('Descricao') ?></h2>
                 <blockquote>
                     <?= $this->Text->autoParagraph(h($visita->descricao)); ?>
                 </blockquote>

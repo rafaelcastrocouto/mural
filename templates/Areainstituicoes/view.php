@@ -4,19 +4,19 @@
  * @var \App\Model\Entity\Areainstituicao $areainstituicao
  */
 ?>
-<div class="row">
-    <aside class="column">
+<div>
+    <aside>
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Areainstituicao'), ['action' => 'edit', $areainstituicao->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Areainstituicao'), ['action' => 'delete', $areainstituicao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $areainstituicao->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Areainstituicoes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Areainstituicao'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Editar Area instituicao'), ['action' => 'edit', $areainstituicao->id], ['class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(__('Deletear Area instituicao'), ['action' => 'delete', $areainstituicao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $areainstituicao->id), 'class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Listar Area instituicoes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Nova Area instituicao'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
         <div class="areainstituicoes view content">
-            <h3><?= h($areainstituicao->id) ?></h3>
+            <h3><?= h($areainstituicao->area) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Area') ?></th>

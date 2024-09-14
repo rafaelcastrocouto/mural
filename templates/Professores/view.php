@@ -1,173 +1,173 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Docente $docente
+ * @var \App\Model\Entity\Professor $professor
  */
 ?>
 <div class="row">
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Docente'), ['action' => 'edit', $docente->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Docente'), ['action' => 'delete', $docente->id], ['confirm' => __('Are you sure you want to delete # {0}?', $docente->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Docentes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Docente'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Edit Professor'), ['action' => 'edit', $professor->id], ['class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(__('Delete Professor'), ['action' => 'delete', $professor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $professor->id), 'class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('List Professores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('New Professor'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
-        <div class="docentes view content">
-            <h3><?= h($docente->id) ?></h3>
+        <div class="professores view content">
+            <h3><?= h($professor->id) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Nome') ?></th>
-                    <td><?= h($docente->nome) ?></td>
+                    <td><?= h($professor->nome) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Cpf') ?></th>
-                    <td><?= h($docente->cpf) ?></td>
+                    <td><?= h($professor->cpf) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Localnascimento') ?></th>
-                    <td><?= h($docente->localnascimento) ?></td>
+                    <td><?= h($professor->localnascimento) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Sexo') ?></th>
-                    <td><?= h($docente->sexo) ?></td>
+                    <td><?= h($professor->sexo) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Ddd Telefone') ?></th>
-                    <td><?= h($docente->ddd_telefone) ?></td>
+                    <td><?= h($professor->ddd_telefone) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Telefone') ?></th>
-                    <td><?= h($docente->telefone) ?></td>
+                    <td><?= h($professor->telefone) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Ddd Celular') ?></th>
-                    <td><?= h($docente->ddd_celular) ?></td>
+                    <td><?= h($professor->ddd_celular) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Celular') ?></th>
-                    <td><?= h($docente->celular) ?></td>
+                    <td><?= h($professor->celular) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Email') ?></th>
-                    <td><?= h($docente->email) ?></td>
+                    <td><?= h($professor->email) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Homepage') ?></th>
-                    <td><?= h($docente->homepage) ?></td>
+                    <td><?= h($professor->homepage) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Redesocial') ?></th>
-                    <td><?= h($docente->redesocial) ?></td>
+                    <td><?= h($professor->redesocial) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Curriculolattes') ?></th>
-                    <td><?= h($docente->curriculolattes) ?></td>
+                    <td><?= h($professor->curriculolattes) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Curriculosigma') ?></th>
-                    <td><?= h($docente->curriculosigma) ?></td>
+                    <td><?= h($professor->curriculosigma) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Pesquisadordgp') ?></th>
-                    <td><?= h($docente->pesquisadordgp) ?></td>
+                    <td><?= h($professor->pesquisadordgp) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Formacaoprofissional') ?></th>
-                    <td><?= h($docente->formacaoprofissional) ?></td>
+                    <td><?= h($professor->formacaoprofissional) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Universidadedegraduacao') ?></th>
-                    <td><?= h($docente->universidadedegraduacao) ?></td>
+                    <td><?= h($professor->universidadedegraduacao) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Mestradoarea') ?></th>
-                    <td><?= h($docente->mestradoarea) ?></td>
+                    <td><?= h($professor->mestradoarea) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Mestradouniversidade') ?></th>
-                    <td><?= h($docente->mestradouniversidade) ?></td>
+                    <td><?= h($professor->mestradouniversidade) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Doutoradoarea') ?></th>
-                    <td><?= h($docente->doutoradoarea) ?></td>
+                    <td><?= h($professor->doutoradoarea) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Doutoradouniversidade') ?></th>
-                    <td><?= h($docente->doutoradouniversidade) ?></td>
+                    <td><?= h($professor->doutoradouniversidade) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Formaingresso') ?></th>
-                    <td><?= h($docente->formaingresso) ?></td>
+                    <td><?= h($professor->formaingresso) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Tipocargo') ?></th>
-                    <td><?= h($docente->tipocargo) ?></td>
+                    <td><?= h($professor->tipocargo) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Categoria') ?></th>
-                    <td><?= h($docente->categoria) ?></td>
+                    <td><?= h($professor->categoria) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Regimetrabalho') ?></th>
-                    <td><?= h($docente->regimetrabalho) ?></td>
+                    <td><?= h($professor->regimetrabalho) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Departamento') ?></th>
-                    <td><?= h($docente->departamento) ?></td>
+                    <td><?= h($professor->departamento) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Motivoegresso') ?></th>
-                    <td><?= h($docente->motivoegresso) ?></td>
+                    <td><?= h($professor->motivoegresso) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($docente->id) ?></td>
+                    <td><?= $this->Number->format($professor->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Siape') ?></th>
-                    <td><?= $this->Number->format($docente->siape) ?></td>
+                    <td><?= $this->Number->format($professor->siape) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Anoformacao') ?></th>
-                    <td><?= $this->Number->format($docente->anoformacao) ?></td>
+                    <td><?= $this->Number->format($professor->anoformacao) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Mestradoanoconclusao') ?></th>
-                    <td><?= $this->Number->format($docente->mestradoanoconclusao) ?></td>
+                    <td><?= $this->Number->format($professor->mestradoanoconclusao) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Doutoradoanoconclusao') ?></th>
-                    <td><?= $this->Number->format($docente->doutoradoanoconclusao) ?></td>
+                    <td><?= $this->Number->format($professor->doutoradoanoconclusao) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Datanascimento') ?></th>
-                    <td><?= h($docente->datanascimento) ?></td>
+                    <td><?= h($professor->datanascimento) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Atualizacaolattes') ?></th>
-                    <td><?= h($docente->atualizacaolattes) ?></td>
+                    <td><?= h($professor->atualizacaolattes) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Dataingresso') ?></th>
-                    <td><?= h($docente->dataingresso) ?></td>
+                    <td><?= h($professor->dataingresso) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Dataegresso') ?></th>
-                    <td><?= h($docente->dataegresso) ?></td>
+                    <td><?= h($professor->dataegresso) ?></td>
                 </tr>
             </table>
             <div class="text">
                 <strong><?= __('Observacoes') ?></strong>
                 <blockquote>
-                    <?= $this->Text->autoParagraph(h($docente->observacoes)); ?>
+                    <?= $this->Text->autoParagraph(h($professor->observacoes)); ?>
                 </blockquote>
             </div>
             <div class="related">
                 <h4><?= __('Related Estagiarios') ?></h4>
-                <?php if (!empty($docente->estagiarios)) : ?>
+                <?php if (!empty($professor->estagiarios)) : ?>
                 <div class="table-responsive">
                     <table>
                         <tr>
@@ -181,7 +181,7 @@
                             <th><?= __('Tc Solicitacao') ?></th>
                             <th><?= __('Instituicaoestagio Id') ?></th>
                             <th><?= __('Supervisor Id') ?></th>
-                            <th><?= __('Docente Id') ?></th>
+                            <th><?= __('Professor Id') ?></th>
                             <th><?= __('Periodo') ?></th>
                             <th><?= __('Areaestagio Id') ?></th>
                             <th><?= __('Nota') ?></th>
@@ -189,7 +189,7 @@
                             <th><?= __('Observacoes') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($docente->estagiarios as $estagiarios) : ?>
+                        <?php foreach ($professor->estagiarios as $estagiarios) : ?>
                         <tr>
                             <td><?= h($estagiarios->id) ?></td>
                             <td><?= h($estagiarios->aluno_id) ?></td>
@@ -201,7 +201,7 @@
                             <td><?= h($estagiarios->tc_solicitacao) ?></td>
                             <td><?= h($estagiarios->instituicaoestagio_id) ?></td>
                             <td><?= h($estagiarios->supervisor_id) ?></td>
-                            <td><?= h($estagiarios->docente_id) ?></td>
+                            <td><?= h($estagiarios->professor_id) ?></td>
                             <td><?= h($estagiarios->periodo) ?></td>
                             <td><?= h($estagiarios->areaestagio_id) ?></td>
                             <td><?= h($estagiarios->nota) ?></td>
@@ -220,7 +220,7 @@
             </div>
             <div class="related">
                 <h4><?= __('Related Muralestagios') ?></h4>
-                <?php if (!empty($docente->muralestagios)) : ?>
+                <?php if (!empty($professor->muralestagios)) : ?>
                 <div class="table-responsive">
                     <table>
                         <tr>
@@ -235,7 +235,7 @@
                             <th><?= __('Requisitos') ?></th>
                             <th><?= __('Areaestagio Id') ?></th>
                             <th><?= __('Horario') ?></th>
-                            <th><?= __('Docente Id') ?></th>
+                            <th><?= __('Professor Id') ?></th>
                             <th><?= __('DataSelecao') ?></th>
                             <th><?= __('DataInscricao') ?></th>
                             <th><?= __('HorarioSelecao') ?></th>
@@ -249,7 +249,7 @@
                             <th><?= __('Email') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($docente->muralestagios as $muralestagios) : ?>
+                        <?php foreach ($professor->muralestagios as $muralestagios) : ?>
                         <tr>
                             <td><?= h($muralestagios->id) ?></td>
                             <td><?= h($muralestagios->instituicaoestagio_id) ?></td>
@@ -262,7 +262,7 @@
                             <td><?= h($muralestagios->requisitos) ?></td>
                             <td><?= h($muralestagios->areaestagio_id) ?></td>
                             <td><?= h($muralestagios->horario) ?></td>
-                            <td><?= h($muralestagios->docente_id) ?></td>
+                            <td><?= h($muralestagios->professor_id) ?></td>
                             <td><?= h($muralestagios->dataSelecao) ?></td>
                             <td><?= h($muralestagios->dataInscricao) ?></td>
                             <td><?= h($muralestagios->horarioSelecao) ?></td>
@@ -287,7 +287,7 @@
             </div>
             <div class="related">
                 <h4><?= __('Related Userestagios') ?></h4>
-                <?php if (!empty($docente->userestagios)) : ?>
+                <?php if (!empty($professor->userestagios)) : ?>
                 <div class="table-responsive">
                     <table>
                         <tr>
@@ -298,11 +298,11 @@
                             <th><?= __('Numero') ?></th>
                             <th><?= __('Aluno Id') ?></th>
                             <th><?= __('Supervisor Id') ?></th>
-                            <th><?= __('Docente Id') ?></th>
+                            <th><?= __('Professor Id') ?></th>
                             <th><?= __('Timestamp') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($docente->userestagios as $userestagios) : ?>
+                        <?php foreach ($professor->userestagios as $userestagios) : ?>
                         <tr>
                             <td><?= h($userestagios->id) ?></td>
                             <td><?= h($userestagios->email) ?></td>
@@ -311,7 +311,7 @@
                             <td><?= h($userestagios->numero) ?></td>
                             <td><?= h($userestagios->aluno_id) ?></td>
                             <td><?= h($userestagios->supervisor_id) ?></td>
-                            <td><?= h($userestagios->docente_id) ?></td>
+                            <td><?= h($userestagios->professor_id) ?></td>
                             <td><?= h($userestagios->timestamp) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Userestagios', 'action' => 'view', $userestagios->id]) ?>

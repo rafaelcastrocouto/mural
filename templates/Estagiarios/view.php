@@ -43,8 +43,8 @@
                     <td><?= $estagiario->has('supervisor') ? $this->Html->link($estagiario->supervisor->id, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Docente') ?></th>
-                    <td><?= $estagiario->has('docente') ? $this->Html->link($estagiario->docente->id, ['controller' => 'Docentes', 'action' => 'view', $estagiario->docente->id]) : '' ?></td>
+                    <th><?= __('Professor') ?></th>
+                    <td><?= $estagiario->has('professor') ? $this->Html->link($estagiario->professor->id, ['controller' => 'Professores', 'action' => 'view', $estagiario->professor->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Periodo') ?></th>

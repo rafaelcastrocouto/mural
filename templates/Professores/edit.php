@@ -1,21 +1,26 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Docente $docente
+ * @var \App\Model\Entity\Professor $professor
  */
 ?>
 <div class="row">
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Docentes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(
+                __('Delete'),
+                ['action' => 'delete', $professor->id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $professor->id), 'class' => 'side-nav-item']
+            ) ?>
+            <?= $this->Html->link(__('Listar Professores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
-        <div class="docentes form content">
-            <?= $this->Form->create($docente) ?>
+        <div class="professores form content">
+            <?= $this->Form->create($professor) ?>
             <fieldset>
-                <legend><?= __('Add Docente') ?></legend>
+                <legend><?= __('Editar Professor') ?></legend>
                 <?php
                     echo $this->Form->control('nome');
                     echo $this->Form->control('cpf');

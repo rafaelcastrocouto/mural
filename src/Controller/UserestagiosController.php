@@ -19,7 +19,7 @@ class UserestagiosController extends AppController {
      */
     public function index() {
         $this->paginate = [
-            'contain' => ['Alunos', 'Supervisores', 'Docentes'],
+            'contain' => ['Alunos', 'Supervisores', 'Professores'],
         ];
         $userestagios = $this->paginate($this->Userestagios);
 
@@ -35,7 +35,7 @@ class UserestagiosController extends AppController {
      */
     public function view($id = null) {
         $userestagio = $this->Userestagios->get($id, [
-            'contain' => ['Alunos', 'Supervisores', 'Docentes'],
+            'contain' => ['Alunos', 'Supervisores', 'Professores'],
         ]);
 
         $this->set(compact('userestagio'));
@@ -59,8 +59,8 @@ class UserestagiosController extends AppController {
         }
         $alunos = $this->Userestagios->Alunos->find('list', ['limit' => 200]);
         $supervisores = $this->Userestagios->Supervisores->find('list', ['limit' => 200]);
-        $docentes = $this->Userestagios->Docentes->find('list', ['limit' => 200]);
-        $this->set(compact('userestagio', 'alunos', 'supervisores', 'docentes'));
+        $professores = $this->Userestagios->Professores->find('list', ['limit' => 200]);
+        $this->set(compact('userestagio', 'alunos', 'supervisores', 'professores'));
     }
 
     /**
@@ -85,8 +85,8 @@ class UserestagiosController extends AppController {
         }
         $alunos = $this->Userestagios->Alunos->find('list', ['limit' => 200]);
         $supervisores = $this->Userestagios->Supervisores->find('list', ['limit' => 200]);
-        $docentes = $this->Userestagios->Docentes->find('list', ['limit' => 200]);
-        $this->set(compact('userestagio', 'alunos', 'supervisores', 'docentes'));
+        $professores = $this->Userestagios->Professores->find('list', ['limit' => 200]);
+        $this->set(compact('userestagio', 'alunos', 'supervisores', 'professores'));
     }
 
     /**
@@ -141,14 +141,14 @@ class UserestagiosController extends AppController {
             if ($c_user->categoria == 3) {
                 // pr($c_user->numero);
                 // die();
-                $this->loadModel('Docentes');
-                $docente = $this->Docentes->find()
+                $this->loadModel('Professores');
+                $professor = $this->Professores->find()
                         ->contain([])
-                        ->where(['docentes.siape' => $c_user->numero]);
-                // pr($docente);
-                // pr($docente->first()->siape);
-                $c_user->docente_id = $docente->first()->id;
-                // pr($c_user->docente_id);
+                        ->where(['professores.siape' => $c_user->numero]);
+                // pr($professor);
+                // pr($professor->first()->siape);
+                $c_user->professor_id = $professor->first()->id;
+                // pr($c_user->professor_id);
                 // pr($c_user->id);
                 // die();
                 if ($this->Userestagios->save($c_user)) {
@@ -158,9 +158,9 @@ class UserestagiosController extends AppController {
                     echo "Erro!" . "<br>";
                     $this->Flash->error(__('The userestagio could not be saved. Please, try again.'));
                 };
-                // die('if docentes');
+                // die('if professores');
             }
-            // die('Docentes');
+            // die('Professores');
             // Supervisores
             if ($c_user->categoria == 4) {
                 // pr($c_user->numero);
@@ -169,10 +169,10 @@ class UserestagiosController extends AppController {
                 $supervisor = $this->Supervisores->find()
                         ->contain([])
                         ->where(['supervisores.cress' => $c_user->numero]);
-                // pr($docente);
-                // pr($docente->first()->siape);
+                // pr($professor);
+                // pr($professor->first()->siape);
                 $c_user->supervisor_id = $supervisor->first()->id;
-                // pr($c_user->docente_id);
+                // pr($c_user->professor_id);
                 // pr($c_user->id);
                 // die();
                 if ($this->Userestagios->save($c_user)) {
@@ -182,9 +182,9 @@ class UserestagiosController extends AppController {
                     echo "Erro!" . "<br>";
                     $this->Flash->error(__('The userestagio could not be saved. Please, try again.'));
                 };
-                // die('if docentes');
+                // die('if professores');
             }
-            // die('Docentes');
+            // die('Professores');
         }
         // pr($user);
         die();

@@ -27,7 +27,7 @@
                     echo $this->Form->control('requisitos');
                     echo $this->Form->control('areaestagio_id', ['options' => $areaestagios]);
                     echo $this->Form->control('horario');
-                    echo $this->Form->control('docente_id', ['options' => $docentes]);
+                    echo $this->Form->control('professor_id', ['options' => $professores]);
                     echo $this->Form->control('dataSelecao', ['empty' => true]);
                     echo $this->Form->control('dataInscricao', ['empty' => true]);
                     echo $this->Form->control('horarioSelecao');

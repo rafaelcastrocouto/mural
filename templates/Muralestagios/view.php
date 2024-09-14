@@ -26,7 +26,7 @@
             <table>
                 <tr>
                     <th><?= __('Instituicao') ?></th>
-                    <td><?= $muralestagio->has('instituicaoestagio') ? $this->Html->link($muralestagio->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $muralestagio->instituicaoestagio]) : '' ?></td>
+                    <td><?= $muralestagio->has('instituicaoestagio') ? $this->Html->link($muralestagio->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $muralestagio->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Convenio') ?></th>
@@ -60,7 +60,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Areaestagio') ?></th>
-                    <td><?= $muralestagio->has('areaestagio') ? $this->Html->link($muralestagio->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $muralestagio->areaestagio]) : '' ?></td>
+                    <td><?= $muralestagio->has('areaestagio') ? $this->Html->link($muralestagio->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $muralestagio->areaestagio->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Horario') ?></th>
@@ -79,8 +79,8 @@
 					</td>
                 </tr>
                 <tr>
-                    <th><?= __('Docente') ?></th>
-                    <td><?= $muralestagio->has('docente') ? $this->Html->link($muralestagio->docente ? $muralestagio->docente->nome : '', ['controller' => 'Docentes', 'action' => 'view', $muralestagio->docente]) : '' ?></td>
+                    <th><?= __('Professor') ?></th>
+                    <td><?= $muralestagio->professor ? $this->Html->link('' . $muralestagio->professor->nome, ['controller' => 'Professores', 'action' => 'view', $muralestagio->id_professor]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('HorarioSelecao') ?></th>
@@ -175,7 +175,7 @@
                             <?php // pr($muralinscricoes) ?>
                             <td><?= h($muralinscricoes->id) ?></td>
                             <td><?= h($muralinscricoes->id_aluno) ?></td>
-                            <td><?= $this->Html->link($muralinscricoes->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $muralinscricoes->alunonovo_id]); ?></td>
+                            <td><?= $this->Html->link('' . $muralinscricoes->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $muralinscricoes->alunonovo_id]); ?></td>
                             <td><?= h($muralinscricoes->id_instituicao) ?></td>
                             <td><?= h($muralinscricoes->data) ?></td>
                             <td><?= h($muralinscricoes->periodo) ?></td>

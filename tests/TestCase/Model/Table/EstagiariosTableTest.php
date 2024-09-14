@@ -28,7 +28,7 @@ class EstagiariosTableTest extends TestCase
         'app.Alunos',
         'app.Instituicaoestagios',
         'app.Supervisores',
-        'app.Docentes',
+        'app.Professores',
         'app.Areaestagios',
     ];
 

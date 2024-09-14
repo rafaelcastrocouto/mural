@@ -53,11 +53,11 @@ class MuralestagiosController extends AppController {
         // die();
         /*
         $muralestagio = $this->Muralestagios->get($id, [
-            'contain' => ['Instituicaoestagios', 'Areaestagios', 'Docentes', 'Muralinscricoes'],
+            'contain' => ['Instituicaoestagios', 'Areaestagios', 'Professores', 'Muralinscricoes'],
         ]);
          */
         $muralestagio = $this->Muralestagios->get($id, [
-            'contain' => ['Instituicaoestagios', 'Areaestagios', 'Docentes', 'Muralinscricoes' => ['Alunos']],
+            'contain' => ['Instituicaoestagios', 'Areaestagios', 'Professores', 'Muralinscricoes' => ['Alunos']],
         ]);
         // pr($muralestagio);
         // die();
@@ -82,8 +82,8 @@ class MuralestagiosController extends AppController {
         }
         $instituicaoestagios = $this->Muralestagios->Instituicaoestagios->find('list', ['limit' => 200]);
         $areaestagios = $this->Muralestagios->Areaestagios->find('list', ['limit' => 200]);
-        $docentes = $this->Muralestagios->Docentes->find('list', ['limit' => 200]);
-        $this->set(compact('muralestagio', 'instituicaoestagios', 'areaestagios', 'docentes'));
+        $professores = $this->Muralestagios->Professores->find('list', ['limit' => 200]);
+        $this->set(compact('muralestagio', 'instituicaoestagios', 'areaestagios', 'professores'));
     }
 
     /**
@@ -109,8 +109,8 @@ class MuralestagiosController extends AppController {
         }
         $instituicaoestagios = $this->Muralestagios->Instituicaoestagios->find('list');
         $areaestagios = $this->Muralestagios->Areaestagios->find('list', ['limit' => 200]);
-        $docentes = $this->Muralestagios->Docentes->find('list', ['limit' => 500]);
-        $this->set(compact('muralestagio', 'instituicaoestagios', 'areaestagios', 'docentes'));
+        $professores = $this->Muralestagios->Professores->find('list', ['limit' => 500]);
+        $this->set(compact('muralestagio', 'instituicaoestagios', 'areaestagios', 'professores'));
     }
 
     /**

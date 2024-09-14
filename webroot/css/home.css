@@ -1,4 +1,5 @@
 /* Home page styles */
+body {font-size: 14px;}
 header {
     margin-bottom: 60px;
 }
@@ -6,7 +7,11 @@ img {
     margin-bottom: 30px;
 }
 h1 {
+    font-size: 14px;
     font-weight: bold;
+}
+h2 {
+    font-size: 14px;
 }
 ul {
     list-style-type: none;

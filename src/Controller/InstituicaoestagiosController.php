@@ -33,7 +33,7 @@ class InstituicaoestagiosController extends AppController
     public function view($id = null)
     {
         $instituicaoestagio = $this->Instituicaoestagios->get($id, [
-            'contain' => ['Areainstituicoes', 'Supervisores', 'Estagiarios' => ['Alunos', 'Instituicaoestagios', 'Docentes', 'Supervisores'], 'Muralestagios', 'Visitas'],
+            'contain' => ['Areainstituicoes', 'Supervisores', 'Estagiarios' => ['Alunos', 'Instituicaoestagios', 'Professores', 'Supervisores'], 'Muralestagios', 'Visitas'],
         ]);
 
         $this->set(compact('instituicaoestagio'));

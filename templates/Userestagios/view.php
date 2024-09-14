@@ -39,8 +39,8 @@
                     <td><?= $userestagio->has('supervisor') ? $this->Html->link($userestagio->supervisor->id, ['controller' => 'Supervisores', 'action' => 'view', $userestagio->supervisor->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Docente') ?></th>
-                    <td><?= $userestagio->has('docente') ? $this->Html->link($userestagio->docente->id, ['controller' => 'Docentes', 'action' => 'view', $userestagio->docente->id]) : '' ?></td>
+                    <th><?= __('Professor') ?></th>
+                    <td><?= $userestagio->has('professor') ? $this->Html->link($userestagio->professor->id, ['controller' => 'Professor', 'action' => 'view', $userestagio->professor->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>

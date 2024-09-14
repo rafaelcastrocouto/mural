@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace App\Controller;
 
 /**
- * Docentes Controller
+ * Professores Controller
  *
- * @property \App\Model\Table\DocentesTable $Docentes
- * @method \App\Model\Entity\Docente[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @property \App\Model\Table\ProfessoresTable $Professores
+ * @method \App\Model\Entity\Professor[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class DocentesController extends AppController
+class ProfessoresController extends AppController
 {
     /**
      * Index method
@@ -18,25 +18,25 @@ class DocentesController extends AppController
      */
     public function index()
     {
-        $docentes = $this->paginate($this->Docentes);
+        $professores = $this->paginate($this->Professores);
 
-        $this->set(compact('docentes'));
+        $this->set(compact('professores'));
     }
 
     /**
      * View method
      *
-     * @param string|null $id Docente id.
+     * @param string|null $id Professor id.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
-        $docente = $this->Docentes->get($id, [
+        $professor = $this->Professores->get($id, [
             'contain' => ['Estagiarios', 'Muralestagios', 'Userestagios'],
         ]);
 
-        $this->set(compact('docente'));
+        $this->set(compact('professor'));
     }
 
     /**
@@ -46,58 +46,58 @@ class DocentesController extends AppController
      */
     public function add()
     {
-        $docente = $this->Docentes->newEmptyEntity();
+        $professor = $this->Professores->newEmptyEntity();
         if ($this->request->is('post')) {
-            $docente = $this->Docentes->patchEntity($docente, $this->request->getData());
-            if ($this->Docentes->save($docente)) {
-                $this->Flash->success(__('The docente has been saved.'));
+            $professor = $this->Professores->patchEntity($professor, $this->request->getData());
+            if ($this->Professores->save($professor)) {
+                $this->Flash->success(__('The professor has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The docente could not be saved. Please, try again.'));
+            $this->Flash->error(__('The professor could not be saved. Please, try again.'));
         }
-        $this->set(compact('docente'));
+        $this->set(compact('professor'));
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Docente id.
+     * @param string|null $id Professor id.
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
     {
-        $docente = $this->Docentes->get($id, [
+        $professor = $this->Professores->get($id, [
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $docente = $this->Docentes->patchEntity($docente, $this->request->getData());
-            if ($this->Docentes->save($docente)) {
-                $this->Flash->success(__('The docente has been saved.'));
+            $professor = $this->Professores->patchEntity($professor, $this->request->getData());
+            if ($this->Professores->save($professor)) {
+                $this->Flash->success(__('The professor has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The docente could not be saved. Please, try again.'));
+            $this->Flash->error(__('The professor could not be saved. Please, try again.'));
         }
-        $this->set(compact('docente'));
+        $this->set(compact('professor'));
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Docente id.
+     * @param string|null $id Professor id.
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $docente = $this->Docentes->get($id);
-        if ($this->Docentes->delete($docente)) {
-            $this->Flash->success(__('The docente has been deleted.'));
+        $professor = $this->Professores->get($id);
+        if ($this->Professores->delete($professor)) {
+            $this->Flash->success(__('The professor has been deleted.'));
         } else {
-            $this->Flash->error(__('The docente could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The professor could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

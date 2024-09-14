@@ -33,14 +33,6 @@ $cakeDescription = 'Mural de estágios da ESS/UFRJ';
         <?= $this->fetch('css') ?>
 
         <?= $this->fetch('script') ?>
-        <style>
-            a {color: #000; font-weight: 500; text-decoration: underline;}
-            a:hover {color: #003d4c; font-weight: 500; /* text-decoration: underline blue */}
-            body {font-size: 14px;}
-            h1 {font-size: 14px;}
-            h2 {font-size: 14px;}
-        </style>
-
     </head>
     <body>
         <?= $this->element('submenu_navegacao'); ?>
