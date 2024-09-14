@@ -6,9 +6,9 @@ namespace App\Test\Fixture;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
- * UserestagiosFixture
+ * UsersFixture
  */
-class UserestagiosFixture extends TestFixture
+class UsersFixture extends TestFixture
 {
     /**
      * Fields

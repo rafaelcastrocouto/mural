@@ -286,8 +286,8 @@
                 <?php endif; ?>
             </div>
             <div class="related">
-                <h4><?= __('Related Userestagios') ?></h4>
-                <?php if (!empty($professor->userestagios)) : ?>
+                <h4><?= __('Related Users') ?></h4>
+                <?php if (!empty($professor->users)) : ?>
                 <div class="table-responsive">
                     <table>
                         <tr>
@@ -302,21 +302,21 @@
                             <th><?= __('Timestamp') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($professor->userestagios as $userestagios) : ?>
+                        <?php foreach ($professor->users as $users) : ?>
                         <tr>
-                            <td><?= h($userestagios->id) ?></td>
-                            <td><?= h($userestagios->email) ?></td>
-                            <td><?= h($userestagios->password) ?></td>
-                            <td><?= h($userestagios->categoria) ?></td>
-                            <td><?= h($userestagios->numero) ?></td>
-                            <td><?= h($userestagios->aluno_id) ?></td>
-                            <td><?= h($userestagios->supervisor_id) ?></td>
-                            <td><?= h($userestagios->professor_id) ?></td>
-                            <td><?= h($userestagios->timestamp) ?></td>
+                            <td><?= h($users->id) ?></td>
+                            <td><?= h($users->email) ?></td>
+                            <td><?= h($users->password) ?></td>
+                            <td><?= h($users->categoria) ?></td>
+                            <td><?= h($users->numero) ?></td>
+                            <td><?= h($users->aluno_id) ?></td>
+                            <td><?= h($users->supervisor_id) ?></td>
+                            <td><?= h($users->professor_id) ?></td>
+                            <td><?= h($users->timestamp) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Userestagios', 'action' => 'view', $userestagios->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Userestagios', 'action' => 'edit', $userestagios->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Userestagios', 'action' => 'delete', $userestagios->id], ['confirm' => __('Are you sure you want to delete # {0}?', $userestagios->id)]) ?>
+                                <?= $this->Html->link(__('View'), ['controller' => 'Users', 'action' => 'view', $users->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Users', 'action' => 'edit', $users->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Users', 'action' => 'delete', $users->id], ['confirm' => __('Are you sure you want to delete # {0}?', $users->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

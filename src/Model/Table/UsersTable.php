@@ -9,27 +9,27 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Userestagios Model
+ * Users Model
  *
  * @property \App\Model\Table\AlunosTable&\Cake\ORM\Association\BelongsTo $Alunos
  * @property \App\Model\Table\SupervisoresTable&\Cake\ORM\Association\BelongsTo $Supervisores
  * @property \App\Model\Table\ProfessoresTable&\Cake\ORM\Association\BelongsTo $Professores
  *
- * @method \App\Model\Entity\Userestagio newEmptyEntity()
- * @method \App\Model\Entity\Userestagio newEntity(array $data, array $options = [])
- * @method \App\Model\Entity\Userestagio[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Userestagio get($primaryKey, $options = [])
- * @method \App\Model\Entity\Userestagio findOrCreate($search, ?callable $callback = null, $options = [])
- * @method \App\Model\Entity\Userestagio patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Userestagio[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\Userestagio|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Userestagio saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Userestagio[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Userestagio[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \App\Model\Entity\Userestagio[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Userestagio[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\User newEmptyEntity()
+ * @method \App\Model\Entity\User newEntity(array $data, array $options = [])
+ * @method \App\Model\Entity\User[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\User get($primaryKey, $options = [])
+ * @method \App\Model\Entity\User findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\User patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\User[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\User|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\User saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class UserestagiosTable extends Table
+class UsersTable extends Table
 {
     /**
      * Initialize method
@@ -42,10 +42,14 @@ class UserestagiosTable extends Table
         parent::initialize($config);
 
         $this->setTable('users');
-        $this->setAlias('userestagios');
+        $this->setAlias('users');
         $this->setDisplayField('email');
         $this->setPrimaryKey('id');
-
+        
+        $this->belongsTo('Categorias', [
+            'foreignKey' => 'categoria',
+        ]);
+        
         $this->belongsTo('Alunos', [
             'foreignKey' => 'id_aluno',
         ]);
@@ -55,10 +59,6 @@ class UserestagiosTable extends Table
         ]);
         $this->belongsTo('Professores', [
             'foreignKey' => 'id_professor',
-        ]);
-        
-        $this->belongsTo('Role', [
-            'foreignKey' => 'categoria',
         ]);
 
     }

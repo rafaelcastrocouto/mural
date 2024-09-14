@@ -205,6 +205,14 @@ input[type='color'] {
     max-width: 4rem;
     padding: 0.3rem .5rem 0.3rem;
 }
+input[type='date'] {
+    display: block;
+    max-width: 220px;
+}
+input[type='datetime-local'] {
+    display: block;
+    max-width: 450px;
+}
 
 /* Paginator */
 .paginator {

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Controller;
 
 /**
- * Userestagios Controller
+ * Users Controller
  *
- * @property \App\Model\Table\UserestagiosTable $Userestagios
- * @method \App\Model\Entity\Userestagio[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @property \App\Model\Table\UsersTable $Users
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class UserestagiosController extends AppController {
+class UsersController extends AppController {
 
     /**
      * Index method
@@ -18,27 +18,25 @@ class UserestagiosController extends AppController {
      * @return \Cake\Http\Response|null|void Renders view
      */
     public function index() {
-        $this->paginate = [
-            'contain' => ['Alunos', 'Supervisores', 'Professores'],
-        ];
-        $userestagios = $this->paginate($this->Userestagios);
-
-        $this->set(compact('userestagios'));
+        //$this->paginate = [
+        //    'contain' => ['Alunos', 'Supervisores', 'Professores'],
+        //];
+        $users = $this->paginate($this->Users);
+        $this->set(compact('users'));
     }
 
     /**
      * View method
      *
-     * @param string|null $id Userestagio id.
+     * @param string|null $id User id.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null) {
-        $userestagio = $this->Userestagios->get($id, [
+        $user = $this->Users->get($id, [
             'contain' => ['Alunos', 'Supervisores', 'Professores'],
         ]);
-
-        $this->set(compact('userestagio'));
+        $this->set(compact('user'));
     }
 
     /**
@@ -47,79 +45,81 @@ class UserestagiosController extends AppController {
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function add() {
-        $userestagio = $this->Userestagios->newEmptyEntity();
+        $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
-            $userestagio = $this->Userestagios->patchEntity($userestagio, $this->request->getData());
-            if ($this->Userestagios->save($userestagio)) {
-                $this->Flash->success(__('The userestagio has been saved.'));
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The userestagio could not be saved. Please, try again.'));
+            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $alunos = $this->Userestagios->Alunos->find('list', ['limit' => 200]);
-        $supervisores = $this->Userestagios->Supervisores->find('list', ['limit' => 200]);
-        $professores = $this->Userestagios->Professores->find('list', ['limit' => 200]);
-        $this->set(compact('userestagio', 'alunos', 'supervisores', 'professores'));
+        $categorias = $this->Users->Categorias->find('list', ['limit' => 200]);
+        $alunos = $this->Users->Alunos->find('list', ['limit' => 200]);
+        $supervisores = $this->Users->Supervisores->find('list', ['limit' => 200]);
+        $professores = $this->Users->Professores->find('list', ['limit' => 200]);
+        $this->set(compact('user', 'alunos', 'supervisores', 'professores', 'categorias'));
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Userestagio id.
+     * @param string|null $id User id.
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null) {
-        $userestagio = $this->Userestagios->get($id, [
+        $user = $this->Users->get($id, [
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $userestagio = $this->Userestagios->patchEntity($userestagio, $this->request->getData());
-            if ($this->Userestagios->save($userestagio)) {
-                $this->Flash->success(__('The userestagio has been saved.'));
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The userestagio could not be saved. Please, try again.'));
+            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $alunos = $this->Userestagios->Alunos->find('list', ['limit' => 200]);
-        $supervisores = $this->Userestagios->Supervisores->find('list', ['limit' => 200]);
-        $professores = $this->Userestagios->Professores->find('list', ['limit' => 200]);
-        $this->set(compact('userestagio', 'alunos', 'supervisores', 'professores'));
+        $categorias = $this->Users->Categorias->find('list', ['limit' => 200]);
+        $alunos = $this->Users->Alunos->find('list', ['limit' => 200]);
+        $supervisores = $this->Users->Supervisores->find('list', ['limit' => 200]);
+        $professores = $this->Users->Professores->find('list', ['limit' => 200]);
+        $this->set(compact('user', 'alunos', 'supervisores', 'professores', 'categorias'));
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Userestagio id.
+     * @param string|null $id User id.
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
-        $userestagio = $this->Userestagios->get($id);
-        if ($this->Userestagios->delete($userestagio)) {
-            $this->Flash->success(__('The userestagio has been deleted.'));
+        $user = $this->Users->get($id);
+        if ($this->Users->delete($user)) {
+            $this->Flash->success(__('The user has been deleted.'));
         } else {
-            $this->Flash->error(__('The userestagio could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
     }
 
     /*
-     * Preenche o id da tabela userestagios com os valores correspondentes
+     * Preenche o id da tabela users com os valores correspondentes
      */
     public function preencher() {
 
-        $user = $this->Userestagios->find('all');
+        $user = $this->Users->find('all');
         foreach ($user as $c_user) {
             // pr($c_user->categoria);
             if ($c_user->categoria == 2) {
                 // pr($c_user->numero);
                 $this->loadModel('Alunos');
-                aluno = $this->Alunos->find()
+                $aluno = $this->Alunos->find()
                         ->contain([])
                         ->where(['alunos.registro' => $c_user->numero]);
                 // pr($aluno);
@@ -127,12 +127,12 @@ class UserestagiosController extends AppController {
                 $c_user->aluno_id = $aluno->first()->id;
                 // pr($c_user->aluno_id);
                 // pr($c_user->id);
-                if ($this->Userestagios->save($c_user)) {
+                if ($this->Users->save($c_user)) {
                     // echo "Atualizado!" . "</br>";
-                    $this->Flash->success(__('The userestagio has been saved.'));
+                    $this->Flash->success(__('The user has been saved.'));
                 } else {
                     // echo "Erro!" . "<br>";
-                    $this->Flash->error(__('The userestagio could not be saved. Please, try again.'));
+                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
                 };
                 // die();
             }
@@ -151,12 +151,12 @@ class UserestagiosController extends AppController {
                 // pr($c_user->professor_id);
                 // pr($c_user->id);
                 // die();
-                if ($this->Userestagios->save($c_user)) {
+                if ($this->Users->save($c_user)) {
                     echo "Atualizado!" . "</br>";
-                    $this->Flash->success(__('The userestagio has been saved.'));
+                    $this->Flash->success(__('The user has been saved.'));
                 } else {
                     echo "Erro!" . "<br>";
-                    $this->Flash->error(__('The userestagio could not be saved. Please, try again.'));
+                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
                 };
                 // die('if professores');
             }
@@ -175,12 +175,12 @@ class UserestagiosController extends AppController {
                 // pr($c_user->professor_id);
                 // pr($c_user->id);
                 // die();
-                if ($this->Userestagios->save($c_user)) {
+                if ($this->Users->save($c_user)) {
                     echo "Atualizado!" . "</br>";
-                    $this->Flash->success(__('The userestagio has been saved.'));
+                    $this->Flash->success(__('The user has been saved.'));
                 } else {
                     echo "Erro!" . "<br>";
-                    $this->Flash->error(__('The userestagio could not be saved. Please, try again.'));
+                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
                 };
                 // die('if professores');
             }

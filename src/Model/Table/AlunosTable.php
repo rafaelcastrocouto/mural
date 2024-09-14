@@ -9,25 +9,25 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Estudantes Model
+ * Alunos Model
  *
  * @property \App\Model\Table\EstagiariosTable&\Cake\ORM\Association\HasMany $Estagiarios
  * @property \App\Model\Table\MuralinscricoesTable&\Cake\ORM\Association\HasMany $Muralinscricoes
- * @property \App\Model\Table\UserestagiosTable&\Cake\ORM\Association\HasMany $Userestagios
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\HasMany $Users
  *
- * @method \App\Model\Entity\Estudante newEmptyEntity()
- * @method \App\Model\Entity\Estudante newEntity(array $data, array $options = [])
- * @method \App\Model\Entity\Estudante[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Estudante get($primaryKey, $options = [])
- * @method \App\Model\Entity\Estudante findOrCreate($search, ?callable $callback = null, $options = [])
- * @method \App\Model\Entity\Estudante patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Estudante[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\Estudante|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Estudante saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Estudante[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Estudante[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \App\Model\Entity\Estudante[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Estudante[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Aluno newEmptyEntity()
+ * @method \App\Model\Entity\Aluno newEntity(array $data, array $options = [])
+ * @method \App\Model\Entity\Aluno[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Aluno get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Aluno findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Aluno patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Aluno[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Aluno|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Aluno saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Aluno[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Aluno[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Aluno[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Aluno[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
 class AlunosTable extends Table
 {
@@ -42,14 +42,14 @@ class AlunosTable extends Table
         parent::initialize($config);
 
         $this->setTable('alunos');
-        $this->setAlias('estudantes');
+        $this->setAlias('alunos');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
         
         $this->hasMany('Muralinscricoes', [
             'foreignKey' => 'alunonovo_id',
         ]);
-       $this->hasMany('Userestagios', [
+       $this->hasMany('Users', [
             'foreignKey' => 'alunonovo_id',
         ]);
         $this->hasMany('Estagiarios', [

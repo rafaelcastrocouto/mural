@@ -13,7 +13,7 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\EstagiariosTable&\Cake\ORM\Association\HasMany $Estagiarios
  * @property \App\Model\Table\MuralestagiosTable&\Cake\ORM\Association\HasMany $Muralestagios
- * @property \App\Model\Table\UserestagiosTable&\Cake\ORM\Association\HasMany $Userestagios
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\HasMany $Users
  *
  * @method \App\Model\Entity\Professor newEmptyEntity()
  * @method \App\Model\Entity\Professor newEntity(array $data, array $options = [])
@@ -52,11 +52,6 @@ class ProfessoresTable extends Table
         $this->hasMany('Muralestagios', [
             'foreignKey' => 'id_professor',
         ]);
-        /*
-        $this->hasMany('Userestagios', [
-            'foreignKey' => 'professor_id',
-        ]);
-        */
     }
 
     /**

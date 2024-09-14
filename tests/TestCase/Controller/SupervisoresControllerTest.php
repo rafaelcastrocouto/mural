@@ -24,7 +24,7 @@ class SupervisoresControllerTest extends TestCase
     protected $fixtures = [
         'app.Supervisores',
         'app.Estagiarios',
-        'app.Userestagios',
+        'app.Users',
         'app.Instituicaoestagios',
         'app.InstituicaoestagiosSupervisores',
     ];
