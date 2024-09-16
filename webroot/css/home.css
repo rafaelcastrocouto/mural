@@ -28,6 +28,9 @@ hr {
     margin-bottom: 35px;
 }
 
+.container {
+    margin: 1em;
+}
 .text-center {
     text-align: center;
 }

@@ -24,7 +24,8 @@
             </thead>
             <tbody>
                 <?php foreach ($users as $user): ?>
-                <tr> 
+                <tr>
+                    <!-- <p> <?= pr($user); ?> </p> -->
                     <td><?= $this->Number->format($user->id) ?></td>
                     <td><?= h($user->email) ?></td>
                     <td><?= h($user->categoria) ?></td>

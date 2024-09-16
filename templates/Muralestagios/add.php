@@ -5,17 +5,16 @@
  */
 ?>
 <div>
-    <aside>
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Muralestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column-responsive column-80">
         <div class="muralestagios form content">
+            <aside>
+                <div class="side-nav">
+                    <?= $this->Html->link(__('Listar Muralestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                </div>
+            </aside>
             <?= $this->Form->create($muralestagio) ?>
             <fieldset>
-                <legend><?= __('Add Muralestagio') ?></legend>
+                <legend><?= __('Adicionar Mural estagio') ?></legend>
                 <?php
                     echo $this->Form->control('instituicaoestagio_id', ['options' => $instituicaoestagios, 'empty' => true]);
                     echo $this->Form->control('instituicao');

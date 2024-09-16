@@ -46,9 +46,6 @@ class MuralinscricoesTable extends Table {
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Alunos', [
-            'foreignKey' => 'registro', 
-        ]);
-        $this->belongsTo('Alunos', [
             'foreignKey' => 'aluno_id',
         ]);
         $this->belongsTo('Muralestagios', [

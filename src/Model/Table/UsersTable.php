@@ -46,14 +46,13 @@ class UsersTable extends Table
         $this->setDisplayField('email');
         $this->setPrimaryKey('id');
         
-        $this->belongsTo('Categorias', [
+        $this->hasMany('Categorias', [
             'foreignKey' => 'categoria',
         ]);
         
         $this->belongsTo('Alunos', [
             'foreignKey' => 'id_aluno',
         ]);
-        
         $this->belongsTo('Supervisores', [
             'foreignKey' => 'id_supervisor',
         ]);

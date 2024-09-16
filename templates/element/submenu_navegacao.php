@@ -55,7 +55,7 @@
                     <a style='color: white' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administração</a>
                     <div class="dropdown-menu">
                         <?php echo $this->Html->link('Configuração', '/Configuracaos/view/1', ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
-                        <?php echo $this->Html->link('Usuários', '/Users/listausuarios/', ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
+                        <?php echo $this->Html->link('Usuários', '/Users', ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                         <?php echo $this->Html->link('Planilha seguro', '/Alunos/planilhaseguro/', ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                         <?php echo $this->Html->link('Planilha CRESS', '/Alunos/planilhacress/', ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>
                         <?php echo $this->Html->link('Carga horária', '/Alunos/cargahoraria/', ['class' => 'dropdown-item', 'style' => 'background-color: #2b6c9c; color: white']); ?>

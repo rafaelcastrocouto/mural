@@ -45,7 +45,7 @@ class Application extends BaseApplication
      */
     public function bootstrap(): void
     {
-        $this->addPlugin('DebugKit');
+        // $this->addPlugin('DebugKit');
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();
@@ -105,6 +105,6 @@ class Application extends BaseApplication
      */
     public function services(ContainerInterface $container): void
     {
-        $this->addPlugin('DebugKit');
+        // $this->addPlugin('DebugKit');
     }
 }

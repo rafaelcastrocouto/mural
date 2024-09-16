@@ -34,6 +34,7 @@
             <tbody>
                 <?php foreach ($alunos as $aluno): ?>
                 <tr>
+                    <!-- <p> <?= pr($aluno); ?> </p> -->
                     <td><?= $this->Number->format($aluno->id) ?></td>
                     <td><?= h($aluno->nome) ?></td>
                     <td><?= $this->Number->format($aluno->registro) ?></td>
