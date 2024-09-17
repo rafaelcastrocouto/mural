@@ -19,9 +19,9 @@ class UsersController extends AppController {
      */
     public function index() {
         //$this->paginate = [
-        //    'contain' => ['Alunos', 'Supervisores', 'Professores'],
+        //    'contain' => ['Categorias'/*'Alunos', 'Supervisores', 'Professores'*/],
         //];
-        $users = $this->paginate($this->Users);
+        $users = $this->paginate($this->Users->find()->contain('Categorias'));
         $this->set(compact('users'));
     }
 
@@ -34,7 +34,7 @@ class UsersController extends AppController {
      */
     public function view($id = null) {
         $user = $this->Users->get($id, [
-            'contain' => ['Alunos', 'Supervisores', 'Professores'],
+            'contain' => ['Categorias'/*'Alunos', 'Supervisores', 'Professores'*/],
         ]);
         $this->set(compact('user'));
     }
@@ -55,11 +55,10 @@ class UsersController extends AppController {
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $categorias = $this->Users->Categorias->find('list', ['limit' => 200]);
         $alunos = $this->Users->Alunos->find('list', ['limit' => 200]);
         $supervisores = $this->Users->Supervisores->find('list', ['limit' => 200]);
         $professores = $this->Users->Professores->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'alunos', 'supervisores', 'professores', 'categorias'));
+        $this->set(compact('user', 'alunos', 'supervisores', 'professores'));
     }
 
     /**
@@ -82,11 +81,10 @@ class UsersController extends AppController {
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $categorias = $this->Users->Categorias->find('list', ['limit' => 200]);
         $alunos = $this->Users->Alunos->find('list', ['limit' => 200]);
         $supervisores = $this->Users->Supervisores->find('list', ['limit' => 200]);
         $professores = $this->Users->Professores->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'alunos', 'supervisores', 'professores', 'categorias'));
+        $this->set(compact('user', 'alunos', 'supervisores', 'professores'));
     }
 
     /**
@@ -116,7 +114,7 @@ class UsersController extends AppController {
         $user = $this->Users->find('all');
         foreach ($user as $c_user) {
             // pr($c_user->categoria);
-            if ($c_user->categoria == 2) {
+            if ($c_user->categoria_id == 2) {
                 // pr($c_user->numero);
                 $this->loadModel('Alunos');
                 $aluno = $this->Alunos->find()
@@ -138,7 +136,7 @@ class UsersController extends AppController {
             }
             // die('Alunos');
             // Professores
-            if ($c_user->categoria == 3) {
+            if ($c_user->categoria_id == 3) {
                 // pr($c_user->numero);
                 // die();
                 $this->loadModel('Professores');
@@ -162,7 +160,7 @@ class UsersController extends AppController {
             }
             // die('Professores');
             // Supervisores
-            if ($c_user->categoria == 4) {
+            if ($c_user->categoria_id == 4) {
                 // pr($c_user->numero);
                 // die();
                 $this->loadModel('Supervisores');

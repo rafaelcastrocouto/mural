@@ -38,7 +38,6 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenDate|null $dataingresso
  * @property string|null $formaingresso
  * @property string|null $tipocargo
- * @property string|null $categoria
  * @property string|null $regimetrabalho
  * @property string|null $departamento
  * @property \Cake\I18n\FrozenDate|null $dataegresso
@@ -90,7 +89,6 @@ class Professor extends Entity
         'dataingresso' => true,
         'formaingresso' => true,
         'tipocargo' => true,
-        'categoria' => true,
         'regimetrabalho' => true,
         'departamento' => true,
         'dataegresso' => true,

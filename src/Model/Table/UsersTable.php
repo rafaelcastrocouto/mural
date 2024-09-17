@@ -46,10 +46,10 @@ class UsersTable extends Table
         $this->setDisplayField('email');
         $this->setPrimaryKey('id');
         
-        $this->hasMany('Categorias', [
-            'foreignKey' => 'categoria',
+        $this->belongsTo('Categorias', [
+            'foreignKey' => 'categoria_id'
         ]);
-        
+        /*
         $this->belongsTo('Alunos', [
             'foreignKey' => 'id_aluno',
         ]);
@@ -59,7 +59,7 @@ class UsersTable extends Table
         $this->belongsTo('Professores', [
             'foreignKey' => 'id_professor',
         ]);
-
+*/
     }
 
     /**
@@ -84,8 +84,8 @@ class UsersTable extends Table
             ->allowEmptyString('password');
 
         $validator
-            ->scalar('categoria')
-            ->notEmptyString('categoria');
+            ->scalar('categoria_id')
+            ->notEmptyString('categoria_id');
 
         $validator
             ->integer('numero')

@@ -27,7 +27,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Categoria') ?></th>
-                    <td><?= h($user->categoria) ?></td>
+                    <td><?= h($user->categoria->categoria); ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Aluno') ?></th>

@@ -23,7 +23,7 @@
 <?php
 // $this->request->getSession()->write('id_categoria', 1);
 $session = $this->request->getSession();
-$session->write('id_categoria', 1);
+//$session->write('id_categoria', 1);
 // echo $this->request->getSession()->read('id_categoria');
 // die();
 ?>

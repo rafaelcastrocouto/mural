@@ -28,7 +28,7 @@
                     <!-- <p> <?= pr($user); ?> </p> -->
                     <td><?= $this->Number->format($user->id) ?></td>
                     <td><?= h($user->email) ?></td>
-                    <td><?= h($user->categoria) ?></td>
+                    <td><?= h($user->categoria->categoria) ?></td>
                     <td><?= $this->Number->format($user->numero) ?></td>
                     <td><?= $user->has('aluno') ? $this->Html->link($user->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $user->aluno->id]) : '' ?></td>
                     <td><?= $user->has('supervisor') ? $this->Html->link($user->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $user->supervisor->id]) : '' ?></td>

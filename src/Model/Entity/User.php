@@ -11,7 +11,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string|null $email
  * @property string|null $password
- * @property string $categoria
+ * @property string $categoria_id
  * @property int $numero
  * @property int|null $aluno_id
  * @property int|null $supervisor_id
@@ -36,7 +36,7 @@ class Userestagio extends Entity
     protected array $_accessible = [
         'email' => true,
         'password' => true,
-        'categoria' => true,
+        'categoria_id' => true,
         'numero' => true,
         'timestamp' => true,
     ];
