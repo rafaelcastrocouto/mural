@@ -20,8 +20,6 @@
             <?= $this->Form->create($user) ?>
             <fieldset>
                 <legend><?= __('Editando User') ?></legend>
-                
-                <!-- <p> <?= pr($user); ?> </p> -->
                 <?php
                     echo $this->Form->control('email', ['type' => 'email']);
                     echo $this->Form->control('password');
@@ -30,7 +28,7 @@
                     echo $this->Form->control('aluno_id', ['type' => 'text', 'value' => $user->aluno_id]);
                     echo $this->Form->control('supervisor_id', ['type' => 'text', 'value' => $user->supervisor_id]);
                     echo $this->Form->control('professor_id', ['type' => 'text', 'value' => $user->professor_id]);
-                    echo $this->Form->control('data');
+                    echo $this->Form->control('data', ['type' => 'datetime-local', 'value' => $user->data ? $user->data->format('Y-m-d\TH:i') : '']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Editar')) ?>

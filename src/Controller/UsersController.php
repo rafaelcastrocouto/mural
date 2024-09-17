@@ -55,10 +55,8 @@ class UsersController extends AppController {
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $alunos = $this->Users->Alunos->find('list', ['limit' => 200]);
-        $supervisores = $this->Users->Supervisores->find('list', ['limit' => 200]);
-        $professores = $this->Users->Professores->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'alunos', 'supervisores', 'professores'));
+        $categorias = $this->Users->Categorias->find('list');
+        $this->set(compact('user', 'categorias'));
     }
 
     /**

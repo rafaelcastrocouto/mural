@@ -18,12 +18,12 @@
                 <?php
                     echo $this->Form->control('email');
                     echo $this->Form->control('password');
-                    echo $this->Form->control('categoria', ['options' => $categorias, 'empty' => true, 'class' => 'form-control']);
+                    echo $this->Form->control('categoria', ['options' => $categorias, 'value' => '2', 'class' => 'form-control']);
                     echo $this->Form->control('numero');
-                    echo $this->Form->control('aluno_id', ['options' => $alunos, 'empty' => true, 'class' => 'form-control']);
-                    echo $this->Form->control('supervisor_id', ['options' => $supervisores, 'empty' => true, 'class' => 'form-control']);
-                    echo $this->Form->control('professor_id', ['options' => $professores, 'empty' => true, 'class' => 'form-control']);
-                    echo $this->Form->control('timestamp');
+                    echo $this->Form->control('aluno_id', ['type' => 'text']);
+                    echo $this->Form->control('supervisor_id', ['type' => 'text']);
+                    echo $this->Form->control('professor_id', ['type' => 'text']);
+                    echo $this->Form->control('data', ['type' => 'datetime-local']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Adicionar')) ?>

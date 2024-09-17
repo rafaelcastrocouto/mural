@@ -16,7 +16,6 @@
                 </div>
             </aside>
             <h3><?= $user->aluno ? h($user->aluno->nome) : ($user->professor ? h($user->professor->nome) : ($user->supervisor ? h($user->supervisor->nome) : $user->id)) ?></h3>
-            <!-- <p> <?= pr($user); ?> </p> -->
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
