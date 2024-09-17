@@ -12,11 +12,11 @@ use Cake\ORM\Entity;
  * @property string|null $email
  * @property string|null $password
  * @property string $categoria_id
- * @property int $numero
+ * @property int $registro
  * @property int|null $aluno_id
  * @property int|null $supervisor_id
  * @property int|null $professor_id
- * @property \Cake\I18n\FrozenTime $timestamp
+ * @property \Cake\I18n\FrozenTime $data
  *
  * @property \App\Model\Entity\Aluno $aluno
  * @property \App\Model\Entity\Supervisor $supervisor
@@ -37,8 +37,8 @@ class Userestagio extends Entity
         'email' => true,
         'password' => true,
         'categoria_id' => true,
-        'numero' => true,
-        'timestamp' => true,
+        'registro' => true,
+        'data' => true,
     ];
 
     /**

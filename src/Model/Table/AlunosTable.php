@@ -43,17 +43,17 @@ class AlunosTable extends Table
 
         $this->setTable('alunos');
         $this->setAlias('alunos');
-        $this->setDisplayField('id');
+        $this->setDisplayField('nome');
         $this->setPrimaryKey('id');
         
         $this->hasMany('Muralinscricoes', [
-            'foreignKey' => 'alunonovo_id',
+            'foreignKey' => 'aluno_id',
         ]);
        $this->hasMany('Users', [
-            'foreignKey' => 'alunonovo_id',
+            'foreignKey' => 'aluno_id',
         ]);
         $this->hasMany('Estagiarios', [
-            'foreignKey' => 'alunonovo_id',
+            'foreignKey' => 'aluno_id',
         ]);
 
     }

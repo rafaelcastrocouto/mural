@@ -27,7 +27,7 @@
                     <td><?= h($user->email) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Password') ?></th>
+                    <th><?= __('Senha') ?></th>
                     <td><?= h($user->password) ?></td>
                 </tr>
                 <tr>
@@ -47,12 +47,12 @@
                     <td><?= $user->professor ? $this->Html->link($user->professor->id, ['controller' => 'Professor', 'action' => 'view', $user->professor->id]) : '-' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Numero') ?></th>
-                    <td><?= $this->Number->format($user->numero) ?></td>
+                    <th><?= __('Registro') ?></th>
+                    <td><?= $this->Number->format($user->registro) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Timestamp') ?></th>
-                    <td><?= h($user->timestamp) ?></td>
+                    <th><?= __('Data') ?></th>
+                    <td><?= h($user->data) ?></td>
                 </tr>
             </table>
         </div>
