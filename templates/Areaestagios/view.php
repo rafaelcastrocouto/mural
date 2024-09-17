@@ -54,7 +54,7 @@
                         <?php foreach ($areaestagio->estagiarios as $estagiarios) : ?>
                         <tr>
                             <td><?= h($estagiarios->id) ?></td>
-                            <td><?= h($estagiarios->id_aluno) ?></td>
+                            <td><?= h($estagiarios->aluno_id) ?></td>
                             <td><?= $estagiarios->has('aluno') ? $this->Html->link(h($estagiarios->aluno->nome), ['controller' => 'alunos', 'action' => 'view', $estagiarios->alunonovo_id]) : '' ?></td>
                             <td><?= h($estagiarios->registro) ?></td>
                             <td><?= h($estagiarios->ajustecurricular2020) ?></td>
@@ -63,8 +63,8 @@
                             <td><?= h($estagiarios->tc) ?></td>
                             <td><?= h($estagiarios->tc_solicitacao) ?></td>
                             <td><?= $estagiarios->has('instituicaoestagio') ? $this->Html->link(h($estagiarios->instituicaoestagio->instituicao), ['controller' => 'instituicaoestagios', 'action' => 'view', $estagiarios->id_instituicao]) : '' ?></td>
-                            <td><?= $estagiarios->has('supervisor') ? $this->Html->link(h($estagiarios->supervisor->nome), ['controller' => 'supervisores', 'action' => 'view', $estagiarios->id_supervisor]) : '' ?></td>
-                            <td><?= $estagiarios->has('professor') ? $this->Html->link(h($estagiarios->professor->nome), ['controller' => 'professores',  'action' => 'view', $estagiarios->id_professor]) : '' ?></td>
+                            <td><?= $estagiarios->has('supervisor') ? $this->Html->link(h($estagiarios->supervisor->nome), ['controller' => 'supervisores', 'action' => 'view', $estagiarios->supervisor_id]) : '' ?></td>
+                            <td><?= $estagiarios->has('professor') ? $this->Html->link(h($estagiarios->professor->nome), ['controller' => 'professores',  'action' => 'view', $estagiarios->professor_id]) : '' ?></td>
                             <td><?= h($estagiarios->periodo) ?></td>
                             <td><?= $estagiarios->has('areaestagio') ? $this->Html->link(h($estagiarios->areaestagio->area), ['controller' => 'areaestagios', 'action' => 'view', $estagiarios->id_area]) : '' ?></td>
                             <td><?= h($estagiarios->nota) ?></td>

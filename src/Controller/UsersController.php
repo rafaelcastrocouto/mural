@@ -21,7 +21,7 @@ class UsersController extends AppController {
         //$this->paginate = [
         //    'contain' => ['Categorias'/*'Alunos', 'Supervisores', 'Professores'*/],
         //];
-        $users = $this->paginate($this->Users->find()->contain('Categorias'));
+        $users = $this->paginate($this->Users->find()->contain(['Categorias', 'Alunos', 'Supervisores', 'Professores']));
         $this->set(compact('users'));
     }
 
@@ -34,7 +34,7 @@ class UsersController extends AppController {
      */
     public function view($id = null) {
         $user = $this->Users->get($id, [
-            'contain' => ['Categorias'/*'Alunos', 'Supervisores', 'Professores'*/],
+            'contain' => ['Categorias', 'Alunos', 'Supervisores', 'Professores'],
         ]);
         $this->set(compact('user'));
     }
@@ -81,10 +81,11 @@ class UsersController extends AppController {
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
+        $categorias = $this->Users->Categorias->find('list', ['limit' => 20]);
         $alunos = $this->Users->Alunos->find('list', ['limit' => 200]);
         $supervisores = $this->Users->Supervisores->find('list', ['limit' => 200]);
         $professores = $this->Users->Professores->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'alunos', 'supervisores', 'professores'));
+        $this->set(compact('user', 'alunos', 'supervisores', 'professores', 'categorias'));
     }
 
     /**

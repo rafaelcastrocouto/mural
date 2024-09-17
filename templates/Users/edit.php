@@ -23,7 +23,7 @@
                 <?php
                     echo $this->Form->control('email');
                     echo $this->Form->control('password');
-                    echo $this->Form->control('categoria', ['options' => $categorias, 'empty' => true, 'class' => 'form-control']);
+                    echo $this->Form->control('categoria', ['options' => $categorias, 'class' => 'form-control']);
                     echo $this->Form->control('numero');
                     echo $this->Form->control('aluno_id', ['options' => $alunos, 'empty' => true, 'class' => 'form-control']);
                     echo $this->Form->control('supervisor_id', ['options' => $supervisores, 'empty' => true, 'class' => 'form-control']);

@@ -55,17 +55,17 @@ class InstituicaoestagiosTable extends Table
             'foreignKey' => 'area',
         ]);        
         $this->hasMany('Estagiarios', [
-            'foreignKey' => 'id_instituicao',
+            'foreignKey' => 'instituicao_id',
         ]);
         $this->hasMany('Muralestagios', [
-            'foreignKey' => 'id_estagio',
+            'foreignKey' => 'estagio_id',
         ]);
         $this->hasMany('Visitas', [
             'foreignKey' => 'estagio_id',
         ]);
         $this->belongsToMany('Supervisores', [
-            'foreignKey' => 'id_instituicao',
-            'targetForeignKey' => 'id_supervisor',
+            'foreignKey' => 'instituicao_id',
+            'targetForeignKey' => 'supervisor_id',
             'joinTable' => 'inst_super',
         ]);
     }

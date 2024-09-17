@@ -47,10 +47,10 @@ class ProfessoresTable extends Table
         $this->setPrimaryKey('id');
 
         $this->hasMany('Estagiarios', [
-            'foreignKey' => 'id_professor',
+            'foreignKey' => 'professor_id',
         ]);
         $this->hasMany('Muralestagios', [
-            'foreignKey' => 'id_professor',
+            'foreignKey' => 'professor_id',
         ]);
     }
 

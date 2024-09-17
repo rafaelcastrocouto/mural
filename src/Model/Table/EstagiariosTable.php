@@ -49,21 +49,21 @@ class EstagiariosTable extends Table
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Alunos', [
-            'foreignKey' => 'id_aluno',
+            'foreignKey' => 'aluno_id',
             'joinType' => 'INNER',
         ]);
         $this->belongsTo('Instituicaoestagios', [
-            'foreignKey' => 'id_instituicao',
+            'foreignKey' => 'instituicao_id',
             'joinType' => 'INNER',
         ]);
         $this->belongsTo('Supervisores', [
-            'foreignKey' => 'id_supervisor',
+            'foreignKey' => 'supervisor_id',
         ]);
         $this->belongsTo('Professores', [
-            'foreignKey' => 'id_professor',
+            'foreignKey' => 'professor_id',
         ]);
         $this->belongsTo('Areaestagios', [
-            'foreignKey' => 'id_area',
+            'foreignKey' => 'area_id',
         ]);
     }
 

@@ -61,7 +61,7 @@ class Muralestagio extends Entity
         'requisitos' => true,
         'id_area' => true,
         'horario' => true,
-        'id_professor' => true,
+        'professor_id' => true,
         'dataSelecao' => true,
         'dataInscricao' => true,
         'horarioSelecao' => true,

@@ -43,7 +43,7 @@ class Estagiario extends Entity
      * @var array
      */
     protected array $_accessible = [
-        'id_aluno' => true,
+        'aluno_id' => true,
         'alunonovo_id' => true,
         'registro' => true,
         'ajustecurricular2020' => true,
@@ -51,11 +51,11 @@ class Estagiario extends Entity
         'nivel' => true,
         'tc' => true,
         'tc_solicitacao' => true,
-        'id_instituicao' => true,
-        'id_supervisor' => true,
-        'id_professor' => true,
+        'instituicao_id' => true,
+        'supervisor_id' => true,
+        'professor_id' => true,
         'periodo' => true,
-        'id_area' => true,
+        'area_id' => true,
         'nota' => true,
         'ch' => true,
         'observacoes' => true,

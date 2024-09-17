@@ -80,7 +80,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Professor') ?></th>
-                    <td><?= $muralestagio->professor ? $this->Html->link('' . $muralestagio->professor->nome, ['controller' => 'Professores', 'action' => 'view', $muralestagio->id_professor]) : '' ?></td>
+                    <td><?= $muralestagio->professor ? $this->Html->link('' . $muralestagio->professor->nome, ['controller' => 'Professores', 'action' => 'view', $muralestagio->professor_id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('HorarioSelecao') ?></th>
@@ -174,7 +174,7 @@
                         <tr>
                             <?php // pr($muralinscricoes) ?>
                             <td><?= h($muralinscricoes->id) ?></td>
-                            <td><?= h($muralinscricoes->id_aluno) ?></td>
+                            <td><?= h($muralinscricoes->aluno_id) ?></td>
                             <td><?= $this->Html->link('' . $muralinscricoes->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $muralinscricoes->alunonovo_id]); ?></td>
                             <td><?= h($muralinscricoes->id_instituicao) ?></td>
                             <td><?= h($muralinscricoes->data) ?></td>
