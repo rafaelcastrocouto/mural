@@ -4,18 +4,17 @@
  * @var \App\Model\Entity\Supervisor $supervisor
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Supervisores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
+<div>
     <div class="column-responsive column-80">
         <div class="supervisores form content">
+            <aside>
+                <div class="side-nav">
+                    <?= $this->Html->link(__('Listar Supervisores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                </div>
+            </aside>
             <?= $this->Form->create($supervisor) ?>
             <fieldset>
-                <legend><?= __('Add Supervisor') ?></legend>
+                <legend><?= __('Adicionar Supervisor') ?></legend>
                 <?php
                     echo $this->Form->control('nome');
                     echo $this->Form->control('cpf');
@@ -39,10 +38,10 @@
                     echo $this->Form->control('num_inscricao');
                     echo $this->Form->control('curso_turma');
                     echo $this->Form->control('observacoes');
-                    echo $this->Form->control('instituicoes._ids', ['options' => $instituicoess]);
+                    echo $this->Form->control('instituicoes._ids', ['options' => $instituicoes]);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Adicionar')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

@@ -4,23 +4,23 @@
  * @var \App\Model\Entity\Supervisor $supervisor
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $supervisor->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $supervisor->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Supervisores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
+<div>
     <div class="column-responsive column-80">
         <div class="supervisores form content">
+            <aside>
+                <div class="side-nav">
+                    <h4 class="heading"><?= __('Actions') ?></h4>
+                    <?= $this->Form->postLink(
+                        __('Deletar'),
+                        ['action' => 'delete', $supervisor->id],
+                        ['confirm' => __('Are you sure you want to delete # {0}?', $supervisor->id), 'class' => 'side-nav-item']
+                    ) ?>
+                    <?= $this->Html->link(__('Listar Supervisores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                </div>
+            </aside>
             <?= $this->Form->create($supervisor) ?>
             <fieldset>
-                <legend><?= __('Edit Supervisor') ?></legend>
+                <legend><?= __('Editar Supervisor') ?></legend>
                 <?php
                     echo $this->Form->control('nome');
                     echo $this->Form->control('cpf');
@@ -47,7 +47,7 @@
                     echo $this->Form->control('instituicoes._ids', ['options' => $instituicoes]);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Editar')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

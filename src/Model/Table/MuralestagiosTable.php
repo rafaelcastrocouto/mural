@@ -49,7 +49,7 @@ class MuralestagiosTable extends Table {
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Instituicoes', [
-            'foreignKey' => ['estagio_id'],
+            'foreignKey' => ['instituicao_id'],
         ]);
         $this->belongsTo('Areaestagios', [
             'foreignKey' => ['area_id'],

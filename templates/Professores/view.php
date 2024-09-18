@@ -4,19 +4,18 @@
  * @var \App\Model\Entity\Professor $professor
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Professor'), ['action' => 'edit', $professor->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Professor'), ['action' => 'delete', $professor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $professor->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Professores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Professor'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
+<div>
     <div class="column-responsive column-80">
         <div class="professores view content">
-            <h3><?= h($professor->id) ?></h3>
+            <aside>
+                <div class="side-nav">
+                    <?= $this->Html->link(__('Editar Professor'), ['action' => 'edit', $professor->id], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Form->postLink(__('Deletar Professor'), ['action' => 'delete', $professor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $professor->id), 'class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Listar Professores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Novo Professor'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                </div>
+            </aside>
+            <h3>professor_<?= h($professor->id) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Nome') ?></th>

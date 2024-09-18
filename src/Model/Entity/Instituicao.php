@@ -68,11 +68,6 @@ class Instituicao extends Entity
         'expira' => true,
         'seguro' => true,
         'avaliacao' => true,
-        'observacoes' => true,
-        'areainstituicao' => true,
-        'estagiarios' => true,
-        'muralestagios' => true,
-        'visitas' => true,
-        'supervisores' => true,
+        'observacoes' => true
     ];
 }

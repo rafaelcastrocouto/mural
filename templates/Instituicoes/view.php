@@ -17,7 +17,7 @@
                     <?= $this->Html->link(__('Nova Instituicao'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
                 </div>
             </aside>
-            <h3>estagio_<?= h($instituicao->id) ?></h3>
+            <h3>instituicao_<?= h($instituicao->id) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>

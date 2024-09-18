@@ -58,10 +58,10 @@ class InstituicoesTable extends Table
             'foreignKey' => 'instituicao_id',
         ]);
         $this->hasMany('Muralestagios', [
-            'foreignKey' => 'estagio_id',
+            'foreignKey' => 'instituicao_id',
         ]);
         $this->hasMany('Visitas', [
-            'foreignKey' => 'estagio_id',
+            'foreignKey' => 'instituicao_id',
         ]);
         $this->belongsToMany('Supervisores', [
             'foreignKey' => 'instituicao_id',

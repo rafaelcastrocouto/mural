@@ -21,7 +21,7 @@ class VisitasController extends AppController
         //$this->paginate = [
         //    'contain' => ['Instituicoes'],
         //];
-        $visitas = $this->paginate($this->Visitas);
+        $visitas = $this->paginate($this->Visitas->find()->contain(['Instituicoes']));
 
         $this->set(compact('visitas'));
     }

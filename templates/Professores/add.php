@@ -4,15 +4,14 @@
  * @var \App\Model\Entity\Professor $professor
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Listar Professores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
+<div>
     <div class="column-responsive column-80">
         <div class="professores form content">
+            <aside>
+                <div class="side-nav">
+                    <?= $this->Html->link(__('Listar Professores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                </div>
+            </aside>
             <?= $this->Form->create($professor) ?>
             <fieldset>
                 <legend><?= __('Adicionar Professor') ?></legend>
@@ -54,7 +53,7 @@
                     echo $this->Form->control('observacoes');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Adicionar')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

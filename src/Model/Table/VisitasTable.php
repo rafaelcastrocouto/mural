@@ -41,11 +41,11 @@ class VisitasTable extends Table
 
         $this->setTable('visita');
         $this->setAlias('visitas');
-        $this->setDisplayField('estagio_id');
+        $this->setDisplayField('instituicao_id');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Instituicoes', [
-            'foreignKey' => 'estagio_id',
+            'foreignKey' => 'instituicao_id',
             'joinType' => 'INNER',
         ]);
     }

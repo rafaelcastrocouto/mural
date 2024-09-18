@@ -16,7 +16,12 @@
                     <?= $this->Html->link(__('Nova Visita'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
                 </div>
             </aside>
+            <h3>visita_<?= h($visita->id) ?></h3>
             <table>
+                <tr>
+                    <th><?= __('Id') ?></th>
+                    <td><?= $this->Number->format($visita->id) ?></td>
+                </tr>
                 <tr>
                     <th><?= __('Instituicao') ?></th>
                     <td><?= $visita->instituicao ? $this->Html->link($visita->instituicao->instituicao, ['controller' => 'Instituicao', 'action' => 'view', $visita->instituicao->id]) : '' ?></td>
@@ -32,10 +37,6 @@
                 <tr>
                     <th><?= __('Avaliacao') ?></th>
                     <td><?= h($visita->avaliacao) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($visita->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Data') ?></th>

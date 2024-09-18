@@ -15,7 +15,7 @@
                     <?= $this->Html->link(__('Novo User'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
                 </div>
             </aside>
-            <h3><?= $user->aluno ? h($user->aluno->nome) : ($user->professor ? h($user->professor->nome) : ($user->supervisor ? h($user->supervisor->nome) : $user->id)) ?></h3>
+            <h3>user_<?= h($user->id) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
@@ -35,15 +35,15 @@
                 </tr>
                 <tr>
                     <th><?= __('Aluno') ?></th>
-                    <td><?= $user->aluno ? $this->Html->link($user->aluno->id, ['controller' => 'Alunos', 'action' => 'view', $user->aluno->id]) : '-' ?></td>
+                    <td><?= $user->aluno ? $this->Html->link($user->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $user->aluno->id]) : '-' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Supervisor') ?></th>
-                    <td><?= $user->supervisor ? $this->Html->link($user->supervisor->id, ['controller' => 'Supervisores', 'action' => 'view', $user->supervisor->id]) : '-' ?></td>
+                    <td><?= $user->supervisor ? $this->Html->link($user->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $user->supervisor->id]) : '-' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Professor') ?></th>
-                    <td><?= $user->professor ? $this->Html->link($user->professor->id, ['controller' => 'Professor', 'action' => 'view', $user->professor->id]) : '-' ?></td>
+                    <td><?= $user->professor ? $this->Html->link($user->professor->nome, ['controller' => 'Professor', 'action' => 'view', $user->professor->id]) : '-' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Registro') ?></th>

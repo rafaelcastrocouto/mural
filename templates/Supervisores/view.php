@@ -4,19 +4,18 @@
  * @var \App\Model\Entity\Supervisor $supervisor
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Supervisor'), ['action' => 'edit', $supervisor->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Supervisor'), ['action' => 'delete', $supervisor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $supervisor->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Supervisores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Supervisor'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
+<div>
     <div class="column-responsive column-80">
         <div class="supervisores view content">
-            <h3><?= h($supervisor->id) ?></h3>
+            <aside>
+                <div class="side-nav">
+                    <?= $this->Html->link(__('Editar Supervisor'), ['action' => 'edit', $supervisor->id], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Form->postLink(__('Deletar Supervisor'), ['action' => 'delete', $supervisor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $supervisor->id), 'class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Listar Supervisores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Novo Supervisor'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                </div>
+            </aside>
+            <h3>supervisor_<?= h($supervisor->id) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Nome') ?></th>

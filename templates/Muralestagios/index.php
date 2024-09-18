@@ -3,7 +3,6 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Muralestagio[]|\Cake\Collection\CollectionInterface $muralestagios
  */
- 
 ?>
 
 <script type="text/javascript">
@@ -20,9 +19,8 @@
 </script>
 
 <?php
-
 $session = $this->request->getSession();
-$session->write('id_categoria', 1);
+//$session->write('id_categoria', 1);
 // echo $session->read('id_categoria');
 ?>
 

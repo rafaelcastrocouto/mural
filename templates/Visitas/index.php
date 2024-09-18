@@ -22,7 +22,8 @@
             </thead>
             <tbody>
                 <?php foreach ($visitas as $visita): ?>
-                <tr>
+                <tr> 
+                <?php //pr($visita); ?>
                     <td><?= $this->Number->format($visita->id) ?></td>
                     <td><?= $visita->instituicao ? $this->Html->link($visita->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $visita->instituicao->id]) : '' ?></td>
                     <td><?= h($visita->data) ?></td>
