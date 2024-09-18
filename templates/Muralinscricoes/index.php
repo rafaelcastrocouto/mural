@@ -32,9 +32,9 @@
                     <td><?= h($muralinscricao->periodo) ?></td>
                     <td><?= h($muralinscricao->timestamp) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $muralinscricao->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $muralinscricao->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $muralinscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralinscricao->id)]) ?>
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $muralinscricao->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $muralinscricao->id]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $muralinscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralinscricao->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

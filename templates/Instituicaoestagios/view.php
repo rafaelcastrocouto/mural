@@ -107,7 +107,7 @@
             <div class="related">
                 <h4><?= __('Related Supervisores') ?></h4>
                 <?php if (!empty($instituicaoestagio->supervisores)) : ?>
-                <div class="table-responsive">
+                <div>
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
@@ -174,7 +174,7 @@
             <div class="related">
                 <h4><?= __('Related Estagiarios') ?></h4>
                 <?php if (!empty($instituicaoestagio->estagiarios)) : ?>
-                <div class="table-responsive">
+                <div>
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
@@ -229,7 +229,7 @@
             <div class="related">
                 <h4><?= __('Related Muralestagios') ?></h4>
                 <?php if (!empty($instituicaoestagio->muralestagios)) : ?>
-                <div class="table-responsive">
+                <div>
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
@@ -281,9 +281,9 @@
                             <td><?= h($muralestagios->localInscricao) ?></td>
                             <td><?= h($muralestagios->email) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Muralestagios', 'action' => 'view', $muralestagios->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Muralestagios', 'action' => 'edit', $muralestagios->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Muralestagios', 'action' => 'delete', $muralestagios->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagios->id)]) ?>
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Muralestagios', 'action' => 'view', $muralestagios->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Muralestagios', 'action' => 'edit', $muralestagios->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Muralestagios', 'action' => 'delete', $muralestagios->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagios->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -294,7 +294,7 @@
             <div class="related">
                 <h4><?= __('Related Visitas') ?></h4>
                 <?php if (!empty($instituicaoestagio->visitas)) : ?>
-                <div class="table-responsive">
+                <div>
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
@@ -316,9 +316,9 @@
                             <td><?= h($visitas->descricao) ?></td>
                             <td><?= h($visitas->avaliacao) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Visitas', 'action' => 'view', $visitas->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Visitas', 'action' => 'edit', $visitas->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Visitas', 'action' => 'delete', $visitas->id], ['confirm' => __('Are you sure you want to delete # {0}?', $visitas->id)]) ?>
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Visitas', 'action' => 'view', $visitas->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Visitas', 'action' => 'edit', $visitas->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Visitas', 'action' => 'delete', $visitas->id], ['confirm' => __('Are you sure you want to delete # {0}?', $visitas->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

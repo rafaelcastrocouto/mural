@@ -53,9 +53,9 @@
                     <td><?= h($aluno->bairro) ?></td>
                     <td><?= h($aluno->observacoes) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $aluno->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $aluno->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $aluno->id], ['confirm' => __('Are you sure you want to delete # {0}?', $aluno->id)]) ?>
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $aluno->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $aluno->id]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $aluno->id], ['confirm' => __('Are you sure you want to delete # {0}?', $aluno->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

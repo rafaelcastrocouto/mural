@@ -58,7 +58,7 @@ class Muralestagio extends Entity
         'final_de_semana' => true,
         'cargaHoraria' => true,
         'requisitos' => true,
-        'id_area' => true,
+        'area_id' => true,
         'horario' => true,
         'professor_id' => true,
         'dataSelecao' => true,

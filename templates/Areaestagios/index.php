@@ -5,8 +5,8 @@
  */
 ?>
 <div class="areaestagios index content">
-    <?= $this->Html->link(__('New Areaestagio'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Areaestagios') ?></h3>
+    <?= $this->Html->link(__('Nova Areaestagio'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <h3><?= __('Area estagios') ?></h3>
     <div>
         <table>
             <thead>
@@ -22,9 +22,9 @@
                     <td><?= $this->Number->format($areaestagio->id) ?></td>
                     <td><?= h($areaestagio->area) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $areaestagio->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $areaestagio->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $areaestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $areaestagio->id)]) ?>
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $areaestagio->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $areaestagio->id]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $areaestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $areaestagio->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

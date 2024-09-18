@@ -88,9 +88,9 @@
                     <td><?= h($professor->dataegresso) ?></td>
                     <td><?= h($professor->motivoegresso) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $professor->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $professor->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $professor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $professor->id)]) ?>
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $professor->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $professor->id]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $professor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $professor->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

@@ -94,9 +94,9 @@ $session = $this->request->getSession();
                     <td><?= $this->Number->format($estagiario->ch) ?></td>
                     <td><?= h($estagiario->observacoes) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $estagiario->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $estagiario->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiario->id)]) ?>
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $estagiario->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $estagiario->id]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiario->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

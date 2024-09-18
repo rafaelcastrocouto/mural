@@ -62,9 +62,9 @@
                     <td><?= $this->Number->format($supervisor->num_inscricao) ?></td>
                     <td><?= h($supervisor->curso_turma) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $supervisor->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $supervisor->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $supervisor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $supervisor->id)]) ?>
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $supervisor->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $supervisor->id]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $supervisor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $supervisor->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
