@@ -11,7 +11,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $instituicao
  * @property int|null $areainstituicoes_id
- * @property int|null $area
+ * @property int|null $area_id
  * @property string|null $natureza
  * @property string $cnpj
  * @property string $email
@@ -21,7 +21,6 @@ use Cake\ORM\Entity;
  * @property string $municipio
  * @property string $cep
  * @property string $telefone
- * @property string $fax
  * @property string|null $beneficio
  * @property string|null $fim_de_semana
  * @property string $localInscricao
@@ -52,7 +51,7 @@ class Instituicaoestagio extends Entity
     protected array $_accessible = [
         'instituicao' => true,
         'area_instituicoes_id' => true,
-        'area' => true,
+        'area_id' => true,
         'natureza' => true,
         'cnpj' => true,
         'email' => true,
@@ -62,7 +61,6 @@ class Instituicaoestagio extends Entity
         'municipio' => true,
         'cep' => true,
         'telefone' => true,
-        'fax' => true,
         'beneficio' => true,
         'fim_de_semana' => true,
         'localInscricao' => true,

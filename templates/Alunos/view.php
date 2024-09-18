@@ -90,7 +90,7 @@
             <div class="related">
                 <h4><?= __('Related Estagiarios') ?></h4>
                 <?php if (!empty($aluno->estagiarios)) : ?>
-                <div class="table-responsive">
+                <div>
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
@@ -143,7 +143,7 @@
             <div class="related">
                 <h4><?= __('Related Muralinscricoes') ?></h4>
                 <?php if (!empty($aluno->muralinscricoes)) : ?>
-                <div class="table-responsive">
+                <div>
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>

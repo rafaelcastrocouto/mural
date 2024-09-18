@@ -143,10 +143,6 @@
                     <th><?= __('DataInscricao') ?></th>
                     <td><?= h($muralestagio->dataInscricao) ?></td>
                 </tr>
-                <tr>
-                    <th><?= __('Datafax') ?></th>
-                    <td><?= h($muralestagio->datafax) ?></td>
-                </tr>
             </table>
             <div class="text">
                 <strong><?= __('Outras') ?></strong>
@@ -157,7 +153,7 @@
             <div class="related">
                 <h4><?= __('Inscricoes para o Mural de Estágios') ?></h4>
                 <?php if (!empty($muralestagio->muralinscricoes)) : ?>
-                <div class="table-responsive">
+                <div>
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>

@@ -7,7 +7,7 @@
 <div class="instituicaoestagios index content">
     <?= $this->Html->link(__('New Instituicaoestagio'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Instituicaoestagios') ?></h3>
-    <div class="table-responsive">
+    <div>
         <table>
             <thead>
                 <tr>
@@ -24,7 +24,6 @@
                     <th><?= $this->Paginator->sort('municipio') ?></th>
                     <th><?= $this->Paginator->sort('cep') ?></th>
                     <th><?= $this->Paginator->sort('telefone') ?></th>
-                    <th><?= $this->Paginator->sort('fax') ?></th>
                     <th><?= $this->Paginator->sort('beneficio') ?></th>
                     <th><?= $this->Paginator->sort('fim_de_semana') ?></th>
                     <th><?= $this->Paginator->sort('localInscricao') ?></th>
@@ -41,18 +40,18 @@
                 <tr>
                     <td><?= $this->Number->format($instituicaoestagio->id) ?></td>
                     <td><?= $this->Html->link($instituicaoestagio->instituicao, ['controller' => 'instituicaoestagios', 'action' => 'view', $instituicaoestagio->id]) ?></td>
-                    <td><?= $instituicaoestagio->has('areainstituicao') ? $this->Html->link($instituicaoestagio->areainstituicao->area, ['controller' => 'Areainstituicoes', 'action' => 'view', $instituicaoestagio->areainstituicao->id]) : '' ?></td>
-                    <td><?= $instituicaoestagio->has('areaestagio') ? $this->Html->link($instituicaoestagio->area) : '' ?></td>
+                    <td><?= $instituicaoestagio->areainstituicao ? $this->Html->link($instituicaoestagio->areainstituicao->area, ['controller' => 'Areainstituicoes', 'action' => 'view', $instituicaoestagio->areainstituicao->id]) : '' ?></td>
+                    <td><?= $instituicaoestagio->areaestagio ? $this->Html->link($instituicaoestagio->areaestagio->area, ['controller' => 'Areainstituicoes', 'action' => 'view', $instituicaoestagio->areaestagio->id]) : '' ?></td>
                     <td><?= h($instituicaoestagio->natureza) ?></td>
                     <td><?= h($instituicaoestagio->cnpj) ?></td>
-                    <td><?= h($instituicaoestagio->email) ?></td>
+                    <td><?= $instituicaoestagio->email ? $this->Html->link($instituicaoestagio->email, 'mailto:' . $instituicaoestagio->email) : '' ?></td>
+                    <td><?= $instituicaoestagio->url ? $this->Html->link($instituicaoestagio->url) : '' ?></td>
                     <td><?= h($instituicaoestagio->url) ?></td>
                     <td><?= h($instituicaoestagio->endereco) ?></td>
                     <td><?= h($instituicaoestagio->bairro) ?></td>
                     <td><?= h($instituicaoestagio->municipio) ?></td>
                     <td><?= h($instituicaoestagio->cep) ?></td>
                     <td><?= h($instituicaoestagio->telefone) ?></td>
-                    <td><?= h($instituicaoestagio->fax) ?></td>
                     <td><?= h($instituicaoestagio->beneficio) ?></td>
                     <td><?= h($instituicaoestagio->fim_de_semana) ?></td>
                     <td><?= h($instituicaoestagio->localInscricao) ?></td>
@@ -62,9 +61,9 @@
                     <td><?= h($instituicaoestagio->avaliacao) ?></td>
                     <td><?= h($instituicaoestagio->observacoes) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $instituicaoestagio->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $instituicaoestagio->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $instituicaoestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $instituicaoestagio->id)]) ?>
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $instituicaoestagio->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $instituicaoestagio->id]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $instituicaoestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $instituicaoestagio->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

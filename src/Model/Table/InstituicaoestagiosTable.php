@@ -52,7 +52,7 @@ class InstituicaoestagiosTable extends Table
             'foreignKey' => 'area_instituicoes_id',
         ]);
         $this->belongsTo('Areaestagios', [
-            'foreignKey' => 'area',
+            'foreignKey' => 'area_id',
         ]);        
         $this->hasMany('Estagiarios', [
             'foreignKey' => 'instituicao_id',
@@ -137,11 +137,6 @@ class InstituicaoestagiosTable extends Table
             ->scalar('telefone')
             ->maxLength('telefone', 50)
             ->notEmptyString('telefone');
-
-        $validator
-            ->scalar('fax')
-            ->maxLength('fax', 20)
-            ->notEmptyString('fax');
 
         $validator
             ->scalar('beneficio')

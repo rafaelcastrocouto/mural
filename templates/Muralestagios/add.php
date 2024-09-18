@@ -35,7 +35,6 @@
                     echo $this->Form->control('formaSelecao');
                     echo $this->Form->control('contato');
                     echo $this->Form->control('periodo');
-                    echo $this->Form->control('datafax', ['empty' => true]);
                     echo $this->Form->control('localInscricao');
                     echo $this->Form->control('outras');
                 ?>

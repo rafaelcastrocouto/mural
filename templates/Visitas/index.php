@@ -7,7 +7,7 @@
 <div class="visitas index content">
     <?= $this->Html->link(__('Nova Visita'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Visitas') ?></h3>
-    <div class="table-responsive">
+    <div>
         <table>
             <thead>
                 <tr>

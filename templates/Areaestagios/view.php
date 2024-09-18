@@ -107,7 +107,6 @@
                             <th><?= __('Contato') ?></th>
                             <th><?= __('Outras') ?></th>
                             <th><?= __('Periodo') ?></th>
-                            <th><?= __('Datafax') ?></th>
                             <th><?= __('LocalInscricao') ?></th>
                             <th><?= __('Email') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -134,7 +133,6 @@
                             <td><?= h($muralestagios->contato) ?></td>
                             <td><?= h($muralestagios->outras) ?></td>
                             <td><?= h($muralestagios->periodo) ?></td>
-                            <td><?= h($muralestagios->datafax) ?></td>
                             <td><?= h($muralestagios->localInscricao) ?></td>
                             <td><?= h($muralestagios->email) ?></td>
                             <td class="actions">

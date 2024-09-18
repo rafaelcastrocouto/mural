@@ -18,7 +18,7 @@ class InstituicaoestagiosController extends AppController
      */
     public function index()
     {
-        $instituicaoestagios = $this->paginate($this->Instituicaoestagios);
+        $instituicaoestagios = $this->paginate($this->Instituicaoestagios->find()->contain(['Areainstituicoes', 'Areaestagios']));
 
         $this->set(compact('instituicaoestagios'));
     }
@@ -33,7 +33,7 @@ class InstituicaoestagiosController extends AppController
     public function view($id = null)
     {
         $instituicaoestagio = $this->Instituicaoestagios->get($id, [
-            'contain' => ['Areainstituicoes', 'Supervisores', 'Estagiarios' => ['Alunos', 'Instituicaoestagios', 'Professores', 'Supervisores'], 'Muralestagios', 'Visitas'],
+            'contain' => ['Areainstituicoes', 'Areaestagios', 'Supervisores', 'Estagiarios' => ['Alunos', 'Instituicaoestagios', 'Professores', 'Supervisores', 'Areaestagios'], 'Muralestagios', 'Visitas'],
         ]);
 
         $this->set(compact('instituicaoestagio'));

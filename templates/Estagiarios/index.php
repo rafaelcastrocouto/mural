@@ -51,7 +51,7 @@ $session = $this->request->getSession();
 <div class="estagiarios index content">
     <?= $this->Html->link(__('New Estagiario'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Estagiarios') ?></h3>
-    <div class="table-responsive">
+    <div>
         <table>
             <thead>
                 <tr>

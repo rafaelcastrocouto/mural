@@ -7,7 +7,7 @@
 <div class="muralinscricoes index content">
     <?= $this->Html->link(__('New Muralinscricao'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Muralinscricoes') ?></h3>
-    <div class="table-responsive">
+    <div>
         <table>
             <thead>
                 <tr>

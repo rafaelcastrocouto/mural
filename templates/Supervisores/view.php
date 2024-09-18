@@ -116,7 +116,7 @@
             <div class="related">
                 <h4><?= __('Related Instituicaoestagios') ?></h4>
                 <?php if (!empty($supervisor->instituicaoestagios)) : ?>
-                    <div class="table-responsive">
+                    <div>
                         <table>
                             <tr>
                                 <th><?= __('Id') ?></th>
@@ -132,7 +132,6 @@
                                 <th><?= __('Municipio') ?></th>
                                 <th><?= __('Cep') ?></th>
                                 <th><?= __('Telefone') ?></th>
-                                <th><?= __('Fax') ?></th>
                                 <th><?= __('Beneficio') ?></th>
                                 <th><?= __('Fim De Semana') ?></th>
                                 <th><?= __('LocalInscricao') ?></th>
@@ -158,7 +157,6 @@
                                     <td><?= h($instituicaoestagios->municipio) ?></td>
                                     <td><?= h($instituicaoestagios->cep) ?></td>
                                     <td><?= h($instituicaoestagios->telefone) ?></td>
-                                    <td><?= h($instituicaoestagios->fax) ?></td>
                                     <td><?= h($instituicaoestagios->beneficio) ?></td>
                                     <td><?= h($instituicaoestagios->fim_de_semana) ?></td>
                                     <td><?= h($instituicaoestagios->localInscricao) ?></td>
@@ -181,7 +179,7 @@
             <div class="related">
                 <h4><?= __('Related Estagiarios') ?></h4>
                 <?php if (!empty($supervisor->estagiarios)) : ?>
-                    <div class="table-responsive">
+                    <div>
                         <table>
                             <tr>
                                 <th><?= __('Id') ?></th>

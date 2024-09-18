@@ -7,7 +7,7 @@
 <div class="areainstituicoes index content">
     <?= $this->Html->link(__('New Areainstituicao'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Areainstituicoes') ?></h3>
-    <div class="table-responsive">
+    <div>
         <table>
             <thead>
                 <tr>

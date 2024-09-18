@@ -7,7 +7,7 @@
 <div class="supervisores index content">
     <?= $this->Html->link(__('New Supervisor'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Supervisores') ?></h3>
-    <div class="table-responsive">
+    <div>
         <table>
             <thead>
                 <tr>

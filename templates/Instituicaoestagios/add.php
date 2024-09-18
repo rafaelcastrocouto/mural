@@ -29,7 +29,6 @@
                     echo $this->Form->control('municipio');
                     echo $this->Form->control('cep');
                     echo $this->Form->control('telefone');
-                    echo $this->Form->control('fax');
                     echo $this->Form->control('beneficio');
                     echo $this->Form->control('fim_de_semana');
                     echo $this->Form->control('localInscricao');

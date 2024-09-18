@@ -168,7 +168,7 @@
             <div class="related">
                 <h4><?= __('Related Estagiarios') ?></h4>
                 <?php if (!empty($professor->estagiarios)) : ?>
-                <div class="table-responsive">
+                <div>
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
@@ -221,7 +221,7 @@
             <div class="related">
                 <h4><?= __('Related Muralestagios') ?></h4>
                 <?php if (!empty($professor->muralestagios)) : ?>
-                <div class="table-responsive">
+                <div>
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
@@ -244,7 +244,6 @@
                             <th><?= __('Contato') ?></th>
                             <th><?= __('Outras') ?></th>
                             <th><?= __('Periodo') ?></th>
-                            <th><?= __('Datafax') ?></th>
                             <th><?= __('LocalInscricao') ?></th>
                             <th><?= __('Email') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -271,7 +270,6 @@
                             <td><?= h($muralestagios->contato) ?></td>
                             <td><?= h($muralestagios->outras) ?></td>
                             <td><?= h($muralestagios->periodo) ?></td>
-                            <td><?= h($muralestagios->datafax) ?></td>
                             <td><?= h($muralestagios->localInscricao) ?></td>
                             <td><?= h($muralestagios->email) ?></td>
                             <td class="actions">
@@ -288,7 +286,7 @@
             <div class="related">
                 <h4><?= __('Related Users') ?></h4>
                 <?php if (!empty($professor->users)) : ?>
-                <div class="table-responsive">
+                <div>
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>

@@ -49,7 +49,7 @@ $session->write('id_categoria', 1);
 <div class="muralestagios index content">
     <?= $this->Html->link(__('Novo mural'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Mural de estagios') ?></h3>
-    <div class="table-responsive">
+    <div>
         <table>
             <thead>
                 <tr>

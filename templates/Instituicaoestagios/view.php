@@ -3,7 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Instituicaoestagio $instituicaoestagio
  */
-//pr($instituicaoestagio)
+//pr($instituicaoestagio);
 //die();
 ?>
 <div>
@@ -11,22 +11,25 @@
         <div class="instituicaoestagios view content">
             <aside>
                 <div class="side-nav">
-                    <h4 class="heading"><?= __('Actions') ?></h4>
-                    <?= $this->Html->link(__('Edit Instituicaoestagio'), ['action' => 'edit', $instituicaoestagio->id], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Form->postLink(__('Delete Instituicaoestagio'), ['action' => 'delete', $instituicaoestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $instituicaoestagio->id), 'class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('List Instituicaoestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('New Instituicaoestagio'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Editar Instituicaoestagio'), ['action' => 'edit', $instituicaoestagio->id], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Form->postLink(__('Deletar Instituicaoestagio'), ['action' => 'delete', $instituicaoestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $instituicaoestagio->id), 'class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Listar Instituicaoestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Novo Instituicaoestagio'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
                 </div>
             </aside>
-            <h3><?= h($instituicaoestagio->id) ?></h3>
+            <h3>estagio_<?= h($instituicaoestagio->id) ?></h3>
             <table>
+                <tr>
+                    <th><?= __('Id') ?></th>
+                    <td><?= $this->Number->format($instituicaoestagio->id) ?></td>
+                </tr>
                 <tr>
                     <th><?= __('Instituicao') ?></th>
                     <td><?= $instituicaoestagio->instituicao ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Areainstituicao') ?></th>
-                    <td><?= $instituicaoestagio->has('areainstituicao') ? $this->Html->link(''.$instituicaoestagio->areainstituicao->id, ['controller' => 'Areainstituicoes', 'action' => 'view', $instituicaoestagio->areainstituicao->id]) : '' ?></td>
+                    <th><?= __('Area instituicao') ?></th>
+                    <td><?= $instituicaoestagio->areainstituicao ? $this->Html->link(''.$instituicaoestagio->areainstituicao->area, ['controller' => 'Areainstituicoes', 'action' => 'view', $instituicaoestagio->areainstituicao->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Natureza') ?></th>
@@ -65,10 +68,6 @@
                     <td><?= h($instituicaoestagio->telefone) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Fax') ?></th>
-                    <td><?= h($instituicaoestagio->fax) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Beneficio') ?></th>
                     <td><?= h($instituicaoestagio->beneficio) ?></td>
                 </tr>
@@ -93,12 +92,8 @@
                     <td><?= h($instituicaoestagio->observacoes) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($instituicaoestagio->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Area') ?></th>
-                    <td><?= $this->Number->format($instituicaoestagio->area) ?></td>
+                    <th><?= __('Area estagio') ?></th>
+                    <td><?= $instituicaoestagio->has('area_id') ? $this->Html->link(''.$instituicaoestagio->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $instituicaoestagio->area_id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Convenio') ?></th>
@@ -166,9 +161,9 @@
                             <td><?= h($supervisores->curso_turma) ?></td>
                             <td><?= h($supervisores->observacoes) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Supervisores', 'action' => 'view', $supervisores->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Supervisores', 'action' => 'edit', $supervisores->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Supervisores', 'action' => 'delete', $supervisores->id], ['confirm' => __('Are you sure you want to delete # {0}?', $supervisores->id)]) ?>
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Supervisores', 'action' => 'view', $supervisores->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Supervisores', 'action' => 'edit', $supervisores->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Supervisores', 'action' => 'delete', $supervisores->id], ['confirm' => __('Are you sure you want to delete # {0}?', $supervisores->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -184,17 +179,18 @@
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Aluno Id') ?></th>
+                            <th><?= __('Nome') ?></th>
                             <th><?= __('Registro') ?></th>
                             <th><?= __('Ajustecurricular2020') ?></th>
                             <th><?= __('Turno') ?></th>
                             <th><?= __('Nivel') ?></th>
                             <th><?= __('Tc') ?></th>
                             <th><?= __('Tc Solicitacao') ?></th>
-                            <th><?= __('Instituicaoestagio Id') ?></th>
-                            <th><?= __('Supervisor Id') ?></th>
-                            <th><?= __('Professor Id') ?></th>
+                            <th><?= __('Instituicaoestagio') ?></th>
+                            <th><?= __('Supervisor') ?></th>
+                            <th><?= __('Professor') ?></th>
                             <th><?= __('Periodo') ?></th>
-                            <th><?= __('Areaestagio Id') ?></th>
+                            <th><?= __('Area estagio') ?></th>
                             <th><?= __('Nota') ?></th>
                             <th><?= __('Ch') ?></th>
                             <th><?= __('Observacoes') ?></th>
@@ -215,14 +211,14 @@
                             <td><?= $estagiarios->has('supervisor') ? $this->Html->link(''.h($estagiarios->supervisor->nome), ['controller' => 'supervisores', 'action' => 'view', $estagiarios->supervisor_id]) : '' ?></td>
                             <td><?= $estagiarios->has('professor') ? $this->Html->link(''.h($estagiarios->professor->nome), ['controller' => 'professores', 'action' => 'view', $estagiarios->profesores_id]) : '' ?></td>
                             <td><?= h($estagiarios->periodo) ?></td>
-                            <td><?= h($estagiarios->id_area) ?></td>
+                            <td><?= $estagiarios->has('area_id') ? $this->Html->link(''.$estagiarios->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $estagiarios->area_id]) : '' ?></td>
                             <td><?= h($estagiarios->nota) ?></td>
                             <td><?= h($estagiarios->ch) ?></td>
                             <td><?= h($estagiarios->observacoes) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Estagiarios', 'action' => 'view', $estagiarios->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Estagiarios', 'action' => 'edit', $estagiarios->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Estagiarios', 'action' => 'delete', $estagiarios->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiarios->id)]) ?>
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Estagiarios', 'action' => 'view', $estagiarios->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Estagiarios', 'action' => 'edit', $estagiarios->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Estagiarios', 'action' => 'delete', $estagiarios->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiarios->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -256,7 +252,6 @@
                             <th><?= __('Contato') ?></th>
                             <th><?= __('Outras') ?></th>
                             <th><?= __('Periodo') ?></th>
-                            <th><?= __('Datafax') ?></th>
                             <th><?= __('LocalInscricao') ?></th>
                             <th><?= __('Email') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -283,7 +278,6 @@
                             <td><?= h($muralestagios->contato) ?></td>
                             <td><?= h($muralestagios->outras) ?></td>
                             <td><?= h($muralestagios->periodo) ?></td>
-                            <td><?= h($muralestagios->datafax) ?></td>
                             <td><?= h($muralestagios->localInscricao) ?></td>
                             <td><?= h($muralestagios->email) ?></td>
                             <td class="actions">
