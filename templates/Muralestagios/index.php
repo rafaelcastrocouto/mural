@@ -68,7 +68,7 @@ $session->write('id_categoria', 1);
                 <?php foreach ($muralestagios as $muralestagio): ?>
                     <tr>
                         <td><?= $this->Number->format($muralestagio->id) ?></td>
-                        <td><?= $muralestagio->has('instituicaoestagio') ? $this->Html->link($muralestagio->instituicao, ['controller' => 'Muralestagios', 'action' => 'view', $muralestagio->id]) : $this->Html->link($muralestagio->instituicao, ['controller' => 'Muralestagios', 'action' => 'view', $muralestagio->id]); ?></td>
+                        <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao, ['controller' => 'Muralestagios', 'action' => 'view', $muralestagio->id]) : $this->Html->link($muralestagio->instituicao, ['controller' => 'Muralestagios', 'action' => 'view', $muralestagio->id]); ?></td>
                         <td><?= $this->Number->format($muralestagio->vagas) ?></td>
                         <td><?= h($muralestagio->beneficios) ?></td>
                         <td><?= h($muralestagio->final_de_semana) ?></td>

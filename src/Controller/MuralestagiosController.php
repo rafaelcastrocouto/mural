@@ -53,11 +53,11 @@ class MuralestagiosController extends AppController {
         // die();
         /*
         $muralestagio = $this->Muralestagios->get($id, [
-            'contain' => ['Instituicaoestagios', 'Areaestagios', 'Professores', 'Muralinscricoes'],
+            'contain' => ['Instituicoes', 'Areaestagios', 'Professores', 'Muralinscricoes'],
         ]);
          */
         $muralestagio = $this->Muralestagios->get($id, [
-            'contain' => ['Instituicaoestagios', 'Areaestagios', 'Professores', 'Muralinscricoes' => ['Alunos']],
+            'contain' => ['Instituicoes', 'Areaestagios', 'Professores', 'Muralinscricoes' => ['Alunos']],
         ]);
         // pr($muralestagio);
         // die();
@@ -80,10 +80,10 @@ class MuralestagiosController extends AppController {
             }
             $this->Flash->error(__('The muralestagio could not be saved. Please, try again.'));
         }
-        $instituicaoestagios = $this->Muralestagios->Instituicaoestagios->find('list', ['limit' => 200]);
+        $instituicoes = $this->Muralestagios->Instituicoes->find('list', ['limit' => 200]);
         $areaestagios = $this->Muralestagios->Areaestagios->find('list', ['limit' => 200]);
         $professores = $this->Muralestagios->Professores->find('list', ['limit' => 200]);
-        $this->set(compact('muralestagio', 'instituicaoestagios', 'areaestagios', 'professores'));
+        $this->set(compact('muralestagio', 'instituicoes', 'areaestagios', 'professores'));
     }
 
     /**
@@ -96,7 +96,7 @@ class MuralestagiosController extends AppController {
     public function edit($id = null) {
 
         $muralestagio = $this->Muralestagios->get($id, [
-            'contain' => ['Instituicaoestagios'],
+            'contain' => ['Instituicoes'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $muralestagio = $this->Muralestagios->patchEntity($muralestagio, $this->request->getData());
@@ -107,10 +107,10 @@ class MuralestagiosController extends AppController {
             }
             $this->Flash->error(__('The muralestagio could not be saved. Please, try again.'));
         }
-        $instituicaoestagios = $this->Muralestagios->Instituicaoestagios->find('list');
+        $instituicoes = $this->Muralestagios->Instituicoes->find('list');
         $areaestagios = $this->Muralestagios->Areaestagios->find('list', ['limit' => 200]);
         $professores = $this->Muralestagios->Professores->find('list', ['limit' => 500]);
-        $this->set(compact('muralestagio', 'instituicaoestagios', 'areaestagios', 'professores'));
+        $this->set(compact('muralestagio', 'instituicoes', 'areaestagios', 'professores'));
     }
 
     /**

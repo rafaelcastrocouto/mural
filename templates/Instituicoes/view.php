@@ -1,112 +1,112 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Instituicaoestagio $instituicaoestagio
+ * @var \App\Model\Entity\Instituicao $instituicao
  */
-//pr($instituicaoestagio);
+//pr($instituicao);
 //die();
 ?>
 <div>
     <div class="column-responsive column-80">
-        <div class="instituicaoestagios view content">
+        <div class="instituicoes view content">
             <aside>
                 <div class="side-nav">
-                    <?= $this->Html->link(__('Editar Instituicaoestagio'), ['action' => 'edit', $instituicaoestagio->id], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Form->postLink(__('Deletar Instituicaoestagio'), ['action' => 'delete', $instituicaoestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $instituicaoestagio->id), 'class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Listar Instituicaoestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Novo Instituicaoestagio'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Editar Instituicao'), ['action' => 'edit', $instituicao->id], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Form->postLink(__('Deletar Instituicao'), ['action' => 'delete', $instituicao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $instituicao->id), 'class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Listar Instituicoes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Nova Instituicao'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
                 </div>
             </aside>
-            <h3>estagio_<?= h($instituicaoestagio->id) ?></h3>
+            <h3>estagio_<?= h($instituicao->id) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($instituicaoestagio->id) ?></td>
+                    <td><?= $instituicao->id ? $this->Number->format($instituicao->id) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Instituicao') ?></th>
-                    <td><?= $instituicaoestagio->instituicao ?></td>
+                    <td><?= $instituicao->instituicao ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Area instituicao') ?></th>
-                    <td><?= $instituicaoestagio->areainstituicao ? $this->Html->link(''.$instituicaoestagio->areainstituicao->area, ['controller' => 'Areainstituicoes', 'action' => 'view', $instituicaoestagio->areainstituicao->id]) : '' ?></td>
+                    <td><?= $instituicao->areainstituicao ? $this->Html->link(''.$instituicao->areainstituicao->area, ['controller' => 'Areainstituicoes', 'action' => 'view', $instituicao->areainstituicao->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Natureza') ?></th>
-                    <td><?= h($instituicaoestagio->natureza) ?></td>
+                    <td><?= h($instituicao->natureza) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Cnpj') ?></th>
-                    <td><?= h($instituicaoestagio->cnpj) ?></td>
+                    <td><?= h($instituicao->cnpj) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Email') ?></th>
-                    <td><?= h($instituicaoestagio->email) ?></td>
+                    <td><?= h($instituicao->email) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Url') ?></th>
-                    <td><?= h($instituicaoestagio->url) ?></td>
+                    <td><?= h($instituicao->url) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Endereco') ?></th>
-                    <td><?= h($instituicaoestagio->endereco) ?></td>
+                    <td><?= h($instituicao->endereco) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Bairro') ?></th>
-                    <td><?= h($instituicaoestagio->bairro) ?></td>
+                    <td><?= h($instituicao->bairro) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Municipio') ?></th>
-                    <td><?= h($instituicaoestagio->municipio) ?></td>
+                    <td><?= h($instituicao->municipio) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Cep') ?></th>
-                    <td><?= h($instituicaoestagio->cep) ?></td>
+                    <td><?= h($instituicao->cep) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Telefone') ?></th>
-                    <td><?= h($instituicaoestagio->telefone) ?></td>
+                    <td><?= h($instituicao->telefone) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Beneficio') ?></th>
-                    <td><?= h($instituicaoestagio->beneficio) ?></td>
+                    <td><?= h($instituicao->beneficio) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Fim De Semana') ?></th>
-                    <td><?= h($instituicaoestagio->fim_de_semana) ?></td>
+                    <td><?= h($instituicao->fim_de_semana) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('LocalInscricao') ?></th>
-                    <td><?= h($instituicaoestagio->localInscricao) ?></td>
+                    <td><?= h($instituicao->localInscricao) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Seguro') ?></th>
-                    <td><?= h($instituicaoestagio->seguro) ?></td>
+                    <td><?= h($instituicao->seguro) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Avaliacao') ?></th>
-                    <td><?= h($instituicaoestagio->avaliacao) ?></td>
+                    <td><?= h($instituicao->avaliacao) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Observacoes') ?></th>
-                    <td><?= h($instituicaoestagio->observacoes) ?></td>
+                    <td><?= h($instituicao->observacoes) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Area estagio') ?></th>
-                    <td><?= $instituicaoestagio->has('area_id') ? $this->Html->link(''.$instituicaoestagio->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $instituicaoestagio->area_id]) : '' ?></td>
+                    <td><?= $instituicao->area_id ? $this->Html->link(''.$instituicao->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $instituicao->area_id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Convenio') ?></th>
-                    <td><?= $this->Number->format($instituicaoestagio->convenio) ?></td>
+                    <td><?= $instituicao->convenio ? $this->Number->format($instituicao->convenio) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Expira') ?></th>
-                    <td><?= h($instituicaoestagio->expira) ?></td>
+                    <td><?= h($instituicao->expira) ?></td>
                 </tr>
             </table>
             <div class="related">
                 <h4><?= __('Related Supervisores') ?></h4>
-                <?php if (!empty($instituicaoestagio->supervisores)) : ?>
+                <?php if (!empty($instituicao->supervisores)) : ?>
                 <div>
                     <table>
                         <tr>
@@ -135,7 +135,7 @@
                             <th><?= __('Observacoes') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($instituicaoestagio->supervisores as $supervisores) : ?>
+                        <?php foreach ($instituicao->supervisores as $supervisores) : ?>
                         <tr>
                             <td><?= h($supervisores->id) ?></td>
                             <td><?= $this->Html->link($supervisores->nome, ['controller' => 'Supervisores', 'action' => 'view', $supervisores->id]) ?></td>
@@ -173,7 +173,7 @@
             </div>
             <div class="related">
                 <h4><?= __('Related Estagiarios') ?></h4>
-                <?php if (!empty($instituicaoestagio->estagiarios)) : ?>
+                <?php if (!empty($instituicao->estagiarios)) : ?>
                 <div>
                     <table>
                         <tr>
@@ -186,7 +186,7 @@
                             <th><?= __('Nivel') ?></th>
                             <th><?= __('Tc') ?></th>
                             <th><?= __('Tc Solicitacao') ?></th>
-                            <th><?= __('Instituicaoestagio') ?></th>
+                            <th><?= __('Instituicao') ?></th>
                             <th><?= __('Supervisor') ?></th>
                             <th><?= __('Professor') ?></th>
                             <th><?= __('Periodo') ?></th>
@@ -196,22 +196,22 @@
                             <th><?= __('Observacoes') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($instituicaoestagio->estagiarios as $estagiarios) : ?>
+                        <?php foreach ($instituicao->estagiarios as $estagiarios) : ?>
                         <tr>
                             <td><?= h($estagiarios->id) ?></td>
                             <td><?= h($estagiarios->aluno_id) ?></td>
-                            <td><?= $estagiarios->has('aluno') ? $this->Html->link($estagiarios->aluno->nome, ['controller' => 'alunos', 'action' => 'view', $estagiarios->alunonovo_id]) : '' ?></td>
+                            <td><?= $estagiarios->aluno ? $this->Html->link($estagiarios->aluno->nome, ['controller' => 'alunos', 'action' => 'view', $estagiarios->alunonovo_id]) : '' ?></td>
                             <td><?= h($estagiarios->registro) ?></td>
                             <td><?= h($estagiarios->ajustecurricular2020) ?></td>
                             <td><?= h($estagiarios->turno) ?></td>
                             <td><?= h($estagiarios->nivel) ?></td>
                             <td><?= h($estagiarios->tc) ?></td>
                             <td><?= h($estagiarios->tc_solicitacao) ?></td>
-                            <td><?= $estagiarios->has('instituicaoestagio') ? $this->Html->link($estagiarios->instituicaoestagio->instituicao, ['controller' => 'instituicaoestagios', 'action' => 'view', $estagiarios->instituicao_id]) : '' ?></td>
-                            <td><?= $estagiarios->has('supervisor') ? $this->Html->link(''.h($estagiarios->supervisor->nome), ['controller' => 'supervisores', 'action' => 'view', $estagiarios->supervisor_id]) : '' ?></td>
-                            <td><?= $estagiarios->has('professor') ? $this->Html->link(''.h($estagiarios->professor->nome), ['controller' => 'professores', 'action' => 'view', $estagiarios->profesores_id]) : '' ?></td>
+                            <td><?= $estagiarios->instituicao ? $this->Html->link($estagiarios->instituicao->instituicao, ['controller' => 'instituicaos', 'action' => 'view', $estagiarios->instituicao_id]) : '' ?></td>
+                            <td><?= $estagiarios->supervisor ? $this->Html->link(''.h($estagiarios->supervisor->nome), ['controller' => 'supervisores', 'action' => 'view', $estagiarios->supervisor_id]) : '' ?></td>
+                            <td><?= $estagiarios->professor ? $this->Html->link(''.h($estagiarios->professor->nome), ['controller' => 'professores', 'action' => 'view', $estagiarios->profesores_id]) : '' ?></td>
                             <td><?= h($estagiarios->periodo) ?></td>
-                            <td><?= $estagiarios->has('area_id') ? $this->Html->link(''.$estagiarios->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $estagiarios->area_id]) : '' ?></td>
+                            <td><?= $estagiarios->area_id ? $this->Html->link(''.$estagiarios->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $estagiarios->area_id]) : '' ?></td>
                             <td><?= h($estagiarios->nota) ?></td>
                             <td><?= h($estagiarios->ch) ?></td>
                             <td><?= h($estagiarios->observacoes) ?></td>
@@ -228,7 +228,7 @@
             </div>
             <div class="related">
                 <h4><?= __('Related Muralestagios') ?></h4>
-                <?php if (!empty($instituicaoestagio->muralestagios)) : ?>
+                <?php if (!empty($instituicao->muralestagios)) : ?>
                 <div>
                     <table>
                         <tr>
@@ -242,7 +242,7 @@
                             <th><?= __('CargaHoraria') ?></th>
                             <th><?= __('Requisitos') ?></th>
                             <th><?= __('Areaestagio Id') ?></th>
-                            <th><?= __('Horario') ?></th>
+                            <th><?= __('Turno') ?></th>
                             <th><?= __('Professor Id') ?></th>
                             <th><?= __('DataSelecao') ?></th>
                             <th><?= __('DataInscricao') ?></th>
@@ -256,7 +256,7 @@
                             <th><?= __('Email') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($instituicaoestagio->muralestagios as $muralestagios) : ?>
+                        <?php foreach ($instituicao->muralestagios as $muralestagios) : ?>
                         <tr>
                             <td><?= h($muralestagios->id) ?></td>
                             <td><?= h($muralestagios->id_estagio) ?></td>
@@ -268,7 +268,7 @@
                             <td><?= h($muralestagios->cargaHoraria) ?></td>
                             <td><?= h($muralestagios->requisitos) ?></td>
                             <td><?= h($muralestagios->areaestagio_id) ?></td>
-                            <td><?= h($muralestagios->horario) ?></td>
+                            <td><?= h($muralestagios->turno) ?></td>
                             <td><?= h($muralestagios->professor_id) ?></td>
                             <td><?= h($muralestagios->dataSelecao) ?></td>
                             <td><?= h($muralestagios->dataInscricao) ?></td>
@@ -293,12 +293,12 @@
             </div>
             <div class="related">
                 <h4><?= __('Related Visitas') ?></h4>
-                <?php if (!empty($instituicaoestagio->visitas)) : ?>
+                <?php if (!empty($instituicao->visitas)) : ?>
                 <div>
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('Instituicaoestagio Id') ?></th>
+                            <th><?= __('Instituicao Id') ?></th>
                             <th><?= __('Data') ?></th>
                             <th><?= __('Motivo') ?></th>
                             <th><?= __('Responsavel') ?></th>
@@ -306,10 +306,10 @@
                             <th><?= __('Avaliacao') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($instituicaoestagio->visitas as $visitas) : ?>
+                        <?php foreach ($instituicao->visitas as $visitas) : ?>
                         <tr>
                             <td><?= h($visitas->id) ?></td>
-                            <td><?= h($visitas->instituicaoestagio_id) ?></td>
+                            <td><?= h($visitas->instituicao_id) ?></td>
                             <td><?= h($visitas->data) ?></td>
                             <td><?= h($visitas->motivo) ?></td>
                             <td><?= h($visitas->responsavel) ?></td>

@@ -21,11 +21,11 @@
 		            <?= $this->Html->link(__('Novo Muralestagio'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
 		        </div>
 		    </aside>
-            <h3><?= h($muralestagio->instituicao) ?></h3>
+            <h3>muralestagios_<?= h($muralestagio->id) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Instituicao') ?></th>
-                    <td><?= $muralestagio->has('instituicaoestagio') ? $this->Html->link($muralestagio->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $muralestagio->id]) : '' ?></td>
+                    <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $muralestagio->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Convenio') ?></th>
@@ -58,23 +58,20 @@
                     <td><?= h($muralestagio->requisitos) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Areaestagio') ?></th>
-                    <td><?= $muralestagio->has('areaestagio') ? $this->Html->link($muralestagio->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $muralestagio->areaestagio->id]) : '' ?></td>
+                    <th><?= __('Area estagio') ?></th>
+                    <td><?= $muralestagio->areaestagio ? $this->Html->link($muralestagio->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $muralestagio->areaestagio->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Horario') ?></th>
+                    <th><?= __('Turno') ?></th>
                     <td>
-						<?php
-						switch ( h($muralestagio->horario) ) {
-							case 'D': $horario = 'Diurno';
-								break;
-							case 'N': $horario = 'Noturno';
-								break;
-							case 'A': $horario = 'Ambos';
-								break;
-						}
-						echo $horario;
-						?>
+					<?php
+					switch ( h($muralestagio->turno) ) {
+						case 'D': $turno = 'Diurno'; break;
+						case 'N': $turno = 'Noturno'; break;
+						case 'A': $turno = 'Ambos'; break;
+					}
+					echo $turno;
+					?>
 					</td>
                 </tr>
                 <tr>

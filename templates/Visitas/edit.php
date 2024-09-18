@@ -21,7 +21,7 @@
             <fieldset>
                 <h2><?= __('Editando Visita') ?></h2>
                 <?php
-                    echo $this->Form->control('instituicaoestagio_id', ['options' => $instituicaoestagios]);
+                    echo $this->Form->control('instituicao_id', ['options' => $instituicoes]);
                     echo $this->Form->control('data');
                     echo $this->Form->control('motivo');
                     echo $this->Form->control('responsavel');

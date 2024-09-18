@@ -33,7 +33,7 @@ class AreaestagiosController extends AppController
     public function view($id = null)
     {
         $areaestagio = $this->Areaestagios->get($id, [
-            'contain' => ['Estagiarios' => ['Alunos', 'Instituicaoestagios', 'Supervisores', 'Professores', 'Areaestagios'], 'Muralestagios'],
+            'contain' => ['Estagiarios' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores', 'Areaestagios'], 'Muralestagios'],
         ]);
         
         $this->set(compact('areaestagio'));

@@ -16,7 +16,7 @@
             <fieldset>
                 <legend><?= __('Adicionar Mural estagio') ?></legend>
                 <?php
-                    echo $this->Form->control('instituicaoestagio_id', ['options' => $instituicaoestagios, 'empty' => true, 'class' => 'form-control']);
+                    echo $this->Form->control('instituicao_id', ['options' => $instituicoes, 'empty' => true, 'class' => 'form-control']);
                     echo $this->Form->control('instituicao');
                     echo $this->Form->control('email');
                     echo $this->Form->control('convenio');
@@ -26,7 +26,7 @@
                     echo $this->Form->control('cargaHoraria');
                     echo $this->Form->control('requisitos');
                     echo $this->Form->control('areaestagio_id', ['options' => $areaestagios, 'class' => 'form-control']);
-                    echo $this->Form->control('horario');
+                    echo $this->Form->control('turno');
                     echo $this->Form->control('professor_id', ['options' => $professores]);
                     echo $this->Form->control('dataSelecao', ['empty' => true]);
                     echo $this->Form->control('dataInscricao', ['empty' => true]);

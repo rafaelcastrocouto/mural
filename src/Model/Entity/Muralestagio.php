@@ -9,7 +9,7 @@ use Cake\ORM\Entity;
  * Muralestagio Entity
  *
  * @property int $id
- * @property int|null $instituicaoestagio_id
+ * @property int|null $instituicao_id
  * @property string $instituicao
  * @property string $convenio
  * @property int $vagas
@@ -18,7 +18,7 @@ use Cake\ORM\Entity;
  * @property int|null $cargaHoraria
  * @property string|null $requisitos
  * @property int $areaestagio_id
- * @property string|null $horario
+ * @property string|null $turno
  * @property int $professor_id
  * @property \Cake\I18n\FrozenDate|null $dataSelecao
  * @property \Cake\I18n\FrozenDate|null $dataInscricao
@@ -31,7 +31,7 @@ use Cake\ORM\Entity;
  * @property string $localInscricao
  * @property string|null $email
  *
- * @property \App\Model\Entity\Instituicaoestagio $instituicaoestagio
+ * @property \App\Model\Entity\Instituicao $instituicaoestagio
  * @property \App\Model\Entity\Areaestagio $areaestagio
  * @property \App\Model\Entity\Professor $professor
  * @property \App\Model\Entity\Muralinscricao[] $muralinscricoes
@@ -59,7 +59,7 @@ class Muralestagio extends Entity
         'cargaHoraria' => true,
         'requisitos' => true,
         'area_id' => true,
-        'horario' => true,
+        'turno' => true,
         'professor_id' => true,
         'dataSelecao' => true,
         'dataInscricao' => true,
@@ -70,10 +70,6 @@ class Muralestagio extends Entity
         'outras' => true,
         'periodo' => true,
         'localInscricao' => true,
-        'email' => true,
-        'instituicaoestagio' => true,
-        'areaestagio' => true,
-        'professor' => true,
-        'muralinscricao' => true,
+        'email' => true
     ];
 }

@@ -33,7 +33,7 @@ class SupervisoresController extends AppController
     public function view($id = null)
     {
         $supervisor = $this->Supervisores->get($id, [
-            'contain' => ['Instituicaoestagios', 'Estagiarios' => ['Alunos']],
+            'contain' => ['Instituicoes', 'Estagiarios' => ['Alunos']],
         ]);
 
         $this->set(compact('supervisor'));
@@ -56,8 +56,8 @@ class SupervisoresController extends AppController
             }
             $this->Flash->error(__('The supervisor could not be saved. Please, try again.'));
         }
-        $instituicaoestagios = $this->Supervisores->Instituicaoestagios->find('list', ['limit' => 200]);
-        $this->set(compact('supervisor', 'instituicaoestagios'));
+        $instituicoes = $this->Supervisores->Instituicoes->find('list', ['limit' => 200]);
+        $this->set(compact('supervisor', 'instituicoes'));
     }
 
     /**
@@ -70,7 +70,7 @@ class SupervisoresController extends AppController
     public function edit($id = null)
     {
         $supervisor = $this->Supervisores->get($id, [
-            'contain' => ['Instituicaoestagios'],
+            'contain' => ['Instituicoes'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $supervisor = $this->Supervisores->patchEntity($supervisor, $this->request->getData());
@@ -81,8 +81,8 @@ class SupervisoresController extends AppController
             }
             $this->Flash->error(__('The supervisor could not be saved. Please, try again.'));
         }
-        $instituicaoestagios = $this->Supervisores->Instituicaoestagios->find('list', ['limit' => 200]);
-        $this->set(compact('supervisor', 'instituicaoestagios'));
+        $instituicoes = $this->Supervisores->Instituicoes->find('list', ['limit' => 200]);
+        $this->set(compact('supervisor', 'instituicoes'));
     }
 
     /**

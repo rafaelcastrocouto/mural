@@ -1,21 +1,21 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Instituicaoestagio $instituicaoestagio
+ * @var \App\Model\Entity\Instituicao $instituicao
  */
 ?>
 <div class="row">
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Instituicaoestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Listar Instituicoes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
-        <div class="instituicaoestagios form content">
-            <?= $this->Form->create($instituicaoestagio) ?>
+        <div class="instituicoes form content">
+            <?= $this->Form->create($instituicao) ?>
             <fieldset>
-                <legend><?= __('Add Instituicaoestagio') ?></legend>
+                <legend><?= __('Adicionar Instituicao') ?></legend>
                 <?php
                     echo $this->Form->control('instituicao');
                     echo $this->Form->control('areainstituicoes_id', ['options' => $areainstituicoes, 'empty' => true]);
@@ -40,7 +40,7 @@
                     echo $this->Form->control('supervisores._ids', ['options' => $supervisores]);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Adicionar')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

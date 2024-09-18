@@ -4,20 +4,23 @@
  * @var \App\Model\Entity\Aluno $aluno
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Aluno'), ['action' => 'edit', $aluno->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Aluno'), ['action' => 'delete', $aluno->id], ['confirm' => __('Are you sure you want to delete # {0}?', $aluno->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Alunos'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Aluno'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
+<div>
     <div class="column-responsive column-80">
         <div class="alunos view content">
-            <h3><?= h($aluno->id) ?></h3>
+            <aside>
+                <div class="side-nav">
+                    <?= $this->Html->link(__('Editar Aluno'), ['action' => 'edit', $aluno->id], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Form->postLink(__('Deletar Aluno'), ['action' => 'delete', $aluno->id], ['confirm' => __('Are you sure you want to delete # {0}?', $aluno->id), 'class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Listar Alunos'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Novo Aluno'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                </div>
+            </aside>
+            <h3>aluno_<?= h($aluno->id) ?></h3>
             <table>
+                <tr>
+                    <th><?= __('Id') ?></th>
+                    <td><?= $this->Number->format($aluno->id) ?></td>
+                </tr>
                 <tr>
                     <th><?= __('Nome') ?></th>
                     <td><?= h($aluno->nome) ?></td>
@@ -67,10 +70,6 @@
                     <td><?= h($aluno->observacoes) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($aluno->id) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Registro') ?></th>
                     <td><?= $this->Number->format($aluno->registro) ?></td>
                 </tr>
@@ -101,7 +100,7 @@
                             <th><?= __('Nivel') ?></th>
                             <th><?= __('Tc') ?></th>
                             <th><?= __('Tc Solicitacao') ?></th>
-                            <th><?= __('Instituicaoestagio Id') ?></th>
+                            <th><?= __('Instituicao Id') ?></th>
                             <th><?= __('Supervisor Id') ?></th>
                             <th><?= __('Professor Id') ?></th>
                             <th><?= __('Periodo') ?></th>
@@ -121,7 +120,7 @@
                             <td><?= h($estagiarios->nivel) ?></td>
                             <td><?= h($estagiarios->tc) ?></td>
                             <td><?= h($estagiarios->tc_solicitacao) ?></td>
-                            <td><?= h($estagiarios->instituicaoestagio_id) ?></td>
+                            <td><?= h($estagiarios->instituicao_id) ?></td>
                             <td><?= h($estagiarios->supervisor_id) ?></td>
                             <td><?= h($estagiarios->professor_id) ?></td>
                             <td><?= h($estagiarios->periodo) ?></td>
@@ -165,9 +164,9 @@
                             <td><?= h($muralinscricoes->periodo) ?></td>
                             <td><?= h($muralinscricoes->timestamp) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Muralinscricoes', 'action' => 'view', $muralinscricoes->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Muralinscricoes', 'action' => 'edit', $muralinscricoes->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Muralinscricoes', 'action' => 'delete', $muralinscricoes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralinscricoes->id)]) ?>
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Muralinscricoes', 'action' => 'view', $muralinscricoes->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Muralinscricoes', 'action' => 'edit', $muralinscricoes->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Muralinscricoes', 'action' => 'delete', $muralinscricoes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralinscricoes->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

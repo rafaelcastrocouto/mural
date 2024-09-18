@@ -179,7 +179,7 @@
                             <th><?= __('Nivel') ?></th>
                             <th><?= __('Tc') ?></th>
                             <th><?= __('Tc Solicitacao') ?></th>
-                            <th><?= __('Instituicaoestagio Id') ?></th>
+                            <th><?= __('Instituicao Id') ?></th>
                             <th><?= __('Supervisor Id') ?></th>
                             <th><?= __('Professor Id') ?></th>
                             <th><?= __('Periodo') ?></th>
@@ -199,7 +199,7 @@
                             <td><?= h($estagiarios->nivel) ?></td>
                             <td><?= h($estagiarios->tc) ?></td>
                             <td><?= h($estagiarios->tc_solicitacao) ?></td>
-                            <td><?= h($estagiarios->instituicaoestagio_id) ?></td>
+                            <td><?= h($estagiarios->instituicao_id) ?></td>
                             <td><?= h($estagiarios->supervisor_id) ?></td>
                             <td><?= h($estagiarios->professor_id) ?></td>
                             <td><?= h($estagiarios->periodo) ?></td>
@@ -225,7 +225,7 @@
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('Instituicaoestagio Id') ?></th>
+                            <th><?= __('Instituicao Id') ?></th>
                             <th><?= __('Instituicao') ?></th>
                             <th><?= __('Convenio') ?></th>
                             <th><?= __('Vagas') ?></th>
@@ -234,7 +234,7 @@
                             <th><?= __('CargaHoraria') ?></th>
                             <th><?= __('Requisitos') ?></th>
                             <th><?= __('Areaestagio Id') ?></th>
-                            <th><?= __('Horario') ?></th>
+                            <th><?= __('Turno') ?></th>
                             <th><?= __('Professor Id') ?></th>
                             <th><?= __('DataSelecao') ?></th>
                             <th><?= __('DataInscricao') ?></th>
@@ -251,7 +251,7 @@
                         <?php foreach ($professor->muralestagios as $muralestagios) : ?>
                         <tr>
                             <td><?= h($muralestagios->id) ?></td>
-                            <td><?= h($muralestagios->instituicaoestagio_id) ?></td>
+                            <td><?= h($muralestagios->instituicao_id) ?></td>
                             <td><?= h($muralestagios->instituicao) ?></td>
                             <td><?= h($muralestagios->convenio) ?></td>
                             <td><?= h($muralestagios->vagas) ?></td>
@@ -260,7 +260,7 @@
                             <td><?= h($muralestagios->cargaHoraria) ?></td>
                             <td><?= h($muralestagios->requisitos) ?></td>
                             <td><?= h($muralestagios->areaestagio_id) ?></td>
-                            <td><?= h($muralestagios->horario) ?></td>
+                            <td><?= h($muralestagios->turno) ?></td>
                             <td><?= h($muralestagios->professor_id) ?></td>
                             <td><?= h($muralestagios->dataSelecao) ?></td>
                             <td><?= h($muralestagios->dataInscricao) ?></td>

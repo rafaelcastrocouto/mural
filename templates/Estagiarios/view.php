@@ -4,23 +4,26 @@
  * @var \App\Model\Entity\Estagiario $estagiario
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Estagiario'), ['action' => 'edit', $estagiario->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Estagiario'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiario->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Estagiarios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Estagiario'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
+<div>
     <div class="column-responsive column-80">
         <div class="estagiarios view content">
-            <h3><?= h($estagiario->id) ?></h3>
+            <aside>
+                <div class="side-nav">
+                    <?= $this->Html->link(__('Editar Estagiario'), ['action' => 'edit', $estagiario->id], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Form->postLink(__('Deletar Estagiario'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiario->id), 'class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Listar Estagiarios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Novo Estagiario'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                </div>
+            </aside>
+            <h3>estagiario_<?= h($estagiario->id) ?></h3>
             <table>
                 <tr>
+                    <th><?= __('Id') ?></th>
+                    <td><?= $this->Number->format($estagiario->id) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Aluno') ?></th>
-                    <td><?= $estagiario->has('aluno') ? $this->Html->link($estagiario->aluno->id, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
+                    <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Ajustecurricular2020') ?></th>
@@ -28,23 +31,32 @@
                 </tr>
                 <tr>
                     <th><?= __('Turno') ?></th>
-                    <td><?= h($estagiario->turno) ?></td>
+                    <td>
+                    <?php
+                    switch ( h($estagiario->turno) ) {
+                        case 'D': $turno = 'Diurno'; break;
+                        case 'N': $turno = 'Noturno'; break;
+                        case 'A': $turno = 'Ambos'; break;
+                    }
+                    echo $turno;
+                    ?>
+                    </td>
                 </tr>
                 <tr>
                     <th><?= __('Nivel') ?></th>
                     <td><?= h($estagiario->nivel) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Instituicaoestagio') ?></th>
-                    <td><?= $estagiario->has('instituicaoestagio') ? $this->Html->link($estagiario->instituicaoestagio->id, ['controller' => 'Instituicaoestagios', 'action' => 'view', $estagiario->instituicaoestagio->id]) : '' ?></td>
+                    <th><?= __('Instituicao') ?></th>
+                    <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Supervisor') ?></th>
-                    <td><?= $estagiario->has('supervisor') ? $this->Html->link($estagiario->supervisor->id, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : '' ?></td>
+                    <td><?= $estagiario->supervisor ? $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Professor') ?></th>
-                    <td><?= $estagiario->has('professor') ? $this->Html->link($estagiario->professor->id, ['controller' => 'Professores', 'action' => 'view', $estagiario->professor->id]) : '' ?></td>
+                    <td><?= $estagiario->professor ? $this->Html->link($estagiario->professor->nome, ['controller' => 'Professores', 'action' => 'view', $estagiario->professor->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Periodo') ?></th>
@@ -52,15 +64,11 @@
                 </tr>
                 <tr>
                     <th><?= __('Areaestagio') ?></th>
-                    <td><?= $estagiario->has('areaestagio') ? $this->Html->link($estagiario->areaestagio->id, ['controller' => 'Areaestagios', 'action' => 'view', $estagiario->areaestagio->id]) : '' ?></td>
+                    <td><?= $estagiario->areaestagio ? $this->Html->link($estagiario->areaestagio->id, ['controller' => 'Areaestagios', 'action' => 'view', $estagiario->areaestagio->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Observacoes') ?></th>
                     <td><?= h($estagiario->observacoes) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($estagiario->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Registro') ?></th>

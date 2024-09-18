@@ -9,14 +9,14 @@ use Cake\ORM\Entity;
  * Configuracao Entity
  *
  * @property int $id
- * @property int $instituicaoestagio_id
+ * @property int $instituicao_id
  * @property \Cake\I18n\FrozenDate $data
  * @property string $motivo
  * @property string $responsavel
  * @property string|null $descricao
  * @property string $avaliacao
  *
- * @property \App\Model\Entity\Instituicaoestagio $instituicaoestagio
+ * @property \App\Model\Entity\Instituicao $instituicao
  */
 class Configuracao extends Entity
 {

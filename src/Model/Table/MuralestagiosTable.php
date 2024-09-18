@@ -12,7 +12,7 @@ use Cake\Validation\Validator;
 /**
  * Muralestagios Model
  *
- * @property \App\Model\Table\InstituicaoestagiosTable&\Cake\ORM\Association\BelongsTo $Instituicaoestagios
+ * @property \App\Model\Table\InstituicoesTable&\Cake\ORM\Association\BelongsTo $Instituicoes
  * @property \App\Model\Table\AreaestagiosTable&\Cake\ORM\Association\BelongsTo $Areaestagios
  * @property \App\Model\Table\ProfessoresTable&\Cake\ORM\Association\BelongsTo $Professores
  * @property \App\Model\Table\MuralinscricoesTable&\Cake\ORM\Association\HasMany $Muralinscricoes
@@ -48,7 +48,7 @@ class MuralestagiosTable extends Table {
         $this->setDisplayField('instituicao');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Instituicaoestagios', [
+        $this->belongsTo('Instituicoes', [
             'foreignKey' => ['estagio_id'],
         ]);
         $this->belongsTo('Areaestagios', [
@@ -112,9 +112,9 @@ class MuralestagiosTable extends Table {
                 ->allowEmptyString('requisitos');
 
         $validator
-                ->scalar('horario')
-                ->maxLength('horario', 1)
-                ->allowEmptyString('horario');
+                ->scalar('turno')
+                ->maxLength('turno', 1)
+                ->allowEmptyString('turno');
 
         $validator
                 ->date('dataSelecao')
@@ -172,7 +172,7 @@ class MuralestagiosTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules): RulesChecker {
-        $rules->add($rules->existsIn(['instituicaoestagio_id'], 'Instituicaoestagios'), ['errorField' => 'instituicaoestagio_id']);
+        $rules->add($rules->existsIn(['instituicao_id'], 'Instituicoes'), ['errorField' => 'instituicao_id']);
         $rules->add($rules->existsIn(['areaestagio_id'], 'Areaestagios'), ['errorField' => 'areaestagio_id']);
         $rules->add($rules->existsIn(['professor_id'], 'Professores'), ['errorField' => 'professor_id']);
 

@@ -49,25 +49,25 @@ $session = $this->request->getSession();
 </div>
 
 <div class="estagiarios index content">
-    <?= $this->Html->link(__('New Estagiario'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <?= $this->Html->link(__('Novo Estagiario'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Estagiarios') ?></h3>
     <div>
         <table>
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('Alunos.nome', 'Nome') ?></th>
+                    <th><?= $this->Paginator->sort('Alunos.nome', 'Aluno') ?></th>
                     <th><?= $this->Paginator->sort('registro') ?></th>
                     <th><?= $this->Paginator->sort('ajustecurricular2020') ?></th>
                     <th><?= $this->Paginator->sort('turno') ?></th>
                     <th><?= $this->Paginator->sort('nivel') ?></th>
                     <th><?= $this->Paginator->sort('tc') ?></th>
                     <th><?= $this->Paginator->sort('tc_solicitacao') ?></th>
-                    <th><?= $this->Paginator->sort('Instituicaoestagios.instituicao', 'Instituicao') ?></th>
+                    <th><?= $this->Paginator->sort('Instituicoes.instituicao', 'Instituicao') ?></th>
                     <th><?= $this->Paginator->sort('Supervisores.nome', 'Supervisor') ?></th>
-                    <th><?= $this->Paginator->sort('Profesdsores.nome', 'Professor/a') ?></th>
+                    <th><?= $this->Paginator->sort('Profesdsores.nome', 'Professor') ?></th>
                     <th><?= $this->Paginator->sort('periodo') ?></th>
-                    <th><?= $this->Paginator->sort('areaestagio_id') ?></th>
+                    <th><?= $this->Paginator->sort('Areaestagios.nome', 'Area estagio') ?></th>
                     <th><?= $this->Paginator->sort('nota') ?></th>
                     <th><?= $this->Paginator->sort('ch') ?></th>
                     <th><?= $this->Paginator->sort('observacoes') ?></th>
@@ -78,20 +78,20 @@ $session = $this->request->getSession();
                 <?php foreach ($estagiarios as $estagiario): ?>
                 <tr>
                     <td><?= $this->Number->format($estagiario->id) ?></td>
-                    <td><?= $estagiario->has('aluno') ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
+                    <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
                     <td><?= $estagiario->registro ?></td>
                     <td><?= h($estagiario->ajustecurricular2020) ?></td>
                     <td><?= h($estagiario->turno) ?></td>
                     <td><?= h($estagiario->nivel) ?></td>
                     <td><?= $estagiario->tc ?></td>
                     <td><?= h($estagiario->tc_solicitacao) ?></td>
-                    <td><?= $estagiario->has('instituicaoestagio') ? $this->Html->link($estagiario->instituicaoestagio->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $estagiario->instituicaoestagio->id]) : '' ?></td>
-                    <td><?= ($estagiario->supervisor and $estagiario->supervisor->has('nome')) ? $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : 'Sem supervisor' ?></td>
-                    <td><?= $estagiario->has('professor') ? $this->Html->link($estagiario->professor->nome, ['controller' => 'Professores', 'action' => 'view', $estagiario->professor->id]) : '' ?></td>
+                    <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicao', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
+                    <td><?= ($estagiario->supervisor and $estagiario->supervisor->nome) ? $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : 'Sem supervisor' ?></td>
+                    <td><?= $estagiario->professor ? $this->Html->link($estagiario->professor->nome, ['controller' => 'Professores', 'action' => 'view', $estagiario->professor->id]) : '' ?></td>
                     <td><?= h($estagiario->periodo) ?></td>
-                    <td><?= $estagiario->has('areaestagio') ? $this->Html->link($estagiario->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $estagiario->areaestagio->id]) : '' ?></td>
-                    <td><?= $this->Number->format($estagiario->nota) ?></td>
-                    <td><?= $this->Number->format($estagiario->ch) ?></td>
+                    <td><?= $estagiario->areaestagio ? $this->Html->link($estagiario->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $estagiario->areaestagio->id]) : '' ?></td>
+                    <td><?= $estagiario->nota ? $this->Number->format($estagiario->nota) : '' ?></td>
+                    <td><?= $estagiario->ch ? $this->Number->format($estagiario->ch) : '' ?></td>
                     <td><?= h($estagiario->observacoes) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('Ver'), ['action' => 'view', $estagiario->id]) ?>

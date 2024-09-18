@@ -18,12 +18,12 @@
             <h3>areaestagio_<?= h($areaestagio->id) ?></h3>
             <table>
                 <tr>
-                    <th><?= __('Area') ?></th>
-                    <td><?= h($areaestagio->area) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($areaestagio->id) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Area') ?></th>
+                    <td><?= h($areaestagio->area) ?></td>
                 </tr>
             </table>
             <div class="related">
@@ -41,7 +41,7 @@
                             <th><?= __('Nivel') ?></th>
                             <th><?= __('Tc') ?></th>
                             <th><?= __('Tc Solicitacao') ?></th>
-                            <th><?= __('Instituicaoestagio Id') ?></th>
+                            <th><?= __('Instituicao Id') ?></th>
                             <th><?= __('Supervisor Id') ?></th>
                             <th><?= __('Professor Id') ?></th>
                             <th><?= __('Periodo') ?></th>
@@ -55,18 +55,18 @@
                         <tr>
                             <td><?= h($estagiarios->id) ?></td>
                             <td><?= h($estagiarios->aluno_id) ?></td>
-                            <td><?= $estagiarios->has('aluno') ? $this->Html->link(h($estagiarios->aluno->nome), ['controller' => 'alunos', 'action' => 'view', $estagiarios->alunonovo_id]) : '' ?></td>
+                            <td><?= $estagiarios->aluno ? $this->Html->link(h($estagiarios->aluno->nome), ['controller' => 'alunos', 'action' => 'view', $estagiarios->alunonovo_id]) : '' ?></td>
                             <td><?= h($estagiarios->registro) ?></td>
                             <td><?= h($estagiarios->ajustecurricular2020) ?></td>
                             <td><?= h($estagiarios->turno) ?></td>
                             <td><?= h($estagiarios->nivel) ?></td>
                             <td><?= h($estagiarios->tc) ?></td>
                             <td><?= h($estagiarios->tc_solicitacao) ?></td>
-                            <td><?= $estagiarios->instituicaoestagio ? $this->Html->link(h($estagiarios->instituicaoestagio->instituicao), ['controller' => 'instituicaoestagios', 'action' => 'view', $estagiarios->instituicao_id]) : '' ?></td>
-                            <td><?= $estagiarios->supervisor ? $this->Html->link(h($estagiarios->supervisor->nome), ['controller' => 'supervisores', 'action' => 'view', $estagiarios->supervisor_id]) : '' ?></td>
-                            <td><?= $estagiarios->professor ? $this->Html->link(h($estagiarios->professor->nome), ['controller' => 'professores',  'action' => 'view', $estagiarios->professor_id]) : '' ?></td>
+                            <td><?= $estagiarios->instituicao ? $this->Html->link(h($estagiarios->instituicao->instituicao), ['controller' => 'instituicaoestagios', 'action' => 'view', $estagiarios->instituicao->id]) : '' ?></td>
+                            <td><?= $estagiarios->supervisor ? $this->Html->link(h($estagiarios->supervisor->nome), ['controller' => 'supervisores', 'action' => 'view', $estagiarios->supervisor_->id]) : '' ?></td>
+                            <td><?= $estagiarios->professor ? $this->Html->link(h($estagiarios->professor->nome), ['controller' => 'professores',  'action' => 'view', $estagiarios->professor->id]) : '' ?></td>
                             <td><?= h($estagiarios->periodo) ?></td>
-                            <td><?= $estagiarios->has('areaestagio') ? $this->Html->link(h($estagiarios->areaestagio->area), ['controller' => 'areaestagios', 'action' => 'view', $estagiarios->area_id]) : '' ?></td>
+                            <td><?= $estagiarios->areaestagio ? $this->Html->link(h($estagiarios->areaestagio->area), ['controller' => 'areaestagios', 'action' => 'view', $estagiarios->areaestagio->id]) : '' ?></td>
                             <td><?= h($estagiarios->nota) ?></td>
                             <td><?= h($estagiarios->ch) ?></td>
                             <td><?= h($estagiarios->observacoes) ?></td>
@@ -88,7 +88,7 @@
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('Instituicaoestagio Id') ?></th>
+                            <th><?= __('Instituicao Id') ?></th>
                             <th><?= __('Instituicao') ?></th>
                             <th><?= __('Convenio') ?></th>
                             <th><?= __('Vagas') ?></th>
@@ -115,7 +115,7 @@
                         <tr>
                             <td><?= h($muralestagios->id) ?></td>
                             <td><?= h($muralestagios->id_estagio) ?></td>
-                            <td><?= $muralestagios->instituicao = ($muralestagios->id_estagio > 0) ? $this->Html->link(h($muralestagios->instituicao), ['controller' => 'instituicaoestagios', 'action' => 'view', $muralestagios->id_estagio]) : '' ?></td>
+                            <td><?= $muralestagios->instituicao = ($muralestagios->id_estagio > 0) ? $this->Html->link(h($muralestagios->instituicao), ['controller' => 'instituicoes', 'action' => 'view', $muralestagios->id_estagio]) : '' ?></td>
                             <td><?= h($muralestagios->convenio) ?></td>
                             <td><?= h($muralestagios->vagas) ?></td>
                             <td><?= h($muralestagios->beneficios) ?></td>

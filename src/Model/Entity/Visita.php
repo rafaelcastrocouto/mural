@@ -9,14 +9,14 @@ use Cake\ORM\Entity;
  * Visita Entity
  *
  * @property int $id
- * @property int $instituicaoestagio_id
+ * @property int $instituicao_id
  * @property \Cake\I18n\FrozenDate $data
  * @property string $motivo
  * @property string $responsavel
  * @property string|null $descricao
  * @property string $avaliacao
  *
- * @property \App\Model\Entity\Instituicaoestagio $instituicaoestagio
+ * @property \App\Model\Entity\Instituicao $instituicao
  */
 class Visita extends Entity
 {
@@ -35,7 +35,6 @@ class Visita extends Entity
         'motivo' => true,
         'responsavel' => true,
         'descricao' => true,
-        'avaliacao' => true,
-        'instituicaoestagio' => true,
+        'avaliacao' => true
     ];
 }

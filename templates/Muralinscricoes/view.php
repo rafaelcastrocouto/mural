@@ -24,11 +24,11 @@
                 </tr>               
                 <tr>
                     <th><?= __('Aluno') ?></th>
-                    <td><?= $muralinscricao->has('aluno') ? $this->Html->link($muralinscricao->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $muralinscricao->alunonovo->id]) : '' ?></td>
+                    <td><?= $muralinscricao->aluno ? $this->Html->link($muralinscricao->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $muralinscricao->alunonovo->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Muralestagio') ?></th>
-                    <td><?= $muralinscricao->has('muralestagio') ? $this->Html->link($muralinscricao->muralestagio->instituicao, ['controller' => 'Muralestagios', 'action' => 'view', $muralinscricao->muralestagio->id]) : '' ?></td>
+                    <td><?= $muralinscricao->muralestagio ? $this->Html->link($muralinscricao->muralestagio->instituicao, ['controller' => 'Muralestagios', 'action' => 'view', $muralinscricao->muralestagio->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Periodo') ?></th>

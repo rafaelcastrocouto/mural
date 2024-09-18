@@ -18,8 +18,8 @@
             </aside>
             <table>
                 <tr>
-                    <th><?= __('Instituicao estagio') ?></th>
-                    <td><?= $visita->has('instituicaoestagio') ? $this->Html->link($visita->instituicaoestagio->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $visita->instituicaoestagio->id]) : '' ?></td>
+                    <th><?= __('Instituicao') ?></th>
+                    <td><?= $visita->instituicao ? $this->Html->link($visita->instituicao->instituicao, ['controller' => 'Instituicao', 'action' => 'view', $visita->instituicao->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Motivo') ?></th>

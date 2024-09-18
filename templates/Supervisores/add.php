@@ -39,7 +39,7 @@
                     echo $this->Form->control('num_inscricao');
                     echo $this->Form->control('curso_turma');
                     echo $this->Form->control('observacoes');
-                    echo $this->Form->control('instituicaoestagios._ids', ['options' => $instituicaoestagios]);
+                    echo $this->Form->control('instituicoes._ids', ['options' => $instituicoess]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

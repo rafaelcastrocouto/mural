@@ -5,7 +5,7 @@
  */
 ?>
 <div class="areaestagios index content">
-    <?= $this->Html->link(__('Nova Areaestagio'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <?= $this->Html->link(__('Nova Area estagio'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Area estagios') ?></h3>
     <div>
         <table>

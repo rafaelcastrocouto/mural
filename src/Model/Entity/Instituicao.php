@@ -6,7 +6,7 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Instituicaoestagio Entity
+ * Instituicao Entity
  *
  * @property int $id
  * @property string $instituicao
@@ -37,7 +37,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Visita[] $visitas
  * @property \App\Model\Entity\Supervisor[] $supervisores
  */
-class Instituicaoestagio extends Entity
+class Instituicao extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().

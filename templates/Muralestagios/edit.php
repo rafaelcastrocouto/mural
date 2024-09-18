@@ -21,7 +21,7 @@
             <fieldset>
                 <legend><?= __('Editar Muralestagio') ?></legend>
                 <?php
-                    echo $this->Form->control('id_estagio', ['options' => $instituicaoestagios, 'empty' => true, 'class' => 'form-control']);
+                    echo $this->Form->control('id_estagio', ['options' => $instituicoes, 'empty' => true, 'class' => 'form-control']);
                     echo $this->Form->control('instituicao');
                     echo $this->Form->control('convenio');
                     echo $this->Form->control('email');
@@ -31,7 +31,7 @@
                     echo $this->Form->control('cargaHoraria');
                     echo $this->Form->control('requisitos');
                     echo $this->Form->control('areaestagio_id', ['options' => $areaestagios, 'class' => 'form-control']);
-                    echo $this->Form->control('horario');
+                    echo $this->Form->control('turno');
                     echo $this->Form->control('professor_id', ['options' => $professores, 'class' => 'form-control']);
                     echo $this->Form->control('dataSelecao', ['empty' => true]);
                     echo $this->Form->control('dataInscricao', ['empty' => true]);

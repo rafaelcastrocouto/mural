@@ -16,7 +16,7 @@ use Cake\ORM\Entity;
  * @property string $nivel
  * @property int $tc
  * @property \Cake\I18n\FrozenDate|null $tc_solicitacao
- * @property int $instituicaoestagio_id
+ * @property int $instituicao_id
  * @property int|null $supervisor_id
  * @property int|null $professor_id
  * @property string $periodo
@@ -26,7 +26,7 @@ use Cake\ORM\Entity;
  * @property string|null $observacoes
  *
  * @property \App\Model\Entity\Aluno $aluno
- * @property \App\Model\Entity\Instituicaoestagio $instituicaoestagio
+ * @property \App\Model\Entity\Instituicao $instituicao
  * @property \App\Model\Entity\Supervisor $supervisor
  * @property \App\Model\Entity\Professor $professor
  * @property \App\Model\Entity\Areaestagio $areaestagio
@@ -59,11 +59,6 @@ class Estagiario extends Entity
         'nota' => true,
         'ch' => true,
         'observacoes' => true,
-        'complemento_id' => true,
-        'aluno' => true,
-        'instituicaoestagio' => true,
-        'supervisor' => true,
-        'professor' => true,
-        'areaestagio' => true,
+        'complemento_id' => true
     ];
 }

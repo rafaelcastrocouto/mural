@@ -12,7 +12,7 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('instituicaoestagio_id') ?></th>
+                    <th><?= $this->Paginator->sort('instituicao_id') ?></th>
                     <th><?= $this->Paginator->sort('data') ?></th>
                     <th><?= $this->Paginator->sort('motivo') ?></th>
                     <th><?= $this->Paginator->sort('responsavel') ?></th>
@@ -24,7 +24,7 @@
                 <?php foreach ($visitas as $visita): ?>
                 <tr>
                     <td><?= $this->Number->format($visita->id) ?></td>
-                    <td><?= $visita->has('instituicaoestagio') ? $this->Html->link($visita->instituicaoestagio->id, ['controller' => 'Instituicaoestagios', 'action' => 'view', $visita->instituicaoestagio->id]) : '' ?></td>
+                    <td><?= $visita->instituicao ? $this->Html->link($visita->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $visita->instituicao->id]) : '' ?></td>
                     <td><?= h($visita->data) ?></td>
                     <td><?= h($visita->motivo) ?></td>
                     <td><?= h($visita->responsavel) ?></td>
