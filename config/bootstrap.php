@@ -226,7 +226,7 @@ ServerRequest::addDetector('tablet', function ($request) {
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
 
 Inflector::rules('irregular', ['supervisor' => 'supervisores']);
-Inflector::rules('irregular', ['muralinscricao' => 'muralinscricoes']);
+Inflector::rules('irregular', ['inscricao' => 'inscricoes']);
 Inflector::rules('irregular', ['areainstituicao' => 'areainstituicoes']);
 Inflector::rules('irregular', ['professor' => 'professores']);
 

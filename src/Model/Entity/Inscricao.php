@@ -6,7 +6,7 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Muralinscricao Entity
+ * Inscricao Entity
  *
  * @property int $id
  * @property int $registro
@@ -19,7 +19,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Aluno $aluno
  * @property \App\Model\Entity\Muralestagio $muralestagio
  */
-class Muralinscricao extends Entity
+class Inscricao extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().

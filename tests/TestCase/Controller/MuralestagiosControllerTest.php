@@ -26,7 +26,7 @@ class MuralestagiosControllerTest extends TestCase
         'app.Instituicoes',
         'app.Areaestagios',
         'app.Professores',
-        'app.Muralinscricoes',
+        'app.Inscricoes',
     ];
 
     /**

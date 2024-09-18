@@ -24,8 +24,16 @@
             <h3>muralestagios_<?= h($muralestagio->id) ?></h3>
             <table>
                 <tr>
+                    <th><?= __('Id') ?></th>
+                    <td><?= $this->Number->format($muralestagio->id) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Instituicao') ?></th>
                     <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $muralestagio->id]) : '' ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Vagas') ?></th>
+                    <td><?= $this->Number->format($muralestagio->vagas) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Convenio') ?></th>
@@ -76,7 +84,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Professor') ?></th>
-                    <td><?= $muralestagio->professor ? $this->Html->link('' . $muralestagio->professor->nome, ['controller' => 'Professores', 'action' => 'view', $muralestagio->professor_id]) : '' ?></td>
+                    <td><?= $muralestagio->professor ? $this->Html->link($muralestagio->professor->nome, ['controller' => 'Professores', 'action' => 'view', $muralestagio->professor->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('HorarioSelecao') ?></th>
@@ -121,14 +129,6 @@
                     <td><?= h($muralestagio->email) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($muralestagio->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Vagas') ?></th>
-                    <td><?= $this->Number->format($muralestagio->vagas) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('CargaHoraria') ?></th>
                     <td><?= $this->Number->format($muralestagio->cargaHoraria) ?></td>
                 </tr>
@@ -149,7 +149,7 @@
             </div>
             <div class="related">
                 <h4><?= __('Inscricoes para o Mural de Estágios') ?></h4>
-                <?php if (!empty($muralestagio->muralinscricoes)) : ?>
+                <?php if (!empty($muralestagio->inscricoes)) : ?>
                 <div>
                     <table>
                         <tr>
@@ -162,20 +162,20 @@
                             <th><?= __('Timestamp') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($muralestagio->muralinscricoes as $muralinscricoes) : ?>
+                        <?php foreach ($muralestagio->inscricoes as $inscricao) : ?>
                         <tr>
-                            <?php // pr($muralinscricoes) ?>
-                            <td><?= h($muralinscricoes->id) ?></td>
-                            <td><?= h($muralinscricoes->aluno_id) ?></td>
-                            <td><?= $this->Html->link($muralinscricoes->aluno ? $muralinscricoes->aluno->nome : '-', ['controller' => 'Alunos', 'action' => 'view', $muralinscricoes->alunonovo_id]); ?></td>
-                            <td><?= h($muralinscricoes->instituicao_id) ?></td>
-                            <td><?= h($muralinscricoes->data) ?></td>
-                            <td><?= h($muralinscricoes->periodo) ?></td>
-                            <td><?= h($muralinscricoes->timestamp) ?></td>
+                            <?php // pr($inscricao) ?>
+                            <td><?= h($inscricao->id) ?></td>
+                            <td><?= h($inscricao->aluno_id) ?></td>
+                            <td><?= $this->Html->link($inscricao->aluno ? $inscricao->aluno->nome : '-', ['controller' => 'Alunos', 'action' => 'view', $inscricao->alunonovo_id]); ?></td>
+                            <td><?= h($inscricao->instituicao_id) ?></td>
+                            <td><?= h($inscricao->data) ?></td>
+                            <td><?= h($inscricao->periodo) ?></td>
+                            <td><?= h($inscricao->timestamp) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('Ver'), ['controller' => 'Muralinscricoes', 'action' => 'view', $muralinscricoes->id]) ?>
-                                <?= $this->Html->link(__('Editar'), ['controller' => 'Muralinscricoes', 'action' => 'edit', $muralinscricoes->id]) ?>
-                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Muralinscricoes', 'action' => 'delete', $muralinscricoes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralinscricoes->id)]) ?>
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Inscricoes', 'action' => 'edit', $inscricao->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Inscricoes', 'action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

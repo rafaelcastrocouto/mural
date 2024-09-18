@@ -21,7 +21,6 @@
             <fieldset>
                 <legend><?= __('Editar Muralestagio') ?></legend>
                 <?php
-                    echo $this->Form->control('id_estagio', ['options' => $instituicoes, 'empty' => true, 'class' => 'form-control']);
                     echo $this->Form->control('instituicao');
                     echo $this->Form->control('convenio');
                     echo $this->Form->control('email');

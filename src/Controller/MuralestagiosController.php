@@ -53,11 +53,11 @@ class MuralestagiosController extends AppController {
         // die();
         /*
         $muralestagio = $this->Muralestagios->get($id, [
-            'contain' => ['Instituicoes', 'Areaestagios', 'Professores', 'Muralinscricoes'],
+            'contain' => ['Instituicoes', 'Areaestagios', 'Professores', 'Inscricoes'],
         ]);
          */
         $muralestagio = $this->Muralestagios->get($id, [
-            'contain' => ['Instituicoes', 'Areaestagios', 'Professores', 'Muralinscricoes' => ['Alunos']],
+            'contain' => ['Instituicoes', 'Areaestagios', 'Professores', 'Inscricoes' => ['Alunos']],
         ]);
         // pr($muralestagio);
         // die();

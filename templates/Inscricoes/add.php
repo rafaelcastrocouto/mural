@@ -1,21 +1,20 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Muralinscricao $muralinscricao
+ * @var \App\Model\Entity\Inscricao $inscricao
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Muralinscricoes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
+<div">
     <div class="column-responsive column-80">
-        <div class="muralinscricoes form content">
-            <?= $this->Form->create($muralinscricao) ?>
+        <div class="inscricoes form content">
+            <aside>
+                <div class="side-nav">
+                    <?= $this->Html->link(__('Listar Inscricoes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                </div>
+            </aside>
+            <?= $this->Form->create($inscricao) ?>
             <fieldset>
-                <legend><?= __('Add Muralinscricao') ?></legend>
+                <legend><?= __('Adicionar Inscricao') ?></legend>
                 <?php
                     echo $this->Form->control('registro');
                     echo $this->Form->control('aluno_id', ['options' => $alunos, 'empty' => true]);
@@ -25,7 +24,7 @@
                     echo $this->Form->control('timestamp');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Inscrever')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

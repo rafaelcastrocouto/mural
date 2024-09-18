@@ -27,7 +27,7 @@ use Cake\ORM\Entity;
  * @property string|null $observacoes
  *
  * @property \App\Model\Entity\Estagiario[] $estagiarios
- * @property \App\Model\Entity\Muralinscricao[] $muralinscricoes
+ * @property \App\Model\Entity\Inscricao[] $inscricoes
  * @property \App\Model\Entity\Userestagio[] $users
  */
 class Aluno extends Entity

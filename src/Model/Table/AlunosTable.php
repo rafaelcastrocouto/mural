@@ -12,7 +12,7 @@ use Cake\Validation\Validator;
  * Alunos Model
  *
  * @property \App\Model\Table\EstagiariosTable&\Cake\ORM\Association\HasMany $Estagiarios
- * @property \App\Model\Table\MuralinscricoesTable&\Cake\ORM\Association\HasMany $Muralinscricoes
+ * @property \App\Model\Table\InscricoesTable&\Cake\ORM\Association\HasMany $Inscricoes
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\HasMany $Users
  *
  * @method \App\Model\Entity\Aluno newEmptyEntity()
@@ -46,7 +46,7 @@ class AlunosTable extends Table
         $this->setDisplayField('nome');
         $this->setPrimaryKey('id');
         
-        $this->hasMany('Muralinscricoes', [
+        $this->hasMany('Inscricoes', [
             'foreignKey' => 'aluno_id',
         ]);
        $this->hasMany('Users', [
