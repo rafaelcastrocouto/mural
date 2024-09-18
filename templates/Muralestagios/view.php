@@ -3,13 +3,9 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Muralestagio $muralestagio
  */
-
 //pr($muralestagio);
 //die();
-
-
 ?>
-
 <div>
     <div class="column-responsive column-80">
         <div class="muralestagios view content">
@@ -29,7 +25,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Instituicao') ?></th>
-                    <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $muralestagio->id]) : '' ?></td>
+                    <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $muralestagio->instituicao->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Vagas') ?></th>
