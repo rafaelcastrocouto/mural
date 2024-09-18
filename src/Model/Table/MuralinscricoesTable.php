@@ -49,7 +49,7 @@ class MuralinscricoesTable extends Table {
             'foreignKey' => 'aluno_id',
         ]);
         $this->belongsTo('Muralestagios', [
-            'foreignKey' => 'id_instituicao',
+            'foreignKey' => 'instituicao_id',
         ]);
     }
 
@@ -75,8 +75,8 @@ class MuralinscricoesTable extends Table {
                 ->notEmptyString('alunonovo_id');
         
         $validator
-                ->integer('id_instituicao')
-                ->notEmptyString('id_instituicao');
+                ->integer('instituicao_id')
+                ->notEmptyString('instituicao_id');
         
         $validator
                 ->date('data')
@@ -104,7 +104,7 @@ class MuralinscricoesTable extends Table {
      */
     public function buildRules(RulesChecker $rules): RulesChecker {
         $rules->add($rules->existsIn(['registro'], 'Alunos'), ['errorField' => 'registro']);
-        $rules->add($rules->existsIn(['id_instituicao'], 'Muralestagios'), ['errorField' => 'id_instituicao']);
+        $rules->add($rules->existsIn(['instituicao_id'], 'Muralestagios'), ['errorField' => 'instituicao_id']);
 
         return $rules;
     }

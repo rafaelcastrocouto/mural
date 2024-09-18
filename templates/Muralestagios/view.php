@@ -11,17 +11,16 @@
 ?>
 
 <div>
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Muralestagio'), ['action' => 'edit', $muralestagio->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Muralestagio'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Muralestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Muralestagio'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column-responsive column-80">
         <div class="muralestagios view content">
+		    <aside>
+		        <div class="side-nav">
+		            <?= $this->Html->link(__('Editar Muralestagio'), ['action' => 'edit', $muralestagio->id], ['class' => 'side-nav-item']) ?>
+		            <?= $this->Form->postLink(__('Deletar Muralestagio'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id), 'class' => 'side-nav-item']) ?>
+		            <?= $this->Html->link(__('Listar Muralestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+		            <?= $this->Html->link(__('Novo Muralestagio'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+		        </div>
+		    </aside>
             <h3><?= h($muralestagio->instituicao) ?></h3>
             <table>
                 <tr>
@@ -175,8 +174,8 @@
                             <?php // pr($muralinscricoes) ?>
                             <td><?= h($muralinscricoes->id) ?></td>
                             <td><?= h($muralinscricoes->aluno_id) ?></td>
-                            <td><?= $this->Html->link('' . $muralinscricoes->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $muralinscricoes->alunonovo_id]); ?></td>
-                            <td><?= h($muralinscricoes->id_instituicao) ?></td>
+                            <td><?= $this->Html->link($muralinscricoes->aluno ? $muralinscricoes->aluno->nome : '-', ['controller' => 'Alunos', 'action' => 'view', $muralinscricoes->alunonovo_id]); ?></td>
+                            <td><?= h($muralinscricoes->instituicao_id) ?></td>
                             <td><?= h($muralinscricoes->data) ?></td>
                             <td><?= h($muralinscricoes->periodo) ?></td>
                             <td><?= h($muralinscricoes->timestamp) ?></td>

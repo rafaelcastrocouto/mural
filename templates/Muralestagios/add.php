@@ -16,15 +16,16 @@
             <fieldset>
                 <legend><?= __('Adicionar Mural estagio') ?></legend>
                 <?php
-                    echo $this->Form->control('instituicaoestagio_id', ['options' => $instituicaoestagios, 'empty' => true]);
+                    echo $this->Form->control('instituicaoestagio_id', ['options' => $instituicaoestagios, 'empty' => true, 'class' => 'form-control']);
                     echo $this->Form->control('instituicao');
+                    echo $this->Form->control('email');
                     echo $this->Form->control('convenio');
                     echo $this->Form->control('vagas');
                     echo $this->Form->control('beneficios');
                     echo $this->Form->control('final_de_semana');
                     echo $this->Form->control('cargaHoraria');
                     echo $this->Form->control('requisitos');
-                    echo $this->Form->control('areaestagio_id', ['options' => $areaestagios]);
+                    echo $this->Form->control('areaestagio_id', ['options' => $areaestagios, 'class' => 'form-control']);
                     echo $this->Form->control('horario');
                     echo $this->Form->control('professor_id', ['options' => $professores]);
                     echo $this->Form->control('dataSelecao', ['empty' => true]);
@@ -33,14 +34,13 @@
                     echo $this->Form->control('localSelecao');
                     echo $this->Form->control('formaSelecao');
                     echo $this->Form->control('contato');
-                    echo $this->Form->control('outras');
                     echo $this->Form->control('periodo');
                     echo $this->Form->control('datafax', ['empty' => true]);
                     echo $this->Form->control('localInscricao');
-                    echo $this->Form->control('email');
+                    echo $this->Form->control('outras');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Adicionar')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

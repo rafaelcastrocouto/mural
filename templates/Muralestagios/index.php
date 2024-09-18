@@ -76,9 +76,9 @@ $session->write('id_categoria', 1);
                         <td><?= h($muralestagio->dataSelecao) ?></td>
                         <td><?= h($muralestagio->dataInscricao) ?></td>
                         <td class="actions">
-                            <?= $this->Html->link(__('View'), ['action' => 'view', $muralestagio->id]) ?>
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $muralestagio->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id)]) ?>
+                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $muralestagio->id]) ?>
+                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $muralestagio->id]) ?>
+                            <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id)]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

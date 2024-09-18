@@ -213,9 +213,9 @@
                                     <td><?= h($estagiarios->nivel) ?></td>
                                     <td><?= h($estagiarios->tc) ?></td>
                                     <td><?= h($estagiarios->tc_solicitacao) ?></td>
-                                    <td><?= $estagiarios->has('instituicaoestagio') ? $this->Html->link(h($estagiarios->instituicaoestagio->instituicao), ['controller' => 'instituicaoestagios', 'action' => 'view', $estagiarios->id_instituicao]) : '' ?></td>
+                                    <td><?= $estagiarios->has('instituicaoestagio') ? $this->Html->link(h($estagiarios->instituicaoestagio->instituicao), ['controller' => 'instituicaoestagios', 'action' => 'view', $estagiarios->instituicao_id]) : '' ?></td>
                                     <td><?= $estagiarios->has('supervisor') ? $this->Html->link(h($estagiarios->supervisor->nome), ['controller' => 'supervisores', 'action' => 'view', $estagiarios->supervisor_id]) : '' ?></td>
-                                    <td><?= $estagiarios->has('professor') ? $this->Html->link(h($estagiarios->professor->nome), ['controller' => 'professores', 'action' => 'view', $estagiarios->id_professor]) : '' ?></td>
+                                    <td><?= $estagiarios->has('professor') ? $this->Html->link(h($estagiarios->professor->nome), ['controller' => 'professores', 'action' => 'view', $estagiarios->professor_id]) : '' ?></td>
                                     <td><?= h($estagiarios->periodo) ?></td>
                                     <td><?= h($estagiarios->areaestagio_id) ?></td>
                                     <td><?= h($estagiarios->nota) ?></td>

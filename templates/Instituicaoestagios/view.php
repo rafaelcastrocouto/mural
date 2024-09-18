@@ -7,17 +7,17 @@
 //die();
 ?>
 <div>
-    <aside>
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Instituicaoestagio'), ['action' => 'edit', $instituicaoestagio->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Instituicaoestagio'), ['action' => 'delete', $instituicaoestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $instituicaoestagio->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Instituicaoestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Instituicaoestagio'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column-responsive column-80">
         <div class="instituicaoestagios view content">
+            <aside>
+                <div class="side-nav">
+                    <h4 class="heading"><?= __('Actions') ?></h4>
+                    <?= $this->Html->link(__('Edit Instituicaoestagio'), ['action' => 'edit', $instituicaoestagio->id], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Form->postLink(__('Delete Instituicaoestagio'), ['action' => 'delete', $instituicaoestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $instituicaoestagio->id), 'class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('List Instituicaoestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('New Instituicaoestagio'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                </div>
+            </aside>
             <h3><?= h($instituicaoestagio->id) ?></h3>
             <table>
                 <tr>
@@ -211,9 +211,9 @@
                             <td><?= h($estagiarios->nivel) ?></td>
                             <td><?= h($estagiarios->tc) ?></td>
                             <td><?= h($estagiarios->tc_solicitacao) ?></td>
-                            <td><?= $estagiarios->has('instituicaoestagio') ? $this->Html->link($estagiarios->instituicaoestagio->instituicao, ['controller' => 'instituicaoestagios', 'action' => 'view', $estagiarios->id_instituicao]) : '' ?></td>
+                            <td><?= $estagiarios->has('instituicaoestagio') ? $this->Html->link($estagiarios->instituicaoestagio->instituicao, ['controller' => 'instituicaoestagios', 'action' => 'view', $estagiarios->instituicao_id]) : '' ?></td>
                             <td><?= $estagiarios->has('supervisor') ? $this->Html->link(''.h($estagiarios->supervisor->nome), ['controller' => 'supervisores', 'action' => 'view', $estagiarios->supervisor_id]) : '' ?></td>
-                            <td><?= $estagiarios->has('professor') ? $this->Html->link(''.h($estagiarios->professor->nome), ['controller' => 'professores', 'action' => 'view', $estagiarios->id_profesores]) : '' ?></td>
+                            <td><?= $estagiarios->has('professor') ? $this->Html->link(''.h($estagiarios->professor->nome), ['controller' => 'professores', 'action' => 'view', $estagiarios->profesores_id]) : '' ?></td>
                             <td><?= h($estagiarios->periodo) ?></td>
                             <td><?= h($estagiarios->id_area) ?></td>
                             <td><?= h($estagiarios->nota) ?></td>

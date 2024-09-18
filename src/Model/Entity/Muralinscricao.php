@@ -34,7 +34,7 @@ class Muralinscricao extends Entity
         'registro' => true,
         'aluno_id' => true,
         'alunonovo_id' => true,
-        'id_instituicao' => true, // id atual do mural de estagios
+        'instituicao_id' => true, // id atual do mural de estagios
         'data' => true,
         'periodo' => true,
         'timestamp' => true,
