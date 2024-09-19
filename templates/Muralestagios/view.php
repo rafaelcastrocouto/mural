@@ -143,9 +143,9 @@
                     <?= $this->Text->autoParagraph(h($muralestagio->outras)); ?>
                 </blockquote>
             </div>
+            <?php if (!empty($muralestagio->inscricoes)) : ?>
             <div class="related">
                 <h4><?= __('Inscricoes para o Mural de Estágios') ?></h4>
-                <?php if (!empty($muralestagio->inscricoes)) : ?>
                 <div>
                     <table>
                         <tr>
@@ -177,8 +177,8 @@
                         <?php endforeach; ?>
                     </table>
                 </div>
-                <?php endif; ?>
             </div>
+			<?php endif; ?>
         </div>
     </div>
 </div>

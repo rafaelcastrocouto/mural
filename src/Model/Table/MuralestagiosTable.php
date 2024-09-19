@@ -52,8 +52,7 @@ class MuralestagiosTable extends Table {
             'foreignKey' => ['instituicao_id'],
         ]);
         $this->belongsTo('Areaestagios', [
-            'foreignKey' => ['area_id'],
-            'joinType' => 'INNER',
+            'foreignKey' => ['area_id']
         ]);
         $this->belongsTo('Professores', [
             'foreignKey' => ['professor_id'],

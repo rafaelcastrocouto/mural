@@ -3,6 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Aluno $aluno
  */
+//pr($aluno);
 ?>
 <div>
     <div class="column-responsive column-80">
@@ -86,9 +87,42 @@
                     <td><?= h($aluno->nascimento) ?></td>
                 </tr>
             </table>
+            
+            <?php if (!empty($aluno->users)) : ?>
+            <div class="related">
+                <h4><?= __('Related Users') ?></h4>
+                <div>
+                    <table>
+                        <tr>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Email') ?></th>
+                            <th><?= __('Senha') ?></th>
+                            <th><?= __('Registro') ?></th>
+                            <th><?= __('Data') ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                        <?php foreach ($aluno->users as $user) : ?>
+                        <tr>
+                            <td><?= h($user->id) ?></td>
+                            <td><?= h($user->email) ?></td>
+                            <td><?= h($user->password) ?></td>
+                            <td><?= $this->Number->format($user->registro) ?></td>
+                            <td><?= h($user->data) ?></td>
+                            <td class="actions">
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Users', 'action' => 'view', $user->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Users', 'action' => 'edit', $user->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Users', 'action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+            </div>
+            <?php endif; ?>
+            
+            <?php if (!empty($aluno->estagiarios)) : ?>
             <div class="related">
                 <h4><?= __('Related Estagiarios') ?></h4>
-                <?php if (!empty($aluno->estagiarios)) : ?>
                 <div>
                     <table>
                         <tr>
@@ -110,38 +144,39 @@
                             <th><?= __('Observacoes') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($aluno->estagiarios as $estagiarios) : ?>
+                        <?php foreach ($aluno->estagiarios as $estagiario) : ?>
                         <tr>
-                            <td><?= h($estagiarios->id) ?></td>
-                            <td><?= h($estagiarios->aluno_id) ?></td>
-                            <td><?= h($estagiarios->registro) ?></td>
-                            <td><?= h($estagiarios->ajustecurricular2020) ?></td>
-                            <td><?= h($estagiarios->turno) ?></td>
-                            <td><?= h($estagiarios->nivel) ?></td>
-                            <td><?= h($estagiarios->tc) ?></td>
-                            <td><?= h($estagiarios->tc_solicitacao) ?></td>
-                            <td><?= h($estagiarios->instituicao_id) ?></td>
-                            <td><?= h($estagiarios->supervisor_id) ?></td>
-                            <td><?= h($estagiarios->professor_id) ?></td>
-                            <td><?= h($estagiarios->periodo) ?></td>
-                            <td><?= h($estagiarios->areaestagio_id) ?></td>
-                            <td><?= h($estagiarios->nota) ?></td>
-                            <td><?= h($estagiarios->ch) ?></td>
-                            <td><?= h($estagiarios->observacoes) ?></td>
+                            <td><?= h($estagiario->id) ?></td>
+                            <td><?= h($estagiario->aluno_id) ?></td>
+                            <td><?= h($estagiario->registro) ?></td>
+                            <td><?= h($estagiario->ajustecurricular2020) ?></td>
+                            <td><?= h($estagiario->turno) ?></td>
+                            <td><?= h($estagiario->nivel) ?></td>
+                            <td><?= h($estagiario->tc) ?></td>
+                            <td><?= h($estagiario->tc_solicitacao) ?></td>
+                            <td><?= h($estagiario->instituicao_id) ?></td>
+                            <td><?= h($estagiario->supervisor_id) ?></td>
+                            <td><?= h($estagiario->professor_id) ?></td>
+                            <td><?= h($estagiario->periodo) ?></td>
+                            <td><?= h($estagiario->areaestagio_id) ?></td>
+                            <td><?= h($estagiario->nota) ?></td>
+                            <td><?= h($estagiario->ch) ?></td>
+                            <td><?= h($estagiario->observacoes) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('Ver'), ['controller' => 'Estagiarios', 'action' => 'view', $estagiarios->id]) ?>
-                                <?= $this->Html->link(__('Editar'), ['controller' => 'Estagiarios', 'action' => 'edit', $estagiarios->id]) ?>
-                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Estagiarios', 'action' => 'delete', $estagiarios->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiarios->id)]) ?>
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Estagiarios', 'action' => 'view', $estagiario->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Estagiarios', 'action' => 'edit', $estagiario->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Estagiarios', 'action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiario->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
                     </table>
                 </div>
-                <?php endif; ?>
             </div>
+            <?php endif; ?>
+            
+            <?php if (!empty($aluno->inscricoes)) : ?>
             <div class="related">
                 <h4><?= __('Related Inscricoes') ?></h4>
-                <?php if (!empty($aluno->inscricoes)) : ?>
                 <div>
                     <table>
                         <tr>
@@ -172,8 +207,8 @@
                         <?php endforeach; ?>
                     </table>
                 </div>
-                <?php endif; ?>
             </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
