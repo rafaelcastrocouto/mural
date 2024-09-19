@@ -20,7 +20,7 @@
 
 <?php
 $session = $this->request->getSession();
-//$session->write('id_categoria', 1);
+$session->write('id_categoria', 1);
 // echo $session->read('id_categoria');
 ?>
 
@@ -66,7 +66,7 @@ $session = $this->request->getSession();
                 <?php foreach ($muralestagios as $muralestagio): ?>
                     <tr>
                         <td><?= $this->Number->format($muralestagio->id) ?></td>
-                        <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao->instituicao, ['controller' => 'Muralestagios', 'action' => 'view', $muralestagio->id]) : $muralestagio->instituicao_old ?></td>
+                        <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao->instituicao, ['controller' => 'Muralestagios', 'action' => 'view', $muralestagio->id]) : '' ?></td>
                         <td><?= $this->Number->format($muralestagio->vagas) ?></td>
                         <td><?= h($muralestagio->beneficios) ?></td>
                         <td><?= h($muralestagio->final_de_semana) ?></td>

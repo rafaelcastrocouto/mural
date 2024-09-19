@@ -10,7 +10,6 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int|null $instituicao_id
- * @property string $instituicao
  * @property string $convenio
  * @property int $vagas
  * @property string|null $beneficios
@@ -50,8 +49,7 @@ class Muralestagio extends Entity
      */
 	 
     protected array $_accessible = [
-        'id_estagio' => true,
-        'instituicao' => true,
+        'instituicao_id' => true,
         'convenio' => true,
         'vagas' => true,
         'beneficios' => true,

@@ -41,6 +41,7 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 400;
     background: var(--color-main-bg);
+    font-size: 14px;
 }
 
 .top-nav-links,
@@ -54,6 +55,17 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-headings);
 }
 
+h1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 2em;
+}
+h2 {
+    font-size: 18px;
+}
+h3 {
+    font-size: 16px;
+}
 a {
     color: var(--color-links);
     transition: color 0.2s linear;
@@ -68,6 +80,17 @@ a:active {
 
 .navbar {
     background: #2b6c9c;
+    margin-bottom: 1em;
+}
+.navbar a,
+.navbar a:hover,
+.navbar a:focus,
+.navbar a:active {
+    color: #fff;
+}
+
+.navbar .navbar-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .side-nav a,
@@ -142,6 +165,9 @@ th {
     display: block;
     padding: 0.5rem 0;
 }
+.nav-item {
+    margin: 0;
+}
 
 /* View action */
 .view.content .text {
@@ -183,6 +209,9 @@ th {
 }
 
 /* Forms */
+.form-inline label {
+    margin-right: 1em;
+}
 .input.radio,
 .input.checkbox,
 .input.multicheckbox {

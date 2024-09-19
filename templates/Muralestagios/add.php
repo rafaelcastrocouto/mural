@@ -17,7 +17,6 @@
                 <legend><?= __('Adicionar Mural estagio') ?></legend>
                 <?php
                     echo $this->Form->control('instituicao_id', ['options' => $instituicoes, 'empty' => true, 'class' => 'form-control']);
-                    echo $this->Form->control('instituicao');
                     echo $this->Form->control('email');
                     echo $this->Form->control('convenio');
                     echo $this->Form->control('vagas');
