@@ -4,12 +4,22 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
+
+<?php
+$session = $this->request->getSession();
+$session->write('id_categoria', 1);
+// echo $session->read('id_categoria');
+?>
+
 <div>
     <div class="column-responsive column-80">
         <div class="users form content">
             <aside>
                 <div class="side-nav">
-                    <?= $this->Html->link(__('Listar Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                    <?php if ($session->read('id_categoria') == 1): ?>
+                        <?= $this->Html->link(__('Listar Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                    <?php endif; ?>
+                    <?= $this->Html->link(__('Fazer Login'), ['action' => 'login'], ['class' => 'side-nav-item']) ?>
                 </div>
             </aside>
             <?= $this->Form->create($user) ?>
@@ -19,11 +29,7 @@
                     echo $this->Form->control('email');
                     echo $this->Form->control('password');
                     echo $this->Form->control('categoria', ['options' => $categorias, 'value' => '2', 'class' => 'form-control']);
-                    echo $this->Form->control('numero');
-                    echo $this->Form->control('aluno_id', ['type' => 'text']);
-                    echo $this->Form->control('supervisor_id', ['type' => 'text']);
-                    echo $this->Form->control('professor_id', ['type' => 'text']);
-                    echo $this->Form->control('data', ['type' => 'datetime-local']);
+                    echo $this->Form->control('registro');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Adicionar')) ?>
