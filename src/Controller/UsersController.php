@@ -11,7 +11,16 @@ namespace App\Controller;
  * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class UsersController extends AppController {
-
+    /**
+     * beforeFilter method
+     */
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+    
+        $this->Authentication->allowUnauthenticated(['login']);
+    }
+    
     /**
      * Index method
      *
@@ -181,4 +190,29 @@ class UsersController extends AppController {
         die();
     }
 
+    /*
+     * Login method
+     */
+    public function login()
+    {
+        $result = $this->Authentication->getResult();
+        // If the user is logged in send them away.
+        if ($result->isValid()) {
+            $target = $this->Authentication->getLoginRedirect() ?? '/muralestagios';
+            return $this->redirect($target);
+        }
+        if ($this->request->is('post')) {
+            $this->Flash->error('Invalid username or password');
+        }
+    }
+    
+
+    /*
+     * Logout method
+     */
+    public function logout()
+    {
+        $this->Authentication->logout();
+        return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+    }
 }
