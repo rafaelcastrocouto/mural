@@ -50,11 +50,9 @@ class EstagiariosTable extends Table
 
         $this->belongsTo('Alunos', [
             'foreignKey' => 'aluno_id',
-            'joinType' => 'INNER',
         ]);
         $this->belongsTo('Instituicoes', [
             'foreignKey' => 'instituicao_id',
-            'joinType' => 'INNER',
         ]);
         $this->belongsTo('Supervisores', [
             'foreignKey' => 'supervisor_id',

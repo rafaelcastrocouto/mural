@@ -103,7 +103,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Num Inscricao') ?></th>
-                    <td><?= $this->Number->format($supervisor->num_inscricao) ?></td>
+                    <td><?= $supervisor->num_inscrica ? $this->Number->format($supervisor->num_inscricao) : '' ?></td>
                 </tr>
             </table>
             <div class="text">
@@ -199,29 +199,29 @@
                                 <th><?= __('Observacoes') ?></th>
                                 <th class="actions"><?= __('Actions') ?></th>
                             </tr>
-                            <?php foreach ($supervisor->estagiarios as $estagiarios) : ?>
+                            <?php foreach ($supervisor->estagiarios as $estagiario) : ?>
                                 <tr>
-                                    <td><?= h($estagiarios->id) ?></td>
-                                    <td><?= h($estagiarios->aluno_id) ?></td>
-                                    <td><?= $this->Html->link($estagiarios->aluno->nome, ['controller' => 'alunos', 'action' => 'view', $estagiarios->alunonovo_id]) ?></td>
-                                    <td><?= h($estagiarios->registro) ?></td>
-                                    <td><?= h($estagiarios->ajustecurricular2020) ?></td>
-                                    <td><?= h($estagiarios->turno) ?></td>
-                                    <td><?= h($estagiarios->nivel) ?></td>
-                                    <td><?= h($estagiarios->tc) ?></td>
-                                    <td><?= h($estagiarios->tc_solicitacao) ?></td>
-                                    <td><?= $estagiarios->instituicao ? $this->Html->link(h($estagiarios->instituicao->instituicao), ['controller' => 'instituicoes', 'action' => 'view', $estagiarios->instituicao->id]) : '' ?></td>
-                                    <td><?= $estagiarios->supervisor ? $this->Html->link(h($estagiarios->supervisor->nome), ['controller' => 'supervisores', 'action' => 'view', $estagiarios->supervisor->id]) : '' ?></td>
-                                    <td><?= $estagiarios->professor ? $this->Html->link(h($estagiarios->professor->nome), ['controller' => 'professores', 'action' => 'view', $estagiarios->professor->id]) : '' ?></td>
-                                    <td><?= h($estagiarios->periodo) ?></td>
-                                    <td><?= h($estagiarios->areaestagio_id) ?></td>
-                                    <td><?= h($estagiarios->nota) ?></td>
-                                    <td><?= h($estagiarios->ch) ?></td>
-                                    <td><?= h($estagiarios->observacoes) ?></td>
+                                    <td><?= h($estagiario->id) ?></td>
+                                    <td><?= h($estagiario->aluno_id) ?></td>
+                                    <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
+                                    <td><?= h($estagiario->registro) ?></td>
+                                    <td><?= h($estagiario->ajustecurricular2020) ?></td>
+                                    <td><?= h($estagiario->turno) ?></td>
+                                    <td><?= h($estagiario->nivel) ?></td>
+                                    <td><?= h($estagiario->tc) ?></td>
+                                    <td><?= h($estagiario->tc_solicitacao) ?></td>
+                                    <td><?= $estagiario->instituicao ? $this->Html->link(h($estagiario->instituicao->instituicao), ['controller' => 'Instituicoes', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
+                                    <td><?= $estagiario->supervisor ? $this->Html->link(h($estagiario->supervisor->nome), ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : '' ?></td>
+                                    <td><?= $estagiario->professor ? $this->Html->link(h($estagiario->professor->nome), ['controller' => 'Professores', 'action' => 'view', $estagiario->professor->id]) : '' ?></td>
+                                    <td><?= h($estagiario->periodo) ?></td>
+                                    <td><?= h($estagiario->areaestagio_id) ?></td>
+                                    <td><?= h($estagiario->nota) ?></td>
+                                    <td><?= h($estagiario->ch) ?></td>
+                                    <td><?= h($estagiario->observacoes) ?></td>
                                     <td class="actions">
-                                        <?= $this->Html->link(__('Ver'), ['controller' => 'Estagiarios', 'action' => 'view', $estagiarios->id]) ?>
-                                        <?= $this->Html->link(__('Editar'), ['controller' => 'Estagiarios', 'action' => 'edit', $estagiarios->id]) ?>
-                                        <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Estagiarios', 'action' => 'delete', $estagiarios->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiarios->id)]) ?>
+                                        <?= $this->Html->link(__('Ver'), ['controller' => 'Estagiarios', 'action' => 'view', $estagiario->id]) ?>
+                                        <?= $this->Html->link(__('Editar'), ['controller' => 'Estagiarios', 'action' => 'edit', $estagiario->id]) ?>
+                                        <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Estagiarios', 'action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiario->id)]) ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

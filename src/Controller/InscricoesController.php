@@ -21,7 +21,7 @@ class InscricoesController extends AppController
         //$this->paginate = [
         //    'contain' => ['Alunos', 'Muralestagios'],
         //];
-        $inscricoes = $this->paginate($this->Inscricoes->find()->contain(['Alunos', 'Muralestagios']));
+        $inscricoes = $this->paginate($this->Inscricoes->find()->contain(['Alunos', 'Muralestagios'/* => ['Instituicoes']*/]));
 
         $this->set(compact('inscricoes'));
     }

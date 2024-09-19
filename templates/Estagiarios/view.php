@@ -37,6 +37,7 @@
                         case 'D': $turno = 'Diurno'; break;
                         case 'N': $turno = 'Noturno'; break;
                         case 'A': $turno = 'Ambos'; break;
+                        default: $turno = '-';
                     }
                     echo $turno;
                     ?>
@@ -48,7 +49,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Instituicao') ?></th>
-                    <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicaoestagios', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
+                    <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Supervisor') ?></th>

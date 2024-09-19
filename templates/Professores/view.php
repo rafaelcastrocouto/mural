@@ -127,19 +127,19 @@
                 </tr>
                 <tr>
                     <th><?= __('Siape') ?></th>
-                    <td><?= $this->Number->format($professor->siape) ?></td>
+                    <td><?= $professor->siape ? $this->Number->format($professor->siape) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Anoformacao') ?></th>
-                    <td><?= $this->Number->format($professor->anoformacao) ?></td>
+                    <td><?= $professor->anoformacao ? $this->Number->format($professor->anoformacao) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Mestradoanoconclusao') ?></th>
-                    <td><?= $this->Number->format($professor->mestradoanoconclusao) ?></td>
+                    <td><?= $professor->mestradoanoconclusao ? $this->Number->format($professor->mestradoanoconclusao) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Doutoradoanoconclusao') ?></th>
-                    <td><?= $this->Number->format($professor->doutoradoanoconclusao) ?></td>
+                    <td><?= $professor->doutoradoanoconclusao ? $this->Number->format($professor->doutoradoanoconclusao) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Datanascimento') ?></th>

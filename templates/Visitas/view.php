@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Instituicao') ?></th>
-                    <td><?= $visita->instituicao ? $this->Html->link($visita->instituicao->instituicao, ['controller' => 'Instituicao', 'action' => 'view', $visita->instituicao->id]) : '' ?></td>
+                    <td><?= $visita->instituicao ? $this->Html->link($visita->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $visita->instituicao->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Motivo') ?></th>

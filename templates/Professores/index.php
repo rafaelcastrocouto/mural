@@ -55,7 +55,7 @@
                     <td><?= $this->Number->format($professor->id) ?></td>
                     <td><?= h($professor->nome) ?></td>
                     <td><?= h($professor->cpf) ?></td>
-                    <td><?= $this->Number->format($professor->siape) ?></td>
+                    <td><?= $professor->siape ? $this->Number->format($professor->siape) : '' ?></td>
                     <td><?= h($professor->datanascimento) ?></td>
                     <td><?= h($professor->localnascimento) ?></td>
                     <td><?= h($professor->sexo) ?></td>
@@ -72,13 +72,13 @@
                     <td><?= h($professor->pesquisadordgp) ?></td>
                     <td><?= h($professor->formacaoprofissional) ?></td>
                     <td><?= h($professor->universidadedegraduacao) ?></td>
-                    <td><?= $this->Number->format($professor->anoformacao) ?></td>
+                    <td><?= $professor->anoformacao ? $this->Number->format($professor->anoformacao) : '' ?></td>
                     <td><?= h($professor->mestradoarea) ?></td>
                     <td><?= h($professor->mestradouniversidade) ?></td>
-                    <td><?= $this->Number->format($professor->mestradoanoconclusao) ?></td>
+                    <td><?= $professor->mestradoanoconclusao ? $this->Number->format($professor->mestradoanoconclusao) : '' ?></td>
                     <td><?= h($professor->doutoradoarea) ?></td>
                     <td><?= h($professor->doutoradouniversidade) ?></td>
-                    <td><?= $this->Number->format($professor->doutoradoanoconclusao) ?></td>
+                    <td><?= $professor->doutoradoanoconclusao ? $this->Number->format($professor->doutoradoanoconclusao) : '' ?></td>
                     <td><?= h($professor->dataingresso) ?></td>
                     <td><?= h($professor->formaingresso) ?></td>
                     <td><?= h($professor->tipocargo) ?></td>

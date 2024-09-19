@@ -46,7 +46,6 @@ class VisitasTable extends Table
 
         $this->belongsTo('Instituicoes', [
             'foreignKey' => 'instituicao_id',
-            'joinType' => 'INNER',
         ]);
     }
 
