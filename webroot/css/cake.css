@@ -66,6 +66,10 @@ a:active {
     transition: color 0.2s ease-out;
 }
 
+.navbar {
+    background: #2b6c9c;
+}
+
 .side-nav a,
 .top-nav-links a,
 th a,

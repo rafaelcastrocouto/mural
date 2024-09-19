@@ -86,6 +86,12 @@ endif;
             <h2>
                 Built with CakePHP <?= h(Configure::version()) ?> Chiffon (🍰)
             </h2>
+            <h3>
+                <div class="side-nav">
+                    <?= $this->Html->link(__('Login'), ['action' => 'login'], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Register'), ['action' => 'register'], ['class' => 'side-nav-item']) ?>
+                </div>
+            </h3>
         </div>
     </header>
     <main class="main">
@@ -242,6 +248,5 @@ endif;
             </div>
         </div>
     </main>
-    <?= phpinfo() ?>
 </body>
 </html>
