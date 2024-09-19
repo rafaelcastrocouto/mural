@@ -6,15 +6,23 @@
 //pr($muralestagio);
 //die();
 ?>
+
+<?php
+$session = $this->request->getSession();
+$session->write('id_categoria', 1);
+// echo $session->read('id_categoria');
+?>
 <div>
     <div class="column-responsive column-80">
         <div class="muralestagios view content">
 		    <aside>
 		        <div class="side-nav">
-		            <?= $this->Html->link(__('Editar Muralestagio'), ['action' => 'edit', $muralestagio->id], ['class' => 'side-nav-item']) ?>
-		            <?= $this->Form->postLink(__('Deletar Muralestagio'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id), 'class' => 'side-nav-item']) ?>
-		            <?= $this->Html->link(__('Listar Muralestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-		            <?= $this->Html->link(__('Novo Muralestagio'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+					<?= $this->Html->link(__('Listar Muralestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                    <?php if ($session->read('id_categoria') == 1): ?>
+			            <?= $this->Html->link(__('Editar Muralestagio'), ['action' => 'edit', $muralestagio->id], ['class' => 'side-nav-item']) ?>
+			            <?= $this->Form->postLink(__('Deletar Muralestagio'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id), 'class' => 'side-nav-item']) ?>
+			            <?= $this->Html->link(__('Novo Muralestagio'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+					<?php endif; ?>
 		        </div>
 		    </aside>
             <h3>muralestagios_<?= h($muralestagio->id) ?></h3>

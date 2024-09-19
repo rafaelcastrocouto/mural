@@ -11,6 +11,15 @@ namespace App\Controller;
  * @method \App\Model\Entity\Muralestagio[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class MuralestagiosController extends AppController {
+    /**
+     * beforeFilter method
+     */
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+    
+        $this->Authentication->allowUnauthenticated(['index', 'view']);
+    }
 
     /**
      * Index method
