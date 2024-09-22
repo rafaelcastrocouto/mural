@@ -20,7 +20,7 @@
                 <li class="nav-item dropdown">
                     <a style='color:white' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Declarações</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <?php echo $this->Html->link("Termo de compromisso", "/Inscricaos/termosolicita", ['class' => 'dropdown-item']); ?>
+                        <?php echo $this->Html->link("Termo de compromisso", "/Inscricoes/termosolicita", ['class' => 'dropdown-item']); ?>
                         <?php echo $this->Html->link("Folha de avaliação discente", "/Alunos/avaliacaosolicita", ['class' => 'dropdown-item']); ?>
                         <?php echo $this->Html->link("Formulário de avaliação discente on-line", "/Avaliacoes/busca_dre", ['class' => 'dropdown-item']); ?>
                         <?php echo $this->Html->link("Folha de atividades", "/Alunos/folhasolicita", ['class' => 'dropdown-item']); ?>
@@ -95,7 +95,7 @@
                 case 3: // Professor
                     ?>
                     <li class="nav-item">
-                        <?php echo $this->Html->link("Meus dados", "/Professors/view?siape=" . $this->Session->read('numero'), ['class' => 'nav-link', 'style' => 'color: white']); ?>
+                        <?php echo $this->Html->link("Meus dados", "/Professores/view?siape=" . $this->Session->read('numero'), ['class' => 'nav-link', 'style' => 'color: white']); ?>
                     </li>
                     <li class = "nav-item">
                         <?php echo $this->Html->link('Sair', '/Users/logout/', ['class' => 'nav-link']); ?>
@@ -105,7 +105,7 @@
                 case 4: // Supervisor
                     ?>
                     <li class="nav-item">
-                        <?php echo $this->Html->link("Meus dados", "/Supervisors/view?cress=" . $this->Session->read('numero'), ['class' => 'nav-link']); ?>
+                        <?php echo $this->Html->link("Meus dados", "/Supervisores/view?cress=" . $this->Session->read('numero'), ['class' => 'nav-link']); ?>
                     </li>
                     <li class = "nav-item">
                         <?php echo $this->Html->link('Sair', '/Users/logout/', ['class' => 'nav-link']); ?>

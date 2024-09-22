@@ -16,7 +16,7 @@ use Cake\ORM\Entity;
  * @property string|null $final_de_semana
  * @property int|null $cargaHoraria
  * @property string|null $requisitos
- * @property int $areaestagio_id
+ * @property int $area_estagio_id
  * @property string|null $turno
  * @property int $professor_id
  * @property \Cake\I18n\FrozenDate|null $dataSelecao
@@ -56,7 +56,7 @@ class Muralestagio extends Entity
         'final_de_semana' => true,
         'cargaHoraria' => true,
         'requisitos' => true,
-        'area_id' => true,
+        'area_estagio_id' => true,
         'turno' => true,
         'professor_id' => true,
         'dataSelecao' => true,

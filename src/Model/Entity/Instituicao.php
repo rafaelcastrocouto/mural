@@ -11,7 +11,6 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $instituicao
  * @property int|null $areainstituicoes_id
- * @property int|null $area_id
  * @property string|null $natureza
  * @property string $cnpj
  * @property string $email
@@ -51,7 +50,6 @@ class Instituicao extends Entity
     protected array $_accessible = [
         'instituicao' => true,
         'area_instituicoes_id' => true,
-        'area_id' => true,
         'natureza' => true,
         'cnpj' => true,
         'email' => true,

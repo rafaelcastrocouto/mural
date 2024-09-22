@@ -20,13 +20,13 @@
 
 <?php
 $session = $this->request->getSession();
-$session->write('id_categoria', 1);
-// echo $session->read('id_categoria');
+$session->write('categoria_id', 1);
+//echo $session->read('categoria_id');
 ?>
 
 <div class="row justify-content-center">
     <div class="col-auto">
-        <?php if ($session->read('id_categoria') == 1): ?>
+        <?php if ($session->read('categoria_id') == 1): ?>
             <?= $this->Form->create($muralestagios, ['class' => 'form-inline']); ?>
 				<?= $this->Form->label('Periodo'); ?>
 				<?= $this->Form->input('periodo', [

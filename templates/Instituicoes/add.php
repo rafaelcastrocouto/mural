@@ -19,7 +19,6 @@
                 <?php
                     echo $this->Form->control('instituicao');
                     echo $this->Form->control('areainstituicoes_id', ['options' => $areainstituicoes, 'empty' => true]);
-                    echo $this->Form->control('area');
                     echo $this->Form->control('natureza');
                     echo $this->Form->control('cnpj');
                     echo $this->Form->control('email');

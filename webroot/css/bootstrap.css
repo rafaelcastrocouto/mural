@@ -4329,7 +4329,7 @@ input[type="button"].btn-block {
   align-items: center;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 3rem;
 }
 
 .navbar .container,

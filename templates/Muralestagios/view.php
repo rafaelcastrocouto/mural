@@ -9,7 +9,7 @@
 
 <?php
 $session = $this->request->getSession();
-$session->write('id_categoria', 1);
+$session->write('categoria_id', 1);
 // echo $session->read('id_categoria');
 ?>
 <div>

@@ -7,8 +7,8 @@
 
 <?php
 $session = $this->request->getSession();
-$session->write('id_categoria', 1);
-// echo $session->read('id_categoria');
+$session->write('categoria_id', 1);
+// echo $session->read('categoria_id');
 ?>
 
 <div>
@@ -16,7 +16,7 @@ $session->write('id_categoria', 1);
         <div class="users form content">
             <aside>
                 <div class="side-nav">
-                    <?php if ($session->read('id_categoria') == 1): ?>
+                    <?php if ($session->read('categoria_id') == 1): ?>
                         <?= $this->Html->link(__('Listar Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
                     <?php endif; ?>
                     <?= $this->Html->link(__('Fazer Login'), ['action' => 'login'], ['class' => 'side-nav-item']) ?>

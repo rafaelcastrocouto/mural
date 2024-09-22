@@ -51,9 +51,6 @@ class InstituicoesTable extends Table
         $this->belongsTo('Areainstituicoes', [
             'foreignKey' => 'area_instituicoes_id',
         ]);
-        $this->belongsTo('Areaestagios', [
-            'foreignKey' => 'area_id',
-        ]);        
         $this->hasMany('Estagiarios', [
             'foreignKey' => 'instituicao_id',
         ]);

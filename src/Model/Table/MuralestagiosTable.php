@@ -52,7 +52,7 @@ class MuralestagiosTable extends Table {
             'foreignKey' => ['instituicao_id'],
         ]);
         $this->belongsTo('Areaestagios', [
-            'foreignKey' => ['area_id']
+            'foreignKey' => ['area_estagios_id']
         ]);
         $this->belongsTo('Professores', [
             'foreignKey' => ['professor_id'],
@@ -172,7 +172,7 @@ class MuralestagiosTable extends Table {
      */
     public function buildRules(RulesChecker $rules): RulesChecker {
         $rules->add($rules->existsIn(['instituicao_id'], 'Instituicoes'), ['errorField' => 'instituicao_id']);
-        $rules->add($rules->existsIn(['areaestagio_id'], 'Areaestagios'), ['errorField' => 'areaestagio_id']);
+        $rules->add($rules->existsIn(['area_estagio_id'], 'Areaestagios'), ['errorField' => 'area_estagio_id']);
         $rules->add($rules->existsIn(['professor_id'], 'Professores'), ['errorField' => 'professor_id']);
 
         return $rules;

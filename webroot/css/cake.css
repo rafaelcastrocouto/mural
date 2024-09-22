@@ -78,9 +78,12 @@ a:active {
     transition: color 0.2s ease-out;
 }
 
-.navbar {
+body .navbar {
     background: #2b6c9c;
-    margin-bottom: 1em;
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    left: 0;
 }
 .navbar a,
 .navbar a:hover,
@@ -116,6 +119,9 @@ th a,
 }
 
 /* Main */
+#content {
+    margin-top: 5em;
+}
 .content {
     padding: 2rem;
     background: var(--color-white);

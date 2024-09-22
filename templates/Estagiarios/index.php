@@ -21,16 +21,16 @@
 </script>
 
 <?php
-// $this->request->getSession()->write('id_categoria', 1);
+// $this->request->getSession()->write('categoria_id', 1);
 $session = $this->request->getSession();
-//$session->write('id_categoria', 1);
-// echo $this->request->getSession()->read('id_categoria');
+//$session->write('categoria_id', 1);
+// echo $this->request->getSession()->read('categoria_id');
 // die();
 ?>
 
 <div class="row justify-content-center">
     <div class="col-auto">
-        <?php if ($session->read('id_categoria') == 1): ?>
+        <?php if ($session->read('categoria_id') == 1): ?>
             <?= $this->Form->create($estagiarios, ['class' => 'form-inline']); ?>
 			<?= $this->Form->input('periodo', [
 					'id' => 'EstagiarioPeriodo', 

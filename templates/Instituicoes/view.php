@@ -92,10 +92,6 @@
                     <td><?= h($instituicao->observacoes) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Area estagio') ?></th>
-                    <td><?= $instituicao->area_id ? $this->Html->link(''.$instituicao->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $instituicao->area_id]) : '' ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Convenio') ?></th>
                     <td><?= $instituicao->convenio ? $this->Number->format($instituicao->convenio) : '' ?></td>
                 </tr>
@@ -127,7 +123,6 @@
                             <th><?= __('Cress') ?></th>
                             <th><?= __('Regiao') ?></th>
                             <th><?= __('Outros Estudos') ?></th>
-                            <th><?= __('Area Curso') ?></th>
                             <th><?= __('Ano Curso') ?></th>
                             <th><?= __('Cargo') ?></th>
                             <th><?= __('Num Inscricao') ?></th>
