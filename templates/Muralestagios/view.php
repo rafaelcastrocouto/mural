@@ -71,7 +71,7 @@ $session->write('categoria_id', 1);
                 </tr>
                 <tr>
                     <th><?= __('Area estagio') ?></th>
-                    <td><?= $muralestagio->areaestagio ? $this->Html->link($muralestagio->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $muralestagio->areaestagio->id]) : '' ?></td>
+                    <td><?= $muralestagio->areaestagio ? $this->Html->link($muralestagio->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $muralestagio->areaestagio->id]) : $muralestagio->area_estagio_id ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Turno') ?></th>
@@ -157,6 +157,7 @@ $session->write('categoria_id', 1);
                 <div>
                     <table>
                         <tr>
+                            <th class="actions"><?= __('Actions') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Registro') ?></th>
                             <th><?= __('Aluno Id') ?></th>
@@ -164,11 +165,15 @@ $session->write('categoria_id', 1);
                             <th><?= __('Data') ?></th>
                             <th><?= __('Periodo') ?></th>
                             <th><?= __('Timestamp') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($muralestagio->inscricoes as $inscricao) : ?>
                         <tr>
                             <?php // pr($inscricao) ?>
+							<td class="actions">
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Inscricoes', 'action' => 'edit', $inscricao->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Inscricoes', 'action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id)]) ?>
+                            </td>
                             <td><?= h($inscricao->id) ?></td>
                             <td><?= h($inscricao->aluno_id) ?></td>
                             <td><?= $this->Html->link($inscricao->aluno ? $inscricao->aluno->nome : '-', ['controller' => 'Alunos', 'action' => 'view', $inscricao->alunonovo_id]); ?></td>
@@ -176,11 +181,6 @@ $session->write('categoria_id', 1);
                             <td><?= h($inscricao->data) ?></td>
                             <td><?= h($inscricao->periodo) ?></td>
                             <td><?= $inscricao->timestamp ? h($inscricao->timestamp) : '' ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('Ver'), ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>
-                                <?= $this->Html->link(__('Editar'), ['controller' => 'Inscricoes', 'action' => 'edit', $inscricao->id]) ?>
-                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Inscricoes', 'action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id)]) ?>
-                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </table>

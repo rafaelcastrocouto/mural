@@ -24,33 +24,41 @@ $session->write('categoria_id', 1);
 //echo $session->read('categoria_id');
 ?>
 
-<div class="row justify-content-center">
-    <div class="col-auto">
-        <?php if ($session->read('categoria_id') == 1): ?>
-            <?= $this->Form->create($muralestagios, ['class' => 'form-inline']); ?>
-				<?= $this->Form->label('Periodo'); ?>
-				<?= $this->Form->input('periodo', [
-						'default'=> $periodo->periodo,
-						'id' => 'MuralestagioPeriodo', 
-						'type' => 'select', 
-						'options' => $periodos,
-						'class' => 'form-control'
-					]); 
-				?>
-            <?= $this->Form->end(); ?>
-        <?php else: ?>
-            <h1 style="text-align: center;">Mural de estágios da ESS/UFRJ. Período: <?= '2020-1'; ?></h1>
-        <?php endif; ?>
-    </div>
-</div>
-
 <div class="muralestagios index content">
-    <?= $this->Html->link(__('Novo mural'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Mural de estagios') ?></h3>
+	
+	<div class="row justify-content-center">
+	    <div class="col-auto">
+	        <?php if ($session->read('categoria_id') == 1): ?>
+	            <?= $this->Form->create($muralestagios, ['class' => 'form-inline']); ?>
+					<?= $this->Form->label('Periodo'); ?>
+					<?= $this->Form->input('periodo', [
+							'default'=> $periodo->periodo,
+							'id' => 'MuralestagioPeriodo', 
+							'type' => 'select', 
+							'options' => $periodos,
+							'class' => 'form-control'
+						]); 
+					?>
+	            <?= $this->Form->end(); ?>
+	        <?php else: ?>
+	            <h1 style="text-align: center;">Mural de estágios da ESS/UFRJ. Período: <?= '2020-1'; ?></h1>
+	        <?php endif; ?>
+	    </div>
+	</div>
+	
+	<aside>
+		<div class="nav">
+		    <?= $this->Html->link(__('Novo mural'), ['action' => 'add'], ['class' => 'button']) ?>
+		</div>
+	</aside>
+	
+	<h3><?= __('Mural de estagios') ?></h3>
+	
     <div>
         <table>
             <thead>
                 <tr>
+                    <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('instituicao', 'Instituição') ?></th>
                     <th><?= $this->Paginator->sort('vagas') ?></th>
@@ -59,12 +67,16 @@ $session->write('categoria_id', 1);
                     <th><?= $this->Paginator->sort('cargaHoraria', 'CH') ?></th>
                     <th><?= $this->Paginator->sort('dataSelecao', 'Seleção') ?></th>
                     <th><?= $this->Paginator->sort('dataInscricao', 'Inscrição') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($muralestagios as $muralestagio): ?>
                     <tr>
+                        <td class="actions">
+                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $muralestagio->id]) ?>
+                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $muralestagio->id]) ?>
+                            <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id)]) ?>
+                        </td>
                         <td><?= $this->Number->format($muralestagio->id) ?></td>
                         <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao->instituicao, ['controller' => 'Muralestagios', 'action' => 'view', $muralestagio->id]) : '' ?></td>
                         <td><?= $this->Number->format($muralestagio->vagas) ?></td>
@@ -73,11 +85,6 @@ $session->write('categoria_id', 1);
                         <td><?= $this->Number->format($muralestagio->cargaHoraria) ?></td>
                         <td><?= h($muralestagio->dataSelecao) ?></td>
                         <td><?= h($muralestagio->dataInscricao) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $muralestagio->id]) ?>
-                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $muralestagio->id]) ?>
-                            <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id)]) ?>
-                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

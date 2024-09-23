@@ -66,10 +66,10 @@ class MuralestagiosController extends AppController {
         ]);
          */
         $muralestagio = $this->Muralestagios->get($id, [
-            'contain' => ['Instituicoes', 'Areaestagios', 'Professores', 'Inscricoes' => ['Alunos']],
+            'contain' => ['Instituicoes', /*'Areaestagios',*/ 'Professores', 'Inscricoes' => ['Alunos']],
         ]);
-        // pr($muralestagio);
-        // die();
+        //pr($muralestagio);
+        //die();
         $this->set(compact('muralestagio'));
     }
 
