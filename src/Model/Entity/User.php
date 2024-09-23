@@ -7,7 +7,7 @@ use Cake\ORM\Entity;
 use Authentication\PasswordHasher\DefaultPasswordHasher;
 
 /**
- * Userestagio Entity
+ * User Entity
  *
  * @property int $id
  * @property string|null $email
@@ -23,7 +23,7 @@ use Authentication\PasswordHasher\DefaultPasswordHasher;
  * @property \App\Model\Entity\Supervisor $supervisor
  * @property \App\Model\Entity\Professor $professor
  */
-class Userestagio extends Entity
+class User extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -51,7 +51,7 @@ class Userestagio extends Entity
         'password'
     ];
 
-        // Automatically hash passwords when they are changed.
+    // Automatically hash passwords when they are changed.
     protected function _setPassword(string $password)
     {
         $hasher = new DefaultPasswordHasher();

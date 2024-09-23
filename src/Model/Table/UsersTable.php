@@ -86,9 +86,9 @@ class UsersTable extends Table
             ->notEmptyString('categoria_id');
 
         $validator
-            ->integer('numero')
-            ->requirePresence('numero', 'create')
-            ->notEmptyString('numero');
+            ->integer('registro')
+            ->requirePresence('registro', 'create')
+            ->notEmptyString('registro');
 
         $validator
             ->dateTime('timestamp')
