@@ -27,16 +27,12 @@
                     <td><?= h($aluno->nome) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Telefone') ?></th>
-                    <td><?= h($aluno->telefone) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Celular') ?></th>
-                    <td><?= h($aluno->celular) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Email') ?></th>
                     <td><?= h($aluno->email) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Registro') ?></th>
+                    <td><?= $this->Number->format($aluno->registro) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Cpf') ?></th>
@@ -49,6 +45,14 @@
                 <tr>
                     <th><?= __('Orgao') ?></th>
                     <td><?= h($aluno->orgao) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Telefone') ?></th>
+                    <td><?= '(' . $aluno->codigo_telefone . ') ' . h($aluno->telefone) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Celular') ?></th>
+                    <td><?= '(' . $aluno->codigo_celular . ') ' . h($aluno->celular) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Endereco') ?></th>
@@ -69,18 +73,6 @@
                 <tr>
                     <th><?= __('Observacoes') ?></th>
                     <td><?= h($aluno->observacoes) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Registro') ?></th>
-                    <td><?= $this->Number->format($aluno->registro) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Codigo Telefone') ?></th>
-                    <td><?= $this->Number->format($aluno->codigo_telefone) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Codigo Celular') ?></th>
-                    <td><?= $this->Number->format($aluno->codigo_celular) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Nascimento') ?></th>
@@ -180,29 +172,29 @@
                 <div>
                     <table>
                         <tr>
+                            <th class="actions"><?= __('Actions') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Registro') ?></th>
                             <th><?= __('Aluno Id') ?></th>
                             <th><?= __('Muralestagio Id') ?></th>
                             <th><?= __('Data') ?></th>
                             <th><?= __('Periodo') ?></th>
-                            <th><?= __('Timestamp') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th><?= __('Data') ?></th>
                         </tr>
                         <?php foreach ($aluno->inscricoes as $inscricao) : ?>
                         <tr>
+                            <td class="actions">
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Inscricoes', 'action' => 'edit', $inscricao->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Inscricoes', 'action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id)]) ?>
+                            </td>
                             <td><?= h($inscricao->id) ?></td>
                             <td><?= h($inscricao->registro) ?></td>
                             <td><?= h($inscricao->aluno_id) ?></td>
                             <td><?= h($inscricao->muralestagio_id) ?></td>
                             <td><?= h($inscricao->data) ?></td>
                             <td><?= h($inscricao->periodo) ?></td>
-                            <td><?= h($inscricao->timestamp) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('Ver'), ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>
-                                <?= $this->Html->link(__('Editar'), ['controller' => 'Inscricoes', 'action' => 'edit', $inscricao->id]) ?>
-                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Inscricoes', 'action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id)]) ?>
-                            </td>
+                            <td><?= h($inscricao->timestamp) ? h($inscricao->timestamp) : '' ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </table>

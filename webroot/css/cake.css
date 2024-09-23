@@ -137,9 +137,7 @@ th a,
 .actions a {
     font-weight: bold;
     padding: 0 0.4rem;
-}
-.actions a:first-child {
-    padding-left: 0;
+    display: block;
 }
 th {
     white-space: nowrap;

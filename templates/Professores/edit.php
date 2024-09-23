@@ -50,7 +50,6 @@
                     echo $this->Form->control('dataingresso', ['empty' => true]);
                     echo $this->Form->control('formaingresso');
                     echo $this->Form->control('tipocargo');
-                    echo $this->Form->control('categoria');
                     echo $this->Form->control('regimetrabalho');
                     echo $this->Form->control('departamento');
                     echo $this->Form->control('dataegresso', ['empty' => true]);

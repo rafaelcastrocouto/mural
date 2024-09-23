@@ -61,7 +61,7 @@ class EstagiariosTable extends Table
             'foreignKey' => 'professor_id',
         ]);
         $this->belongsTo('Areaestagios', [
-            'foreignKey' => 'area_id',
+            'foreignKey' => 'area_estagio_id',
         ]);
     }
 

@@ -206,11 +206,6 @@ class ProfessoresTable extends Table
             ->allowEmptyString('tipocargo');
 
         $validator
-            ->scalar('categoria')
-            ->maxLength('categoria', 10)
-            ->allowEmptyString('categoria');
-
-        $validator
             ->scalar('regimetrabalho')
             ->maxLength('regimetrabalho', 5)
             ->allowEmptyString('regimetrabalho');

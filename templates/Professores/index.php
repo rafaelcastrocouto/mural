@@ -11,6 +11,7 @@
         <table>
             <thead>
                 <tr>
+                    <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('nome') ?></th>
                     <th><?= $this->Paginator->sort('cpf') ?></th>
@@ -41,17 +42,20 @@
                     <th><?= $this->Paginator->sort('dataingresso') ?></th>
                     <th><?= $this->Paginator->sort('formaingresso') ?></th>
                     <th><?= $this->Paginator->sort('tipocargo') ?></th>
-                    <th><?= $this->Paginator->sort('categoria') ?></th>
                     <th><?= $this->Paginator->sort('regimetrabalho') ?></th>
                     <th><?= $this->Paginator->sort('departamento') ?></th>
                     <th><?= $this->Paginator->sort('dataegresso') ?></th>
                     <th><?= $this->Paginator->sort('motivoegresso') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($professores as $professor): ?>
                 <tr>
+                    <td class="actions">
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $professor->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $professor->id]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $professor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $professor->id)]) ?>
+                    </td>
                     <td><?= $this->Number->format($professor->id) ?></td>
                     <td><?= h($professor->nome) ?></td>
                     <td><?= h($professor->cpf) ?></td>
@@ -82,16 +86,10 @@
                     <td><?= h($professor->dataingresso) ?></td>
                     <td><?= h($professor->formaingresso) ?></td>
                     <td><?= h($professor->tipocargo) ?></td>
-                    <td><?= h($professor->categoria) ?></td>
                     <td><?= h($professor->regimetrabalho) ?></td>
                     <td><?= h($professor->departamento) ?></td>
                     <td><?= h($professor->dataegresso) ?></td>
                     <td><?= h($professor->motivoegresso) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $professor->id]) ?>
-                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $professor->id]) ?>
-                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $professor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $professor->id)]) ?>
-                    </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

@@ -38,7 +38,7 @@
                     <td><?= $inscricao->muralestagio ? $this->Html->link($inscricao->muralestagio->instituicao_id, ['controller' => 'Muralestagios', 'action' => 'view', $inscricao->muralestagio->id]) : '' ?></td>
                     <td><?= h($inscricao->data) ?></td>
                     <td><?= h($inscricao->periodo) ?></td>
-                    <td><?= h($inscricao->timestamp) ?></td>
+                    <td><?= $inscricao->timestamp ? h($inscricao->timestamp) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('Ver'), ['action' => 'view', $inscricao->id]) ?>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $inscricao->id]) ?>

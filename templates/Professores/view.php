@@ -106,10 +106,6 @@
                     <td><?= h($professor->tipocargo) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Categoria') ?></th>
-                    <td><?= h($professor->categoria) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Regimetrabalho') ?></th>
                     <td><?= h($professor->regimetrabalho) ?></td>
                 </tr>
@@ -309,7 +305,7 @@
                             <td><?= h($users->aluno_id) ?></td>
                             <td><?= h($users->supervisor_id) ?></td>
                             <td><?= h($users->professor_id) ?></td>
-                            <td><?= h($users->timestamp) ?></td>
+                            <td><?= $user->timestamp ? h($users->timestamp) : '' ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('Ver'), ['controller' => 'Users', 'action' => 'view', $users->id]) ?>
                                 <?= $this->Html->link(__('Editar'), ['controller' => 'Users', 'action' => 'edit', $users->id]) ?>

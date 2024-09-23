@@ -175,7 +175,7 @@ $session->write('categoria_id', 1);
                             <td><?= h($inscricao->instituicao_id) ?></td>
                             <td><?= h($inscricao->data) ?></td>
                             <td><?= h($inscricao->periodo) ?></td>
-                            <td><?= h($inscricao->timestamp) ?></td>
+                            <td><?= $inscricao->timestamp ? h($inscricao->timestamp) : '' ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('Ver'), ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>
                                 <?= $this->Html->link(__('Editar'), ['controller' => 'Inscricoes', 'action' => 'edit', $inscricao->id]) ?>

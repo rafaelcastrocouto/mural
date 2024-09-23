@@ -11,12 +11,11 @@
         <table>
             <thead>
                 <tr>
+                    <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('nome') ?></th>
                     <th><?= $this->Paginator->sort('registro') ?></th>
-                    <th><?= $this->Paginator->sort('codigo_telefone') ?></th>
                     <th><?= $this->Paginator->sort('telefone') ?></th>
-                    <th><?= $this->Paginator->sort('codigo_celular') ?></th>
                     <th><?= $this->Paginator->sort('celular') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
                     <th><?= $this->Paginator->sort('cpf') ?></th>
@@ -28,20 +27,22 @@
                     <th><?= $this->Paginator->sort('municipio') ?></th>
                     <th><?= $this->Paginator->sort('bairro') ?></th>
                     <th><?= $this->Paginator->sort('observacoes') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($alunos as $aluno): ?>
                 <tr>
                     <!-- <p> <?= pr($aluno); ?> </p> -->
+                    <td class="actions">
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $aluno->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $aluno->id]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $aluno->id], ['confirm' => __('Are you sure you want to delete # {0}?', $aluno->id)]) ?>
+                    </td>
                     <td><?= $this->Number->format($aluno->id) ?></td>
                     <td><?= h($aluno->nome) ?></td>
                     <td><?= $this->Number->format($aluno->registro) ?></td>
-                    <td><?= $this->Number->format($aluno->codigo_telefone) ?></td>
-                    <td><?= h($aluno->telefone) ?></td>
-                    <td><?= $this->Number->format($aluno->codigo_celular) ?></td>
-                    <td><?= h($aluno->celular) ?></td>
+                    <td><?= '(' . $aluno->codigo_telefone . ') ' . h($aluno->telefone) ?></td>
+                    <td><?= '(' . $aluno->codigo_celular . ') ' . h($aluno->celular) ?></td>
                     <td><?= h($aluno->email) ?></td>
                     <td><?= h($aluno->cpf) ?></td>
                     <td><?= h($aluno->identidade) ?></td>
@@ -52,11 +53,6 @@
                     <td><?= h($aluno->municipio) ?></td>
                     <td><?= h($aluno->bairro) ?></td>
                     <td><?= h($aluno->observacoes) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $aluno->id]) ?>
-                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $aluno->id]) ?>
-                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $aluno->id], ['confirm' => __('Are you sure you want to delete # {0}?', $aluno->id)]) ?>
-                    </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

@@ -28,7 +28,7 @@
                     echo $this->Form->control('aluno_id', ['type' => 'text', 'value' => $user->aluno_id]);
                     echo $this->Form->control('supervisor_id', ['type' => 'text', 'value' => $user->supervisor_id]);
                     echo $this->Form->control('professor_id', ['type' => 'text', 'value' => $user->professor_id]);
-                    echo $this->Form->control('data', ['type' => 'datetime-local', 'value' => $user->data ? $user->data->format('Y-m-d\TH:i') : '']);
+                    echo $this->Form->control('timestamp', ['type' => 'datetime-local', 'value' => $user->timestamp ? $user->timestamp->format('Y-m-d\TH:i') : '']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Editar')) ?>

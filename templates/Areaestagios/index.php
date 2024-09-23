@@ -11,21 +11,21 @@
         <table>
             <thead>
                 <tr>
+                    <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('area') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($areaestagios as $areaestagio): ?>
                 <tr>
-                    <td><?= $this->Number->format($areaestagio->id) ?></td>
-                    <td><?= h($areaestagio->area) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('Ver'), ['action' => 'view', $areaestagio->id]) ?>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $areaestagio->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $areaestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $areaestagio->id)]) ?>
                     </td>
+                    <td><?= $this->Number->format($areaestagio->id) ?></td>
+                    <td><?= h($areaestagio->area) ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

@@ -39,11 +39,11 @@
                 </tr>
                 <tr>
                     <th><?= __('Data') ?></th>
-                    <td><?= h($inscricao->data) ?></td>
+                    <td><?= $inscricao->data ? h($inscricao->data) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Timestamp') ?></th>
-                    <td><?= h($inscricao->timestamp) ?></td>
+                    <td><?= $inscricao->timestamp ? h($inscricao->timestamp) : '' ?></td>
                 </tr>
             </table>
         </div>
