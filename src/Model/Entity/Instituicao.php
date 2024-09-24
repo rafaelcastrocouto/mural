@@ -10,7 +10,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $instituicao
- * @property int|null $areainstituicoes_id
+ * @property int|null $area_id
  * @property string|null $natureza
  * @property string $cnpj
  * @property string $email
@@ -29,8 +29,7 @@ use Cake\ORM\Entity;
  * @property string $avaliacao
  * @property string|null $observacoes
  *
- * @property \App\Model\Entity\Areainstituicao $areainstituicao
- * @property \App\Model\Entity\Areainstituicao $areaestagio
+ * @property \App\Model\Entity\Area[] $area
  * @property \App\Model\Entity\Estagiario[] $estagiarios
  * @property \App\Model\Entity\Muralestagio[] $muralestagios
  * @property \App\Model\Entity\Visita[] $visitas

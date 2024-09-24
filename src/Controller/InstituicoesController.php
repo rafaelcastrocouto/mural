@@ -18,7 +18,7 @@ class InstituicoesController extends AppController
      */
     public function index()
     {
-        $instituicoes = $this->paginate($this->Instituicoes->find()->contain(['Areainstituicoes', 'Areaestagios']));
+        $instituicoes = $this->paginate($this->Instituicoes->find()->contain(['Areas']));
 
         $this->set(compact('instituicoes'));
     }
@@ -33,7 +33,7 @@ class InstituicoesController extends AppController
     public function view($id = null)
     {
         $instituicao = $this->Instituicoes->get($id, [
-            'contain' => ['Areainstituicoes', 'Areaestagios', 'Supervisores', 'Estagiarios' => ['Alunos', 'Instituicoes', 'Professores', 'Supervisores', 'Areaestagios'], 'Muralestagios', 'Visitas'],
+            'contain' => ['Areas', 'Areas', 'Supervisores', 'Estagiarios' => ['Alunos', 'Instituicoes', 'Professores', 'Supervisores', 'Areaestagios'], 'Muralestagios', 'Visitas'],
         ]);
 
         $this->set(compact('instituicao'));
@@ -56,9 +56,9 @@ class InstituicoesController extends AppController
             }
             $this->Flash->error(__('The instituicao could not be saved. Please, try again.'));
         }
-        $areainstituicoes = $this->Instituicoes->Areainstituicoes->find('list', ['limit' => 200]);
+        $areas = $this->Instituicoes->Areas->find('list');
         $supervisores = $this->Instituicoes->Supervisores->find('list', ['limit' => 200]);
-        $this->set(compact('instituicao', 'areainstituicoes', 'supervisores'));
+        $this->set(compact('instituicao', 'areas', 'supervisores'));
     }
 
     /**
@@ -82,9 +82,9 @@ class InstituicoesController extends AppController
             }
             $this->Flash->error(__('The instituicao could not be saved. Please, try again.'));
         }
-        $areainstituicoes = $this->Instituicoes->Areainstituicoes->find('list', ['limit' => 200]);
+        $areas = $this->Instituicoes->Areas->find('list');
         $supervisores = $this->Instituicoes->Supervisores->find('list', ['limit' => 200]);
-        $this->set(compact('instituicao', 'areainstituicoes', 'supervisores'));
+        $this->set(compact('instituicao', 'areas', 'supervisores'));
     }
 
     /**

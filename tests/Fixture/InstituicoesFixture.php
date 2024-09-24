@@ -19,7 +19,7 @@ class InstituicoesFixture extends TestFixture
     public $fields = [
         'id' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'instituicao' => ['type' => 'string', 'length' => 120, 'null' => false, 'default' => '', 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
-        'areainstituicoes_id' => ['type' => 'smallinteger', 'length' => null, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
+        'area_id' => ['type' => 'smallinteger', 'length' => null, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'area' => ['type' => 'smallinteger', 'length' => null, 'unsigned' => false, 'null' => true, 'default' => '0', 'comment' => '', 'precision' => null],
         'natureza' => ['type' => 'string', 'length' => 50, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         'cnpj' => ['type' => 'char', 'length' => 18, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
@@ -58,8 +58,7 @@ class InstituicoesFixture extends TestFixture
             [
                 'id' => 1,
                 'instituicao' => 'Lorem ipsum dolor sit amet',
-                'areainstituicoes_id' => 1,
-                'area' => 1,
+                'area_id' => 1,
                 'natureza' => 'Lorem ipsum dolor sit amet',
                 'cnpj' => '',
                 'email' => 'Lorem ipsum dolor sit amet',

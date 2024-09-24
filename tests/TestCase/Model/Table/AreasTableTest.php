@@ -3,20 +3,20 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\AreainstituicoesTable;
+use App\Model\Table\AreasTable;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\AreainstituicoesTable Test Case
+ * App\Model\Table\AreasTable Test Case
  */
-class AreainstituicoesTableTest extends TestCase
+class AreasTableTest extends TestCase
 {
     /**
      * Test subject
      *
-     * @var \App\Model\Table\AreainstituicoesTable
+     * @var \App\Model\Table\AreasTable
      */
-    protected $Areainstituicoes;
+    protected $Areas;
 
     /**
      * Fixtures
@@ -24,7 +24,7 @@ class AreainstituicoesTableTest extends TestCase
      * @var array
      */
     protected $fixtures = [
-        'app.Areainstituicoes',
+        'app.Areas',
     ];
 
     /**
@@ -35,8 +35,8 @@ class AreainstituicoesTableTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $config = $this->getTableLocator()->exists('Areainstituicoes') ? [] : ['className' => AreainstituicoesTable::class];
-        $this->Areainstituicoes = $this->getTableLocator()->get('Areainstituicoes', $config);
+        $config = $this->getTableLocator()->exists('Areas') ? [] : ['className' => AreasTable::class];
+        $this->Areas = $this->getTableLocator()->get('Areas', $config);
     }
 
     /**
@@ -46,7 +46,7 @@ class AreainstituicoesTableTest extends TestCase
      */
     public function tearDown(): void
     {
-        unset($this->Areainstituicoes);
+        unset($this->Areas);
 
         parent::tearDown();
     }

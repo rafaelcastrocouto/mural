@@ -8,18 +8,18 @@
     <div class="column-responsive column-80">
         <div class="muralestagios form content">
             <aside>
-                <div class="side-nav">
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Muralestagios'), ['action' => 'index'], ['class' => 'button']) ?>
                     <?= $this->Form->postLink(
                         __('Deletar'),
                         ['action' => 'delete', $muralestagio->id],
-                        ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id), 'class' => 'side-nav-item']
+                        ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id), 'class' => 'button']
                     ) ?>
-                    <?= $this->Html->link(__('Listar Muralestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
                 </div>
             </aside>
             <?= $this->Form->create($muralestagio) ?>
             <fieldset>
-                <legend><?= __('Editar Muralestagio') ?></legend>
+                <legend><?= __('Editando Muralestagio') ?></legend>
                 <?php
                     echo $this->Form->control('instituicao');
                     echo $this->Form->control('convenio');

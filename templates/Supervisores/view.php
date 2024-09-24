@@ -120,7 +120,6 @@
                             <tr>
                                 <th><?= __('Id') ?></th>
                                 <th><?= __('Instituicao') ?></th>
-                                <th><?= __('Areainstituicoes Id') ?></th>
                                 <th><?= __('Area') ?></th>
                                 <th><?= __('Natureza') ?></th>
                                 <th><?= __('Cnpj') ?></th>
@@ -145,8 +144,7 @@
                                 <tr>
                                     <td><?= h($instituicao->id) ?></td>
                                     <td><?= h($instituicao->instituicao) ?></td>
-                                    <td><?= $instituicao->areainstituicao ? $this->Html->link(h($instituicao->areainstituicao->area), ['controller' => 'areainstituicoes', 'action' => 'view', $instituicao->area_instituicoes_id]) : '' ?></td>
-                                    <td><?= h($instituicao->area) ?></td>
+                                    <td><?= $instituicao->area ? $this->Html->link(h($instituicao->area->area), ['controller' => 'areas', 'action' => 'view', $instituicao->area->id]) : '' ?></td>
                                     <td><?= h($instituicao->natureza) ?></td>
                                     <td><?= h($instituicao->cnpj) ?></td>
                                     <td><?= h($instituicao->email) ?></td>

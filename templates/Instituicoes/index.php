@@ -13,7 +13,7 @@
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('instituicao') ?></th>
-                    <th><?= $this->Paginator->sort('areainstituicoes_id') ?></th>
+                    <th><?= $this->Paginator->sort('area') ?></th>
                     <th><?= $this->Paginator->sort('natureza') ?></th>
                     <th><?= $this->Paginator->sort('cnpj') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
@@ -39,7 +39,7 @@
                 <tr>
                     <td><?= $this->Number->format($instituicao->id) ?></td>
                     <td><?= $this->Html->link($instituicao->instituicao, ['controller' => 'instituicoes', 'action' => 'view', $instituicao->id]) ?></td>
-                    <td><?= $instituicao->areainstituicao ? $this->Html->link($instituicao->areainstituicao->area, ['controller' => 'Areainstituicoes', 'action' => 'view', $instituicao->areainstituicao->id]) : '' ?></td>
+                    <td><?= $instituicao->area ? $this->Html->link($instituicao->area->area, ['controller' => 'Areas', 'action' => 'view', $instituicao->area->id]) : '' ?></td>
                     <td><?= h($instituicao->natureza) ?></td>
                     <td><?= h($instituicao->cnpj) ?></td>
                     <td><?= $instituicao->email ? $this->Html->link($instituicao->email, 'mailto:' . $instituicao->email) : '' ?></td>

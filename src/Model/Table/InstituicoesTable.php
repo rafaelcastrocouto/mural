@@ -11,7 +11,7 @@ use Cake\Validation\Validator;
 /**
  * Instituicoes Model
  *
- * @property \App\Model\Table\AreainstituicoesTable&\Cake\ORM\Association\BelongsTo $Areainstituicoes
+ * @property \App\Model\Table\AreasTable&\Cake\ORM\Association\BelongsTo $Areas
  * @property \App\Model\Table\EstagiariosTable&\Cake\ORM\Association\HasMany $Estagiarios
  * @property \App\Model\Table\MuralestagiosTable&\Cake\ORM\Association\HasMany $Muralestagios
  * @property \App\Model\Table\VisitasTable&\Cake\ORM\Association\HasMany $Visitas
@@ -48,8 +48,8 @@ class InstituicoesTable extends Table
         $this->setDisplayField('instituicao');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Areainstituicoes', [
-            'foreignKey' => 'area_instituicoes_id',
+        $this->belongsTo('Areas', [
+            'foreignKey' => 'area_id',
         ]);
         $this->hasMany('Estagiarios', [
             'foreignKey' => 'instituicao_id',
@@ -185,7 +185,7 @@ class InstituicoesTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['areainstituicoes_id'], 'Areainstituicoes'), ['errorField' => 'areainstituicoes_id']);
+        $rules->add($rules->existsIn(['area_id'], 'Areas'), ['errorField' => 'area_id']);
 
         return $rules;
     }

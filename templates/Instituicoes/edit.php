@@ -22,7 +22,7 @@
                 <legend><?= __('Editar Instituicao') ?></legend>
                 <?php
                     echo $this->Form->control('instituicao');
-                    echo $this->Form->control('areainstituicoes_id', ['options' => $areainstituicoes, 'empty' => true, 'class' => 'form-control']);
+                    echo $this->Form->control('area_id', ['options' => $areas, 'empty' => true, 'class' => 'form-control']);
                     echo $this->Form->control('natureza');
                     echo $this->Form->control('cnpj');
                     echo $this->Form->control('email');

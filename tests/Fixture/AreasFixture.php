@@ -6,9 +6,9 @@ namespace App\Test\Fixture;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
- * AreainstituicoesFixture
+ * AreasFixture
  */
-class AreainstituicoesFixture extends TestFixture
+class AreasFixture extends TestFixture
 {
     /**
      * Fields

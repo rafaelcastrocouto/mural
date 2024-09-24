@@ -1,31 +1,35 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Areainstituicao[]|\Cake\Collection\CollectionInterface $areainstituicoes
+ * @var \App\Model\Entity\Area[]|\Cake\Collection\CollectionInterface $areas
  */
 ?>
-<div class="areainstituicoes index content">
-    <?= $this->Html->link(__('Nova Area instituicao'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Area instituicoes') ?></h3>
+<div class="areas index content">
+    <aside>
+		<div class="nav">
+            <?= $this->Html->link(__('Nova Area'), ['action' => 'add'], ['class' => 'button']) ?>
+        </div>
+	</aside>
+    <h3><?= __('Areas') ?></h3>
     <div>
         <table>
             <thead>
                 <tr>
+                    <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('area') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($areainstituicoes as $areainstituicao): ?>
+                <?php foreach ($areas as $area): ?>
                 <tr>
-                    <td><?= $this->Number->format($areainstituicao->id) ?></td>
-                    <td><?= h($areainstituicao->area) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $areainstituicao->id]) ?>
-                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $areainstituicao->id]) ?>
-                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $areainstituicao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $areainstituicao->id)]) ?>
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $area->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $area->id]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $area->id], ['confirm' => __('Are you sure you want to delete {0}?', $area->area)]) ?>
                     </td>
+                    <td><?= h($area->id) ?></td>
+                    <td><?= h($area->area) ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

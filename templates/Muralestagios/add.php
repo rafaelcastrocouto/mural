@@ -8,13 +8,13 @@
     <div class="column-responsive column-80">
         <div class="muralestagios form content">
             <aside>
-                <div class="side-nav">
-                    <?= $this->Html->link(__('Listar Muralestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Muralestagios'), ['action' => 'index'], ['class' => 'button']) ?>
                 </div>
             </aside>
             <?= $this->Form->create($muralestagio) ?>
             <fieldset>
-                <legend><?= __('Adicionar Mural estagio') ?></legend>
+                <legend><?= __('Preencha para adicionar novo estagio') ?></legend>
                 <?php
                     echo $this->Form->control('instituicao_id', ['options' => $instituicoes, 'empty' => true, 'class' => 'form-control']);
                     echo $this->Form->control('email');

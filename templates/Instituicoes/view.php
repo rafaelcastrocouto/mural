@@ -28,8 +28,8 @@
                     <td><?= $instituicao->instituicao ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Area instituicao') ?></th>
-                    <td><?= $instituicao->areainstituicao ? $this->Html->link(''.$instituicao->areainstituicao->area, ['controller' => 'Areainstituicoes', 'action' => 'view', $instituicao->areainstituicao->id]) : '' ?></td>
+                    <th><?= __('Area') ?></th>
+                    <td><?= $instituicao->area ? $this->Html->link(''.$instituicao->area->area, ['controller' => 'Areas', 'action' => 'view', $instituicao->area->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Natureza') ?></th>

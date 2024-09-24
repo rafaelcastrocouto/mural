@@ -3,25 +3,25 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Muralestagio $muralestagio
  */
+
+$session = $this->request->getSession();
+
+$session->write('categoria_id', 1);
 //pr($muralestagio);
+//pr($session->read('categoria_id'));
 //die();
 ?>
 
-<?php
-$session = $this->request->getSession();
-$session->write('categoria_id', 1);
-// echo $session->read('id_categoria');
-?>
 <div>
     <div class="column-responsive column-80">
         <div class="muralestagios view content">
 		    <aside>
-		        <div class="side-nav">
-					<?= $this->Html->link(__('Listar Muralestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-                    <?php if ($session->read('id_categoria') == 1): ?>
-			            <?= $this->Html->link(__('Editar Muralestagio'), ['action' => 'edit', $muralestagio->id], ['class' => 'side-nav-item']) ?>
-			            <?= $this->Form->postLink(__('Deletar Muralestagio'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id), 'class' => 'side-nav-item']) ?>
-			            <?= $this->Html->link(__('Novo Muralestagio'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+		        <div class="nav">
+					<?= $this->Html->link(__('Listar Muralestagios'), ['action' => 'index'], ['class' => 'button']) ?>
+                    <?php if ($session->read('categoria_id') == 1): ?>
+			            <?= $this->Html->link(__('Editar Muralestagio'), ['action' => 'edit', $muralestagio->id], ['class' => 'button']) ?>
+			            <?= $this->Form->postLink(__('Deletar Muralestagio'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id), 'class' => 'button']) ?>
+			            <?= $this->Html->link(__('Novo Muralestagio'), ['action' => 'add'], ['class' => 'button']) ?>
 					<?php endif; ?>
 		        </div>
 		    </aside>
@@ -160,8 +160,7 @@ $session->write('categoria_id', 1);
                             <th class="actions"><?= __('Actions') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Registro') ?></th>
-                            <th><?= __('Aluno Id') ?></th>
-                            <th><?= __('Muralestagio Id') ?></th>
+                            <th><?= __('Aluno') ?></th>
                             <th><?= __('Data') ?></th>
                             <th><?= __('Periodo') ?></th>
                             <th><?= __('Timestamp') ?></th>
@@ -175,9 +174,8 @@ $session->write('categoria_id', 1);
                                 <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Inscricoes', 'action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id)]) ?>
                             </td>
                             <td><?= h($inscricao->id) ?></td>
-                            <td><?= h($inscricao->aluno_id) ?></td>
-                            <td><?= $this->Html->link($inscricao->aluno ? $inscricao->aluno->nome : '-', ['controller' => 'Alunos', 'action' => 'view', $inscricao->alunonovo_id]); ?></td>
-                            <td><?= h($inscricao->instituicao_id) ?></td>
+                            <td><?= $inscricao->aluno ? h($inscricao->aluno->registro) : '' ?></td>
+                            <td><?= $inscricao->aluno ? $this->Html->link($inscricao->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $inscricao->aluno->id])  : '' ?></td>
                             <td><?= h($inscricao->data) ?></td>
                             <td><?= h($inscricao->periodo) ?></td>
                             <td><?= $inscricao->timestamp ? h($inscricao->timestamp) : '' ?></td>
