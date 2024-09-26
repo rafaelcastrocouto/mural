@@ -49,7 +49,7 @@ class InscricoesTable extends Table {
             'foreignKey' => 'aluno_id',
         ]);
         $this->belongsTo('Muralestagios', [
-            'foreignKey' => 'instituicao_id',
+            'foreignKey' => 'mural_estagio_id',
         ]);
     }
 

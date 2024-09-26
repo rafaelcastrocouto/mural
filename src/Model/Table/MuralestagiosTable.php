@@ -47,7 +47,11 @@ class MuralestagiosTable extends Table {
         $this->setAlias('muralestagios');
         $this->setDisplayField('instituicao');
         $this->setPrimaryKey('id');
-
+            
+        //$this->hasMany('Inscricoes', [
+        //    'foreignKey' => ['mural_estagio_id'],
+        //]);
+            
         $this->belongsTo('Instituicoes', [
             'foreignKey' => ['instituicao_id'],
         ]);
@@ -56,9 +60,6 @@ class MuralestagiosTable extends Table {
         ]);
         $this->belongsTo('Professores', [
             'foreignKey' => ['professor_id'],
-        ]);
-        $this->hasMany('Inscricoes', [
-            'foreignKey' => ['instituicao_id'],
         ]);
     }
 

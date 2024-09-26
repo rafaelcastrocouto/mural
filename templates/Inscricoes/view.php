@@ -27,7 +27,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Muralestagio') ?></th>
-                    <td><?= $inscricao->muralestagio ? $this->Html->link($inscricao->muralestagio->instituicao, ['controller' => 'Muralestagios', 'action' => 'view', $inscricao->muralestagio->id]) : '' ?></td>
+                    <td><?= $inscricao->muralestagio ? $this->Html->link($inscricao->muralestagio->id, ['controller' => 'Muralestagios', 'action' => 'view', $inscricao->muralestagio->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Periodo') ?></th>
@@ -39,7 +39,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Data') ?></th>
-                    <td><?= $inscricao->data ? h($inscricao->data) ?></td>
+                    <td><?= $inscricao->data ? h($inscricao->data) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Timestamp') ?></th>

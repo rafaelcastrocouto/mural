@@ -51,6 +51,10 @@ class InstituicoesTable extends Table
         $this->belongsTo('Areas', [
             'foreignKey' => 'area_id',
         ]);
+        
+        $this->hasMany('Inscricoes', [
+            'foreignKey' => 'instituicao_id',
+        ]);
         $this->hasMany('Estagiarios', [
             'foreignKey' => 'instituicao_id',
         ]);
@@ -60,11 +64,7 @@ class InstituicoesTable extends Table
         $this->hasMany('Visitas', [
             'foreignKey' => 'instituicao_id',
         ]);
-        $this->belongsToMany('Supervisores', [
-            'foreignKey' => 'instituicao_id',
-            'targetForeignKey' => 'supervisor_id',
-            'joinTable' => 'inst_super',
-        ]);
+        
     }
 
     /**

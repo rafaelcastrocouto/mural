@@ -13,6 +13,7 @@
         <table>
             <thead>
                 <tr>
+                    <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('registro') ?></th>
                     <th><?= $this->Paginator->sort('aluno_id') ?></th>
@@ -20,7 +21,6 @@
                     <th><?= $this->Paginator->sort('data') ?></th>
                     <th><?= $this->Paginator->sort('periodo') ?></th>
                     <th><?= $this->Paginator->sort('timestamp') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +32,11 @@
 //die();
 ?>
                 <tr>
+                    <td class="actions">
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $inscricao->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $inscricao->id]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id)]) ?>
+                    </td>
                     <td><?= $this->Number->format($inscricao->id) ?></td>
                     <td><?= $this->Number->format($inscricao->registro) ?></td>
                     <td><?= $inscricao->aluno ? $this->Html->link($inscricao->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $inscricao->aluno->id]) : '' ?></td>
@@ -39,11 +44,6 @@
                     <td><?= h($inscricao->data) ?></td>
                     <td><?= h($inscricao->periodo) ?></td>
                     <td><?= $inscricao->timestamp ? h($inscricao->timestamp) : '' ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $inscricao->id]) ?>
-                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $inscricao->id]) ?>
-                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id)]) ?>
-                    </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
