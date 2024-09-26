@@ -19,15 +19,9 @@ class EstagiariosController extends AppController
     public function index($periodo = NULL)
     {
         if (!$periodo) {
-            //$this->loadModel("Configuracao");
-            //$configuracao = $this->Configuracao->findById('1');
-            //$periodo = $configuracao['Configuracao']['mural_periodo_atual'];
-            $periodo = '2024-1';
+            $configuracao = $this->fetchTable("Configuracoes")->find()->first();
+            $periodo = $configuracao['mural_periodo_atual'];
         }
-
-        //pr($periodo);
-        //pr('test');
-        //die();
         
         if ($periodo) {
             $estagiarios = $this->Estagiarios->find('all', ['conditions' => ['estagiarios.periodo' => $periodo] ])

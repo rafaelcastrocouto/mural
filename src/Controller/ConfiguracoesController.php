@@ -47,8 +47,6 @@ class ConfiguracoesController extends AppController {
 	public function view($id = NULL) {
 
 		$configuracao = $this->Configuracoes->find()->first();
-		// pr($configuracao);
-
 		$this->set('configuracao', $configuracao);
 	}
   
