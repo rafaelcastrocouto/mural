@@ -58,18 +58,9 @@ class MuralestagiosController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null) {
-        // pr($id);
-        // die();
-        /*
         $muralestagio = $this->Muralestagios->get($id, [
-            'contain' => ['Instituicoes', 'Areaestagios', 'Professores', 'Inscricoes'],
+            'contain' => ['Instituicoes', 'Areaestagios', 'Professores', 'Inscricoes' => ['Alunos']],
         ]);
-         */
-        $muralestagio = $this->Muralestagios->get($id, [
-            'contain' => ['Instituicoes', /*'Areaestagios',*/ 'Professores', 'Inscricoes' => ['Alunos']],
-        ]);
-        //pr($muralestagio);
-        //die();
         $this->set(compact('muralestagio'));
     }
 

@@ -5,7 +5,13 @@
  */
 ?>
 <div class="areaestagios index content">
-    <?= $this->Html->link(__('Nova Area estagio'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    
+	<aside>
+		<div class="nav">
+            <?= $this->Html->link(__('Nova Areaestagio'), ['action' => 'add'], ['class' => 'button']) ?>
+		</div>
+	</aside>
+            
     <h3><?= __('Area estagios') ?></h3>
     <div>
         <table>
@@ -22,7 +28,7 @@
                     <td class="actions">
                         <?= $this->Html->link(__('Ver'), ['action' => 'view', $areaestagio->id]) ?>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $areaestagio->id]) ?>
-                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $areaestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $areaestagio->id)]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $areaestagio->id], ['confirm' => __('Are you sure you want to delete {0}?', $areaestagio->area)]) ?>
                     </td>
                     <td><?= $this->Number->format($areaestagio->id) ?></td>
                     <td><?= h($areaestagio->area) ?></td>

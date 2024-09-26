@@ -8,11 +8,11 @@
     <div class="column-responsive column-80">
         <div class="areaestagios view content">
             <aside>
-                <div class="side-nav">
-                    <?= $this->Html->link(__('Editar Areaestagio'), ['action' => 'edit', $areaestagio->id], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Form->postLink(__('Deletar Areaestagio'), ['action' => 'delete', $areaestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $areaestagio->id), 'class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Listar Areaestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Nova Areaestagio'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Areaestagios'), ['action' => 'index'], ['class' => 'button']) ?>
+                    <?= $this->Html->link(__('Editar Areaestagio'), ['action' => 'edit', $areaestagio->id], ['class' => 'button']) ?>
+                    <?= $this->Form->postLink(__('Deletar Areaestagio'), ['action' => 'delete', $areaestagio->id], ['confirm' => __('Are you sure you want to delete {0}?', $areaestagio->area), 'class' => 'button']) ?>
+                    <?= $this->Html->link(__('Nova Areaestagio'), ['action' => 'add'], ['class' => 'button']) ?>
                 </div>
             </aside>
             <h3>areaestagio_<?= h($areaestagio->id) ?></h3>
@@ -93,7 +93,6 @@
                             <th><?= __('Beneficios') ?></th>
                             <th><?= __('Final De Semana') ?></th>
                             <th><?= __('CargaHoraria') ?></th>
-                            <th><?= __('Requisitos') ?></th>
                             <th><?= __('Horario') ?></th>
                             <th><?= __('Professor') ?></th>
                             <th><?= __('DataSelecao') ?></th>
@@ -102,7 +101,6 @@
                             <th><?= __('LocalSelecao') ?></th>
                             <th><?= __('FormaSelecao') ?></th>
                             <th><?= __('Contato') ?></th>
-                            <th><?= __('Outras') ?></th>
                             <th><?= __('Periodo') ?></th>
                             <th><?= __('LocalInscricao') ?></th>
                             <th><?= __('Email') ?></th>
@@ -121,7 +119,6 @@
                             <td><?= h($muralestagios->beneficios) ?></td>
                             <td><?= h($muralestagios->final_de_semana) ?></td>
                             <td><?= h($muralestagios->cargaHoraria) ?></td>
-                            <td><?= h($muralestagios->requisitos) ?></td>
                             <td><?= h($muralestagios->horario) ?></td>
                             <td><?= $muralestagios->professor ? $this->Html->link(h($muralestagios->professor->nome), ['controller' => 'professores', 'action' => 'view', $muralestagios->professor->id]) : '' ?></td>
                             <td><?= h($muralestagios->dataSelecao) ?></td>
@@ -130,7 +127,6 @@
                             <td><?= h($muralestagios->localSelecao) ?></td>
                             <td><?= h($muralestagios->formaSelecao) ?></td>
                             <td><?= h($muralestagios->contato) ?></td>
-                            <td><?= h($muralestagios->outras) ?></td>
                             <td><?= h($muralestagios->periodo) ?></td>
                             <td><?= h($muralestagios->localInscricao) ?></td>
                             <td><?= h($muralestagios->email) ?></td>

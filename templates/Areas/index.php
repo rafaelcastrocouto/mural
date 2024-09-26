@@ -29,7 +29,7 @@
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $area->id], ['confirm' => __('Are you sure you want to delete {0}?', $area->area)]) ?>
                     </td>
                     <td><?= h($area->id) ?></td>
-                    <td><?= h($area->area) ?></td>
+                    <td><?= $this->Html->link(h($area->area), ['action' => 'view', $area->id]) ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

@@ -37,16 +37,16 @@
                 </li>
 
                 <li class="nav-item">
-                    <?php echo $this->Html->link("Estagiários", "/Estagiarios/index", ['class' => 'nav-link']); ?>
+                    <?php echo $this->Html->link("Estagiários", ['controller' => 'Estagiarios', 'action' => 'index'], ['class' => 'nav-link']); ?>
                 </li>
                 <li class="nav-item">
-                    <?php echo $this->Html->link("Instituições", "/Instituicoes/index", ['escape' => FALSE, 'class' => 'nav-link']); ?>
+                    <?php echo $this->Html->link("Instituições", ['controller' => 'Instituicoes', 'action' => 'index'], ['escape' => FALSE, 'class' => 'nav-link']); ?>
                 </li>
                 <li class="nav-item">
-                    <?php echo $this->Html->link("Supervisores", "/Supervisores/index/ordem:nome", ['class' => 'nav-link']); ?>
+                    <?php echo $this->Html->link("Supervisores", ['controller' => 'Supervisores', 'action' => 'index'] , ['class' => 'nav-link']); ?>
                 </li>
                 <li class="nav-item">
-                    <?php echo $this->Html->link("Professores", "/Professores/index/", ['class' => 'nav-link']); ?>
+                    <?php echo $this->Html->link("Professores", ['controller' => 'Professores', 'action' => 'index'], ['class' => 'nav-link']); ?>
                 </li>
             <?php endif; ?>
 
@@ -59,8 +59,8 @@
                         <?php echo $this->Html->link('Planilha seguro', '/Alunos/planilhaseguro/', ['class' => 'dropdown-item']); ?>
                         <?php echo $this->Html->link('Planilha CRESS', '/Alunos/planilhacress/', ['class' => 'dropdown-item']); ?>
                         <?php echo $this->Html->link('Carga horária', '/Alunos/cargahoraria/', ['class' => 'dropdown-item']); ?>
-                        <?php echo $this->Html->link('Complemento período', '/Complementos/index/', ['class' => 'dropdown-item']); ?>
-                        <?php echo $this->Html->link('Extensão', '/Extensaos/index/', ['class' => 'dropdown-item']); ?>
+                        <?php echo $this->Html->link('Complemento período', '/Complementos', ['class' => 'dropdown-item']); ?>
+                        <?php echo $this->Html->link('Extensão', '/Extensaos', ['class' => 'dropdown-item']); ?>
                     </div>
                 </li>
             <?php endif; ?>

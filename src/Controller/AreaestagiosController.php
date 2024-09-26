@@ -34,8 +34,8 @@ class AreaestagiosController extends AppController
     {
         $areaestagio = $this->Areaestagios->get($id, [
             'contain' => [
-                'Estagiarios' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores'],
-                'Muralestagios' => ['Instituicoes', 'Professores']
+               /* 'Estagiarios' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores'],*/
+               'Muralestagios' => ['Instituicoes', 'Professores']
             ],
         ]);
         

@@ -9,11 +9,11 @@
     <div class="column-responsive column-80">
         <div class="alunos view content">
             <aside>
-                <div class="side-nav">
-                    <?= $this->Html->link(__('Editar Aluno'), ['action' => 'edit', $aluno->id], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Form->postLink(__('Deletar Aluno'), ['action' => 'delete', $aluno->id], ['confirm' => __('Are you sure you want to delete # {0}?', $aluno->id), 'class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Listar Alunos'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Novo Aluno'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                <div class="nav">
+                    <?= $this->Html->link(__('Editar Aluno'), ['action' => 'edit', $aluno->id], ['class' => 'button']) ?>
+                    <?= $this->Form->postLink(__('Deletar Aluno'), ['action' => 'delete', $aluno->id], ['confirm' => __('Are you sure you want to delete {0}?', $aluno->nome), 'class' => 'button']) ?>
+                    <?= $this->Html->link(__('Listar Alunos'), ['action' => 'index'], ['class' => 'button']) ?>
+                    <?= $this->Html->link(__('Novo Aluno'), ['action' => 'add'], ['class' => 'button']) ?>
                 </div>
             </aside>
             <h3>aluno_<?= h($aluno->id) ?></h3>
@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Email') ?></th>
-                    <td><?= h($aluno->email) ?></td>
+                    <td><?= $aluno->email ? $this->Html->link(h($aluno->email), 'mailto:' . $aluno->email) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Registro') ?></th>
@@ -83,7 +83,7 @@
             <?php if (!empty($aluno->users)) : ?>
             <div class="related">
                 <h4><?= __('Related Users') ?></h4>
-                <div>
+                <div class="table_wrap">
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
@@ -115,7 +115,7 @@
             <?php if (!empty($aluno->estagiarios)) : ?>
             <div class="related">
                 <h4><?= __('Related Estagiarios') ?></h4>
-                <div>
+                <div class="table_wrap">
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
