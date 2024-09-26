@@ -8,11 +8,11 @@
     <div class="column-responsive column-80">
         <div class="estagiarios view content">
             <aside>
-                <div class="side-nav">
-                    <?= $this->Html->link(__('Editar Estagiario'), ['action' => 'edit', $estagiario->id], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Form->postLink(__('Deletar Estagiario'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiario->id), 'class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Listar Estagiarios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Novo Estagiario'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Estagiarios'), ['action' => 'index'], ['class' => 'button']) ?>
+                    <?= $this->Html->link(__('Editar Estagiario'), ['action' => 'edit', $estagiario->id], ['class' => 'button']) ?>
+                    <?= $this->Form->postLink(__('Deletar Estagiario'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete estagiario #{0}?', $estagiario->id), 'class' => 'button']) ?>
+                    <?= $this->Html->link(__('Novo Estagiario'), ['action' => 'add'], ['class' => 'button']) ?>
                 </div>
             </aside>
             <h3>estagiario_<?= h($estagiario->id) ?></h3>
@@ -65,7 +65,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Areaestagio') ?></th>
-                    <td><?= $estagiario->areaestagio ? $this->Html->link($estagiario->areaestagio->id, ['controller' => 'Areaestagios', 'action' => 'view', $estagiario->areaestagio->id]) : '' ?></td>
+                    <td><?= $estagiario->areaestagio ? $this->Html->link($estagiario->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $estagiario->areaestagio->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Observacoes') ?></th>

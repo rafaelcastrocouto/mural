@@ -85,7 +85,7 @@ $session = $this->request->getSession();
                     <td class="actions">
                         <?= $this->Html->link(__('Ver'), ['action' => 'view', $estagiario->id]) ?>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $estagiario->id]) ?>
-                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiario->id)]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete estagiario #{0}?', $estagiario->id)]) ?>
                     </td>
                     <td><?= $this->Number->format($estagiario->id) ?></td>
                     <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['action' => 'view', $estagiario->id]) : '' ?></td>
@@ -95,7 +95,7 @@ $session = $this->request->getSession();
                     <td><?= $estagiario->tc ?></td>
                     <td><?= h($estagiario->tc_solicitacao) ?></td>
                     <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicao', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
-                    <td><?= ($estagiario->supervisor and $estagiario->supervisor->nome) ? $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : 'Sem supervisor' ?></td>
+                    <td><?= ($estagiario->supervisor and $estagiario->supervisor->nome) ? $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : '' ?></td>
                     <td><?= $estagiario->professor ? $this->Html->link($estagiario->professor->nome, ['controller' => 'Professores', 'action' => 'view', $estagiario->professor->id]) : '' ?></td>
                     <td><?= h($estagiario->periodo) ?></td>
                     <td><?= $estagiario->areaestagio ? $this->Html->link($estagiario->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $estagiario->areaestagio->id]) : '' ?></td>
