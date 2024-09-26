@@ -8,18 +8,18 @@
     <div class="column-responsive column-80">
         <div class="areaestagios form content">
             <aside>
-                <div class="side-nav">
+                <div class="nav">
                     <?= $this->Form->postLink(
                         __('Deletar'),
                         ['action' => 'delete', $areaestagio->id],
-                        ['confirm' => __('Are you sure you want to delete # {0}?', $areaestagio->id), 'class' => 'side-nav-item']
+                        ['confirm' => __('Are you sure you want to delete {0}?', $areaestagio->area), 'class' => 'button']
                     ) ?>
-                    <?= $this->Html->link(__('Listar Areaestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Listar Areaestagios'), ['action' => 'index'], ['class' => 'button']) ?>
                 </div>
             </aside>
             <?= $this->Form->create($areaestagio) ?>
             <fieldset>
-                <legend><?= __('Editar Area estagio') ?></legend>
+                <legend><?= __('Editando Area estagio') ?></legend>
                 <?php
                     echo $this->Form->control('area');
                 ?>

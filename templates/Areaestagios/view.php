@@ -90,20 +90,11 @@
                             <th><?= __('Instituicao') ?></th>
                             <th><?= __('Convenio') ?></th>
                             <th><?= __('Vagas') ?></th>
-                            <th><?= __('Beneficios') ?></th>
-                            <th><?= __('Final De Semana') ?></th>
-                            <th><?= __('CargaHoraria') ?></th>
-                            <th><?= __('Horario') ?></th>
                             <th><?= __('Professor') ?></th>
                             <th><?= __('DataSelecao') ?></th>
                             <th><?= __('DataInscricao') ?></th>
-                            <th><?= __('HorarioSelecao') ?></th>
-                            <th><?= __('LocalSelecao') ?></th>
-                            <th><?= __('FormaSelecao') ?></th>
                             <th><?= __('Contato') ?></th>
                             <th><?= __('Periodo') ?></th>
-                            <th><?= __('LocalInscricao') ?></th>
-                            <th><?= __('Email') ?></th>
                         </tr>
                         <?php foreach ($areaestagio->muralestagios as $muralestagios) : ?>
                         <tr>
@@ -116,20 +107,11 @@
                             <td><?= $muralestagios->instituicao ? $this->Html->link(h($muralestagios->instituicao->instituicao), ['controller' => 'instituicoes', 'action' => 'view', $muralestagios->instituicao->id]) : '' ?></td>
                             <td><?= h($muralestagios->convenio) ?></td>
                             <td><?= h($muralestagios->vagas) ?></td>
-                            <td><?= h($muralestagios->beneficios) ?></td>
-                            <td><?= h($muralestagios->final_de_semana) ?></td>
-                            <td><?= h($muralestagios->cargaHoraria) ?></td>
-                            <td><?= h($muralestagios->horario) ?></td>
                             <td><?= $muralestagios->professor ? $this->Html->link(h($muralestagios->professor->nome), ['controller' => 'professores', 'action' => 'view', $muralestagios->professor->id]) : '' ?></td>
                             <td><?= h($muralestagios->dataSelecao) ?></td>
                             <td><?= h($muralestagios->dataInscricao) ?></td>
-                            <td><?= h($muralestagios->horarioSelecao) ?></td>
-                            <td><?= h($muralestagios->localSelecao) ?></td>
-                            <td><?= h($muralestagios->formaSelecao) ?></td>
                             <td><?= h($muralestagios->contato) ?></td>
                             <td><?= h($muralestagios->periodo) ?></td>
-                            <td><?= h($muralestagios->localInscricao) ?></td>
-                            <td><?= h($muralestagios->email) ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </table>

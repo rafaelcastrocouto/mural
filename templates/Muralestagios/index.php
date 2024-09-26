@@ -3,15 +3,17 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Muralestagio[]|\Cake\Collection\CollectionInterface $muralestagios
  */
+// pr($muralestagios);
+// pr($periodo);
 ?>
 
 <script type="text/javascript">
 	$(document).ready(function () {
         var url = "<?= $this->Html->Url->build(['controller' => 'muralestagios']); ?>";
-        var muralestagioperiodo = $("#MuralestagioPeriodo");
+        var select = $("#muralestagioperiodo");
 		var pathname = location.pathname.split('/').filter(Boolean);
-		if (pathname[pathname.length - 2] == 'index') muralestagioperiodo.val(pathname[pathname.length - 1]);
-		muralestagioperiodo.on('change', function () {
+		if (pathname[pathname.length - 2] == 'index') select.val(pathname[pathname.length - 1]);
+		select.on('change', function () {
             var periodo = $(this).val();
             window.location = url + '/index/' + periodo;
         });
@@ -30,10 +32,10 @@ $session->write('categoria_id', 1);
 	    <div class="col-auto">
 	        <?php if ($session->read('categoria_id') == 1): ?>
 	            <?= $this->Form->create($muralestagios, ['class' => 'form-inline']); ?>
-					<?= $this->Form->label('Periodo'); ?>
+					<?= $this->Form->label('muralestagioperiodo', 'Período'); ?>
 					<?= $this->Form->input('periodo', [
 							'default'=> $periodo->periodo,
-							'id' => 'MuralestagioPeriodo', 
+							'id' => 'muralestagioperiodo', 
 							'type' => 'select', 
 							'options' => $periodos,
 							'class' => 'form-control'
@@ -41,7 +43,7 @@ $session->write('categoria_id', 1);
 					?>
 	            <?= $this->Form->end(); ?>
 	        <?php else: ?>
-	            <h1 style="text-align: center;">Mural de estágios da ESS/UFRJ. Período: <?= '2020-1'; ?></h1>
+	            <h1 style="text-align: center;">Período: <?= '2005-1'; ?></h1>
 	        <?php endif; ?>
 	    </div>
 	</div>

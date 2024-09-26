@@ -9,12 +9,15 @@ use Cake\ORM\Entity;
  * Configuracao Entity
  *
  * @property int $id
- * @property int $instituicao_id
- * @property \Cake\I18n\FrozenDate $data
- * @property string $motivo
- * @property string $responsavel
- * @property string|null $descricao
- * @property string $avaliacao
+ * @property string $mural_periodo_atual
+ * @property int $curso_turma_atual
+ * @property \Cake\I18n\FrozenDate $curso_abertura_inscricoes
+ * @property \Cake\I18n\FrozenDate $curso_encerramento_inscricoes
+ * @property string $termo_compromisso_periodo
+ * @property \Cake\I18n\FrozenDate $termo_compromisso_inicio
+ * @property \Cake\I18n\FrozenDate $termo_compromisso_final
+ * @property string $periodo_calendario_academico
+ * @property string $instituicao
  *
  * @property \App\Model\Entity\Instituicao $instituicao
  */
@@ -37,6 +40,7 @@ class Configuracao extends Entity
         'termo_compromisso_periodo' => true,
         'termo_compromisso_inicio' => true,
         'termo_compromisso_final' => true,
-		'periodo_calendario_academico' => true
+		'periodo_calendario_academico' => true,
+		'instituicao' => true
     ];
 }

@@ -14,7 +14,7 @@
             </aside>
             <?= $this->Form->create($area) ?>
             <fieldset>
-                <legend><?= __('Adicionar Area') ?></legend>
+                <h3><?= __('Adicionando Area') ?></h3>
                 <?php
                     echo $this->Form->control('area');
                 ?>

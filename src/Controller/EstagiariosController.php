@@ -18,18 +18,25 @@ class EstagiariosController extends AppController
      */
     public function index($periodo = NULL)
     {
+        if (!$periodo) {
+            //$this->loadModel("Configuracao");
+            //$configuracao = $this->Configuracao->findById('1');
+            //$periodo = $configuracao['Configuracao']['mural_periodo_atual'];
+            $periodo = '2024-1';
+        }
+
+        //pr($periodo);
+        //pr('test');
+        //die();
         
-        // echo "Período " . $periodo;
         if ($periodo) {
-            $query = $this->Estagiarios->find('all')
-            ->where(['estagiarios.periodo' => $periodo])
+            $estagiarios = $this->Estagiarios->find('all', ['conditions' => ['estagiarios.periodo' => $periodo] ])
             ->contain(['Alunos', 'Professores', 'Supervisores', 'Instituicoes', 'Areaestagios']);
         } else {
-            $query = $this->Estagiarios->find('all')
+            $estagiarios = $this->Estagiarios->find('all')
             ->contain(['Alunos', 'Professores', 'Supervisores', 'Instituicoes', 'Areaestagios']);
         }
-        //$config = $this->paginate = ['sortWhitelist' => ['id', 'Alunos.nome', 'registro', 'turno', 'nivel', 'Instituicoes.instituicao', 'Supervisores.nome', 'Professores.nome']];
-        $estagiarios = $this->paginate($query);
+        $this->set('estagiarios', $this->paginate($estagiarios));
 
         $query = $this->Estagiarios->find('all', [
             'fields' => ['periodo'],
@@ -40,10 +47,9 @@ class EstagiariosController extends AppController
         foreach ($query as $periodo) {
             $periodostotal[$periodo->periodo] = $periodo->periodo;
         }
-        $this->set('periodo', $periodo);        
         $this->set('periodos', $periodostotal);
+        $this->set('periodo', $periodo);
 
-        $this->set(compact('estagiarios'));
     }
 
     /**

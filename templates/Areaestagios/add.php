@@ -8,13 +8,13 @@
     <div class="column-responsive column-80">
         <div class="areaestagios form content">
             <aside>
-                <div class="side-nav">
-                    <?= $this->Html->link(__('Listar Areaestagios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Areaestagios'), ['action' => 'index'], ['class' => 'button']) ?>
                 </div>
             </aside>
             <?= $this->Form->create($areaestagio) ?>
             <fieldset>
-                <legend><?= __('Adicionar Area estagio') ?></legend>
+                <h3><?= __('Adicionando Area estagio') ?></h3>
                 <?php
                     echo $this->Form->control('area');
                 ?>

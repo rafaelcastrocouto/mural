@@ -10,8 +10,8 @@
             <?= $this->Html->link(__('Nova Area'), ['action' => 'add'], ['class' => 'button']) ?>
         </div>
 	</aside>
-    <h3><?= __('Areas') ?></h3>
-    <div>
+    <h3><?= __('Lista de Areas') ?></h3>
+    <div class="table_wrap">
         <table>
             <thead>
                 <tr>

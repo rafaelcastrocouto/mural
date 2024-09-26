@@ -12,8 +12,8 @@
 		</div>
 	</aside>
             
-    <h3><?= __('Area estagios') ?></h3>
-    <div>
+    <h3><?= __('Lista de Areaestagios') ?></h3>
+    <div class="table_wrap">
         <table>
             <thead>
                 <tr>
@@ -31,7 +31,7 @@
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $areaestagio->id], ['confirm' => __('Are you sure you want to delete {0}?', $areaestagio->area)]) ?>
                     </td>
                     <td><?= $this->Number->format($areaestagio->id) ?></td>
-                    <td><?= h($areaestagio->area) ?></td>
+                    <td><?= $this->Html->link(h($areaestagio->area), ['action' => 'view', $areaestagio->id]) ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

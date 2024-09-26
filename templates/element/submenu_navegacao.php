@@ -54,7 +54,7 @@
                 <li class="nav-item dropdown">
                     <a style='color: white' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administração</a>
                     <div class="dropdown-menu">
-                        <?php echo $this->Html->link('Configuração', '/Configuracaos/view/1', ['class' => 'dropdown-item']); ?>
+                        <?php echo $this->Html->link('Configuração', '/Configuracoes/view/1', ['class' => 'dropdown-item']); ?>
                         <?php echo $this->Html->link('Usuários', '/Users', ['class' => 'dropdown-item']); ?>
                         <?php echo $this->Html->link('Planilha seguro', '/Alunos/planilhaseguro/', ['class' => 'dropdown-item']); ?>
                         <?php echo $this->Html->link('Planilha CRESS', '/Alunos/planilhacress/', ['class' => 'dropdown-item']); ?>

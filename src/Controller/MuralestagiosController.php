@@ -26,14 +26,14 @@ class MuralestagiosController extends AppController {
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function index($periodo = NULL) {
-
+    public function index($periodo = NULL)
+    {
         if ($periodo) {
-            $muralestagios = $this->Muralestagios->find('all', [
-                'conditions' => ['muralestagios.periodo' => $periodo]
-            ])->contain(['Instituicoes']);
+            $muralestagios = $this->Muralestagios->find('all', ['conditions' => ['muralestagios.periodo' => $periodo] ])
+            ->contain(['Instituicoes']);
         } else {
-            $muralestagios = $this->Muralestagios->find('all')->contain(['Instituicoes']);
+            $muralestagios = $this->Muralestagios->find('all')
+            ->contain(['Instituicoes']);
         }
         $this->set('muralestagios', $this->paginate($muralestagios));
 
@@ -48,6 +48,7 @@ class MuralestagiosController extends AppController {
         }
         $this->set('periodos', $periodostotal);
         $this->set('periodo', $periodo);
+
     }
 
     /**
@@ -57,7 +58,8 @@ class MuralestagiosController extends AppController {
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null) {
+    public function view($id = null)
+    {
         $muralestagio = $this->Muralestagios->get($id, [
             'contain' => ['Instituicoes', 'Areaestagios', 'Professores', 'Inscricoes' => ['Alunos']],
         ]);
@@ -69,7 +71,8 @@ class MuralestagiosController extends AppController {
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add() {
+    public function add()
+    {
         $muralestagio = $this->Muralestagios->newEmptyEntity();
         if ($this->request->is('post')) {
             $muralestagio = $this->Muralestagios->patchEntity($muralestagio, $this->request->getData());
@@ -93,8 +96,8 @@ class MuralestagiosController extends AppController {
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null) {
-
+    public function edit($id = null)
+    {
         $muralestagio = $this->Muralestagios->get($id, [
             'contain' => ['Instituicoes'],
         ]);
@@ -120,7 +123,8 @@ class MuralestagiosController extends AppController {
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null) {
+    public function delete($id = null)
+    {
         $this->request->allowMethod(['post', 'delete']);
         $muralestagio = $this->Muralestagios->get($id);
         if ($this->Muralestagios->delete($muralestagio)) {

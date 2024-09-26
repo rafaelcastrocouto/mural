@@ -26,13 +26,7 @@
                     <th><?= $this->Paginator->sort('celular') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
                     <th><?= $this->Paginator->sort('cpf') ?></th>
-                    <th><?= $this->Paginator->sort('identidade') ?></th>
-                    <th><?= $this->Paginator->sort('orgao') ?></th>
                     <th><?= $this->Paginator->sort('nascimento') ?></th>
-                    <th><?= $this->Paginator->sort('endereco') ?></th>
-                    <th><?= $this->Paginator->sort('cep') ?></th>
-                    <th><?= $this->Paginator->sort('municipio') ?></th>
-                    <th><?= $this->Paginator->sort('bairro') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -51,13 +45,7 @@
                     <td><?= '(' . $aluno->codigo_celular . ') ' . h($aluno->celular) ?></td>
                     <td><?= $aluno->email ? $this->Html->link(h($aluno->email), 'mailto:' . $aluno->email) : '' ?></td>
                     <td><?= h($aluno->cpf) ?></td>
-                    <td><?= h($aluno->identidade) ?></td>
-                    <td><?= h($aluno->orgao) ?></td>
                     <td><?= h($aluno->nascimento) ?></td>
-                    <td><?= h($aluno->endereco) ?></td>
-                    <td><?= h($aluno->cep) ?></td>
-                    <td><?= h($aluno->municipio) ?></td>
-                    <td><?= h($aluno->bairro) ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

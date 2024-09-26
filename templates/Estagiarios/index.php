@@ -10,10 +10,10 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var url = "<?= $this->Html->Url->build(['controller' => 'estagiarios']); ?>";
-        var estagiarioperiodo = $("#EstagiarioPeriodo");
+        var select= $("#estagiarioperiodo");
 		var pathname = location.pathname.split('/').filter(Boolean);
-		if (pathname[pathname.length - 2] == 'index') estagiarioperiodo.val(pathname[pathname.length - 1]);
-        $("#EstagiarioPeriodo").change(function () {
+		if (pathname[pathname.length - 2] == 'index') select.val(pathname[pathname.length - 1]);
+        select.change(function () {
             var periodo = $(this).val();
             window.location = url + '/index/' + periodo;
         });
@@ -28,37 +28,44 @@ $session = $this->request->getSession();
 // die();
 ?>
 
-<div class="row justify-content-center">
-    <div class="col-auto">
-        <?php if ($session->read('categoria_id') == 1): ?>
-            <?= $this->Form->create($estagiarios, ['class' => 'form-inline']); ?>
-			<?= $this->Form->input('periodo', [
-					'id' => 'EstagiarioPeriodo', 
-					'type' => 'select', 
-					'label' => ['text' => 'Período ', 'style' => 'display: inline;'], 
-					'options' => $periodos, 
-					'selected' => $periodo, 
-					'class' => 'form-control'
-				]); 
-			?>
-            <?= $this->Form->end(); ?>
-        <?php else: ?>
-            <h1 style="text-align: center;">Mural de estágios da ESS/UFRJ. Período: <?= '2020-1'; ?></h1>
-        <?php endif; ?>
-    </div>
-</div>
 
 <div class="estagiarios index content">
-    <?= $this->Html->link(__('Novo Estagiario'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Estagiarios') ?></h3>
-    <div>
+	
+	<div class="row justify-content-center">
+	    <div class="col-auto">
+	        <?php if ($session->read('categoria_id') == 1): ?>
+	            <?= $this->Form->create($estagiarios, ['class' => 'form-inline']); ?>
+					<?= $this->Form->label('estagiarioperiodo', 'Período'); ?>
+					<?= $this->Form->input('periodo', [
+							'default'=> $periodo->periodo,
+							'id' => 'estagiarioperiodo', 
+							'type' => 'select', 
+							'options' => $periodos, 
+							'class' => 'form-control'
+						]); 
+					?>
+	            <?= $this->Form->end(); ?>
+	        <?php else: ?>
+	            <h1 style="text-align: center;">Período: <?= '2005-1'; ?></h1>
+	        <?php endif; ?>
+	    </div>
+	</div>
+	
+	<aside>
+		<div class="nav">
+		    <?= $this->Html->link(__('Novo Estagiario'), ['action' => 'add'], ['class' => 'button']) ?>
+		</div>
+	</aside>
+	
+    <h3><?= __('Lista de Estagiarios') ?></h3>
+    <div class="table_wrap">
         <table>
             <thead>
                 <tr>
+                    <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('Alunos.nome', 'Aluno') ?></th>
                     <th><?= $this->Paginator->sort('registro') ?></th>
-                    <th><?= $this->Paginator->sort('ajustecurricular2020') ?></th>
                     <th><?= $this->Paginator->sort('turno') ?></th>
                     <th><?= $this->Paginator->sort('nivel') ?></th>
                     <th><?= $this->Paginator->sort('tc') ?></th>
@@ -70,17 +77,19 @@ $session = $this->request->getSession();
                     <th><?= $this->Paginator->sort('Areaestagios.nome', 'Area estagio') ?></th>
                     <th><?= $this->Paginator->sort('nota') ?></th>
                     <th><?= $this->Paginator->sort('ch') ?></th>
-                    <th><?= $this->Paginator->sort('observacoes') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($estagiarios as $estagiario): ?>
                 <tr>
+                    <td class="actions">
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $estagiario->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $estagiario->id]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiario->id)]) ?>
+                    </td>
                     <td><?= $this->Number->format($estagiario->id) ?></td>
-                    <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
+                    <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['action' => 'view', $estagiario->id]) : '' ?></td>
                     <td><?= $estagiario->registro ?></td>
-                    <td><?= h($estagiario->ajustecurricular2020) ?></td>
                     <td><?= h($estagiario->turno) ?></td>
                     <td><?= h($estagiario->nivel) ?></td>
                     <td><?= $estagiario->tc ?></td>
@@ -92,12 +101,6 @@ $session = $this->request->getSession();
                     <td><?= $estagiario->areaestagio ? $this->Html->link($estagiario->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $estagiario->areaestagio->id]) : '' ?></td>
                     <td><?= $estagiario->nota ? $this->Number->format($estagiario->nota) : '' ?></td>
                     <td><?= $estagiario->ch ? $this->Number->format($estagiario->ch) : '' ?></td>
-                    <td><?= h($estagiario->observacoes) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $estagiario->id]) ?>
-                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $estagiario->id]) ?>
-                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiario->id)]) ?>
-                    </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

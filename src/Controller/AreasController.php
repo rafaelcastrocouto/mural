@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 /**
- * Areaos Controller
+ * Areas Controller
  *
  * @property \App\Model\Table\AreasTable $Areas
  * @method \App\Model\Entity\Area[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
@@ -73,9 +73,7 @@ class AreasController extends AppController
      */
     public function edit($id = null)
     {
-        $area = $this->Areas->get($id, [
-            'contain' => [],
-        ]);
+        $area = $this->Areas->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $area = $this->Areas->patchEntity($area, $this->request->getData());
             if ($this->Areas->save($area)) {
