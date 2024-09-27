@@ -13,9 +13,13 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  * @var \App\View\AppView $this
  */
+
 $cakeDescription = 'Mural de estágios da ESS/UFRJ';
+
 ?>
+
 <!DOCTYPE html>
+<!-- templates/layout/default.php -->
 <html>
     <head>
         <?= $this->Html->charset() ?>
@@ -40,9 +44,6 @@ $cakeDescription = 'Mural de estágios da ESS/UFRJ';
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
         </div>
-
-        <footer>
-            
-        </footer>
+        <?= $this->element('footer'); ?>
     </body>
 </html>

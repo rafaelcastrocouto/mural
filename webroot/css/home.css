@@ -1,6 +1,8 @@
 /* Home page styles */
 body {
     font-size: 14px;
+    max-width: 115rem;
+    margin: 0 auto;
 }
 img {
     float: right;
@@ -37,10 +39,10 @@ hr {
 
 .container {
     margin: 1em;
+    padding-bottom: 2em;
 }
 .text-center {
     text-align: center;
-    padding: 2em;
 }
 .links a {
     margin-right: 10px;
@@ -73,4 +75,13 @@ hr {
 }
 #url-rewriting-warning {
     display: none;
+}
+.col1 {
+    padding: 2em;
+    display: grid;
+    width: 700px;
+    place-content: center;
+}
+.col2 {
+    padding: 2em;
 }

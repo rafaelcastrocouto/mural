@@ -56,14 +56,18 @@ if (!Configure::read('debug')) :
     );
 endif;
 
+$cakeDescription = 'Mural de estágios da ESS/UFRJ';
+
 ?>
+
 <!DOCTYPE html>
+<!-- templates/pages/home -->
 <html>
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        CakePHP: the rapid development PHP framework:
+        <?= $cakeDescription ?>
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
@@ -76,22 +80,27 @@ endif;
 </head>
 <body>
     <header>
-        <div class="container text-center">
-            <a href="https://cakephp.org/" target="_blank" rel="noopener">
-                <img alt="CakePHP" src="https://cakephp.org/v2/img/logos/CakePHP_Logo.svg" width="350" />
-            </a>
-            <h1>
-                Welcome to <a href="muralestagios">Mural de Estágios</a>
-            </h1>
-            <h2>
-                Built with CakePHP <?= h(Configure::version()) ?> Chiffon (🍰)
-            </h2>
-            <h3>
-                <div class="side-nav">
-                    <?= $this->Html->link(__('Login'), ['action' => 'login'], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Register'), ['action' => 'register'], ['class' => 'side-nav-item']) ?>
+        <div class="container">
+            <div class="row">
+                <div class="col1">
+                    <h1 class="text-center">Boas vindas ao <a href="muralestagios">Mural de Estágios</a></h1>
+                    <h2 class="text-center">
+                        <div class="nav">
+                            <?= $this->Html->link(__('Login'), ['controller' => 'users', 'action' => 'login'], ['class' => 'button']) ?>
+                            <?= $this->Html->link(__('Novo usuário'), ['controller' => 'users', 'action' => 'register'], ['class' => 'button']) ?>
+                        </div>
+                    </h2>
+                </div>   
+                <div class="col2">
+                    <p>Prezadas(os) usuárias(os),</p>
+                    <p>O Mural de Estágio tem a função de: permitir a consulta e inscrição em vagas de estágio; retirar o Termo de Compromisso, folha de atividades, avaliação do/a supervisor/a, declaração de estágio, dentre outros.</p>
+                    <p>É a sua primeira vez por aqui? Faça o cadastro com dados completos. Não abrevie seu nome.</p>
+                    <p>Vai retirar o Termo de Compromisso? Preencha os dados da supervisão de campo e do/a docente de OTP.</p>
+                    <p>Supervisores/as e docentes também podem fazer o cadastro e contribuir para mantermos atualizados os dados das instituições, assim como seus dados profissionais, incluindo e-mail e telefone.</p>
+                    <p>Ficou alguma dúvida? Escreva um e-mail detalhado para: <a href="mailto:estagio@ess.ufrj.br">estagio@ess.ufrj.br</a>.</p>
+                    <p>Estamos à disposição.</p>
                 </div>
-            </h3>
+            </div>
         </div>
     </header>
     <main class="main">

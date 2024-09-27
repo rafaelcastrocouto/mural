@@ -15,16 +15,16 @@ $session->write('categoria_id', 1);
     <div class="column-responsive column-80">
         <div class="users form content">
             <aside>
-                <div class="side-nav">
+                <div class="nav">
                     <?php if ($session->read('categoria_id') == 1): ?>
-                        <?= $this->Html->link(__('Listar Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                        <?= $this->Html->link(__('Listar Usuários'), ['action' => 'index'], ['class' => 'button']) ?>
                     <?php endif; ?>
-                    <?= $this->Html->link(__('Fazer Login'), ['action' => 'login'], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Fazer Login'), ['action' => 'login'], ['class' => 'button']) ?>
                 </div>
             </aside>
             <?= $this->Form->create($user) ?>
             <fieldset>
-                <legend><?= __('Adicionar User') ?></legend>
+                <h3><?= __('Adicionando usuário') ?></h3>
                 <?php
                     echo $this->Form->control('email');
                     echo $this->Form->control('password');

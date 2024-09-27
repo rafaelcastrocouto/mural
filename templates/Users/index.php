@@ -5,8 +5,14 @@
  */
 ?>
 <div class="users index content">
-    <?= $this->Html->link(__('Novo user'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Users') ?></h3>
+    
+	<aside>
+		<div class="nav">
+            <?= $this->Html->link(__('Novo usuário'), ['action' => 'add'], ['class' => 'button']) ?>
+		</div>
+	</aside>
+    
+    <h3><?= __('Lista de usuários') ?></h3>
     <div>
         <table>
             <thead>
@@ -14,8 +20,8 @@
                     <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
-                    <th><?= $this->Paginator->sort('categoria') ?></th>
                     <th><?= $this->Paginator->sort('registro') ?></th>
+                    <th><?= $this->Paginator->sort('categoria') ?></th>
                     <th><?= $this->Paginator->sort('aluno_id') ?></th>
                     <th><?= $this->Paginator->sort('supervisor_id') ?></th>
                     <th><?= $this->Paginator->sort('professor_id') ?></th>
@@ -31,9 +37,9 @@
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
                     </td>
                     <td><?= $this->Number->format($user->id) ?></td>
-                    <td><?= h($user->email) ?></td>
-                    <td><?= h($user->categoria->categoria) ?></td>
+                    <td><?= $user->email ? $this->Html->link(h($user->email), 'mailto:' . $user->email) : '' ?></td>
                     <td><?= $this->Number->format($user->registro) ?></td>
+                    <td><?= h($user->categoria->categoria) ?></td>
                     <td><?= $user->aluno ? $this->Html->link($user->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $user->aluno->id]) : '' ?></td>
                     <td><?= $user->supervisor ? $this->Html->link($user->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $user->supervisor->id]) : '' ?></td>
                     <td><?= $user->professor ? $this->Html->link($user->professor->nome, ['controller' => 'Professores', 'action' => 'view', $user->professor->id]) : '' ?></td>
@@ -43,14 +49,5 @@
             </tbody>
         </table>
     </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-    </div>
+    <?= $this->element('paginator'); ?>
 </div>

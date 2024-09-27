@@ -1,10 +1,4 @@
-<?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+<!-- templates/element/menu_superior.php -->
 <ul class="navbar-nav mr-auto">
   <li class="nav-item"><?= $this->Html->link(__('Alunos'), ['controller' => 'alunos', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
   <li class="nav-item"><?= $this->Html->link(__('Professores'), ['controller' => 'professores', 'action' => 'index'], ['class' => 'nav-link']) ?></li>

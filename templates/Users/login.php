@@ -1,12 +1,12 @@
 <div class="users form content">
     <aside>
-        <div class="side-nav">
-            <?= $this->Html->link(__('Adicionar User'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+        <div class="nav">
+            <?= $this->Html->link(__('Novo usuário'), ['action' => 'add'], ['class' => 'button']) ?>
         </div>
     </aside>
     <?= $this->Form->create() ?>
     <fieldset>
-        <legend><?= __('Fazer login') ?></legend>
+        <h3><?= __('Fazer login') ?></h3>
         <?= $this->Form->control('email') ?>
         <?= $this->Form->control('password') ?>
     </fieldset>
