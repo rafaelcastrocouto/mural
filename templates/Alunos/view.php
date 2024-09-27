@@ -3,8 +3,8 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Aluno $aluno
  */
-//pr($aluno);
-//pr($users);
+//pr($aluno->users);
+//die();
 ?>
 <div>
     <div class="column-responsive column-80">
@@ -81,31 +81,29 @@
                 </tr>
             </table>
             
-            <?php if (!empty($users)) : ?>
+            <?php if (!empty($aluno->users)) : ?>
             <div class="related">
                 <h4><?= __('Related Users') ?></h4>
                 <div class="table_wrap">
                     <table>
                         <tr>
+                            <th class="actions"><?= __('Actions') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Email') ?></th>
-                            <th><?= __('Senha') ?></th>
                             <th><?= __('Registro') ?></th>
                             <th><?= __('Data') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($users as $user) : ?>
+                        <?php foreach ($aluno->users as $user) : ?>
                         <tr>
-                            <td><?= h($user->id) ?></td>
-                            <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
-                            <td><?= h($user->password) ?></td>
-                            <td><?= $this->Number->format($user->registro) ?></td>
-                            <td><?= h($user->data) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('Ver'), ['controller' => 'Users', 'action' => 'view', $user->id]) ?>
                                 <?= $this->Html->link(__('Editar'), ['controller' => 'Users', 'action' => 'edit', $user->id]) ?>
                                 <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Users', 'action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
                             </td>
+                            <td><?= h($user->id) ?></td>
+                            <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
+                            <td><?= $this->Number->format($user->registro) ?></td>
+                            <td><?= h($user->data) ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </table>
@@ -119,47 +117,42 @@
                 <div class="table_wrap">
                     <table>
                         <tr>
+                            <th class="actions"><?= __('Actions') ?></th>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('Aluno Id') ?></th>
                             <th><?= __('Registro') ?></th>
-                            <th><?= __('Ajustecurricular2020') ?></th>
                             <th><?= __('Turno') ?></th>
                             <th><?= __('Nivel') ?></th>
                             <th><?= __('Tc') ?></th>
                             <th><?= __('Tc Solicitacao') ?></th>
-                            <th><?= __('Instituicao Id') ?></th>
-                            <th><?= __('Supervisor Id') ?></th>
-                            <th><?= __('Professor Id') ?></th>
+                            <th><?= __('Instituicao') ?></th>
+                            <th><?= __('Supervisor') ?></th>
+                            <th><?= __('Professor') ?></th>
+                            <th><?= __('Areaestagio') ?></th>
                             <th><?= __('Periodo') ?></th>
-                            <th><?= __('Areaestagio Id') ?></th>
                             <th><?= __('Nota') ?></th>
                             <th><?= __('Ch') ?></th>
-                            <th><?= __('Observacoes') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($aluno->estagiarios as $estagiario) : ?>
                         <tr>
+                            <td class="actions">
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Estagiarios', 'action' => 'view', $estagiario->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Estagiarios', 'action' => 'edit', $estagiario->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Estagiarios', 'action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete {0}?', $estagiario->id)]) ?>
+                            </td>
                             <td><?= h($estagiario->id) ?></td>
-                            <td><?= h($estagiario->aluno_id) ?></td>
                             <td><?= h($estagiario->registro) ?></td>
-                            <td><?= h($estagiario->ajustecurricular2020) ?></td>
                             <td><?= h($estagiario->turno) ?></td>
                             <td><?= h($estagiario->nivel) ?></td>
                             <td><?= h($estagiario->tc) ?></td>
                             <td><?= h($estagiario->tc_solicitacao) ?></td>
-                            <td><?= h($estagiario->instituicao_id) ?></td>
-                            <td><?= h($estagiario->supervisor_id) ?></td>
-                            <td><?= h($estagiario->professor_id) ?></td>
+                            <td><?= $estagiario->instituicao_id ? $this->Html->link(h($estagiario->instituicao_id), ['controller' => 'Muralestagios', 'action' => 'view', $estagiario->instituicao_id]) : '' ?></td>
+                            <td><?= $estagiario->supervisor_id ? $this->Html->link(h($estagiario->supervisor_id), ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor_id]) : '' ?></td>
+                            <td><?= $estagiario->professor_id ? $this->Html->link(h($estagiario->professor_id), ['controller' => 'Professores', 'action' => 'view', $estagiario->professor_id]) : '' ?></td>
+                            <td><?= $estagiario->area_estagio_id ? $this->Html->link(h($estagiario->area_estagio_id), ['controller' => 'Areaestagios', 'action' => 'view', $estagiario->area_estagio_id]) : '' ?></td>
                             <td><?= h($estagiario->periodo) ?></td>
-                            <td><?= h($estagiario->areaestagio_id) ?></td>
                             <td><?= h($estagiario->nota) ?></td>
                             <td><?= h($estagiario->ch) ?></td>
                             <td><?= h($estagiario->observacoes) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('Ver'), ['controller' => 'Estagiarios', 'action' => 'view', $estagiario->id]) ?>
-                                <?= $this->Html->link(__('Editar'), ['controller' => 'Estagiarios', 'action' => 'edit', $estagiario->id]) ?>
-                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Estagiarios', 'action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiario->id)]) ?>
-                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </table>
@@ -176,11 +169,9 @@
                             <th class="actions"><?= __('Actions') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Registro') ?></th>
-                            <th><?= __('Aluno Id') ?></th>
-                            <th><?= __('Muralestagio Id') ?></th>
-                            <th><?= __('Data') ?></th>
+                            <th><?= __('Muralestagio') ?></th>
                             <th><?= __('Periodo') ?></th>
-                            <th><?= __('Data') ?></th>
+                            <th><?= __('timestamp', 'Data') ?></th>
                         </tr>
                         <?php foreach ($aluno->inscricoes as $inscricao) : ?>
                         <tr>
@@ -191,9 +182,7 @@
                             </td>
                             <td><?= h($inscricao->id) ?></td>
                             <td><?= h($inscricao->registro) ?></td>
-                            <td><?= h($inscricao->aluno_id) ?></td>
-                            <td><?= h($inscricao->muralestagio_id) ?></td>
-                            <td><?= h($inscricao->data) ?></td>
+                            <td><?= $inscricao->mural_estagio_id ? $this->Html->link(h($inscricao->mural_estagio_id), ['controller' => 'Muralestagios', 'action' => 'view', $inscricao->mural_estagio_id]) : '' ?></td>
                             <td><?= h($inscricao->periodo) ?></td>
                             <td><?= h($inscricao->timestamp) ? h($inscricao->timestamp) : '' ?></td>
                         </tr>

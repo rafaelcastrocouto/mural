@@ -73,9 +73,7 @@ class UsersController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null) {
-        $user = $this->Users->get($id, [
-            'contain' => [],
-        ]);
+        $user = $this->Users->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
@@ -85,8 +83,11 @@ class UsersController extends AppController {
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
+        $alunos = $this->Users->Alunos->find('list');
+        $supervisores = $this->Users->Supervisores->find('list');
+        $professores = $this->Users->Professores->find('list');
         $categorias = $this->Users->Categorias->find('list');
-        $this->set(compact('user', 'categorias'));
+        $this->set(compact('user', 'categorias', 'alunos', 'supervisores', 'professores'));
     }
 
     /**

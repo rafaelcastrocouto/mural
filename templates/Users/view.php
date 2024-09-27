@@ -8,11 +8,11 @@
     <div class="column-responsive column-80">
         <div class="users view content">
             <aside>
-                <div class="side-nav">
-                    <?= $this->Html->link(__('Editar User'), ['action' => 'edit', $user->id], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Form->postLink(__('Deletar User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id), 'class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Listar Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Novo User'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Usuários'), ['action' => 'index'], ['class' => 'button']) ?>
+                    <?= $this->Html->link(__('Editar Usuário'), ['action' => 'edit', $user->id], ['class' => 'button']) ?>
+                    <?= $this->Form->postLink(__('Deletar Usuário'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete {0}?', $user->email), 'class' => 'button']) ?>
+                    <?= $this->Html->link(__('Novo Usuário'), ['action' => 'add'], ['class' => 'button']) ?>
                 </div>
             </aside>
             <h3>user_<?= h($user->id) ?></h3>
@@ -24,10 +24,6 @@
                 <tr>
                     <th><?= __('Email') ?></th>
                     <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Senha') ?></th>
-                    <td><?= h($user->password) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Categoria') ?></th>
@@ -51,7 +47,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Data') ?></th>
-                    <td><?= h($user->data) ?></td>
+                    <td><?= h($user->timestamp) ?></td>
                 </tr>
             </table>
         </div>

@@ -49,10 +49,10 @@ class AlunosTable extends Table
         $this->hasMany('Inscricoes', [
             'foreignKey' => 'aluno_id',
         ]);
-        $this->hasMany('Users', [
+        $this->hasMany('Estagiarios', [
             'foreignKey' => 'aluno_id',
         ]);
-        $this->hasMany('Estagiarios', [
+        $this->hasMany('Users', [
             'foreignKey' => 'aluno_id',
         ]);
 

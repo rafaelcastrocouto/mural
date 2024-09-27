@@ -35,7 +35,7 @@ class AreasController extends AppController
     {
         $area = $this->Areas->get($id, [
             'contain' => [
-                'Instituicoes'
+              //  'Instituicoes'
               //  'Estagiarios' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores'],
               //  'Muralestagios' => ['Instituicoes', 'Professores'] 
             ],

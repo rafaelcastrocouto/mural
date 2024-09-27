@@ -33,10 +33,9 @@ class AlunosController extends AppController
     public function view($id = null)
     {
         $aluno = $this->Alunos->get($id, [
-            'contain' => ['Estagiarios', 'Inscricoes'],
+            'contain' => ['Estagiarios', 'Inscricoes', 'Users'],
         ]);
-        $users = $this->fetchTable('Users')->find('all', ['conditions' => ['users.aluno_id' => $id] ]);
-        $this->set(compact('users'));
+        //$users = $this->fetchTable('Users')->find('all', ['conditions' => ['users.aluno_id' => $id] ]);
         $this->set(compact('aluno'));
     }
 

@@ -8,26 +8,26 @@
     <div class="column-responsive column-80">
         <div class="users form content">
             <aside>
-                <div class="side-nav">
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Usuários'), ['action' => 'index'], ['class' => 'button']) ?>
                     <?= $this->Form->postLink(
                         __('Deletar'),
                         ['action' => 'delete', $user->id],
-                        ['confirm' => __('Are you sure you want to delete # {0}?', $user->id), 'class' => 'side-nav-item']
+                        ['confirm' => __('Are you sure you want to delete {0}?', $user->email), 'class' => 'button']
                     ) ?>
-                    <?= $this->Html->link(__('Listar Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
                 </div>
             </aside>
             <?= $this->Form->create($user) ?>
             <fieldset>
-                <legend><?= __('Editando User') ?></legend>
+                <h3><?= __('Editando Usuário ') . $user->id ?></h3>
                 <?php
                     echo $this->Form->control('email', ['type' => 'email']);
                     echo $this->Form->control('password');
-                    echo $this->Form->control('categoria', ['options' => $categorias, 'value' => $user->categoria_id,'class' => 'form-control']);
+                    echo $this->Form->control('categoria', ['options' => $categorias, 'value' => $user->categoria_id, 'class' => 'form-control']);
                     echo $this->Form->control('registro');
-                    echo $this->Form->control('aluno_id', ['type' => 'text', 'value' => $user->aluno_id]);
-                    echo $this->Form->control('supervisor_id', ['type' => 'text', 'value' => $user->supervisor_id]);
-                    echo $this->Form->control('professor_id', ['type' => 'text', 'value' => $user->professor_id]);
+                    echo $this->Form->control('aluno', ['options' => $alunos, 'value' => $user->aluno_id, 'empty' => true, 'class' => 'form-control']);
+                    echo $this->Form->control('supervisor_id', ['options' => $supervisores, 'value' => $user->supervisor_id, 'empty' => true, 'class' => 'form-control']);
+                    echo $this->Form->control('professor_id', ['options' => $professores, 'value' => $user->professor_id, 'empty' => true, 'class' => 'form-control']);
                     echo $this->Form->control('timestamp', ['type' => 'datetime-local', 'value' => $user->timestamp ? $user->timestamp->format('Y-m-d\TH:i') : '']);
                 ?>
             </fieldset>
