@@ -58,6 +58,10 @@ $session = $this->request->getSession();
 	</aside>
 	
     <h3><?= __('Lista de Estagiarios') ?></h3>
+	
+	<div class="paginator">
+        <?= $this->element('paginator'); ?>
+    </div>
     <div class="table_wrap">
         <table>
             <thead>
@@ -94,7 +98,7 @@ $session = $this->request->getSession();
                     <td><?= h($estagiario->nivel) ?></td>
                     <td><?= $estagiario->tc ?></td>
                     <td><?= h($estagiario->tc_solicitacao) ?></td>
-                    <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicao', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
+                    <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
                     <td><?= ($estagiario->supervisor and $estagiario->supervisor->nome) ? $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : '' ?></td>
                     <td><?= $estagiario->professor ? $this->Html->link($estagiario->professor->nome, ['controller' => 'Professores', 'action' => 'view', $estagiario->professor->id]) : '' ?></td>
                     <td><?= h($estagiario->periodo) ?></td>
@@ -107,13 +111,7 @@ $session = $this->request->getSession();
         </table>
     </div>
     <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        <?= $this->element('paginator'); ?>
+        <?= $this->element('paginator_count'); ?>
     </div>
 </div>

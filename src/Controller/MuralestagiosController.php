@@ -28,7 +28,6 @@ class MuralestagiosController extends AppController {
      */
     public function index($periodo = NULL)
     {
-
         if (!$periodo) {
             $configuracao = $this->fetchTable("Configuracoes")->find()->first();
             $periodo = $configuracao['mural_periodo_atual'];

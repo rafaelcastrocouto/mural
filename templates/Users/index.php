@@ -5,7 +5,6 @@
  */
 ?>
 <div class="users index content">
-    
 	<aside>
 		<div class="nav">
             <?= $this->Html->link(__('Novo usuário'), ['action' => 'add'], ['class' => 'button']) ?>
@@ -13,7 +12,11 @@
 	</aside>
     
     <h3><?= __('Lista de usuários') ?></h3>
-    <div>
+    
+    <div class="paginator">
+        <?= $this->element('paginator'); ?>
+    </div>
+    <div class="table_wrap">
         <table>
             <thead>
                 <tr>
@@ -49,5 +52,8 @@
             </tbody>
         </table>
     </div>
-    <?= $this->element('paginator'); ?>
+    <div class="paginator">
+        <?= $this->element('paginator'); ?>
+        <?= $this->element('paginator_count'); ?>
+    </div>
 </div>

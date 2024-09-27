@@ -56,7 +56,8 @@ if (!Configure::read('debug')) :
     );
 endif;
 
-$cakeDescription = 'Mural de estágios da ESS/UFRJ';
+
+$cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituicao'];
 
 ?>
 

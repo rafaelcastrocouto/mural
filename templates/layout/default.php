@@ -14,7 +14,7 @@
  * @var \App\View\AppView $this
  */
 
-$cakeDescription = 'Mural de estágios da ESS/UFRJ';
+$cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituicao'];
 
 ?>
 

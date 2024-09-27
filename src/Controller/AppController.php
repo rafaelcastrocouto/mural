@@ -44,6 +44,10 @@ class AppController extends Controller
         $this->loadComponent('Authentication.Authentication');
 
         $this->loadComponent('Flash');
+     
+
+        $configuracao = $this->fetchTable("Configuracoes")->find()->first();
+        $this->set('configuracao', $configuracao);
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.

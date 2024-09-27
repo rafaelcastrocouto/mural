@@ -61,6 +61,11 @@ class InstituicoesTable extends Table
         $this->hasMany('Muralestagios', [
             'foreignKey' => 'instituicao_id',
         ]);
+        $this->belongsToMany('Supervisores', [
+            'foreignKey' => 'instituicao_id',
+            'targetForeignKey' => 'supervisor_id',
+            'joinTable' => 'inst_super',
+        ]);
         $this->hasMany('Visitas', [
             'foreignKey' => 'instituicao_id',
         ]);

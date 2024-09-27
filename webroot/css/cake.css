@@ -359,6 +359,13 @@ input[type='datetime-local'] {
     min-width: 7em;
 }
 
+/* Error */
+.cake-error {
+    margin-top: 2em;
+}
+.cake-error:first-child {
+    margin-top: 6em;
+}
 
 /* Footer */
 footer {

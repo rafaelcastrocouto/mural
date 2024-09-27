@@ -7,9 +7,18 @@
 // die();
 ?>
 <div class="inscricoes index content">
-    <?= $this->Html->link(__('Nova Inscricao'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Inscricoes') ?></h3>
-    <div>
+	<aside>
+		<div class="nav">
+            <?= $this->Html->link(__('Nova Inscricao'), ['action' => 'add'], ['class' => 'button']) ?>
+		</div>
+	</aside>
+    
+    <h3><?= __('Lista de inscrições') ?></h3>
+	
+    <div class="paginator">
+        <?= $this->element('paginator'); ?>
+    </div>
+    <div class="table_wrap">
         <table>
             <thead>
                 <tr>
@@ -50,13 +59,7 @@
         </table>
     </div>
     <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        <?= $this->element('paginator'); ?>
+        <?= $this->element('paginator_count'); ?>
     </div>
 </div>
