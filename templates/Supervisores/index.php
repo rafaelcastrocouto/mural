@@ -50,7 +50,7 @@
                     <td><?= h($supervisor->telefone) ?></td>
                     <td><?= h($supervisor->codigo_cel) ?></td>
                     <td><?= h($supervisor->celular) ?></td>
-                    <td><?= h($supervisor->email) ?></td>
+                    <td><?= $supervisor->email ? $this->Text->autoLinkEmails($supervisor->email) : '' ?></td>
                     <td><?= h($supervisor->escola) ?></td>
                     <td><?= h($supervisor->ano_formatura) ?></td>
                     <td><?= $this->Number->format($supervisor->cress) ?></td>

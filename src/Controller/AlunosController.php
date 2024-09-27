@@ -18,8 +18,8 @@ class AlunosController extends AppController
      */
     public function index()
     {
-        $alunos = $this->paginate($this->Alunos);
-
+        $alunos = $this->paginate($this->Alunos->find('all')->contain(['Users']));
+        
         $this->set(compact('alunos'));
     }
 
@@ -33,9 +33,10 @@ class AlunosController extends AppController
     public function view($id = null)
     {
         $aluno = $this->Alunos->get($id, [
-            'contain' => ['Estagiarios', 'Inscricoes', 'Users'],
+            'contain' => ['Estagiarios', 'Inscricoes'],
         ]);
-        //$users = $this->fetchTable('Users')->find()->where(['aluno_id =' => $id])->all();
+        $users = $this->fetchTable('Users')->find('all', ['conditions' => ['users.aluno_id' => $id] ]);
+        $this->set(compact('users'));
         $this->set(compact('aluno'));
     }
 

@@ -23,7 +23,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Email') ?></th>
-                    <td><?= h($user->email) ?></td>
+                    <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Senha') ?></th>

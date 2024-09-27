@@ -40,7 +40,7 @@
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
                     </td>
                     <td><?= $this->Number->format($user->id) ?></td>
-                    <td><?= $user->email ? $this->Html->link(h($user->email), 'mailto:' . $user->email) : '' ?></td>
+                    <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
                     <td><?= $this->Number->format($user->registro) ?></td>
                     <td><?= h($user->categoria->categoria) ?></td>
                     <td><?= $user->aluno ? $this->Html->link($user->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $user->aluno->id]) : '' ?></td>

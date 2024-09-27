@@ -41,7 +41,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Email') ?></th>
-                    <td><?= h($instituicao->email) ?></td>
+                    <td><?= $instituicao->email ? $this->Text->autoLinkEmails($instituicao->email) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Url') ?></th>
@@ -143,7 +143,7 @@
                             <td><?= h($supervisores->telefone) ?></td>
                             <td><?= h($supervisores->codigo_cel) ?></td>
                             <td><?= h($supervisores->celular) ?></td>
-                            <td><?= h($supervisores->email) ?></td>
+                            <td><?= $supervisores->email ? $this->Text->autoLinkEmails($supervisores->email) : '' ?></td>
                             <td><?= h($supervisores->escola) ?></td>
                             <td><?= h($supervisores->ano_formatura) ?></td>
                             <td><?= h($supervisores->cress) ?></td>
@@ -274,7 +274,7 @@
                             <td><?= h($muralestagios->outras) ?></td>
                             <td><?= h($muralestagios->periodo) ?></td>
                             <td><?= h($muralestagios->localInscricao) ?></td>
-                            <td><?= h($muralestagios->email) ?></td>
+                            <td><?= $muralestagios->email ? $this->Text->autoLinkEmails($muralestagios->email) : '' ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('Ver'), ['controller' => 'Muralestagios', 'action' => 'view', $muralestagios->id]) ?>
                                 <?= $this->Html->link(__('Editar'), ['controller' => 'Muralestagios', 'action' => 'edit', $muralestagios->id]) ?>

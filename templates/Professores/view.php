@@ -51,7 +51,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Email') ?></th>
-                    <td><?= h($professor->email) ?></td>
+                    <td><?= $professor->email ? $this->Text->autoLinkEmails($professor->email) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Homepage') ?></th>
@@ -266,7 +266,7 @@
                             <td><?= h($muralestagios->outras) ?></td>
                             <td><?= h($muralestagios->periodo) ?></td>
                             <td><?= h($muralestagios->localInscricao) ?></td>
-                            <td><?= h($muralestagios->email) ?></td>
+                            <td><?= $muralestagios->email ? $this->Text->autoLinkEmails($muralestagios->email) : '' ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('Ver'), ['controller' => 'Muralestagios', 'action' => 'view', $muralestagios->id]) ?>
                                 <?= $this->Html->link(__('Editar'), ['controller' => 'Muralestagios', 'action' => 'edit', $muralestagios->id]) ?>
@@ -298,7 +298,7 @@
                         <?php foreach ($professor->users as $users) : ?>
                         <tr>
                             <td><?= h($users->id) ?></td>
-                            <td><?= h($users->email) ?></td>
+                            <td><?= $users->email ? $this->Text->autoLinkEmails($users->email) : '' ?></td>
                             <td><?= h($users->password) ?></td>
                             <td><?= h($users->categoria) ?></td>
                             <td><?= h($users->numero) ?></td>

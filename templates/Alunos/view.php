@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\Aluno $aluno
  */
 //pr($aluno);
+//pr($users);
 ?>
 <div>
     <div class="column-responsive column-80">
@@ -28,7 +29,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Email') ?></th>
-                    <td><?= $aluno->email ? $this->Html->link(h($aluno->email), 'mailto:' . $aluno->email) : '' ?></td>
+                    <td><?= $aluno->email ? $this->Text->autoLinkEmails($aluno->email) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Registro') ?></th>
@@ -80,7 +81,7 @@
                 </tr>
             </table>
             
-            <?php if (!empty($aluno->users)) : ?>
+            <?php if (!empty($users)) : ?>
             <div class="related">
                 <h4><?= __('Related Users') ?></h4>
                 <div class="table_wrap">
@@ -93,10 +94,10 @@
                             <th><?= __('Data') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($aluno->users as $user) : ?>
+                        <?php foreach ($users as $user) : ?>
                         <tr>
                             <td><?= h($user->id) ?></td>
-                            <td><?= h($user->email) ?></td>
+                            <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
                             <td><?= h($user->password) ?></td>
                             <td><?= $this->Number->format($user->registro) ?></td>
                             <td><?= h($user->data) ?></td>

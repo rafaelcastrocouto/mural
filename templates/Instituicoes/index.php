@@ -51,7 +51,7 @@
                     <td><?= $instituicao->area ? $this->Html->link($instituicao->area->area, ['controller' => 'Areas', 'action' => 'view', $instituicao->area->id]) : '' ?></td>
                     <td><?= h($instituicao->natureza) ?></td>
                     <td><?= h($instituicao->cnpj) ?></td>
-                    <td><?= $instituicao->email ? $this->Html->link($instituicao->email, 'mailto:' . $instituicao->email) : '' ?></td>
+                    <td><?= $instituicao->email ? $this->Text->autoLinkEmails($instituicao->email) : '' ?></td>
                     <td><?= $instituicao->url ? $this->Html->link($instituicao->url) : '' ?></td>
                     <td><?= h($instituicao->endereco) ?></td>
                     <td><?= h($instituicao->bairro) ?></td>

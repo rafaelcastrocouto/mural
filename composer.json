@@ -4,6 +4,7 @@
     "type": "project",
     "homepage": "https://cakephp.org",
     "license": "MIT",
+    "author": "Luis Acosta",
     "require": {
         "php": ">=8.1",
         "cakephp/authentication": "^3.1",

@@ -88,7 +88,7 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
                     <h2 class="text-center">
                         <div class="nav">
                             <?= $this->Html->link(__('Login'), ['controller' => 'users', 'action' => 'login'], ['class' => 'button']) ?>
-                            <?= $this->Html->link(__('Novo usuário'), ['controller' => 'users', 'action' => 'register'], ['class' => 'button']) ?>
+                            <?= $this->Html->link(__('Novo usuário'), ['controller' => 'users', 'action' => 'add'], ['class' => 'button']) ?>
                         </div>
                     </h2>
                 </div>   
@@ -98,7 +98,7 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
                     <p>É a sua primeira vez por aqui? Faça o cadastro com dados completos. Não abrevie seu nome.</p>
                     <p>Vai retirar o Termo de Compromisso? Preencha os dados da supervisão de campo e do/a docente de OTP.</p>
                     <p>Supervisores/as e docentes também podem fazer o cadastro e contribuir para mantermos atualizados os dados das instituições, assim como seus dados profissionais, incluindo e-mail e telefone.</p>
-                    <p>Ficou alguma dúvida? Escreva um e-mail detalhado para: <a href="mailto:estagio@ess.ufrj.br">estagio@ess.ufrj.br</a>.</p>
+                    <p>Ficou alguma dúvida? Escreva um e-mail detalhado para: <?= $this->Text->autoLinkEmails('estagio@ess.ufrj.br') ?>.</p>
                     <p>Estamos à disposição.</p>
                 </div>
             </div>

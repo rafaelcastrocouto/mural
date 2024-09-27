@@ -70,7 +70,7 @@
                 <?php echo $this->Html->link('Grupo Google', 'https://groups.google.com/forum/#!forum/estagio_ess', ['class' => 'nav-link']); ?>
             </li>
             <li class = "nav-item">
-                <?php echo $this->Html->link('Fale conosco', 'mailto: estagio@ess.ufrj.br', ['class' => 'nav-link']); ?>
+                <?php echo $this->Html->link('Fale conosco', 'mailto:estagio@ess.ufrj.br', ['class' => 'nav-link']); ?>
             </li>
         </ul>
         <ul class = "navbar-nav ml-auto">

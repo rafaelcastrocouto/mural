@@ -76,7 +76,7 @@
                     <td><?= h($professor->telefone) ?></td>
                     <td><?= h($professor->ddd_celular) ?></td>
                     <td><?= h($professor->celular) ?></td>
-                    <td><?= h($professor->email) ?></td>
+                    <td><?= $professor->email ? $this->Text->autoLinkEmails($professor->email) : '' ?></td>
                     <td><?= h($professor->homepage) ?></td>
                     <td><?= h($professor->redesocial) ?></td>
                     <td><?= h($professor->curriculolattes) ?></td>

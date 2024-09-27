@@ -133,7 +133,7 @@
                             <td><?= h($muralestagios->outras) ?></td>
                             <td><?= h($muralestagios->periodo) ?></td>
                             <td><?= h($muralestagios->localInscricao) ?></td>
-                            <td><?= h($muralestagios->email) ?></td>
+                            <td><?= $muralestagios->email ? $this->Text->autoLinkEmails($muralestagios->email) : '' ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </table>

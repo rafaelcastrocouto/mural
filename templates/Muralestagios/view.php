@@ -67,7 +67,7 @@ $session->write('categoria_id', 1);
                 </tr>
                 <tr>
                     <th><?= __('Requisitos') ?></th>
-                    <td><?= h($muralestagio->requisitos) ?></td>
+                    <td><?= $this->Text->autoParagraph($muralestagio->requisitos) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Area estagio') ?></th>
@@ -130,7 +130,7 @@ $session->write('categoria_id', 1);
                 </tr>
                 <tr>
                     <th><?= __('Email') ?></th>
-                    <td><?= h($muralestagio->email) ?></td>
+                    <td><?= $muralestagio->email ? $this->Text->autoLinkEmails($muralestagio->email) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('CargaHoraria') ?></th>
@@ -148,9 +148,10 @@ $session->write('categoria_id', 1);
             <div class="text">
                 <strong><?= __('Outras') ?></strong>
                 <blockquote>
-                    <?= $this->Text->autoParagraph(h($muralestagio->outras)); ?>
+                    <?= $this->Text->autoParagraph($muralestagio->outras); ?>
                 </blockquote>
             </div>
+			
             <?php if (!empty($muralestagio->inscricoes)) : ?>
             <div class="related">
                 <h4><?= __('Inscricoes para o Mural de Estágios') ?></h4>

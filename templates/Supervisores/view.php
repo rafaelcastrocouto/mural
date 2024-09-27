@@ -59,7 +59,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Email') ?></th>
-                    <td><?= h($supervisor->email) ?></td>
+                    <td><?= $supervisor->email ? $this->Text->autoLinkEmails($supervisor->email) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Escola') ?></th>
@@ -147,7 +147,7 @@
                                     <td><?= $instituicao->area ? $this->Html->link(h($instituicao->area->area), ['controller' => 'areas', 'action' => 'view', $instituicao->area->id]) : '' ?></td>
                                     <td><?= h($instituicao->natureza) ?></td>
                                     <td><?= h($instituicao->cnpj) ?></td>
-                                    <td><?= h($instituicao->email) ?></td>
+                                    <td><?= $this->Text->autoLinkEmails($instituicao->email) ?></td>
                                     <td><?= h($instituicao->url) ?></td>
                                     <td><?= h($instituicao->endereco) ?></td>
                                     <td><?= h($instituicao->bairro) ?></td>

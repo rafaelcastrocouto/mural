@@ -41,12 +41,12 @@
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $aluno->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $aluno->id], ['confirm' => __('Are you sure you want to delete {0}?', $aluno->nome)]) ?>
                     </td>
-                    <td><?= $this->Number->format($aluno->id) ?></td>
+                    <td><?= $this->Number->format($aluno->id)?></td>
                     <td><?= $aluno->nome ? $this->Html->link(h($aluno->nome), ['action' => 'view', $aluno->id]) : '' ?></td>
                     <td><?= $this->Number->format($aluno->registro) ?></td>
                     <td><?= '(' . $aluno->codigo_telefone . ') ' . h($aluno->telefone) ?></td>
                     <td><?= '(' . $aluno->codigo_celular . ') ' . h($aluno->celular) ?></td>
-                    <td><?= $aluno->email ? $this->Html->link(h($aluno->email), 'mailto:' . $aluno->email) : '' ?></td>
+                    <td><?= $aluno->email ? $this->Text->autoLinkEmails($aluno->email) : '' ?></td>
                     <td><?= h($aluno->cpf) ?></td>
                     <td><?= h($aluno->nascimento) ?></td>
                 </tr>
