@@ -9,6 +9,9 @@
     <?= $this->Html->link(__('Novo Supervisor'), ['action' => 'add'], ['class' => 'button']) ?>
     
     <h3><?= __('Lista de Supervisores') ?></h3>
+    <div class="paginator">
+        <?= $this->element('paginator'); ?>
+    </div>
     <div>
         <table>
             <thead>
