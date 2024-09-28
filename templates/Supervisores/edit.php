@@ -8,19 +8,18 @@
     <div class="column-responsive column-80">
         <div class="supervisores form content">
             <aside>
-                <div class="side-nav">
-                    <h4 class="heading"><?= __('Actions') ?></h4>
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Supervisores'), ['action' => 'index'], ['class' => 'button']) ?>
                     <?= $this->Form->postLink(
                         __('Deletar'),
                         ['action' => 'delete', $supervisor->id],
-                        ['confirm' => __('Are you sure you want to delete # {0}?', $supervisor->id), 'class' => 'side-nav-item']
+                        ['confirm' => __('Are you sure you want to delete {0}?', $supervisor->nome), 'class' => 'button']
                     ) ?>
-                    <?= $this->Html->link(__('Listar Supervisores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
                 </div>
             </aside>
             <?= $this->Form->create($supervisor) ?>
             <fieldset>
-                <legend><?= __('Editar Supervisor') ?></legend>
+                <h3><?= __('Editando supervisor_') . $supervisor->id ?></h3>
                 <?php
                     echo $this->Form->control('nome');
                     echo $this->Form->control('cpf');

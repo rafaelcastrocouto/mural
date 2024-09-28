@@ -8,13 +8,13 @@
     <div class="column-responsive column-80">
         <div class="supervisores form content">
             <aside>
-                <div class="side-nav">
-                    <?= $this->Html->link(__('Listar Supervisores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Supervisores'), ['action' => 'index'], ['class' => 'button']) ?>
                 </div>
             </aside>
             <?= $this->Form->create($supervisor) ?>
             <fieldset>
-                <legend><?= __('Adicionar Supervisor') ?></legend>
+                <h3><?= __('Adicionando Supervisor') ?></h3>
                 <?php
                     echo $this->Form->control('nome');
                     echo $this->Form->control('cpf');

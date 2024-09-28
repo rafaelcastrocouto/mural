@@ -8,11 +8,11 @@
     <div class="column-responsive column-80">
         <div class="supervisores view content">
             <aside>
-                <div class="side-nav">
-                    <?= $this->Html->link(__('Editar Supervisor'), ['action' => 'edit', $supervisor->id], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Form->postLink(__('Deletar Supervisor'), ['action' => 'delete', $supervisor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $supervisor->id), 'class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Listar Supervisores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Novo Supervisor'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Supervisores'), ['action' => 'index'], ['class' => 'button']) ?>
+                    <?= $this->Html->link(__('Editar Supervisor'), ['action' => 'edit', $supervisor->id], ['class' => 'button']) ?>
+                    <?= $this->Form->postLink(__('Deletar Supervisor'), ['action' => 'delete', $supervisor->id], ['confirm' => __('Are you sure you want to delete {0}?', $supervisor->nome), 'class' => 'button']) ?>
+                    <?= $this->Html->link(__('Novo Supervisor'), ['action' => 'add'], ['class' => 'button']) ?>
                 </div>
             </aside>
             <h3>supervisor_<?= h($supervisor->id) ?></h3>
