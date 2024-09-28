@@ -267,6 +267,7 @@ input[type='datetime-local'] {
 .paginator p {
     margin-bottom: 0;
     text-align: center;
+    color: var(--color-lightgray);
 }
 .pagination {
     display: flex;
@@ -296,9 +297,7 @@ input[type='datetime-local'] {
     text-decoration: underline;
 }
 .pagination .disabled a {
-    cursor: not-allowed;
-    color: var(--color-lightgray);
-    text-decoration: none;
+    display: none;
 }
 .first a,
 .prev a,

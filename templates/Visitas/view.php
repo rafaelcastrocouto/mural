@@ -9,11 +9,11 @@
     <div class="column-responsive column-80">
         <div class="visitas view content">
             <aside>
-                <div class="side-nav">
-                    <?= $this->Html->link(__('Editar Visita'), ['action' => 'edit', $visita->id], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Form->postLink(__('Deletar Visita'), ['action' => 'delete', $visita->id], ['confirm' => __('Are you sure you want to delete # {0}?', $visita->id), 'class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Listar Visitas'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Nova Visita'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                <div class="nav">
+                    <?= $this->Html->link(__('Editar Visita'), ['action' => 'edit', $visita->id], ['class' => 'button']) ?>
+                    <?= $this->Form->postLink(__('Deletar Visita'), ['action' => 'delete', $visita->id], ['confirm' => __('Are you sure you want to delete visita_{0}?', $visita->id), 'class' => 'button']) ?>
+                    <?= $this->Html->link(__('Listar Visitas'), ['action' => 'index'], ['class' => 'button']) ?>
+                    <?= $this->Html->link(__('Nova Visita'), ['action' => 'add'], ['class' => 'button']) ?>
                 </div>
             </aside>
             <h3>visita_<?= h($visita->id) ?></h3>

@@ -19,7 +19,7 @@
             </aside>
             <?= $this->Form->create($user) ?>
             <fieldset>
-                <h3><?= __('Editando Usuário ') . $user->id ?></h3>
+                <h3><?= __('Editando user_') . $user->id ?></h3>
                 <?php
                     echo $this->Form->control('email', ['type' => 'email']);
                     echo $this->Form->control('password');

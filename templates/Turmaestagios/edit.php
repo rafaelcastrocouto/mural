@@ -19,9 +19,9 @@
             </aside>
             <?= $this->Form->create($turmaestagio) ?>
             <fieldset>
-                <legend><?= __('Editando Turma estagio') ?></legend>
+                <h3><?= __('Editando turmaestagio_') . $turmaestagio->id ?></h3>
                 <?php
-                    echo $this->Form->control('turma');
+                    echo $this->Form->control('turma', ['label' => 'Nome da Turma']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Editar')) ?>

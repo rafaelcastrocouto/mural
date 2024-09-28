@@ -8,18 +8,18 @@
     <div class="column-responsive column-80">
         <div class="visitas form content">
         <aside>
-            <div class="side-nav">
+            <div class="nav">
+                <?= $this->Html->link(__('Listar Visitas'), ['action' => 'index'], ['class' => 'button']) ?>
                 <?= $this->Form->postLink(
-                    __('Delete'),
+                    __('Deletar'),
                     ['action' => 'delete', $visita->id],
-                    ['confirm' => __('Are you sure you want to delete # {0}?', $visita->id), 'class' => 'side-nav-item']
+                    ['confirm' => __('Are you sure you want to delete visita_{0}?', $visita->id), 'class' => 'button']
                 ) ?>
-                <?= $this->Html->link(__('Listar Visitas'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
             </div>
         </aside>
             <?= $this->Form->create($visita) ?>
             <fieldset>
-                <h2><?= __('Editando Visita') ?></h2>
+                <h3><?= __('Editando visita_') . $visita->id ?></h3>
                 <?php
                     echo $this->Form->control('instituicao_id', ['options' => $instituicoes]);
                     echo $this->Form->control('data');
