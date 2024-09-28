@@ -70,8 +70,8 @@ $session->write('categoria_id', 1);
                     <td><?= $this->Text->autoParagraph($muralestagio->requisitos) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Area estagio') ?></th>
-                    <td><?= $muralestagio->areaestagio ? $this->Html->link($muralestagio->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $muralestagio->areaestagio->id]) : $muralestagio->area_estagio_id ?></td>
+                    <th><?= __('Turma') ?></th>
+                    <td><?= $muralestagio->turmaestagio ? $this->Html->link($muralestagio->turmaestagio->turma, ['controller' => 'Turmaestagios', 'action' => 'view', $muralestagio->turmaestagio->id]) : $muralestagio->turma_estagio_id ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Turno') ?></th>

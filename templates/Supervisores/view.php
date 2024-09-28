@@ -191,7 +191,7 @@
                                 <th><?= __('Supervisor Id') ?></th>
                                 <th><?= __('Professor Id') ?></th>
                                 <th><?= __('Periodo') ?></th>
-                                <th><?= __('Areaestagio Id') ?></th>
+                                <th><?= __('Turma') ?></th>
                                 <th><?= __('Nota') ?></th>
                                 <th><?= __('Ch') ?></th>
                                 <th><?= __('Observacoes') ?></th>
@@ -212,7 +212,7 @@
                                     <td><?= $estagiario->supervisor ? $this->Html->link(h($estagiario->supervisor->nome), ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : '' ?></td>
                                     <td><?= $estagiario->professor ? $this->Html->link(h($estagiario->professor->nome), ['controller' => 'Professores', 'action' => 'view', $estagiario->professor->id]) : '' ?></td>
                                     <td><?= h($estagiario->periodo) ?></td>
-                                    <td><?= h($estagiario->areaestagio_id) ?></td>
+                                    <td><?= h($estagiario->turmaestagio_id) ?></td>
                                     <td><?= h($estagiario->nota) ?></td>
                                     <td><?= h($estagiario->ch) ?></td>
                                     <td><?= h($estagiario->observacoes) ?></td>

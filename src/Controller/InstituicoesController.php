@@ -33,7 +33,7 @@ class InstituicoesController extends AppController
     public function view($id = null)
     {
         $instituicao = $this->Instituicoes->get($id, [
-            'contain' => ['Areas', 'Areas', 'Supervisores', 'Estagiarios' => ['Alunos', 'Instituicoes', 'Professores', 'Supervisores', 'Areaestagios'], 'Muralestagios', 'Visitas'],
+            'contain' => ['Areas', 'Areas', 'Supervisores', 'Estagiarios' => ['Alunos', 'Instituicoes', 'Professores', 'Supervisores', 'Turmaestagios'], 'Muralestagios', 'Visitas'],
         ]);
 
         $this->set(compact('instituicao'));
@@ -78,7 +78,7 @@ class InstituicoesController extends AppController
             if ($this->Instituicoes->save($instituicao)) {
                 $this->Flash->success(__('The instituicao has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The instituicao could not be saved. Please, try again.'));
         }

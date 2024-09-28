@@ -79,7 +79,7 @@ class AreasController extends AppController
             if ($this->Areas->save($area)) {
                 $this->Flash->success(__('The area has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The area could not be saved. Please, try again.'));
         }

@@ -90,9 +90,6 @@ class InstituicoesTable extends Table
             ->notEmptyString('instituicao');
 
         $validator
-            ->allowEmptyString('area');
-
-        $validator
             ->scalar('natureza')
             ->maxLength('natureza', 50)
             ->allowEmptyString('natureza');
@@ -100,8 +97,7 @@ class InstituicoesTable extends Table
         $validator
             ->scalar('cnpj')
             ->maxLength('cnpj', 18)
-            ->requirePresence('cnpj', 'create')
-            ->notEmptyString('cnpj');
+            ->allowEmptyString('cnpj');
 
         $validator
             ->email('email')
@@ -116,48 +112,41 @@ class InstituicoesTable extends Table
         $validator
             ->scalar('endereco')
             ->maxLength('endereco', 105)
-            ->notEmptyString('endereco');
+            ->allowEmptyString('endereco');
 
         $validator
             ->scalar('bairro')
             ->maxLength('bairro', 30)
-            ->requirePresence('bairro', 'create')
-            ->notEmptyString('bairro');
+            ->allowEmptyString('bairro');
 
         $validator
             ->scalar('municipio')
             ->maxLength('municipio', 30)
-            ->requirePresence('municipio', 'create')
-            ->notEmptyString('municipio');
+            ->allowEmptyString('municipio');
 
         $validator
             ->scalar('cep')
             ->maxLength('cep', 9)
-            ->notEmptyString('cep');
+            ->allowEmptyString('cep');
 
         $validator
             ->scalar('telefone')
             ->maxLength('telefone', 50)
-            ->notEmptyString('telefone');
+            ->allowEmptyString('telefone');
 
         $validator
             ->scalar('beneficio')
-            ->maxLength('beneficio', 50)
-            ->allowEmptyString('beneficio');
+            ->maxLength('beneficio', 50);
 
         $validator
             ->scalar('fim_de_semana')
-            ->maxLength('fim_de_semana', 1)
-            ->allowEmptyString('fim_de_semana');
+            ->maxLength('fim_de_semana', 1);
 
         $validator
-            ->scalar('localInscricao')
-            ->notEmptyString('localInscricao');
+            ->scalar('localInscricao');
 
         $validator
-            ->integer('convenio')
-            ->requirePresence('convenio', 'create')
-            ->notEmptyString('convenio');
+            ->integer('convenio');
 
         $validator
             ->date('expira')
@@ -166,7 +155,6 @@ class InstituicoesTable extends Table
         $validator
             ->scalar('seguro')
             ->maxLength('seguro', 1)
-            ->requirePresence('seguro', 'create')
             ->notEmptyString('seguro');
 
         $validator

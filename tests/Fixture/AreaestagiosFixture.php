@@ -6,9 +6,9 @@ namespace App\Test\Fixture;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
- * AreaestagiosFixture
+ * TurmaestagiosFixture
  */
-class AreaestagiosFixture extends TestFixture
+class TurmaestagiosFixture extends TestFixture
 {
     /**
      * Fields
@@ -18,7 +18,7 @@ class AreaestagiosFixture extends TestFixture
     // phpcs:disable
     public $fields = [
         'id' => ['type' => 'smallinteger', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
-        'area' => ['type' => 'string', 'length' => 70, 'null' => false, 'default' => '', 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
+        'turma' => ['type' => 'string', 'length' => 70, 'null' => false, 'default' => '', 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
@@ -38,7 +38,7 @@ class AreaestagiosFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'area' => 'Lorem ipsum dolor sit amet',
+                'turma' => 'Lorem ipsum dolor sit amet',
             ],
         ];
         parent::init();

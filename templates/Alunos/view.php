@@ -103,7 +103,7 @@
                             <td><?= h($user->id) ?></td>
                             <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
                             <td><?= $this->Number->format($user->registro) ?></td>
-                            <td><?= h($user->data) ?></td>
+                            <td><?= h($user->timestamp) ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </table>
@@ -127,7 +127,7 @@
                             <th><?= __('Instituicao') ?></th>
                             <th><?= __('Supervisor') ?></th>
                             <th><?= __('Professor') ?></th>
-                            <th><?= __('Areaestagio') ?></th>
+                            <th><?= __('Turmaestagio') ?></th>
                             <th><?= __('Periodo') ?></th>
                             <th><?= __('Nota') ?></th>
                             <th><?= __('Ch') ?></th>
@@ -148,7 +148,7 @@
                             <td><?= $estagiario->instituicao_id ? $this->Html->link(h($estagiario->instituicao_id), ['controller' => 'Muralestagios', 'action' => 'view', $estagiario->instituicao_id]) : '' ?></td>
                             <td><?= $estagiario->supervisor_id ? $this->Html->link(h($estagiario->supervisor_id), ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor_id]) : '' ?></td>
                             <td><?= $estagiario->professor_id ? $this->Html->link(h($estagiario->professor_id), ['controller' => 'Professores', 'action' => 'view', $estagiario->professor_id]) : '' ?></td>
-                            <td><?= $estagiario->area_estagio_id ? $this->Html->link(h($estagiario->area_estagio_id), ['controller' => 'Areaestagios', 'action' => 'view', $estagiario->area_estagio_id]) : '' ?></td>
+                            <td><?= $estagiario->area_estagio_id ? $this->Html->link(h($estagiario->area_estagio_id), ['controller' => 'Turmaestagios', 'action' => 'view', $estagiario->area_estagio_id]) : '' ?></td>
                             <td><?= h($estagiario->periodo) ?></td>
                             <td><?= h($estagiario->nota) ?></td>
                             <td><?= h($estagiario->ch) ?></td>

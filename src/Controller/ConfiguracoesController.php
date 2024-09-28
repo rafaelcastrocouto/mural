@@ -65,7 +65,7 @@ class ConfiguracoesController extends AppController {
             if ($this->Configuracoes->save($configuracao)) {
                 $this->Flash->success(__('The configuracao has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The configuracao could not be saved. Please, try again.'));
         }

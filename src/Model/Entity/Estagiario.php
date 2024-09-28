@@ -29,7 +29,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Instituicao $instituicao
  * @property \App\Model\Entity\Supervisor $supervisor
  * @property \App\Model\Entity\Professor $professor
- * @property \App\Model\Entity\Areaestagio $areaestagio
+ * @property \App\Model\Entity\Turmaestagio $turmaestagio
  */
 class Estagiario extends Entity
 {

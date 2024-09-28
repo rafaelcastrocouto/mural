@@ -64,8 +64,8 @@
                     <td><?= h($estagiario->periodo) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Areaestagio') ?></th>
-                    <td><?= $estagiario->areaestagio ? $this->Html->link($estagiario->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $estagiario->areaestagio->id]) : '' ?></td>
+                    <th><?= __('Turmaestagio') ?></th>
+                    <td><?= $estagiario->turmaestagio ? $this->Html->link($estagiario->turmaestagio->turma, ['controller' => 'Turmaestagios', 'action' => 'view', $estagiario->turmaestagio->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Observacoes') ?></th>

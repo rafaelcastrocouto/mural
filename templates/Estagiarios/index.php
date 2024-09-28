@@ -78,7 +78,7 @@ $session = $this->request->getSession();
                     <th><?= $this->Paginator->sort('Supervisores.nome', 'Supervisor') ?></th>
                     <th><?= $this->Paginator->sort('Profesdsores.nome', 'Professor') ?></th>
                     <th><?= $this->Paginator->sort('periodo') ?></th>
-                    <th><?= $this->Paginator->sort('Areaestagios.nome', 'Area estagio') ?></th>
+                    <th><?= $this->Paginator->sort('Turmaestagios.turma', 'Turma') ?></th>
                     <th><?= $this->Paginator->sort('nota') ?></th>
                     <th><?= $this->Paginator->sort('ch') ?></th>
                 </tr>
@@ -102,7 +102,7 @@ $session = $this->request->getSession();
                     <td><?= ($estagiario->supervisor and $estagiario->supervisor->nome) ? $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : '' ?></td>
                     <td><?= $estagiario->professor ? $this->Html->link($estagiario->professor->nome, ['controller' => 'Professores', 'action' => 'view', $estagiario->professor->id]) : '' ?></td>
                     <td><?= h($estagiario->periodo) ?></td>
-                    <td><?= $estagiario->areaestagio ? $this->Html->link($estagiario->areaestagio->area, ['controller' => 'Areaestagios', 'action' => 'view', $estagiario->areaestagio->id]) : '' ?></td>
+                    <td><?= $estagiario->turmaestagio ? $this->Html->link($estagiario->turmaestagio->turma, ['controller' => 'Turmaestagios', 'action' => 'view', $estagiario->turmaestagio->id]) : '' ?></td>
                     <td><?= $estagiario->nota ? $this->Number->format($estagiario->nota) : '' ?></td>
                     <td><?= $estagiario->ch ? $this->Number->format($estagiario->ch) : '' ?></td>
                 </tr>

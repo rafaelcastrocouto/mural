@@ -1,34 +1,34 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Areaestagio $areaestagio
+ * @var \App\Model\Entity\Turmaestagio $turmaestagio
  */
 ?>
 <div>
     <div class="column-responsive column-80">
-        <div class="areaestagios view content">
+        <div class="turmaestagios view content">
             <aside>
                 <div class="nav">
-                    <?= $this->Html->link(__('Listar Areaestagios'), ['action' => 'index'], ['class' => 'button']) ?>
-                    <?= $this->Html->link(__('Editar Areaestagio'), ['action' => 'edit', $areaestagio->id], ['class' => 'button']) ?>
-                    <?= $this->Form->postLink(__('Deletar Areaestagio'), ['action' => 'delete', $areaestagio->id], ['confirm' => __('Are you sure you want to delete {0}?', $areaestagio->area), 'class' => 'button']) ?>
-                    <?= $this->Html->link(__('Nova Areaestagio'), ['action' => 'add'], ['class' => 'button']) ?>
+                    <?= $this->Html->link(__('Listar Turma estagios'), ['action' => 'index'], ['class' => 'button']) ?>
+                    <?= $this->Html->link(__('Editar Turma estagio'), ['action' => 'edit', $turmaestagio->id], ['class' => 'button']) ?>
+                    <?= $this->Form->postLink(__('Deletar Turma estagio'), ['action' => 'delete', $turmaestagio->id], ['confirm' => __('Are you sure you want to delete {0}?', $turmaestagio->turma), 'class' => 'button']) ?>
+                    <?= $this->Html->link(__('Nova Turma estagio'), ['action' => 'add'], ['class' => 'button']) ?>
                 </div>
             </aside>
-            <h3>areaestagio_<?= h($areaestagio->id) ?></h3>
+            <h3>turmaestagio_<?= h($turmaestagio->id) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($areaestagio->id) ?></td>
+                    <td><?= $this->Number->format($turmaestagio->id) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Area') ?></th>
-                    <td><?= h($areaestagio->area) ?></td>
+                    <th><?= __('Turma') ?></th>
+                    <td><?= h($turmaestagio->turma) ?></td>
                 </tr>
             </table>
             <div class="related">
                 <h4><?= __('Related Estagiarios') ?></h4>
-                <?php if (!empty($areaestagio->estagiarios)) : ?>
+                <?php if (!empty($turmaestagio->estagiarios)) : ?>
                 <div>
                     <table>
                         <tr>
@@ -50,7 +50,7 @@
                             <th><?= __('Ch') ?></th>
                             <th><?= __('Observacoes') ?></th>
                         </tr>
-                        <?php foreach ($areaestagio->estagiarios as $estagiarios) : ?>
+                        <?php foreach ($turmaestagio->estagiarios as $estagiarios) : ?>
                         <tr>
                             <td class="actions">
                                 <?= $this->Html->link(__('Ver'), ['controller' => 'Estagiarios', 'action' => 'view', $estagiarios->id]) ?>
@@ -81,7 +81,7 @@
             </div>
             <div class="related">
                 <h4><?= __('Related Muralestagios') ?></h4>
-                <?php if (!empty($areaestagio->muralestagios)) : ?>
+                <?php if (!empty($turmaestagio->muralestagios)) : ?>
                 <div>
                     <table>
                         <tr>
@@ -96,7 +96,7 @@
                             <th><?= __('Contato') ?></th>
                             <th><?= __('Periodo') ?></th>
                         </tr>
-                        <?php foreach ($areaestagio->muralestagios as $muralestagios) : ?>
+                        <?php foreach ($turmaestagio->muralestagios as $muralestagios) : ?>
                         <tr>
                             <td class="actions">
                                 <?= $this->Html->link(__('Ver'), ['controller' => 'Muralestagios', 'action' => 'view', $muralestagios->id]) ?>

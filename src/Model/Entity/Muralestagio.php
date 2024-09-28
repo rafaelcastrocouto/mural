@@ -31,7 +31,7 @@ use Cake\ORM\Entity;
  * @property string|null $email
  *
  * @property \App\Model\Entity\Instituicao $instituicaoestagio
- * @property \App\Model\Entity\Areaestagio $areaestagio
+ * @property \App\Model\Entity\Turmaestagio $turmaestagio
  * @property \App\Model\Entity\Professor $professor
  * @property \App\Model\Entity\Inscricao[] $inscricoes
  */

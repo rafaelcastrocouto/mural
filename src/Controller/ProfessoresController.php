@@ -76,7 +76,7 @@ class ProfessoresController extends AppController
             if ($this->Professores->save($professor)) {
                 $this->Flash->success(__('The professor has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The professor could not be saved. Please, try again.'));
         }

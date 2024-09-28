@@ -29,7 +29,7 @@
                     echo $this->Form->control('final_de_semana');
                     echo $this->Form->control('cargaHoraria');
                     echo $this->Form->control('requisitos');
-                    echo $this->Form->control('areaestagio_id', ['options' => $areaestagios, 'class' => 'form-control']);
+                    echo $this->Form->control('turmaestagio_id', ['options' => $turmaestagios, 'class' => 'form-control']);
                     echo $this->Form->control('turno');
                     echo $this->Form->control('professor_id', ['options' => $professores, 'class' => 'form-control']);
                     echo $this->Form->control('dataSelecao', ['empty' => true]);

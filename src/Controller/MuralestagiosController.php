@@ -66,7 +66,7 @@ class MuralestagiosController extends AppController {
     public function view($id = null)
     {
         $muralestagio = $this->Muralestagios->get($id, [
-            'contain' => ['Instituicoes', 'Areaestagios', 'Professores'/*, 'Inscricoes' => ['Alunos']*/],
+            'contain' => ['Instituicoes', 'Turmaestagios', 'Professores'/*, 'Inscricoes' => ['Alunos']*/],
         ]);
         $this->set(compact('muralestagio'));
     }
@@ -89,9 +89,9 @@ class MuralestagiosController extends AppController {
             $this->Flash->error(__('The muralestagio could not be saved. Please, try again.'));
         }
         $instituicoes = $this->Muralestagios->Instituicoes->find('list', ['limit' => 200]);
-        $areaestagios = $this->Muralestagios->Areaestagios->find('list', ['limit' => 200]);
+        $turmaestagios = $this->Muralestagios->Turmaestagios->find('list', ['limit' => 200]);
         $professores = $this->Muralestagios->Professores->find('list', ['limit' => 200]);
-        $this->set(compact('muralestagio', 'instituicoes', 'areaestagios', 'professores'));
+        $this->set(compact('muralestagio', 'instituicoes', 'turmaestagios', 'professores'));
     }
 
     /**
@@ -111,14 +111,14 @@ class MuralestagiosController extends AppController {
             if ($this->Muralestagios->save($muralestagio)) {
                 $this->Flash->success(__('The muralestagio has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The muralestagio could not be saved. Please, try again.'));
         }
         $instituicoes = $this->Muralestagios->Instituicoes->find('list');
-        $areaestagios = $this->Muralestagios->Areaestagios->find('list', ['limit' => 200]);
+        $turmaestagios = $this->Muralestagios->Turmaestagios->find('list', ['limit' => 200]);
         $professores = $this->Muralestagios->Professores->find('list', ['limit' => 500]);
-        $this->set(compact('muralestagio', 'instituicoes', 'areaestagios', 'professores'));
+        $this->set(compact('muralestagio', 'instituicoes', 'turmaestagios', 'professores'));
     }
 
     /**

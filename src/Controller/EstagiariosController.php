@@ -18,6 +18,8 @@ class EstagiariosController extends AppController
      */
     public function index($periodo = NULL)
     {
+        $contained = ['Alunos', 'Professores', 'Supervisores', 'Instituicoes', 'Turmaestagios'];
+        
         if (!$periodo) {
             $configuracao = $this->fetchTable("Configuracoes")->find()->first();
             $periodo = $configuracao['mural_periodo_atual'];
@@ -25,10 +27,10 @@ class EstagiariosController extends AppController
         
         if ($periodo) {
             $estagiarios = $this->Estagiarios->find('all', ['conditions' => ['estagiarios.periodo' => $periodo] ])
-            ->contain(['Alunos', 'Professores', 'Supervisores', 'Instituicoes', 'Areaestagios']);
+            ->contain($contained);
         } else {
             $estagiarios = $this->Estagiarios->find('all')
-            ->contain(['Alunos', 'Professores', 'Supervisores', 'Instituicoes', 'Areaestagios']);
+            ->contain($contained);
         }
         $this->set('estagiarios', $this->paginate($estagiarios));
 
@@ -56,7 +58,7 @@ class EstagiariosController extends AppController
     public function view($id = null)
     {
         $estagiario = $this->Estagiarios->get($id, [
-            'contain' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores', 'Areaestagios'],
+            'contain' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores', 'Turmaestagios'],
         ]);
 
         $this->set(compact('estagiario'));
@@ -83,8 +85,8 @@ class EstagiariosController extends AppController
         $instituicoes = $this->Estagiarios->Instituicoes->find('list', ['limit' => 200]);
         $supervisores = $this->Estagiarios->Supervisores->find('list', ['limit' => 200]);
         $professores = $this->Estagiarios->Professores->find('list', ['limit' => 200]);
-        $areaestagios = $this->Estagiarios->Areaestagios->find('list', ['limit' => 200]);
-        $this->set(compact('estagiario', 'alunos', 'instituicoes', 'supervisores', 'professores', 'areaestagios'));
+        $turmaestagios = $this->Estagiarios->Turmaestagios->find('list', ['limit' => 200]);
+        $this->set(compact('estagiario', 'alunos', 'instituicoes', 'supervisores', 'professores', 'turmaestagios'));
     }
 
     /**
@@ -104,7 +106,7 @@ class EstagiariosController extends AppController
             if ($this->Estagiarios->save($estagiario)) {
                 $this->Flash->success(__('The estagiario has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The estagiario could not be saved. Please, try again.'));
         }
@@ -112,8 +114,8 @@ class EstagiariosController extends AppController
         $instituicoes = $this->Estagiarios->Instituicoes->find('list');
         $supervisores = $this->Estagiarios->Supervisores->find('list');
         $professores = $this->Estagiarios->Professores->find('list', ['limit' => 500]);
-        $areaestagios = $this->Estagiarios->Areaestagios->find('list', ['limit' => 200]);
-        $this->set(compact('estagiario', 'alunos', 'instituicoes', 'supervisores', 'professores', 'areaestagios'));
+        $turmaestagios = $this->Estagiarios->Turmaestagios->find('list', ['limit' => 200]);
+        $this->set(compact('estagiario', 'alunos', 'instituicoes', 'supervisores', 'professores', 'turmaestagios'));
     }
 
     /**

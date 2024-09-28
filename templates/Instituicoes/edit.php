@@ -8,21 +8,21 @@
     <div class="column-responsive column-80">
         <div class="instituicoes form content">
             <aside>
-                <div class="side-nav">
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Instituições'), ['action' => 'index'], ['class' => 'button']) ?>
                     <?= $this->Form->postLink(
                         __('Deletar'),
                         ['action' => 'delete', $instituicao->id],
-                        ['confirm' => __('Are you sure you want to delete # {0}?', $instituicao->id), 'class' => 'side-nav-item']
+                        ['confirm' => __('Are you sure you want to delete {0}?', $instituicao->instituicao), 'class' => 'button']
                     ) ?>
-                    <?= $this->Html->link(__('Listar Instituicoes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
                 </div>
             </aside>
             <?= $this->Form->create($instituicao) ?>
             <fieldset>
-                <legend><?= __('Editar Instituicao') ?></legend>
+                <h3><?= __('Editando instituição_') . $instituicao->id ?></h3>
                 <?php
                     echo $this->Form->control('instituicao');
-                    echo $this->Form->control('area_id', ['options' => $areas, 'empty' => true, 'class' => 'form-control']);
+                    echo $this->Form->control('area_id', ['options' => $areas, 'class' => 'form-control']);
                     echo $this->Form->control('natureza');
                     echo $this->Form->control('cnpj');
                     echo $this->Form->control('email');

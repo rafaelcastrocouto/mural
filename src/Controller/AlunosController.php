@@ -76,7 +76,7 @@ class AlunosController extends AppController
             if ($this->Alunos->save($aluno)) {
                 $this->Flash->success(__('The aluno has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The aluno could not be saved. Please, try again.'));
         }

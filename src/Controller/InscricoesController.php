@@ -56,7 +56,7 @@ class InscricoesController extends AppController
             if ($this->Inscricoes->save($inscricao)) {
                 $this->Flash->success(__('The inscricao has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The inscricao could not be saved. Please, try again.'));
         }

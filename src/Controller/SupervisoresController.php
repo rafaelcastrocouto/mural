@@ -77,7 +77,7 @@ class SupervisoresController extends AppController
             if ($this->Supervisores->save($supervisor)) {
                 $this->Flash->success(__('The supervisor has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The supervisor could not be saved. Please, try again.'));
         }

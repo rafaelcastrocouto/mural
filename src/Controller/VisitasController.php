@@ -80,7 +80,7 @@ class VisitasController extends AppController
             if ($this->Visitas->save($visita)) {
                 $this->Flash->success(__('The visita has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The visita could not be saved. Please, try again.'));
         }
