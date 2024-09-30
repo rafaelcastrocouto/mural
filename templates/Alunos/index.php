@@ -3,6 +3,9 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Aluno[]|\Cake\Collection\CollectionInterface $alunos
  */
+
+//pr($alunos);
+//die();
 ?>
 <div class="alunos index content">
     
@@ -35,7 +38,6 @@
             <tbody>
                 <?php foreach ($alunos as $aluno): ?>
                 <tr>
-                    <!-- <p> <?= pr($aluno); ?> </p> -->
                     <td class="actions">
                         <?= $this->Html->link(__('Ver'), ['action' => 'view', $aluno->id]) ?>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $aluno->id]) ?>
@@ -46,7 +48,7 @@
                     <td><?= $this->Number->format($aluno->registro) ?></td>
                     <td><?= '(' . $aluno->codigo_telefone . ') ' . h($aluno->telefone) ?></td>
                     <td><?= '(' . $aluno->codigo_celular . ') ' . h($aluno->celular) ?></td>
-                    <td><?= $aluno->email ? $this->Text->autoLinkEmails($aluno->email) : '' ?></td>
+                    <td><?= ($aluno->user->email) ? $this->Text->autoLinkEmails($aluno->user->email) : '' ?></td>
                     <td><?= h($aluno->cpf) ?></td>
                     <td><?= h($aluno->nascimento) ?></td>
                 </tr>
