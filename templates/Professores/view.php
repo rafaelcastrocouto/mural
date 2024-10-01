@@ -161,7 +161,7 @@
                 </blockquote>
             </div>
             <div class="related">
-                <h4><?= __('Related Users') ?></h4>
+                <h4><?= __('User') ?></h4>
                 <?php if (!empty($professor->user)) : ?>
                 <div>
                     <table>

@@ -34,11 +34,7 @@ class AreasController extends AppController
     public function view($id = null)
     {
         $area = $this->Areas->get($id, [
-            'contain' => [
-              //  'Instituicoes'
-              //  'Estagiarios' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores'],
-              //  'Muralestagios' => ['Instituicoes', 'Professores'] 
-            ],
+            'contain' => ['Instituicoes'],
         ]);
         
         $this->set(compact('area'));

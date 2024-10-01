@@ -12,11 +12,15 @@
                     <?= $this->Html->link(__('Editar Configuracao'), ['action' => 'edit', $configuracao->id], ['class' => 'button']) ?>
                 </div>
             </aside>
-            <h3>Configuraçoes</h3>
+            <h3>Configurações</h3>
             <table>
                 <tr>
                     <th><?= __('Instituição') ?></th>
                     <td><?= h($configuracao->instituicao) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Descrição') ?></th>
+                    <td><?= h($configuracao->descricao) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Mural Período Atual') ?></th>

@@ -41,6 +41,7 @@ class Configuracao extends Entity
         'termo_compromisso_inicio' => true,
         'termo_compromisso_final' => true,
 		'periodo_calendario_academico' => true,
-		'instituicao' => true
+		'instituicao' => true,
+		'descricao' => true
     ];
 }

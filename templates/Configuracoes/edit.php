@@ -9,9 +9,10 @@
         <div class="configuracao form content">
             <?= $this->Form->create($configuracao) ?>
             <fieldset>
-                <h3><?= __('Editando Configuracao') ?></h3>
+                <h3><?= __('Editando Configurações') ?></h3>
                 <?php
                     echo $this->Form->control('instituicao');
+                    echo $this->Form->control('descricao');
                     echo $this->Form->control('mural_periodo_atual');
                     echo $this->Form->control('curso_turma_atual');
                     echo $this->Form->control('curso_abertura_inscricoes');
