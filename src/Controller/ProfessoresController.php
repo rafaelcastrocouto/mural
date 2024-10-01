@@ -33,7 +33,11 @@ class ProfessoresController extends AppController
     public function view($id = null)
     {
         $professor = $this->Professores->get($id, [
-            'contain' => ['Estagiarios', 'Muralestagios', 'Users'],
+            'contain' => [
+                'Estagiarios' => ['Alunos', 'Instituicoes', 'Supervisores', 'Turmaestagios'], 
+                'Muralestagios' => ['Instituicoes'], 
+                'Users'
+            ],
         ]);
 
         $this->set(compact('professor'));

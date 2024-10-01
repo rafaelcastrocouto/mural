@@ -28,10 +28,6 @@
                     <td><?= h($aluno->nome) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Email') ?></th>
-                    <td><?= $aluno->email ? $this->Text->autoLinkEmails($aluno->email) : '' ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Registro') ?></th>
                     <td><?= $this->Number->format($aluno->registro) ?></td>
                 </tr>
@@ -81,9 +77,9 @@
                 </tr>
             </table>
             
-            <?php if (!empty($aluno->users)) : ?>
+            <?php if (!empty($aluno->user)) : ?>
             <div class="related">
-                <h4><?= __('Related Users') ?></h4>
+                <h4><?= __('User') ?></h4>
                 <div class="table_wrap">
                     <table>
                         <tr>
@@ -93,19 +89,17 @@
                             <th><?= __('Registro') ?></th>
                             <th><?= __('Data') ?></th>
                         </tr>
-                        <?php foreach ($aluno->users as $user) : ?>
                         <tr>
                             <td class="actions">
-                                <?= $this->Html->link(__('Ver'), ['controller' => 'Users', 'action' => 'view', $user->id]) ?>
-                                <?= $this->Html->link(__('Editar'), ['controller' => 'Users', 'action' => 'edit', $user->id]) ?>
-                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Users', 'action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Users', 'action' => 'view', $aluno->user->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Users', 'action' => 'edit', $aluno->user->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Users', 'action' => 'delete', $aluno->user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $aluno->user->id)]) ?>
                             </td>
-                            <td><?= h($user->id) ?></td>
-                            <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
-                            <td><?= $this->Number->format($user->registro) ?></td>
-                            <td><?= h($user->timestamp) ?></td>
+                            <td><?= h($aluno->user->id) ?></td>
+                            <td><?= $aluno->user->email ? $this->Text->autoLinkEmails($aluno->user->email) : '' ?></td>
+                            <td><?= $this->Number->format($aluno->user->registro) ?></td>
+                            <td><?= h($aluno->user->timestamp) ?></td>
                         </tr>
-                        <?php endforeach; ?>
                     </table>
                 </div>
             </div>

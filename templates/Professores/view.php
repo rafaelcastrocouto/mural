@@ -8,11 +8,11 @@
     <div class="column-responsive column-80">
         <div class="professores view content">
             <aside>
-                <div class="side-nav">
-                    <?= $this->Html->link(__('Editar Professor'), ['action' => 'edit', $professor->id], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Form->postLink(__('Deletar Professor'), ['action' => 'delete', $professor->id], ['confirm' => __('Are you sure you want to delete # {0}?', $professor->id), 'class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Listar Professores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Novo Professor'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Professores'), ['action' => 'index'], ['class' => 'button']) ?>
+                    <?= $this->Html->link(__('Editar Professor'), ['action' => 'edit', $professor->id], ['class' => 'button']) ?>
+                    <?= $this->Form->postLink(__('Deletar Professor'), ['action' => 'delete', $professor->id], ['confirm' => __('Are you sure you want to delete {0}?', $professor->nome), 'class' => 'button']) ?>
+                    <?= $this->Html->link(__('Novo Professor'), ['action' => 'add'], ['class' => 'button']) ?>
                 </div>
             </aside>
             <h3>professor_<?= h($professor->id) ?></h3>
@@ -58,51 +58,63 @@
                     <td><?= h($professor->homepage) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Redesocial') ?></th>
+                    <th><?= __('Rede social') ?></th>
                     <td><?= h($professor->redesocial) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Curriculolattes') ?></th>
-                    <td><?= h($professor->curriculolattes) ?></td>
+                    <th><?= __('Curriculo lattes') ?></th>
+                    <td><?= $professor->curriculolattes ? $this->Html->link('http://lattes.cnpq.br/' . h($professor->curriculolattes)) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Curriculosigma') ?></th>
+                    <th><?= __('Curriculo sigma') ?></th>
                     <td><?= h($professor->curriculosigma) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Pesquisadordgp') ?></th>
+                    <th><?= __('Pesquisador DGP') ?></th>
                     <td><?= h($professor->pesquisadordgp) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Formacaoprofissional') ?></th>
+                    <th><?= __('Formacao profissional') ?></th>
                     <td><?= h($professor->formacaoprofissional) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Universidadedegraduacao') ?></th>
+                    <th><?= __('Graduacao Universidade') ?></th>
                     <td><?= h($professor->universidadedegraduacao) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Mestradoarea') ?></th>
+                    <th><?= __('Ano de formacao') ?></th>
+                    <td><?= $professor->anoformacao ? $this->Number->format($professor->anoformacao) : '' ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Mestrado area') ?></th>
                     <td><?= h($professor->mestradoarea) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Mestradouniversidade') ?></th>
+                    <th><?= __('Mestrado universidade') ?></th>
                     <td><?= h($professor->mestradouniversidade) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Doutoradoarea') ?></th>
+                    <th><?= __('Ano de conclusao do Mestrado') ?></th>
+                    <td><?= $professor->mestradoanoconclusao ? $this->Number->format($professor->mestradoanoconclusao) : '' ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Doutorado area') ?></th>
                     <td><?= h($professor->doutoradoarea) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Doutoradouniversidade') ?></th>
+                    <th><?= __('Doutorado universidade') ?></th>
                     <td><?= h($professor->doutoradouniversidade) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Formaingresso') ?></th>
+                    <th><?= __('Ano de conclusao do Doutorado') ?></th>
+                    <td><?= $professor->doutoradoanoconclusao ? $this->Number->format($professor->doutoradoanoconclusao) : '' ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Forma de ingresso') ?></th>
                     <td><?= h($professor->formaingresso) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Tipocargo') ?></th>
+                    <th><?= __('Tipo do cargo') ?></th>
                     <td><?= h($professor->tipocargo) ?></td>
                 </tr>
                 <tr>
@@ -114,7 +126,7 @@
                     <td><?= h($professor->departamento) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Motivoegresso') ?></th>
+                    <th><?= __('Motivo egresso') ?></th>
                     <td><?= h($professor->motivoegresso) ?></td>
                 </tr>
                 <tr>
@@ -126,31 +138,19 @@
                     <td><?= $professor->siape ? $this->Number->format($professor->siape) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Anoformacao') ?></th>
-                    <td><?= $professor->anoformacao ? $this->Number->format($professor->anoformacao) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Mestradoanoconclusao') ?></th>
-                    <td><?= $professor->mestradoanoconclusao ? $this->Number->format($professor->mestradoanoconclusao) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Doutoradoanoconclusao') ?></th>
-                    <td><?= $professor->doutoradoanoconclusao ? $this->Number->format($professor->doutoradoanoconclusao) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Datanascimento') ?></th>
+                    <th><?= __('Data de nascimento') ?></th>
                     <td><?= h($professor->datanascimento) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Atualizacaolattes') ?></th>
+                    <th><?= __('Atualizacao lattes') ?></th>
                     <td><?= h($professor->atualizacaolattes) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Dataingresso') ?></th>
+                    <th><?= __('Data ingresso') ?></th>
                     <td><?= h($professor->dataingresso) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Dataegresso') ?></th>
+                    <th><?= __('Data egresso') ?></th>
                     <td><?= h($professor->dataegresso) ?></td>
                 </tr>
             </table>
@@ -166,47 +166,51 @@
                 <div>
                     <table>
                         <tr>
+                            <th class="actions"><?= __('Actions') ?></th>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('Aluno Id') ?></th>
+                            <th><?= __('Aluno') ?></th>
                             <th><?= __('Registro') ?></th>
-                            <th><?= __('Ajustecurricular2020') ?></th>
                             <th><?= __('Turno') ?></th>
                             <th><?= __('Nivel') ?></th>
                             <th><?= __('Tc') ?></th>
                             <th><?= __('Tc Solicitacao') ?></th>
-                            <th><?= __('Instituicao Id') ?></th>
-                            <th><?= __('Supervisor Id') ?></th>
-                            <th><?= __('Professor Id') ?></th>
+                            <th><?= __('Instituicao') ?></th>
+                            <th><?= __('Supervisor') ?></th>
                             <th><?= __('Periodo') ?></th>
                             <th><?= __('Turma') ?></th>
                             <th><?= __('Nota') ?></th>
                             <th><?= __('Ch') ?></th>
-                            <th><?= __('Observacoes') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($professor->estagiarios as $estagiarios) : ?>
+                        <?php foreach ($professor->estagiarios as $estagiario) : ?>
                         <tr>
-                            <td><?= h($estagiarios->id) ?></td>
-                            <td><?= h($estagiarios->aluno_id) ?></td>
-                            <td><?= h($estagiarios->registro) ?></td>
-                            <td><?= h($estagiarios->ajustecurricular2020) ?></td>
-                            <td><?= h($estagiarios->turno) ?></td>
-                            <td><?= h($estagiarios->nivel) ?></td>
-                            <td><?= h($estagiarios->tc) ?></td>
-                            <td><?= h($estagiarios->tc_solicitacao) ?></td>
-                            <td><?= h($estagiarios->instituicao_id) ?></td>
-                            <td><?= h($estagiarios->supervisor_id) ?></td>
-                            <td><?= h($estagiarios->professor_id) ?></td>
-                            <td><?= h($estagiarios->periodo) ?></td>
-                            <td><?= h($estagiarios->turmaestagio_id) ?></td>
-                            <td><?= h($estagiarios->nota) ?></td>
-                            <td><?= h($estagiarios->ch) ?></td>
-                            <td><?= h($estagiarios->observacoes) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('Ver'), ['controller' => 'Estagiarios', 'action' => 'view', $estagiarios->id]) ?>
-                                <?= $this->Html->link(__('Editar'), ['controller' => 'Estagiarios', 'action' => 'edit', $estagiarios->id]) ?>
-                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Estagiarios', 'action' => 'delete', $estagiarios->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiarios->id)]) ?>
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Estagiarios', 'action' => 'view', $estagiario->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Estagiarios', 'action' => 'edit', $estagiario->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Estagiarios', 'action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete estagiario_{0}?', $estagiario->id)]) ?>
                             </td>
+                            <td><?= h($estagiario->id) ?></td>
+                            <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
+                            <td><?= h($estagiario->registro) ?></td>
+                            <td>
+                            <?php
+                            switch ( $estagiario->turno ) {
+                                case 'D': $turno = 'Diurno'; break;
+                                case 'N': $turno = 'Noturno'; break;
+                                case 'A': $turno = 'Ambos'; break;
+                                case 'I': $turno = 'Integral'; break;
+                            }
+                            echo h($turno);
+                            ?>
+                            </td>
+                            <td><?= h($estagiario->nivel) ?></td>
+                            <td><?= h($estagiario->tc) ?></td>
+                            <td><?= h($estagiario->tc_solicitacao) ?></td>
+                            <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
+                            <td><?= $estagiario->supervisor ? $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : '' ?></td>
+                            <td><?= h($estagiario->periodo) ?></td>
+                            <td><?= $estagiario->turmaestagio ? $this->Html->link($estagiario->turmaestagio->turma, ['controller' => 'Turmaestagios', 'action' => 'view', $estagiario->turmaestagio->id]) : '' ?></td>
+                            <td><?= h($estagiario->nota) ?></td>
+                            <td><?= h($estagiario->ch) ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </table>
@@ -219,59 +223,31 @@
                 <div>
                     <table>
                         <tr>
+                            <th class="actions"><?= __('Actions') ?></th>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('Instituicao Id') ?></th>
                             <th><?= __('Instituicao') ?></th>
-                            <th><?= __('Convenio') ?></th>
                             <th><?= __('Vagas') ?></th>
                             <th><?= __('Beneficios') ?></th>
                             <th><?= __('Final De Semana') ?></th>
                             <th><?= __('CargaHoraria') ?></th>
-                            <th><?= __('Requisitos') ?></th>
-                            <th><?= __('Turma') ?></th>
-                            <th><?= __('Turno') ?></th>
-                            <th><?= __('Professor') ?></th>
                             <th><?= __('DataSelecao') ?></th>
                             <th><?= __('DataInscricao') ?></th>
-                            <th><?= __('HorarioSelecao') ?></th>
-                            <th><?= __('LocalSelecao') ?></th>
-                            <th><?= __('FormaSelecao') ?></th>
-                            <th><?= __('Contato') ?></th>
-                            <th><?= __('Outras') ?></th>
-                            <th><?= __('Periodo') ?></th>
-                            <th><?= __('LocalInscricao') ?></th>
-                            <th><?= __('Email') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($professor->muralestagios as $muralestagios) : ?>
+                        <?php foreach ($professor->muralestagios as $muralestagio) : ?>
                         <tr>
-                            <td><?= h($muralestagios->id) ?></td>
-                            <td><?= h($muralestagios->instituicao_id) ?></td>
-                            <td><?= h($muralestagios->instituicao) ?></td>
-                            <td><?= h($muralestagios->convenio) ?></td>
-                            <td><?= h($muralestagios->vagas) ?></td>
-                            <td><?= h($muralestagios->beneficios) ?></td>
-                            <td><?= h($muralestagios->final_de_semana) ?></td>
-                            <td><?= h($muralestagios->cargaHoraria) ?></td>
-                            <td><?= h($muralestagios->requisitos) ?></td>
-                            <td><?= h($muralestagios->turmaestagio_id) ?></td>
-                            <td><?= h($muralestagios->turno) ?></td>
-                            <td><?= h($muralestagios->professor_id) ?></td>
-                            <td><?= h($muralestagios->dataSelecao) ?></td>
-                            <td><?= h($muralestagios->dataInscricao) ?></td>
-                            <td><?= h($muralestagios->horarioSelecao) ?></td>
-                            <td><?= h($muralestagios->localSelecao) ?></td>
-                            <td><?= h($muralestagios->formaSelecao) ?></td>
-                            <td><?= h($muralestagios->contato) ?></td>
-                            <td><?= h($muralestagios->outras) ?></td>
-                            <td><?= h($muralestagios->periodo) ?></td>
-                            <td><?= h($muralestagios->localInscricao) ?></td>
-                            <td><?= $muralestagios->email ? $this->Text->autoLinkEmails($muralestagios->email) : '' ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('Ver'), ['controller' => 'Muralestagios', 'action' => 'view', $muralestagios->id]) ?>
-                                <?= $this->Html->link(__('Editar'), ['controller' => 'Muralestagios', 'action' => 'edit', $muralestagios->id]) ?>
-                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Muralestagios', 'action' => 'delete', $muralestagios->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagios->id)]) ?>
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Muralestagios', 'action' => 'view', $muralestagio->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Muralestagios', 'action' => 'edit', $muralestagio->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Muralestagios', 'action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete muralestagios_{0}?', $muralestagio->id)]) ?>
                             </td>
+                            <td><?= h($muralestagio->id) ?></td>
+                            <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $muralestagio->instituicao->id]) : '' ?></td>
+                            <td><?= h($muralestagio->vagas) ?></td>
+                            <td><?= h($muralestagio->beneficios) ?></td>
+                            <td><?= h($muralestagio->final_de_semana) ?></td>
+                            <td><?= h($muralestagio->cargaHoraria) ?></td>
+                            <td><?= h($muralestagio->dataSelecao) ?></td>
+                            <td><?= h($muralestagio->dataInscricao) ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </table>
@@ -280,7 +256,7 @@
             </div>
             <div class="related">
                 <h4><?= __('Related Users') ?></h4>
-                <?php if (!empty($professor->users)) : ?>
+                <?php if (!empty($professor->user)) : ?>
                 <div>
                     <table>
                         <tr>
@@ -295,24 +271,22 @@
                             <th><?= __('Timestamp') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($professor->users as $users) : ?>
                         <tr>
-                            <td><?= h($users->id) ?></td>
-                            <td><?= $users->email ? $this->Text->autoLinkEmails($users->email) : '' ?></td>
-                            <td><?= h($users->password) ?></td>
-                            <td><?= h($users->categoria) ?></td>
-                            <td><?= h($users->numero) ?></td>
-                            <td><?= h($users->aluno_id) ?></td>
-                            <td><?= h($users->supervisor_id) ?></td>
-                            <td><?= h($users->professor_id) ?></td>
-                            <td><?= $user->timestamp ? h($users->timestamp) : '' ?></td>
+                            <td><?= h($professor->$users->id) ?></td>
+                            <td><?= $professor->$users->email ? $this->Text->autoLinkEmails($professor->$users->email) : '' ?></td>
+                            <td><?= h($professor->$users->password) ?></td>
+                            <td><?= h($professor->$users->categoria) ?></td>
+                            <td><?= h($professor->$users->numero) ?></td>
+                            <td><?= h($professor->$users->aluno_id) ?></td>
+                            <td><?= h($professor->$users->supervisor_id) ?></td>
+                            <td><?= h($professor->$users->professor_id) ?></td>
+                            <td><?= $professor->$user->timestamp ? h($professor->$users->timestamp) : '' ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('Ver'), ['controller' => 'Users', 'action' => 'view', $users->id]) ?>
-                                <?= $this->Html->link(__('Editar'), ['controller' => 'Users', 'action' => 'edit', $users->id]) ?>
-                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Users', 'action' => 'delete', $users->id], ['confirm' => __('Are you sure you want to delete # {0}?', $users->id)]) ?>
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Users', 'action' => 'view', $professor->$users->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Users', 'action' => 'edit', $professor->$users->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Users', 'action' => 'delete', $professor->$users->id], ['confirm' => __('Are you sure you want to delete user_{0}?', $professor->$users->id)]) ?>
                             </td>
                         </tr>
-                        <?php endforeach; ?>
                     </table>
                 </div>
                 <?php endif; ?>

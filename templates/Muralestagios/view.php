@@ -77,12 +77,13 @@ $session->write('categoria_id', 1);
                     <th><?= __('Turno') ?></th>
                     <td>
 					<?php
-					switch ( h($muralestagio->turno) ) {
+					switch ( $muralestagio->turno) {
 						case 'D': $turno = 'Diurno'; break;
 						case 'N': $turno = 'Noturno'; break;
 						case 'A': $turno = 'Ambos'; break;
+	                    case 'I': $turno = 'Integral'; break;
 					}
-					echo $turno;
+					echo h($turno);
 					?>
 					</td>
                 </tr>

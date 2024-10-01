@@ -28,6 +28,9 @@ class MuralestagiosController extends AppController {
      */
     public function index($periodo = NULL)
     {
+
+        $contained = ['Instituicoes', 'Professores'];
+        
         if (!$periodo) {
             $configuracao = $this->fetchTable("Configuracoes")->find()->first();
             $periodo = $configuracao['mural_periodo_atual'];
@@ -35,10 +38,10 @@ class MuralestagiosController extends AppController {
         
         if ($periodo) {
             $muralestagios = $this->Muralestagios->find('all', ['conditions' => ['muralestagios.periodo' => $periodo] ])
-            ->contain(['Instituicoes']);
+            ->contain($contained);
         } else {
             $muralestagios = $this->Muralestagios->find('all')
-            ->contain(['Instituicoes']);
+            ->contain($contained);
         }
         $this->set('muralestagios', $this->paginate($muralestagios));
 

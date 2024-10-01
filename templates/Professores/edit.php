@@ -8,18 +8,18 @@
     <div class="column-responsive column-80">
         <div class="professores form content">
             <aside>
-                <div class="side-nav">
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Professores'), ['action' => 'index'], ['class' => 'button']) ?>
                     <?= $this->Form->postLink(
                         __('Deletar'),
                         ['action' => 'delete', $professor->id],
-                        ['confirm' => __('Are you sure you want to delete # {0}?', $professor->id), 'class' => 'side-nav-item']
+                        ['confirm' => __('Are you sure you want to delete {0}?', $professor->nome), 'class' => 'button']
                     ) ?>
-                    <?= $this->Html->link(__('Listar Professores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
                 </div>
             </aside>
             <?= $this->Form->create($professor) ?>
             <fieldset>
-                <legend><?= __('Editar Professor') ?></legend>
+                <h3><?= __('Editando Professor') ?></h3>
                 <?php
                     echo $this->Form->control('nome');
                     echo $this->Form->control('cpf');

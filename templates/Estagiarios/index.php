@@ -76,7 +76,7 @@ $session = $this->request->getSession();
                     <th><?= $this->Paginator->sort('tc_solicitacao') ?></th>
                     <th><?= $this->Paginator->sort('Instituicoes.instituicao', 'Instituicao') ?></th>
                     <th><?= $this->Paginator->sort('Supervisores.nome', 'Supervisor') ?></th>
-                    <th><?= $this->Paginator->sort('Profesdsores.nome', 'Professor') ?></th>
+                    <th><?= $this->Paginator->sort('Professores.nome', 'Professor') ?></th>
                     <th><?= $this->Paginator->sort('periodo') ?></th>
                     <th><?= $this->Paginator->sort('Turmaestagios.turma', 'Turma') ?></th>
                     <th><?= $this->Paginator->sort('nota') ?></th>
@@ -94,7 +94,17 @@ $session = $this->request->getSession();
                     <td><?= $this->Number->format($estagiario->id) ?></td>
                     <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['action' => 'view', $estagiario->id]) : '' ?></td>
                     <td><?= $estagiario->registro ?></td>
-                    <td><?= h($estagiario->turno) ?></td>
+                    <td>
+					<?php
+					switch ( $estagiario->turno ) {
+						case 'D': $turno = 'Diurno'; break;
+						case 'N': $turno = 'Noturno'; break;
+						case 'A': $turno = 'Ambos'; break;
+						case 'I': $turno = 'Integral'; break;
+					}
+					echo h($turno);
+					?>
+					</td>
                     <td><?= h($estagiario->nivel) ?></td>
                     <td><?= $estagiario->tc ?></td>
                     <td><?= h($estagiario->tc_solicitacao) ?></td>

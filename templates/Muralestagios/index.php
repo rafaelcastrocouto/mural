@@ -67,6 +67,7 @@ $session->write('categoria_id', 1);
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('instituicao', 'Instituição') ?></th>
                     <th><?= $this->Paginator->sort('vagas') ?></th>
+                    <th><?= $this->Paginator->sort('professor') ?></th>
                     <th><?= $this->Paginator->sort('beneficios') ?></th>
                     <th><?= $this->Paginator->sort('final_de_semana', 'Final de semana') ?></th>
                     <th><?= $this->Paginator->sort('cargaHoraria', 'CH') ?></th>
@@ -82,12 +83,13 @@ $session->write('categoria_id', 1);
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $muralestagio->id]) ?>
                             <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id)]) ?>
                         </td>
-                        <td><?= $this->Number->format($muralestagio->id) ?></td>
-                        <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao->instituicao, ['controller' => 'Muralestagios', 'action' => 'view', $muralestagio->id]) : '' ?></td>
-                        <td><?= $this->Number->format($muralestagio->vagas) ?></td>
+                        <td><?= h($muralestagio->id) ?></td>
+                        <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $muralestagio->instituicao->id]) : '' ?></td>
+                        <td><?= h($muralestagio->vagas) ?></td>
+						<td><?= $muralestagio->professor ? $this->Html->link($muralestagio->professor->nome, ['controller' => 'Professores', 'action' => 'view', $muralestagio->professor->id]) : '' ?></td>
                         <td><?= h($muralestagio->beneficios) ?></td>
                         <td><?= h($muralestagio->final_de_semana) ?></td>
-                        <td><?= $this->Number->format($muralestagio->cargaHoraria) ?></td>
+                        <td><?= h($muralestagio->cargaHoraria) ?></td>
                         <td><?= h($muralestagio->dataSelecao) ?></td>
                         <td><?= h($muralestagio->dataInscricao) ?></td>
                     </tr>

@@ -8,13 +8,13 @@
     <div class="column-responsive column-80">
         <div class="professores form content">
             <aside>
-                <div class="side-nav">
-                    <?= $this->Html->link(__('Listar Professores'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Professores'), ['action' => 'index'], ['class' => 'button']) ?>
                 </div>
             </aside>
             <?= $this->Form->create($professor) ?>
             <fieldset>
-                <legend><?= __('Adicionar Professor') ?></legend>
+                <h3><?= __('Adicionando Professor') ?></h3>
                 <?php
                     echo $this->Form->control('nome');
                     echo $this->Form->control('cpf');
