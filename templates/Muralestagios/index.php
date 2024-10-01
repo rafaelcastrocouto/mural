@@ -81,7 +81,7 @@ $session->write('categoria_id', 1);
                         <td class="actions">
                             <?= $this->Html->link(__('Ver'), ['action' => 'view', $muralestagio->id]) ?>
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $muralestagio->id]) ?>
-                            <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id)]) ?>
+                            <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete muralestagio_{0}?', $muralestagio->id)]) ?>
                         </td>
                         <td><?= h($muralestagio->id) ?></td>
                         <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $muralestagio->instituicao->id]) : '' ?></td>

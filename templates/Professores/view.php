@@ -161,6 +161,35 @@
                 </blockquote>
             </div>
             <div class="related">
+                <h4><?= __('Related Users') ?></h4>
+                <?php if (!empty($professor->user)) : ?>
+                <div>
+                    <table>
+                        <tr>
+                            <th class="actions"><?= __('Actions') ?></th>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Email') ?></th>
+                            <th><?= __('Password') ?></th>
+                            <th><?= __('Registro') ?></th>
+                            <th><?= __('Timestamp') ?></th>
+                        </tr>
+                        <tr>
+                            <td class="actions">
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Users', 'action' => 'view', $professor->user->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Users', 'action' => 'edit', $professor->user->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Users', 'action' => 'delete', $professor->user->id], ['confirm' => __('Are you sure you want to delete user_{0}?', $professor->user->id)]) ?>
+                            </td>
+                            <td><?= h($professor->user->id) ?></td>
+                            <td><?= $professor->user->email ? $this->Text->autoLinkEmails($professor->user->email) : '' ?></td>
+                            <td><?= h($professor->user->password) ?></td>
+                            <td><?= h($professor->user->registro) ?></td>
+                            <td><?= $professor->user->timestamp ? h($professor->user->timestamp) : '' ?></td>
+                        </tr>
+                    </table>
+                </div>
+                <?php endif; ?>
+            </div>
+            <div class="related">
                 <h4><?= __('Related Estagiarios') ?></h4>
                 <?php if (!empty($professor->estagiarios)) : ?>
                 <div>
@@ -250,43 +279,6 @@
                             <td><?= h($muralestagio->dataInscricao) ?></td>
                         </tr>
                         <?php endforeach; ?>
-                    </table>
-                </div>
-                <?php endif; ?>
-            </div>
-            <div class="related">
-                <h4><?= __('Related Users') ?></h4>
-                <?php if (!empty($professor->user)) : ?>
-                <div>
-                    <table>
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Email') ?></th>
-                            <th><?= __('Password') ?></th>
-                            <th><?= __('Categoria') ?></th>
-                            <th><?= __('Numero') ?></th>
-                            <th><?= __('Aluno Id') ?></th>
-                            <th><?= __('Supervisor Id') ?></th>
-                            <th><?= __('Professor Id') ?></th>
-                            <th><?= __('Timestamp') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <tr>
-                            <td><?= h($professor->$users->id) ?></td>
-                            <td><?= $professor->$users->email ? $this->Text->autoLinkEmails($professor->$users->email) : '' ?></td>
-                            <td><?= h($professor->$users->password) ?></td>
-                            <td><?= h($professor->$users->categoria) ?></td>
-                            <td><?= h($professor->$users->numero) ?></td>
-                            <td><?= h($professor->$users->aluno_id) ?></td>
-                            <td><?= h($professor->$users->supervisor_id) ?></td>
-                            <td><?= h($professor->$users->professor_id) ?></td>
-                            <td><?= $professor->$user->timestamp ? h($professor->$users->timestamp) : '' ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('Ver'), ['controller' => 'Users', 'action' => 'view', $professor->$users->id]) ?>
-                                <?= $this->Html->link(__('Editar'), ['controller' => 'Users', 'action' => 'edit', $professor->$users->id]) ?>
-                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Users', 'action' => 'delete', $professor->$users->id], ['confirm' => __('Are you sure you want to delete user_{0}?', $professor->$users->id)]) ?>
-                            </td>
-                        </tr>
                     </table>
                 </div>
                 <?php endif; ?>

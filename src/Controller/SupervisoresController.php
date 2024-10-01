@@ -33,7 +33,11 @@ class SupervisoresController extends AppController
     public function view($id = null)
     {
         $supervisor = $this->Supervisores->get($id, [
-            'contain' => ['Instituicoes', 'Estagiarios' => ['Alunos']],
+            'contain' => [
+                'Instituicoes' => ['Areas'], 
+                'Estagiarios' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores', 'Turmaestagios'], 
+                'Users'
+            ],
         ]);
 
         $this->set(compact('supervisor'));

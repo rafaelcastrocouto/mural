@@ -52,7 +52,7 @@ class ProfessoresTable extends Table
         $this->hasMany('Muralestagios', [
             'foreignKey' => 'professor_id',
         ]);
-        $this->hasMany('Users', [
+        $this->hasOne('Users', [
             'foreignKey' => 'professor_id',
         ]);
     }

@@ -91,9 +91,9 @@ $session = $this->request->getSession();
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $estagiario->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete estagiario #{0}?', $estagiario->id)]) ?>
                     </td>
-                    <td><?= $this->Number->format($estagiario->id) ?></td>
-                    <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['action' => 'view', $estagiario->id]) : '' ?></td>
-                    <td><?= $estagiario->registro ?></td>
+                    <td><?= h($estagiario->id) ?></td>
+                    <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
+                    <td><?= h($estagiario->registro) ?></td>
                     <td>
 					<?php
 					switch ( $estagiario->turno ) {
@@ -106,7 +106,7 @@ $session = $this->request->getSession();
 					?>
 					</td>
                     <td><?= h($estagiario->nivel) ?></td>
-                    <td><?= $estagiario->tc ?></td>
+                    <td><?= h($estagiario->tc) ?></td>
                     <td><?= h($estagiario->tc_solicitacao) ?></td>
                     <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
                     <td><?= ($estagiario->supervisor and $estagiario->supervisor->nome) ? $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : '' ?></td>
