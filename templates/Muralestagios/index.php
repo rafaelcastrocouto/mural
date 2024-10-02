@@ -88,7 +88,17 @@ $session->write('categoria_id', 1);
                         <td><?= h($muralestagio->vagas) ?></td>
 						<td><?= $muralestagio->professor ? $this->Html->link($muralestagio->professor->nome, ['controller' => 'Professores', 'action' => 'view', $muralestagio->professor->id]) : '' ?></td>
                         <td><?= h($muralestagio->beneficios) ?></td>
-                        <td><?= h($muralestagio->final_de_semana) ?></td>
+                        <td>
+							<?php
+							$final_de_semana = '';
+							switch ( $muralestagio->final_de_semana ) {
+								case 0: $final_de_semana = 'Não';          break;
+								case 1: $final_de_semana = 'Sim';          break;
+								case 2: $final_de_semana = 'Parcialmente'; break;
+							}
+							echo $final_de_semana;
+							?>
+						</td>
                         <td><?= h($muralestagio->cargaHoraria) ?></td>
                         <td><?= h($muralestagio->dataSelecao) ?></td>
                         <td><?= h($muralestagio->dataInscricao) ?></td>

@@ -32,15 +32,16 @@
                 <tr>
                     <th><?= __('Turno') ?></th>
                     <td>
-                    <?php
-                    switch ( h($estagiario->turno) ) {
-                        case 'D': $turno = 'Diurno'; break;
-                        case 'N': $turno = 'Noturno'; break;
-                        case 'A': $turno = 'Ambos'; break;
-                        default: $turno = '-';
-                    }
-                    echo $turno;
-                    ?>
+						<?php
+                        $turno = '';
+						switch ( $estagiario->turno ) {
+							case 'D': $turno = 'Diurno';   break;
+							case 'N': $turno = 'Noturno';  break;
+							case 'A': $turno = 'Ambos';    break;
+		                    case 'I': $turno = 'Integral'; break;
+						}
+						echo h($turno);
+						?>
                     </td>
                 </tr>
                 <tr>

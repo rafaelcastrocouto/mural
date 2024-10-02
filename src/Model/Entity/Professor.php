@@ -14,7 +14,6 @@ use Cake\ORM\Entity;
  * @property int|null $siape
  * @property \Cake\I18n\FrozenDate|null $datanascimento
  * @property string|null $localnascimento
- * @property string|null $sexo
  * @property string $ddd_telefone
  * @property string|null $telefone
  * @property string $ddd_celular
@@ -65,7 +64,6 @@ class Professor extends Entity
         'siape' => true,
         'datanascimento' => true,
         'localnascimento' => true,
-        'sexo' => true,
         'ddd_telefone' => true,
         'telefone' => true,
         'ddd_celular' => true,

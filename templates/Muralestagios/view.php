@@ -42,7 +42,7 @@ $session->write('categoria_id', 1);
                 <tr>
                     <th><?= __('Convenio') ?></th>
                     <td>
-						<?= h($muralestagio->convenio) ? 'Sim' : 'Não'; ?>
+						<?= $muralestagio->convenio ? 'Sim' : 'Não'; ?>
 					</td>
                 </tr>
                 <tr>
@@ -53,13 +53,11 @@ $session->write('categoria_id', 1);
                     <th><?= __('Final De Semana') ?></th>
                     <td>
 						<?php
-						switch ( h($muralestagio->final_de_semana) ) {
-							case 0: $final_de_semana = 'Não';
-								break;
-							case 1: $final_de_semana = 'Sim';
-								break;
-							case 2: $final_de_semana = 'Parcialmente';
-								break;
+						$final_de_semana = '';
+						switch ( $muralestagio->final_de_semana ) {
+							case 0: $final_de_semana = 'Não';          break;
+							case 1: $final_de_semana = 'Sim';          break;
+							case 2: $final_de_semana = 'Parcialmente'; break;
 						}
 						echo $final_de_semana;
 						?>
@@ -76,15 +74,16 @@ $session->write('categoria_id', 1);
                 <tr>
                     <th><?= __('Turno') ?></th>
                     <td>
-					<?php
-					switch ( $muralestagio->turno) {
-						case 'D': $turno = 'Diurno'; break;
-						case 'N': $turno = 'Noturno'; break;
-						case 'A': $turno = 'Ambos'; break;
-	                    case 'I': $turno = 'Integral'; break;
-					}
-					echo h($turno);
-					?>
+						<?php
+						$turno = '';
+						switch ( $muralestagio->turno ) {
+							case 'D': $turno = 'Diurno';   break;
+							case 'N': $turno = 'Noturno';  break;
+							case 'A': $turno = 'Ambos';    break;
+		                    case 'I': $turno = 'Integral'; break;
+						}
+						echo h($turno);
+						?>
 					</td>
                 </tr>
                 <tr>
@@ -103,15 +102,12 @@ $session->write('categoria_id', 1);
                     <th><?= __('FormaSelecao') ?></th>
                     <td>
 						<?php
+						$formaselecao = '';
 						switch ( h($muralestagio->formaSelecao) ) {
-							case 0: $formaselecao = 'Entrevista';
-								break;
-							case 1: $formaselecao = 'CR';
-								break;
-							case 2: $formaselecao = 'Prova';
-								break;
-							case 3: $formaselecao = 'Outra';
-								break;
+							case 0: $formaselecao = 'Entrevista'; break;
+							case 1: $formaselecao = 'CR';         break;
+							case 2: $formaselecao = 'Prova';      break;
+							case 3: $formaselecao = 'Outra';      break;
 						}
 						echo $formaselecao;
 						?>
@@ -127,7 +123,7 @@ $session->write('categoria_id', 1);
                 </tr>
                 <tr>
                     <th><?= __('LocalInscricao') ?></th>
-                    <td><?= h($muralestagio->localInscricao) ? "Inscrição somente no mural da Coordenação de Estágio da ESS" : "Inscrição no mural da Coordenação de Estágio da ESS e na Instituição" ?></td>
+                    <td><?= h($muralestagio->localInscricao) ? "Inscrição somente no mural da Coordenação de Estágio da ESS" : "Inscrição na Instituição e no mural da Coordenação de Estágio da ESS" ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Email') ?></th>

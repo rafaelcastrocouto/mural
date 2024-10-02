@@ -93,10 +93,6 @@ class ProfessoresTable extends Table
             ->allowEmptyString('localnascimento');
 
         $validator
-            ->scalar('sexo')
-            ->allowEmptyString('sexo');
-
-        $validator
             ->scalar('ddd_telefone')
             ->maxLength('ddd_telefone', 2)
             ->notEmptyString('ddd_telefone');

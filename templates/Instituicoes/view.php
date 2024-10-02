@@ -81,7 +81,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Convenio') ?></th>
-                    <td><?= $instituicao->convenio ? $this->Number->format($instituicao->convenio) : '' ?></td>
+                    <td><?= h($instituicao->convenio) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Expira') ?></th>
@@ -151,15 +151,16 @@
                             <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
                             <td><?= h($estagiario->registro) ?></td>
                             <td>
-        					<?php
-        					switch ( $estagiario->turno ) {
-        						case 'D': $turno = 'Diurno'; break;
-        						case 'N': $turno = 'Noturno'; break;
-        						case 'A': $turno = 'Ambos'; break;
-        						case 'I': $turno = 'Integral'; break;
-        					}
-        					echo h($turno);
-        					?>
+        						<?php
+                                $turno = '';
+        						switch ( $estagiario->turno ) {
+        							case 'D': $turno = 'Diurno';   break;
+        							case 'N': $turno = 'Noturno';  break;
+        							case 'A': $turno = 'Ambos';    break;
+        		                    case 'I': $turno = 'Integral'; break;
+        						}
+        						echo h($turno);
+        						?>
                             </td>
                             <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
                             <td><?= $estagiario->supervisor ? $this->Html->link(h($estagiario->supervisor->nome), ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : '' ?></td>
@@ -201,7 +202,17 @@
                             <td><?= h($muralestagio->vagas) ?></td>
                             <td><?= $muralestagio->professor ? $this->Html->link($muralestagio->professor->nome, ['controller' => 'Professores', 'action' => 'view', $muralestagio->professor->id]) : '' ?></td>
                             <td><?= h($muralestagio->beneficios) ?></td>
-                            <td><?= h($muralestagio->final_de_semana) ?></td>
+                            <td>
+        						<?php
+                                $final_de_semana = '';
+        						switch ( $muralestagio->final_de_semana ) {
+        							case 0: $final_de_semana = 'Não';          break;
+        							case 1: $final_de_semana = 'Sim';          break;
+        							case 2: $final_de_semana = 'Parcialmente'; break;
+        						}
+        						echo $final_de_semana;
+        						?>
+                            </td>
                             <td><?= h($muralestagio->cargaHoraria) ?></td>
                             <td><?= h($muralestagio->dataSelecao) ?></td>
                             <td><?= h($muralestagio->dataInscricao) ?></td>

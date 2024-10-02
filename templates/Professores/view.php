@@ -18,6 +18,10 @@
             <h3>professor_<?= h($professor->id) ?></h3>
             <table>
                 <tr>
+                    <th><?= __('Id') ?></th>
+                    <td><?= $this->Number->format($professor->id) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Nome') ?></th>
                     <td><?= h($professor->nome) ?></td>
                 </tr>
@@ -30,24 +34,12 @@
                     <td><?= h($professor->localnascimento) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Sexo') ?></th>
-                    <td><?= h($professor->sexo) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Ddd Telefone') ?></th>
-                    <td><?= h($professor->ddd_telefone) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Telefone') ?></th>
-                    <td><?= h($professor->telefone) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Ddd Celular') ?></th>
-                    <td><?= h($professor->ddd_celular) ?></td>
+                    <td><?= $professor->telefone ? h('(' . $professor->ddd_telefone . ') ' . $professor->telefone) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Celular') ?></th>
-                    <td><?= h($professor->celular) ?></td>
+                    <td><?= $professor->celular ? h('(' . $professor->ddd_celular . ') ' . $professor->celular) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Email') ?></th>
@@ -83,7 +75,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Ano de formacao') ?></th>
-                    <td><?= $professor->anoformacao ? $this->Number->format($professor->anoformacao) : '' ?></td>
+                    <td><?= h($professor->anoformacao) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Mestrado area') ?></th>
@@ -95,7 +87,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Ano de conclusao do Mestrado') ?></th>
-                    <td><?= $professor->mestradoanoconclusao ? $this->Number->format($professor->mestradoanoconclusao) : '' ?></td>
+                    <td><?= h($professor->mestradoanoconclusao) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Doutorado area') ?></th>
@@ -107,7 +99,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Ano de conclusao do Doutorado') ?></th>
-                    <td><?= $professor->doutoradoanoconclusao ? $this->Number->format($professor->doutoradoanoconclusao) : '' ?></td>
+                    <td><?= h($professor->doutoradoanoconclusao) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Forma de ingresso') ?></th>
@@ -130,12 +122,8 @@
                     <td><?= h($professor->motivoegresso) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($professor->id) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Siape') ?></th>
-                    <td><?= $professor->siape ? $this->Number->format($professor->siape) : '' ?></td>
+                    <td><?= h($professor->siape) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Data de nascimento') ?></th>
@@ -221,15 +209,16 @@
                             <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
                             <td><?= h($estagiario->registro) ?></td>
                             <td>
-                            <?php
-                            switch ( $estagiario->turno ) {
-                                case 'D': $turno = 'Diurno'; break;
-                                case 'N': $turno = 'Noturno'; break;
-                                case 'A': $turno = 'Ambos'; break;
-                                case 'I': $turno = 'Integral'; break;
-                            }
-                            echo h($turno);
-                            ?>
+        						<?php
+                                $turno = '';
+        						switch ( $estagiario->turno ) {
+        							case 'D': $turno = 'Diurno';   break;
+        							case 'N': $turno = 'Noturno';  break;
+        							case 'A': $turno = 'Ambos';    break;
+        		                    case 'I': $turno = 'Integral'; break;
+        						}
+        						echo h($turno);
+        						?>
                             </td>
                             <td><?= h($estagiario->nivel) ?></td>
                             <td><?= h($estagiario->tc) ?></td>
@@ -273,7 +262,17 @@
                             <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $muralestagio->instituicao->id]) : '' ?></td>
                             <td><?= h($muralestagio->vagas) ?></td>
                             <td><?= h($muralestagio->beneficios) ?></td>
-                            <td><?= h($muralestagio->final_de_semana) ?></td>
+                            <td>
+        						<?php
+                                $final_de_semana = '';
+        						switch ( $muralestagio->final_de_semana ) {
+        							case 0: $final_de_semana = 'Não';          break;
+        							case 1: $final_de_semana = 'Sim';          break;
+        							case 2: $final_de_semana = 'Parcialmente'; break;
+        						}
+        						echo $final_de_semana;
+        						?>
+                            </td>
                             <td><?= h($muralestagio->cargaHoraria) ?></td>
                             <td><?= h($muralestagio->dataSelecao) ?></td>
                             <td><?= h($muralestagio->dataInscricao) ?></td>

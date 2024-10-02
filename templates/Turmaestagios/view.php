@@ -62,7 +62,18 @@
                             <td><?= $estagiarios->aluno ? $this->Html->link(h($estagiarios->aluno->nome), ['controller' => 'alunos', 'action' => 'view', $estagiarios->alunonovo_id]) : '' ?></td>
                             <td><?= h($estagiarios->registro) ?></td>
                             <td><?= h($estagiarios->ajustecurricular2020) ?></td>
-                            <td><?= h($estagiarios->turno) ?></td>
+                            <td>
+        						<?php
+                                $turno = '';
+        						switch ( $estagiarios->turno ) {
+        							case 'D': $turno = 'Diurno';   break;
+        							case 'N': $turno = 'Noturno';  break;
+        							case 'A': $turno = 'Ambos';    break;
+        		                    case 'I': $turno = 'Integral'; break;
+        						}
+        						echo h($turno);
+        						?>
+                            </td>
                             <td><?= h($estagiarios->nivel) ?></td>
                             <td><?= h($estagiarios->tc) ?></td>
                             <td><?= h($estagiarios->tc_solicitacao) ?></td>
@@ -105,7 +116,9 @@
                             </td>
                             <td><?= h($muralestagios->id) ?></td>
                             <td><?= $muralestagios->instituicao ? $this->Html->link(h($muralestagios->instituicao->instituicao), ['controller' => 'instituicoes', 'action' => 'view', $muralestagios->instituicao->id]) : '' ?></td>
-                            <td><?= h($muralestagios->convenio) ?></td>
+                            <td>
+                                <?= $muralestagio->convenio ? 'Sim' : 'Não'; ?>
+                            </td>
                             <td><?= h($muralestagios->vagas) ?></td>
                             <td><?= $muralestagios->professor ? $this->Html->link(h($muralestagios->professor->nome), ['controller' => 'professores', 'action' => 'view', $muralestagios->professor->id]) : '' ?></td>
                             <td><?= h($muralestagios->dataSelecao) ?></td>

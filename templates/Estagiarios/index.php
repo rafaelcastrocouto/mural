@@ -95,15 +95,16 @@ $session = $this->request->getSession();
                     <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
                     <td><?= h($estagiario->registro) ?></td>
                     <td>
-					<?php
-					switch ( $estagiario->turno ) {
-						case 'D': $turno = 'Diurno'; break;
-						case 'N': $turno = 'Noturno'; break;
-						case 'A': $turno = 'Ambos'; break;
-						case 'I': $turno = 'Integral'; break;
-					}
-					echo h($turno);
-					?>
+						<?php
+                        $turno = '';
+						switch ( $estagiario->turno ) {
+							case 'D': $turno = 'Diurno';   break;
+							case 'N': $turno = 'Noturno';  break;
+							case 'A': $turno = 'Ambos';    break;
+		                    case 'I': $turno = 'Integral'; break;
+						}
+						echo h($turno);
+						?>
 					</td>
                     <td><?= h($estagiario->nivel) ?></td>
                     <td><?= h($estagiario->tc) ?></td>
