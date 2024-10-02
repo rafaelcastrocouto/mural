@@ -34,7 +34,11 @@ class AlunosController extends AppController
     public function view($id = null)
     {
         $aluno = $this->Alunos->get($id, [
-            'contain' => ['Estagiarios', 'Inscricoes', 'Users'],
+            'contain' => [
+                'Estagiarios' => ['Instituicoes', 'Supervisores', 'Professores'], 
+                'Inscricoes' => ['Muralestagios' => ['Instituicoes']], 
+                'Users'
+            ],
         ]);
         $this->set(compact('aluno'));
     }
