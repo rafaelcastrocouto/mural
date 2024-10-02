@@ -11,7 +11,7 @@
 		</div>
 	</aside>
     
-    <h3><?= __('Lista de instituicoes') ?></h3>
+    <h3><?= __('Lista de instituições') ?></h3>
     
     <div class="paginator">
         <?= $this->element('paginator'); ?>
@@ -23,7 +23,7 @@
                     <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('instituicao') ?></th>
-                    <th><?= $this->Paginator->sort('area') ?></th>
+                    <th><?= $this->Paginator->sort('Area.area', 'Área') ?></th>
                     <th><?= $this->Paginator->sort('natureza') ?></th>
                     <th><?= $this->Paginator->sort('cnpj') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>

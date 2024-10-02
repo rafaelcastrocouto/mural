@@ -53,19 +53,19 @@ $session->write('categoria_id', 1);
                     <th><?= __('Final De Semana') ?></th>
                     <td>
 						<?php
-						$final_de_semana = '';
-						switch ( $muralestagio->final_de_semana ) {
-							case 0: $final_de_semana = 'Não';          break;
-							case 1: $final_de_semana = 'Sim';          break;
-							case 2: $final_de_semana = 'Parcialmente'; break;
+						$fim_de_semana = '';
+						switch ( $muralestagio->fim_de_semana ) {
+							case 0: $fim_de_semana = 'Não';          break;
+							case 1: $fim_de_semana = 'Sim';          break;
+							case 2: $fim_de_semana = 'Parcialmente'; break;
 						}
-						echo $final_de_semana;
+						echo $fim_de_semana;
 						?>
 					</td>
                 </tr>
                 <tr>
                     <th><?= __('Requisitos') ?></th>
-                    <td><?= $this->Text->autoParagraph($muralestagio->requisitos) ?></td>
+                    <td><?= $muralestagio->requisitos ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Turma') ?></th>

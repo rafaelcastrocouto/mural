@@ -13,7 +13,7 @@ use Cake\ORM\Entity;
  * @property string $convenio
  * @property int $vagas
  * @property string|null $beneficios
- * @property string|null $final_de_semana
+ * @property string|null $fim_de_semana
  * @property int|null $cargaHoraria
  * @property string|null $requisitos
  * @property int $area_estagio_id
@@ -53,7 +53,7 @@ class Muralestagio extends Entity
         'convenio' => true,
         'vagas' => true,
         'beneficios' => true,
-        'final_de_semana' => true,
+        'fim_de_semana' => true,
         'cargaHoraria' => true,
         'requisitos' => true,
         'area_estagio_id' => true,

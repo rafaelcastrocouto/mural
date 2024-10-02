@@ -99,9 +99,9 @@ class MuralestagiosTable extends Table {
                 ->allowEmptyString('beneficios');
 
         $validator
-                ->scalar('final_de_semana')
-                ->maxLength('final_de_semana', 1)
-                ->allowEmptyString('final_de_semana');
+                ->scalar('fim_de_semana')
+                ->maxLength('fim_de_semana', 1)
+                ->allowEmptyString('fim_de_semana');
 
         $validator
                 ->allowEmptyString('cargaHoraria');

@@ -249,7 +249,7 @@
                             <th><?= __('Instituicao') ?></th>
                             <th><?= __('Vagas') ?></th>
                             <th><?= __('Beneficios') ?></th>
-                            <th><?= __('Final De Semana') ?></th>
+                            <th><?= __('Fim De Semana') ?></th>
                             <th><?= __('CargaHoraria') ?></th>
                             <th><?= __('DataSelecao') ?></th>
                             <th><?= __('DataInscricao') ?></th>
@@ -267,13 +267,13 @@
                             <td><?= h($muralestagio->beneficios) ?></td>
                             <td>
                                 <?php
-                                $final_de_semana = '';
-                                switch ( $muralestagio->final_de_semana ) {
-                                    case 0: $final_de_semana = 'Não';          break;
-                                    case 1: $final_de_semana = 'Sim';          break;
-                                    case 2: $final_de_semana = 'Parcialmente'; break;
+                                $fim_de_semana = '';
+                                switch ( $muralestagio->fim_de_semana ) {
+                                    case 0: $fim_de_semana = 'Não';          break;
+                                    case 1: $fim_de_semana = 'Sim';          break;
+                                    case 2: $fim_de_semana = 'Parcialmente'; break;
                                 }
-                                echo $final_de_semana;
+                                echo $fim_de_semana;
                                 ?>
                             </td>
                             <td><?= h($muralestagio->cargaHoraria) ?></td>

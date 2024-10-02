@@ -54,7 +54,7 @@ $session->write('categoria_id', 1);
 		</div>
 	</aside>
 	
-	<h3><?= __('Mural de estagios') ?></h3>
+	<h3><?= __('Mural de estágios') ?></h3>
 	
     <div class="paginator">
         <?= $this->element('paginator'); ?>
@@ -65,12 +65,12 @@ $session->write('categoria_id', 1);
                 <tr>
                     <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('instituicao', 'Instituição') ?></th>
+                    <th><?= $this->Paginator->sort('Instituicao.instituicao', 'Instituição') ?></th>
                     <th><?= $this->Paginator->sort('vagas') ?></th>
                     <th><?= $this->Paginator->sort('professor') ?></th>
                     <th><?= $this->Paginator->sort('beneficios') ?></th>
-                    <th><?= $this->Paginator->sort('final_de_semana', 'Final de semana') ?></th>
-                    <th><?= $this->Paginator->sort('cargaHoraria', 'CH') ?></th>
+                    <th><?= $this->Paginator->sort('fim_de_semana', 'Fim de semana') ?></th>
+                    <th><?= $this->Paginator->sort('cargaHoraria', 'Carga Horária') ?></th>
                     <th><?= $this->Paginator->sort('dataSelecao', 'Seleção') ?></th>
                     <th><?= $this->Paginator->sort('dataInscricao', 'Inscrição') ?></th>
                 </tr>
@@ -90,13 +90,13 @@ $session->write('categoria_id', 1);
                         <td><?= h($muralestagio->beneficios) ?></td>
                         <td>
 							<?php
-							$final_de_semana = '';
-							switch ( $muralestagio->final_de_semana ) {
-								case 0: $final_de_semana = 'Não';          break;
-								case 1: $final_de_semana = 'Sim';          break;
-								case 2: $final_de_semana = 'Parcialmente'; break;
+							$fim_de_semana = '';
+							switch ( $muralestagio->fim_de_semana ) {
+								case 0: $fim_de_semana = 'Não';          break;
+								case 1: $fim_de_semana = 'Sim';          break;
+								case 2: $fim_de_semana = 'Parcialmente'; break;
 							}
-							echo $final_de_semana;
+							echo $fim_de_semana;
 							?>
 						</td>
                         <td><?= h($muralestagio->cargaHoraria) ?></td>

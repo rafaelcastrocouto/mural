@@ -26,7 +26,7 @@
                     echo $this->Form->control('email');
                     echo $this->Form->control('vagas');
                     echo $this->Form->control('beneficios');
-                    echo $this->Form->control('final_de_semana');
+                    echo $this->Form->control('fim_de_semana');
                     echo $this->Form->control('cargaHoraria');
                     echo $this->Form->control('requisitos');
                     echo $this->Form->control('turmaestagio_id', ['options' => $turmaestagios, 'class' => 'form-control']);

@@ -45,7 +45,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Url') ?></th>
-                    <td><?= $this->Html->link($instituicao->url) ?></td>
+                    <td><?= $instituicao->url ? $this->Html->link($instituicao->url) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Endereco') ?></th>
@@ -61,11 +61,21 @@
                 </tr>
                 <tr>
                     <th><?= __('Fim De Semana') ?></th>
-                    <td><?= h($instituicao->fim_de_semana) ?></td>
+                    <td>
+                        <?php
+                        $fim_de_semana = '';
+                        switch ( $instituicao->fim_de_semana ) {
+                            case 0: $fim_de_semana = 'Não';          break;
+                            case 1: $fim_de_semana = 'Sim';          break;
+                            case 2: $fim_de_semana = 'Parcialmente'; break;
+                        }
+                        echo $fim_de_semana;
+                        ?>
+                    </td>
                 </tr>
                 <tr>
                     <th><?= __('LocalInscricao') ?></th>
-                    <td><?= h($instituicao->localInscricao) ?></td>
+                    <td><?= h($instituicao->localInscricao) ? "Inscrição somente no mural da Coordenação de Estágio da ESS" : "Inscrição na Instituição e no mural da Coordenação de Estágio da ESS" ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Seguro') ?></th>
@@ -203,15 +213,15 @@
                             <td><?= $muralestagio->professor ? $this->Html->link($muralestagio->professor->nome, ['controller' => 'Professores', 'action' => 'view', $muralestagio->professor->id]) : '' ?></td>
                             <td><?= h($muralestagio->beneficios) ?></td>
                             <td>
-        						<?php
-                                $final_de_semana = '';
-        						switch ( $muralestagio->final_de_semana ) {
-        							case 0: $final_de_semana = 'Não';          break;
-        							case 1: $final_de_semana = 'Sim';          break;
-        							case 2: $final_de_semana = 'Parcialmente'; break;
-        						}
-        						echo $final_de_semana;
-        						?>
+                                <?php
+                                $fim_de_semana = '';
+                                switch ( $muralestagio->fim_de_semana ) {
+                                    case 0: $fim_de_semana = 'Não';          break;
+                                    case 1: $fim_de_semana = 'Sim';          break;
+                                    case 2: $fim_de_semana = 'Parcialmente'; break;
+                                }
+                                echo $fim_de_semana;
+                                ?>
                             </td>
                             <td><?= h($muralestagio->cargaHoraria) ?></td>
                             <td><?= h($muralestagio->dataSelecao) ?></td>
