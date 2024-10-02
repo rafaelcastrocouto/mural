@@ -91,7 +91,7 @@
             <div class="related">
                 <h4><?= __('Related Supervisores') ?></h4>
                 <?php if (!empty($instituicao->supervisores)) : ?>
-                <div>
+                <div class="table_wrap">
                     <table>
                         <tr>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -124,7 +124,7 @@
             <div class="related">
                 <h4><?= __('Related Estagiarios') ?></h4>
                 <?php if (!empty($instituicao->estagiarios)) : ?>
-                <div>
+                <div class="table_wrap">
                     <table>
                         <tr>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -178,7 +178,7 @@
             <div class="related">
                 <h4><?= __('Related Muralestagios') ?></h4>
                 <?php if (!empty($instituicao->muralestagios)) : ?>
-                <div>
+                <div class="table_wrap">
                     <table>
                         <tr>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -222,10 +222,11 @@
                 </div>
                 <?php endif; ?>
             </div>
+            
+            <?php if (!empty($instituicao->visitas)) : ?>
             <div class="related">
                 <h4><?= __('Related Visitas') ?></h4>
-                <?php if (!empty($instituicao->visitas)) : ?>
-                <div>
+                <div class="table_wrap">
                     <table>
                         <tr>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -253,8 +254,9 @@
                         <?php endforeach; ?>
                     </table>
                 </div>
-                <?php endif; ?>
             </div>
+            <?php endif; ?>
+            
         </div>
     </div>
 </div>

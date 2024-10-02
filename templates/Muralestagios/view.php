@@ -152,7 +152,7 @@ $session->write('categoria_id', 1);
             <?php if (!empty($muralestagio->inscricoes)) : ?>
             <div class="related">
                 <h4><?= __('Inscricoes para o Mural de Estágios') ?></h4>
-                <div>
+                <div class="table_wrap">
                     <table>
                         <tr>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -183,6 +183,7 @@ $session->write('categoria_id', 1);
                 </div>
             </div>
 			<?php endif; ?>
+			
         </div>
     </div>
 </div>

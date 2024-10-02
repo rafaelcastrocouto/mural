@@ -26,10 +26,11 @@
                     <td><?= h($area->area) ?></td>
                 </tr>
             </table>
+            
+            <?php if (!empty($area->instituicoes)) : ?>
             <div class="related">
                 <h4><?= __('Related Instituições') ?></h4>
-                <?php if (!empty($area->instituicoes)) : ?>
-                <div>
+                <div class="table_wrap">
                     <table>
                         <tr>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -59,8 +60,9 @@
                         <?php endforeach; ?>
                     </table>
                 </div>
-                <?php endif; ?>
             </div>
+            <?php endif; ?>
+            
         </div>
     </div>
 </div>

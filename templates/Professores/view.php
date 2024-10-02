@@ -148,10 +148,11 @@
                     <?= $this->Text->autoParagraph(h($professor->observacoes)); ?>
                 </blockquote>
             </div>
+            
+            <?php if (!empty($professor->user)) : ?>
             <div class="related">
-                <h4><?= __('User') ?></h4>
-                <?php if (!empty($professor->user)) : ?>
-                <div>
+                <h4><?= __('Related User') ?></h4>
+                <div class="table_wrap">
                     <table>
                         <tr>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -175,12 +176,13 @@
                         </tr>
                     </table>
                 </div>
-                <?php endif; ?>
             </div>
+            <?php endif; ?>
+            
             <div class="related">
                 <h4><?= __('Related Estagiarios') ?></h4>
                 <?php if (!empty($professor->estagiarios)) : ?>
-                <div>
+                <div class="table_wrap">
                     <table>
                         <tr>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -235,10 +237,11 @@
                 </div>
                 <?php endif; ?>
             </div>
+            
+            <?php if (!empty($professor->muralestagios)) : ?>
             <div class="related">
                 <h4><?= __('Related Muralestagios') ?></h4>
-                <?php if (!empty($professor->muralestagios)) : ?>
-                <div>
+                <div class="table_wrap">
                     <table>
                         <tr>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -263,15 +266,15 @@
                             <td><?= h($muralestagio->vagas) ?></td>
                             <td><?= h($muralestagio->beneficios) ?></td>
                             <td>
-        						<?php
+                                <?php
                                 $final_de_semana = '';
-        						switch ( $muralestagio->final_de_semana ) {
-        							case 0: $final_de_semana = 'Não';          break;
-        							case 1: $final_de_semana = 'Sim';          break;
-        							case 2: $final_de_semana = 'Parcialmente'; break;
-        						}
-        						echo $final_de_semana;
-        						?>
+                                switch ( $muralestagio->final_de_semana ) {
+                                    case 0: $final_de_semana = 'Não';          break;
+                                    case 1: $final_de_semana = 'Sim';          break;
+                                    case 2: $final_de_semana = 'Parcialmente'; break;
+                                }
+                                echo $final_de_semana;
+                                ?>
                             </td>
                             <td><?= h($muralestagio->cargaHoraria) ?></td>
                             <td><?= h($muralestagio->dataSelecao) ?></td>
@@ -280,8 +283,9 @@
                         <?php endforeach; ?>
                     </table>
                 </div>
-                <?php endif; ?>
             </div>
+            <?php endif; ?>
+            
         </div>
     </div>
 </div>

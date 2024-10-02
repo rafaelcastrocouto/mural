@@ -156,7 +156,7 @@
             <?php if (!empty($aluno->inscricoes)) : ?>
             <div class="related">
                 <h4><?= __('Related Inscricoes') ?></h4>
-                <div>
+                <div class="table_wrap">
                     <table>
                         <tr>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -184,6 +184,7 @@
                 </div>
             </div>
             <?php endif; ?>
+            
         </div>
     </div>
 </div>

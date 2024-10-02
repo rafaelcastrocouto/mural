@@ -26,10 +26,11 @@
                     <td><?= h($turmaestagio->turma) ?></td>
                 </tr>
             </table>
+            
+            <?php if (!empty($turmaestagio->estagiarios)) : ?>
             <div class="related">
                 <h4><?= __('Related Estagiarios') ?></h4>
-                <?php if (!empty($turmaestagio->estagiarios)) : ?>
-                <div>
+                <div class="table_wrap">
                     <table>
                         <tr>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -88,12 +89,13 @@
                         <?php endforeach; ?>
                     </table>
                 </div>
-                <?php endif; ?>
             </div>
+            <?php endif; ?>
+            
+            <?php if (!empty($turmaestagio->muralestagios)) : ?>
             <div class="related">
                 <h4><?= __('Related Muralestagios') ?></h4>
-                <?php if (!empty($turmaestagio->muralestagios)) : ?>
-                <div>
+                <div class="table_wrap">
                     <table>
                         <tr>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -129,8 +131,9 @@
                         <?php endforeach; ?>
                     </table>
                 </div>
-                <?php endif; ?>
             </div>
+            <?php endif; ?>
+            
         </div>
     </div>
 </div>
