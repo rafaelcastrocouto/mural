@@ -21,6 +21,7 @@
             <thead>
                 <tr>
                     <th class="actions"><?= __('Actions') ?></th>
+                    <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('nome') ?></th>
                     <th><?= $this->Paginator->sort('telefone') ?></th>
                     <th><?= $this->Paginator->sort('celular') ?></th>
@@ -37,6 +38,7 @@
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $professor->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $professor->id], ['confirm' => __('Are you sure you want to delete {0}?', $professor->nome)]) ?>
                     </td>
+                    <td><?= $this->Html->link($professor->id, ['action' => 'view', $professor->id]) ?></td>
                     <td><?= $this->Html->link(h($professor->nome), ['action' => 'view', $professor->id]) ?></td>
                     <td><?= $professor->telefone ? '(' . h($professor->ddd_telefone) . ')' . h($professor->telefone) : '' ?></td>
                     <td><?= $professor->celular ? '(' . h($professor->ddd_celular) . ')' . h($professor->celular) : '' ?></td>

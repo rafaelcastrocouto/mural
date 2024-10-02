@@ -42,7 +42,7 @@ class UsersTable extends Table
         parent::initialize($config);
 
         $this->setTable('users');
-        $this->setAlias('users');
+        $this->setAlias('Users');
         $this->setDisplayField('email');
         $this->setPrimaryKey('id');
         

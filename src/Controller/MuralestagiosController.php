@@ -37,7 +37,7 @@ class MuralestagiosController extends AppController {
         }
         
         if ($periodo) {
-            $muralestagios = $this->Muralestagios->find('all', ['conditions' => ['muralestagios.periodo' => $periodo] ])
+            $muralestagios = $this->Muralestagios->find('all', ['conditions' => ['Muralestagios.periodo' => $periodo] ])
             ->contain($contained);
         } else {
             $muralestagios = $this->Muralestagios->find('all')

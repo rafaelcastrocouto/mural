@@ -91,7 +91,7 @@ $session = $this->request->getSession();
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $estagiario->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete estagiario #{0}?', $estagiario->id)]) ?>
                     </td>
-                    <td><?= h($estagiario->id) ?></td>
+                    <td><?= $this->Html->link($estagiario->id, ['action' => 'view', $estagiario->id]) ?></td>
                     <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
                     <td><?= h($estagiario->registro) ?></td>
                     <td>

@@ -40,7 +40,7 @@ class CategoriasTable extends Table
         parent::initialize($config);
 
         $this->setTable('categorias');
-        $this->setAlias('categorias');
+        $this->setAlias('Categorias');
         $this->setDisplayField('categoria');
         $this->setPrimaryKey('id');
 

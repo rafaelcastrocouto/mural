@@ -42,7 +42,7 @@ class AlunosTable extends Table
         parent::initialize($config);
 
         $this->setTable('alunos');
-        $this->setAlias('alunos');
+        $this->setAlias('Alunos');
         $this->setDisplayField('nome');
         $this->setPrimaryKey('id');
         

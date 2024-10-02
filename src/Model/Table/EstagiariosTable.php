@@ -44,7 +44,7 @@ class EstagiariosTable extends Table
         parent::initialize($config);
 
         $this->setTable('estagiarios');
-        $this->setAlias('estagiarios');
+        $this->setAlias('Estagiarios');
         $this->setDisplayField('registro');
         $this->setPrimaryKey('id');
 

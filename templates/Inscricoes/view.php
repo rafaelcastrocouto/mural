@@ -8,11 +8,11 @@
     <div class="column-responsive column-80">
         <div class="inscricoes view content">
             <aside>
-                <div class="side-nav">
-                    <?= $this->Html->link(__('Editar Inscricao'), ['action' => 'edit', $inscricao->id], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Form->postLink(__('Deletar Inscricao'), ['action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id), 'class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Listar Inscricoes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-                    <?= $this->Html->link(__('Nova Inscricao'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Inscricoes'), ['action' => 'index'], ['class' => 'button']) ?>
+                    <?= $this->Html->link(__('Editar Inscricao'), ['action' => 'edit', $inscricao->id], ['class' => 'button']) ?>
+                    <?= $this->Form->postLink(__('Deletar Inscricao'), ['action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete inscricao_{0}?', $inscricao->id), 'class' => 'button']) ?>
+                    <?= $this->Html->link(__('Nova Inscricao'), ['action' => 'add'], ['class' => 'button']) ?>
                 </div>
             </aside>
             <h3>inscricao_<?= h($inscricao->id) ?></h3>
@@ -27,7 +27,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Muralestagio') ?></th>
-                    <td><?= $inscricao->muralestagio ? $this->Html->link($inscricao->muralestagio->id, ['controller' => 'Muralestagios', 'action' => 'view', $inscricao->muralestagio->id]) : '' ?></td>
+                    <td><?= $inscricao->muralestagio ? $this->Html->link($inscricao->muralestagio->instituicao ? $inscricao->muralestagio->instituicao->instituicao . ' (' . $inscricao->muralestagio->dataSelecao . ')' : $inscricao->muralestagio->id , ['controller' => 'Muralestagios', 'action' => 'view', $inscricao->muralestagio->id]) : $inscricao->muralestagio_id ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Periodo') ?></th>

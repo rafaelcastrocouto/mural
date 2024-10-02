@@ -41,7 +41,7 @@ class TurmaestagiosTable extends Table
         parent::initialize($config);
 
         $this->setTable('turma_estagios');
-        $this->setAlias('turmaestagios');
+        $this->setAlias('Turmaestagios');
         $this->setDisplayField('turma');
         $this->setPrimaryKey('id');
         /*

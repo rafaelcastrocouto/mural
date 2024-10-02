@@ -41,7 +41,7 @@ class InscricoesTable extends Table {
         parent::initialize($config);
 
         $this->setTable('inscricoes');
-        $this->setAlias('inscricoes');
+        $this->setAlias('Inscricoes');
         $this->setDisplayField('registro');
         $this->setPrimaryKey('id');
 

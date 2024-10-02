@@ -33,8 +33,8 @@
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $area->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $area->id], ['confirm' => __('Are you sure you want to delete {0}?', $area->area)]) ?>
                     </td>
-                    <td><?= h($area->id) ?></td>
-                    <td><?= $this->Html->link(h($area->area), ['action' => 'view', $area->id]) ?></td>
+                    <td><?= $this->Html->link($area->id, ['action' => 'view', $area->id]) ?></td>
+                    <td><?= $this->Html->link($area->area, ['action' => 'view', $area->id]) ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

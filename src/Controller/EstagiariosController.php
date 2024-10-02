@@ -26,7 +26,7 @@ class EstagiariosController extends AppController
         }
         
         if ($periodo) {
-            $estagiarios = $this->Estagiarios->find('all', ['conditions' => ['estagiarios.periodo' => $periodo] ])
+            $estagiarios = $this->Estagiarios->find('all', ['conditions' => ['Estagiarios.periodo' => $periodo] ])
             ->contain($contained);
         } else {
             $estagiarios = $this->Estagiarios->find('all')

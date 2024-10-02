@@ -43,9 +43,9 @@ class MuralestagiosTable extends Table {
     public function initialize(array $config): void {
         parent::initialize($config);
 
-        $this->setTable('mural_estagio');
-        $this->setAlias('muralestagios');
-        $this->setDisplayField('instituicao');
+        $this->setTable('mural_estagios');
+        $this->setAlias('Muralestagios');
+        $this->setDisplayField('instituicao_id');
         $this->setPrimaryKey('id');
             
         //$this->hasMany('Inscricoes', [
@@ -65,7 +65,7 @@ class MuralestagiosTable extends Table {
 
     public function beforeFind($event, $query, $options, $primary) {
 
-        $query->order(['muralestagios.id' => 'ASC']);
+        $query->order(['Muralestagios.id' => 'ASC']);
         return $query;
     }
 
@@ -81,9 +81,9 @@ class MuralestagiosTable extends Table {
                 ->allowEmptyString('id', null, 'create');
 
         $validator
-                ->scalar('instituicao')
-                ->maxLength('instituicao', 100)
-                ->notEmptyString('instituicao');
+                ->scalar('instituicao_id')
+                ->maxLength('instituicao_id', 100)
+                ->notEmptyString('instituicao_id');
 
         $validator
                 ->scalar('convenio')

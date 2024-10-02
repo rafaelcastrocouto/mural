@@ -45,7 +45,7 @@
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $aluno->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $aluno->id], ['confirm' => __('Are you sure you want to delete {0}?', $aluno->nome)]) ?>
                     </td>
-                    <td><?= $aluno->id?></td>
+                    <td><?= $this->Html->link($aluno->id, ['action' => 'view', $aluno->id]) ?></td>
                     <td><?= $aluno->nome ? $this->Html->link(h($aluno->nome), ['action' => 'view', $aluno->id]) : '' ?></td>
                     <td><?= $aluno->registro ?></td>
                     <td><?= (!$aluno->user) ? ('no_user ' . $aluno->email) : ($aluno->user->email ? $this->Text->autoLinkEmails($aluno->user->email) : '') ?></td>

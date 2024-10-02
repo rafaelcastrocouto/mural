@@ -118,6 +118,9 @@ th a,
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
+table p {
+    margin: 0;
+}
 
 /* Main */
 #content {

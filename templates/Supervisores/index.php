@@ -33,7 +33,7 @@
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $supervisor->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $supervisor->id], ['confirm' => __('Are you sure you want to delete {0}?', $supervisor->nome)]) ?>
                     </td>
-                    <td><?= $this->Number->format($supervisor->id) ?></td>
+                    <td><?= $this->Html->link($supervisor->id, ['action' => 'view', $supervisor->id]) ?></td>
                     <td><?= h($supervisor->nome) ?></td>
                     <td><?= h($supervisor->cpf) ?></td>
                     <td><?= $supervisor->email ? $this->Text->autoLinkEmails($supervisor->email) : '' ?></td>

@@ -83,7 +83,7 @@ $session->write('categoria_id', 1);
                             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $muralestagio->id]) ?>
                             <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete muralestagio_{0}?', $muralestagio->id)]) ?>
                         </td>
-                        <td><?= h($muralestagio->id) ?></td>
+                        <td><?= $this->Html->link($muralestagio->id, ['action' => 'view', $muralestagio->id]) ?></td>
                         <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $muralestagio->instituicao->id]) : '' ?></td>
                         <td><?= h($muralestagio->vagas) ?></td>
 						<td><?= $muralestagio->professor ? $this->Html->link($muralestagio->professor->nome, ['controller' => 'Professores', 'action' => 'view', $muralestagio->professor->id]) : '' ?></td>

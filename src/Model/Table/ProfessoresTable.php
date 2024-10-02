@@ -42,7 +42,7 @@ class ProfessoresTable extends Table
         parent::initialize($config);
 
         $this->setTable('professores');
-        $this->setAlias('professores');
+        $this->setAlias('Professores');
         $this->setDisplayField('nome');
         $this->setPrimaryKey('id');
 
