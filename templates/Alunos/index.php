@@ -48,7 +48,7 @@
                     <td><?= $this->Html->link($aluno->id, ['action' => 'view', $aluno->id]) ?></td>
                     <td><?= $aluno->nome ? $this->Html->link(h($aluno->nome), ['action' => 'view', $aluno->id]) : '' ?></td>
                     <td><?= $aluno->registro ?></td>
-                    <td><?= (!$aluno->user) ? ('no_user ' . $aluno->email) : ($aluno->user->email ? $this->Text->autoLinkEmails($aluno->user->email) : '') ?></td>
+                    <td><?= (!$aluno->user) ? ('no_user ' . $aluno->email) : ($aluno->user->email ? $aluno->user->id . ' ' . $this->Text->autoLinkEmails($aluno->user->email) : '') ?></td>
                     <td><?= '(' . $aluno->codigo_telefone . ') ' . h($aluno->telefone) ?></td>
                     <td><?= '(' . $aluno->codigo_celular . ') ' . h($aluno->celular) ?></td>
                     <td><?= h($aluno->cpf) ?></td>
