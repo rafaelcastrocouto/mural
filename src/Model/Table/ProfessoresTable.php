@@ -46,17 +46,14 @@ class ProfessoresTable extends Table
         $this->setDisplayField('nome');
         $this->setPrimaryKey('id');
 
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+        ]);
         $this->hasMany('Estagiarios', [
             'foreignKey' => 'professor_id',
         ]);
         $this->hasMany('Muralestagios', [
             'foreignKey' => 'professor_id',
-        ]);/*
-        $this->hasOne('Users', [
-            'foreignKey' => 'professor_id',
-        ]);*/
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
         ]);
     }
 

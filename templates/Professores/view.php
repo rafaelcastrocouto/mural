@@ -158,7 +158,6 @@
                             <th class="actions"><?= __('Actions') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Email') ?></th>
-                            <th><?= __('Password') ?></th>
                             <th><?= __('Registro') ?></th>
                             <th><?= __('Timestamp') ?></th>
                         </tr>
@@ -170,7 +169,6 @@
                             </td>
                             <td><?= h($professor->user->id) ?></td>
                             <td><?= $professor->user->email ? $this->Text->autoLinkEmails($professor->user->email) : '' ?></td>
-                            <td><?= h($professor->user->password) ?></td>
                             <td><?= h($professor->user->registro) ?></td>
                             <td><?= $professor->user->timestamp ? h($professor->user->timestamp) : '' ?></td>
                         </tr>

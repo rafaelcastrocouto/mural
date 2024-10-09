@@ -49,9 +49,14 @@ class SupervisoresTable extends Table
         $this->hasMany('Estagiarios', [
             'foreignKey' => 'supervisor_id',
         ]);
+        
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+        ]);
+        /*
         $this->hasOne('Users', [
             'foreignKey' => 'supervisor_id',
-        ]);       
+        ]);  */   
         $this->belongsToMany('Instituicoes', [
             'foreignKey' => 'supervisor_id',
             'targetForeignKey' => 'instituicao_id',

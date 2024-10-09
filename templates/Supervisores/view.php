@@ -122,7 +122,6 @@
                             <th class="actions"><?= __('Actions') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Email') ?></th>
-                            <th><?= __('Password') ?></th>
                             <th><?= __('Registro') ?></th>
                             <th><?= __('Timestamp') ?></th>
                         </tr>
@@ -134,7 +133,6 @@
                             </td>
                             <td><?= h($supervisor->user->id) ?></td>
                             <td><?= $supervisor->user->email ? $this->Text->autoLinkEmails($supervisor->user->email) : '' ?></td>
-                            <td><?= h($supervisor->user->password) ?></td>
                             <td><?= h($supervisor->user->registro) ?></td>
                             <td><?= $supervisor->user->timestamp ? h($supervisor->user->timestamp) : '' ?></td>
                         </tr>
