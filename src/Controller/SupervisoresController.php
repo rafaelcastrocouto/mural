@@ -53,6 +53,10 @@ class SupervisoresController extends AppController
         $supervisor = $this->Supervisores->newEmptyEntity();
         if ($this->request->is('post')) {
             $supervisor = $this->Supervisores->patchEntity($supervisor, $this->request->getData());
+
+            $user = $this->Authentication->getIdentity();
+            $professor->user_id = $user->get('id');
+            
             if ($this->Supervisores->save($supervisor)) {
                 $this->Flash->success(__('The supervisor has been saved.'));
 

@@ -53,6 +53,10 @@ class ProfessoresController extends AppController
         $professor = $this->Professores->newEmptyEntity();
         if ($this->request->is('post')) {
             $professor = $this->Professores->patchEntity($professor, $this->request->getData());
+
+            $user = $this->Authentication->getIdentity();
+            $professor->user_id = $user->get('id');
+            
             if ($this->Professores->save($professor)) {
                 $this->Flash->success(__('The professor has been saved.'));
 
