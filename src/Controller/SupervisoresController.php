@@ -18,8 +18,9 @@ class SupervisoresController extends AppController
      */
     public function index()
     {
-        $supervisores = $this->paginate($this->Supervisores);
-
+        $supervisores = $this->paginate($this->Supervisores->find('all', [
+            'contain' => ['Users'],
+        ]));
         $this->set(compact('supervisores'));
     }
 

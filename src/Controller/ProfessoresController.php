@@ -18,8 +18,9 @@ class ProfessoresController extends AppController
      */
     public function index()
     {
-        $professores = $this->paginate($this->Professores);
-
+        $professores = $this->paginate($this->Professores->find('all', [
+            'contain' => ['Users'],
+        ]));
         $this->set(compact('professores'));
     }
 

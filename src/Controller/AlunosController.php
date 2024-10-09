@@ -19,7 +19,7 @@ class AlunosController extends AppController
     public function index()
     {
         $alunos = $this->paginate($this->Alunos->find('all', [
-            'contain' => [/*'Estagiarios', 'Inscricoes',*/ 'Users'],
+            'contain' => ['Users'],
         ]));
         $this->set(compact('alunos'));
     }

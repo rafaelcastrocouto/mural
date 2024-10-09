@@ -42,7 +42,7 @@
                     <td><?= $this->Html->link(h($professor->nome), ['action' => 'view', $professor->id]) ?></td>
                     <td><?= $professor->telefone ? '(' . h($professor->ddd_telefone) . ')' . h($professor->telefone) : '' ?></td>
                     <td><?= $professor->celular ? '(' . h($professor->ddd_celular) . ')' . h($professor->celular) : '' ?></td>
-                    <td><?= $professor->email ? $this->Text->autoLinkEmails($professor->email) : '' ?></td>
+                    <td><?= ($professor->user and $professor->user->email) ? $this->Text->autoLinkEmails($professor->user->email) : '' ?></td>
                     <td><?= $professor->curriculolattes ? $this->Html->link('http://lattes.cnpq.br/' . h($professor->curriculolattes)) : '' ?></td>
                     <td><?= h($professor->departamento) ?></td>
                 </tr>

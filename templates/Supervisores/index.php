@@ -36,7 +36,7 @@
                     <td><?= $this->Html->link($supervisor->id, ['action' => 'view', $supervisor->id]) ?></td>
                     <td><?= $this->Html->link($supervisor->nome, ['action' => 'view', $supervisor->id]) ?></td>
                     <td><?= h($supervisor->cpf) ?></td>
-                    <td><?= $supervisor->email ? $this->Text->autoLinkEmails($supervisor->email) : '' ?></td>
+                    <td><?= ($supervisor->user and $supervisor->user->email) ? $this->Text->autoLinkEmails($supervisor->user->email) : '' ?></td>
                     <td><?= h($supervisor->escola) ?></td>
                     <td><?= h($supervisor->ano_formatura) ?></td>
                 </tr>
