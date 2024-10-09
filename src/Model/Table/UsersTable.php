@@ -49,20 +49,20 @@ class UsersTable extends Table
         
         $this->hasOne('Alunos', [
             'foreignKey' => 'user_id',
-        ]);/*
-        $this->belongsTo('Alunos', [
-            'foreignKey' => 'aluno_id',
-        ]);*/
+        ]);
+        $this->hasOne('Professores', [
+            'foreignKey' => 'user_id',
+        ]);
         
         $this->belongsTo('Categorias', [
             'foreignKey' => 'categoria_id'
         ]);
         $this->belongsTo('Supervisores', [
             'foreignKey' => 'supervisor_id',
-        ]);
+        ]);/*
         $this->belongsTo('Professores', [
             'foreignKey' => 'professor_id',
-        ]);
+        ]);*/
     }
 
     /**
