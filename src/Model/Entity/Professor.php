@@ -18,7 +18,6 @@ use Cake\ORM\Entity;
  * @property string|null $telefone
  * @property string $ddd_celular
  * @property string|null $celular
- * @property string|null $email
  * @property string|null $homepage
  * @property string|null $redesocial
  * @property string|null $curriculolattes
@@ -68,7 +67,6 @@ class Professor extends Entity
         'telefone' => true,
         'ddd_celular' => true,
         'celular' => true,
-        'email' => true,
         'homepage' => true,
         'redesocial' => true,
         'curriculolattes' => true,

@@ -23,9 +23,10 @@
                     <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
-                    <th><?= $this->Paginator->sort('registro') ?></th>
                     <th><?= $this->Paginator->sort('categoria_id', 'Categorias') ?></th>
-                    <th><?= $this->Paginator->sort('Alunos.nome', 'Nome') ?></th>
+                    <th><?= $this->Paginator->sort('Alunos.nome', 'Aluno') ?></th>
+                    <th><?= $this->Paginator->sort('Professores.nome', 'Professor') ?></th>
+                    <th><?= $this->Paginator->sort('Supervisores.nome', 'Supervisor') ?></th>
                     <th><?= $this->Paginator->sort('timestamp', 'Data') ?></th>
                 </tr>
             </thead>
@@ -39,11 +40,10 @@
                     </td>
                     <td><?= $this->Html->link($user->id, ['action' => 'view', $user->id]) ?></td>
                     <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
-                    <td><?= $user->registro ?></td>
                     <td><?= h($user->categoria->categoria) ?></td>
-                    <td><?= $user->aluno ? $this->Html->link($user->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $user->aluno->id]) : '' ?>
-                    <?= $user->supervisor ? $this->Html->link($user->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $user->supervisor->id]) : '' ?>
-                    <?= $user->professor ? $this->Html->link($user->professor->nome, ['controller' => 'Professores', 'action' => 'view', $user->professor->id]) : '' ?></td>
+                    <td><?= $user->aluno ? $this->Html->link($user->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $user->aluno->id]) : '' ?></td>
+                    <td><?= $user->supervisor ? $this->Html->link($user->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $user->supervisor->id]) : '' ?></td>
+                    <td><?= $user->professor ? $this->Html->link($user->professor->nome, ['controller' => 'Professores', 'action' => 'view', $user->professor->id]) : '' ?></td>
                     <td><?= $user->timestamp ? h($user->timestamp) : '' ?></td>
                 </tr>
                 <?php endforeach; ?>

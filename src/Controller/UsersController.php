@@ -23,7 +23,7 @@ class UsersController extends AppController {
     
     protected array $paginate = [
         'sortableFields' => [
-            'id', 'email', 'categoria_id', 'registro', 'Alunos.nome', 'timestamp'
+            'id', 'email', 'categoria_id', 'Alunos.nome', 'Professores.nome', 'Supervisores.nome', 'timestamp'
         ]
     ];
     

@@ -42,10 +42,6 @@
                     <td><?= $user->professor ? $this->Html->link($user->professor->nome, ['controller' => 'Professor', 'action' => 'view', $user->professor->id]) : '-' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Registro') ?></th>
-                    <td><?= $this->Number->format($user->registro) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Data') ?></th>
                     <td><?= h($user->timestamp) ?></td>
                 </tr>

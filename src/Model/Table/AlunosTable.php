@@ -13,7 +13,7 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\EstagiariosTable&\Cake\ORM\Association\HasMany $Estagiarios
  * @property \App\Model\Table\InscricoesTable&\Cake\ORM\Association\HasMany $Inscricoes
- * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\HasMany $Users
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  *
  * @method \App\Model\Entity\Aluno newEmptyEntity()
  * @method \App\Model\Entity\Aluno newEntity(array $data, array $options = [])
@@ -95,10 +95,6 @@ class AlunosTable extends Table
             ->scalar('celular')
             ->maxLength('celular', 10)
             ->allowEmptyString('celular');
-
-        $validator
-            ->email('email')
-            ->allowEmptyString('email');
 
         $validator
             ->scalar('cpf')

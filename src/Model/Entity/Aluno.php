@@ -15,7 +15,6 @@ use Cake\ORM\Entity;
  * @property string|null $telefone
  * @property int $codigo_celular
  * @property string|null $celular
- * @property string|null $email
  * @property string|null $cpf
  * @property string|null $identidade
  * @property string|null $orgao
@@ -48,7 +47,6 @@ class Aluno extends Entity
         'telefone' => true,
         'codigo_celular' => true,
         'celular' => true,
-        'email' => true,
         'cpf' => true,
         'identidade' => true,
         'orgao' => true,

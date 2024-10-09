@@ -13,12 +13,7 @@ use Authentication\PasswordHasher\DefaultPasswordHasher;
  * @property string|null $email
  * @property string|null $password
  * @property string $categoria_id
- * @property int $registro
  * @property \Cake\I18n\FrozenTime $data
- *
- * @property \App\Model\Entity\Aluno $aluno
- * @property \App\Model\Entity\Supervisor $supervisor
- * @property \App\Model\Entity\Professor $professor
  */
 class User extends Entity
 {
@@ -35,7 +30,6 @@ class User extends Entity
         'email' => true,
         'password' => true,
         'categoria_id' => true,
-        'registro' => true,
         'data' => true,
     ];
 
@@ -44,9 +38,7 @@ class User extends Entity
      *
      * @var array
      */
-    protected array $_hidden = [
-        'password'
-    ];
+    protected array $_hidden = ['password'];
 
     // Automatically hash passwords when they are changed.
     protected function _setPassword(string $password)

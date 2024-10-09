@@ -19,7 +19,6 @@ use Cake\ORM\Entity;
  * @property string $telefone
  * @property string $codigo_cel
  * @property string $celular
- * @property string|null $email
  * @property string $escola
  * @property string $ano_formatura
  * @property int|null $cress
@@ -58,7 +57,6 @@ class Supervisor extends Entity
         'telefone' => true,
         'codigo_cel' => true,
         'celular' => true,
-        'email' => true,
         'escola' => true,
         'ano_formatura' => true,
         'cress' => true,

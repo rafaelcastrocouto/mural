@@ -29,7 +29,6 @@ $session->write('categoria_id', 1);
                     echo $this->Form->control('email');
                     echo $this->Form->control('password');
                     echo $this->Form->control('categoria', ['options' => $categorias, 'value' => '2', 'class' => 'form-control']);
-                    echo $this->Form->control('registro');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Adicionar')) ?>

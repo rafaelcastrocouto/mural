@@ -60,12 +60,14 @@
                     <td><?= h($aluno->nascimento) ?></td>
                 </tr>
             </table>
+            <?php if (!empty($aluno->observacoes)) : ?>
             <div class="text">
                 <strong><?= __('Observacoes') ?></strong>
                 <blockquote>
                     <?= $this->Text->autoParagraph($aluno->observacoes); ?>
                 </blockquote>
             </div>
+            <?php endif; ?>
             
             <?php if (!empty($aluno->user)) : ?>
             <div class="related">
@@ -85,7 +87,7 @@
                                 <?= $this->Html->link(__('Editar'), ['controller' => 'Users', 'action' => 'edit', $aluno->user->id]) ?>
                                 <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Users', 'action' => 'delete', $aluno->user->id], ['confirm' => __('Are you sure you want to delete user_{0}?', $aluno->user->id)]) ?>
                             </td>
-                            <td><?= h($aluno->user->id) ?></td>
+                            <td><?= $this->Html->link($aluno->user->id, ['controller' => 'Users', 'action' => 'view', $aluno->user->id]) ?></td>
                             <td><?= $aluno->user->email ? $this->Text->autoLinkEmails($aluno->user->email) : '' ?></td>
                             <td><?= h($aluno->user->registro) ?></td>
                             <td><?= h($aluno->user->timestamp) ?></td>
