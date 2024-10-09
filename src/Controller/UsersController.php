@@ -125,7 +125,11 @@ class UsersController extends AppController {
                         ->where(['alunos.registro' => $c_user->numero]);
                 // pr($aluno);
                 // pr($aluno->first()->registro);
-                $c_user->aluno_id = $aluno->first()->id;
+               
+                //$c_user->aluno_id = $aluno->first()->id;
+                
+                $aluno->user_id = $c_user->id;
+                
                 // pr($c_user->aluno_id);
                 // pr($c_user->id);
                 if ($this->Users->save($c_user)) {
