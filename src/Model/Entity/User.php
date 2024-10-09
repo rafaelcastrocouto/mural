@@ -14,9 +14,6 @@ use Authentication\PasswordHasher\DefaultPasswordHasher;
  * @property string|null $password
  * @property string $categoria_id
  * @property int $registro
- * @property int|null $aluno_id
- * @property int|null $supervisor_id
- * @property int|null $professor_id
  * @property \Cake\I18n\FrozenTime $data
  *
  * @property \App\Model\Entity\Aluno $aluno

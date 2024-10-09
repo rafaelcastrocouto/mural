@@ -25,9 +25,9 @@
                     echo $this->Form->control('password');
                     echo $this->Form->control('categoria', ['options' => $categorias, 'value' => $user->categoria_id, 'class' => 'form-control']);
                     echo $this->Form->control('registro');
-                    echo $this->Form->control('aluno', ['options' => $alunos, 'value' => $user->aluno_id, 'empty' => true, 'class' => 'form-control']);
-                    echo $this->Form->control('supervisor_id', ['options' => $supervisores, 'value' => $user->supervisor_id, 'empty' => true, 'class' => 'form-control']);
-                    echo $this->Form->control('professor_id', ['options' => $professores, 'value' => $user->professor_id, 'empty' => true, 'class' => 'form-control']);
+                    //echo $this->Form->control('aluno', ['options' => $alunos, 'value' => $user->aluno_id, 'empty' => true, 'class' => 'form-control']);
+                    //echo $this->Form->control('supervisor_id', ['options' => $supervisores, 'value' => $user->supervisor_id, 'empty' => true, 'class' => 'form-control']);
+                    //echo $this->Form->control('professor_id', ['options' => $professores, 'value' => $user->professor_id, 'empty' => true, 'class' => 'form-control']);
                     echo $this->Form->control('timestamp', ['type' => 'datetime-local', 'value' => $user->timestamp ? $user->timestamp->format('Y-m-d\TH:i') : '']);
                 ?>
             </fieldset>

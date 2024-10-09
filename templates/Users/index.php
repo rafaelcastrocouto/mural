@@ -25,7 +25,7 @@
                     <th><?= $this->Paginator->sort('email') ?></th>
                     <th><?= $this->Paginator->sort('registro') ?></th>
                     <th><?= $this->Paginator->sort('categoria_id', 'Categorias') ?></th>
-                    <th><?= $this->Paginator->sort('aluno_id', 'Nome') ?></th>
+                    <th><?= $this->Paginator->sort('Alunos.nome', 'Nome') ?></th>
                     <th><?= $this->Paginator->sort('timestamp', 'Data') ?></th>
                 </tr>
             </thead>
