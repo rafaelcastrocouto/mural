@@ -42,7 +42,7 @@
                     <td><?= $user->professor ? $this->Html->link($user->professor->nome, ['controller' => 'Professor', 'action' => 'view', $user->professor->id]) : '-' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Data') ?></th>
+                    <th><?= __('Timestamp') ?></th>
                     <td><?= h($user->timestamp) ?></td>
                 </tr>
             </table>

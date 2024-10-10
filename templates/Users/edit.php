@@ -24,7 +24,7 @@
                     echo $this->Form->control('email', ['type' => 'email']);
                     echo $this->Form->control('password');
                     echo $this->Form->control('categoria', ['options' => $categorias, 'value' => $user->categoria_id, 'class' => 'form-control']);
-                    echo $this->Form->control('timestamp', ['type' => 'datetime-local', 'value' => $user->timestamp ? $user->timestamp->format('Y-m-d\TH:i') : '']);
+                    echo $this->Form->control('timestamp', ['type' => 'datetime-local', 'value' => $user->timestamp ? h($user->timestamp) : '']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Editar')) ?>

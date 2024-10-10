@@ -27,7 +27,7 @@
                     <th><?= $this->Paginator->sort('Alunos.nome', 'Aluno') ?></th>
                     <th><?= $this->Paginator->sort('Professores.nome', 'Professor') ?></th>
                     <th><?= $this->Paginator->sort('Supervisores.nome', 'Supervisor') ?></th>
-                    <th><?= $this->Paginator->sort('timestamp', 'Data') ?></th>
+                    <th><?= $this->Paginator->sort('timestamp') ?></th>
                 </tr>
             </thead>
             <tbody>
