@@ -49,6 +49,10 @@ class AppController extends Controller
         $configuracao = $this->fetchTable("Configuracoes")->find()->first();
         $this->set('configuracao', $configuracao);
 
+     
+        $session = $this->request->getAttribute('identity');
+        $this->set('session', $session);
+
         /*
          * Enable the following component for recommended CakePHP form protection settings.
          * see https://book.cakephp.org/5/en/controllers/components/form-protection.html

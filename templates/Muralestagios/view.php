@@ -4,12 +4,7 @@
  * @var \App\Model\Entity\Muralestagio $muralestagio
  */
 
-$session = $this->request->getSession();
-
-$session->write('categoria_id', 1);
-//pr($muralestagio);
-//pr($session->read('categoria_id'));
-//die();
+$categoria_id = $session->get('categoria_id');
 ?>
 
 <div>
@@ -18,7 +13,7 @@ $session->write('categoria_id', 1);
 		    <aside>
 		        <div class="nav">
 					<?= $this->Html->link(__('Listar Muralestagios'), ['action' => 'index'], ['class' => 'button']) ?>
-                    <?php if ($session->read('categoria_id') == 1): ?>
+                    <?php if ($categoria_id == 1): ?>
 			            <?= $this->Html->link(__('Editar Muralestagio'), ['action' => 'edit', $muralestagio->id], ['class' => 'button']) ?>
 			            <?= $this->Form->postLink(__('Deletar Muralestagio'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id), 'class' => 'button']) ?>
 			            <?= $this->Html->link(__('Novo Muralestagio'), ['action' => 'add'], ['class' => 'button']) ?>

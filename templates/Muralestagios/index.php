@@ -3,8 +3,9 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Muralestagio[]|\Cake\Collection\CollectionInterface $muralestagios
  */
-// pr($muralestagios);
-// pr($periodo);
+
+$categoria_id = $session->get('categoria_id');
+
 ?>
 
 <script type="text/javascript">
@@ -20,17 +21,11 @@
     });
 </script>
 
-<?php
-$session = $this->request->getSession();
-$session->write('categoria_id', 1);
-//echo $session->read('categoria_id');
-?>
-
 <div class="muralestagios index content">
 	
 	<div class="row justify-content-center">
 	    <div class="col-auto">
-	        <?php if ($session->read('categoria_id') == 1): ?>
+	        <?php if ($categoria_id == 1): ?>
 	            <?= $this->Form->create($muralestagios, ['class' => 'form-inline']); ?>
 					<?= $this->Form->label('muralestagioperiodo', 'Período'); ?>
 					<?= $this->Form->input('periodo', [

@@ -3,8 +3,10 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Estagiario[]|\Cake\Collection\CollectionInterface $estagiarios
  */
-// pr($estagiarios);
-// pr($periodo);
+
+$user = $this->request->getAttribute('identity');
+$categoria_id = $user->get('categoria_id');
+
 ?>
 
 <script type="text/javascript">
@@ -20,20 +22,11 @@
     });
 </script>
 
-<?php
-// $this->request->getSession()->write('categoria_id', 1);
-$session = $this->request->getSession();
-//$session->write('categoria_id', 1);
-// echo $this->request->getSession()->read('categoria_id');
-// die();
-?>
-
-
 <div class="estagiarios index content">
 	
 	<div class="row justify-content-center">
 	    <div class="col-auto">
-	        <?php if ($session->read('categoria_id') == 1): ?>
+	        <?php if ($categoria_id == 1): ?>
 	            <?= $this->Form->create($estagiarios, ['class' => 'form-inline']); ?>
 					<?= $this->Form->label('estagiarioperiodo', 'Período'); ?>
 					<?= $this->Form->input('periodo', [

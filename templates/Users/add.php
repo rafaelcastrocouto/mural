@@ -6,9 +6,8 @@
 ?>
 
 <?php
-$session = $this->request->getSession();
-$session->write('categoria_id', 1);
-// echo $session->read('categoria_id');
+$user = $this->request->getAttribute('identity');
+$categoria_id = $user->get('categoria_id');
 ?>
 
 <div>
@@ -16,7 +15,7 @@ $session->write('categoria_id', 1);
         <div class="users form content">
             <aside>
                 <div class="nav">
-                    <?php if ($session->read('categoria_id') == 1): ?>
+                    <?php if ($categoria_id == 1): ?>
                         <?= $this->Html->link(__('Listar Usuários'), ['action' => 'index'], ['class' => 'button']) ?>
                     <?php endif; ?>
                     <?= $this->Html->link(__('Fazer Login'), ['action' => 'login'], ['class' => 'button']) ?>
