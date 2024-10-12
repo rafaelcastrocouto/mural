@@ -18,8 +18,8 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenDate $termo_compromisso_final
  * @property string $periodo_calendario_academico
  * @property string $instituicao
+ * @property string $descricao
  *
- * @property \App\Model\Entity\Instituicao $instituicao
  */
 class Configuracao extends Entity
 {

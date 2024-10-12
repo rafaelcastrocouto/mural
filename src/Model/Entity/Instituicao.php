@@ -30,10 +30,6 @@ use Cake\ORM\Entity;
  * @property string|null $observacoes
  *
  * @property \App\Model\Entity\Area[] $area
- * @property \App\Model\Entity\Estagiario[] $estagiarios
- * @property \App\Model\Entity\Muralestagio[] $muralestagios
- * @property \App\Model\Entity\Visita[] $visitas
- * @property \App\Model\Entity\Supervisor[] $supervisores
  */
 class Instituicao extends Entity
 {
@@ -48,7 +44,7 @@ class Instituicao extends Entity
      */
     protected array $_accessible = [
         'instituicao' => true,
-        'area_instituicoes_id' => true,
+        'area_id' => true,
         'natureza' => true,
         'cnpj' => true,
         'email' => true,

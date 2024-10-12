@@ -6,13 +6,14 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Turmaestagio Entity
+ * Administrador Entity
  *
  * @property int $id
- * @property string $turma
+ * @property string $nome
  *
+ * @property \App\Model\Entity\User[] $user_id
  */
-class Turmaestagio extends Entity
+class Administrador extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -24,6 +25,7 @@ class Turmaestagio extends Entity
      * @var array
      */
     protected array $_accessible = [
-        'turma' => true
+        'nome' => true,
+        'user_id' => true
     ];
 }

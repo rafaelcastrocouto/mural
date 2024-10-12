@@ -6,12 +6,11 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Visita Entity
+ * Categoria Entity
  *
  * @property int $id
  * @property string $categoria
  *
- * @property \App\Model\Entity\Categoria $categoria
  */
 class Visita extends Entity
 {

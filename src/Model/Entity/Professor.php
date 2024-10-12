@@ -41,9 +41,8 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenDate|null $dataegresso
  * @property string|null $motivoegresso
  * @property string|null $observacoes
+ * @property int $user_id
  *
- * @property \App\Model\Entity\Estagiario[] $estagiarios
- * @property \App\Model\Entity\Muralestagio[] $muralestagios
  * @property \App\Model\Entity\User[] $users
  */
 class Professor extends Entity
@@ -92,5 +91,6 @@ class Professor extends Entity
         'observacoes' => true,
         'estagiarios' => true,
         'muralestagios' => true,
+        'user_id' => true
     ];
 }
