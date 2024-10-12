@@ -16,6 +16,10 @@
             <fieldset>
                 <h3><?= __('Adicionando Professor') ?></h3>
                 <?php
+                    if ($categoria_id == 1):
+                        $val = $this->request->getParam('pass') ? $this->request->getParam('pass')[0] : '';
+                        echo $this->Form->control('user_id', ['type' => 'number', 'value' => $val ]); 
+                    endif;
                     echo $this->Form->control('nome');
                     echo $this->Form->control('cpf');
                     echo $this->Form->control('siape');

@@ -14,6 +14,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\AlunosTable&\Cake\ORM\Association\BelongsTo $Alunos
  * @property \App\Model\Table\SupervisoresTable&\Cake\ORM\Association\BelongsTo $Supervisores
  * @property \App\Model\Table\ProfessoresTable&\Cake\ORM\Association\BelongsTo $Professores
+ * @property \App\Model\Table\AdministradoresTable&\Cake\ORM\Association\BelongsTo $Administradores
  *
  * @method \App\Model\Entity\User newEmptyEntity()
  * @method \App\Model\Entity\User newEntity(array $data, array $options = [])
@@ -46,7 +47,9 @@ class UsersTable extends Table
         $this->setDisplayField('email');
         $this->setPrimaryKey('id');
 
-        
+        $this->hasOne('Administradores', [
+            'foreignKey' => 'user_id',
+        ]);
         $this->hasOne('Alunos', [
             'foreignKey' => 'user_id',
         ]);

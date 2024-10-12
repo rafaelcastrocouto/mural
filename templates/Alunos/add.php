@@ -3,6 +3,11 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Aluno $aluno
  */
+$categoria_id = 0;
+
+if ($session) {
+    $categoria_id = $session->get('categoria_id');
+}
 ?>
 <div>
     <div class="column-responsive column-80">
@@ -16,6 +21,10 @@
             <fieldset>
                 <h3><?= __('Adicionando Aluno') ?></h3>
                 <?php
+                    if ($categoria_id == 1):
+                        $val = $this->request->getParam('pass') ? $this->request->getParam('pass')[0] : '';
+                        echo $this->Form->control('user_id', ['type' => 'number', 'value' => $val ]); 
+                    endif;
                     echo $this->Form->control('nome');
                     echo $this->Form->control('registro');
                     echo $this->Form->control('codigo_telefone');

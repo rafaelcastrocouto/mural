@@ -23,10 +23,8 @@
                     <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
-                    <th><?= $this->Paginator->sort('categoria_id', 'Categorias') ?></th>
-                    <th><?= $this->Paginator->sort('Alunos.nome', 'Aluno') ?></th>
-                    <th><?= $this->Paginator->sort('Professores.nome', 'Professor') ?></th>
-                    <th><?= $this->Paginator->sort('Supervisores.nome', 'Supervisor') ?></th>
+                    <th><?= $this->Paginator->sort('categoria', 'Categorias') ?></th>
+                    <th><?= $this->Paginator->sort('Alunos.nome', 'Nome') ?></th>
                     <th><?= $this->Paginator->sort('timestamp') ?></th>
                 </tr>
             </thead>
@@ -41,9 +39,26 @@
                     <td><?= $this->Html->link($user->id, ['action' => 'view', $user->id]) ?></td>
                     <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
                     <td><?= h($user->categoria->categoria) ?></td>
-                    <td><?= $user->aluno ? $this->Html->link($user->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $user->aluno->id]) : '' ?></td>
-                    <td><?= $user->supervisor ? $this->Html->link($user->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $user->supervisor->id]) : '' ?></td>
-                    <td><?= $user->professor ? $this->Html->link($user->professor->nome, ['controller' => 'Professores', 'action' => 'view', $user->professor->id]) : '' ?></td>
+                    <td>
+                    <?php
+                    switch ($user->categoria_id) {
+                        case 1: // Administrador
+                            echo $user->administrador ? $this->Html->link($user->administrador->nome, ['controller' => 'Administradores', 'action' => 'view', $user->administrador->id]) : $this->Html->link('Criar administrador', ['controller' => 'Administradores', 'action' => 'add']);
+                            break;
+                        case 2: // Aluno
+                            echo $user->aluno ? $this->Html->link($user->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $user->aluno->id]) : $this->Html->link('Criar aluno', ['controller' => 'Alunos', 'action' => 'add', $user->id]);
+                            break;
+                        case 3: // Professor
+                            echo $user->professor ? $this->Html->link($user->professor->nome, ['controller' => 'Professores', 'action' => 'view', $user->professor->id]) : $this->Html->link('Criar professor', ['controller' => 'Professores', 'action' => 'add']);
+                            break;
+                        case 4: // Supervisor
+                            echo $user->supervisor ? $this->Html->link($user->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $user->supervisor->id]) : $this->Html->link('Criar supervisor', ['controller' => 'Supervisores', 'action' => 'add']);
+                            break;
+                        default:
+                            echo 'Categoria invalida';
+                    }
+                    ?>
+                    </td>
                     <td><?= $user->timestamp ? h($user->timestamp) : '' ?></td>
                 </tr>
                 <?php endforeach; ?>

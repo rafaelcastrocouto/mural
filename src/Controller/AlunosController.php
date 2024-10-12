@@ -53,9 +53,15 @@ class AlunosController extends AppController
         $aluno = $this->Alunos->newEmptyEntity();
         if ($this->request->is('post')) {
             $aluno = $this->Alunos->patchEntity($aluno, $this->request->getData());
+
+            pr($aluno);
+            die();
+
             
-            $user = $this->Authentication->getIdentity();
-            $aluno->user_id = $user->get('id');
+            if (!$aluno->user_id) { 
+                $user = $this->Authentication->getIdentity();
+                $aluno->user_id = $user->get('id'); 
+            }
             
             if ($this->Alunos->save($aluno)) {
                 $this->Flash->success(__('The aluno has been saved.'));

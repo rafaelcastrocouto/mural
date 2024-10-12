@@ -33,7 +33,7 @@ class UsersController extends AppController {
      * @return \Cake\Http\Response|null|void Renders view
      */
     public function index() {
-        $query = $this->Users->find()->contain(['Alunos', 'Supervisores', 'Professores', 'Categorias']);
+        $query = $this->Users->find()->contain(['Administradores', 'Alunos', 'Supervisores', 'Professores', 'Categorias']);
         $users = $this->paginate($query);
         $this->set(compact('users'));
     }
@@ -47,7 +47,7 @@ class UsersController extends AppController {
      */
     public function view($id = null) {
         $user = $this->Users->get($id, [
-            'contain' => ['Categorias', 'Alunos', 'Supervisores', 'Professores'],
+            'contain' => ['Categorias', 'Administradores', 'Alunos', 'Supervisores', 'Professores'],
         ]);
         $this->set(compact('user'));
     }

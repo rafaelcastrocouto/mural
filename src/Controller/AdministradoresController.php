@@ -34,7 +34,7 @@ class AdministradoresController extends AppController
     public function view($id = null)
     {
         $administrador = $this->Administradores->get($id, [
-        //    'contain' => ['Users'],
+            'contain' => ['Users'],
         ]);
         
         $this->set(compact('administrador'));
@@ -51,8 +51,10 @@ class AdministradoresController extends AppController
         if ($this->request->is('post')) {
             $administrador = $this->Administradores->patchEntity($administrador, $this->request->getData());
 
-            $user = $this->Authentication->getIdentity();
-            $administrador->user_id = $user->get('id');
+            if (!$administrador->user_id) { 
+                $user = $this->Authentication->getIdentity();
+                $administrador->user_id = $user->get('id'); 
+            }
             
             if ($this->Administradores->save($administrador)) {
                 $this->Flash->success(__('The administrador has been saved.'));
