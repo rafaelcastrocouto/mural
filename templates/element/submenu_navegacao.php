@@ -1,7 +1,11 @@
 <!-- templates/element/submenu_navegacao.php -->
 <?php
 
-$categoria_id = $session->get('categoria_id');
+$categoria_id = 0;
+
+if ($session) {
+    $categoria_id = $session->get('categoria_id');
+}
 
 ?>
 <nav class='navbar navbar-expand-lg navbar-light py-0 navbar-fixed-top'>
@@ -80,9 +84,11 @@ $categoria_id = $session->get('categoria_id');
             </li>
         </ul>
         <ul class = "navbar-nav ml-auto">
+            <?php if ($session): ?>
             <li class="nav-item">
                 <?php echo $this->Html->link("Minha conta", ['controller' => 'Users', 'action' => 'view', $session->id], ['class' => 'nav-link']); ?>
             </li>
+            <?php endif; ?>
             <?php
             switch ($categoria_id) {
                 case 1: // Administrador
