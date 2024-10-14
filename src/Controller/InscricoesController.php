@@ -18,13 +18,29 @@ class InscricoesController extends AppController
      */
     public function index()
     {
-        //$this->paginate = [
-        //    'contain' => ['Alunos', 'Muralestagios'],
-        //];
-        $inscricoes = $this->paginate($this->Inscricoes->find()
-        ->contain(['Alunos', 'Muralestagios' => ['Instituicoes']]));
+        $periodo = $this->getRequest()->getQuery('periodo');
 
-        $this->set(compact('inscricoes'));
+        if (empty($periodo)) {
+            $configuracao = $this->fetchTable('Configuracoes');
+            $periodo_atual = $configuracao->find()->select(['mural_periodo_atual'])->first();
+            $periodo = $periodo_atual->mural_periodo_atual;
+        }
+        
+        $estagiariotabela = $this->fetchTable('Estagiarios');
+        $periodototal = $estagiariotabela->find('list', [
+            'keyField' => 'periodo',
+            'valueField' => 'periodo',
+            'order' => 'periodo'
+        ]);
+        $periodos = $periodototal->toArray();
+
+        $query = $this->Inscricoes->find()
+                ->contain(['Alunos', 'Muralestagios' => ['Instituicoes']])
+                ->where(['Inscricoes.periodo' => $periodo]);
+
+        $inscricoes = $this->paginate($query);
+
+        $this->set(compact('inscricoes', 'periodos', 'periodo'));
     }
 
     /**
@@ -51,8 +67,48 @@ class InscricoesController extends AppController
     public function add()
     {
         $inscricao = $this->Inscricoes->newEmptyEntity();
+        
+        $mural_estagio_id = $this->getRequest()->getQuery('mural_estagio_id');
+        $periodo = $this->getRequest()->getQuery('periodo');
+
+        if (empty($periodo)) {
+            $configuracaotabela = $this->fetchTable('Configuracoes');
+            $periodoconfiguracao = $configuracaotabela->find()
+                    ->first();
+            $periodo = $periodoconfiguracao->mural_periodo_atual;
+        }
+        
+        $user_id = $this->Authentication->getIdentifier();
+        $aluno = $this->fetchTable('Alunos')->find()->where(['user_id' => $user_id ])->first();
+        if (!$aluno) {
+            $this->Flash->error(__('Selecione aluno'));
+            return $this->redirect(['controller' => 'Inscricoes', 'action' => 'add', '?' => ['mural_estagio_id' => $mural_estagio_id]]);
+        }
+        
+        /** Verifico o periodo do mural e comparo com o periodo da inscricao */
+        $muralestagiotabela = $this->fetchTable('Muralestagios');
+        $muralestagio = $muralestagiotabela->find()->where(['id' => $this->getRequest()->getData('mural_estagio_id')])->first();
+        if ($muralestagio->periodo <> $this->getRequest()->getData('periodo')) {
+            $this->Flash->error(__('O periodo de inscricao nao coincide com o periodo do Mural.'));
+            return $this->redirect(['controller' => 'Muralestagios', 'action' => 'view', $this->getRequest()->getData('mural_estagio_id')]);
+        }
+
+        /** Verifico se já fez inscrição para não duplicar */
+        $inscricao_dupli = $this->Inscricoes->find()->where(['Inscricoes.aluno_id' => $aluno->id, 'Inscricoes.mural_estagio_id' => $muralestagio->id])->first();
+        if ($inscricao_dupli) {
+            $this->Flash->error(__("Inscrição já realizada"));
+            return $this->redirect(['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]);
+        }
+
+        $dados = $this->request->getData();
+        $dados['registro'] = $aluno->registro;
+        $dados['aluno_id'] = $aluno->id;
+        $dados['mural_estagio_id'] = $this->getRequest()->getData('muralestagio_id');
+        $dados['data'] = date('Y-m-d');
+        $dados['periodo'] = $this->getRequest()->getData('periodo');
+        
         if ($this->request->is('post')) {
-            $inscricao = $this->Inscricoes->patchEntity($inscricao, $this->request->getData());
+            $inscricao = $this->Inscricoes->patchEntity($inscricao, $dados);
             if ($this->Inscricoes->save($inscricao)) {
                 $this->Flash->success(__('The inscricao has been saved.'));
 
@@ -60,9 +116,7 @@ class InscricoesController extends AppController
             }
             $this->Flash->error(__('The inscricao could not be saved. Please, try again.'));
         }
-        $alunos = $this->Inscricoes->Alunos->find('list', ['limit' => 200]);
-        $muralestagios = $this->Inscricoes->Muralestagios->find('list', ['limit' => 200]);
-        $this->set(compact('inscricao', 'alunos', 'muralestagios'));
+        $this->set(compact('inscricao', 'aluno', 'periodo', 'mural_estagio_id'));
     }
 
     /**
@@ -86,9 +140,7 @@ class InscricoesController extends AppController
             }
             $this->Flash->error(__('The inscricao could not be saved. Please, try again.'));
         }
-        $alunos = $this->Inscricoes->Alunos->find('list', ['limit' => 200]);
-        $muralestagios = $this->Inscricoes->Muralestagios->find('list', ['limit' => 200]);
-        $this->set(compact('inscricao', 'alunos', 'muralestagios'));
+        $this->set(compact('inscricao'));
     }
 
     /**
@@ -110,15 +162,5 @@ class InscricoesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-    
-    //public function mural($id = null)
-    //{
-        //$inscricao = $this->Inscricoes->find('all');
-        // pr($inscricao);
-        //foreach ($inscricao as $c_inscriacao) {
-            // pr($c_inscriacao);
-        //}
-        //die();
-    //}
     
 }

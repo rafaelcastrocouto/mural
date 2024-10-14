@@ -67,7 +67,7 @@ class SupervisoresController extends AppController
             }
             $this->Flash->error(__('The supervisor could not be saved. Please, try again.'));
         }
-        $instituicoes = $this->Supervisores->Instituicoes->find('list', ['limit' => 200]);
+        $instituicoes = $this->Supervisores->Instituicoes->find('list');
         $this->set(compact('supervisor', 'instituicoes'));
     }
 
@@ -92,7 +92,7 @@ class SupervisoresController extends AppController
             }
             $this->Flash->error(__('The supervisor could not be saved. Please, try again.'));
         }
-        $instituicoes = $this->Supervisores->Instituicoes->find('list', ['limit' => 200]);
+        $instituicoes = $this->Supervisores->Instituicoes->find('list');
         $this->set(compact('supervisor', 'instituicoes'));
     }
 

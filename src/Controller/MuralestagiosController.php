@@ -26,15 +26,13 @@ class MuralestagiosController extends AppController {
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function index($periodo = NULL)
+    public function index($id = null)
     {
 
-        $contained = ['Instituicoes', 'Professores'];
+        $periodo = $this->getRequest()->getQuery('periodo');
+        $this->set('periodo', $periodo);
         
-        if (!$periodo) {
-            $configuracao = $this->fetchTable("Configuracoes")->find()->first();
-            $periodo = $configuracao['mural_periodo_atual'];
-        }
+        $contained = ['Instituicoes', 'Professores'];
         
         if ($periodo) {
             $muralestagios = $this->Muralestagios->find('all', ['conditions' => ['Muralestagios.periodo' => $periodo] ])
@@ -45,18 +43,13 @@ class MuralestagiosController extends AppController {
         }
         $this->set('muralestagios', $this->paginate($muralestagios));
 
-        $query = $this->Muralestagios->find('all', [
-            'fields' => ['periodo'],
-            'group' => ['periodo'],
-            'order' => ['periodo']
+        /** Obtenho todos os periódos em forma de lista */
+        $periodototal = $this->Muralestagios->find('list', [
+            'keyField' => 'periodo',
+            'valueField' => 'periodo'
         ]);
-        $periodos = $query->all()->toArray();
-        foreach ($query as $periodo) {
-            $periodostotal[$periodo->periodo] = $periodo->periodo;
-        }
-        $this->set('periodos', $periodostotal);
-        $this->set('periodo', $periodo);
-
+        $periodos = $periodototal->toArray();
+        $this->set('periodos', $periodos);
     }
 
     /**
@@ -83,18 +76,27 @@ class MuralestagiosController extends AppController {
     {
         $muralestagio = $this->Muralestagios->newEmptyEntity();
         if ($this->request->is('post')) {
-            $muralestagio = $this->Muralestagios->patchEntity($muralestagio, $this->request->getData());
+
+            $instituicao = $this->Muralestagios->Instituicoes->find()
+                    ->where(['id' => $this->request->getData('instituicao_id')])
+                    ->select(['instituicao'])
+                    ->first();
+            
+            $dados = $this->request->getData();
+            $dados['instituicao_id'] = $instituicao->id;
+            
+            $muralestagio = $this->Muralestagios->patchEntity($muralestagio, $dados);
             if ($this->Muralestagios->save($muralestagio)) {
                 $this->Flash->success(__('The muralestagio has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The muralestagio could not be saved. Please, try again.'));
+            $this->Flash->error(__('Registro de mural de estágio não foi feito. Tente novamente.'));
         }
-        $instituicoes = $this->Muralestagios->Instituicoes->find('list', ['limit' => 200]);
-        $turmaestagios = $this->Muralestagios->Turmaestagios->find('list', ['limit' => 200]);
-        $professores = $this->Muralestagios->Professores->find('list', ['limit' => 200]);
-        $this->set(compact('muralestagio', 'instituicoes', 'turmaestagios', 'professores'));
+        $instituicoes = $this->Muralestagios->Instituicoes->find('list');
+        $turmaestagios = $this->Muralestagios->Turmaestagios->find('list');
+        $professores = $this->Muralestagios->Professores->find('list');
+        $this->set(compact('muralestagio', 'instituicoes', 'turmaestagios', 'professores', 'periodo'));
     }
 
     /**
@@ -119,7 +121,7 @@ class MuralestagiosController extends AppController {
             $this->Flash->error(__('The muralestagio could not be saved. Please, try again.'));
         }
         $instituicoes = $this->Muralestagios->Instituicoes->find('list');
-        $turmaestagios = $this->Muralestagios->Turmaestagios->find('list', ['limit' => 200]);
+        $turmaestagios = $this->Muralestagios->Turmaestagios->find('list');
         $professores = $this->Muralestagios->Professores->find('list', ['limit' => 500]);
         $this->set(compact('muralestagio', 'instituicoes', 'turmaestagios', 'professores'));
     }

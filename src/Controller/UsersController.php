@@ -20,7 +20,9 @@ class UsersController extends AppController {
     
         $this->Authentication->allowUnauthenticated(['login', 'add',]);
     }
-    
+    /**
+     * paginate array
+     */
     protected array $paginate = [
         'sortableFields' => [
             'id', 'email', 'categoria_id', 'Alunos.nome', 'Professores.nome', 'Supervisores.nome', 'timestamp'

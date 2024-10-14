@@ -64,7 +64,7 @@ class InstituicoesController extends AppController
             $this->Flash->error(__('The instituicao could not be saved. Please, try again.'));
         }
         $areas = $this->Instituicoes->Areas->find('list');
-        $supervisores = $this->Instituicoes->Supervisores->find('list', ['limit' => 200]);
+        $supervisores = $this->Instituicoes->Supervisores->find('list');
         $this->set(compact('instituicao', 'areas', 'supervisores'));
     }
 
@@ -90,7 +90,7 @@ class InstituicoesController extends AppController
             $this->Flash->error(__('The instituicao could not be saved. Please, try again.'));
         }
         $areas = $this->Instituicoes->Areas->find('list');
-        $supervisores = $this->Instituicoes->Supervisores->find('list', ['limit' => 200]);
+        $supervisores = $this->Instituicoes->Supervisores->find('list');
         $this->set(compact('instituicao', 'areas', 'supervisores'));
     }
 

@@ -59,7 +59,7 @@ class VisitasController extends AppController
             }
             $this->Flash->error(__('The visita could not be saved. Please, try again.'));
         }
-        $instituicoes = $this->Visitas->Instituicoes->find('list', ['limit' => 200]);
+        $instituicoes = $this->Visitas->Instituicoes->find('list');
         $this->set(compact('visita', 'instituicoes'));
     }
 
@@ -84,7 +84,7 @@ class VisitasController extends AppController
             }
             $this->Flash->error(__('The visita could not be saved. Please, try again.'));
         }
-        $instituicoes = $this->Visitas->Instituicoes->find('list', ['limit' => 200]);
+        $instituicoes = $this->Visitas->Instituicoes->find('list');
         $this->set(compact('visita', 'instituicoes'));
     }
 
