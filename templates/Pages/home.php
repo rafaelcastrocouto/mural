@@ -87,8 +87,14 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
                     <h1 class="text-center">Boas vindas ao <a href="muralestagios">Mural de Estágios</a></h1>
                     <h2 class="text-center">
                         <div class="nav">
+                            
+                        <?php if (!$session) : ?>
                             <?= $this->Html->link(__('Login'), ['controller' => 'users', 'action' => 'login'], ['class' => 'button']) ?>
                             <?= $this->Html->link(__('Novo usuário'), ['controller' => 'users', 'action' => 'add'], ['class' => 'button']) ?>
+                        <?php else : ?>
+                            <?= $this->Html->link(__('Minha Conta'), ['controller' => 'users', 'action' => 'view', $session->id], ['class' => 'button']) ?>
+                            <?= $this->Html->link(__('Logout'), ['controller' => 'users', 'action' => 'logout'], ['class' => 'button']) ?>
+                        <?php endif; ?>    
                         </div>
                     </h2>
                 </div>   

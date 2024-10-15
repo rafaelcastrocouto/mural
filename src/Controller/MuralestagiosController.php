@@ -28,17 +28,24 @@ class MuralestagiosController extends AppController {
      */
     public function index($id = null)
     {
-
-        $periodo = $this->getRequest()->getQuery('periodo');
+        //$periodo = $this->getRequest()->getQuery('periodo');
+        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : '';
         $this->set('periodo', $periodo);
+        
         
         $contained = ['Instituicoes', 'Professores'];
         
-        if ($periodo) {
+        $configuracao = $this->fetchTable("Configuracoes")->find()->first();
+        $session = $this->request->getAttribute('identity');
+        
+        if ($periodo == 'all') {
+            $muralestagios = $this->Muralestagios->find('all')
+            ->contain($contained);
+        } else if ($periodo) {
             $muralestagios = $this->Muralestagios->find('all', ['conditions' => ['Muralestagios.periodo' => $periodo] ])
             ->contain($contained);
         } else {
-            $muralestagios = $this->Muralestagios->find('all')
+            $muralestagios = $this->Muralestagios->find('all', ['conditions' => ['Muralestagios.periodo' => $configuracao['mural_periodo_atual']] ])
             ->contain($contained);
         }
         $this->set('muralestagios', $this->paginate($muralestagios));
@@ -49,6 +56,9 @@ class MuralestagiosController extends AppController {
             'valueField' => 'periodo'
         ]);
         $periodos = $periodototal->toArray();
+        $periodos = array_merge($periodos, array('all' => 'Todos'));
+        $periodos = array_reverse($periodos);
+        
         $this->set('periodos', $periodos);
     }
 

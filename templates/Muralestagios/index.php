@@ -29,7 +29,7 @@ $categoria_id = $session->get('categoria_id');
 	            <?= $this->Form->create($muralestagios, ['class' => 'form-inline']); ?>
 					<?= $this->Form->label('muralestagioperiodo', 'Período'); ?>
 					<?= $this->Form->input('periodo', [
-							'default'=> $periodo->periodo,
+							'default'=> $periodo ? $periodo : $configuracao['mural_periodo_atual'],
 							'id' => 'muralestagioperiodo', 
 							'type' => 'select', 
 							'options' => $periodos,
@@ -38,7 +38,7 @@ $categoria_id = $session->get('categoria_id');
 					?>
 	            <?= $this->Form->end(); ?>
 	        <?php else: ?>
-	            <h1 style="text-align: center;">Período: <?= '2005-1'; ?></h1>
+	            <h2 class="label">Período <?= $configuracao['mural_periodo_atual']; ?></h2>
 	        <?php endif; ?>
 	    </div>
 	</div>
