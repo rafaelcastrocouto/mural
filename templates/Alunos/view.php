@@ -3,8 +3,6 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Aluno $aluno
  */
-//pr($aluno->users);
-//die();
 ?>
 <div>
     <div class="column-responsive column-80">
@@ -21,7 +19,7 @@
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($aluno->id) ?></td>
+                    <td><?= h($aluno->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Nome') ?></th>
@@ -29,7 +27,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Registro') ?></th>
-                    <td><?= $this->Number->format($aluno->registro) ?></td>
+                    <td><?= h($aluno->registro) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Cpf') ?></th>
@@ -78,7 +76,6 @@
                             <th class="actions"><?= __('Actions') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Email') ?></th>
-                            <th><?= __('Registro') ?></th>
                             <th><?= __('Data') ?></th>
                         </tr>
                         <tr>
@@ -89,7 +86,6 @@
                             </td>
                             <td><?= $this->Html->link($aluno->user->id, ['controller' => 'Users', 'action' => 'view', $aluno->user->id]) ?></td>
                             <td><?= $aluno->user->email ? $this->Text->autoLinkEmails($aluno->user->email) : '' ?></td>
-                            <td><?= h($aluno->user->registro) ?></td>
                             <td><?= h($aluno->user->timestamp) ?></td>
                         </tr>
                     </table>

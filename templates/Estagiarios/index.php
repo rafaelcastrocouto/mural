@@ -4,8 +4,7 @@
  * @var \App\Model\Entity\Estagiario[]|\Cake\Collection\CollectionInterface $estagiarios
  */
 
-$user = $this->request->getAttribute('identity');
-$categoria_id = $user->get('categoria_id');
+$categoria_id = $session ? (int) $session->get('categoria_id') : 2;
 
 ?>
 
@@ -30,7 +29,7 @@ $categoria_id = $user->get('categoria_id');
 	            <?= $this->Form->create($estagiarios, ['class' => 'form-inline']); ?>
 					<?= $this->Form->label('estagiarioperiodo', 'Período'); ?>
 					<?= $this->Form->input('periodo', [
-							'default'=> $periodo->periodo,
+							'default'=> $periodo ? $periodo : $configuracao['mural_periodo_atual'],
 							'id' => 'estagiarioperiodo', 
 							'type' => 'select', 
 							'options' => $periodos, 
@@ -39,7 +38,7 @@ $categoria_id = $user->get('categoria_id');
 					?>
 	            <?= $this->Form->end(); ?>
 	        <?php else: ?>
-	            <h1 style="text-align: center;">Período: <?= '2005-1'; ?></h1>
+	            <h3 class="label">Período: <?= $configuracao['mural_periodo_atual']; ?></h3>
 	        <?php endif; ?>
 	    </div>
 	</div>

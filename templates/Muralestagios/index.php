@@ -4,7 +4,7 @@
  * @var \App\Model\Entity\Muralestagio[]|\Cake\Collection\CollectionInterface $muralestagios
  */
 
-$categoria_id = $session->get('categoria_id');
+$categoria_id = $session ? (int) $session->get('categoria_id') : 2;
 
 ?>
 
@@ -38,7 +38,7 @@ $categoria_id = $session->get('categoria_id');
 					?>
 	            <?= $this->Form->end(); ?>
 	        <?php else: ?>
-	            <h2 class="label">Período <?= $configuracao['mural_periodo_atual']; ?></h2>
+	            <h2 class="label">Período: <?= $configuracao['mural_periodo_atual']; ?></h2>
 	        <?php endif; ?>
 	    </div>
 	</div>

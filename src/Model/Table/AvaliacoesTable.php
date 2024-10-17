@@ -40,13 +40,12 @@ class AvaliacoesTable extends Table {
         parent::initialize($config);
 
         $this->setTable('avaliacoes');
-        $this->setAlias('Avaliacaoes');
+        $this->setAlias('Avaliacoes');
         $this->setDisplayField('estagiario_id');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Estagiarios', [
-            'foreignKey' => 'estagiario_id',
-            'joinType' => 'INNER',
+            'foreignKey' => 'estagiario_id'
         ]);
     }
 

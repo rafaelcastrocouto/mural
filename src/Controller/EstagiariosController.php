@@ -27,33 +27,30 @@ class EstagiariosController extends AppController
      */
     public function index()
     {
+        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
+        $this->set('periodo', $periodo);
+        
         $contained = ['Alunos', 'Professores', 'Supervisores', 'Instituicoes', 'Turmaestagios'];
         
-        $periodo = $this->getRequest()->getQuery('periodo');
-
-        if (empty($periodo)) {
-            $configuracao = $this->fetchTable('Configuracoes');
-            $periodo_atual = $configuracao->find()->select(['mural_periodo_atual'])->first();
-            $periodo = $periodo_atual->mural_periodo_atual;
-        }
-        
-        if ($periodo) {
-            $query = $this->Estagiarios->find('all')
-                ->where(['Estagiarios.periodo' => $periodo])
+        if ($periodo == 'all') {
+            $estagiarios = $this->Estagiarios->find('all')
                 ->contain($contained);
         } else {
-            $query = $this->Estagiarios->find('all')
+            $estagiarios = $this->Estagiarios->find('all', ['conditions' => ['Estagiarios.periodo' => $periodo] ])
                 ->contain($contained);
         }
-        $estagiarios = $this->paginate($query);
+        
+        $this->set('estagiarios', $this->paginate($estagiarios));
 
         $periodototal = $this->Estagiarios->find('list', [
             'keyField' => 'periodo',
-            'valueField' => 'periodo',
-            'order' => 'periodo'
+            'valueField' => 'periodo'
         ]);
         $periodos = $periodototal->toArray();
-        $this->set(compact('estagiarios', 'periodo', 'periodos'));
+        $periodos = array_merge($periodos, array('all' => 'Todos'));
+        $periodos = array_reverse($periodos);
+        
+        $this->set('periodos', $periodos);
     }
 
     /**

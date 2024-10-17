@@ -28,29 +28,21 @@ class MuralestagiosController extends AppController {
      */
     public function index($id = null)
     {
-        //$periodo = $this->getRequest()->getQuery('periodo');
-        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : '';
+        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
         $this->set('periodo', $periodo);
         
-        
         $contained = ['Instituicoes', 'Professores'];
-        
-        $configuracao = $this->fetchTable("Configuracoes")->find()->first();
-        $session = $this->request->getAttribute('identity');
         
         if ($periodo == 'all') {
             $muralestagios = $this->Muralestagios->find('all')
             ->contain($contained);
-        } else if ($periodo) {
+        } else {
             $muralestagios = $this->Muralestagios->find('all', ['conditions' => ['Muralestagios.periodo' => $periodo] ])
             ->contain($contained);
-        } else {
-            $muralestagios = $this->Muralestagios->find('all', ['conditions' => ['Muralestagios.periodo' => $configuracao['mural_periodo_atual']] ])
-            ->contain($contained);
         }
+        
         $this->set('muralestagios', $this->paginate($muralestagios));
 
-        /** Obtenho todos os periódos em forma de lista */
         $periodototal = $this->Muralestagios->find('list', [
             'keyField' => 'periodo',
             'valueField' => 'periodo'

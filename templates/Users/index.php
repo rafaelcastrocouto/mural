@@ -23,7 +23,7 @@
                     <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
-                    <th><?= $this->Paginator->sort('categoria', 'Categorias') ?></th>
+                    <th><?= $this->Paginator->sort('categoria_id', 'Categoria') ?></th>
                     <th><?= $this->Paginator->sort('Alunos.nome', 'Nome') ?></th>
                     <th><?= $this->Paginator->sort('timestamp') ?></th>
                 </tr>

@@ -33,18 +33,18 @@ class AlunosController extends AppController
      */
     public function view($id = null)
     {
-        $condition = ['id' => $id];
+        $condition = ['Alunos.id' => $id];
         
         $registro = $this->getRequest()->getQuery('registro');
-        if ($registro) { $condition = ['registro' => $registro]; }
+        if ($registro) { $condition = ['Alunos.registro' => $registro]; }
             
-        $contained => [
+        $contained = [
             'Estagiarios' => ['Instituicoes', 'Supervisores', 'Professores'], 
             'Inscricoes' => ['Muralestagios' => ['Instituicoes']], 
             'Users'
         ];
 
-        $aluno = $this->Alunos->find()->contain($contained)->where($condition)->first();
+        $aluno = $this->Alunos->find('all',  ['conditions' => $condition ])->contain($contained)->first();
         
         if (!isset($aluno)) {
             $this->Flash->error(__('Nao ha registros para esse numero!'));

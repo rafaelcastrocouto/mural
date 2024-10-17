@@ -64,7 +64,7 @@ if ($professora) {
 <div class="container">
     <div class="row">
         <div class="column-responsive column-80">
-            <div class="avaliacaoes view content">
+            <div class="avaliacoes view content">
                 <table>
                     <tr>
                         <th><?= __('1) ASSIDUIDADE: Desenvolveu as atividades propostas com frequência, ausentando-se apenas com conhecimento e acordado com o(a) supervisor(a) de campo e ou acadêmico(a), seja por motivo de saúde, seja por situações estabelecidas na Lei 11788/2008, entre outras:') ?></th>
