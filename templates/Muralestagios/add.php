@@ -27,14 +27,14 @@
                     echo $this->Form->control('turmaestagio', ['options' => $turmaestagios, 'class' => 'form-control']);
                     echo $this->Form->control('turno');
                     echo $this->Form->control('professor_id', ['options' => $professores]);
-                    echo $this->Form->control('dataSelecao', ['empty' => true]);
-                    echo $this->Form->control('dataInscricao', ['empty' => true]);
-                    echo $this->Form->control('horarioSelecao');
-                    echo $this->Form->control('localSelecao');
-                    echo $this->Form->control('formaSelecao');
+                    echo $this->Form->control('local_inscricao');
+                    echo $this->Form->control('data_inscricao', ['empty' => true]);
+                    echo $this->Form->control('local_selecao');
+                    echo $this->Form->control('data_selecao', ['empty' => true]);
+                    echo $this->Form->control('horario_selecao');
+                    echo $this->Form->control('forma_selecao');
                     echo $this->Form->control('contato');
                     echo $this->Form->control('periodo');
-                    echo $this->Form->control('localInscricao');
                     echo $this->Form->control('outras');
                 ?>
             </fieldset>

@@ -369,9 +369,8 @@ class EstagiariosController extends AppController
         } elseif ($periodoatual > $ultimoestagio->periodo) {
             $nivel = $ultimoestagio->nivel + 1;
             /** Calculo o ultimo nível de estágio possível a partir do ajuste curricular. */
-            $ultimoestagio->ajuste2020 == 0 ? $ultimonivelestagio = 4 : $ultimonivelestagio = 3;
             /** Se nivel é maior que o ultimo nivel curricular então está realizando estagio extracurricular e o nivel é 9. */
-            if ($nivel > $ultimonivelestagio) {
+            if ($nivel > 4) {
                 // Estágio não curricular
                 $nivel = 9;
             }

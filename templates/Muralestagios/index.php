@@ -65,9 +65,9 @@ $categoria_id = $session ? (int) $session->get('categoria_id') : 2;
                     <th><?= $this->Paginator->sort('professor') ?></th>
                     <th><?= $this->Paginator->sort('beneficios') ?></th>
                     <th><?= $this->Paginator->sort('fim_de_semana', 'Fim de semana') ?></th>
-                    <th><?= $this->Paginator->sort('cargaHoraria', 'Carga Horária') ?></th>
-                    <th><?= $this->Paginator->sort('dataSelecao', 'Seleção') ?></th>
-                    <th><?= $this->Paginator->sort('dataInscricao', 'Inscrição') ?></th>
+                    <th><?= $this->Paginator->sort('carga_horaria', 'Carga Horária') ?></th>
+                    <th><?= $this->Paginator->sort('data_selecao', 'Seleção') ?></th>
+                    <th><?= $this->Paginator->sort('data_inscricao', 'Inscrição') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -94,9 +94,9 @@ $categoria_id = $session ? (int) $session->get('categoria_id') : 2;
 							echo $fim_de_semana;
 							?>
 						</td>
-                        <td><?= h($muralestagio->cargaHoraria) ?></td>
-                        <td><?= h($muralestagio->dataSelecao) ?></td>
-                        <td><?= h($muralestagio->dataInscricao) ?></td>
+                        <td><?= h($muralestagio->carga_horaria) ?></td>
+                        <td><?= h($muralestagio->data_selecao) ?></td>
+                        <td><?= h($muralestagio->data_inscricao) ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

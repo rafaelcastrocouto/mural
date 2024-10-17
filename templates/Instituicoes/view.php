@@ -74,8 +74,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <th><?= __('LocalInscricao') ?></th>
-                    <td><?= h($instituicao->localInscricao) ? "Inscrição somente no mural da Coordenação de Estágio da ESS" : "Inscrição na Instituição e no mural da Coordenação de Estágio da ESS" ?></td>
+                    <th><?= __('Local Inscricao') ?></th>
+                    <td><?= h($instituicao->local_inscricao) ? "Inscrição somente no mural da Coordenação de Estágio da ESS" : "Inscrição na Instituição e no mural da Coordenação de Estágio da ESS" ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Seguro') ?></th>

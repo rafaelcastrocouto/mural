@@ -31,14 +31,18 @@ $categoria_id = $session->get('categoria_id');
                     <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $muralestagio->instituicao->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Vagas') ?></th>
-                    <td><?= $this->Number->format($muralestagio->vagas) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Convenio') ?></th>
                     <td>
 						<?= $muralestagio->convenio ? 'Sim' : 'Não'; ?>
 					</td>
+                </tr>
+                <tr>
+                    <th><?= __('Email') ?></th>
+                    <td><?= $muralestagio->email ? $this->Text->autoLinkEmails($muralestagio->email) : '' ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Vagas') ?></th>
+                    <td><?= $this->Number->format($muralestagio->vagas) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Beneficios') ?></th>
@@ -57,6 +61,10 @@ $categoria_id = $session->get('categoria_id');
 						echo $fim_de_semana;
 						?>
 					</td>
+                </tr>
+                <tr>
+                    <th><?= __('Carga Horaria') ?></th>
+                    <td><?= $this->Number->format($muralestagio->carga_horaria) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Requisitos') ?></th>
@@ -86,19 +94,31 @@ $categoria_id = $session->get('categoria_id');
                     <td><?= $muralestagio->professor ? $this->Html->link($muralestagio->professor->nome, ['controller' => 'Professores', 'action' => 'view', $muralestagio->professor->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('HorarioSelecao') ?></th>
-                    <td><?= h($muralestagio->horarioSelecao) ?></td>
+                    <th><?= __('Local Inscricao') ?></th>
+                    <td><?= h($muralestagio->local_inscricao) ? "Inscrição somente no mural da Coordenação de Estágio da ESS" : "Inscrição na Instituição e no mural da Coordenação de Estágio da ESS" ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('LocalSelecao') ?></th>
-                    <td><?= h($muralestagio->localSelecao) ?></td>
+                    <th><?= __('Data Inscricao') ?></th>
+                    <td><?= h($muralestagio->data_inscricao) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('FormaSelecao') ?></th>
+                    <th><?= __('Local Selecao') ?></th>
+                    <td><?= h($muralestagio->local_selecao) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Data Selecao') ?></th>
+                    <td><?= h($muralestagio->data_selecao) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Horario Selecao') ?></th>
+                    <td><?= h($muralestagio->horario_selecao) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Forma Selecao') ?></th>
                     <td>
 						<?php
 						$formaselecao = '';
-						switch ( h($muralestagio->formaSelecao) ) {
+						switch ( h($muralestagio->forma_selecao) ) {
 							case 0: $formaselecao = 'Entrevista'; break;
 							case 1: $formaselecao = 'CR';         break;
 							case 2: $formaselecao = 'Prova';      break;
@@ -115,26 +135,6 @@ $categoria_id = $session->get('categoria_id');
                 <tr>
                     <th><?= __('Periodo') ?></th>
                     <td><?= h($muralestagio->periodo) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('LocalInscricao') ?></th>
-                    <td><?= h($muralestagio->localInscricao) ? "Inscrição somente no mural da Coordenação de Estágio da ESS" : "Inscrição na Instituição e no mural da Coordenação de Estágio da ESS" ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Email') ?></th>
-                    <td><?= $muralestagio->email ? $this->Text->autoLinkEmails($muralestagio->email) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('CargaHoraria') ?></th>
-                    <td><?= $this->Number->format($muralestagio->cargaHoraria) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('DataSelecao') ?></th>
-                    <td><?= h($muralestagio->dataSelecao) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('DataInscricao') ?></th>
-                    <td><?= h($muralestagio->dataInscricao) ?></td>
                 </tr>
             </table>
             <div class="text">

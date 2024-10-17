@@ -104,7 +104,7 @@ class MuralestagiosTable extends Table {
                 ->allowEmptyString('fim_de_semana');
 
         $validator
-                ->allowEmptyString('cargaHoraria');
+                ->allowEmptyString('carga_horaria');
 
         $validator
                 ->scalar('requisitos')
@@ -116,28 +116,31 @@ class MuralestagiosTable extends Table {
                 ->maxLength('turno', 1)
                 ->allowEmptyString('turno');
 
-        $validator
-                ->date('dataSelecao')
-                ->allowEmptyDate('dataSelecao');
 
         $validator
-                ->date('dataInscricao')
-                ->allowEmptyDate('dataInscricao');
+                ->scalar('local_inscricao')
+                ->notEmptyString('local_inscricao');
+        $validator
+                ->date('data_inscricao')
+                ->allowEmptyDate('data_inscricao');
 
         $validator
-                ->scalar('horarioSelecao')
-                ->maxLength('horarioSelecao', 5)
-                ->allowEmptyString('horarioSelecao');
+                ->date('data_selecao')
+                ->allowEmptyDate('data_selecao');
+        $validator
+                ->scalar('horario_selecao')
+                ->maxLength('horario_selecao', 5)
+                ->allowEmptyString('horario_selecao');
 
         $validator
-                ->scalar('localSelecao')
-                ->maxLength('localSelecao', 70)
-                ->allowEmptyString('localSelecao');
+                ->scalar('local_selecao')
+                ->maxLength('local_selecao', 70)
+                ->allowEmptyString('local_selecao');
 
         $validator
-                ->scalar('formaSelecao')
-                ->maxLength('formaSelecao', 1)
-                ->allowEmptyString('formaSelecao');
+                ->scalar('forma_selecao')
+                ->maxLength('forma_selecao', 1)
+                ->allowEmptyString('forma_selecao');
 
         $validator
                 ->scalar('contato')
@@ -152,10 +155,6 @@ class MuralestagiosTable extends Table {
                 ->scalar('periodo')
                 ->maxLength('periodo', 6)
                 ->allowEmptyString('periodo');
-
-        $validator
-                ->scalar('localInscricao')
-                ->notEmptyString('localInscricao');
 
         $validator
                 ->email('email')

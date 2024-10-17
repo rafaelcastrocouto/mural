@@ -30,7 +30,7 @@
                     echo $this->Form->control('telefone');
                     echo $this->Form->control('beneficio');
                     echo $this->Form->control('fim_de_semana');
-                    echo $this->Form->control('localInscricao');
+                    echo $this->Form->control('local_inscricao');
                     echo $this->Form->control('convenio');
                     echo $this->Form->control('expira', ['empty' => true]);
                     echo $this->Form->control('seguro');

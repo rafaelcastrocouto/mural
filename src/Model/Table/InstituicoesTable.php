@@ -143,7 +143,7 @@ class InstituicoesTable extends Table
             ->maxLength('fim_de_semana', 1);
 
         $validator
-            ->scalar('localInscricao');
+            ->scalar('local_inscricao');
 
         $validator
             ->integer('convenio');

@@ -51,7 +51,7 @@ if ($professora) {
                     <?= $this->Html->link(__('Imprimir avaliação'), ['action' => 'imprimeavaliacaopdf/' . $avaliacao->id], ['class' => 'button']) ?>
                 </div>
             </aside>
-            <div class="table-wrap">
+            <div class="table_wrap">
                 <h3>Avaliação da(o) estagiario(a) <?= $avaliacao->hasValue('estagiario') ? $this->Html->link($avaliacao->estagiario->aluno->nome, ['controller' => 'Estagiarios', 'action' => 'view', $avaliacao->estagiario->id]) : '' ?></h3>
                 <p>Campo de estágio <?= $avaliacao->estagiario->instituicao->instituicao ?>.</p> 
                 <p>Supervisor(a) <?= $supervisora ?>.</p>

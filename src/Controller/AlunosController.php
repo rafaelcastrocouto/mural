@@ -536,45 +536,44 @@ class AlunosController extends AppController
         // die();
 
         $alunos = $this->Alunos->find()->contain(['Estagiarios'])->limit(20)->toArray();
-
         $i = 0;
         foreach ($alunos as $aluno):
             //pr($aluno['estagiarios']);
             // pr(sizeof($aluno['estagiarios']));
             // die();
-            $cargahorariatotal[$i]['id'] = $aluno['Aluno']['id'];
-            $cargahorariatotal[$i]['registro'] = $aluno['Aluno']['registro'];
-            $cargahorariatotal[$i]['q_semestres'] = sizeof($aluno['estagiarios']);
-            $carga_estagio = null;
+            $carga_horaria_total[$i]['id'] = $aluno->id;
+            $carga_horaria_total[$i]['registro'] = $aluno->registro;
+            $carga_horaria_total[$i]['q_semestres'] = sizeof($aluno['estagiarios']);
+            $carga_estagio = 0;
             $y = 0;
             foreach ($aluno['estagiarios'] as $estagiario):
                 // pr($estagiario);
                 // die();
                 if ($estagiario['nivel'] == 1):
-                    $cargahorariatotal[$i][$y]['ch'] = $estagiario['ch'];
-                    $cargahorariatotal[$i][$y]['nivel'] = $estagiario['nivel'];
-                    $cargahorariatotal[$i][$y]['periodo'] = $estagiario['periodo'];
-                    $carga_estagio['ch'] = $carga_estagio['ch'] + $estagiario['ch'];
+                    $carga_horaria_total[$i][$y]['ch'] = $estagiario['ch'];
+                    $carga_horaria_total[$i][$y]['nivel'] = $estagiario['nivel'];
+                    $carga_horaria_total[$i][$y]['periodo'] = $estagiario['periodo'];
+                    $carga_estagio += $estagiario['ch'];
                 // $criterio[$i][$ordem] = $c_estagio['periodo'];
                 else:
-                    $cargahorariatotal[$i][$y]['ch'] = $estagiario['ch'];
-                    $cargahorariatotal[$i][$y]['nivel'] = $estagiario['nivel'];
-                    $cargahorariatotal[$i][$y]['periodo'] = $estagiario['periodo'];
-                    $carga_estagio['ch'] = $carga_estagio['ch'] + $estagiario['ch'];
+                    $carga_horaria_total[$i][$y]['ch'] = $estagiario['ch'];
+                    $carga_horaria_total[$i][$y]['nivel'] = $estagiario['nivel'];
+                    $carga_horaria_total[$i][$y]['periodo'] = $estagiario['periodo'];
+                    $carga_estagio += $estagiario['ch'];
                 // $criterio[$i][$ordem] = NULL;
                 endif;
                 $y++;
             endforeach;
-            $cargahorariatotal[$i]['ch_total'] = $carga_estagio['ch'];
-            $criterio[$i] = $cargahorariatotal[$i][$ordem];
+            $carga_horaria_total[$i]['ch_total'] = $carga_estagio;
+            $criterio[$i] = $carga_horaria_total[$i][$ordem];
             $i++;
             //            endif;
         endforeach;
 
-        array_multisort($criterio, SORT_ASC, $cargahorariatotal);
-        // pr($cargahorariatotal);
+        array_multisort($criterio, SORT_ASC, $carga_horaria_total);
+        // pr($carga_horaria_total);
         // die();
-        $this->set('cargahorariatotal', $cargahorariatotal);
+        $this->set('carga_horaria_total', $carga_horaria_total);
 
         // die();
     }
