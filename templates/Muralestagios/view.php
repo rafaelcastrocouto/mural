@@ -117,14 +117,14 @@ $categoria_id = $session->get('categoria_id');
                     <th><?= __('Forma Selecao') ?></th>
                     <td>
 						<?php
-						$formaselecao = '';
+						$forma_selecao = '';
 						switch ( h($muralestagio->forma_selecao) ) {
-							case 0: $formaselecao = 'Entrevista'; break;
-							case 1: $formaselecao = 'CR';         break;
-							case 2: $formaselecao = 'Prova';      break;
-							case 3: $formaselecao = 'Outra';      break;
+							case 0: $forma_selecao = 'Entrevista'; break;
+							case 1: $forma_selecao = 'CR';         break;
+							case 2: $forma_selecao = 'Prova';      break;
+							case 3: $forma_selecao = 'Outra';      break;
 						}
-						echo $formaselecao;
+						echo $forma_selecao;
 						?>
 					</td>
                 </tr>

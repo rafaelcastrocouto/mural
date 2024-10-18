@@ -4,38 +4,48 @@
 <?php // die();       ?>
 
 <script>
-
-    var base_url = "<?= $this->Html->Url->build(['controller' => 'Alunos', 'action' => 'planilhaseguro']); ?>";
-    /* alert(base_url); */
-
     $(document).ready(function () {
+        var base_url = "<?= $this->Html->Url->build(['controller' => 'Alunos', 'action' => 'planilhaseguro']); ?>";
+        var select = $("#periodo");
+		var pathname = location.pathname.split('/').filter(Boolean);
+		if (pathname[pathname.length - 2] == 'planilhaseguro') select.val(pathname[pathname.length - 1]);
 
-        $("#periodo").change(function () {
+        select.on('change', function () {
             var periodo = $(this).val();
-            /* alert(periodo); */
-            window.location = base_url + "?periodo=" + periodo;
+            window.location = base_url + "/" + periodo;
         })
     });
-
 </script>
 
-<?= $this->element('templates') ?>
-
 <div class="container">
-    <div class='table-responsive'>
-
-        <?= $this->Form->create(null, ['url' => 'index'], ['class' => 'form-inline']); ?>
-        <?= $this->Form->input('periodo', ['id' => 'periodo', 'type' => 'select', 'label' => ['style' => 'display:inline;'], 'options' => $periodos, 'selected' => $periodoselecionado, 'empty' => array($periodoselecionado => 'Período'), 'class' => 'form-control']); ?>
-        <?= $this->Form->end(); ?>
-
-        <table class='table table-striped table-hover table-responsive'>
-            <thead class='thead-light'>
-            <caption style='caption-side: top'>Planilha para seguro de vida dos alunos estagiários</caption>
+	
+	<div class="row justify-content-center">
+	    <div class="col-auto">
+            <?= $this->Form->create(null, ['url' => 'index'], ['class' => 'form-inline']); ?>
+            <?= $this->Form->input('periodo', [
+    				'default'=> $periodo ? $periodo : $configuracao['mural_periodo_atual'],
+                   'id' => 'periodo', 
+                   'type' => 'select', 
+                   'options' => $periodos,
+                   'class' => 'form-control'
+                ]); 
+            ?>
+            <?= $this->Form->end(); ?>
+        </div>
+	</div>
+	
+    <h3>Planilha para seguro de vida dos alunos estagiários</h3>
+    
+    <div class="paginator">
+        <?= $this->element('paginator'); ?>
+    </div>
+    <div class='table_wrap'>
+        <table>
+            <thead>
             <tr>
                 <th>Nome</th>
                 <th>CPF</th>
                 <th>Nascimento</th>
-                <th>Sexo</th>
                 <th>DRE</th>
                 <th>Curso</th>
                 <th>Nível</th>
@@ -45,49 +55,164 @@
                 <th>Instituição</th>
             </tr>
             </thead>
-            <?php foreach ($t_seguro as $cada_aluno): ?>
-                <?php // pr($cada_aluno);  ?>
-                <?php // die(); ?>
+            <?php foreach ($seguro as $estagiario): ?>
+                <?php 
+                
+                // pr($estagiario);
+                // die();
+                
+                if ($estagiario->nivel == 1) {
+            
+                    // Início
+                    $inicio = $estagiario->periodo;
+            
+                    // Final
+                    $semestre = explode('-', $estagiario->periodo);
+                    $ano = $semestre[0];
+                    $indicasemestre = $semestre[1];
+            
+                    if ($indicasemestre == 1) {
+                        $novoano = $ano + 1;
+                        $novoindicasemestre = $indicasemestre + 1;
+                        $final = $novoano . "-" . $novoindicasemestre;
+                    } elseif ($indicasemestre == 2) {
+                        $novoano = $ano + 2;
+                        $final = $novoano . "-" . 1;
+                    }
+                    
+                } elseif ($estagiario->nivel == 2) {
+            
+                    $semestre = explode('-', $estagiario->periodo);
+                    $ano = $semestre[0];
+                    $indicasemestre = $semestre[1];
+            
+                    // Início
+                    if ($indicasemestre == 1) {
+                        $novoano = $ano - 1;
+                        $inicio = $novoano . "-" . 2;
+                    } elseif ($indicasemestre == 2) {
+                        $inicio = $ano . "-" . "1";
+                    }
+            
+                    // Final
+                    if ($indicasemestre == 1) {
+                        $novoano = $ano + 1;
+                        $final = $novoano . "-" . 1;
+                    } elseif ($indicasemestre == 2) {
+                        $novoano = $ano + 1;
+                        $final = $novoano . "-" . "2";
+                    }
+                    
+                } elseif ($estagiario->nivel == 3) {
+            
+                    $semestre = explode('-', $estagiario->periodo);
+                    $ano = $semestre[0];
+                    $indicasemestre = $semestre[1];
+            
+                    // Início
+                    $novoano = $ano - 1;
+                    $inicio = $novoano . "-" . $indicasemestre;
+            
+                    // Final
+                    if ($indicasemestre == 1) {
+                        // $ano = $ano + 1;
+                        $final = $ano . "-" . 2;
+                    } elseif ($indicasemestre == 2) {
+                        $novoano = $ano + 1;
+                        $final = $novoano . "-" . 1;
+                    }
+                    
+                } elseif ($estagiario->nivel == 4) {
+            
+                    $semestre = explode('-', $estagiario->periodo);
+                    $ano = $semestre[0];
+                    $indicasemestre = $semestre[1];
+            
+                    // Início
+                    if ($indicasemestre == 1) {
+                        $ano = $ano - 2;
+                        $inicio = $ano . "-" . 2;
+                    } elseif ($indicasemestre == 2) {
+                        $ano = $ano - 1;
+                        $inicio = $ano . "-" . 1;
+                    }
+            
+                    // Final
+                    $final = $estagiario->periodo;
+            
+                    // Estagio não obrigatório. Conto como estágio 5
+                    
+                } elseif ($estagiario->nivel == 9) {
+            
+                    $semestre = explode('-', $estagiario->periodo);
+                    $ano = $semestre[0];
+                    $indicasemestre = $semestre[1];
+            
+                    // Início
+                    if ($indicasemestre == 1) {
+                        $ano = $ano - 2;
+                        $inicio = $ano . "-" . 1;
+                    } elseif ($indicasemestre == 2) {
+                        $ano = $ano - 2;
+                        $inicio = $ano . "-" . 2;
+                    }
+            
+                    // Final
+                    $final = $estagiario->periodo;
+                }
+                
+                $estagiario->curso = $instituicao;
+            
+                
+                if ($estagiario->nivel == 9):
+                    $c_seguro['nivel'] = "Não obrigatório";
+                endif;
+                
+                $estagiario['inicio'] = $inicio;
+                $estagiario['final'] = $final;
+                
+                ?>
                 <tr>
                     <td>
-                        <?php echo $this->Html->link($cada_aluno['nome'], '/alunos/view/' . $cada_aluno['id']); ?>
+                        <?php echo $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome , ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id ]) : ''; ?>
                     </td>
                     <td>
-                        <?php echo $cada_aluno['cpf']; ?>
+                        <?php echo $estagiario->aluno->cpf; ?>
                     </td>
                     <td>
-                        <?php if (empty($cada_aluno['nascimento'])): ?>
+                        <?php if (empty($estagiario->aluno->nascimento)): ?>
                             <?php echo "s/d"; ?>
                         <?php else: ?>
-                            <?php echo date('d-m-Y', strtotime($cada_aluno['nascimento'])); ?>
+                            <?php echo date('d-m-Y', strtotime($estagiario->aluno->nascimento)); ?>
                         <?php endif; ?>
                     </td>
                     <td>
-                        <?php echo $cada_aluno['sexo']; ?>
+                        <?php echo $estagiario->aluno->registro; ?>
                     </td>
                     <td>
-                        <?php echo $cada_aluno['registro']; ?>
+                        <?php echo $estagiario->curso; ?>
                     </td>
                     <td>
-                        <?php echo $cada_aluno['curso']; ?>
+                        <?php echo $estagiario->nivel; ?>
                     </td>
                     <td>
-                        <?php echo $cada_aluno['nivel']; ?>
+                        <?php echo $estagiario->periodo; ?>
                     </td>
                     <td>
-                        <?php echo $cada_aluno['periodo']; ?>
+                        <?php echo $estagiario['inicio']; ?>
                     </td>
                     <td>
-                        <?php echo $cada_aluno['inicio']; ?>
+                        <?php echo $estagiario['final']; ?>
                     </td>
                     <td>
-                        <?php echo $cada_aluno['final']; ?>
-                    </td>
-                    <td>
-                        <?php echo $cada_aluno['instituicao']; ?>
+                        <?php echo ($estagiario->instituicao) ? $this->Html->link($estagiario->instituicao->instituicao , ['controller' => 'Instituicoes', 'action' => 'view', $estagiario->instituicao->id ]) : ''; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </table>
+    </div>
+    <div class="paginator">
+        <?= $this->element('paginator'); ?>
+        <?= $this->element('paginator_count'); ?>
     </div>
 </div>

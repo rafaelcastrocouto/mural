@@ -187,15 +187,15 @@ class AlunosController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function planilhaseguro($id = NULL) {
-
-        $periodo = $this->getRequest()->getQuery('periodo');
-
+        
+        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
+        $this->set('periodo', $periodo);
+        
         $ordem = 'nome';
 
         $periodototal = $this->Alunos->Estagiarios->find('list', [
             'keyField' => 'periodo',
-            'valueField' => 'periodo',
-            'order' => 'periodo'
+            'valueField' => 'periodo'
         ]);
         $periodos = $periodototal->toArray();
 
@@ -203,153 +203,51 @@ class AlunosController extends AppController
             $periodo = end($periodos);
         }
 
-        $seguro = $this->Alunos->Estagiarios->find()
-                ->contain(['Alunos', 'Instituicoes'])
+        $contained = ['Alunos', 'Instituicoes'];
+
+        $selected = [
+            'Alunos.id',
+            'Alunos.nome',
+            'Alunos.cpf',
+            'Alunos.nascimento',
+            'Alunos.registro',
+            'Estagiarios.nivel',
+            'Estagiarios.periodo',
+            'Instituicoes.id',
+            'Instituicoes.instituicao'
+        ];
+
+        $ordered = ['Estagiarios.nivel'];
+
+        if ($periodo === 'all') {
+            ini_set('memory_limit', '2048M');
+            $seguro = $this->Alunos->Estagiarios->find()
+                ->contain($contained)
+                ->select($selected)
+                ->order($ordered);
+        } else {
+            $seguro = $this->Alunos->Estagiarios->find()
+                ->contain($contained)
                 ->where(['Estagiarios.periodo' => $periodo])
-                ->select([
-                    'Alunos.id',
-                    'Alunos.nome',
-                    'Alunos.cpf',
-                    'Alunos.nascimento',
-                    'Alunos.registro',
-                    'Estagiarios.nivel',
-                    'Estagiarios.periodo',
-                    'Instituicoes.instituicao'
-                ])
-                ->order(['Estagiarios.nivel'])
-                ->all();
-
-        $i = 0;
-        foreach ($seguro as $c_seguro) {
-            // pr($c_seguro);
-            // die();
-            if ($c_seguro->nivel == 1) {
-
-                // Início
-                $inicio = $c_seguro->periodo;
-
-                // Final
-                $semestre = explode('-', $c_seguro->periodo);
-                $ano = $semestre[0];
-                $indicasemestre = $semestre[1];
-
-                if ($indicasemestre == 1) {
-                    $novoano = $ano + 1;
-                    $novoindicasemestre = $indicasemestre + 1;
-                    $final = $novoano . "-" . $novoindicasemestre;
-                } elseif ($indicasemestre == 2) {
-                    $novoano = $ano + 2;
-                    $final = $novoano . "-" . 1;
-                }
-            } elseif ($c_seguro->nivel == 2) {
-
-                $semestre = explode('-', $c_seguro->periodo);
-                $ano = $semestre[0];
-                $indicasemestre = $semestre[1];
-
-                // Início
-                if ($indicasemestre == 1) {
-                    $novoano = $ano - 1;
-                    $inicio = $novoano . "-" . 2;
-                } elseif ($indicasemestre == 2) {
-                    $inicio = $ano . "-" . "1";
-                }
-
-                // Final
-                if ($indicasemestre == 1) {
-                    $novoano = $ano + 1;
-                    $final = $novoano . "-" . 1;
-                } elseif ($indicasemestre == 2) {
-                    $novoano = $ano + 1;
-                    $final = $novoano . "-" . "2";
-                }
-            } elseif ($c_seguro->nivel == 3) {
-
-                $semestre = explode('-', $c_seguro->periodo);
-                $ano = $semestre[0];
-                $indicasemestre = $semestre[1];
-
-                // Início
-                $novoano = $ano - 1;
-                $inicio = $novoano . "-" . $indicasemestre;
-
-                // Final
-                if ($indicasemestre == 1) {
-                    // $ano = $ano + 1;
-                    $final = $ano . "-" . 2;
-                } elseif ($indicasemestre == 2) {
-                    $novoano = $ano + 1;
-                    $final = $novoano . "-" . 1;
-                }
-            } elseif ($c_seguro->nivel == 4) {
-
-                $semestre = explode('-', $c_seguro->periodo);
-                $ano = $semestre[0];
-                $indicasemestre = $semestre[1];
-
-                // Início
-                if ($indicasemestre == 1) {
-                    $ano = $ano - 2;
-                    $inicio = $ano . "-" . 2;
-                } elseif ($indicasemestre == 2) {
-                    $ano = $ano - 1;
-                    $inicio = $ano . "-" . 1;
-                }
-
-                // Final
-                $final = $c_seguro->periodo;
-
-                // Estagio não obrigatório. Conto como estágio 5
-            } elseif ($c_seguro->nivel == 9) {
-
-                $semestre = explode('-', $c_seguro->periodo);
-                $ano = $semestre[0];
-                $indicasemestre = $semestre[1];
-
-                // Início
-                if ($indicasemestre == 1) {
-                    $ano = $ano - 2;
-                    $inicio = $ano . "-" . 1;
-                } elseif ($indicasemestre == 2) {
-                    $ano = $ano - 2;
-                    $inicio = $ano . "-" . 2;
-                }
-
-                // Final
-                $final = $c_seguro->periodo;
-
-                // echo "Nível: " . $c_seguro['Estagiario']['nivel'] . " Período: " . $c_seguro['Estagiario']['periodo'] . " Início: " . $inicio . " Final: " . $final . '<br>';
-            }
-
-            $t_seguro[$i]['id'] = $c_seguro->aluno->id;
-            $t_seguro[$i]['nome'] = $c_seguro->aluno->nome;
-            $t_seguro[$i]['cpf'] = $c_seguro->aluno->cpf;
-            $t_seguro[$i]['nascimento'] = $c_seguro->aluno->nascimento;
-            $t_seguro[$i]['sexo'] = "";
-            $t_seguro[$i]['registro'] = $c_seguro->aluno->registro;
-            $t_seguro[$i]['curso'] = "UFRJ/Serviço Social";
-            if ($c_seguro->nivel == 9):
-                // pr("Não");
-                $t_seguro[$i]['nivel'] = "Não obrigatório";
-            else:
-                // pr($c_seguro['Estagiario']['nivel']);
-                $t_seguro[$i]['nivel'] = $c_seguro->nivel;
-            endif;
-            $t_seguro[$i]['periodo'] = $c_seguro->periodo;
-            $t_seguro[$i]['inicio'] = $inicio;
-            $t_seguro[$i]['final'] = $final;
-            $t_seguro[$i]['instituicao'] = $c_seguro->instituicao->instituicao;
-            $criterio[$i] = $t_seguro[$i][$ordem];
-
-            $i++;
+                ->select($selected)
+                ->order($ordered);
         }
-        if (!empty($t_seguro)) {
-            array_multisort($criterio, SORT_ASC, $t_seguro);
-        }
+
+        //if (!empty($t_seguro)) {
+        //    array_multisort($criterio, SORT_ASC, $t_seguro);
+        //}
         // pr($t_seguro);
-        $this->set('t_seguro', $t_seguro);
+        //$this->set('t_seguro', $t_seguro);
+        
+        $this->set('seguro', $this->paginate($seguro));
+        
+        $periodos = array_merge($periodos, array('all' => 'Todos'));
+        $periodos = array_reverse($periodos);
         $this->set('periodos', $periodos);
-        $this->set('periodoselecionado', $periodo);
+
+
+        $instituicao = $this->fetchTable("Configuracoes")->find()->first()['instituicao'];
+        $this->set('instituicao', $instituicao);
         // die();
     }
     

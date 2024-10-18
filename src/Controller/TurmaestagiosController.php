@@ -32,7 +32,7 @@ class TurmaestagiosController extends AppController
      */
     public function view($id = null)
     {
-        //ini_set('memory_limit', '2048M');
+        ini_set('memory_limit', '2048M');
         $turmaestagio = $this->Turmaestagios->get($id, [
             'contain' => [
                /* 'Estagiarios' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores'],*/

@@ -10,13 +10,13 @@ $categoria_id = $session ? (int) $session->get('categoria_id') : 2;
 
 <script type="text/javascript">
 	$(document).ready(function () {
-        var url = "<?= $this->Html->Url->build(['controller' => 'muralestagios']); ?>";
+        var base_url = "<?= $this->Html->Url->build(['controller' => 'muralestagios']); ?>";
         var select = $("#muralestagioperiodo");
 		var pathname = location.pathname.split('/').filter(Boolean);
 		if (pathname[pathname.length - 2] == 'index') select.val(pathname[pathname.length - 1]);
 		select.on('change', function () {
             var periodo = $(this).val();
-            window.location = url + '/index/' + periodo;
+            window.location = base_url + '/index/' + periodo;
         });
     });
 </script>
