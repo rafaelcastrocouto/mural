@@ -6,6 +6,7 @@
 //pr($carga_horaria_total); 
 ?>
 <div class="alunos cargahoraria content">
+    <h3><?= __('Carga Horária') ?></h3>
     <div class='table_wrap'>
         <table>
             <thead>

@@ -31,27 +31,17 @@ if ($professora) {
 
 <div class="container">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerEstagiario"
-            aria-controls="navbarTogglerUsuario" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerEstagiario">
-            <ul class="navbar-nav ms-auto mt-lg-0">
-                <li class="nav-item">
-                    <?= $this->Html->link(__('Cadastra nova atividade'), ['action' => 'add', '?' => ['estagiario_id' => $estagiario->id]], ['class' => 'btn btn-primary float-end']) ?>
-                </li>
-                <li class="nav-item">
-                    <?= $this->Html->link(__('Imprime folha de atividades'), ['action' => 'folhadeatividadespdf', '?' => ['estagiario_id' => $estagiario->id]], ['class' => 'btn btn-primary float-end']) ?>
-                </li>
-            </ul>
+    <nav>
+        <div>
+            <?= $this->Html->link(__('Cadastra nova atividade'), ['action' => 'add', '?' => ['estagiario_id' => $estagiario->id]], ['class' => 'btn btn-primary float-end']) ?>
+            <?= $this->Html->link(__('Imprime folha de atividades'), ['action' => 'folhadeatividadespdf', '?' => ['estagiario_id' => $estagiario->id]], ['class' => 'btn btn-primary float-end']) ?>
         </div>
     </nav>
 
-    <h3 class="text-center"><?= __('Folha de atividades da(o) estagiária(o) ' . $estagiario->aluno->nome) ?></h3>
+    <h3><?= __('Folha de atividades da(o) estagiária(o) ' . $estagiario->aluno->nome) ?></h3>
 
-    <div class="table-responsive">
-        <table class="table table-striped table-hover table-responsive">
+    <div class="table_wrap">
+        <table>
             <tr>
                 <th>Período</th>
                 <th>Nível</th>
@@ -69,8 +59,8 @@ if ($professora) {
         </table>
     </div>
 
-    <div class="table-responsive">
-        <table class="table table-striped table-hover table-responsive">
+    <div class="table_wrap">
+        <table>
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>

@@ -17,7 +17,7 @@
     });
 </script>
 
-<div class="container">
+<div class="alunos planilhaseguro content">
 	
 	<div class="row justify-content-center">
 	    <div class="col-auto">
@@ -34,7 +34,7 @@
         </div>
 	</div>
 	
-    <h3>Planilha para seguro de vida dos alunos estagiários</h3>
+    <h3>Planilha para seguro de vida dos estagiários</h3>
     
     <div class="paginator">
         <?= $this->element('paginator'); ?>

@@ -11,7 +11,7 @@
         </div>
 	</aside>
     
-    <h3><?= __('Lista de áreas') ?></h3>
+    <h3><?= __('Lista de Áreas') ?></h3>
 	
     <div class="paginator">
         <?= $this->element('paginator'); ?>

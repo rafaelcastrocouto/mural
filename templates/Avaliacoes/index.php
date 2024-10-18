@@ -21,7 +21,7 @@ $categoria_id = $session? (int) $session->get('categoria_id') : 2;
     
     <?php if ( $categoria_id == 1 ): ?>
     
-        <h3><?= __('Lista de avaliações') ?></h3>
+        <h3><?= __('Lista de Avaliações') ?></h3>
     
         <div class="paginator">
             <?= $this->element('paginator'); ?>

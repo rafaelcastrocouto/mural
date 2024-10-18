@@ -11,7 +11,7 @@
 		</div>
 	</aside>
     
-    <h3><?= __('Lista de professores') ?></h3>
+    <h3><?= __('Lista de Professores') ?></h3>
     
     <div class="paginator">
         <?= $this->element('paginator'); ?>
