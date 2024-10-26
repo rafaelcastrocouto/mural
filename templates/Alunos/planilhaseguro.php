@@ -22,13 +22,14 @@
 	<div class="row justify-content-center">
 	    <div class="col-auto">
             <?= $this->Form->create(null, ['url' => 'index'], ['class' => 'form-inline']); ?>
-            <?= $this->Form->input('periodo', [
-    				'default'=> $periodo ? $periodo : $configuracao['mural_periodo_atual'],
-                   'id' => 'periodo', 
-                   'type' => 'select', 
-                   'options' => $periodos,
-                   'class' => 'form-control'
-                ]); 
+	    		<?= $this->Form->label('periodo', 'Período'); ?>
+	            <?= $this->Form->input('periodo', [
+	    				'default'=> $periodo ? $periodo : $configuracao['mural_periodo_atual'],
+	                    'id' => 'periodo', 
+	                    'type' => 'select', 
+	                    'options' => $periodos,
+	                    'class' => 'form-control'
+	                ]); 
             ?>
             <?= $this->Form->end(); ?>
         </div>
@@ -40,8 +41,8 @@
         <?= $this->element('paginator'); ?>
     </div>
     <div class='table_wrap'>
-        <table>
-            <thead>
+        <table class="table">
+            <thead class='thead-light'>
             <tr>
                 <th>Nome</th>
                 <th>CPF</th>

@@ -11,7 +11,7 @@ $categoria_id = $session ? (int) $session->get('categoria_id') : 2;
 <script type="text/javascript">
 	$(document).ready(function () {
         var base_url = "<?= $this->Html->Url->build(['controller' => 'muralestagios']); ?>";
-        var select = $("#muralestagioperiodo");
+        var select = $("#periodo");
 		var pathname = location.pathname.split('/').filter(Boolean);
 		if (pathname[pathname.length - 2] == 'index') select.val(pathname[pathname.length - 1]);
 		select.on('change', function () {
@@ -27,10 +27,10 @@ $categoria_id = $session ? (int) $session->get('categoria_id') : 2;
 	    <div class="col-auto">
 	        <?php if ($categoria_id == 1): ?>
 	            <?= $this->Form->create($muralestagios, ['class' => 'form-inline']); ?>
-					<?= $this->Form->label('muralestagioperiodo', 'Período'); ?>
+					<?= $this->Form->label('periodo', 'Período'); ?>
 					<?= $this->Form->input('periodo', [
 							'default'=> $periodo ? $periodo : $configuracao['mural_periodo_atual'],
-							'id' => 'muralestagioperiodo', 
+							'id' => 'periodo', 
 							'type' => 'select', 
 							'options' => $periodos,
 							'class' => 'form-control'

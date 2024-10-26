@@ -144,39 +144,51 @@ class AlunosController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function planilhacress($id = NULL) {
+    public function planilhacress($id = null) {
 
-        $periodo = !is_null($this->getRequest()->getQuery('periodo')) ? $this->getRequest()->getQuery('periodo') : NULL;
-        // pr($periodo);
-        // die();
-        $ordem = 'Alunos.nome';
-
+        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
+        $this->set('periodo', $periodo);
+        
         /* Todos os periódos */
         $periodototal = $this->Alunos->Estagiarios->find('list', [
             'keyField' => 'periodo',
-            'valueField' => 'periodo',
-            'order' => 'periodo'
+            'valueField' => 'periodo'
         ]);
         $periodos = $periodototal->toArray();
+        
         /* Se o periodo não veio anexo como parametro então o período é o último da lista dos períodos */
         if (empty($periodo)) {
             $periodo = end($periodos);
         }
         // pr($periodos);
 
-        $cress = $this->Alunos->Estagiarios->find()
-                ->contain(['Alunos', 'Instituicoes', 'Supervisores', 'Professores'])
-                ->select(['Estagiarios.periodo', 'Alunos.id', 'Alunos.nome', 'Instituicoes.id', 'Instituicoes.instituicao', 'Instituicoes.cep', 'Instituicoes.endereco', 'Instituicoes.bairro', 'Supervisores.nome', 'Supervisores.cress', 'Professores.nome'])
-                ->where(['Estagiarios.periodo' => $periodo])
-                ->order(['Alunos.nome'])
-                ->all();
+        $contained = ['Alunos', 'Instituicoes', 'Supervisores', 'Professores'];
+        
+        $selected = ['Estagiarios.periodo', 'Alunos.id', 'Alunos.nome', 'Instituicoes.id', 'Instituicoes.instituicao', 'Instituicoes.cep', 'Instituicoes.endereco', 'Instituicoes.bairro', 'Supervisores.nome', 'Supervisores.cress', 'Professores.nome'];
+
+        $ordered = ['Alunos.nome'];
+        
+        if ($periodo === 'all') {
+            //ini_set('memory_limit', '2048M');
+            $cress = $this->Alunos->Estagiarios->find()
+                    ->contain($contained)
+                    ->select($selected)
+                    ->order($ordered);
+        } else {
+            $cress = $this->Alunos->Estagiarios->find()
+                    ->contain($contained)
+                    ->select($selected)
+                    ->where(['Estagiarios.periodo' => $periodo])
+                    ->order($ordered);
+        }
 
         // pr($cress);
         // die();
-        $this->set('cress', $cress);
+        $this->set('cress', $this->paginate($cress));
+
+        $periodos = array_merge($periodos, array('all' => 'Todos'));
+        $periodos = array_reverse($periodos);
         $this->set('periodos', $periodos);
-        $this->set('periodoselecionado', $periodo);
-        // die();
     }
 
     /**
@@ -186,12 +198,10 @@ class AlunosController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function planilhaseguro($id = NULL) {
+    public function planilhaseguro($id = null) {
         
         $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
         $this->set('periodo', $periodo);
-        
-        $ordem = 'nome';
 
         $periodototal = $this->Alunos->Estagiarios->find('list', [
             'keyField' => 'periodo',
@@ -220,7 +230,7 @@ class AlunosController extends AppController
         $ordered = ['Estagiarios.nivel'];
 
         if ($periodo === 'all') {
-            ini_set('memory_limit', '2048M');
+            //ini_set('memory_limit', '2048M');
             $seguro = $this->Alunos->Estagiarios->find()
                 ->contain($contained)
                 ->select($selected)

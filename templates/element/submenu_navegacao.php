@@ -71,7 +71,6 @@ if ($session) {
                         <?php echo $this->Html->link('Planilha CRESS', '/Alunos/planilhacress/', ['class' => 'dropdown-item']); ?>
                         <?php echo $this->Html->link('Carga horária', '/Alunos/cargahoraria/', ['class' => 'dropdown-item']); ?>
                         <?php echo $this->Html->link('Complemento período', '/Complementos', ['class' => 'dropdown-item']); ?>
-                        <?php echo $this->Html->link('Extensão', '/Extensaos', ['class' => 'dropdown-item']); ?>
                     </div>
                 </li>
             <?php endif; ?>

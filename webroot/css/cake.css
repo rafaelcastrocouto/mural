@@ -156,7 +156,7 @@ table p {
     display: inline-block;
 }
 th {
-    white-space: normal;
+    white-space: nowrap;
 }
 
 /* Nav bar */
