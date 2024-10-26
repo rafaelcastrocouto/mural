@@ -50,12 +50,6 @@ $checkConnection = function (string $name) {
     return compact('connected', 'error');
 };
 
-if (!Configure::read('debug')) :
-    throw new NotFoundException(
-        'Please replace templates/Pages/home.php with your own version or re-enable debug mode.'
-    );
-endif;
-
 
 $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituicao'];
 
@@ -73,14 +67,15 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'fonts', 'cake', 'home', 'bootstrap']) ?>
+    <?= $this->Html->css(['normalize.min', 'milligram.min', 'fonts', 'cake', 'bootstrap', 'mural']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <header>
+    <?= $this->element('submenu_navegacao'); ?>
+    <header id="content">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -110,15 +105,18 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
             </div>
         </div>
     </header>
+
+    <?php if (Configure::read('debug')) : ?>
     <main class="main">
+        
+        <div class="message default text-center">
+            <small>Please be aware that this page will not be shown if you turn off debug mode unless you replace templates/Pages/home.php with your own version.</small>
+        </div>
         <div class="container">
             <div class="content">
                 <div class="row">
                     <div class="column">
-                        <div class="message default text-center">
-                            <small>Please be aware that this page will not be shown if you turn off debug mode unless you replace templates/Pages/home.php with your own version.</small>
-                        </div>
-                        <div id="url-rewriting-warning" style="padding: 1rem; background: #fcebea; color: #cc1f1a; border-color: #ef5753;">
+                        <div id="url-rewriting-warning">
                             <ul>
                                 <li class="bullet problem">
                                     URL rewriting is not properly configured on your server.<br />
@@ -270,6 +268,9 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
                 </div>
             </div>
         </div>
+        
     </main>
+    <?php endif; ?>
+    <?= $this->element('footer'); ?>
 </body>
 </html>

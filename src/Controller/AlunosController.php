@@ -149,12 +149,15 @@ class AlunosController extends AppController
         $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
         $this->set('periodo', $periodo);
         
-        /* Todos os periódos */
+        /* lista de periodos */
         $periodototal = $this->Alunos->Estagiarios->find('list', [
             'keyField' => 'periodo',
             'valueField' => 'periodo'
         ]);
         $periodos = $periodototal->toArray();
+        $periodos = array_merge($periodos, array('all' => 'Todos'));
+        $periodos = array_reverse($periodos);
+        $this->set('periodos', $periodos);
         
         /* Se o periodo não veio anexo como parametro então o período é o último da lista dos períodos */
         if (empty($periodo)) {
@@ -185,10 +188,6 @@ class AlunosController extends AppController
         // pr($cress);
         // die();
         $this->set('cress', $this->paginate($cress));
-
-        $periodos = array_merge($periodos, array('all' => 'Todos'));
-        $periodos = array_reverse($periodos);
-        $this->set('periodos', $periodos);
     }
 
     /**
@@ -208,6 +207,9 @@ class AlunosController extends AppController
             'valueField' => 'periodo'
         ]);
         $periodos = $periodototal->toArray();
+        $periodos = array_merge($periodos, array('all' => 'Todos'));
+        $periodos = array_reverse($periodos);
+        $this->set('periodos', $periodos);
 
         if (empty($periodo)) {
             $periodo = end($periodos);
@@ -250,11 +252,6 @@ class AlunosController extends AppController
         //$this->set('t_seguro', $t_seguro);
         
         $this->set('seguro', $this->paginate($seguro));
-        
-        $periodos = array_merge($periodos, array('all' => 'Todos'));
-        $periodos = array_reverse($periodos);
-        $this->set('periodos', $periodos);
-
 
         $instituicao = $this->fetchTable("Configuracoes")->find()->first()['instituicao'];
         $this->set('instituicao', $instituicao);
@@ -264,10 +261,128 @@ class AlunosController extends AppController
     /**
      * Certificadoperiodo method
      *
-     * @param string|null $id Aluno id.
+     * @param string|null $nome Aluno nome.
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+
+ public function busca($nome = null) {
+
+        // Para paginar os resultados da busca por nome
+        if (isset($nome)) {
+            $this->request->data['Alunos']['nome'] = $nome;
+        }
+
+        if (!empty($this->data['Alunos']['nome'])) {
+
+            $this->Alunos->contain();
+            $condicaoalunonovo = ['Alunos.nome like' => '%' . $this->data['Alunos']['nome'] . '%'];
+            $alunos = $this->Alunos->find('all', [
+                'conditions' => $condicaoalunonovo
+            ]);
+            // pr($alunos);
+            // die();
+            // Nenhum resultado
+            if (empty($alunos)) {
+                $this->loadModel('Aluno');
+                $condicaoaluno = ['Aluno.nome like' => '%' . $this->data['Alunos']['nome'] . '%'];
+                $alunos = $this->Aluno->find('all', ['conditions' => $condicaoaluno]);
+                if (empty($alunonovos)) {
+                    $this->Flash->error(__("Não foram encontrados registros"));
+                } else {
+                    $this->Paginator->settings = ['order' => ['Alunos.nome ASC'], 'limit' => 10, 'conditions' => $condicaoalunonovo];
+                    $this->set('alunos', $this->Paginator->paginate('alunos'));
+                    $this->set('nome', $this->data['Aluno']['nome']);
+                }
+            } else {
+                $this->Paginator->settings = ['order' => 'Alunos.nome ASC', 'limit' => 10, 'conditions' => $condicaoalunonovo];
+                $this->set('alunos', $this->Paginator->paginate('alunos'));
+                $this->set('nome', $this->data['Alunos']['nome']);
+            }
+        }
+    }
+    
+    /**
+     * Busca_dre
+     *
+     * @return \Cake\Http\Response|null|void Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function buscaDre() {
+
+        // pr($this->data);
+        if (!empty($this->data['Alunos']['registro'])) {
+            $alunos = $this->Alunos->find('first', [
+                'conditions' => ['Alunos.registro' => $this->data['Alunos']['registro']]
+            ]);
+            // pr($alunos);
+            // die('alunos');
+                // pr($alunonovos);
+            if (empty($alunos)) {
+                $this->Flash->error(__("Não foram encontrados registros do aluno"));
+                $this->redirect(['controller' => 'Alunoss', 'action' => 'busca_dre']);
+            } else {
+                $this->Flash->success(__('Estudante'));
+                $this->redirect(['controller' => 'Alunos', 'action' => 'view', $alunos['Aluno']['id']]);
+            }
+        }
+    }
+    
+    /**
+     * Busca_email method
+     *
+     * @return \Cake\Http\Response|null|void Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function busca_email() {
+
+        if (!empty($this->data)) {
+            // pr($this->data);
+            // die();
+            $alunos = $this->Alunos->findAllByEmail($this->data['Alunos']['email']);
+            // pr($alunos);
+            // die("Sem registro");
+            if (empty($alunos)) {
+                $this->Flash->error(__("Não foram encontrados registros do email aluno"));
+                // Teria que buscar na tabela alunos_novos
+                // $alunos_novos = $this->Aluno_novo->findAllByRegistro($this->data['Aluno']['registro']);
+                // if (empty($alunos_novos)
+                $this->redirect(['controller' => 'Alunoss', 'action' => 'busca']);
+            } else {
+                $this->set('alunos', $alunos);
+                // $this->set('alunos',$alunos_novos);
+            }
+        }
+    }
+    
+    /**
+     * Busca_cpf method
+     *
+     * @return \Cake\Http\Response|null|void Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function busca_cpf() {
+
+        if (!empty($this->data)) {
+            // pr($this->data);
+            // die();
+            $alunos = $this->Alunos->findAllByCpf($this->data['Alunos']['cpf']);
+            // pr($alunos);
+            // die("Sem registro");
+            if (empty($alunos)) {
+                $this->Flash->error(__("Não foram encontrados registros do CPF"));
+                // Teria que buscar na tabela alunos_novos
+                // $alunos_novos = $this->Aluno_novo->findAllByRegistro($this->data['Aluno']['registro']);
+                // if (empty($alunos_novos)
+                $this->redirect(['controller' => 'Alunoss', 'action' => 'busca_cpf']);
+            } else {
+                $this->set('alunos', $alunos);
+                // $this->set('alunos',$alunos_novos);
+            }
+        }
+    }
+
+    
     public function certificadoperiodo($id = null) {
         /**
          * Autorização. Verifica se o aluno cadastrado no Users está acessando seu próprio registro.
@@ -443,58 +558,10 @@ class AlunosController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function cargahoraria($ordem = null) {
-        /** Aumenta a memória */
-        ini_set('memory_limit', '2048M');
-        $ordem = $this->getRequest()->getQuery('ordem');
 
-        if (empty($ordem)):
-            $ordem = 'q_semestres';
-        endif;
+        $alunos = $this->Alunos->find()->contain(['Estagiarios']);
 
-        // pr($ordem);
-        // die();
-
-        $alunos = $this->Alunos->find()->contain(['Estagiarios'])->limit(20)->toArray();
-        $i = 0;
-        foreach ($alunos as $aluno):
-            //pr($aluno['estagiarios']);
-            // pr(sizeof($aluno['estagiarios']));
-            // die();
-            $carga_horaria_total[$i]['id'] = $aluno->id;
-            $carga_horaria_total[$i]['registro'] = $aluno->registro;
-            $carga_horaria_total[$i]['q_semestres'] = sizeof($aluno['estagiarios']);
-            $carga_estagio = 0;
-            $y = 0;
-            foreach ($aluno['estagiarios'] as $estagiario):
-                // pr($estagiario);
-                // die();
-                if ($estagiario['nivel'] == 1):
-                    $carga_horaria_total[$i][$y]['ch'] = $estagiario['ch'];
-                    $carga_horaria_total[$i][$y]['nivel'] = $estagiario['nivel'];
-                    $carga_horaria_total[$i][$y]['periodo'] = $estagiario['periodo'];
-                    $carga_estagio += $estagiario['ch'];
-                // $criterio[$i][$ordem] = $c_estagio['periodo'];
-                else:
-                    $carga_horaria_total[$i][$y]['ch'] = $estagiario['ch'];
-                    $carga_horaria_total[$i][$y]['nivel'] = $estagiario['nivel'];
-                    $carga_horaria_total[$i][$y]['periodo'] = $estagiario['periodo'];
-                    $carga_estagio += $estagiario['ch'];
-                // $criterio[$i][$ordem] = NULL;
-                endif;
-                $y++;
-            endforeach;
-            $carga_horaria_total[$i]['ch_total'] = $carga_estagio;
-            $criterio[$i] = $carga_horaria_total[$i][$ordem];
-            $i++;
-            //            endif;
-        endforeach;
-
-        array_multisort($criterio, SORT_ASC, $carga_horaria_total);
-        // pr($carga_horaria_total);
-        // die();
-        $this->set('carga_horaria_total', $carga_horaria_total);
-
-        // die();
+        $this->set('alunos', $this->paginate($alunos));
     }
     
 }

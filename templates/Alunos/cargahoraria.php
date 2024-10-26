@@ -7,13 +7,16 @@
 ?>
 <div class="alunos cargahoraria content">
     <h3><?= __('Carga Horária') ?></h3>
+    <div class="paginator">
+        <?= $this->element('paginator'); ?>
+    </div>
     <div class='table_wrap'>
         <table>
             <thead>
                 <tr>
-                    <th>Id</th> 
-                    <th><?= $this->Html->link("Registro", ['controller' => 'Alunos', 'action' => 'cargahoraria', '?' => ['ordem' => 'registro']]); ?></th>
-                    <th><?= $this->Html->link("Semestres",['controller' => 'Alunos', 'action' => 'cargahoraria', '?' => ['ordem' => 'q_semestres']]); ?></th>
+                    <th><?= $this->Paginator->sort('nome') ?></th> 
+                    <th><?= $this->Paginator->sort('registro') ?></th>
+                    <th>Semestres</th>
                     <th>Nível</th>
                     <th>Período</th>
                     <th>CH 1</th>
@@ -26,30 +29,32 @@
                     <th>Nível</th>
                     <th>Período</th>
                     <th>CH 4</th>
-                    <th><?php echo $this->Html->link("Total", ['controller' => 'Alunos', 'action' => 'cargahoraria', '?' => ['ordem' => 'ch_total']]); ?></th>
+                    <th>Total</th>
                 </tr>
             </thead>
-            <?php $i = 1; ?>
-            <?php foreach ($carga_horaria_total as $c_carga_horaria_total): ?>
+
+            <?php foreach ($alunos as $aluno): ?>
+            <?php //pr($aluno['estagiarios']); ?>
+            <?php $carga_estagio = 0; ?>
                 <tr>
-                    <td><?php echo $i++; ?></td>
-                    <td><?php echo $this->Html->link($c_carga_horaria_total['registro'], ['controller' => 'Alunos', 'action' => 'view', $c_carga_horaria_total['id'] ]); ?></td>
-                    <td><?php echo $c_carga_horaria_total['q_semestres']; ?></td>
-        
-                    <?php foreach ($c_carga_horaria_total as $cada_carga_horaria_total): ?>
-            
-                        <?php // pr($cada_carga_horaria_total); ?>
-                        <?php if (is_array($cada_carga_horaria_total)): ?>
-                            <td><?php echo $cada_carga_horaria_total['nivel']; ?></td>
-                            <td><?php echo $cada_carga_horaria_total['periodo']; ?></td>
-                            <td><?php echo $cada_carga_horaria_total['ch']; ?></td>
-                        <?php endif; ?>
-            
-                    <?php endforeach; ?>
-        
-                    <td><?php echo $c_carga_horaria_total['ch_total']; ?></td>
+                    <td><?php echo $this->Html->link($aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $aluno->id ]); ?></td>
+                    <td><?php echo h($aluno['registro']); ?></td>
+                    <td><?php echo sizeof($aluno['estagiarios']); ?></td>
+                    
+                    <?php for ($i = 0; $i <= 3; $i++): ?>
+                            <?php $estagiario = $aluno['estagiarios'][$i] ?? null; ?>
+                            <td><?php echo $estagiario ? $estagiario['nivel'] : ''; ?></td>
+                            <td><?php echo $estagiario ? $estagiario['periodo'] : '-'; ?></td>
+                            <td><?php echo $estagiario ? $estagiario['ch'] : '0'; ?></td>
+                            <?php $carga_estagio += $estagiario ? $estagiario['ch'] : 0; ?>
+                    <?php endfor; ?>
+                    <td><?php echo $carga_estagio; ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>
+    </div>
+    <div class="paginator">
+        <?= $this->element('paginator'); ?>
+        <?= $this->element('paginator_count'); ?>
     </div>
 </div>

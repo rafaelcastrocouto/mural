@@ -44,6 +44,10 @@
 						?>
                     </td>
                 </tr>
+				<tr>
+                    <th><?= __('Complemento') ?></th>
+                    <td><?= $estagiario->complemento ? h($estagiario->complemento->periodo_especial) : '' ?></td>
+                </tr>
                 <tr>
                     <th><?= __('Nivel') ?></th>
                     <td><?= h($estagiario->nivel) ?></td>
@@ -74,19 +78,19 @@
                 </tr>
                 <tr>
                     <th><?= __('Registro') ?></th>
-                    <td><?= $this->Number->format($estagiario->registro) ?></td>
+                    <td><?= h($estagiario->registro) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Tc') ?></th>
-                    <td><?= $this->Number->format($estagiario->tc) ?></td>
+                    <td><?= $this->Number->format($estagiario->tc || '') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Nota') ?></th>
-                    <td><?= $this->Number->format($estagiario->nota) ?></td>
+                    <td><?= $this->Number->format($estagiario->nota || '') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Ch') ?></th>
-                    <td><?= $this->Number->format($estagiario->ch) ?></td>
+                    <td><?= $this->Number->format($estagiario->ch || '') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Tc Solicitacao') ?></th>

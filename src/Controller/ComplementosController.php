@@ -33,9 +33,7 @@ class ComplementosController extends AppController
      */
     public function view($id = null)
     {
-        $complemento = $this->Complementos->get($id, [
-            'contain' => ['Users'],
-        ]);
+        $complemento = $this->Complementos->get($id);
         
         $this->set(compact('complemento'));
     }

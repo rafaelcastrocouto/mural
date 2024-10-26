@@ -44,13 +44,13 @@
         <table class="table">
             <thead class='thead-light'>
             <tr>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>Nascimento</th>
-                <th>DRE</th>
-                <th>Curso</th>
-                <th>Nível</th>
-                <th>Período</th>
+                <th><?= $this->Paginator->sort('Alunos.nome', 'Nome') ?></th>
+                <th><?= $this->Paginator->sort('Alunos.cpf', 'CPF') ?></th>
+                <th><?= $this->Paginator->sort('Alunos.nascimento', 'Nascimento') ?></th>
+                <th><?= $this->Paginator->sort('Alunos.registro', 'Registro') ?></th>
+                <th><?= $this->Paginator->sort('curso') ?></th>
+                <th><?= $this->Paginator->sort('nivel') ?></th>
+                <th><?= $this->Paginator->sort('periodo') ?></th>
                 <th>Início</th>
                 <th>Final</th>
                 <th>Instituição</th>

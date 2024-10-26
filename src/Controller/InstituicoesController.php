@@ -32,7 +32,7 @@ class InstituicoesController extends AppController
      */
     public function view($id = null)
     {
-        ini_set('memory_limit', '2048M');
+        //ini_set('memory_limit', '2048M');
         $instituicao = $this->Instituicoes->get($id, [
             'contain' => [
                 'Areas',

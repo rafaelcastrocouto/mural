@@ -38,23 +38,23 @@
         </div>
 	</div>
 
-    <h3>Escola de Serviço Social da UFRJ. Planilha de estagiários para o CRESS 7ª Região</h3>
+    <h3>Planilha de estagiários para o CRESS 7ª Região</h3>
 
     <div class="paginator">
         <?= $this->element('paginator'); ?>
     </div>
     <div class='table_wrap'>
-        <table class='table'>
-            <thead class='thead-light'>
+        <table>
+            <thead>
                 <tr>
-                    <th>Aluno</th>
-                    <th>Instituição</th>
+                    <th><?= $this->Paginator->sort('Alunos.nome', 'Nome') ?></th>
+                    <th><?= $this->Paginator->sort('Instituicoes.instituicao', 'Instituição') ?></th>
                     <th>Endereço</th>
                     <th>CEP</th>
                     <th>Bairro</th>
-                    <th>Supervisor</th>
+                    <th><?= $this->Paginator->sort('Supervisores.nome', 'Supervisor') ?></th>
                     <th>CRESS</th>
-                    <th>Professor</th>
+                    <th><?= $this->Paginator->sort('Professores.nome', 'Professor') ?></th>
                 </tr>
             </thead>
             <?php foreach ($cress as $c_cress): ?>
@@ -71,5 +71,9 @@
                 </tr>
             <?php endforeach; ?>
         </table>
+    </div>
+    <div class="paginator">
+        <?= $this->element('paginator'); ?>
+        <?= $this->element('paginator_count'); ?>
     </div>
 </div>

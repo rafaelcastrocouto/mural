@@ -63,7 +63,7 @@ class EstagiariosController extends AppController
     public function view($id = null)
     {
         $estagiario = $this->Estagiarios->get($id, [
-            'contain' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores', 'Turmaestagios'/*, 'Folhadeatividades' */],
+            'contain' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores', 'Turmaestagios', 'Complementos'/*, 'Folhadeatividades' */],
         ]);
         
         //$folhadeatividades = $this->Estagiarios->Folhadeatividades->find()

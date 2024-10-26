@@ -1,12 +1,7 @@
-/* Home page styles */
 body {
     font-size: 14px;
     max-width: 115rem;
     margin: 0 auto;
-}
-img {
-    float: right;
-    padding: 2em;
 }
 header {
     margin-bottom: 1em;
