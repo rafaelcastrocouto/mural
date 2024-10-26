@@ -18,7 +18,7 @@ class UsersController extends AppController {
     {
         parent::beforeFilter($event);
     
-        $this->Authentication->allowUnauthenticated(['login', 'add', 'home']);
+        $this->Authentication->allowUnauthenticated(['login', 'add']);
     }
     /**
      * paginate array
@@ -35,7 +35,7 @@ class UsersController extends AppController {
      * @return \Cake\Http\Response|null|void Renders view
      */
     public function index() {
-        $query = $this->Users->find()->contain(['Administradores', 'Alunos', 'Supervisores', 'Professores', 'Categorias']);
+        $query = $this->Users->find()->contain(['Categorias']);
         $users = $this->paginate($query);
         $this->set(compact('users'));
     }

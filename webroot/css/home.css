@@ -76,12 +76,9 @@ hr {
 #url-rewriting-warning {
     display: none;
 }
-.col1 {
+.col {
     padding: 2em;
     display: grid;
-    width: 700px;
+    width: 600px;
     place-content: center;
-}
-.col2 {
-    padding: 2em;
 }

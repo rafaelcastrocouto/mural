@@ -73,7 +73,7 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'fonts', 'cake', 'home']) ?>
+    <?= $this->Html->css(['normalize.min', 'milligram.min', 'fonts', 'cake', 'home', 'bootstrap']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -83,22 +83,22 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
     <header>
         <div class="container">
             <div class="row">
-                <div class="col1">
+                <div class="col">
                     <h1 class="text-center">Boas vindas ao <a href="muralestagios">Mural de Estágios</a></h1>
                     <h2 class="text-center">
                         <div class="nav">
                             
                         <?php if (!$session) : ?>
-                            <?= $this->Html->link(__('Login'), ['controller' => 'users', 'action' => 'login'], ['class' => 'button']) ?>
+                            <?= $this->Html->link(__('Login'), ['controller' => 'users', 'action' => 'login'], ['class' => 'button btn-info']) ?>
                             <?= $this->Html->link(__('Novo usuário'), ['controller' => 'users', 'action' => 'add'], ['class' => 'button']) ?>
                         <?php else : ?>
                             <?= $this->Html->link(__('Minha Conta'), ['controller' => 'users', 'action' => 'view', $session->id], ['class' => 'button']) ?>
-                            <?= $this->Html->link(__('Logout'), ['controller' => 'users', 'action' => 'logout'], ['class' => 'button']) ?>
+                            <?= $this->Html->link(__('Logout'), ['controller' => 'users', 'action' => 'logout'], ['class' => 'button btn-info']) ?>
                         <?php endif; ?>    
                         </div>
                     </h2>
                 </div>   
-                <div class="col2">
+                <div class="col">
                     <p>Prezadas(os) usuárias(os),</p>
                     <p>O Mural de Estágio tem a função de: permitir a consulta e inscrição em vagas de estágio; retirar o Termo de Compromisso, folha de atividades, avaliação do/a supervisor/a, declaração de estágio, dentre outros.</p>
                     <p>É a sua primeira vez por aqui? Faça o cadastro com dados completos. Não abrevie seu nome.</p>
@@ -259,6 +259,13 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
                         <h3>Training and Certification</h3>
                         <a target="_blank" rel="noopener" href="https://cakefoundation.org/">Cake Software Foundation</a>
                         <a target="_blank" rel="noopener" href="https://training.cakephp.org/">CakePHP Training</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="column links">
+                        <h3>PHP info</h3>
+                        <?= $this->Html->link(__('PHP info'), ['..', 'phpinfo.php']) ?>
                     </div>
                 </div>
             </div>

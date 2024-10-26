@@ -4,12 +4,6 @@
 // echo $aluno->nome;
 ?>
 
-<?php
-$submit = [
-    "button" => "<div class='d-flex justify-content-center'><button type ='submit' class= 'btn btn-danger' {{attrs}}>{{text}}</button></div>"
-];
-?>
-
 <div class="content">
     <?= $this->Form->create($aluno) ?>
     <fieldset>
@@ -44,7 +38,6 @@ $submit = [
     <div class="d-flex justify-content-center">
         <div class="btn-group" role="group" aria-label="Confirma">
             <?= $this->Html->link('Imprime PDF', ['action' => 'certificadoperiodopdf', '?' => ['id' => $aluno->id, 'totalperiodos' => $totalperiodos]], ['class' => 'button btn-info']); ?>
-            
             <?= $this->Form->button(__('Confirmar alteraçoes'), ['type' => 'submit', 'class' => 'button']) ?>
             <?= $this->Form->end() ?>
         </div>

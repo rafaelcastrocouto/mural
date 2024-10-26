@@ -36,7 +36,6 @@
                             <th class="actions"><?= __('Actions') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Email') ?></th>
-                            <th><?= __('Registro') ?></th>
                             <th><?= __('Data') ?></th>
                         </tr>
                         <tr>
@@ -47,7 +46,6 @@
                             </td>
                             <td><?= $this->Html->link($administrador->user->id, ['controller' => 'Users', 'action' => 'view', $administrador->user->id]) ?></td>
                             <td><?= $administrador->user->email ? $this->Text->autoLinkEmails($administrador->user->email) : '' ?></td>
-                            <td><?= h($administrador->user->registro) ?></td>
                             <td><?= h($administrador->user->timestamp) ?></td>
                         </tr>
                     </table>

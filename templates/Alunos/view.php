@@ -43,11 +43,11 @@
                 </tr>
                 <tr>
                     <th><?= __('Telefone') ?></th>
-                    <td><?= '(' . $aluno->codigo_telefone . ') ' . h($aluno->telefone) ?></td>
+                    <td><?= '(' . h($aluno->codigo_telefone) . ') ' . h($aluno->telefone) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Celular') ?></th>
-                    <td><?= '(' . $aluno->codigo_celular . ') ' . h($aluno->celular) ?></td>
+                    <td><?= '(' . h($aluno->codigo_celular) . ') ' . h($aluno->celular) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Endereco') ?></th>

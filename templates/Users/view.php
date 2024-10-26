@@ -30,22 +30,136 @@
                     <td><?= h($user->categoria->categoria); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Aluno') ?></th>
-                    <td><?= $user->aluno ? $this->Html->link($user->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $user->aluno->id]) : '-' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Supervisor') ?></th>
-                    <td><?= $user->supervisor ? $this->Html->link($user->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $user->supervisor->id]) : '-' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Professor') ?></th>
-                    <td><?= $user->professor ? $this->Html->link($user->professor->nome, ['controller' => 'Professor', 'action' => 'view', $user->professor->id]) : '-' ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Timestamp') ?></th>
                     <td><?= h($user->timestamp) ?></td>
                 </tr>
             </table>
+
+            <?php if (!empty($user->administrador)) : ?>
+            <div class="related">
+                <h4><?= __('Related Administrador') ?></h4>
+                <div class="table_wrap">
+                    <table>
+                        <tr>
+                            <th class="actions"><?= __('Actions') ?></th>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Nome') ?></th>
+                        </tr>
+                        <tr>
+                            <td class="actions">
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'administradores', 'action' => 'view', $user->administrador->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'administradores', 'action' => 'edit', $user->administrador->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'administradores', 'action' => 'delete', $user->administrador->id], ['confirm' => __('Are you sure you want to delete administrador_{0}?', $user->administrador->id)]) ?>
+                            </td>
+                            <td><?= $this->Html->link($user->administrador->id, ['controller' => 'administradores', 'action' => 'view', $user->administrador->id]) ?></td>
+                            <td><?= h($user->administrador->nome) ?></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <?php endif; ?>
+            
+            <?php if (!empty($user->aluno)) : ?>
+            <div class="related">
+                <h4><?= __('Related Aluno') ?></h4>
+                <div class="table_wrap">
+                    <table>
+                        <tr>
+                            <th class="actions"><?= __('Actions') ?></th>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Nome') ?></th>
+                            <th><?= __('Registro') ?></th>
+                            <th><?= __('Telefone') ?></th>
+                            <th><?= __('Celular') ?></th>
+                            <th><?= __('CFP') ?></th>
+                            <th><?= __('Nascimento') ?></th>
+                            <th><?= __('Estagiario Count') ?></th>
+                            <th><?= __('Inscricao Count') ?></th>
+                        </tr>
+                        <tr>
+                            <td class="actions">
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'alunos', 'action' => 'view', $user->aluno->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'alunos', 'action' => 'edit', $user->aluno->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'alunos', 'action' => 'delete', $user->aluno->id], ['confirm' => __('Are you sure you want to delete aluno_{0}?', $user->aluno->id)]) ?>
+                            </td>
+                            <td><?= $this->Html->link($user->aluno->id, ['controller' => 'alunos', 'action' => 'view', $user->aluno->id]) ?></td>
+                            <td><?= h($user->aluno->nome) ?></td>
+                            <td><?= h($user->aluno->registro) ?></td>
+                            <td><?= '(' . h($user->aluno->codigo_telefone) . ') ' . h($user->aluno->telefone) ?></td>
+                            <td><?= '(' . h($user->aluno->codigo_celular) . ') ' . h($user->aluno->celular) ?></td>
+                            <td><?= h($user->aluno->cpf) ?></td>
+                            <td><?= h($user->aluno->nascimento) ?></td>
+                            <td><?= h($user->aluno->estagiario_count) ?></td>
+                            <td><?= h($user->aluno->inscricao_count) ?></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <?php endif; ?>
+
+            <?php if (!empty($user->professor)) : ?>
+            <div class="related">
+                <h4><?= __('Related Professor') ?></h4>
+                <div class="table_wrap">
+                    <table>
+                        <tr>
+                            <th class="actions"><?= __('Actions') ?></th>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Nome') ?></th>
+                            <th><?= __('Telefone') ?></th>
+                            <th><?= __('Celular') ?></th>
+                            <th><?= __('Lattes') ?></th>
+                            <th><?= __('Departamento') ?></th>
+                        </tr>
+                        <tr>
+                            <td class="actions">
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'professores', 'action' => 'view', $user->professor->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'professores', 'action' => 'edit', $user->professor->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'professores', 'action' => 'delete', $user->professor->id], ['confirm' => __('Are you sure you want to delete professor_{0}?', $user->professor->id)]) ?>
+                            </td>
+                            <td><?= $this->Html->link($user->professor->id, ['controller' => 'professores', 'action' => 'view', $user->professor->id]) ?></td>
+                            <td><?= $this->Html->link(h($user->professor->nome), ['action' => 'view', $user->professor->id]) ?></td>
+                            <td><?= $user->professor->telefone ? '(' . h($user->professor->ddd_telefone) . ')' . h($user->professor->telefone) : '' ?></td>
+                            <td><?= $user->professor->celular ? '(' . h($user->professor->ddd_celular) . ')' . h($user->professor->celular) : '' ?></td>
+                            <td><?= $user->professor->curriculolattes ? $this->Html->link('http://lattes.cnpq.br/' . h($user->professor->curriculolattes)) : '' ?></td>
+                            <td><?= h($user->professor->departamento) ?></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <?php endif; ?>
+            
+
+            <?php if (!empty($user->supervisor)) : ?>
+            <div class="related">
+                <h4><?= __('Related Supervisor') ?></h4>
+                <div class="table_wrap">
+                    <table>
+                        <tr>
+                            <th class="actions"><?= __('Actions') ?></th>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Nome') ?></th>
+                            <th><?= __('Cpf') ?></th>
+                            <th><?= __('Escola') ?></th>
+                            <th><?= __('Ano de formatura') ?></th>
+                        </tr>
+                        <tr>
+                            <td class="actions">
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'supervisores', 'action' => 'view', $user->supervisor->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'supervisores', 'action' => 'edit', $user->supervisor->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'supervisores', 'action' => 'delete', $user->supervisor->id], ['confirm' => __('Are you sure you want to delete supervisor_{0}?', $user->supervisor->id)]) ?>
+                            </td>
+                            <td><?= $this->Html->link($user->supervisor->id, ['action' => 'view', $user->supervisor->id]) ?></td>
+                            <td><?= $this->Html->link($user->supervisor->nome, ['action' => 'view', $user->supervisor->id]) ?></td>
+                            <td><?= h($user->supervisor->cpf) ?></td>
+                            <td><?= h($user->supervisor->escola) ?></td>
+                            <td><?= h($user->supervisor->ano_formatura) ?></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <?php endif; ?>
+            
         </div>
     </div>
 </div>
