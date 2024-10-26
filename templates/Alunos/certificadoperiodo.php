@@ -7,15 +7,13 @@
 <?php
 $submit = [
     "button" => "<div class='d-flex justify-content-center'><button type ='submit' class= 'btn btn-danger' {{attrs}}>{{text}}</button></div>"
-]
-    ?>
+];
+?>
 
-<?= $this->element('templates') ?>
-
-<div class="container">
+<div class="content">
     <?= $this->Form->create($aluno) ?>
     <fieldset>
-        <legend><?= __('Declaração de ' . $totalperiodos . 'º' . ' período do(a) aluno') ?></legend>
+        <h3><?= __('Declaração de ' . $totalperiodos . 'º' . ' período do(a) aluno') ?></h3>
         <?php
         if ($aluno->periodonovo):
             echo $this->Form->control('novoperiodo', ['label' => ['text' => 'Período de ingresso'], 'value' => $aluno->periodonovo]);
@@ -45,9 +43,9 @@ $submit = [
     </fieldset>
     <div class="d-flex justify-content-center">
         <div class="btn-group" role="group" aria-label="Confirma">
-            <?= $this->Html->link('Imprime PDF', ['action' => 'certificadoperiodopdf', '?' => ['id' => $aluno->id, 'totalperiodos' => $totalperiodos]], ['class' => 'btn btn-lg btn-primary', 'rule' => 'button']); ?>
-            <?php $this->Form->setTemplates($submit); ?>
-            <?= $this->Form->button(__('Confirmar alteraçoes'), ['type' => 'submit', 'class' => 'btn btn-lg btn-danger']) ?>
+            <?= $this->Html->link('Imprime PDF', ['action' => 'certificadoperiodopdf', '?' => ['id' => $aluno->id, 'totalperiodos' => $totalperiodos]], ['class' => 'button btn-info']); ?>
+            
+            <?= $this->Form->button(__('Confirmar alteraçoes'), ['type' => 'submit', 'class' => 'button']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

@@ -6,8 +6,11 @@
 ?>
 
 <?php
-$user = $this->request->getAttribute('identity');
-$categoria_id = $user->get('categoria_id');
+$categoria_id = 2; // aluno
+$categorias_permitidas = $categorias->all()->toArray();
+$user_session = $this->request->getAttribute('identity');
+if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
+if ($categoria_id == 1) { $categorias_permitidas[1] = 'administrador'; }
 ?>
 
 <div>
@@ -27,7 +30,7 @@ $categoria_id = $user->get('categoria_id');
                 <?php
                     echo $this->Form->control('email');
                     echo $this->Form->control('password');
-                    echo $this->Form->control('categoria', ['options' => $categorias, 'value' => '2', 'class' => 'form-control']);
+                    echo $this->Form->control('categoria', ['options' => $categorias_permitidas, 'value' => '2', 'class' => 'form-control']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Adicionar')) ?>

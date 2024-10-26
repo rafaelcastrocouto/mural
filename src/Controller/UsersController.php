@@ -18,7 +18,7 @@ class UsersController extends AppController {
     {
         parent::beforeFilter($event);
     
-        $this->Authentication->allowUnauthenticated(['login', 'add',]);
+        $this->Authentication->allowUnauthenticated(['login', 'add', 'home']);
     }
     /**
      * paginate array
@@ -70,7 +70,7 @@ class UsersController extends AppController {
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $categorias = $this->Users->Categorias->find('list');
+        $categorias = $this->Users->Categorias->find('list')->where(['id !=' => 1]);
         $this->set(compact('user', 'categorias'));
     }
 
@@ -95,7 +95,7 @@ class UsersController extends AppController {
         $alunos = $this->Users->Alunos->find('list');
         $supervisores = $this->Users->Supervisores->find('list');
         $professores = $this->Users->Professores->find('list');
-        $categorias = $this->Users->Categorias->find('list');
+        $categorias = $this->Users->Categorias->find('list')->where(['id !=' => 1]);
         $this->set(compact('user', 'categorias', 'alunos', 'supervisores', 'professores'));
     }
 

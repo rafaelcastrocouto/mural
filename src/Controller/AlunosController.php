@@ -258,11 +258,12 @@ class AlunosController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function certificadoperiodo($id = NULL) {
+    public function certificadoperiodo($id = null) {
         /**
          * Autorização. Verifica se o aluno cadastrado no Users está acessando seu próprio registro.
          */
-        if ($this->getRequest()->getAttribute('identity')['categoria_id'] == '2') {
+        $option = 0;
+        if ($this->getRequest()->getAttribute('identity')['categoria_id'] == 2) {
             $aluno_id = $this->getRequest()->getAttribute('identity')['aluno_id'];
             if ($id == $aluno_id) {
                 /**
@@ -287,7 +288,7 @@ class AlunosController extends AppController
                     // die('Aluno não autorizado.');
                 }
             }
-        } elseif ($this->getRequest()->getAttribute('identity')['categoria_id'] == '1') {
+        } elseif ($this->getRequest()->getAttribute('identity')['categoria_id'] == 1) {
             echo "Administrador autorizado";
         } else {
             $this->Flash->error(__('2. Operação não autorizada.'));
@@ -298,9 +299,13 @@ class AlunosController extends AppController
         /**
          * Consulto a tabela alunos com o registro ou com o id
          */
-        $aluno = $this->Alunos->find()
-                ->where([$option])
-                ->first();
+        if ($option) {
+            $aluno = $this->Alunos->find()->where([$option])->first();
+        } else {
+            $aluno = $this->Alunos->find()->first();
+        }
+
+        
         /**
          * Calculo a partir do ingresso em que periodo o aluno esté neste momento.
          */
@@ -324,10 +329,12 @@ class AlunosController extends AppController
             $periodo_inicial = $aluno->ingresso;
         }
 
-        $inicial = explode('-', $periodo_inicial);
+        //pr($periodo_inicial); die();
+        
+        //$inicial = explode('-', $periodo_inicial);
+        $inicial = [$periodo_inicial, 1];
         $atual = explode('-', $periodo_atual);
         // echo $atual[0] . ' ' . $inicial[0] . '<br>';
-
         /**
          * Calculo o total de semestres
          */
@@ -357,7 +364,11 @@ class AlunosController extends AppController
         /** Se o período inicial é maior que o período atual então informar que há um erro */
         if ($totalperiodos <= 0) {
             $this->Flash->error(__('Error: período inicial é maior que período atual'));
-            return $this->redirect(['controller' => 'Alunos', 'action' => 'certificadoperiodo', '?' => ['registro' => $this->getRequest()->getAttribute('identity')['registro']]]);
+        }
+
+
+        if ($totalperiodos > 20) {
+            $this->Flash->error(__('Error: período é maior q o permitido'));
         }
 
         // pr($totalperiodos);
