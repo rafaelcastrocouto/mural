@@ -1,11 +1,7 @@
-body {
-  margin-top: 70px;
-}
 nav {
   font-family: 'Raleway', sans-serif;
   position: fixed;
   width: 100vw;
-  padding: 5px;
   top: 0;
   left: 0;
   display: grid;
@@ -33,12 +29,16 @@ nav menu {
 
 nav li {
   margin: 0;
-  display: inline-block;
   position: relative;
   white-space: nowrap;
+  display: inline;
 }
-nav > menu > li {
-  padding: 0 5px;
+
+nav > menu > li > * {
+  padding: 0 6px;
+}
+nav li a {
+  display: inline-block;
 }
 nav a,
 nav a:focus,
@@ -49,6 +49,7 @@ nav label {
   font-weight: normal;
   font-size: 14px;
   color: #fff;
+  margin: 0;
 }
 
 nav a,
@@ -98,7 +99,7 @@ nav .toggle-input:checked ~ label .toggle-less {
 
 nav .toggle-dropdown {
   display: inline-block;
-  margin-top: 5px;
+  min-width: 9em;
 }
 
 nav menu li menu {
@@ -112,44 +113,40 @@ nav menu li menu li a {
   padding: 5px 15px;
 }
 
+
 /* LARGE ONLY */
-@media only screen and (min-width: 768px)  {
+@media only screen and (min-width: 768px) {
   nav .toggle-dropdown {
     position: absolute;
   }
-  nav menu li:nth-child(2) menu {
-    margin-left: -106px;
+  nav menu li:nth-child(2) menu { /* declaracoes */
+    margin-left: -55px;
   }
-  nav menu li:nth-child(3) menu {
-    margin-left: -4px;
+  nav menu li:nth-child(3) menu { /* consulta */
+    margin-left: 180px;
   }
-  nav menu li:nth-child(5) menu {
+  nav menu li:nth-child(5) menu {/* admin */
     margin-left: -30px;
   }
-  nav menu li:nth-child(6) menu {
-    margin-left: -22px;
+  nav menu li:nth-child(6) menu { /* user */
+    margin-left: -20px;
   }
 
   nav .user-menu {
     margin-right: 30px;
     float: right;
   }
-
   
 }
 
-
 /* SMALL ONLY */
-@media only screen and (max-width: 768px)  {
+@media only screen and (max-width: 768px) {
+  nav {
+    overflow-y: auto;
+    max-height: 80vh;
+  }
   nav li {
     display: block;
-  }
-
-  nav .responsive-toggle-dropdown {
-    width: 96vw;
-  }
-  
-  nav .toggle-dropdown {
   }
   nav .responsive-toggle-label {
     display: inline;

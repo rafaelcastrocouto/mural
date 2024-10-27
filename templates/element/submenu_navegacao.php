@@ -1,7 +1,7 @@
 <!-- templates/element/submenu_navegacao.php -->
 <?php
 
-$categoria_id = 2;
+$categoria_id = 0;
 if ($session) { $categoria_id = $session->get('categoria_id'); }
 
 ?>

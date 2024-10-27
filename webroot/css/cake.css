@@ -108,9 +108,6 @@ table p {
 }
 
 /* Main */
-#content {
-    margin-top: 5em;
-}
 .content {
     padding: 2rem;
     background: var(--color-white);
