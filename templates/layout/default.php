@@ -30,7 +30,7 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
         </title>
         <?= $this->Html->meta('icon') ?>
         
-        <?= $this->Html->css(['normalize.min', 'milligram.min', 'fonts', 'cake', 'bootstrap', 'mural']) ?>
+        <?= $this->Html->css(['normalize.min', 'fonts', 'milligram.min', 'bootstrap', 'cake', 'nav', 'mural']) ?>
         <?= $this->Html->script(['jquery-3.6.0.js', 'popper.min.js', 'bootstrap.min.js', 'bootstrap.bundle.min.js']) ?>
 
         <?= $this->fetch('meta') ?>
