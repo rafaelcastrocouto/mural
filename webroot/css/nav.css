@@ -120,13 +120,13 @@ nav menu li menu li a {
     position: absolute;
   }
   nav menu li:nth-child(2) menu { /* declaracoes */
-    margin-left: -55px;
+    margin-left: -60px;
   }
   nav menu li:nth-child(3) menu { /* consulta */
-    margin-left: 180px;
+    margin-left: 168px;
   }
   nav menu li:nth-child(5) menu {/* admin */
-    margin-left: -30px;
+    margin-left: 300px;
   }
   nav menu li:nth-child(6) menu { /* user */
     margin-left: -20px;
