@@ -16,6 +16,7 @@
     <div class="paginator">
         <?= $this->element('paginator'); ?>
     </div>
+    
     <div class="table_wrap">
         <table>
             <thead>

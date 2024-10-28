@@ -3,6 +3,9 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Administrador $nome
  */
+
+$categoria_id = $session ? (int) $session->get('categoria_id') : 2;
+
 ?>
 <div>
     <div class="column-responsive column-80">

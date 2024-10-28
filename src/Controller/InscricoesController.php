@@ -83,32 +83,45 @@ class InscricoesController extends AppController
         if (!$aluno) {
             $session = $this->request->getAttribute('identity');
             $this->Flash->error(__('Erro ao selecionar aluno'));
-            if ($session->get('categoria_id') == 1) {
-                return    $this->redirect(['controller' => 'Users', 'action' => 'alternarusuario']);
-            } else return $this->redirect(['controller' => 'Inscricoes', 'action' => 'index']);
+            //if ($session->get('categoria_id') == 1) {
+            //    return    $this->redirect(['controller' => 'Users', 'action' => 'alternarusuario']);
+            //} else return $this->redirect(['controller' => 'Inscricoes', 'action' => 'index']);
         }
         
         /** Verifico o periodo do mural e comparo com o periodo da inscricao */
         $muralestagiotabela = $this->fetchTable('Muralestagios');
-        $muralestagio = $muralestagiotabela->find()->where(['id' => $this->getRequest()->getData('mural_estagio_id')])->first();
-        if ($muralestagio->periodo <> $this->getRequest()->getData('periodo')) {
-            $this->Flash->error(__('O periodo de inscricao nao coincide com o periodo do Mural.'));
-            return $this->redirect(['controller' => 'Muralestagios', 'action' => 'view', $this->getRequest()->getData('mural_estagio_id')]);
+
+        $request_id = $this->getRequest()->getData('mural_estagio_id');
+
+        if (!$request_id) {
+            $this->Flash->error(__('Erro no identificador do mural de estagios'));
         }
 
-        /** Verifico se já fez inscrição para não duplicar */
-        $inscricao_dupli = $this->Inscricoes->find()->where(['Inscricoes.aluno_id' => $aluno->id, 'Inscricoes.mural_estagio_id' => $muralestagio->id])->first();
-        if ($inscricao_dupli) {
-            $this->Flash->error(__("Inscrição já realizada"));
-            return $this->redirect(['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]);
+        if ($request_id) {
+            $muralestagio = $muralestagiotabela->find()->where(['id' => $request_id])->first();
+            if ($muralestagio->periodo <> $this->getRequest()->getData('periodo')) {
+                $this->Flash->error(__('O periodo de inscricao nao coincide com o periodo do Mural.'));
+                //return $this->redirect(['controller' => 'Muralestagios', 'action' => 'view', $this->getRequest()->getData('mural_estagio_id')]);
+            }
+        }
+        
+        if ($aluno) {
+            /** Verifico se já fez inscrição para não duplicar */
+            $inscricao_dupli = $this->Inscricoes->find()->where(['Inscricoes.aluno_id' => $aluno->id, 'Inscricoes.mural_estagio_id' => $muralestagio->id])->first();
+            if ($inscricao_dupli) {
+                $this->Flash->error(__("Inscrição já realizada"));
+                //return $this->redirect(['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]);
+            }
+        
+
+            $dados = $this->request->getData();
+            $dados['registro'] = $aluno->registro;
+            $dados['aluno_id'] = $aluno->id;
+            $dados['mural_estagio_id'] = $this->getRequest()->getData('muralestagio_id');
+            $dados['data'] = date('Y-m-d');
+            $dados['periodo'] = $this->getRequest()->getData('periodo');
         }
 
-        $dados = $this->request->getData();
-        $dados['registro'] = $aluno->registro;
-        $dados['aluno_id'] = $aluno->id;
-        $dados['mural_estagio_id'] = $this->getRequest()->getData('muralestagio_id');
-        $dados['data'] = date('Y-m-d');
-        $dados['periodo'] = $this->getRequest()->getData('periodo');
         
         if ($this->request->is('post')) {
             $inscricao = $this->Inscricoes->patchEntity($inscricao, $dados);

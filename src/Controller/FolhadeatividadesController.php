@@ -21,24 +21,35 @@ class FolhadeatividadesController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function index($id = NULL)
+    public function index($id = null)
     {
         $estagiario_id = $this->getRequest()->getQuery('estagiario_id');
+        $estagiariotabela = $this->fetchTable('Estagiarios');
         if ($estagiario_id) {
             $folhadeatividades = $this->Folhadeatividades->find('all')
                 ->order(['id'])
                 ->where(['estagiario_id' => $estagiario_id]);
 
-            $estagiariotabela = $this->fetchTable('Estagiarios');
             $estagiario = $estagiariotabela->find()
                 ->contain(['Alunos', 'Instituicoes'])
                 ->where(['Estagiarios.id' => $estagiario_id])
                 ->first();
         }
 
+        
+        if (empty($estagiario)) { 
+            $this->Flash->error(__('Selecione o estagiário'));
+            $estagiario = $estagiariotabela->find()
+                ->contain(['Alunos', 'Instituicoes'])
+                ->first();
+            $folhadeatividades = $this->Folhadeatividades->find('all')
+                ->order(['id'])
+                ->where(['estagiario_id' => $estagiario->id]);
+        }
+
         if (empty($folhadeatividades)) {
             $this->Flash->error(__('Selecione o estagiário e o período da folha de atividades'));
-            return $this->redirect(['controller' => 'folhadeatividades', 'action' => 'add', '?' => ['estagiario_id' => $estagiario_id]]);
+            //return $this->redirect(['controller' => 'estagiarios', 'action' => 'index']);
         }
 
         $folhadeatividades = $this->paginate($folhadeatividades);

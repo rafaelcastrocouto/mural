@@ -29,14 +29,14 @@ if ($professora) {
 }
 ?>
 
-<div class="container">
+<div class="folhadeatividades index content">
 
-    <nav>
-        <div>
-            <?= $this->Html->link(__('Cadastra nova atividade'), ['action' => 'add', '?' => ['estagiario_id' => $estagiario->id]], ['class' => 'btn btn-primary float-end']) ?>
-            <?= $this->Html->link(__('Imprime folha de atividades'), ['action' => 'folhadeatividadespdf', '?' => ['estagiario_id' => $estagiario->id]], ['class' => 'btn btn-primary float-end']) ?>
+    <aside>
+        <div class="nav">
+            <?= $this->Html->link(__('Cadastra nova atividade'), ['action' => 'add', '?' => ['estagiario_id' => $estagiario->id]], ['class' => 'button']) ?>
+            <?= $this->Html->link(__('Imprime folha de atividades'), ['action' => 'folhadeatividadespdf', '?' => ['estagiario_id' => $estagiario->id]], ['class' => 'button']) ?>
         </div>
-    </nav>
+    </aside>
 
     <h3><?= __('Folha de atividades da(o) estagiária(o) ' . $estagiario->aluno->nome) ?></h3>
 
@@ -58,35 +58,38 @@ if ($professora) {
             </tr>
         </table>
     </div>
-
+    
+    <div class="paginator">
+        <?= $this->element('paginator'); ?>
+    </div>
     <div class="table_wrap">
         <table>
             <thead>
                 <tr>
+                    <th class="actions"><?= __('Ações') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('dia') ?></th>
                     <th><?= $this->Paginator->sort('inicio') ?></th>
                     <th><?= $this->Paginator->sort('final') ?></th>
                     <th><?= $this->Paginator->sort('horario', 'Horas') ?></th>
                     <th><?= $this->Paginator->sort('atividade') ?></th>
-                    <th class="actions"><?= __('Ações') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php $seconds = NULL ?>
                 <?php foreach ($folhadeatividades as $folhadeatividade): ?>
                     <tr>
+                        <td class="actions">
+                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $folhadeatividade->id]) ?>
+                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $folhadeatividade->id]) ?>
+                            <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $folhadeatividade->id], ['confirm' => __('Tem certeza que quer excluir o registro # {0}?', $folhadeatividade->id)]) ?>
+                        </td>
                         <td><?= $folhadeatividade->id ?></td>
                         <td><?= h($folhadeatividade->dia) ?></td>
                         <td><?= h($folhadeatividade->inicio) ?></td>
                         <td><?= h($folhadeatividade->final) ?></td>
                         <td><?= h($folhadeatividade->horario) ?></td>
                         <td><?= h($folhadeatividade->atividade) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $folhadeatividade->id]) ?>
-                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $folhadeatividade->id]) ?>
-                            <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $folhadeatividade->id], ['confirm' => __('Tem certeza que quer excluir o registro # {0}?', $folhadeatividade->id)]) ?>
-                        </td>
                     </tr>
                     <?php
                     list($hour, $minute, $second) = array_pad(explode(':', $folhadeatividade->horario), 3, null);
@@ -97,7 +100,7 @@ if ($professora) {
                     ?>
                 <?php endforeach; ?>
                 <tr>
-                    <td colspan="4">Total de horas</td>
+                    <td colspan="5">Total de horas</td>
                     <td>
                         <?php
                         $hours = floor($seconds / 3600);
@@ -112,15 +115,9 @@ if ($professora) {
             </tbody>
         </table>
     </div>
-</div>
-
-<?= $this->element('templates'); ?>
-<div class="d-flex justify-content-center">
     <div class="paginator">
-        <ul class="pagination">
-            <?= $this->element('paginator') ?>
-        </ul>
+        <?= $this->element('paginator'); ?>
+        <?= $this->element('paginator_count'); ?>
     </div>
-</div>
-<?= $this->element('paginator_count') ?>
+
 </div>
