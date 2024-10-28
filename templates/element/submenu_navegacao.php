@@ -73,7 +73,7 @@ if ($session) { $categoria_id = $session->get('categoria_id'); }
                 <label for="menu-admin-toggler" class="toggle-label">Administração <span class="toggle-more">▾</span><span class="toggle-less">◂</span></label>
                 
                 <menu class="toggle-dropdown">
-                    <li><?php echo $this->Html->link('Configuração', '/Configuracoes/view/1'); ?></li>
+                    <li><?php echo $this->Html->link('Configurações', '/Configuracoes'); ?></li>
                     <li><?php echo $this->Html->link('Usuários', '/Users'); ?></li>
                     <li><?php echo $this->Html->link('Planilha seguro', '/Alunos/planilhaseguro/'); ?></li>
                     <li><?php echo $this->Html->link('Planilha CRESS', '/Alunos/planilhacress/'); ?></li>

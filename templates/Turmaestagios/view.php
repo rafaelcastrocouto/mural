@@ -119,7 +119,7 @@
                             <td><?= h($muralestagios->id) ?></td>
                             <td><?= $muralestagios->instituicao ? $this->Html->link(h($muralestagios->instituicao->instituicao), ['controller' => 'instituicoes', 'action' => 'view', $muralestagios->instituicao->id]) : '' ?></td>
                             <td>
-                                <?= $muralestagio->convenio ? 'Sim' : 'Não'; ?>
+                                <?= $muralestagios->convenio ? 'Sim' : 'Não'; ?>
                             </td>
                             <td><?= h($muralestagios->vagas) ?></td>
                             <td><?= $muralestagios->professor ? $this->Html->link(h($muralestagios->professor->nome), ['controller' => 'professores', 'action' => 'view', $muralestagios->professor->id]) : '' ?></td>

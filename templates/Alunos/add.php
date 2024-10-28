@@ -42,7 +42,7 @@ if ($session) {
                     echo $this->Form->control('observacoes');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Adicionar')) ?>
+            <?= $this->Form->button(__('Adicionar'), ['class' => 'button']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

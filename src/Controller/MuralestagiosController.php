@@ -76,6 +76,8 @@ class MuralestagiosController extends AppController {
      */
     public function add()
     {
+        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
+        
         $muralestagio = $this->Muralestagios->newEmptyEntity();
         if ($this->request->is('post')) {
 

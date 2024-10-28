@@ -33,7 +33,7 @@ if ($categoria_id == 1) { $categorias_permitidas[1] = 'administrador'; }
                     echo $this->Form->control('categoria', ['options' => $categorias_permitidas, 'value' => '2', 'class' => 'form-control']);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Adicionar')) ?>
+            <?= $this->Form->button(__('Adicionar'), ['class' => 'button']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

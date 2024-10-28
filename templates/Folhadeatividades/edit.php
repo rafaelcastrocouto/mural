@@ -64,7 +64,7 @@
             echo $this->Form->control('atividade');
             ?>
         </fieldset>
-        <?= $this->Form->button(__('Submit')) ?>
+        <?= $this->Form->button(__('Enviar'), ['class' => 'button']) ?>
         <?= $this->Form->end() ?>
     </div>
 </div>

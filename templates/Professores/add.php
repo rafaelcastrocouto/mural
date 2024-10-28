@@ -3,6 +3,10 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Professor $professor
  */
+
+
+$categoria_id = $session ? (int) $session->get('categoria_id') : 2;
+
 ?>
 <div>
     <div class="column-responsive column-80">
@@ -55,7 +59,7 @@
                     echo $this->Form->control('observacoes');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Adicionar')) ?>
+            <?= $this->Form->button(__('Adicionar'), ['class' => 'button']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

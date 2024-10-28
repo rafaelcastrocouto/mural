@@ -127,6 +127,27 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
                             <?php Debugger::checkSecurityKeys(); ?>
                         </div>
                     </div>
+
+                    <p>
+                        <a href="./administradores">administradores</a> | 
+                        <a href="./alunos">alunos</a> | 
+                        <a href="./areas">areas</a> | 
+                        <a href="./avaliacoes">avaliacoes</a> | 
+                        <a href="./complementos">complementos</a> | 
+                        <a href="./configuracoes">configuracoes</a> | 
+                        <a href="./estagiarios">estagiarios</a> | 
+                        <a href="./folhadeatividades">folhadeatividades</a> | 
+                        <a href="./inscricoes">inscricoes</a> | 
+                        <a href="./instituicoes">instituicoes</a> | 
+                        <a href="./muralestagios">muralestagios</a> | 
+                        <a href="./professores">professores</a> | 
+                        <a href="./supervisores">supervisores</a> | 
+                        <a href="./turmaestagios">turmaestagios</a> | 
+                        <a href="./users">users</a> | 
+                        <a href="./visitas">visitas</a>
+                    </p>
+
+                    
                     <div class="row">
                         <div class="column">
                             <h4>Environment</h4>

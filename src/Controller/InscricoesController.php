@@ -73,16 +73,19 @@ class InscricoesController extends AppController
 
         if (empty($periodo)) {
             $configuracaotabela = $this->fetchTable('Configuracoes');
-            $periodoconfiguracao = $configuracaotabela->find()
-                    ->first();
+            $periodoconfiguracao = $configuracaotabela->find()->first();
             $periodo = $periodoconfiguracao->mural_periodo_atual;
         }
         
         $user_id = $this->Authentication->getIdentifier();
         $aluno = $this->fetchTable('Alunos')->find()->where(['user_id' => $user_id ])->first();
+        
         if (!$aluno) {
-            $this->Flash->error(__('Selecione aluno'));
-            return $this->redirect(['controller' => 'Inscricoes', 'action' => 'add', '?' => ['mural_estagio_id' => $mural_estagio_id]]);
+            $session = $this->request->getAttribute('identity');
+            $this->Flash->error(__('Erro ao selecionar aluno'));
+            if ($session->get('categoria_id') == 1) {
+                return    $this->redirect(['controller' => 'Users', 'action' => 'alternarusuario']);
+            } else return $this->redirect(['controller' => 'Inscricoes', 'action' => 'index']);
         }
         
         /** Verifico o periodo do mural e comparo com o periodo da inscricao */

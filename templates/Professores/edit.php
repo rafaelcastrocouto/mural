@@ -64,7 +64,7 @@ if ($session) {
                     echo $this->Form->control('observacoes');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Editar')) ?>
+            <?= $this->Form->button(__('Editar'), ['class' => 'button']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

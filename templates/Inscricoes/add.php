@@ -24,7 +24,7 @@
                     echo $this->Form->control('timestamp');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Inscrever')) ?>
+            <?= $this->Form->button(__('Inscrever'), ['class' => 'button']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

@@ -3,6 +3,9 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Inscricao $inscricao
  */
+
+//pr($inscricao)
+
 ?>
 <div>
     <div class="column-responsive column-80">
@@ -12,24 +15,24 @@
                     <?= $this->Form->postLink(
                         __('Deletar'),
                         ['action' => 'delete', $inscricao->id],
-                        ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id), 'class' => 'side-nav-item']
+                        ['confirm' => __('Are you sure you want to delete inscricao_{0}?', $inscricao->id), 'class' => 'button']
                     ) ?>
-                    <?= $this->Html->link(__('Listar Inscricoes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                    <?= $this->Html->link(__('Listar Inscricoes'), ['action' => 'index'], ['class' => 'button']) ?>
                 </div>
             </aside>
             <?= $this->Form->create($inscricao) ?>
             <fieldset>
-                <legend><?= __('Editar Inscricao') ?></legend>
+                <h3><?= __('Editar Inscricao') ?></h3>
                 <?php
                     echo $this->Form->control('registro');
-                    echo $this->Form->control('aluno_id', ['options' => $alunos, 'empty' => true]);
-                    echo $this->Form->control('muralestagio_id', ['options' => $muralestagios]);
+                    echo $this->Form->control('aluno_id', ['type' => 'number']);
+                    echo $this->Form->control('mural_estagio_id', ['type' => 'number']);
                     echo $this->Form->control('data');
                     echo $this->Form->control('periodo');
                     echo $this->Form->control('timestamp');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Editar')) ?>
+            <?= $this->Form->button(__('Editar'), ['class' => 'button']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

@@ -34,11 +34,11 @@
                     echo $this->Form->control('horario_selecao');
                     echo $this->Form->control('forma_selecao');
                     echo $this->Form->control('contato');
-                    echo $this->Form->control('periodo');
+                    echo $this->Form->control('periodo', ['value' => $periodo]);
                     echo $this->Form->control('outras');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Adicionar')) ?>
+            <?= $this->Form->button(__('Adicionar'), ['class' => 'button']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

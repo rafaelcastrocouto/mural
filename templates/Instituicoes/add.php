@@ -4,18 +4,17 @@
  * @var \App\Model\Entity\Instituicao $instituicao
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Listar Instituicoes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
+<div>
     <div class="column-responsive column-80">
         <div class="instituicoes form content">
+            <aside>
+                <div class="nav">
+                    <?= $this->Html->link(__('Listar Instituicoes'), ['action' => 'index'], ['class' => 'button']) ?>
+                </div>
+            </aside>
             <?= $this->Form->create($instituicao) ?>
             <fieldset>
-                <legend><?= __('Adicionar Instituicao') ?></legend>
+                <h3><?= __('Adicionar Instituicao') ?></h3>
                 <?php
                     echo $this->Form->control('instituicao');
                     echo $this->Form->control('area_id', ['options' => $areas, 'empty' => true]);
@@ -39,7 +38,7 @@
                     echo $this->Form->control('supervisores._ids', ['options' => $supervisores]);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Adicionar')) ?>
+            <?= $this->Form->button(__('Adicionar'), ['class' => 'button']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

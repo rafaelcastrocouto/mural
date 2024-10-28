@@ -23,7 +23,7 @@
                     echo $this->Form->control('periodo_calendario_academico');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Editar')) ?>
+            <?= $this->Form->button(__('Editar'), ['class' => 'button']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

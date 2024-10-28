@@ -36,7 +36,7 @@ if ($categoria_id == 1) { $categorias_permitidas[1] = 'administrador'; }
                     echo $this->Form->control('timestamp', ['type' => 'datetime-local', 'value' => $user->timestamp ? h($user->timestamp) : '']);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Editar')) ?>
+            <?= $this->Form->button(__('Editar'), ['class' => 'button']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

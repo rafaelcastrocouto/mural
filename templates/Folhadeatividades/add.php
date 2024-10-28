@@ -75,7 +75,7 @@
             echo $this->Form->control('horario', ['type' => 'hidden', 'value' => null]);
             ?>
         </fieldset>
-        <?= $this->Form->button(__('Submit')) ?>
+        <?= $this->Form->button(__('Enviar'), ['class' => 'button']) ?>
         <?= $this->Form->end() ?>
 
     </div>

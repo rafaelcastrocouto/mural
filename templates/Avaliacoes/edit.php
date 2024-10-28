@@ -163,7 +163,7 @@ if ($cress) {
             <?= $this->Form->input('observacoes', ['type' => 'textarea', 'label' => false, 'class' => 'form-control', 'rows' => 5, 'cols' => 60]); ?>
 
         </fieldset>
-        <?= $this->Form->button(__('Submit')) ?>
+        <?= $this->Form->button(__('Enviar'), ['class' => 'button']) ?>
         <?= $this->Form->end() ?>
     </div>
 </div>

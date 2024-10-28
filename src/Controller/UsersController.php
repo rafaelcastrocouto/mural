@@ -143,4 +143,18 @@ class UsersController extends AppController {
         $this->Authentication->logout();
         return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     }
+
+
+    /*
+     * Alternarusuario method
+     * https://book.cakephp.org/authentication/3/en/impersonation.html
+     */
+    public function alternarusuario() {
+
+        // pr($this->data);
+        // die();
+        
+ 
+    }
+    
 }

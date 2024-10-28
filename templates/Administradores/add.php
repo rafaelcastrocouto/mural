@@ -4,7 +4,7 @@
  * @var \App\Model\Entity\Administrador $nome
  */
 ?>
-<div
+<div>
     <div class="column-responsive column-80">
         <div class="administradores form content">
             <aside>
