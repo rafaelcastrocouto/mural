@@ -1,3 +1,11 @@
+body {
+    margin-top: 60px;
+}
+#content {
+    max-width: 110rem;
+    margin: 0 auto;
+    min-height: calc(100vh - 120px);
+}
 nav {
   font-family: 'Raleway', sans-serif;
   position: fixed;
@@ -114,7 +122,7 @@ nav menu li menu li a {
 }
 
 
-/* LARGE ONLY */
+/* LARGE MOBILE MORE ONLY */
 @media only screen and (min-width: 768px) {
   nav .toggle-dropdown {
     position: absolute;
@@ -125,7 +133,6 @@ nav menu li menu li a {
   nav .menu-user menu {
     margin-left: -20px;
   }
-
   nav .menu-user {
     margin-right: 30px;
     float: right;
@@ -133,7 +140,7 @@ nav menu li menu li a {
   
 }
 
-/* SMALL ONLY */
+/* SMALL MOBILE LESS ONLY */
 @media only screen and (max-width: 768px) {
   nav {
     overflow-y: auto;
@@ -151,4 +158,39 @@ nav menu li menu li a {
   nav .toggle-input:checked ~ .responsive-toggle-dropdown {
     display: block;
   }
+}
+
+/* SMALL TABLET LESS ONLY */
+@media only screen and (max-width: 1120px) {
+  body {
+      margin-top: 50px;
+  }
+  #content {
+      min-height: calc(100vh - 110px);
+  }
+}
+
+/* LARGE TABLET MORE ONLY */
+@media only screen and (min-width: 1120px) {
+  .content {
+    margin-bottom: 1em;
+  }
+  nav .menu-user .toggle-input:not(checked) ~ .toggle-dropdown {
+    display: inline;
+    right: 0;
+  }
+  
+  nav .menu-user {
+    text-align: right;
+  }
+  nav .menu-user label {
+    display: none;
+  }
+  nav .menu-user li,
+  nav .menu-user li a {
+    display: inline-block;
+    line-height: 50px;
+    padding: 0 5px;
+  }
+   
 }

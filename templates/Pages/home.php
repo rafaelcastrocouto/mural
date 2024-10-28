@@ -77,12 +77,11 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
     <?= $this->element('submenu_navegacao'); ?>
     <div id="content">
         <header>
-            <div class="container">
+            <div>
                 <div class="row">
                     <div class="col">
                         <h1 class="text-center">Boas vindas ao <a href="muralestagios">Mural de Estágios</a></h1>
                         <h2 class="text-center">
-                            <div class="nav">
                                 
                             <?php if (!$session) : ?>
                                 <?= $this->Html->link(__('Login'), ['controller' => 'users', 'action' => 'login'], ['class' => 'button btn-info']) ?>
@@ -90,8 +89,7 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
                             <?php else : ?>
                                 <?= $this->Html->link(__('Minha Conta'), ['controller' => 'users', 'action' => 'view', $session->id], ['class' => 'button']) ?>
                                 <?= $this->Html->link(__('Logout'), ['controller' => 'users', 'action' => 'logout'], ['class' => 'button btn-info']) ?>
-                            <?php endif; ?>    
-                            </div>
+                            <?php endif; ?> 
                         </h2>
                     </div>   
                     <div class="col">
@@ -113,7 +111,7 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
             <div class="message default text-center">
                 <small>Please be aware that this page will not be shown if you turn off debug mode unless you replace templates/Pages/home.php with your own version.</small>
             </div>
-            <div class="container">
+            <div>
                 <div class="content">
                     <div class="row">
                         <div class="column">

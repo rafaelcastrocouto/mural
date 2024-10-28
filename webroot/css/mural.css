@@ -1,27 +1,13 @@
 body {
     font-size: 14px;
-    margin-top: 60px;
 }
 header {
     margin-bottom: 1em;
 } 
-#content {
-    max-width: 110rem;
-    margin: 0 auto;
-    min-height: calc(100vh - 120px);
-}
-@media only screen and (max-width: 1120px) {
-    body {
-        margin-top: 50px;
-    }
-    #content {
-        min-height: calc(100vh - 110px);
-    }
-}
 h1 {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
-    margin-top: 2em;
+    margin: 1em 0;
 }
 h2 {
     font-size: 18px;
@@ -86,7 +72,6 @@ hr {
 .col {
     padding: 2em;
     display: grid;
-    width: 600px;
     place-content: center;
 }
 
