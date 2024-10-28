@@ -5,6 +5,18 @@ $categoria_id = 0;
 if ($session) { $categoria_id = $session->get('categoria_id'); }
 
 ?>
+
+<script>
+    const loadEvent = event => {
+        const navInputs = [...document.querySelectorAll('.toggle-input')];
+        const changeEvent = event => {
+            navInputs.forEach(inputBox => { if (inputBox !== event.target) inputBox.checked = false; });
+        };
+        navInputs.forEach(inputBox => { inputBox.addEventListener('change', changeEvent); });
+    };
+    addEventListener('load', loadEvent);
+</script>
+    
 <nav>
     <?php 
         $logo = $this->Html->image('logoess_horizontal-azul.svg', ['height' => '50', 'width' => '150', 'alt' => 'ESS']);
@@ -18,9 +30,9 @@ if ($session) { $categoria_id = $session->get('categoria_id'); }
 
         <li><?php echo $this->Html->link("Mural", ['controller' => 'Muralestagios', 'action' => 'index']); ?></li>
 
-        <li>
-            <input id="menu_declaracoes_toggler" type="checkbox" class="toggle-input" />
-            <label for="menu_declaracoes_toggler" class="toggle-label">Declarações <span class="toggle-more">▾</span><span class="toggle-less">◂</span></label>
+        <li class="menu-declaracoes">
+            <input id="menu-declaracoes-toggler" type="checkbox" class="toggle-input" />
+            <label for="menu-declaracoes-toggler" class="toggle-label">Declarações <span class="toggle-more">▾</span><span class="toggle-less">◂</span></label>
             
             <menu class="toggle-dropdown">
                 <li><?php echo $this->Html->link("Termo de compromisso", "/Inscricoes/termosolicita"); ?></li>
@@ -38,9 +50,9 @@ if ($session) { $categoria_id = $session->get('categoria_id'); }
             </menu>
         </li>
 
-        <li>
-            <input id="menu_consulta_toggler" type="checkbox" class="toggle-input" />
-            <label for="menu_consulta_toggler" class="toggle-label">Consulta <span class="toggle-more">▾</span><span class="toggle-less">◂</span></label>
+        <li class="menu-consulta">
+            <input id="menu-consulta-toggler" type="checkbox" class="toggle-input" />
+            <label for="menu-consulta-toggler" class="toggle-label">Consulta <span class="toggle-more">▾</span><span class="toggle-less">◂</span></label>
             
             <menu class="toggle-dropdown">
         
@@ -56,9 +68,9 @@ if ($session) { $categoria_id = $session->get('categoria_id'); }
         <li><?php echo $this->Html->link('Grupo Google', 'https://groups.google.com/forum/#!forum/estagio_ess'); ?></li>
         
         <?php if ($categoria_id == 1): ?>
-            <li>
-                <input id="menu_admin_toggler" type="checkbox" class="toggle-input" />
-                <label for="menu_admin_toggler" class="toggle-label">Administração <span class="toggle-more">▾</span><span class="toggle-less">◂</span></label>
+            <li class="menu-admin">
+                <input id="menu-admin-toggler" type="checkbox" class="toggle-input" />
+                <label for="menu-admin-toggler" class="toggle-label">Administração <span class="toggle-more">▾</span><span class="toggle-less">◂</span></label>
                 
                 <menu class="toggle-dropdown">
                     <li><?php echo $this->Html->link('Configuração', '/Configuracoes/view/1'); ?></li>
@@ -73,10 +85,10 @@ if ($session) { $categoria_id = $session->get('categoria_id'); }
             <li><?php echo $this->Html->link('Fale conosco', 'mailto:estagio@ess.ufrj.br'); ?></li>
         <?php endif; ?>
 
-        <li class="user-menu">
+        <li class="menu-user">
             
-            <input id="menu_user_toggler" type="checkbox" class="toggle-input" />
-            <label for="menu_user_toggler" class="toggle-label">Usuário <span class="toggle-more">▾</span><span class="toggle-less">◂</span></label>
+            <input id="menu-user-toggler" type="checkbox" class="toggle-input" />
+            <label for="menu-user-toggler" class="toggle-label">Usuário <span class="toggle-more">▾</span><span class="toggle-less">◂</span></label>
             
             <menu class="toggle-dropdown">
                 

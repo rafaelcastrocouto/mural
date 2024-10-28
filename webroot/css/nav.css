@@ -31,7 +31,7 @@ nav li {
   margin: 0;
   position: relative;
   white-space: nowrap;
-  display: inline;
+  display: inline-block;
 }
 
 nav > menu > li > * {
@@ -119,20 +119,14 @@ nav menu li menu li a {
   nav .toggle-dropdown {
     position: absolute;
   }
-  nav menu li:nth-child(2) menu { /* declaracoes */
-    margin-left: -60px;
+  nav .menu-declaracoes menu {
+    margin-left: -112px;
   }
-  nav menu li:nth-child(3) menu { /* consulta */
-    margin-left: 168px;
-  }
-  nav menu li:nth-child(5) menu {/* admin */
-    margin-left: 300px;
-  }
-  nav menu li:nth-child(6) menu { /* user */
+  nav .menu-user menu {
     margin-left: -20px;
   }
 
-  nav .user-menu {
+  nav .menu-user {
     margin-right: 30px;
     float: right;
   }
