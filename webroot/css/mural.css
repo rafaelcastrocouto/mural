@@ -34,6 +34,18 @@ hr {
     margin: 1em;
     padding-bottom: 2em;
 }
+.content fieldset legend {
+    margin-top: 2em;
+}
+.content fieldset p span {
+    margin-right: 2em;
+}
+.content fieldset p span input {
+    margin-left: 0.5em;
+}
+.content .input.select {
+    margin-bottom: 2em;
+}
 .text-center {
     text-align: center;
 }
