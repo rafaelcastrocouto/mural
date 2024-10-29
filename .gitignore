@@ -51,3 +51,8 @@ nbproject/*
 # yarn
 yarn-debug.log
 yarn-error.log
+
+# Composer files #
+##########################
+composer.phar
+/vendor/
