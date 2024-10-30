@@ -141,6 +141,64 @@ class FolhadeatividadesController extends AppController
     }
 
     /**
+     * Edit method
+     *
+     * @param string|null $id Folhadeatividade id.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function edit($id = null)
+    {
+        $folhadeatividade = $this->Folhadeatividades->get($id, [
+            'contain' => [],
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $folhadeatividade = $this->Folhadeatividades->patchEntity($folhadeatividade, $this->request->getData());
+            if ($this->Folhadeatividades->save($folhadeatividade)) {
+                $this->Flash->success(__('Atividade atualizada.'));
+
+                return $this->redirect(['action' => 'view', $id]);
+            }
+            $this->Flash->error(__('Não foi possível atualizar. Tente outra vez.'));
+        }
+        $estagiarioquery = $this->Folhadeatividades->find()
+            ->where(['Folhadeatividades.id' => $id])
+            ->contain(['Estagiarios' => ['Alunos']])
+            ->select(['Estagiarios.id', 'Alunos.nome']);
+        // pr($estagiarioquery->first());
+        $estagiario = $estagiarioquery->first();
+        // pr($estagiario);
+        // die();
+        $this->set(compact('folhadeatividade', 'estagiario'));
+    }
+
+    /**
+     * Delete method
+     *
+     * @param string|null $id Folhadeatividade id.
+     * @return \Cake\Http\Response|null|void Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function delete($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $folhadeatividade = $this->Folhadeatividades->get($id);
+        $estagiariotabela = $this->fetchTable('Estagiarios');
+        $estagiario = $estagiariotabela->find()
+            ->where(['id' => $folhadeatividade->estagiario_id])
+            ->first();
+
+        if ($this->Folhadeatividades->delete($folhadeatividade)) {
+            $this->Flash->success(__('Registro de atividade excluido.'));
+            return $this->redirect(['controller' => 'estagiarios', 'action' => 'view', $estagiario->id]);
+        } else {
+            $this->Flash->error(__('Registro de atividade nao foi excluido. Tente novamente.'));
+            return $this->redirect(['controller' => 'folhadeatividades', 'action' => 'view', $id]);
+        }
+    }
+
+
+    /**
      * Imprimefolhadeatividades method
      *
      * @param string|null $id Folhadeatividade id.
@@ -220,83 +278,28 @@ class FolhadeatividadesController extends AppController
 
         $this->set(compact('folhadeatividade', 'atividadesrealizadas'));
     }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Folhadeatividade id.
-     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $folhadeatividade = $this->Folhadeatividades->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $folhadeatividade = $this->Folhadeatividades->patchEntity($folhadeatividade, $this->request->getData());
-            if ($this->Folhadeatividades->save($folhadeatividade)) {
-                $this->Flash->success(__('Atividade atualizada.'));
-
-                return $this->redirect(['action' => 'view', $id]);
-            }
-            $this->Flash->error(__('Não foi possível atualizar. Tente outra vez.'));
-        }
-        $estagiarioquery = $this->Folhadeatividades->find()
-            ->where(['Folhadeatividades.id' => $id])
-            ->contain(['Estagiarios' => ['Alunos']])
-            ->select(['Estagiarios.id', 'Alunos.nome']);
-        // pr($estagiarioquery->first());
-        $estagiario = $estagiarioquery->first();
-        // pr($estagiario);
-        // die();
-        $this->set(compact('folhadeatividade', 'estagiario'));
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Folhadeatividade id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $folhadeatividade = $this->Folhadeatividades->get($id);
-        $estagiariotabela = $this->fetchTable('Estagiarios');
-        $estagiario = $estagiariotabela->find()
-            ->where(['id' => $folhadeatividade->estagiario_id])
-            ->first();
-
-        if ($this->Folhadeatividades->delete($folhadeatividade)) {
-            $this->Flash->success(__('Registro de atividade excluido.'));
-            return $this->redirect(['controller' => 'estagiarios', 'action' => 'view', $estagiario->id]);
-        } else {
-            $this->Flash->error(__('Registro de atividade nao foi excluido. Tente novamente.'));
-            return $this->redirect(['controller' => 'folhadeatividades', 'action' => 'view', $id]);
-        }
-    }
-
+    
     public function selecionafolhadeatividades($id = NULL)
     {
 
         /* No login foi capturado o id do estagiário */
         $id = $this->getRequest()->getSession()->read('estagiario_id');
-        $this->layout = false;
+        //$this->layout = false;
         if (is_null($id)) {
             $this->Flash->error(__('Selecione o estagiário e o período da folha de atividades'));
-            return $this->redirect('/estagiarios/index');
+
+            $estagiario = $this->fetchTable('Estagiarios')->find()
+                ->contain(['Alunos', 'Supervisores', 'Instituicoes']);
+            $this->set('estagiario', $this->paginate($estagiario));
+            //return $this->redirect('/estagiarios/index');
+            
         } else {
-            $estagiariostabela = $this->fetchTable('Estagiarios');
-            $estagiario = $estagiariostabela->find()
+            $estagiario = $this->fetchTable('Estagiarios')->find()
                 ->contain(['Alunos', 'Supervisores', 'Instituicoes'])
                 ->where(['Estagiarios.registro' => $this->getRequest()->getSession()->read('registro')])
-                ->orderByDesc('nivel')
-                ->all()
-                ->last();
-            $this->set('estagiario', $estagiario);
-            return $this->redirect(['controller' => 'alunos', 'action' => 'view', $estagiario->aluno_id]);
+                ->orderByDesc('nivel');
+            $this->set('estagiario', $this->paginate($estagiario));
+            //return $this->redirect(['controller' => 'alunos', 'action' => 'view', $estagiario->aluno_id]);
         }
         // pr($estagiarios);
         // die();

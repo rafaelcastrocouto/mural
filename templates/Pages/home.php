@@ -128,15 +128,16 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
                         </div>
                     </div>
 
+                    <h3>Mapa do site</h3>
                     <p>
                         <a href="./administradores">administradores</a> | <a href="./administradores/view/1">view</a> | <a href="./administradores/edit/1">edit</a> | <a href="./administradores/edit/1">add</a><br>
-                        <a href="./alunos">alunos</a> | <a href="./alunos/view/1">view</a> | <a href="./alunos/edit/1">edit</a> | <a href="./alunos/add">add</a> | <a href="./alunos/busca">busca</a><br>
+                        <a href="./alunos">alunos</a> | <a href="./alunos/view/1">view</a> | <a href="./alunos/edit/1">edit</a> | <a href="./alunos/add">add</a> | <a href="./alunos/busca">busca</a> | <a href="./alunos/planilhacress">planilhacress</a> | <a href="./alunos/planilhaseguro">planilhaseguro</a> | <a href="./alunos/cargahoraria">cargahoraria</a> | <a href="./alunos/certificadoperiodo">certificadoperiodo</a><br>
                         <a href="./areas">areas</a> | <a href="./areas/view/1">view</a> | <a href="./areas/edit/1">edit</a> | <a href="./areas/add">add</a><br>
                         <a href="./avaliacoes">avaliacoes</a> | <a href="./avaliacoes/view/1">view</a> | <a href="./avaliacoes/edit/1">edit</a> | <a href="./avaliacoes/add">add</a><br>
                         <a href="./complementos">complementos</a> | <a href="./complementos/view/1">view</a> | <a href="./complementos/edit/1">edit</a> | <a href="./complementos/add">add</a><br>
                         <a href="./configuracoes">configuracoes</a> | <a href="./configuracoes/edit/1">edit</a><br>
                         <a href="./estagiarios">estagiarios</a> | <a href="./estagiarios/view/1">view</a> | <a href="./estagiarios/edit/1">edit</a> | <a href="./estagiarios/add">add</a><br>
-                        <a href="./folhadeatividades">folhadeatividades</a> | <a href="./folhadeatividades/view/1">view</a> | <a href="./folhadeatividades/edit/1">edit</a> | <a href="./folhadeatividades/add">add</a><br>
+                        <a href="./folhadeatividades">folhadeatividades</a> | <a href="./folhadeatividades/view/1">view</a> | <a href="./folhadeatividades/edit/1">edit</a> | <a href="./folhadeatividades/add">add</a> | <a href="./folhadeatividades/selecionafolhadeatividades">selecionafolhadeatividades</a><br>
                         <a href="./inscricoes">inscricoes</a> | <a href="./inscricoes/view/1">view</a> | <a href="./inscricoes/edit/1">edit</a> | <a href="./inscricoes/add">add</a><br>
                         <a href="./instituicoes">instituicoes</a> | <a href="./instituicoes/view/1">view</a> | <a href="./instituicoes/edit/1">edit</a> | <a href="./instituicoes/add">add</a><br>
                         <a href="./muralestagios">muralestagios</a> | <a href="./muralestagios/view/1">view</a> | <a href="./muralestagios/edit/1">edit</a> | <a href="./muralestagios/add">add</a><br>

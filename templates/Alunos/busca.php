@@ -36,11 +36,15 @@ if ($session) {
                 </tr>
             </thead>
             <?php foreach ($alunos as $aluno): ?>
+                <?php 
+                  //pr($aluno);
+                  // die();
+                ?>
                 <tr>
                     <td><?php echo $aluno->registro; ?></td>
                     <td><?php echo $this->Html->link($aluno->nome, ['action' => 'view', $aluno->id]); ?></td>
                     <td><?php echo $aluno->cpf; ?></td>
-                    <td><?php echo $aluno->email; ?></td>
+                    <td><?php echo ($aluno->user and $aluno->user->email) ? $this->Text->autoLinkEmails($aluno->user->email) : '' ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>

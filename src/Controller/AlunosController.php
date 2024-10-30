@@ -18,9 +18,7 @@ class AlunosController extends AppController
      */
     public function index()
     {
-        $alunos = $this->paginate($this->Alunos->find('all', [
-            'contain' => ['Users'],
-        ]));
+        $alunos = $this->paginate($this->Alunos->find('all')->contain(['Users']));
         $this->set(compact('alunos'));
     }
 
@@ -144,7 +142,8 @@ class AlunosController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function planilhacress($id = null) {
+    public function planilhacress($id = null) 
+    {
 
         $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
         $this->set('periodo', $periodo);
@@ -197,7 +196,8 @@ class AlunosController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function planilhaseguro($id = null) {
+    public function planilhaseguro($id = null) 
+    {
         
         $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
         $this->set('periodo', $periodo);
@@ -266,14 +266,16 @@ class AlunosController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
 
- public function busca($nome = null) {
+ public function busca($nome = null) 
+    {
+     
         $nome = $this->getRequest()->getQuery('nome');
-
+     
         if ($nome) {
             //pr($nome);
             //die();
-            $condicaoaluno = ['Alunos.nome LIKE' => '%' . $nome . '%'];
-            $alunos = $this->Alunos->find('all')->where($condicaoaluno);
+            $condition = ['Alunos.nome LIKE' => '%' . $nome . '%'];
+            $alunos = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
             // pr($alunos);
             // die();
             if (empty($alunos)) {
@@ -291,7 +293,8 @@ class AlunosController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function buscaDre() {
+    public function buscaDre() 
+    {
 
         // pr($this->data);
         if (!empty($this->data['Alunos']['registro'])) {
@@ -317,7 +320,8 @@ class AlunosController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function busca_email() {
+    public function busca_email() 
+    {
 
         if (!empty($this->data)) {
             // pr($this->data);
@@ -344,8 +348,8 @@ class AlunosController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function busca_cpf() {
-
+    public function busca_cpf() 
+    {
         if (!empty($this->data)) {
             // pr($this->data);
             // die();
@@ -366,7 +370,8 @@ class AlunosController extends AppController
     }
 
     
-    public function certificadoperiodo($id = null) {
+    public function certificadoperiodo($id = null) 
+    {
         /**
          * Autorização. Verifica se o aluno cadastrado no Users está acessando seu próprio registro.
          */
@@ -397,7 +402,8 @@ class AlunosController extends AppController
                 }
             }
         } elseif ($this->getRequest()->getAttribute('identity')['categoria_id'] == 1) {
-            echo "Administrador autorizado";
+            
+            $this->Flash->info(__("Administrador autorizado"));
         } else {
             $this->Flash->error(__('2. Operação não autorizada.'));
             return $this->redirect(['controller' => 'Muralestagios', 'action' => 'index']);
