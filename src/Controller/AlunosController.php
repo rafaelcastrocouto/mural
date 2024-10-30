@@ -267,28 +267,20 @@ class AlunosController extends AppController
      */
 
  public function busca($nome = null) {
-
-        // Para paginar os resultados da busca por nome
-        //if (isset($nome)) {
-        //    $this->request->data['Alunos']['nome'] = $nome;
-        //}
-     
         $nome = $this->getRequest()->getQuery('nome');
 
         if ($nome) {
-        
-            //$this->Alunos->contain();
-            $condicaoaluno = ['Alunos.nome like' => '%' . $nome . '%'];
-            $alunos = $this->Alunos->find('all', ['conditions' => $condicaoaluno]);
+            //pr($nome);
+            //die();
+            $condicaoaluno = ['Alunos.nome LIKE' => '%' . $nome . '%'];
+            $alunos = $this->Alunos->find('all')->where($condicaoaluno);
             // pr($alunos);
             // die();
             if (empty($alunos)) {
                 // Nenhum resultado
                 $this->Flash->error(__("Não foram encontrados registros"));
             } else {
-                $this->Paginator->settings = ['order' => 'Alunos.nome ASC', 'limit' => 10, 'conditions' => $condicaoaluno];
-                $this->set('alunos', $this->Paginator->paginate('alunos'));
-                $this->set('nome', $this->data['Alunos']['nome']);
+                $this->set('alunos', $this->paginate('alunos'));
             }
         }
     }
