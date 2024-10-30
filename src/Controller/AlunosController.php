@@ -269,33 +269,24 @@ class AlunosController extends AppController
  public function busca($nome = null) {
 
         // Para paginar os resultados da busca por nome
-        if (isset($nome)) {
-            $this->request->data['Alunos']['nome'] = $nome;
-        }
+        //if (isset($nome)) {
+        //    $this->request->data['Alunos']['nome'] = $nome;
+        //}
+     
+        $nome = $this->getRequest()->getQuery('nome');
 
-        if (!empty($this->data['Alunos']['nome'])) {
-
-            $this->Alunos->contain();
-            $condicaoalunonovo = ['Alunos.nome like' => '%' . $this->data['Alunos']['nome'] . '%'];
-            $alunos = $this->Alunos->find('all', [
-                'conditions' => $condicaoalunonovo
-            ]);
+        if ($nome) {
+        
+            //$this->Alunos->contain();
+            $condicaoaluno = ['Alunos.nome like' => '%' . $nome . '%'];
+            $alunos = $this->Alunos->find('all', ['conditions' => $condicaoaluno]);
             // pr($alunos);
             // die();
-            // Nenhum resultado
             if (empty($alunos)) {
-                $this->loadModel('Aluno');
-                $condicaoaluno = ['Aluno.nome like' => '%' . $this->data['Alunos']['nome'] . '%'];
-                $alunos = $this->Aluno->find('all', ['conditions' => $condicaoaluno]);
-                if (empty($alunonovos)) {
-                    $this->Flash->error(__("Não foram encontrados registros"));
-                } else {
-                    $this->Paginator->settings = ['order' => ['Alunos.nome ASC'], 'limit' => 10, 'conditions' => $condicaoalunonovo];
-                    $this->set('alunos', $this->Paginator->paginate('alunos'));
-                    $this->set('nome', $this->data['Aluno']['nome']);
-                }
+                // Nenhum resultado
+                $this->Flash->error(__("Não foram encontrados registros"));
             } else {
-                $this->Paginator->settings = ['order' => 'Alunos.nome ASC', 'limit' => 10, 'conditions' => $condicaoalunonovo];
+                $this->Paginator->settings = ['order' => 'Alunos.nome ASC', 'limit' => 10, 'conditions' => $condicaoaluno];
                 $this->set('alunos', $this->Paginator->paginate('alunos'));
                 $this->set('nome', $this->data['Alunos']['nome']);
             }
@@ -317,7 +308,7 @@ class AlunosController extends AppController
             ]);
             // pr($alunos);
             // die('alunos');
-                // pr($alunonovos);
+                // pr($alunos);
             if (empty($alunos)) {
                 $this->Flash->error(__("Não foram encontrados registros do aluno"));
                 $this->redirect(['controller' => 'Alunoss', 'action' => 'busca_dre']);

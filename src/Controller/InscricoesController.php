@@ -81,7 +81,7 @@ class InscricoesController extends AppController
         $aluno = $this->fetchTable('Alunos')->find()->where(['user_id' => $user_id ])->first();
         
         if (!$aluno) {
-            $session = $this->request->getAttribute('identity');
+            //$session = $this->request->getAttribute('identity');
             $this->Flash->error(__('Erro ao selecionar aluno'));
             //if ($session->get('categoria_id') == 1) {
             //    return    $this->redirect(['controller' => 'Users', 'action' => 'alternarusuario']);

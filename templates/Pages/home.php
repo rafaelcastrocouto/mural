@@ -109,7 +109,7 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
         <main class="main">
             
             <div class="message default text-center">
-                <small>Please be aware that this page will not be shown if you turn off debug mode unless you replace templates/Pages/home.php with your own version.</small>
+                <small>Please be aware that this page will not be shown if you turn off debug mode.</small>
             </div>
             <div>
                 <div class="content">
@@ -130,7 +130,7 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
 
                     <p>
                         <a href="./administradores">administradores</a> | <a href="./administradores/view/1">view</a> | <a href="./administradores/edit/1">edit</a> | <a href="./administradores/edit/1">add</a><br>
-                        <a href="./alunos">alunos</a> | <a href="./alunos/view/1">view</a> | <a href="./alunos/edit/1">edit</a> | <a href="./alunos/add">add</a><br>
+                        <a href="./alunos">alunos</a> | <a href="./alunos/view/1">view</a> | <a href="./alunos/edit/1">edit</a> | <a href="./alunos/add">add</a> | <a href="./alunos/busca">busca</a><br>
                         <a href="./areas">areas</a> | <a href="./areas/view/1">view</a> | <a href="./areas/edit/1">edit</a> | <a href="./areas/add">add</a><br>
                         <a href="./avaliacoes">avaliacoes</a> | <a href="./avaliacoes/view/1">view</a> | <a href="./avaliacoes/edit/1">edit</a> | <a href="./avaliacoes/add">add</a><br>
                         <a href="./complementos">complementos</a> | <a href="./complementos/view/1">view</a> | <a href="./complementos/edit/1">edit</a> | <a href="./complementos/add">add</a><br>
@@ -141,10 +141,10 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
                         <a href="./instituicoes">instituicoes</a> | <a href="./instituicoes/view/1">view</a> | <a href="./instituicoes/edit/1">edit</a> | <a href="./instituicoes/add">add</a><br>
                         <a href="./muralestagios">muralestagios</a> | <a href="./muralestagios/view/1">view</a> | <a href="./muralestagios/edit/1">edit</a> | <a href="./muralestagios/add">add</a><br>
                         <a href="./professores">professores</a> | <a href="./professores/view/1">view</a> | <a href="./professores/edit/1">edit</a> | <a href="./professores/add">add</a><br>
-                        <a href="./supervisores">supervisores</a> | 
-                        <a href="./turmaestagios">turmaestagios</a> | 
-                        <a href="./users">users</a> | 
-                        <a href="./visitas">visitas</a>
+                        <a href="./supervisores">supervisores</a> | <a href="./supervisores/view/1">view</a> | <a href="./supervisores/edit/1">edit</a> | <a href="./supervisores/add">add</a><br>
+                        <a href="./turmaestagios">turmaestagios</a> | <a href="./turmaestagios/view/1">view</a> | <a href="./turmaestagios/edit/1">edit</a> | <a href="./turmaestagios/add">add</a><br>
+                        <a href="./users">users</a> | <a href="./users/view/1">view</a> | <a href="./users/edit/1">edit</a> | <a href="./users/add">add</a><br>
+                        <a href="./visitas">visitas</a> | <a href="./visitas/view/1">view</a> | <a href="./visitas/edit/1">edit</a> | <a href="./visitas/add">add</a><br>
                     </p>
 
                     

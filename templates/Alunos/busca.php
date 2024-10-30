@@ -1,15 +1,12 @@
-<?= $this->element('submenu_alunos'); ?>
 
-<?php if ($this->Session->read('id_categoria') == '1'): ?>
-    <p>
-        <?php echo $this->Html->link('Busca por Nome', '/alunos/busca', ['role' => 'button', 'class' => 'btn btn-info']); ?>
-        <?php echo $this->Html->link('Busca por DRE', '/alunos/busca_dre', ['role' => 'button', 'class' => 'btn btn-info']); ?>
-        <?php echo $this->Html->link('Busca por Email', '/alunos/busca_email', ['role' => 'button', 'class' => 'btn btn-info']); ?>
-        <?php echo $this->Html->link('Busca por CPF', '/alunos/busca_cpf', ['role' => 'button', 'class' => 'btn btn-info']); ?>
-    </p>
-<?php endif; ?>
+<?php 
 
-<?php
+$categoria_id = 0;
+
+if ($session) {
+    $categoria_id = $session->get('categoria_id');
+}
+
 // pr($alunos);
 // die();
 ?>
@@ -33,24 +30,21 @@
                 <th><?php echo $this->Paginator->sort('email', 'E-mail'); ?></th>
             </tr>
         </thead>
-        <?php foreach ($alunos as $c_aluno): ?>
+        <?php foreach ($alunos as $aluno): ?>
             <tr>
-                <td><?php echo $c_aluno['Aluno']['registro']; ?></td>
-                <td><?php echo $this->Html->link($c_aluno['Aluno']['nome'], '/alunos/view/' . $c_aluno['Aluno']['id']); ?></td>
-                <td><?php echo $c_aluno['Aluno']['cpf']; ?></td>
-                <td><?php echo $c_aluno['Aluno']['email']; ?></td>
+                <td><?php echo $aluno['Aluno']['registro']; ?></td>
+                <td><?php echo $this->Html->link($aluno['Aluno']['nome'], '/alunos/view/' . $aluno['Aluno']['id']); ?></td>
+                <td><?php echo $aluno['Aluno']['cpf']; ?></td>
+                <td><?php echo $aluno['Aluno']['email']; ?></td>
             </tr>
         <?php endforeach; ?>
     </table>
 
 <?php else: ?>
-
-    <?php echo $this->Form->create('Aluno') ?>
-    <?php echo $this->Form->input('nome', array('label' => ['text' => 'Digite o nome do aluno'], 'class' => 'form-control')); ?>
-    <div class='row justify-content-between'>
-        <div class='col-auto'>
-            <?php echo $this->Form->submit('Confirma', ['type' => 'Submit', 'label' => ['text' => 'Confirma'], 'class' => 'btn btn-primary']); ?>
-            <?php echo $this->Form->end(); ?>
-        </div>
+    <div>
+        <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
+        <?php echo $this->Form->control('nome', ['label' => ['text' => 'Digite o nome do aluno'], 'class' => 'form-control']); ?>
+        <?php echo $this->Form->submit('Confirma', ['type' => 'Submit', 'label' => ['text' => 'Confirma'], 'class' => 'button']); ?>
+        <?php echo $this->Form->end(); ?>
     </div>
 <?php endif; ?>

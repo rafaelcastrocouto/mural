@@ -7,10 +7,8 @@
 
 <?php
 $categoria_id = 2; // aluno
-$categorias_permitidas = $categorias->all()->toArray();
 $user_session = $this->request->getAttribute('identity');
 if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
-if ($categoria_id == 1) { $categorias_permitidas[1] = 'administrador'; }
 ?>
     
 <div>
@@ -32,7 +30,7 @@ if ($categoria_id == 1) { $categorias_permitidas[1] = 'administrador'; }
                 <?php
                     echo $this->Form->control('email', ['type' => 'email']);
                     echo $this->Form->control('password');
-                    echo $this->Form->control('categoria', ['options' => $categorias_permitidas, 'value' => $user->categoria_id, 'class' => 'form-control']);
+                    echo $this->Form->control('categoria', ['options' => $categorias, 'value' => $user->categoria_id, 'class' => 'form-control']);
                     echo $this->Form->control('timestamp', ['type' => 'datetime-local', 'value' => $user->timestamp ? h($user->timestamp) : '']);
                 ?>
             </fieldset>

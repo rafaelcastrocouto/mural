@@ -35,10 +35,11 @@ class ProfessoresController extends AppController
     {
         $this->paginate = [
             'Estagiarios' => ['limit' => 5, 'scope' => 'estagiario'],
-            'Muralestagios' => ['limit' => 5, 'scope' => 'muralestagio']
+            /*'Muralestagios' => ['limit' => 5, 'scope' => 'muralestagio']*/
         ];
         $professor = $this->Professores->get($id, [
-            'contain' => [ 'Users' ],
+            'contain' => [ 'Users', 'Muralestagios' => ['Instituicoes'] ],
+            
         ]);
         $estagiarios = $this->paginate($this->Professores->Estagiarios->find('all', [
             'contain' => ['Alunos', 'Instituicoes', 'Supervisores', 'Turmaestagios'],
@@ -48,7 +49,7 @@ class ProfessoresController extends AppController
             
             ]);
         }));
-
+        /*
         $muralestagios = $this->paginate($this->Professores->Muralestagios->find('all', [
             'contain' => ['Instituicoes'],
         ])->innerJoinWith('Professores', function (\Cake\ORM\Query $query) use ($professor) {
@@ -57,8 +58,8 @@ class ProfessoresController extends AppController
             
             ]);
         }));
-        
-        $this->set(compact('professor', 'estagiarios', 'muralestagios'));
+        */
+        $this->set(compact('professor', 'estagiarios'/*, 'muralestagios'*/));
     }
 
     /**

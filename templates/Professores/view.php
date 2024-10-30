@@ -247,12 +247,9 @@
             </div>
             <?php endif; ?>
             
-            <?php if (!empty($muralestagios)) : ?>
+            <?php if (!empty($professor->muralestagios)) : ?>
             <div class="related">
                 <h4><?= __('Related Muralestagios') ?></h4>
-                <div class="paginator">
-                    <?= $this->element('paginator'); ?>
-                </div>
                 <div class="table_wrap">
                     <table>
                         <tr>
@@ -266,7 +263,7 @@
                             <th><?= __('DataSelecao') ?></th>
                             <th><?= __('DataInscricao') ?></th>
                         </tr>
-                        <?php foreach ($muralestagios as $muralestagio) : ?>
+                        <?php foreach ($professor->muralestagios as $muralestagio) : ?>
                         <tr>
                             <td class="actions">
                                 <?= $this->Html->link(__('Ver'), ['controller' => 'Muralestagios', 'action' => 'view', $muralestagio->id]) ?>
@@ -294,10 +291,6 @@
                         </tr>
                         <?php endforeach; ?>
                     </table>
-                </div>
-                <div class="paginator">
-                    <?= $this->element('paginator'); ?>
-                    <?= $this->element('paginator_count'); ?>
                 </div>
             </div>
             <?php endif; ?>
