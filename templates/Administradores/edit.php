@@ -24,7 +24,7 @@ if ($session) {
             </aside>
             <?= $this->Form->create($administrador) ?>
             <fieldset>
-                <h3><?= __('Editando Administrador') ?></h3>
+                <h3><?= __('Editando administrador_' . $administrador->id) ?></h3>
                 <?php
                     if ($categoria_id == 1):
                        echo $this->Form->control('user_id', ['type' => 'number']); 

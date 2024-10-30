@@ -17,7 +17,7 @@
     </aside>
     <?= $this->Form->create($area) ?>
     <fieldset>
-        <h3><?= __('Editando Area') ?></h3>
+        <h3><?= __('Editando area_' . $area->id) ?></h3>
         <?php
             echo $this->Form->control('area');
         ?>

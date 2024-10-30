@@ -16,7 +16,7 @@
     </aside>
 
     <div class="table_wrap">
-        <h3><?= h($folhadeatividade->atividade) ?></h3>
+        <h3><?= h('folhadeatividade_' . $folhadeatividade->id) ?></h3>
         <table class="table table-striped table-hover table-responsive">
             <tr>
                 <th><?= __('Atividade') ?></th>

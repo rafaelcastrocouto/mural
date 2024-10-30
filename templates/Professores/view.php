@@ -3,6 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Professor $professor
  */
+
 ?>
 <div>
     <div class="column-responsive column-80">
@@ -177,9 +178,12 @@
             </div>
             <?php endif; ?>
             
+            <?php if (!empty($estagiarios)) : ?>
             <div class="related">
                 <h4><?= __('Related Estagiarios') ?></h4>
-                <?php if (!empty($professor->estagiarios)) : ?>
+                <div class="paginator">
+                    <?= $this->element('paginator'); ?>
+                </div>
                 <div class="table_wrap">
                     <table>
                         <tr>
@@ -198,7 +202,8 @@
                             <th><?= __('Nota') ?></th>
                             <th><?= __('Ch') ?></th>
                         </tr>
-                        <?php foreach ($professor->estagiarios as $estagiario) : ?>
+
+                        <?php foreach ($estagiarios as $estagiario) : ?>
                         <tr>
                             <td class="actions">
                                 <?= $this->Html->link(__('Ver'), ['controller' => 'Estagiarios', 'action' => 'view', $estagiario->id]) ?>
@@ -231,14 +236,23 @@
                             <td><?= h($estagiario->ch) ?></td>
                         </tr>
                         <?php endforeach; ?>
+                        
                     </table>
                 </div>
-                <?php endif; ?>
+                <div class="paginator">
+                    
+                    <?= $this->element('paginator'); ?>
+                    <?= $this->element('paginator_count'); ?>
+                </div>
             </div>
+            <?php endif; ?>
             
-            <?php if (!empty($professor->muralestagios)) : ?>
+            <?php if (!empty($muralestagios)) : ?>
             <div class="related">
                 <h4><?= __('Related Muralestagios') ?></h4>
+                <div class="paginator">
+                    <?= $this->element('paginator'); ?>
+                </div>
                 <div class="table_wrap">
                     <table>
                         <tr>
@@ -252,7 +266,7 @@
                             <th><?= __('DataSelecao') ?></th>
                             <th><?= __('DataInscricao') ?></th>
                         </tr>
-                        <?php foreach ($professor->muralestagios as $muralestagio) : ?>
+                        <?php foreach ($muralestagios as $muralestagio) : ?>
                         <tr>
                             <td class="actions">
                                 <?= $this->Html->link(__('Ver'), ['controller' => 'Muralestagios', 'action' => 'view', $muralestagio->id]) ?>
@@ -280,6 +294,10 @@
                         </tr>
                         <?php endforeach; ?>
                     </table>
+                </div>
+                <div class="paginator">
+                    <?= $this->element('paginator'); ?>
+                    <?= $this->element('paginator_count'); ?>
                 </div>
             </div>
             <?php endif; ?>

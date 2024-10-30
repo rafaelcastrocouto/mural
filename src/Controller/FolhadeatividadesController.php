@@ -83,7 +83,9 @@ class FolhadeatividadesController extends AppController
 
         if (empty($folhadeatividades)) {
             $this->Flash->error(__('Selecione o estagiário e o período da folha de atividades'));
-            return $this->redirect(['controller' => 'folhadeatividades', 'action' => 'add', '?' => ['estagiario_id' => $estagiario_id]]);
+            //return $this->redirect(['controller' => 'folhadeatividades', 'action' => 'add', '?' => ['estagiario_id' => $estagiario_id]]);
+        } else {
+            $this->set('folhadeatividades', $folhadeatividades);
         }
 
         $folhadeatividadeentity = $this->Folhadeatividades->newEmptyEntity();
@@ -107,8 +109,8 @@ class FolhadeatividadesController extends AppController
             // die('post');
         }
 
-        $this->set('folhadeatividades', $folhadeatividades);
-        $this->set('estagiario', $estagiario);
+        
+        if (!empty($folhadeatividades)) { $this->set('estagiario', $estagiario); }
     }
 
     /**

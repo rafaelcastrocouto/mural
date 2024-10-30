@@ -22,11 +22,11 @@
             </aside>
             <?= $this->Form->create($inscricao) ?>
             <fieldset>
-                <h3><?= __('Editar Inscricao') ?></h3>
+                <h3><?= __('Editando Inscricao do aluno(a) ' . $inscricao->aluno->nome) ?></h3>
                 <?php
                     echo $this->Form->control('registro');
-                    echo $this->Form->control('aluno_id', ['type' => 'number']);
-                    echo $this->Form->control('mural_estagio_id', ['type' => 'number']);
+                    echo $this->Form->control('aluno_id', ['type' => 'number', 'label' => 'aluno_id']);
+                    echo $this->Form->control('mural_estagio_id', ['type' => 'number', 'label' => 'mural_estagio_id']);
                     echo $this->Form->control('data');
                     echo $this->Form->control('periodo');
                     echo $this->Form->control('timestamp');

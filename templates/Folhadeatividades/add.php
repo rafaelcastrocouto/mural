@@ -11,7 +11,7 @@
 <div class="areas add content">
     <aside>
         <div class="nav">
-            <?= $this->Html->link(__('Listar atividades'), ['controller' => 'folhadeatividades', 'action' => 'index', '?' => ['estagiario_id' => $estagiario->id]], ['class' => 'button']) ?>
+            <?= $this->Html->link(__('Listar atividades'), ['controller' => 'folhadeatividades', 'action' => 'index', '?' => ['estagiario_id' => isset($estagiario) ? $estagiario->id : '1']], ['class' => 'button']) ?>
         </div>
     </aside>
 
@@ -50,14 +50,14 @@
                 </table>
             </div>
         <?php else: ?>
-            <?php echo 'Sem atividades' . '<br>' ?>
+            <p><?php echo 'Sem atividades' . '<br>' ?></p>
         <?php endif; ?>
 
         <?= $this->Form->create(null, ['type' => 'post']) ?>
         <fieldset>
-            <h3><?= __('Adiciona uma atividade') ?></h3>
+            <h3><?= __('Adicionar uma atividade') ?></h3>
             <?php
-            echo $this->Form->control('estagiario_id', ['options' => [$estagiario->id => $estagiario->aluno->nome]], 'readonly');
+            echo isset($estagiario) ? $this->Form->control('estagiario_id', ['options' => [$estagiario->id => $estagiario->aluno->nome]], 'readonly') : $this->Form->control('estagiario_id', ['type' => 'number']);
             echo $this->Form->control('dia');
             echo $this->Form->control('inicio', ['label' => ['text' => 'Horário de início']]);
             echo $this->Form->control('final', ['label' => ['text' => 'Horário de finalização']]);
@@ -65,7 +65,7 @@
             echo $this->Form->control('horario', ['type' => 'hidden', 'value' => null]);
             ?>
         </fieldset>
-        <?= $this->Form->button(__('Enviar'), ['class' => 'button']) ?>
+        <?= $this->Form->button(__('Adicionar'), ['class' => 'button']) ?>
         <?= $this->Form->end() ?>
 
     </div>

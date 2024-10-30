@@ -145,7 +145,7 @@ class InscricoesController extends AppController
     public function edit($id = null)
     {
         $inscricao = $this->Inscricoes->get($id, [
-            'contain' => [],
+            'contain' => ['Alunos'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $inscricao = $this->Inscricoes->patchEntity($inscricao, $this->request->getData());

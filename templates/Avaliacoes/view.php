@@ -52,11 +52,12 @@ if ($professora) {
                 </div>
             </aside>
             <div class="table_wrap">
-                <h3>Avaliação da(o) estagiario(a) <?= $avaliacao->hasValue('estagiario') ? $this->Html->link($avaliacao->estagiario->aluno->nome, ['controller' => 'Estagiarios', 'action' => 'view', $avaliacao->estagiario->id]) : '' ?></h3>
-                <p>Campo de estágio <?= $avaliacao->estagiario->instituicao->instituicao ?>.</p> 
-                <p>Supervisor(a) <?= $supervisora ?>.</p>
-                <p>Cress <?= $cress ?>.</p>
-                <p>Período de estágio <?= $avaliacao->estagiario->periodo ?>. </p>
+                <h3><?= h('avaliacao_' . $avaliacao->id) ?></h3>
+                <p>Avaliação da(o) estagiario(a): <?= $avaliacao->hasValue('estagiario') ? $this->Html->link($avaliacao->estagiario->aluno->nome, ['controller' => 'Estagiarios', 'action' => 'view', $avaliacao->estagiario->id]) : '' ?></p>
+                <p>Campo de estágio: <?= $avaliacao->estagiario->instituicao->instituicao ?>.</p> 
+                <p>Supervisor(a): <?= $supervisora ?>.</p>
+                <p>Cress: <?= $cress ?>.</p>
+                <p>Período de estágio: <?= $avaliacao->estagiario->periodo ?>. </p>
                 <p>Nível: <?= $avaliacao->estagiario->nivel ?>.</p>
                 <p>Supervisão acadêmica: <?= $professora ?>.</p>
                 <table>

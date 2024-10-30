@@ -19,7 +19,7 @@
             </aside>
             <?= $this->Form->create($estagiario) ?>
             <fieldset>
-                <h3><?= __('Editando Estagiario') ?></h3>
+                <h3><?= __('Editando estagiario_' . $estagiario->id) ?></h3>
                 <?php
                     echo $this->Form->control('aluno_id', ['options' => $alunos, 'class' => 'form-control']);
                     echo $this->Form->control('registro');

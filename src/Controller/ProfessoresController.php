@@ -33,15 +33,32 @@ class ProfessoresController extends AppController
      */
     public function view($id = null)
     {
+        $this->paginate = [
+            'Estagiarios' => ['limit' => 5, 'scope' => 'estagiario'],
+            'Muralestagios' => ['limit' => 5, 'scope' => 'muralestagio']
+        ];
         $professor = $this->Professores->get($id, [
-            'contain' => [
-                'Estagiarios' => ['Alunos', 'Instituicoes', 'Supervisores', 'Turmaestagios'], 
-                'Muralestagios' => ['Instituicoes'], 
-                'Users'
-            ],
+            'contain' => [ 'Users' ],
         ]);
+        $estagiarios = $this->paginate($this->Professores->Estagiarios->find('all', [
+            'contain' => ['Alunos', 'Instituicoes', 'Supervisores', 'Turmaestagios'],
+        ])->innerJoinWith('Professores', function (\Cake\ORM\Query $query) use ($professor) {
+            return $query->where([
+                'professor_id' => $professor->id,
+            
+            ]);
+        }));
 
-        $this->set(compact('professor'));
+        $muralestagios = $this->paginate($this->Professores->Muralestagios->find('all', [
+            'contain' => ['Instituicoes'],
+        ])->innerJoinWith('Professores', function (\Cake\ORM\Query $query) use ($professor) {
+            return $query->where([
+                'professor_id' => $professor->id,
+            
+            ]);
+        }));
+        
+        $this->set(compact('professor', 'estagiarios', 'muralestagios'));
     }
 
     /**

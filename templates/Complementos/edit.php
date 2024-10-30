@@ -19,7 +19,7 @@
             </aside>
             <?= $this->Form->create($complemento) ?>
             <fieldset>
-                <h3><?= __('Editando Complemento') ?></h3>
+                <h3><?= __('Editando complemento_' . $complemento->id) ?></h3>
                 <?php
                     echo $this->Form->control('periodo_especial');
                 ?>
