@@ -275,14 +275,16 @@ class AlunosController extends AppController
             //pr($nome);
             //die();
             $condition = ['Alunos.nome LIKE' => '%' . $nome . '%'];
-            $alunos = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
-            // pr($alunos);
+            //$condition = ['Alunos.nome' => $nome];
+            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
+            // pr($busca);
             // die();
-            if (empty($alunos)) {
+            if (iterator_count($busca) == 0) {
                 // Nenhum resultado
                 $this->Flash->error(__("Não foram encontrados registros"));
             } else {
-                $this->set('alunos', $this->paginate('alunos'));
+                $alunos = $this->paginate($busca);
+                $this->set(compact('alunos'));
             }
         }
     }

@@ -43,7 +43,7 @@ hr {
 .content fieldset p span input {
     margin-left: 0.5em;
 }
-.content .input.select {
+.content .input.text input {
     margin-bottom: 2em;
 }
 .text-center {
