@@ -134,7 +134,51 @@ class AlunosController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    
+    /**
+     * Busca method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function busca() 
+    {
+        $nome = $this->getRequest()->getQuery('nome');
+        if ($nome) {
+            $condition = ['Alunos.nome LIKE' => '%' . $nome . '%'];
+            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
+            $alunos = $this->paginate($busca);
+            $this->set(compact('alunos'));
+            return;
+        }
 
+        $dre = $this->getRequest()->getQuery('dre');
+        if ($dre) {
+            $condition = ['Alunos.registro' => $dre];
+            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
+            $alunos = $this->paginate($busca);
+            $this->set(compact('alunos'));
+            return;
+        }
+                
+        $cpf = $this->getRequest()->getQuery('cpf');
+        if ($cpf) {
+            $condition = ['Alunos.cpf' => $cpf];
+            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
+            $alunos = $this->paginate($busca);
+            $this->set(compact('alunos'));
+            return;
+        }
+        
+        $email = $this->getRequest()->getQuery('email');
+        if ($email) {
+            $condition = ['Users.email' => $email];
+            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
+            $alunos = $this->paginate($busca);
+            $this->set(compact('alunos'));
+            return;
+        }
+    }
+    
     /**
      * Planilhacress method
      *
@@ -256,53 +300,6 @@ class AlunosController extends AppController
         $instituicao = $this->fetchTable("Configuracoes")->find()->first()['instituicao'];
         $this->set('instituicao', $instituicao);
         // die();
-    }
-    
-    /**
-     * Certificadoperiodo method
-     *
-     * @param string|null $nome Aluno nome.
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-
- public function busca($nome = null) 
-    {
-        $nome = $this->getRequest()->getQuery('nome');
-        if ($nome) {
-            $condition = ['Alunos.nome LIKE' => '%' . $nome . '%'];
-            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
-            $alunos = $this->paginate($busca);
-            $this->set(compact('alunos'));
-            return;
-        }
-
-        $dre = $this->getRequest()->getQuery('dre');
-        if ($dre) {
-            $condition = ['Alunos.registro' => $dre];
-            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
-            $alunos = $this->paginate($busca);
-            $this->set(compact('alunos'));
-            return;
-        }
-                
-        $cpf = $this->getRequest()->getQuery('cpf');
-        if ($cpf) {
-            $condition = ['Alunos.cpf' => $cpf];
-            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
-            $alunos = $this->paginate($busca);
-            $this->set(compact('alunos'));
-            return;
-        }
-        
-        $email = $this->getRequest()->getQuery('email');
-        if ($email) {
-            $condition = ['Users.email' => $email];
-            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
-            $alunos = $this->paginate($busca);
-            $this->set(compact('alunos'));
-            return;
-        }
     }
     
     public function certificadoperiodo($id = null) 
@@ -486,6 +483,43 @@ class AlunosController extends AppController
         $alunos = $this->Alunos->find()->contain(['Estagiarios']);
 
         $this->set('alunos', $this->paginate($alunos));
+    }
+
+    /**
+     * Cargahoraria method
+     *
+     * @return \Cake\Http\Response|null|void Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */    
+    public function folhasolicita()
+    {
+        $categoria_id = 0;
+        $session = $this->request->getAttribute('identity');
+        if ($session) { $categoria_id = $session->get('categoria_id'); }
+
+        
+        if ($categoria_id != 2) {
+
+            // pr($this->data);
+            // die();
+            if (empty($this->data)) {
+                //$this->data = $this->Alunos->read();
+                
+                $this->Flash->info(__('No data'));
+            } else {
+                
+                $this->Flash->info(__('Redirect to folhadeatividadespdf registro'));
+                // pr($this->data);
+                // die();
+                // $this->Session->write('menu_aluno', 'estagiario');
+                //$this->Session->write('numero', $this->data['Aluno']['registro']);
+                // $this->redirect('folhadeatividades');
+                //$this->redirect(['action' => 'folhadeatividadespdf', $this->data['Aluno']['registro'], 'ext' => 'pdf', 'folhadeatividades']);
+            }
+        } else {
+            $this->Flash->info(__('Redirect to folhadeatividadespdf numero'));
+            //$this->redirect(['action' => 'folhadeatividadespdf', $this->Session->read('numero'), 'ext' => 'pdf', 'folhadeatividades']);
+        }
     }
     
 }
