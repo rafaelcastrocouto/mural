@@ -43,9 +43,46 @@ hr {
 .content fieldset p span input {
     margin-left: 0.5em;
 }
-.content .input.text input {
-    margin-bottom: 2em;
+.content .input input {
+    margin-bottom: 1em;
 }
+
+.tabset {
+    display: flex;
+    flex-wrap: wrap;
+}
+.tabset > label {
+    border: 1px solid var(--color-lightgray);
+    border-bottom: 0;
+    margin: 0;
+    margin-right: 1em;
+    padding: 0.4em 1em;
+    border-radius: 3px 3px 0 0;
+    opacity: 0.6;
+    cursor: pointer;
+    order: 1;
+}
+.tabset input[name="tabs"] {
+    display: none;
+}
+.tabset input[name="tabs"]:checked + label {
+    background: var(--color-white);
+    opacity: 1;
+    position: relative;
+    top: 1px;
+}
+.tabset .tab-content {
+    padding: 1em;
+    border: 1px solid var(--color-lightgray);
+    display: none;
+    order: 999;
+    flex-grow: 1;
+    width: 100%;
+}
+.tabset input[name="tabs"]:checked + label + .tab-content {
+    display: block;
+}
+
 .text-center {
     text-align: center;
 }

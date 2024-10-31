@@ -268,109 +268,42 @@ class AlunosController extends AppController
 
  public function busca($nome = null) 
     {
-     
         $nome = $this->getRequest()->getQuery('nome');
-     
         if ($nome) {
-            //pr($nome);
-            //die();
             $condition = ['Alunos.nome LIKE' => '%' . $nome . '%'];
-            //$condition = ['Alunos.nome' => $nome];
             $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
-            // pr($busca);
-            // die();
-            if (iterator_count($busca) == 0) {
-                // Nenhum resultado
-                $this->Flash->error(__("Não foram encontrados registros"));
-            } else {
-                $alunos = $this->paginate($busca);
-                $this->set(compact('alunos'));
-            }
+            $alunos = $this->paginate($busca);
+            $this->set(compact('alunos'));
+            return;
         }
-    }
-    
-    /**
-     * Busca_dre
-     *
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function buscaDre() 
-    {
 
-        // pr($this->data);
-        if (!empty($this->data['Alunos']['registro'])) {
-            $alunos = $this->Alunos->find('first', [
-                'conditions' => ['Alunos.registro' => $this->data['Alunos']['registro']]
-            ]);
-            // pr($alunos);
-            // die('alunos');
-                // pr($alunos);
-            if (empty($alunos)) {
-                $this->Flash->error(__("Não foram encontrados registros do aluno"));
-                $this->redirect(['controller' => 'Alunoss', 'action' => 'busca_dre']);
-            } else {
-                $this->Flash->success(__('Estudante'));
-                $this->redirect(['controller' => 'Alunos', 'action' => 'view', $alunos['Aluno']['id']]);
-            }
+        $dre = $this->getRequest()->getQuery('dre');
+        if ($dre) {
+            $condition = ['Alunos.registro' => $dre];
+            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
+            $alunos = $this->paginate($busca);
+            $this->set(compact('alunos'));
+            return;
+        }
+                
+        $cpf = $this->getRequest()->getQuery('cpf');
+        if ($cpf) {
+            $condition = ['Alunos.cpf' => $cpf];
+            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
+            $alunos = $this->paginate($busca);
+            $this->set(compact('alunos'));
+            return;
+        }
+        
+        $email = $this->getRequest()->getQuery('email');
+        if ($email) {
+            $condition = ['Users.email' => $email];
+            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
+            $alunos = $this->paginate($busca);
+            $this->set(compact('alunos'));
+            return;
         }
     }
-    
-    /**
-     * Busca_email method
-     *
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function busca_email() 
-    {
-
-        if (!empty($this->data)) {
-            // pr($this->data);
-            // die();
-            $alunos = $this->Alunos->findAllByEmail($this->data['Alunos']['email']);
-            // pr($alunos);
-            // die("Sem registro");
-            if (empty($alunos)) {
-                $this->Flash->error(__("Não foram encontrados registros do email aluno"));
-                // Teria que buscar na tabela alunos_novos
-                // $alunos_novos = $this->Aluno_novo->findAllByRegistro($this->data['Aluno']['registro']);
-                // if (empty($alunos_novos)
-                $this->redirect(['controller' => 'Alunoss', 'action' => 'busca']);
-            } else {
-                $this->set('alunos', $alunos);
-                // $this->set('alunos',$alunos_novos);
-            }
-        }
-    }
-    
-    /**
-     * Busca_cpf method
-     *
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function busca_cpf() 
-    {
-        if (!empty($this->data)) {
-            // pr($this->data);
-            // die();
-            $alunos = $this->Alunos->findAllByCpf($this->data['Alunos']['cpf']);
-            // pr($alunos);
-            // die("Sem registro");
-            if (empty($alunos)) {
-                $this->Flash->error(__("Não foram encontrados registros do CPF"));
-                // Teria que buscar na tabela alunos_novos
-                // $alunos_novos = $this->Aluno_novo->findAllByRegistro($this->data['Aluno']['registro']);
-                // if (empty($alunos_novos)
-                $this->redirect(['controller' => 'Alunoss', 'action' => 'busca_cpf']);
-            } else {
-                $this->set('alunos', $alunos);
-                // $this->set('alunos',$alunos_novos);
-            }
-        }
-    }
-
     
     public function certificadoperiodo($id = null) 
     {
