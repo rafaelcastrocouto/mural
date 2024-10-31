@@ -76,7 +76,7 @@ $email = $this->getRequest()->getQuery('email');
             <?php if ($nome): ?><h3>Resultado da busca para o termo "<?= $nome ?>"</h3><?php endif; ?>
             <?php if ($dre):  ?><h3>Resultado da busca para o DRE <?= $dre ?></h3><?php endif; ?>
             <?php if ($cpf):  ?><h3>Resultado da busca para o CPF <?= $cpf ?></h3><?php endif; ?>
-            <?php if ($email):  ?><h3>Resultado da busca para o email <?= $cpf ?></h3><?php endif; ?>
+            <?php if ($email):  ?><h3>Resultado da busca para o email <?= $email ?></h3><?php endif; ?>
     
             <div class="paginator">
                 <?= $this->element('paginator'); ?>
