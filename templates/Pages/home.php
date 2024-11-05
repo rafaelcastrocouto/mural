@@ -138,7 +138,7 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
                         <a href="./configuracoes">configuracoes</a> | <a href="./configuracoes/edit/1">edit</a><br>
                         <a href="./estagiarios">estagiarios</a> | <a href="./estagiarios/view/1">view</a> | <a href="./estagiarios/edit/1">edit</a> | <a href="./estagiarios/add">add</a><br>
                         <a href="./folhadeatividades">folhadeatividades</a> | <a href="./folhadeatividades/view/1">view</a> | <a href="./folhadeatividades/edit/1">edit</a> | <a href="./folhadeatividades/add">add</a> | <a href="./folhadeatividades/selecionafolhadeatividades">selecionafolhadeatividades</a><br>
-                        <a href="./inscricoes">inscricoes</a> | <a href="./inscricoes/view/1">view</a> | <a href="./inscricoes/edit/1">edit</a> | <a href="./inscricoes/add">add</a><br>
+                        <a href="./inscricoes">inscricoes</a> | <a href="./inscricoes/view/1">view</a> | <a href="./inscricoes/edit/1">edit</a> | <a href="./inscricoes/add">add</a> | <a href="./inscricoes/termocompromisso">termocompromisso</a><br>
                         <a href="./instituicoes">instituicoes</a> | <a href="./instituicoes/view/1">view</a> | <a href="./instituicoes/edit/1">edit</a> | <a href="./instituicoes/add">add</a><br>
                         <a href="./muralestagios">muralestagios</a> | <a href="./muralestagios/view/1">view</a> | <a href="./muralestagios/edit/1">edit</a> | <a href="./muralestagios/add">add</a><br>
                         <a href="./professores">professores</a> | <a href="./professores/view/1">view</a> | <a href="./professores/edit/1">edit</a> | <a href="./professores/add">add</a><br>

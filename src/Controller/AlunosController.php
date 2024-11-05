@@ -356,8 +356,9 @@ class AlunosController extends AppController
          * Calculo a partir do ingresso em que periodo o aluno esté neste momento.
          */
         /* Capturo o periodo do calendario academico atual */
-        $configuracaotabela = $this->fetchTable('Configuracoes');
-        $periodoacademicoatual = $configuracaotabela->find()->select(['periodo_calendario_academico'])->first();
+        //$configuracaotabela = $this->fetchTable('Configuracoes');
+        //$periodoacademicoatual = $configuracaotabela->find()->select(['periodo_calendario_academico'])->first();
+        $periodoacademicoatual = $this->fetchTable("Configuracoes")->find()->first()['periodo_calendario_academico'];
         // pr($periodoacademicoatual);
         // die();
         /**
