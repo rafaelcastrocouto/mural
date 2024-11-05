@@ -20,7 +20,7 @@ $categoria_id = $session->get('categoria_id');
 					<?php endif; ?>
 		        </div>
 		    </aside>
-            <h3>muralestagios_<?= h($muralestagio->id) ?></h3>
+            <h3>estagio_<?= h($muralestagio->id) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>

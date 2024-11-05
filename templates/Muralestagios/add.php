@@ -14,7 +14,7 @@
             </aside>
             <?= $this->Form->create($muralestagio) ?>
             <fieldset>
-                <h3><?= __('Adicionar nova vaga de estagio') ?></h3>
+                <h3><?= __('Adicionar vagas de estagio') ?></h3>
                 <?php
                     echo $this->Form->control('instituicao_id', ['options' => $instituicoes, 'empty' => true, 'class' => 'form-control']);
                     echo $this->Form->control('email');

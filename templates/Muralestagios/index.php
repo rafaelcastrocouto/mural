@@ -45,7 +45,7 @@ $categoria_id = $session ? (int) $session->get('categoria_id') : 2;
 	
 	<aside>
 		<div class="nav">
-		    <?= $this->Html->link(__('Novo mural'), ['action' => 'add'], ['class' => 'button']) ?>
+		    <?= $this->Html->link(__('Novas vagas'), ['action' => 'add'], ['class' => 'button']) ?>
 		</div>
 	</aside>
 	

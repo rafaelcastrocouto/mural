@@ -19,7 +19,7 @@
             </aside>
             <?= $this->Form->create($muralestagio) ?>
             <fieldset>
-                <legend><?= __('Editando Muralestagio') ?></legend>
+                <h3><?= __('Editando estagio_' . $muralestagio->id) ?></h3>
                 <?php
                     echo $this->Form->control('instituicao');
                     echo $this->Form->control('convenio');
