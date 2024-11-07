@@ -73,27 +73,36 @@ class UsersTable extends Table
      */
     public function validationDefault(Validator $validator): Validator
     {
+
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
 
         $validator
             ->email('email')
-            ->allowEmptyString('email');
+            ->notEmptyString('email', 'Erro: Email vazio');
 
         $validator
             ->scalar('password')
             ->maxLength('password', 40)
-            ->allowEmptyString('password');
+            ->notEmptyString('password', 'Erro: senha vazia');
 
         $validator
             ->scalar('categoria_id')
-            ->notEmptyString('categoria_id');
+            ->notEmptyString('categoria_id', 'Erro: categoria vazia')
+            ->add('role', 'inList', [
+                'rule' => ['inList', [2, 3, 4]],
+                'message' => 'Erro: categoria falsa'
+            ]);
 
         $validator
-            ->dateTime('timestamp')
-            ->notEmptyDateTime('timestamp');
-
+            ->dateTime('created')
+            ->notEmptyDateTime('created');
+        
+        $validator
+            ->dateTime('modified')
+            ->notEmptyDateTime('modified');
+        
         return $validator;
     }
 

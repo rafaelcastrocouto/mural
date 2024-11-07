@@ -30,8 +30,12 @@
                     <td><?= h($user->categoria->categoria); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Timestamp') ?></th>
-                    <td><?= h($user->timestamp) ?></td>
+                    <th><?= __('Criado') ?></th>
+                    <td><?= h($user->created) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Modificado') ?></th>
+                    <td><?= h($user->modified) ?></td>
                 </tr>
             </table>
 

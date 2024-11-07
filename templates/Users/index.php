@@ -24,7 +24,8 @@
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
                     <th><?= $this->Paginator->sort('categoria_id', 'Categoria') ?></th>
-                    <th><?= $this->Paginator->sort('timestamp') ?></th>
+                    <th><?= $this->Paginator->sort('created', 'Criado') ?></th>
+                    <th><?= $this->Paginator->sort('modified', 'Modificado') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,12 +34,13 @@
                     <td class="actions">
                         <?= $this->Html->link(__('Ver'), ['action' => 'view', $user->id]) ?>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $user->id]) ?>
-                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete user_{0}?', $user->id)]) ?>
                     </td>
                     <td><?= $this->Html->link($user->id, ['action' => 'view', $user->id]) ?></td>
                     <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
                     <td><?= h($user->categoria->categoria) ?></td>
-                    <td><?= $user->timestamp ? h($user->timestamp) : '' ?></td>
+                    <td><?= $user->created ? h($user->created) : '' ?></td>
+                    <td><?= $user->modified ? h($user->modified) : '' ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

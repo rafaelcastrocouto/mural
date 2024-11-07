@@ -20,14 +20,15 @@ class UsersController extends AppController {
     
         $this->Authentication->allowUnauthenticated(['login', 'add']);
     }
+
     /**
      * paginate array
      */
     protected array $paginate = [
         'sortableFields' => [
-            'id', 'email', 'categoria_id', 'Alunos.nome', 'Professores.nome', 'Supervisores.nome', 'timestamp'
+            'id', 'email', 'categoria_id', 'Alunos.nome', 'Professores.nome', 'Supervisores.nome', 'created', 'modified'
         ]
-    ];
+    ];   
     
     /**
      * Index method
@@ -68,9 +69,10 @@ class UsersController extends AppController {
 
                 return $this->redirect(['action' => 'index']);
             }
+            
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        
+        // filter input list options
         $session = $this->request->getAttribute('identity');
         if ($session and $session->get('categoria_id') == 1) {
             $categorias = $this->Users->Categorias->find('list');
@@ -99,9 +101,6 @@ class UsersController extends AppController {
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $alunos = $this->Users->Alunos->find('list');
-        $supervisores = $this->Users->Supervisores->find('list');
-        $professores = $this->Users->Professores->find('list');
         
         $session = $this->request->getAttribute('identity');
         if ($session and $session->get('categoria_id') == 1) {
@@ -109,8 +108,7 @@ class UsersController extends AppController {
         } else {
             $categorias = $this->Users->Categorias->find('list')->where(['id !=' => 1]);            
         }
-        
-        $this->set(compact('user', 'categorias', 'alunos', 'supervisores', 'professores'));
+        $this->set(compact('user', 'categorias'));
     }
 
     /**

@@ -41,32 +41,6 @@ class AdministradoresController extends AppController
     }
 
     /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $administrador = $this->Administradores->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $administrador = $this->Administradores->patchEntity($administrador, $this->request->getData());
-
-            if (!$administrador->user_id) { 
-                $user = $this->Authentication->getIdentity();
-                $administrador->user_id = $user->get('id'); 
-            }
-            
-            if ($this->Administradores->save($administrador)) {
-                $this->Flash->success(__('The administrador has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The administrador could not be saved. Please, try again.'));
-        }
-        $this->set(compact('administrador'));
-    }
-
-    /**
      * Edit method
      *
      * @param string|null $id Administrador id.

@@ -24,6 +24,8 @@ if ($session) {
                     if ($categoria_id == 1):
                         $val = $this->request->getParam('pass') ? $this->request->getParam('pass')[0] : '';
                         echo $this->Form->control('user_id', ['type' => 'number', 'value' => $val ]); 
+                    else:
+                        echo $this->Form->control('user_id', ['type' => 'number', 'value' => $session->get('id'), 'hidden' => true ]); 
                     endif;
                     echo $this->Form->control('nome');
                     echo $this->Form->control('registro');
