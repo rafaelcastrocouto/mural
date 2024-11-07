@@ -7,14 +7,14 @@ if ($session) { $categoria_id = $session->get('categoria_id'); }
 ?>
 
 <script>
-    const loadEvent = event => {
+    const navLoadEvent = event => {
         const navInputs = [...document.querySelectorAll('.toggle-input')];
         const changeEvent = event => {
             navInputs.forEach(inputBox => { if (inputBox !== event.target) inputBox.checked = false; });
         };
         navInputs.forEach(inputBox => { inputBox.addEventListener('change', changeEvent); });
     };
-    addEventListener('load', loadEvent);
+    addEventListener('load', navLoadEvent);
 </script>
     
 <nav>

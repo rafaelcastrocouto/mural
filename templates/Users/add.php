@@ -10,7 +10,9 @@ $categoria_id = 0;
 $user_session = $this->request->getAttribute('identity');
 if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
 ?>
-
+    
+<?= $this->element('show_password'); ?>
+    
 <div class="users form content">
     <aside>
         <div class="nav">
@@ -24,8 +26,9 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
     <fieldset>
         <h3><?= __('Adicionando usuário') ?></h3>
         <?php
-            echo $this->Form->control('email', ['required' => true]);
-            echo $this->Form->control('password', ['label' => 'Senha', 'required' => true]);
+            echo $this->Form->control('email', ['required' => true, 'autocomplete' => 'username']);
+            echo $this->Form->control('password', ['label' => 'Senha', 'required' => true, 'autocomplete' => 'new-password' ]);
+            echo '<div class="checkbox show-password"><input type="checkbox" id="show-password"> <label for="show-password" id="show-password-label">Mostrar senha</label></div>';
             echo $this->Form->control('categoria_id', ['options' => $categorias, 'value' => '2', 'class' => 'form-control', 'required' => true]);
         ?>
     </fieldset>

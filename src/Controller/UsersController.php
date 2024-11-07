@@ -98,7 +98,7 @@ class UsersController extends AppController {
     public function edit($id = null) {
         $session = $this->request->getAttribute('identity');
         $authAdmin = ($session and $session->get('categoria_id') == 1);
-        $authUser = ($session and $session->get('id') == $id)
+        $authUser = ($session and $session->get('id') == $id);
 
         $user = $this->Users->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
