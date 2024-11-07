@@ -61,9 +61,15 @@ class UsersController extends AppController {
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function add() {
+        $session = $this->request->getAttribute('identity');
+        $authAdmin = ($session and $session->get('categoria_id') == 1);
+        
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
+            $user = $this->Users->patchEntity($user, $this->request->getData(), [
+                'fields' => ['categoria_id', 'password', 'email'],
+                'accessibleFields' => ['password' => true]
+            ]);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -73,8 +79,7 @@ class UsersController extends AppController {
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         // filter input list options
-        $session = $this->request->getAttribute('identity');
-        if ($session and $session->get('categoria_id') == 1) {
+        if ($authAdmin) {
             $categorias = $this->Users->Categorias->find('list');
         } else {
             $categorias = $this->Users->Categorias->find('list')->where(['id !=' => 1]);            
@@ -91,9 +96,16 @@ class UsersController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null) {
+        $session = $this->request->getAttribute('identity');
+        $authAdmin = ($session and $session->get('categoria_id') == 1);
+        $authUser = ($session and $session->get('id') == $id)
+
         $user = $this->Users->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
+            $user = $this->Users->patchEntity($user, $this->request->getData(), [
+                'fields' => ['categoria_id', 'password', 'email'],
+                'accessibleFields' => ['password' => ($authAdmin OR $authUser)]
+            ]);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -102,8 +114,7 @@ class UsersController extends AppController {
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         
-        $session = $this->request->getAttribute('identity');
-        if ($session and $session->get('categoria_id') == 1) {
+        if ($authAdmin) {
             $categorias = $this->Users->Categorias->find('list');
         } else {
             $categorias = $this->Users->Categorias->find('list')->where(['id !=' => 1]);            

@@ -47,6 +47,8 @@ class UsersTable extends Table
         $this->setDisplayField('email');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('Timestamp');
+        
         $this->hasOne('Administradores', [
             'foreignKey' => 'user_id',
         ]);

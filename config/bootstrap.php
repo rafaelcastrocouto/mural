@@ -181,6 +181,8 @@ Security::setSalt(Configure::consume('Security.salt'));
  * If you don't use these checks you can safely remove this code
  * and the mobiledetect package from composer.json.
  */
+
+/*
 ServerRequest::addDetector('mobile', function ($request) {
     $detector = new \Detection\MobileDetect();
 
@@ -191,7 +193,7 @@ ServerRequest::addDetector('tablet', function ($request) {
 
     return $detector->isTablet();
 });
-
+*/
 /*
  * You can enable default locale format parsing by adding calls
  * to `useLocaleParser()`. This enables the automatic conversion of

@@ -26,7 +26,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
         <?php
             echo $this->Form->control('email', ['required' => true]);
             echo $this->Form->control('password', ['label' => 'Senha', 'required' => true]);
-            echo $this->Form->control('categoria', ['options' => $categorias, 'value' => '2', 'class' => 'form-control', 'required' => true]);
+            echo $this->Form->control('categoria_id', ['options' => $categorias, 'value' => '2', 'class' => 'form-control', 'required' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Adicionar'), ['class' => 'button']) ?>
