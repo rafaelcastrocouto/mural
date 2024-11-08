@@ -19,6 +19,7 @@ class UsersController extends AppController {
         parent::beforeFilter($event);
     
         $this->Authentication->allowUnauthenticated(['login', 'add']);
+        $this->Authorization->authorizeModel('login', 'add');
     }
 
     /**
@@ -35,7 +36,8 @@ class UsersController extends AppController {
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function index() {
+    public function index()
+    {
         $query = $this->Users->find()->contain(['Categorias']);
         $users = $this->paginate($query);
         $this->set(compact('users'));
@@ -48,10 +50,12 @@ class UsersController extends AppController {
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null) {
+    public function view($id = null)
+    {
         $user = $this->Users->get($id, [
             'contain' => ['Categorias', 'Administradores', 'Alunos', 'Supervisores', 'Professores'],
         ]);
+        $this->Authorization->authorize($user);
         $this->set(compact('user'));
     }
 
@@ -60,11 +64,14 @@ class UsersController extends AppController {
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add() {
+    public function add()
+    {
         $session = $this->request->getAttribute('identity');
         $authAdmin = ($session and $session->get('categoria_id') == 1);
         
         $user = $this->Users->newEmptyEntity();
+        $this->Authorization->authorize($user);
+        
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData(), [
                 'fields' => ['categoria_id', 'password', 'email'],
@@ -95,20 +102,27 @@ class UsersController extends AppController {
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         $session = $this->request->getAttribute('identity');
         $authAdmin = ($session and $session->get('categoria_id') == 1);
         $authUser = ($session and $session->get('id') == $id);
-
+        
         $user = $this->Users->get($id);
+        $this->Authorization->authorize($user);
+        
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData(), [
-                'fields' => ['categoria_id', 'password', 'email'],
-                'accessibleFields' => ['password' => ($authAdmin OR $authUser)]
-            ]);
+            $opt = ['fields' => ['categoria_id', 'email']];
+            $data = $this->request->getData();
+            if ($data['password']) {
+                $opt = [
+                    'fields' => ['categoria_id', 'email', 'password'],
+                    'accessibleFields' => ['password' => ($authAdmin OR $authUser)]
+                ];
+            } else { unset($data['password']); }
+            $user = $this->Users->patchEntity($user, $data, $opt);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
-
                 return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
@@ -119,6 +133,8 @@ class UsersController extends AppController {
         } else {
             $categorias = $this->Users->Categorias->find('list')->where(['id !=' => 1]);            
         }
+
+        $user['password'] = '';    
         $this->set(compact('user', 'categorias'));
     }
 
@@ -129,9 +145,11 @@ class UsersController extends AppController {
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null) {
+    public function delete($id = null) 
+    {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
+        $this->Authorization->authorize($user);
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('The user has been deleted.'));
         } else {
@@ -172,7 +190,8 @@ class UsersController extends AppController {
      * Alternarusuario method
      * https://book.cakephp.org/authentication/3/en/impersonation.html
      */
-    public function alternarusuario() {
+    public function alternarusuario() 
+    {
 
         // pr($this->data);
         // die();

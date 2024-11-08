@@ -28,13 +28,10 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
     <fieldset>
         <h3><?= __('Editando user_') . $user->id ?></h3>
         <?php
-            echo $this->Form->control('email', ['type' => 'email', 'required' => true]);
-            if ($categoria_id != 1):
-                echo $this->Form->control('current_password', ['id' => 'current-password', 'label' => 'Senha atual', 'autocomplete' => 'current-password']);
-            endif;
-            echo $this->Form->control('password1', ['id' => 'new-password', 'label' => 'Nova senha', 'required' => true]);
-            echo $this->Form->control('password2', ['label' => 'Digite novamente', 'required' => true]);
-            echo $this->Form->control('categoria', ['options' => $categorias, 'value' => $user->categoria_id, 'class' => 'form-control', 'required' => true]);
+            echo $this->Form->control('email', ['type' => 'email', 'autocomplete' => 'username',]);
+            echo $this->Form->control('password', ['value' => '', 'label' => 'Nova senha', 'autocomplete' => 'new-password', 'id' => 'password', 'required' => false]);
+            echo $this->element('show_password');
+            echo $this->Form->control('categoria_id', ['options' => $categorias, 'value' => $user->categoria_id, 'class' => 'form-control']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Editar'), ['class' => 'button']) ?>

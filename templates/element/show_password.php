@@ -1,23 +1,27 @@
 <!-- templates/element/show_password.php -->
+<?php /* Require previous <input type=password id=password>  */ ?>
+<div class="checkbox show-password">
+  <input type="checkbox" id="show-password"> <label for="show-password" id="show-password-label">Mostrar senha</label>
+</div>
+
 <script>
-  const passwordLoadEvent = event => {
+  addEventListener('load', event => {
+    const show = 'Mostrar senha';
+    const hide = 'Ocultar senha';
     const passwordInput = document.getElementById('password');
     const togglePasswordCheckbox = document.getElementById('show-password');
     const togglePasswordLabel = document.getElementById('show-password-label');
-    
-    togglePasswordCheckbox.addEventListener('click', togglePassword);
-    
-    function togglePassword() {
+    const togglePassword = () => {
       if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
-        togglePasswordLabel.textContent = 'Ocultar senha';
-        togglePasswordCheckbox.setAttribute('aria-label', 'Ocultar senha');
+        togglePasswordLabel.textContent = hide;
+        togglePasswordCheckbox.setAttribute('aria-label', hide);
       } else {
         passwordInput.type = 'password';
-        togglePasswordLabel.textContent = 'Mostrar senha';
-        togglePasswordCheckbox.setAttribute('aria-label', 'Mostrar senha');
+        togglePasswordLabel.textContent = show;
+        togglePasswordCheckbox.setAttribute('aria-label', show);
       }
-    }
-  };
-  addEventListener('load', passwordLoadEvent);
+    };
+    togglePasswordCheckbox.addEventListener('click', togglePassword);
+  });
 </script>

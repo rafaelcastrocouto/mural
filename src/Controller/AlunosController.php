@@ -31,10 +31,10 @@ class AlunosController extends AppController
      */
     public function view($id = null)
     {
-        $condition = ['Alunos.id' => $id];
+        $condition = ['Alunos.id IS' => $id];
         
         $registro = $this->getRequest()->getQuery('registro');
-        if ($registro) { $condition = ['Alunos.registro' => $registro]; }
+        if ($registro) { $condition = ['Alunos.registro IS' => $registro]; }
             
         $contained = [
             'Estagiarios' => ['Instituicoes', 'Supervisores', 'Professores'], 

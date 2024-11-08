@@ -7,14 +7,13 @@ if ($session) { $categoria_id = $session->get('categoria_id'); }
 ?>
 
 <script>
-    const navLoadEvent = event => {
+    addEventListener('load', () => {
         const navInputs = [...document.querySelectorAll('.toggle-input')];
-        const changeEvent = event => {
-            navInputs.forEach(inputBox => { if (inputBox !== event.target) inputBox.checked = false; });
-        };
-        navInputs.forEach(inputBox => { inputBox.addEventListener('change', changeEvent); });
-    };
-    addEventListener('load', navLoadEvent);
+        const unselect = (inputBox, event) => { if (inputBox !== event.target) inputBox.checked = false };
+        const unselectAll = (event) => { navInputs.forEach( (inputBox) => { unselect(inputBox, event) } ) };
+        navInputs.forEach( (inputBox) => { inputBox.addEventListener('change', unselectAll) });
+        addEventListener('click', unselectAll);
+    });
 </script>
     
 <nav>

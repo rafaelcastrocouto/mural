@@ -52,6 +52,7 @@ echo "mural repository cloned"
 
 cd /var/www/html/mural
 sudo chmod -R a+w /var/www/html/mural
+sudo php /var/www/html/mural/src/Console/Installer.php
 composer update
 echo "composer requirements installed"
 
@@ -101,3 +102,4 @@ sudo apt -y install phpmyadmin
 sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
 sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
 echo "phpmyadmin configured"
+

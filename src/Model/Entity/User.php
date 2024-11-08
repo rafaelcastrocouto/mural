@@ -3,8 +3,13 @@ declare(strict_types=1);
 
 namespace App\Model\Entity;
 
+use ArrayAccess;
 use Cake\ORM\Entity;
 use Authentication\PasswordHasher\DefaultPasswordHasher;
+use Authentication\IdentityInterface as AuthenticationIdentity;
+use Authorization\AuthorizationService;
+use Authorization\IdentityInterface as AuthorizationIdentity;
+use Authorization\Policy\ResultInterface;
 
 /**
  * User Entity
@@ -16,7 +21,7 @@ use Authentication\PasswordHasher\DefaultPasswordHasher;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  */
-class User extends Entity
+class User extends Entity implements AuthorizationIdentity, AuthenticationIdentity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -46,6 +51,56 @@ class User extends Entity
     {
         $hasher = new DefaultPasswordHasher();
         return $hasher->hash($password);
+    }
+    
+    /**
+     * Authentication\IdentityInterface method
+     */
+    public function getIdentifier(): array|string|int|null
+    {
+        return $this->id;
+    }
+
+    /**
+     * Authentication\IdentityInterface method
+     */
+    public function getOriginalData(): ArrayAccess|array
+    {
+        return $this;
+    }
+
+    /**
+     * Authorization\IdentityInterface method
+     */
+    public function can(string $action, mixed $resource): bool
+    {
+        return $this->authorization->can($this, $action, $resource);
+    }
+
+     /**
+     * Authorization\IdentityInterface method
+     */   
+    public function canResult(string $action, mixed $resource): ResultInterface
+    {
+        return $this->authorization->canResult($this, $action, $resource);
+    }
+    
+    /**
+     * Authorization\IdentityInterface method
+     */
+    public function applyScope(string $action, mixed $resource, mixed ...$optionalArgs): mixed
+    {
+        return $this->authorization->applyScope($this, $action, $resource, ...$optionalArgs);
+    }
+
+    /**
+     * Setter to be used by the middleware.
+     */
+    public function setAuthorization(AuthorizationService $service)
+    {
+        $this->authorization = $service;
+
+        return $this;
     }
 
 }
