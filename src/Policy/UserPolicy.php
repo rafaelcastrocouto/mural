@@ -14,12 +14,6 @@ class UserPolicy
     }
   }
   
-  public function canLogin() 
-  { 
-    return true; 
-  }
-  
-  
   public function canAdd()
   {
       return true;

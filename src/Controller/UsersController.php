@@ -19,7 +19,7 @@ class UsersController extends AppController {
         parent::beforeFilter($event);
     
         $this->Authentication->allowUnauthenticated(['login', 'add']);
-        $this->Authorization->authorizeModel('login', 'add');
+        $this->Authorization->authorizeModel('Users');
     }
 
     /**
@@ -38,7 +38,7 @@ class UsersController extends AppController {
      */
     public function index()
     {
-        $query = $this->Users->find()->contain(['Categorias']);
+        $query = $this->Authorization->applyScope($this->Users->find()->contain(['Categorias']));
         $users = $this->paginate($query);
         $this->set(compact('users'));
     }
@@ -66,6 +66,8 @@ class UsersController extends AppController {
      */
     public function add()
     {
+        $this->Authorization->skipAuthorization();
+        
         $session = $this->request->getAttribute('identity');
         $authAdmin = ($session and $session->get('categoria_id') == 1);
         
@@ -149,11 +151,16 @@ class UsersController extends AppController {
     {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
-        $this->Authorization->authorize($user);
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
-        } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+
+        try {
+            $this->Authorization->authorize($user);
+            if ($this->Users->delete($user)) {
+                $this->Flash->success(__('The user has been deleted.'));
+            } else {
+                $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            }
+        } catch (ForbiddenException $error) {
+            $this->Flash->error(__('Authorization error.'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -164,6 +171,7 @@ class UsersController extends AppController {
      */
     public function login()
     {
+        $this->Authorization->skipAuthorization();
         $result = $this->Authentication->getResult();
         // If the user is logged in send them away.
         if ($result->isValid()) {
@@ -181,6 +189,7 @@ class UsersController extends AppController {
      */
     public function logout()
     {
+        $this->Authorization->skipAuthorization();
         $this->Authentication->logout();
         return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     }

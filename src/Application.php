@@ -62,9 +62,6 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         // Call parent to load bootstrap from files.
         parent::bootstrap();
 
-        $this->addPlugin('Authentication');
-        $this->addPlugin('Authorization');
-
         if (PHP_SAPI !== 'cli') {
             FactoryLocator::add(
                 'Table',
@@ -109,8 +106,8 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             // Add the AuthorizationMiddleware *after* routing, body parser
             // and authentication middleware.
             ->add(new AuthorizationMiddleware($this, [
-                'identityDecorator' => function (AuthorizationServiceInterface $authorization, ArrayAccess $identity) {
-                    return $identity->setAuthorization($authorization);
+                'identityDecorator' => function (AuthorizationServiceInterface $authorization, Model\Entity\User $user) {
+                    return $user->setAuthorization($authorization);
                 },
                 'requireAuthorizationCheck' => true,
                 'unauthorizedHandler' => [
@@ -143,6 +140,8 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     public function services(ContainerInterface $container): void
     {
         // $this->addPlugin('DebugKit');
+        $this->addPlugin('Authentication');
+        $this->addPlugin('Authorization');
     }
 
     /**

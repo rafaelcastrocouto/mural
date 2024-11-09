@@ -25,6 +25,10 @@ use Cake\Controller\Controller;
  * will inherit them.
  *
  * @link https://book.cakephp.org/5/en/controllers.html#the-app-controller
+ *
+ * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication
+ * @property \Authorization\Controller\Component\AuthorizationComponent $Authorization
+ *
  */
 class AppController extends Controller
 {
@@ -44,6 +48,7 @@ class AppController extends Controller
      
         $this->loadComponent('Authentication.Authentication');
         $this->loadComponent('Authorization.Authorization');
+     
         $this->loadComponent('Flash');
      
 
