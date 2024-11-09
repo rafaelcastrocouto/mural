@@ -32,6 +32,16 @@ use Cake\View\Exception\MissingTemplateException;
 class PagesController extends AppController
 {
     /**
+     * beforeFilter method
+     */
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+    
+        $this->Authentication->allowUnauthenticated(['display']);
+        
+    }
+    /**
      * Displays a view
      *
      * @param string ...$path Path segments.
@@ -69,14 +79,5 @@ class PagesController extends AppController
             }
             throw new NotFoundException();
         }
-    }
-    /**
-     * beforeFilter method
-     */
-    public function beforeFilter(\Cake\Event\EventInterface $event)
-    {
-        parent::beforeFilter($event);
-    
-        $this->Authentication->allowUnauthenticated(['display']);
     }
 }

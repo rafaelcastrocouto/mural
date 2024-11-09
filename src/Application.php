@@ -21,11 +21,15 @@ use Cake\Core\ContainerInterface;
 use Cake\Datasource\FactoryLocator;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
 use Cake\Http\BaseApplication;
+use Cake\Http\ServerRequest;
+use Cake\Http\MiddlewareQueue;
 use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\ORM\Locator\TableLocator;
+use Cake\Routing\Router;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use App\Policy\RequestPolicy;
 use Authentication\AuthenticationService;
 use Authentication\AuthenticationServiceInterface;
 use Authentication\AuthenticationServiceProviderInterface;
@@ -36,10 +40,11 @@ use Authorization\AuthorizationService;
 use Authorization\AuthorizationServiceInterface;
 use Authorization\AuthorizationServiceProviderInterface;
 use Authorization\Middleware\AuthorizationMiddleware;
+use Authorization\Middleware\RequestAuthorizationMiddleware;
+use Authorization\Policy\ResolverCollection;
+use Authorization\Policy\MapResolver;
 use Authorization\Policy\OrmResolver;
 use Psr\Http\Message\ResponseInterface;
-use Cake\Http\MiddlewareQueue;
-use Cake\Routing\Router;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -52,6 +57,7 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class Application extends BaseApplication implements AuthenticationServiceProviderInterface, AuthorizationServiceProviderInterface
 {
+    
     /**
      * Load all the application configuration and bootstrap logic.
      *
@@ -110,16 +116,10 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                     return $user->setAuthorization($authorization);
                 },
                 'requireAuthorizationCheck' => true,
-                'unauthorizedHandler' => [
-                    'className' => 'Authorization.Redirect',
-                    'url' => '/users/login',
-                    'queryParam' => 'redirectUrl',
-                    'exceptions' => [
-                        MissingIdentityException::class,
-                        OtherException::class
-                    ]
-                ]
+                'unauthorizedHandler' => ['className' => 'Authorization.CakeRedirect']
             ]))
+
+            ->add(new RequestAuthorizationMiddleware())
         
             // Cross Site Request Forgery (CSRF) Protection Middleware
             // // https://book.cakephp.org/5/en/security/csrf.html#cross-site-request-forgery-csrf-middleware
@@ -139,7 +139,6 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
      */
     public function services(ContainerInterface $container): void
     {
-        // $this->addPlugin('DebugKit');
         $this->addPlugin('Authentication');
         $this->addPlugin('Authorization');
     }
@@ -153,16 +152,18 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
     {
         $service = new AuthenticationService();
-    
+
+        $loginURL = Router::url([
+            'prefix' => false,
+            'plugin' => null,
+            'controller' => 'Users',
+            'action' => 'login',
+        ]);
+        
         // Define where users should be redirected to when they are not authenticated
         $service->setConfig([
-            'unauthenticatedRedirect' => Router::url([
-                    'prefix' => false,
-                    'plugin' => null,
-                    'controller' => 'Users',
-                    'action' => 'login',
-            ]),
-            'queryParam' => 'redirect',
+            'unauthenticatedRedirect' => $loginURL,
+            'queryParam' => 'redirect'
         ]);
     
         $fields = [
@@ -173,12 +174,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         $service->loadAuthenticator('Authentication.Session');
         $service->loadAuthenticator('Authentication.Form', [
             'fields' => $fields,
-            'loginUrl' => Router::url([
-                'prefix' => false,
-                'plugin' => null,
-                'controller' => 'Users',
-                'action' => 'login',
-            ]),
+            'loginUrl' => $loginURL
         ]);
     
         // Load identifiers
@@ -189,9 +185,15 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     
     public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
     {
-        $resolver = new OrmResolver();
-    
-        return new AuthorizationService($resolver);
+        $mapResolver = new MapResolver();
+        $mapResolver->map(ServerRequest::class, RequestPolicy::class);
+        
+        $ormResolver = new OrmResolver();
+        
+        $resolver = new ResolverCollection([$mapResolver, $ormResolver]);
+        $service = new AuthorizationService($resolver);
+        
+        return $service;
     }
     
 }

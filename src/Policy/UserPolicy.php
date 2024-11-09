@@ -1,8 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Policy;
 
 use App\Model\Entity\User;
 use Authorization\IdentityInterface;
+use Authorization\Policy\Result;
 
 class UserPolicy
 {
@@ -23,9 +27,9 @@ class UserPolicy
   {
     if (!$userSession) return new Result(false, 'Erro: Preciso estar logado');
     if ($this->sameUser($userSession, $userData)) {
-      new Result(true);
+      return new Result(true);
     } else {
-      new Result(false, 'Erro: policy not authorized');
+      return new Result(false, 'Erro: policy not authorized');
     };
   }
   
@@ -33,9 +37,9 @@ class UserPolicy
   {
     if (!$userSession) return new Result(false, 'Erro: Preciso estar logado');
     if ($this->sameUser($userSession, $userData)) {
-      new Result(true);
+      return new Result(true);
     } else {
-      new Result(false, 'Erro: policy not authorized');
+      return new Result(false, 'Erro: policy not authorized');
     };
   }
   

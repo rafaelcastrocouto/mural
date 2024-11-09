@@ -55,7 +55,11 @@ class UsersController extends AppController {
         $user = $this->Users->get($id, [
             'contain' => ['Categorias', 'Administradores', 'Alunos', 'Supervisores', 'Professores'],
         ]);
-        $this->Authorization->authorize($user);
+        try {
+            $this->Authorization->authorize($user);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error.');
+        }
         $this->set(compact('user'));
     }
 
