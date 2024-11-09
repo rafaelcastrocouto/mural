@@ -116,7 +116,15 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                     return $user->setAuthorization($authorization);
                 },
                 'requireAuthorizationCheck' => true,
-                'unauthorizedHandler' => ['className' => 'Authorization.CakeRedirect']
+                'unauthorizedHandler' => [
+                    'className' => 'Authorization.Redirect',
+                    'url' => '/',
+                    'queryParam' => 'redirectUrl',
+                    'exceptions' => [
+                        MissingIdentityException::class,
+                        ForbiddenException::class,
+                    ]
+                ]
             ]))
 
             ->add(new RequestAuthorizationMiddleware())

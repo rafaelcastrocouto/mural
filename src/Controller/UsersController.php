@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Authorization\Exception\ForbiddenException;
+
 /**
  * Users Controller
  *
@@ -59,6 +61,9 @@ class UsersController extends AppController {
             $this->Authorization->authorize($user);
         } catch (ForbiddenException $error) {
             $this->Flash->error('Authorization error.');
+            $session = $this->request->getAttribute('identity');
+            
+            return $this->redirect(['action' => 'view', $session->id]);
         }
         $this->set(compact('user'));
     }
@@ -115,9 +120,18 @@ class UsersController extends AppController {
         $authUser = ($session and $session->get('id') == $id);
         
         $user = $this->Users->get($id);
-        $this->Authorization->authorize($user);
         
+        try {
+            $this->Authorization->authorize($user);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error.');
+            
+            $session = $this->request->getAttribute('identity');
+            return $this->redirect(['action' => 'edit', $session->id]);
+        }
+            
         if ($this->request->is(['patch', 'post', 'put'])) {
+            
             $opt = ['fields' => ['categoria_id', 'email']];
             $data = $this->request->getData();
             if ($data['password']) {
