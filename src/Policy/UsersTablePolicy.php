@@ -6,8 +6,11 @@ namespace App\Policy;
 
 use App\Model\Table\UsersTable;
 use Authorization\IdentityInterface;
+use Authorization\Policy\Result;
+use Authorization\Policy\BeforePolicyInterface;
+use Authorization\Policy\ResultInterface;
 
-class UsersTablePolicy
+class UsersTablePolicy implements BeforePolicyInterface
 {
   
   public function before(?IdentityInterface $identity, mixed $resource, string $action): ResultInterface|bool|null
@@ -15,11 +18,11 @@ class UsersTablePolicy
     if ($identity->getOriginalData()->categoria_id == 1) {
       return true;
     }
+    return null;
   }
   
   public function scopeIndex($user, $query)
   {
-    //pr($user);
     return $query->where(['Users.id' => $user->getIdentifier()]);
   }
   

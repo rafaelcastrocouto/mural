@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Authorization\Exception\ForbiddenException;
+
 /**
  * Administradores Controller
  *
@@ -12,6 +14,15 @@ namespace App\Controller;
 class AdministradoresController extends AppController
 {
     /**
+     * beforeFilter method
+     */
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+    }
+
+    
+    /**
      * Index method
      *
      * @return \Cake\Http\Response|null|void Renders view
@@ -19,8 +30,16 @@ class AdministradoresController extends AppController
     
     public function index()
     {
-        $administradores = $this->paginate($this->Administradores);
+        $session = $this->request->getAttribute('identity');
         
+        try {
+            $this->Authorization->authorize($this->Administradores);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error.');
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $session->id]);
+        }
+        
+        $administradores = $this->paginate($this->Administradores);
         $this->set(compact('administradores'));
     }
 
@@ -33,10 +52,17 @@ class AdministradoresController extends AppController
      */
     public function view($id = null)
     {
+        $session = $this->request->getAttribute('identity');
+        try {
+            $this->Authorization->authorize($this->Administradores);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error.');
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $session->id]);
+        }
+        
         $administrador = $this->Administradores->get($id, [
             'contain' => ['Users'],
         ]);
-        
         $this->set(compact('administrador'));
     }
 
@@ -49,6 +75,14 @@ class AdministradoresController extends AppController
      */
     public function edit($id = null)
     {
+        $session = $this->request->getAttribute('identity');
+        try {
+            $this->Authorization->authorize($this->Administradores);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error.');
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $session->id]);
+        }
+        
         $administrador = $this->Administradores->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $administrador = $this->Administradores->patchEntity($administrador, $this->request->getData());
@@ -62,23 +96,4 @@ class AdministradoresController extends AppController
         $this->set(compact('administrador'));
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Administrador id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $administrador = $this->Administradores->get($id);
-        if ($this->Administradores->delete($administrador)) {
-            $this->Flash->success(__('The administrador has been deleted.'));
-        } else {
-            $this->Flash->error(__('The administrador could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
-    }
 }

@@ -15,11 +15,6 @@ if ($session) {
             <aside>
                 <div class="nav">
                     <?= $this->Html->link(__('Listar Administradores'), ['action' => 'index'], ['class' => 'button']) ?>
-                    <?= $this->Form->postLink(
-                        __('Deletar'),
-                        ['action' => 'delete', $administrador->id],
-                        ['confirm' => __('Are you sure you want to delete {0}?', $administrador->nome), 'class' => 'button']
-                    ) ?>
                 </div>
             </aside>
             <?= $this->Form->create($administrador) ?>

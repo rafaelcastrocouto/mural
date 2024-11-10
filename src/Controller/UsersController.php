@@ -21,7 +21,6 @@ class UsersController extends AppController {
         parent::beforeFilter($event);
     
         $this->Authentication->allowUnauthenticated(['login', 'add']);
-        $this->Authorization->authorizeModel('Users');
     }
 
     /**
@@ -54,17 +53,19 @@ class UsersController extends AppController {
      */
     public function view($id = null)
     {
+        $session = $this->request->getAttribute('identity');
+        
         $user = $this->Users->get($id, [
             'contain' => ['Categorias', 'Administradores', 'Alunos', 'Supervisores', 'Professores'],
         ]);
+        
         try {
             $this->Authorization->authorize($user);
         } catch (ForbiddenException $error) {
             $this->Flash->error('Authorization error.');
-            $session = $this->request->getAttribute('identity');
-            
             return $this->redirect(['action' => 'view', $session->id]);
         }
+        
         $this->set(compact('user'));
     }
 
@@ -81,16 +82,15 @@ class UsersController extends AppController {
         $authAdmin = ($session and $session->get('categoria_id') == 1);
         
         $user = $this->Users->newEmptyEntity();
-        $this->Authorization->authorize($user);
         
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData(), [
                 'fields' => ['categoria_id', 'password', 'email'],
                 'accessibleFields' => ['password' => true]
             ]);
+                
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             
@@ -125,8 +125,6 @@ class UsersController extends AppController {
             $this->Authorization->authorize($user);
         } catch (ForbiddenException $error) {
             $this->Flash->error('Authorization error.');
-            
-            $session = $this->request->getAttribute('identity');
             return $this->redirect(['action' => 'edit', $session->id]);
         }
             
@@ -134,17 +132,21 @@ class UsersController extends AppController {
             
             $opt = ['fields' => ['categoria_id', 'email']];
             $data = $this->request->getData();
+            
             if ($data['password']) {
                 $opt = [
                     'fields' => ['categoria_id', 'email', 'password'],
                     'accessibleFields' => ['password' => ($authAdmin OR $authUser)]
                 ];
             } else { unset($data['password']); }
+            
             $user = $this->Users->patchEntity($user, $data, $opt);
+            
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'view', $id]);
             }
+            
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         

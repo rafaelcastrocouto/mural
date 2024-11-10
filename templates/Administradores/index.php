@@ -5,11 +5,6 @@
  */
 ?>
 <div class="administradores index content">
-    <aside>
-		<div class="nav">
-            <?= $this->Html->link(__('Novo Administrador'), ['action' => 'add'], ['class' => 'button']) ?>
-        </div>
-	</aside>
     
     <h3><?= __('Lista de Administradores') ?></h3>
 	
@@ -31,7 +26,6 @@
                     <td class="actions">
                         <?= $this->Html->link(__('Ver'), ['action' => 'view', $administrador->id]) ?>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $administrador->id]) ?>
-                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $administrador->id], ['confirm' => __('Are you sure you want to delete {0}?', $administrador->nome)]) ?>
                     </td>
                     <td><?= $this->Html->link($administrador->id, ['action' => 'view', $administrador->id]) ?></td>
                     <td><?= $this->Html->link($administrador->nome, ['action' => 'view', $administrador->id]) ?></td>

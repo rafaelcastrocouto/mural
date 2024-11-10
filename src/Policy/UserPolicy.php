@@ -7,8 +7,10 @@ namespace App\Policy;
 use App\Model\Entity\User;
 use Authorization\IdentityInterface;
 use Authorization\Policy\Result;
+use Authorization\Policy\BeforePolicyInterface;
+use Authorization\Policy\ResultInterface;
 
-class UserPolicy
+class UserPolicy implements BeforePolicyInterface
 {
   
   public function before(?IdentityInterface $identity, mixed $resource, string $action): ResultInterface|bool|null
@@ -16,11 +18,12 @@ class UserPolicy
     if ($identity->getOriginalData()->categoria_id == 1) {
       return true;
     }
+    return null;
   }
   
   public function canAdd()
   {
-      return true;
+      return new Result(true);
   }
   
   public function canView(IdentityInterface $userSession, User $userData)
@@ -48,6 +51,7 @@ class UserPolicy
     return new Result(false, 'Erro: delete user not allowed');
   }
 
+  
   protected function sameUser(IdentityInterface $userSession, User $userData)
   {
     return ($userSession->id == $userData->id);

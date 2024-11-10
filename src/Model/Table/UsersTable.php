@@ -119,9 +119,6 @@ class UsersTable extends Table
     {
 
         $rules->add($rules->isUnique(['email']));
-        //$rules->add($rules->existsIn(['aluno_id'], 'Alunos'), ['errorField' => 'aluno_id']);
-        //$rules->add($rules->existsIn(['supervisor_id'], 'Supervisores'), ['errorField' => 'supervisor_id']);
-        //$rules->add($rules->existsIn(['professor_id'], 'Professores'), ['errorField' => 'professor_id']);
 
         return $rules;
     }
