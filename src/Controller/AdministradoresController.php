@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Authorization\Exception\ForbiddenException;
+use Cake\Event\EventInterface;
 
 /**
  * Administradores Controller
@@ -19,6 +20,12 @@ class AdministradoresController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
+        try {
+            $this->Authorization->authorize($this->Administradores);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error.');
+            return $this->redirect('/');
+        }
     }
 
     
@@ -30,13 +37,6 @@ class AdministradoresController extends AppController
     
     public function index()
     {
-        try {
-            $this->Authorization->authorize($this->Administradores);
-        } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error.');
-            return $this->redirect('/');
-        }
-        
         $administradores = $this->paginate($this->Administradores);
         $this->set(compact('administradores'));
     }
@@ -50,13 +50,6 @@ class AdministradoresController extends AppController
      */
     public function view($id = null)
     {
-        try {
-            $this->Authorization->authorize($this->Administradores);
-        } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error.');
-            return $this->redirect('/');
-        }
-        
         $administrador = $this->Administradores->get($id, [
             'contain' => ['Users'],
         ]);
@@ -72,13 +65,6 @@ class AdministradoresController extends AppController
      */
     public function edit($id = null)
     {
-        try {
-            $this->Authorization->authorize($this->Administradores);
-        } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error.');
-            return $this->redirect('/');
-        }
-        
         $administrador = $this->Administradores->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $administrador = $this->Administradores->patchEntity($administrador, $this->request->getData());

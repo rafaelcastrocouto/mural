@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Authorization\Exception\ForbiddenException;
+use Cake\Event\EventInterface;
+
+
 /**
  * Areas Controller
  *
@@ -11,6 +15,20 @@ namespace App\Controller;
  */
 class AreasController extends AppController
 {
+    /**
+     * beforeFilter method
+     */
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        try {
+            $this->Authorization->authorize($this->Areas);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error.');
+            return $this->redirect('/');
+        }
+    }
+    
     /**
      * Index method
      *

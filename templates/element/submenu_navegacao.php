@@ -96,41 +96,10 @@ if ($session) { $categoria_id = $session->get('categoria_id'); }
                 
                 <?php if ($session): ?>
                     <li><?php echo $this->Html->link("Minha conta", ['controller' => 'Users', 'action' => 'view', $session->id]); ?></li>
+                    <li><?php echo $this->Html->link('Sair', ['controller' => 'Users', 'action' => 'logout']); ?></li>
+                <?php else: ?>
+                    <li><?php echo $this->Html->link("Login", ['controller' => 'Users', 'action' => 'login']); ?></li>
                 <?php endif; ?>
-                
-                <?php
-                switch ($categoria_id) {
-                    case 1: // Administrador
-                        ?>
-                        <li><?php echo $this->Html->link("Meus dados",  ['controller' => 'Administradores', 'action' => 'view', $session->id]); ?></li>
-                        <li><?php echo $this->Html->link('Sair', ['controller' => 'Users', 'action' => 'logout']); ?></li>
-                        <?php
-                        break;
-                    case 2: // Aluno
-                        ?>
-                        <li><?php echo $this->Html->link("Meus dados", "/Alunos/view?registro="); ?></li>
-                        <li><?php echo $this->Html->link('Sair', ['controller' => 'Users', 'action' => 'logout']); ?></li>
-                        <?php
-                        break;
-                    case 3: // Professor
-                        ?>
-                        <li><?php echo $this->Html->link("Meus dados", "/Professores/view?siape="); ?></li>
-                        <li><?php echo $this->Html->link('Sair', ['controller' => 'Users', 'action' => 'logout']); ?></li>
-                        <?php
-                        break;
-                    case 4: // Supervisor
-                        ?>
-                        <li><?php echo $this->Html->link("Meus dados", "/Supervisores/view?cress="); ?></li>
-                        <li><?php echo $this->Html->link('Sair', ['controller' => 'Users', 'action' => 'logout']); ?></li>
-                        <?php
-                        break;
-                    default:
-                        ?>
-                        <li><?php echo $this->Html->link("Login", ['controller' => 'Users', 'action' => 'login']); ?></li>
-                    <?php
-                }
-                ?>
-                
             </menu>  
         </li>    
     </menu>

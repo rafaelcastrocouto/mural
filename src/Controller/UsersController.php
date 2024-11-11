@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Authorization\Exception\ForbiddenException;
+use Cake\Event\EventInterface;
 
 /**
  * Users Controller
@@ -19,7 +20,8 @@ class UsersController extends AppController {
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-    
+
+        // allow all visitors to access login and add
         $this->Authentication->allowUnauthenticated(['login', 'add']);
     }
 
@@ -76,6 +78,7 @@ class UsersController extends AppController {
      */
     public function add()
     {
+        // authorize all users to add
         $this->Authorization->skipAuthorization();
         
         $session = $this->request->getAttribute('identity');
@@ -195,7 +198,9 @@ class UsersController extends AppController {
      */
     public function login()
     {
+        // authorize all users to access login
         $this->Authorization->skipAuthorization();
+        
         $result = $this->Authentication->getResult();
         // If the user is logged in send them away.
         if ($result->isValid()) {
@@ -215,9 +220,12 @@ class UsersController extends AppController {
      */
     public function logout()
     {
+        // authorize all users to access logout
         $this->Authorization->skipAuthorization();
+        
         $this->Authentication->logout();
-        return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+        $this->Flash->warning(__('Usuario desconectado.'));
+        return $this->redirect('/');
     }
 
 
