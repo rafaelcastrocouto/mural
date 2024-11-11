@@ -4,7 +4,14 @@
  * @var \App\Model\Entity\Muralestagio $muralestagio
  */
 
-$categoria_id = $session->get('categoria_id');
+
+declare(strict_types=1);
+
+$categoria_id = 0;
+$session = $this->request->getAttribute('identity');
+
+if ($session) { $categoria_id = $session->get('categoria_id'); }
+	
 ?>
 
 <div>

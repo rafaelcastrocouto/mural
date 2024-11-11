@@ -4,11 +4,13 @@
  * @var \App\Model\Entity\Aluno $aluno
  */
 
-$categoria_id = 0;
+declare(strict_types=1);
 
-if ($session) {
-    $categoria_id = $session->get('categoria_id');
-}
+$categoria_id = 0;
+$session = $this->request->getAttribute('identity');
+
+if ($session) { $categoria_id = $session->get('categoria_id'); }
+
 ?>
 <div>
     <div class="column-responsive column-80">

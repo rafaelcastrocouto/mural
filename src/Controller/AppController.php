@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -14,6 +15,7 @@ declare(strict_types=1);
  * @since     0.2.9
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Controller;
 
 use Cake\Controller\Controller;
@@ -51,18 +53,14 @@ class AppController extends Controller
      
         $this->loadComponent('Flash');
      
-
-        $configuracao = $this->fetchTable("Configuracoes")->find()->first();
-        $this->set('configuracao', $configuracao);
-
-     
-        $session = $this->request->getAttribute('identity');
-        $this->set('session', $session);
-
         /*
          * Enable the following component for recommended CakePHP form protection settings.
          * see https://book.cakephp.org/5/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
+     
+        $configuracao = $this->fetchTable("Configuracoes")->find()->first();
+        $this->set('configuracao', $configuracao);
+     
     }
 }

@@ -30,13 +30,11 @@ class AdministradoresController extends AppController
     
     public function index()
     {
-        $session = $this->request->getAttribute('identity');
-        
         try {
             $this->Authorization->authorize($this->Administradores);
         } catch (ForbiddenException $error) {
             $this->Flash->error('Authorization error.');
-            return $this->redirect(['controller' => 'Users', 'action' => 'view', $session->id]);
+            return $this->redirect('/');
         }
         
         $administradores = $this->paginate($this->Administradores);
@@ -52,12 +50,11 @@ class AdministradoresController extends AppController
      */
     public function view($id = null)
     {
-        $session = $this->request->getAttribute('identity');
         try {
             $this->Authorization->authorize($this->Administradores);
         } catch (ForbiddenException $error) {
             $this->Flash->error('Authorization error.');
-            return $this->redirect(['controller' => 'Users', 'action' => 'view', $session->id]);
+            return $this->redirect('/');
         }
         
         $administrador = $this->Administradores->get($id, [
@@ -75,12 +72,11 @@ class AdministradoresController extends AppController
      */
     public function edit($id = null)
     {
-        $session = $this->request->getAttribute('identity');
         try {
             $this->Authorization->authorize($this->Administradores);
         } catch (ForbiddenException $error) {
             $this->Flash->error('Authorization error.');
-            return $this->redirect(['controller' => 'Users', 'action' => 'view', $session->id]);
+            return $this->redirect('/');
         }
         
         $administrador = $this->Administradores->get($id);

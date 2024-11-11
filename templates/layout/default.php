@@ -14,6 +14,11 @@
  * @var \App\View\AppView $this
  */
 
+$categoria_id = 0;
+$session = $this->request->getAttribute('identity');
+
+if ($session) { $categoria_id = $session->get('categoria_id'); }
+
 $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituicao'];
 
 ?>

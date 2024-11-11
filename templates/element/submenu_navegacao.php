@@ -1,11 +1,14 @@
-<!-- templates/element/submenu_navegacao.php -->
 <?php
 
+declare(strict_types=1);
+
 $categoria_id = 0;
+$session = $this->request->getAttribute('identity');
+
 if ($session) { $categoria_id = $session->get('categoria_id'); }
-
+    
 ?>
-
+<!-- templates/element/submenu_navegacao.php -->
 <script>
     addEventListener('load', () => {
         const navInputs = [...document.querySelectorAll('.toggle-input')];
@@ -19,7 +22,7 @@ if ($session) { $categoria_id = $session->get('categoria_id'); }
 <nav>
     <?php 
         $logo = $this->Html->image('logoess_horizontal-azul.svg', ['height' => '50', 'width' => '150', 'alt' => 'ESS']);
-        echo $this->Html->link($logo, "http://www.ess.ufrj.br", ['escape' => false]);
+        echo $this->Html->link($logo, $this->getRequest()->getRequestTarget() == '/' ? "http://www.ess.ufrj.br" : '/', ['escape' => false, 'full'=>true]);
     ?>
 
     <label for="nav-toggler" class="responsive-toggle-label toggle-icon">☰</label>

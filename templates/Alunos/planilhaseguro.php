@@ -1,7 +1,9 @@
-<?php // pr($t_seguro);       ?>
-<?php // pr($periodos);       ?>
-<?php // pr($periodoselecionado);       ?>
-<?php // die();       ?>
+<?php 
+// pr($t_seguro); 
+// pr($periodos); 
+// pr($periodoselecionado);
+// die();
+?>
 
 <script>
     $(document).ready(function () {

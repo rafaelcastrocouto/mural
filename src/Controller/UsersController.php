@@ -80,6 +80,10 @@ class UsersController extends AppController {
         
         $session = $this->request->getAttribute('identity');
         $authAdmin = ($session and $session->get('categoria_id') == 1);
+
+        if ($session) {
+            $this->Flash->warning(__('Usuario ja esta logado.'));
+        }
         
         $user = $this->Users->newEmptyEntity();
         
@@ -195,6 +199,8 @@ class UsersController extends AppController {
         $result = $this->Authentication->getResult();
         // If the user is logged in send them away.
         if ($result->isValid()) {
+            $this->Flash->success(__('Usuario logado.'));
+            
             $target = $this->Authentication->getLoginRedirect() ?? '/';
             return $this->redirect($target);
         }

@@ -3,8 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
  */
+
 $timeZone = new DateTimeZone('America/Sao_Paulo');
 $dataDeHoje = new DateTime(null, $timeZone);
+
 ?>
 
 <style>

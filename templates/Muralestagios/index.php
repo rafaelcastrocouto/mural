@@ -3,9 +3,6 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Muralestagio[]|\Cake\Collection\CollectionInterface $muralestagios
  */
-
-$categoria_id = $session ? (int) $session->get('categoria_id') : 2;
-
 ?>
 
 <script type="text/javascript">

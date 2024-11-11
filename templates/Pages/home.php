@@ -13,6 +13,9 @@
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  * @var \App\View\AppView $this
  */
+
+declare(strict_types=1);
+
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
@@ -50,9 +53,14 @@ $checkConnection = function (string $name) {
     return compact('connected', 'error');
 };
 
-
 $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituicao'];
 
+$categoria_id = 0;
+$session = $this->request->getAttribute('identity');
+
+if ($session) { $categoria_id = $session->get('categoria_id'); }
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -76,6 +84,7 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
 <body>
     <?= $this->element('submenu_navegacao'); ?>
     <div id="content">
+        <?= $this->Flash->render() ?>
         <header>
             <div>
                 <div class="row">
@@ -144,7 +153,7 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
                         <a href="./professores">professores</a> | <a href="./professores/view/1">view</a> | <a href="./professores/edit/1">edit</a> | <a href="./professores/add">add</a><br>
                         <a href="./supervisores">supervisores</a> | <a href="./supervisores/view/1">view</a> | <a href="./supervisores/edit/1">edit</a> | <a href="./supervisores/add">add</a><br>
                         <a href="./turmaestagios">turmaestagios</a> | <a href="./turmaestagios/view/1">view</a> | <a href="./turmaestagios/edit/1">edit</a> | <a href="./turmaestagios/add">add</a><br>
-                        <a href="./users">users</a> | <a href="./users/view/1">view</a> | <a href="./users/edit/1">edit</a> | <a href="./users/add">add</a><br>
+                        <a href="./users">users</a> | <a href="./users/view/1">view</a> | <a href="./users/edit/1">edit</a> | <a href="./users/add">add</a> | <a href="./users/login">login</a><br>
                         <a href="./visitas">visitas</a> | <a href="./visitas/view/1">view</a> | <a href="./visitas/edit/1">edit</a> | <a href="./visitas/add">add</a><br>
                     </p>
 

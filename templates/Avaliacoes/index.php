@@ -1,10 +1,16 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Avaliacao[]|\Cake\Collection\CollectionInterface $avaliacoes
  */
 
-$categoria_id = $session? (int) $session->get('categoria_id') : 2;
+$categoria_id = 0;
+$session = $this->request->getAttribute('identity');
+
+if ($session) { $categoria_id = $session->get('categoria_id'); }
 
 ?>
 <div class="avaliacoes index content">

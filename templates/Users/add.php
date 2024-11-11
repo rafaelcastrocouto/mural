@@ -17,7 +17,9 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
             <?php if ($categoria_id == 1): ?>
                 <?= $this->Html->link(__('Listar Usuários'), ['action' => 'index'], ['class' => 'button']) ?>
             <?php endif; ?>
-            <?= $this->Html->link(__('Fazer Login'), ['action' => 'login'], ['class' => 'button']) ?>
+            <?php if (!$user_session):  ?>
+                <?= $this->Html->link(__('Fazer Login'), ['action' => 'login'], ['class' => 'button']) ?>
+            <?php endif; ?>
         </div>
     </aside>
     <?= $this->Form->create($user) ?>

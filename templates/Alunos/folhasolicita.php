@@ -1,3 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+$categoria_id = 0;
+$session = $this->request->getAttribute('identity');
+
+if ($session) { $categoria_id = $session->get('categoria_id'); }
+
+?>
+
 <?= $this->Html->script("jquery.maskedinput"); ?>
 <script>
     $(document).ready(function () {
@@ -9,9 +20,6 @@
 
 <?php
 
-$categoria_id = 0;
-if ($session) { $categoria_id = $session->get('categoria_id'); }
-
 echo $this->Form->create(null, ['class' => 'form-inline']);
 
 if ($categoria_id != 2) {
@@ -19,7 +27,7 @@ if ($categoria_id != 2) {
 } else {
     echo $this->Form->input('registro', ['type' => 'text', 'div' => 'form-group row','label' => ['text' => 'DRE', 'class' => 'label-control col-1'], 'value' => $this->Session->read('numero'), 'between' => '<div class ="form-inline col-8">', 'after' => '</div>','class' => 'form-control required']);
 }
-    ?>
+?>
 <div class='row justify-content-left'>
     <div class='col-auto'>
         <?php

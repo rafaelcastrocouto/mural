@@ -3,9 +3,6 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Estagiario[]|\Cake\Collection\CollectionInterface $estagiarios
  */
-
-$categoria_id = $session ? (int) $session->get('categoria_id') : 2;
-
 ?>
 
 <script type="text/javascript">

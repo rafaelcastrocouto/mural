@@ -3,11 +3,14 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Supervisor $supervisor
  */
-$categoria_id = 0;
 
-if ($session) {
-    $categoria_id = $session->get('categoria_id');
-}
+declare(strict_types=1);
+
+$categoria_id = 0;
+$session = $this->request->getAttribute('identity');
+
+if ($session) { $categoria_id = $session->get('categoria_id'); }
+    
 ?>
 <div>
     <div class="column-responsive column-80">

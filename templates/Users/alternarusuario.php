@@ -1,5 +1,12 @@
 <?php
-$categoria_id = $session ? (int) $session->get('categoria_id') : 2;
+
+declare(strict_types=1);
+
+$categoria_id = 0;
+$session = $this->request->getAttribute('identity');
+
+if ($session) { $categoria_id = $session->get('categoria_id'); }
+    
 ?>
 
 <?php if ($categoria_id == 1): ?>
