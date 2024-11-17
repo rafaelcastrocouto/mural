@@ -37,12 +37,12 @@ class AvaliacoesController extends AppController
         $session = $this->request->getAttribute('identity');
         if ($session) { $categoria_id = $session->get('categoria_id'); }
         
-        if ($categoria_id === 1) {
+        if ($categoria_id == 1) {
             $avaliacoes = $this->paginate($this->Avaliacoes->find()->contain(['Estagiarios' => ['Alunos', 'Instituicoes']]));
             $this->set(compact('avaliacoes'));
             $this->set('id', '');
         }
-        else if ($categoria_id === 2) {
+        else if ($categoria_id == 2) {
             $estagiario_id = $this->getRequest()->getQuery('estagiario_id');
             // pr($estagiario_id);
             // die();
