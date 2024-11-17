@@ -41,7 +41,14 @@ class UsersController extends AppController {
      */
     public function index()
     {
-        $query = $this->Authorization->applyScope($this->Users->find()->contain(['Categorias']));
+        $session = $this->request->getAttribute('identity');
+        $authAdmin = ($session and $session->get('categoria_id') == 1);
+        
+        if ($authAdmin) {
+            $query = $this->Users->find()->contain(['Categorias']);
+        } else {
+            $query = $this->Authorization->applyScope($this->Users->find()->contain(['Categorias']));
+        }
         $users = $this->paginate($query);
         $this->set(compact('users'));
     }
