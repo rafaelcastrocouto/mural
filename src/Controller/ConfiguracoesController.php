@@ -3,29 +3,29 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Authorization\Exception\ForbiddenException;
+use Cake\Event\EventInterface;
 /**
  * Configuracoes Controller
  *
  * @property \App\Model\Table\ConfiguracoesTable $Configuracoes
  * @method \App\Model\Entity\Configuracao[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class ConfiguracoesController extends AppController {
+class ConfiguracoesController extends AppController 
+{
     /**
      * beforeFilter method
      */
-	//public function beforeFilter(Cake\Event\EventInterface $event) {
-
-      //parent::beforeFilter($event);
-      // Admin
-      //if ($this->Session->read('id_categoria') == '1') {
-      //	$this->Auth->allow();
-      //	$this->Flash->usuario(__("Administrador"));
-      //} else {
-      //	$this->Flash->error(__("Administração: Não autorizado"));
-      //}
-      // die(pr($this->Session->read('user')));
-	//}
-
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        try {
+            $this->Authorization->authorize($this->Configuracoes);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error.');
+            return $this->redirect('/');
+        }
+    }
 	
     /**
      * Index method
@@ -70,17 +70,6 @@ class ConfiguracoesController extends AppController {
             $this->Flash->error(__('The configuracao could not be saved. Please, try again.'));
         }
         $this->set(compact('configuracao'));
-      
-		//$this->Configuracao->id = $id;
-		//if (empty($this->data)) {
-		//	$this->data = $this->Configuracao->read();
-		//} else {
-		//	if ($this->Configuracao->save($this->data)) {
-		//		// print_r($this->data);
-		//		$this->Session->setFlash("Atualizado");
-		//		$this->redirect('/Configuracaos/view/' . $id);
-		//	}
-		//}
 	}
 
 }

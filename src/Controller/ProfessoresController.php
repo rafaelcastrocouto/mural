@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Authorization\Exception\ForbiddenException;
+use Cake\Event\EventInterface;
+
+
 /**
  * Professores Controller
  *
@@ -11,6 +15,14 @@ namespace App\Controller;
  */
 class ProfessoresController extends AppController
 {
+    /**
+     * beforeFilter method
+     */
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+    }
+    
     /**
      * Index method
      *
@@ -41,6 +53,7 @@ class ProfessoresController extends AppController
             'contain' => [ 'Users', 'Muralestagios' => ['Instituicoes'] ],
             
         ]);
+        
         $estagiarios = $this->paginate($this->Professores->Estagiarios->find('all', [
             'contain' => ['Alunos', 'Instituicoes', 'Supervisores', 'Turmaestagios'],
         ])->innerJoinWith('Professores', function (\Cake\ORM\Query $query) use ($professor) {
@@ -97,9 +110,15 @@ class ProfessoresController extends AppController
      */
     public function edit($id = null)
     {
-        $professor = $this->Professores->get($id, [
-            'contain' => [],
-        ]);
+        $professor = $this->Professores->get($id/*, [ 'contain' => []*/ );
+        
+        try {
+            $this->Authorization->authorize($professor);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error.');
+            return $this->redirect('/');
+        }
+        
         if ($this->request->is(['patch', 'post', 'put'])) {
             $professor = $this->Professores->patchEntity($professor, $this->request->getData());
             if ($this->Professores->save($professor)) {

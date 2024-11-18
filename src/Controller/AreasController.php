@@ -6,7 +6,6 @@ namespace App\Controller;
 use Authorization\Exception\ForbiddenException;
 use Cake\Event\EventInterface;
 
-
 /**
  * Areas Controller
  *

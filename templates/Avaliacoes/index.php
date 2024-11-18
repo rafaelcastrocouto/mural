@@ -53,8 +53,8 @@ if ($session) { $categoria_id = $session->get('categoria_id'); }
                             <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $avaliacao->id], ['confirm' => __('Are you sure you want to delete {0}?', $avaliacao->id)]) ?>
                         </td>
                         <td><?= $this->Html->link((string)$avaliacao->id, ['action' => 'view', $avaliacao->id]) ?></td>
-                        <td><?= ($avaliacao->estagiario and $avaliacao->estagiario->aluno) ? $this->Html->link($avaliacao->estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $avaliacao->estagiario->aluno->id]) : '' ?></td>
-                                                <td><?= ($avaliacao->estagiario and $avaliacao->estagiario->instituicao) ? $this->Html->link($avaliacao->estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $avaliacao->estagiario->instituicao->id]) : '' ?></td>
+                        <td><?= ($avaliacao->estagiario and $avaliacao->estagiario->aluno) ? $this->Html->link(h($avaliacao->estagiario->aluno->nome), ['controller' => 'Alunos', 'action' => 'view', $avaliacao->estagiario->aluno->id]) : '' ?></td>
+                                                <td><?= ($avaliacao->estagiario and $avaliacao->estagiario->instituicao) ? $this->Html->link(h($avaliacao->estagiario->instituicao->instituicao), ['controller' => 'Instituicoes', 'action' => 'view', $avaliacao->estagiario->instituicao->id]) : '' ?></td>
                         <td><?= h($avaliacao->avaliacao1) ?></td>
                         <td><?= h($avaliacao->timestamp) ?></td>
                     </tr>

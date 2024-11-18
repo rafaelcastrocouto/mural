@@ -39,7 +39,6 @@ class PagesController extends AppController
         parent::beforeFilter($event);
     
         $this->Authentication->allowUnauthenticated(['display']);
-        
     }
     /**
      * Displays a view

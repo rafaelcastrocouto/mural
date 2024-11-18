@@ -15,8 +15,11 @@ class UsersTablePolicy implements BeforePolicyInterface
   
   public function before(?IdentityInterface $identity, mixed $resource, string $action): ResultInterface|bool|null
   {
-    if ($identity->getOriginalData()->categoria_id == 1) {
-      return true;
+    if ($identity) {
+      $data = $identity->getOriginalData();
+      if ($data and $data->categoria_id == 1) {
+        return true;
+      }
     }
     return null;
   }
