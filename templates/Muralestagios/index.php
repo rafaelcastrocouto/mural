@@ -60,8 +60,10 @@ if ($user_session) { $categoria_id = $session->get('categoria_id'); }
         <table>
             <thead>
                 <tr>
-                    <th class="actions"><?= __('Actions') ?></th>
-                    <th><?= $this->Paginator->sort('id') ?></th>
+			        <?php if ($categoria_id == 1): ?>
+	                    <th class="actions"><?= __('Actions') ?></th>
+	                    <th><?= $this->Paginator->sort('id') ?></th>
+			        <?php endif; ?>
                     <th><?= $this->Paginator->sort('Instituicao.instituicao', 'Instituição') ?></th>
                     <th><?= $this->Paginator->sort('vagas') ?></th>
                     <th><?= $this->Paginator->sort('professor') ?></th>
@@ -75,13 +77,15 @@ if ($user_session) { $categoria_id = $session->get('categoria_id'); }
             <tbody>
                 <?php foreach ($muralestagios as $muralestagio): ?>
                     <tr>
-                        <td class="actions">
-                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $muralestagio->id]) ?>
-                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $muralestagio->id]) ?>
-                            <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete muralestagio_{0}?', $muralestagio->id)]) ?>
-                        </td>
-                        <td><?= $this->Html->link($muralestagio->id, ['action' => 'view', $muralestagio->id]) ?></td>
-                        <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $muralestagio->instituicao->id]) : '' ?></td>
+				        <?php if ($categoria_id == 1): ?>
+	                        <td class="actions">
+	                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $muralestagio->id]) ?>
+	                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $muralestagio->id]) ?>
+	                            <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete muralestagio_{0}?', $muralestagio->id)]) ?>
+	                        </td>
+	                        <td><?= $this->Html->link($muralestagio->id, ['action' => 'view', $muralestagio->id]) ?></td>
+				        <?php endif; ?>
+                        <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao->instituicao, ['controller' => 'Muralestagios', 'action' => 'view', $muralestagio->id]) : '' ?></td>
                         <td><?= h($muralestagio->vagas) ?></td>
 						<td><?= $muralestagio->professor ? $this->Html->link($muralestagio->professor->nome, ['controller' => 'Professores', 'action' => 'view', $muralestagio->professor->id]) : '' ?></td>
                         <td><?= h($muralestagio->beneficios) ?></td>

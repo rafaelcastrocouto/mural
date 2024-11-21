@@ -91,7 +91,7 @@ if ($user_session) { $categoria_id = $session->get('categoria_id'); }
                         <h1 class="text-center">Boas vindas ao <a href="muralestagios">Mural de Estágios</a></h1>
                         <h2 class="text-center">
                                 
-                            <?php if (!$session) : ?>
+                            <?php if (!$user_session) : ?>
                                 <?= $this->Html->link(__('Login'), ['controller' => 'users', 'action' => 'login'], ['class' => 'button btn-info']) ?>
                                 <?= $this->Html->link(__('Novo usuário'), ['controller' => 'users', 'action' => 'add'], ['class' => 'button']) ?>
                             <?php else : ?>
