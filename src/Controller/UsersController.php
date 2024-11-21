@@ -41,8 +41,8 @@ class UsersController extends AppController {
      */
     public function index()
     {
-        $session = $this->request->getAttribute('identity');
-        $authAdmin = ($session and $session->get('categoria_id') == 1);
+        $user_session = $this->request->getAttribute('identity');
+        $authAdmin = ($user_session and $session->get('categoria_id') == 1);
         
         if ($authAdmin) {
             $query = $this->Users->find()->contain(['Categorias']);
@@ -62,7 +62,7 @@ class UsersController extends AppController {
      */
     public function view($id = null)
     {
-        $session = $this->request->getAttribute('identity');
+        $user_session = $this->request->getAttribute('identity');
         
         $user = $this->Users->get($id, [
             'contain' => ['Categorias', 'Administradores', 'Alunos', 'Supervisores', 'Professores'],
@@ -72,7 +72,7 @@ class UsersController extends AppController {
             $this->Authorization->authorize($user);
         } catch (ForbiddenException $error) {
             $this->Flash->error('Authorization error.');
-            return $this->redirect(['action' => 'view', $session->id]);
+            return $this->redirect(['action' => 'view', $user_session->id]);
         }
         
         $this->set(compact('user'));
@@ -88,10 +88,10 @@ class UsersController extends AppController {
         // authorize all users to add
         $this->Authorization->skipAuthorization();
         
-        $session = $this->request->getAttribute('identity');
-        $authAdmin = ($session and $session->get('categoria_id') == 1);
+        $user_session = $this->request->getAttribute('identity');
+        $authAdmin = ($user_session and $session->get('categoria_id') == 1);
 
-        if ($session) {
+        if ($user_session) {
             $this->Flash->warning(__('Usuario ja esta logado.'));
         }
         
@@ -129,9 +129,9 @@ class UsersController extends AppController {
      */
     public function edit($id = null)
     {
-        $session = $this->request->getAttribute('identity');
-        $authAdmin = ($session and $session->get('categoria_id') == 1);
-        $authUser = ($session and $session->get('id') == $id);
+        $user_session = $this->request->getAttribute('identity');
+        $authAdmin = ($user_session and $session->get('categoria_id') == 1);
+        $authUser = ($user_session and $session->get('id') == $id);
         
         $user = $this->Users->get($id);
         

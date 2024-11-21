@@ -7,9 +7,8 @@
 declare(strict_types=1);
 
 $categoria_id = 0;
-$session = $this->request->getAttribute('identity');
-
-if ($session) { $categoria_id = $session->get('categoria_id'); }
+$user_session = $this->request->getAttribute('identity');
+if ($user_session) { $categoria_id = $session->get('categoria_id'); }
 
 ?>
 <div>

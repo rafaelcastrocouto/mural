@@ -304,12 +304,15 @@ class AlunosController extends AppController
     
     public function certificadoperiodo($id = null) 
     {
+        $categoria_id = 0;
+        $user_session = $this->request->getAttribute('identity');
+        if ($user_session) { $categoria_id = $session->get('categoria_id'); }
         /**
          * Autorização. Verifica se o aluno cadastrado no Users está acessando seu próprio registro.
          */
         $option = 0;
-        if ($this->getRequest()->getAttribute('identity')['categoria_id'] == 2) {
-            $aluno_id = $this->getRequest()->getAttribute('identity')['aluno_id'];
+        if (categoria_id == 2) {
+            $aluno_id = $user_session->get('aluno_id');
             if ($id == $aluno_id) {
                 /**
                  * @var $option
@@ -318,8 +321,8 @@ class AlunosController extends AppController
                 $option = "id = $aluno_id";
                 // echo "Aluno Id autorizado";
             } else {
-                $estudante_registro = $this->getRequest()->getAttribute('identity')['registro'];
-                if ($estudante_registro == $this->getRequest()->getQuery('registro')) {
+                $estudante_registro = $user_session['registro'];
+                if ($estudante_registro == $this->request->getQuery('registro')) {
                     /**
                      * @var $option
                      * Para consultar a tabela alunos com o registro
@@ -329,11 +332,11 @@ class AlunosController extends AppController
                 } else {
                     // echo "Registros não coincidem" . "<br>";
                     $this->Flash->error(__('1. Operação não autorizada.'));
-                    return $this->redirect(['controller' => 'Alunos', 'action' => 'certificadoperiodo?registro=' . $this->getRequest()->getAttribute('identity')['registro']]);
+                    return $this->redirect(['controller' => 'Alunos', 'action' => 'certificadoperiodo?registro=' . $estudante_registro]);
                     // die('Aluno não autorizado.');
                 }
             }
-        } elseif ($this->getRequest()->getAttribute('identity')['categoria_id'] == 1) {
+        } elseif ($categoria_id == 1) {
             
             $this->Flash->info(__("Administrador autorizado"));
         } else {
@@ -495,8 +498,8 @@ class AlunosController extends AppController
     public function folhasolicita()
     {
         $categoria_id = 0;
-        $session = $this->request->getAttribute('identity');
-        if ($session) { $categoria_id = $session->get('categoria_id'); }
+        $user_session = $this->request->getAttribute('identity');
+        if ($user_session) { $categoria_id = $session->get('categoria_id'); }
 
         
         if ($categoria_id != 2) {

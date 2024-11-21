@@ -36,8 +36,8 @@ class AvaliacoesController extends AppController
     public function index($id = NULL)
     {
         $categoria_id = 0;
-        $session = $this->request->getAttribute('identity');
-        if ($session) { $categoria_id = $session->get('categoria_id'); }
+        $user_session = $this->request->getAttribute('identity');
+        if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
         
         if ($categoria_id == 1) {
             $avaliacoes = $this->paginate($this->Avaliacoes->find()->contain(['Estagiarios' => ['Alunos', 'Instituicoes']]));

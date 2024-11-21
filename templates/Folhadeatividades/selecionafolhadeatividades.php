@@ -5,6 +5,11 @@
  */
 // pr($estagiario->item->aluno);
 // die();
+
+$categoria_id = 0;
+$user_session = $this->request->getAttribute('identity');
+if ($user_session) { $categoria_id = $session->get('categoria_id'); }
+
 ?>
 
 <div class="folhadeatividades index content">
@@ -18,7 +23,7 @@
         <table>
             <thead>
                 <tr>
-                    <?php if ($this->getRequest()->getAttribute('identity')['categoria_id'] == 1): ?>
+                    <?php if (categoria_id == 1): ?>
                         <th class="actions"><?= __('Ações') ?></th>
                     <?php endif; ?>
                     <th><?= $this->Paginator->sort('id') ?></th>
@@ -38,7 +43,7 @@
                     <?php // die(); ?>
                     <tr>
 
-                        <?php if ($this->getRequest()->getAttribute('identity')['categoria_id'] == 1): ?> 
+                        <?php if ($categoria_id == 1): ?> 
                             <?php if (isset($c_estagiario->id)): ?>
                                 <td class="actions">
                                     <?= $this->Html->link(__('View'), ['action' => 'view', $c_estagiario->id]) ?>
@@ -48,7 +53,7 @@
                             <?php endif; ?>
                         <?php endif; ?>
                         
-                        <?php if ($this->getRequest()->getAttribute('identity')['categoria_id'] == 1): ?>
+                        <?php if ($categoria_id == 1): ?>
                             <td><?= isset($c_estagiario->id) ? $this->Html->link($c_estagiario->id, ['controller' => 'estagiarios', 'action' => 'view', $c_estagiario->id]) : '' ?></td>
                         <?php else: ?>
                             <td><?= isset($c_estagiario->id) ? $c_estagiario->id : '' ?></td>
@@ -56,7 +61,7 @@
 
                         <td><?= $this->Html->link('Preencher folha de atividades', ['controller' => 'folhadeatividades', 'action' => 'index', $c_estagiario->id]) ?></td>
 
-                        <?php if ($this->getRequest()->getAttribute('identity')['categoria_id'] == 1): ?>
+                        <?php if ($categoria_id == 1): ?>
                             <td><?= $c_estagiario->hasValue('aluno') ? $this->Html->link($c_estagiario->aluno->nome, ['controller' => 'alunos', 'action' => 'view', $c_estagiario->aluno->id]) : '' ?></td>
                         <?php else: ?>
                             <td><?= $c_estagiario->hasValue('aluno') ? $c_estagiario->aluno->nome : '' ?></td>

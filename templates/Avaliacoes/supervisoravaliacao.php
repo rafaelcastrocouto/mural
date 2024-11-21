@@ -5,6 +5,11 @@
  */
 // pr($estagiario);
 // die();
+
+$categoria_id = 0;
+$user_session = $this->request->getAttribute('identity');
+if ($user_session) { $categoria_id = $session->get('categoria_id'); }
+    
 ?>
 <div class="container">
     <h3><?= __('Avaliações') ?></h3>
@@ -12,7 +17,10 @@
         <table class="table table-striped table-hover table-responsive">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
+                    <?php if ($categoria_id == 1): ?>
+                        <th class="actions"><?= __('Ações') ?></th>
+                        <th><?= $this->Paginator->sort('id') ?></th>
+                    <?php endif; ?>
                     <th><?= $this->Paginator->sort('estagiario.avaliacao.id', 'Avaliação on-line') ?></th>
                     <th><?= $this->Paginator->sort('estagiario.avaliacao.id', 'Imprime avaliação') ?></th>
                     <th><?= $this->Paginator->sort('estagiario->aluno->nome', 'Aluno') ?></th>
@@ -22,9 +30,6 @@
                     <th><?= $this->Paginator->sort('estagiario->nivel', 'Nível') ?></th>
                     <th><?= $this->Paginator->sort('estagiario->ch', 'Carga horária') ?></th>
                     <th><?= $this->Paginator->sort('estagiario->nota', 'Nota') ?></th>
-                    <?php if ($this->getRequest()->getAttribute('identity')['categoria_id'] == 1): ?>
-                        <th class="actions"><?= __('Ações') ?></th>
-                    <?php endif; ?>
                 </tr>
             </thead>
             <tbody>
@@ -32,13 +37,20 @@
                     <?php // pr($c_estagiario); ?>
                     <?php // die(); ?>
                     <tr>
-                        <?php if ($this->getRequest()->getAttribute('identity')['categoria_id'] == 1): ?>
+                        <?php if ($categoria_id == 1): ?>
+                            <?php if (isset($c_estagiario->avaliacao->id)): ?>
+                                <td class="actions">
+                                    <?= $this->Html->link(__('View'), ['action' => 'view', $c_estagiario->avaliacao->id]) ?>
+                                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $c_estagiario->avaliacao->id]) ?>
+                                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $c_estagiario->avaliacao->id], ['confirm' => __('Tem certeza que quer excluir o registro # {0}?', $c_estagiario->avaliacao->id)]) ?>
+                                </td>
+                            <?php endif; ?>
                             <td><?= isset($c_estagiario->id) ? $this->Html->link($c_estagiario->id, ['controller' => 'estagiarios', 'action' => 'view', $c_estagiario->id]) : '' ?></td>
                         <?php else: ?>
                             <td><?= isset($c_estagiario->id) ? $c_estagiario->id : '' ?></td>
                         <?php endif; ?>
 
-                        <?php if ($this->getRequest()->getAttribute('identity')['categoria_id'] == 1 || $this->getRequest()->getAttribute('identity')['categoria_id'] == 4): ?>
+                        <?php if ($categoria_id == 1 || $categoria_id == 4): ?>
                             <td><?= $c_estagiario->hasValue('avaliacao') ? $this->Html->link('Ver avaliação', ['controller' => 'Avaliacoes', 'action' => 'view', $c_estagiario->avaliacao->id], ['class' => 'btn btn-success']) : $this->Html->link('Fazer avaliação on-line', ['controller' => 'avaliacoes', 'action' => 'add', $c_estagiario->id], ['class' => 'btn btn-warning']) ?></td>
                         <?php else: ?>
                             <td><?= $c_estagiario->hasValue('avaliacao') ? $this->Html->link('Ver avaliação', ['controller' => 'Avaliacoes', 'action' => 'view', $c_estagiario->avaliacao->id], ['class' => 'btn btn-success']) : 'Sem avaliação on-line' ?></td>
@@ -46,7 +58,7 @@
 
                         <td><?= $this->Html->link('Imprime avaliação discente', ['controller' => 'estagiarios', 'action' => 'avaliacaodiscentepdf', $c_estagiario->id], ['class' => 'btn btn-success']) ?></td>    
 
-                        <?php if ($this->getRequest()->getAttribute('identity')['categoria_id'] == 1): ?>
+                        <?php if ($categoria_id == 1): ?>
                             <td><?= $c_estagiario->hasValue('aluno') ? $this->Html->link($c_estagiario->aluno->nome, ['controller' => 'alunos', 'action' => 'view', $c_estagiario->aluno->id]) : '' ?></td>
                         <?php else: ?>
                             <td><?= $c_estagiario->hasValue('aluno') ? $c_estagiario->aluno->nome : '' ?></td>
@@ -58,16 +70,6 @@
                         <td><?= $c_estagiario->nivel ?></td>
                         <td><?= $c_estagiario->ch ?></td>
                         <td><?= $c_estagiario->nota ?></td>
-
-                        <?php if ($this->getRequest()->getAttribute('identity')['categoria_id'] == 1): ?>
-                            <?php if (isset($c_estagiario->avaliacao->id)): ?>
-                                <td class="actions">
-                                    <?= $this->Html->link(__('View'), ['action' => 'view', $c_estagiario->avaliacao->id]) ?>
-                                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $c_estagiario->avaliacao->id]) ?>
-                                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $c_estagiario->avaliacao->id], ['confirm' => __('Tem certeza que quer excluir o registro # {0}?', $c_estagiario->avaliacao->id)]) ?>
-                                </td>
-                            <?php endif; ?>
-                        <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

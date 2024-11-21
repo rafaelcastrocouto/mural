@@ -3,6 +3,11 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Muralestagio[]|\Cake\Collection\CollectionInterface $muralestagios
  */
+
+$categoria_id = 0;
+$user_session = $this->request->getAttribute('identity');
+if ($user_session) { $categoria_id = $session->get('categoria_id'); }
+
 ?>
 
 <script type="text/javascript">

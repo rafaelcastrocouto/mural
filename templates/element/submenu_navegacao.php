@@ -3,9 +3,8 @@
 declare(strict_types=1);
 
 $categoria_id = 0;
-$session = $this->request->getAttribute('identity');
-
-if ($session) { $categoria_id = $session->get('categoria_id'); }
+$user_session = $this->request->getAttribute('identity');
+if ($user_session) { $categoria_id = $session->get('categoria_id'); }
     
 ?>
 <!-- templates/element/submenu_navegacao.php -->
@@ -94,8 +93,8 @@ if ($session) { $categoria_id = $session->get('categoria_id'); }
             
             <menu class="toggle-dropdown">
                 
-                <?php if ($session): ?>
-                    <li><?php echo $this->Html->link("Minha conta", ['controller' => 'Users', 'action' => 'view', $session->id]); ?></li>
+                <?php if ($user_session): ?>
+                    <li><?php echo $this->Html->link("Minha conta", ['controller' => 'Users', 'action' => 'view', $user_session->id]); ?></li>
                     <li><?php echo $this->Html->link('Sair', ['controller' => 'Users', 'action' => 'logout']); ?></li>
                 <?php else: ?>
                     <li><?php echo $this->Html->link("Login", ['controller' => 'Users', 'action' => 'login']); ?></li>
