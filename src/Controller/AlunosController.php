@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Authorization\Exception\ForbiddenException;
+use Cake\Event\EventInterface;
+
 /**
  * Alunos Controller
  *
@@ -12,13 +15,37 @@ namespace App\Controller;
 class AlunosController extends AppController
 {
     /**
+     * beforeFilter method
+     */
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        //try {
+        //    $this->Authorization->authorize($this->Alunos);
+        //} catch (ForbiddenException $error) {
+        //    $this->Flash->error('Authorization error.');
+        //    return $this->redirect('/');
+        //}
+    }
+    /**
      * Index method
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
     public function index()
     {
-        $alunos = $this->paginate($this->Alunos->find('all')->contain(['Users']));
+        $user_session = $this->request->getAttribute('identity');
+        $authAdmin = ($user_session and $user_session->get('categoria_id') == 1);
+        $authProf = ($user_session and $user_session->get('categoria_id') == 3);
+        $authSuper = ($user_session and $user_session->get('categoria_id') == 4);
+
+        if ($authAdmin || $authProf || $authSuper) {
+            $query = $this->Alunos->find('all')->contain(['Users']);
+        } else {
+            $query = $this->Authorization->applyScope($this->Alunos->find('all')->contain(['Users']));
+        }
+        
+        $alunos = $this->paginate($query);
         $this->set(compact('alunos'));
     }
 
@@ -306,7 +333,7 @@ class AlunosController extends AppController
     {
         $categoria_id = 0;
         $user_session = $this->request->getAttribute('identity');
-        if ($user_session) { $categoria_id = $session->get('categoria_id'); }
+        if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
         /**
          * Autorização. Verifica se o aluno cadastrado no Users está acessando seu próprio registro.
          */
@@ -499,7 +526,7 @@ class AlunosController extends AppController
     {
         $categoria_id = 0;
         $user_session = $this->request->getAttribute('identity');
-        if ($user_session) { $categoria_id = $session->get('categoria_id'); }
+        if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
 
         
         if ($categoria_id != 2) {

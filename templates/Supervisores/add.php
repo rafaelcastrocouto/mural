@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 $categoria_id = 0;
 $user_session = $this->request->getAttribute('identity');
-if ($user_session) { $categoria_id = $session->get('categoria_id'); }
+if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
 
 ?>
 <div>
@@ -27,7 +27,7 @@ if ($user_session) { $categoria_id = $session->get('categoria_id'); }
                         $val = $this->request->getParam('pass') ? $this->request->getParam('pass')[0] : '';
                         echo $this->Form->control('user_id', ['type' => 'number', 'value' => $val ]); 
                     else:
-                        echo $this->Form->control('user_id', ['type' => 'number', 'value' => $session->get('id'), 'hidden' => true ]); 
+                        echo $this->Form->control('user_id', ['type' => 'number', 'value' => $user_session->get('id'), 'hidden' => true ]); 
                     endif;
                     echo $this->Form->control('nome');
                     echo $this->Form->control('cpf');

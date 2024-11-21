@@ -6,6 +6,11 @@
 
 //pr($alunos);
 //die();
+
+$categoria_id = 0;
+$user_session = $this->request->getAttribute('identity');
+if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
+    
 ?>
 <div class="alunos index content">
     
@@ -24,8 +29,10 @@
         <table>
             <thead>
                 <tr>
-                    <th class="actions"><?= __('Actions') ?></th>
-                    <th><?= $this->Paginator->sort('id') ?></th>
+				    <?php if ($categoria_id == 1): ?>
+                        <th class="actions"><?= __('Actions') ?></th>
+                        <th><?= $this->Paginator->sort('id') ?></th>
+                    <?php endif; ?>
                     <th><?= $this->Paginator->sort('nome') ?></th>
                     <th><?= $this->Paginator->sort('registro') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
@@ -40,12 +47,14 @@
             <tbody>
                 <?php foreach ($alunos as $aluno): ?>
                 <tr>
+				    <?php if ($categoria_id == 1): ?>
                     <td class="actions">
                         <?= $this->Html->link(__('Ver'), ['action' => 'view', $aluno->id]) ?>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $aluno->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $aluno->id], ['confirm' => __('Are you sure you want to delete {0}?', $aluno->nome)]) ?>
                     </td>
                     <td><?= $this->Html->link($aluno->id, ['action' => 'view', $aluno->id]) ?></td>
+                    <?php endif; ?>
                     <td><?= $aluno->nome ? $this->Html->link(h($aluno->nome), ['action' => 'view', $aluno->id]) : '' ?></td>
                     <td><?= h($aluno->registro) ?></td>
                     <td><?= ($aluno->user and $aluno->user->email) ? $this->Text->autoLinkEmails($aluno->user->email) : '' ?></td>

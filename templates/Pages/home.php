@@ -57,7 +57,7 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
 
 $categoria_id = 0;
 $user_session = $this->request->getAttribute('identity');
-if ($user_session) { $categoria_id = $session->get('categoria_id'); }
+if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
 
     
 ?>
@@ -95,7 +95,7 @@ if ($user_session) { $categoria_id = $session->get('categoria_id'); }
                                 <?= $this->Html->link(__('Login'), ['controller' => 'users', 'action' => 'login'], ['class' => 'button btn-info']) ?>
                                 <?= $this->Html->link(__('Novo usuário'), ['controller' => 'users', 'action' => 'add'], ['class' => 'button']) ?>
                             <?php else : ?>
-                                <?= $this->Html->link(__('Minha Conta'), ['controller' => 'users', 'action' => 'view', $session->id], ['class' => 'button']) ?>
+                                <?= $this->Html->link(__('Minha Conta'), ['controller' => 'users', 'action' => 'view', $user_session->id], ['class' => 'button']) ?>
                                 <?= $this->Html->link(__('Logout'), ['controller' => 'users', 'action' => 'logout'], ['class' => 'button btn-info']) ?>
                             <?php endif; ?> 
                         </h2>

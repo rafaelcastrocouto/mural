@@ -42,7 +42,7 @@ class UsersController extends AppController {
     public function index()
     {
         $user_session = $this->request->getAttribute('identity');
-        $authAdmin = ($user_session and $session->get('categoria_id') == 1);
+        $authAdmin = ($user_session and $user_session->get('categoria_id') == 1);
         
         if ($authAdmin) {
             $query = $this->Users->find()->contain(['Categorias']);
@@ -89,7 +89,7 @@ class UsersController extends AppController {
         $this->Authorization->skipAuthorization();
         
         $user_session = $this->request->getAttribute('identity');
-        $authAdmin = ($user_session and $session->get('categoria_id') == 1);
+        $authAdmin = ($user_session and $user_session->get('categoria_id') == 1);
 
         if ($user_session) {
             $this->Flash->warning(__('Usuario ja esta logado.'));
@@ -130,8 +130,8 @@ class UsersController extends AppController {
     public function edit($id = null)
     {
         $user_session = $this->request->getAttribute('identity');
-        $authAdmin = ($user_session and $session->get('categoria_id') == 1);
-        $authUser = ($user_session and $session->get('id') == $id);
+        $authAdmin = ($user_session and $user_session->get('categoria_id') == 1);
+        $authUser = ($user_session and $user_session->get('id') == $id);
         
         $user = $this->Users->get($id);
         
@@ -139,7 +139,7 @@ class UsersController extends AppController {
             $this->Authorization->authorize($user);
         } catch (ForbiddenException $error) {
             $this->Flash->error('Authorization error.');
-            return $this->redirect(['action' => 'edit', $session->id]);
+            return $this->redirect(['action' => 'edit', $user_session->id]);
         }
             
         if ($this->request->is(['patch', 'post', 'put'])) {
