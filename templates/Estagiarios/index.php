@@ -3,6 +3,13 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Estagiario[]|\Cake\Collection\CollectionInterface $estagiarios
  */
+
+declare(strict_types=1);
+
+$categoria_id = 0;
+$user_session = $this->request->getAttribute('identity');
+if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
+
 ?>
 
 <script type="text/javascript">
@@ -58,11 +65,8 @@
                     <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('Alunos.nome', 'Aluno') ?></th>
-                    <th><?= $this->Paginator->sort('registro') ?></th>
                     <th><?= $this->Paginator->sort('turno') ?></th>
                     <th><?= $this->Paginator->sort('nivel') ?></th>
-                    <th><?= $this->Paginator->sort('tc') ?></th>
-                    <th><?= $this->Paginator->sort('tc_solicitacao') ?></th>
                     <th><?= $this->Paginator->sort('Instituicoes.instituicao', 'Instituicao') ?></th>
                     <th><?= $this->Paginator->sort('Supervisores.nome', 'Supervisor') ?></th>
                     <th><?= $this->Paginator->sort('Professores.nome', 'Professor') ?></th>
@@ -80,9 +84,8 @@
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $estagiario->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete estagiario #{0}?', $estagiario->id)]) ?>
                     </td>
-                    <td><?= $this->Html->link($estagiario->id, ['action' => 'view', $estagiario->id]) ?></td>
+                    <td><?= $this->Html->link((string)$estagiario->id, ['action' => 'view', $estagiario->id]) ?></td>
                     <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
-                    <td><?= h($estagiario->registro) ?></td>
                     <td>
 						<?php
                         $turno = '';
@@ -96,8 +99,6 @@
 						?>
 					</td>
                     <td><?= h($estagiario->nivel) ?></td>
-                    <td><?= h($estagiario->tc) ?></td>
-                    <td><?= h($estagiario->tc_solicitacao) ?></td>
                     <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
                     <td><?= ($estagiario->supervisor and $estagiario->supervisor->nome) ? $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : '' ?></td>
                     <td><?= $estagiario->professor ? $this->Html->link($estagiario->professor->nome, ['controller' => 'Professores', 'action' => 'view', $estagiario->professor->id]) : '' ?></td>
