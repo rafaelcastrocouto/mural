@@ -22,7 +22,7 @@ class ConfiguracoesController extends AppController
         try {
             $this->Authorization->authorize($this->Configuracoes);
         } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error.');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
             return $this->redirect('/');
         }
     }

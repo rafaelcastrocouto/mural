@@ -23,7 +23,7 @@ class InstituicoesController extends AppController
         try {
             $this->Authorization->authorize($this->Instituicoes);
         } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error.');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
             return $this->redirect('/');
         }
     }

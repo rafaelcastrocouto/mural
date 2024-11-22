@@ -23,7 +23,7 @@ class AdministradoresController extends AppController
         try {
             $this->Authorization->authorize($this->Administradores);
         } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error.');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
             return $this->redirect('/');
         }
     }

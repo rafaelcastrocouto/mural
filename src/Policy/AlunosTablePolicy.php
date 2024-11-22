@@ -28,5 +28,10 @@ class AlunosTablePolicy implements BeforePolicyInterface
   {
     return $query->where(['Alunos.user_id' => $user->getIdentifier()]);
   }
+  
+  public function canBusca()
+  {
+    return new Result(false, 'Erro: alunos busca policy not authorized');
+  }
 
 }

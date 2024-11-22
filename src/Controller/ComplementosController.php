@@ -23,7 +23,7 @@ class ComplementosController extends AppController
         try {
             $this->Authorization->authorize($this->Complementos);
         } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error.');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
             return $this->redirect('/');
         }
     }

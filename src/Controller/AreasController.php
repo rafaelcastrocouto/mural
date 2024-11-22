@@ -23,7 +23,7 @@ class AreasController extends AppController
         try {
             $this->Authorization->authorize($this->Areas);
         } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error.');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
             return $this->redirect('/');
         }
     }

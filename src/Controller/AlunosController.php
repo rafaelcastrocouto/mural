@@ -20,12 +20,6 @@ class AlunosController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        //try {
-        //    $this->Authorization->authorize($this->Alunos);
-        //} catch (ForbiddenException $error) {
-        //    $this->Flash->error('Authorization error.');
-        //    return $this->redirect('/');
-        //}
     }
     /**
      * Index method
@@ -58,22 +52,20 @@ class AlunosController extends AppController
      */
     public function view($id = null)
     {
-        $condition = ['Alunos.id IS' => $id];
-        
-        $registro = $this->getRequest()->getQuery('registro');
-        if ($registro) { $condition = ['Alunos.registro IS' => $registro]; }
-            
         $contained = [
             'Estagiarios' => ['Instituicoes', 'Supervisores', 'Professores'], 
             'Inscricoes' => ['Muralestagios' => ['Instituicoes']], 
             'Users'
         ];
 
-        $aluno = $this->Alunos->find('all',  ['conditions' => $condition ])->contain($contained)->first();
-        
-        if (!isset($aluno)) {
-            $this->Flash->error(__('Nao ha registros para esse numero!'));
-            return $this->redirect(['action' => 'index']);
+        $aluno = $this->Alunos->get($id, [ 'contain' => $contained ]);
+
+        try {
+            $this->Authorization->authorize($aluno);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            $user_session = $this->request->getAttribute('identity');
+            return $this->redirect('/');
         }
         
         $this->set(compact('aluno'));
@@ -86,18 +78,19 @@ class AlunosController extends AppController
      */
     public function add()
     {
+        $user_session = $this->request->getAttribute('identity');
+        $user_id = $user_session->get('id');
+
+        $alunocadastrado = $this->Alunos->find()->where(['user_id' => $user_id]);
+
+        if ($alunocadastrado->count() > 0) {
+            $this->Flash->error(__('Aluno já cadastrado'));
+            return $this->redirect('/');
+        }
+        
         $aluno = $this->Alunos->newEmptyEntity();
         if ($this->request->is('post')) {
             $aluno = $this->Alunos->patchEntity($aluno, $this->request->getData());
-
-            $registro = $this->getRequest()->getQuery('registro');
-            if ($registro) {
-                $estudantecadastrado = $this->Alunos->find()->where(['registro' => $registro])->first();
-                if ($estudantecadastrado) {
-                    $this->Flash->error(__('Aluno já cadastrado'));
-                    return $this->redirect(['view' => $estudantecadastrado->id]);
-                }
-            }
             
             if (!$aluno->user_id) { 
                 $user = $this->Authentication->getIdentity();
@@ -122,14 +115,23 @@ class AlunosController extends AppController
      */
     public function edit($id = null)
     {
-        $aluno = $this->Alunos->get($id, [
-            'contain' => [],
-        ]);
+        $user_session = $this->request->getAttribute('identity');
+        $authAdmin = ($user_session and $user_session->get('categoria_id') == 1);
+        $authUser = ($user_session and $user_session->get('id') == $id);
+        
+        $aluno = $this->Alunos->get($id);
+        
+        try {
+            $this->Authorization->authorize($aluno);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
         if ($this->request->is(['patch', 'post', 'put'])) {
             $aluno = $this->Alunos->patchEntity($aluno, $this->request->getData());
             if ($this->Alunos->save($aluno)) {
                 $this->Flash->success(__('The aluno has been saved.'));
-
                 return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The aluno could not be saved. Please, try again.'));
@@ -169,6 +171,13 @@ class AlunosController extends AppController
      */
     public function busca() 
     {
+        try {
+            $this->Authorization->authorize($this->Alunos);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
         $nome = $this->getRequest()->getQuery('nome');
         if ($nome) {
             $condition = ['Alunos.nome LIKE' => '%' . $nome . '%'];

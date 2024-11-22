@@ -62,16 +62,15 @@ class UsersController extends AppController {
      */
     public function view($id = null)
     {
-        $user_session = $this->request->getAttribute('identity');
+        $contained = ['Categorias', 'Administradores', 'Alunos', 'Supervisores', 'Professores'];
         
-        $user = $this->Users->get($id, [
-            'contain' => ['Categorias', 'Administradores', 'Alunos', 'Supervisores', 'Professores'],
-        ]);
+        $user = $this->Users->get($id, [ 'contain' =>  $contained ]);
         
         try {
             $this->Authorization->authorize($user);
         } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error.');
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
             return $this->redirect(['action' => 'view', $user_session->id]);
         }
         
@@ -138,7 +137,7 @@ class UsersController extends AppController {
         try {
             $this->Authorization->authorize($user);
         } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error.');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
             return $this->redirect(['action' => 'edit', $user_session->id]);
         }
             

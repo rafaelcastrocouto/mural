@@ -115,7 +115,7 @@ class ProfessoresController extends AppController
         try {
             $this->Authorization->authorize($professor);
         } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error.');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
             return $this->redirect('/');
         }
         
