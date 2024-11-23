@@ -193,7 +193,7 @@ class UsersController extends AppController {
                 $this->Flash->error(__('The user could not be deleted. Please, try again.'));
             }
         } catch (ForbiddenException $error) {
-            $this->Flash->error(__('Authorization error.'));
+            $this->Flash->error(__( 'Authorization error: ' . $error->getMessage() ));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -230,6 +230,7 @@ class UsersController extends AppController {
         $this->Authorization->skipAuthorization();
         
         $this->Authentication->logout();
+        
         $this->Flash->warning(__('Usuario desconectado.'));
         return $this->redirect('/');
     }

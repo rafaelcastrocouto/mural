@@ -17,16 +17,11 @@ class AlunoPolicy implements BeforePolicyInterface
   {
     if ($identity) {
       $data = $identity->getOriginalData();
-      if ($data and $data->categoria_id == 1) {
+      if ($data and ( $data->categoria_id == 1 || $data->categoria_id == 3 || $data->categoria_id == 4 )) {
         return true;
       }
     }
     return null;
-  }
-  
-  public function canAdd()
-  {
-      return new Result(true);
   }
   
   public function canView(IdentityInterface $userSession, Aluno $alunoData)

@@ -24,11 +24,6 @@ class UserPolicy implements BeforePolicyInterface
     return null;
   }
   
-  public function canAdd()
-  {
-      return new Result(true);
-  }
-  
   public function canView(IdentityInterface $userSession, User $userData)
   {
     if (!$userSession) return new Result(false, 'Erro: Preciso estar logado para ver');

@@ -64,7 +64,6 @@ class AlunosController extends AppController
             $this->Authorization->authorize($aluno);
         } catch (ForbiddenException $error) {
             $this->Flash->error('Authorization error: ' . $error->getMessage());
-            $user_session = $this->request->getAttribute('identity');
             return $this->redirect('/');
         }
         
@@ -115,10 +114,6 @@ class AlunosController extends AppController
      */
     public function edit($id = null)
     {
-        $user_session = $this->request->getAttribute('identity');
-        $authAdmin = ($user_session and $user_session->get('categoria_id') == 1);
-        $authUser = ($user_session and $user_session->get('id') == $id);
-        
         $aluno = $this->Alunos->get($id);
         
         try {
@@ -155,10 +150,16 @@ class AlunosController extends AppController
             $this->Flash->error(__('Aluno tem estagiários associados.'));
             return $this->redirect(['controller' => 'alunos', 'action' => 'view', $id]);
         }
-        if ($this->Alunos->delete($aluno)) {
-            $this->Flash->success(__('The aluno has been deleted.'));
-        } else {
-            $this->Flash->error(__('The aluno could not be deleted. Please, try again.'));
+
+        try {
+            $this->Authorization->authorize($aluno);
+            if ($this->Alunos->delete($aluno)) {
+                $this->Flash->success(__('The aluno has been deleted.'));
+            } else {
+                $this->Flash->error(__('The aluno could not be deleted. Please, try again.'));
+            }
+        } catch (ForbiddenException $error) {
+            $this->Flash->error(__( 'Authorization error: ' . $error->getMessage() ));
         }
 
         return $this->redirect(['action' => 'index']);

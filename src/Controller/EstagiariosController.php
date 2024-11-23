@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Authorization\Exception\ForbiddenException;
+use Cake\Event\EventInterface;
+
 /**
  * Estagiarios Controller
  *
@@ -65,6 +68,13 @@ class EstagiariosController extends AppController
         $estagiario = $this->Estagiarios->get($id, [
             'contain' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores', 'Turmaestagios', 'Complementos'/*, 'Folhadeatividades' */],
         ]);
+
+        try {
+            $this->Authorization->authorize($estagiario);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
         
         //$folhadeatividades = $this->Estagiarios->Folhadeatividades->find()
         //    ->where(['estagiario_id' => $id])
@@ -81,9 +91,17 @@ class EstagiariosController extends AppController
     public function add()
     {
         $estagiario = $this->Estagiarios->newEmptyEntity();
-        
+
+        try {
+            $this->Authorization->authorize($estagiario);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+
         $configuracao = $this->fetchTable('Configuracoes');
         $periodo_atual = $configuracao->find()->select(['mural_periodo_atual'])->first();
+        
         $periodo = $periodo_atual->mural_periodo_atual;
         
         if ($this->request->is('post')) {
@@ -95,11 +113,13 @@ class EstagiariosController extends AppController
             }
             $this->Flash->error(__('The estagiario could not be saved. Please, try again.'));
         }
+        
         $alunos = $this->Estagiarios->Alunos->find('list');
         $instituicoes = $this->Estagiarios->Instituicoes->find('list');
         $supervisores = $this->Estagiarios->Supervisores->find('list');
         $professores = $this->Estagiarios->Professores->find('list');
         $turmaestagios = $this->Estagiarios->Turmaestagios->find('list');
+        
         $this->set(compact('periodo', 'estagiario', 'alunos', 'instituicoes', 'supervisores', 'professores', 'turmaestagios'));
     }
 
@@ -112,9 +132,15 @@ class EstagiariosController extends AppController
      */
     public function edit($id = null)
     {
-        $estagiario = $this->Estagiarios->get($id, [
-            'contain' => [],
-        ]);
+        $estagiario = $this->Estagiarios->get($id);
+        
+        try {
+            $this->Authorization->authorize($estagiario);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
         if ($this->request->is(['patch', 'post', 'put'])) {
             $estagiario = $this->Estagiarios->patchEntity($estagiario, $this->request->getData());
             if ($this->Estagiarios->save($estagiario)) {
@@ -124,11 +150,13 @@ class EstagiariosController extends AppController
             }
             $this->Flash->error(__('The estagiario could not be saved. Please, try again.'));
         }
+        
         $alunos = $this->Estagiarios->Alunos->find('list');
         $instituicoes = $this->Estagiarios->Instituicoes->find('list');
         $supervisores = $this->Estagiarios->Supervisores->find('list');
-        $professores = $this->Estagiarios->Professores->find('list', ['limit' => 500]);
+        $professores = $this->Estagiarios->Professores->find('list');
         $turmaestagios = $this->Estagiarios->Turmaestagios->find('list');
+        
         $this->set(compact('estagiario', 'alunos', 'instituicoes', 'supervisores', 'professores', 'turmaestagios'));
     }
 
@@ -142,11 +170,18 @@ class EstagiariosController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
+        
         $estagiario = $this->Estagiarios->get($id);
-        if ($this->Estagiarios->delete($estagiario)) {
-            $this->Flash->success(__('The estagiario has been deleted.'));
-        } else {
-            $this->Flash->error(__('The estagiario could not be deleted. Please, try again.'));
+
+        try {
+            $this->Authorization->authorize($estagiario);
+            if ($this->Estagiarios->delete($estagiario)) {
+                $this->Flash->success(__('The estagiario has been deleted.'));
+            } else {
+                $this->Flash->error(__('The estagiario could not be deleted. Please, try again.'));
+            }
+        } catch (ForbiddenException $error) {
+            $this->Flash->error(__( 'Authorization error: ' . $error->getMessage() ));
         }
 
         return $this->redirect(['action' => 'index']);
