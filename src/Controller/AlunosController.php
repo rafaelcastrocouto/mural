@@ -28,14 +28,10 @@ class AlunosController extends AppController
      */
     public function index()
     {
-        $user_session = $this->request->getAttribute('identity');
-        $authAdmin = ($user_session and $user_session->get('categoria_id') == 1);
-        $authProf = ($user_session and $user_session->get('categoria_id') == 3);
-        $authSuper = ($user_session and $user_session->get('categoria_id') == 4);
-
-        if ($authAdmin || $authProf || $authSuper) {
+        try {
+            $this->Authorization->authorize($this->Alunos);
             $query = $this->Alunos->find('all')->contain(['Users']);
-        } else {
+        } catch (ForbiddenException $error) {
             $query = $this->Authorization->applyScope($this->Alunos->find('all')->contain(['Users']));
         }
         

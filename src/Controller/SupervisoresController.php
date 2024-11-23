@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Authorization\Exception\ForbiddenException;
+use Cake\Event\EventInterface;
+
 /**
  * Supervisores Controller
  *
@@ -11,6 +14,13 @@ namespace App\Controller;
  */
 class SupervisoresController extends AppController
 {
+    /**
+     * beforeFilter method
+     */
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+    }
     /**
      * Index method
      *

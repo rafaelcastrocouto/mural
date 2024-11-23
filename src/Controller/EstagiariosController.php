@@ -132,7 +132,9 @@ class EstagiariosController extends AppController
      */
     public function edit($id = null)
     {
-        $estagiario = $this->Estagiarios->get($id);
+        $estagiario = $this->Estagiarios->get($id, [
+            'contain' => ['Alunos'],
+        ]);
         
         try {
             $this->Authorization->authorize($estagiario);

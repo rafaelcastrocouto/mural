@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Policy;
 
-use App\Model\Entity\Professor;
+use App\Model\Entity\Supervisor;
 use Authorization\IdentityInterface;
 use Authorization\Policy\Result;
 use Authorization\Policy\BeforePolicyInterface;
 use Authorization\Policy\ResultInterface;
 
-class ProfessorPolicy implements BeforePolicyInterface
+class SupervisorPolicy implements BeforePolicyInterface
 {
   
   public function before(?IdentityInterface $identity, mixed $resource, string $action): ResultInterface|bool|null
@@ -34,25 +34,25 @@ class ProfessorPolicy implements BeforePolicyInterface
     return new Result(true);
   }
   
-  public function canEdit(IdentityInterface $userSession, Professor $professorData)
+  public function canEdit(IdentityInterface $userSession, Supervisor $userData)
   {
     if (!$userSession) return new Result(false, 'Erro: Preciso estar logado para editar');
-    if ($this->sameUser($userSession, $professorData)) {
+    if ($this->sameUser($userSession, $supervisorData)) {
       return new Result(true);
     } else {
-      return new Result(false, 'Erro: professor edit policy not authorized');
+      return new Result(false, 'Erro: supervisor edit policy not authorized');
     };
   }
   
-  public function canDelete(IdentityInterface $userSession, Professor $professorData)
+  public function canDelete(IdentityInterface $userSession, Supervisor $supervisorData)
   {
-    return new Result(false, 'Erro: professor delete policy not allowed');
+    return new Result(false, 'Erro: supervisor delete policy not allowed');
   }
 
   
-  protected function sameUser(IdentityInterface $userSession, Professor $professorData)
+  protected function sameUser(IdentityInterface $userSession, Supervisor $supervisorData)
   {
-    return ($userSession->id == $professorData->user_id);
+    return ($userSession->id == $supervisorData->user_id);
   }
   
 }
