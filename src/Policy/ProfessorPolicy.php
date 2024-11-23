@@ -41,7 +41,7 @@ class ProfessorPolicy implements BeforePolicyInterface
       return new Result(true);
     } else {
       return new Result(false, 'Erro: professor edit policy not authorized');
-    };
+    }
   }
   
   public function canDelete(IdentityInterface $userSession, Professor $professorData)

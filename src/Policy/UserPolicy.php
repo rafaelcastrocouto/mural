@@ -31,7 +31,7 @@ class UserPolicy implements BeforePolicyInterface
       return new Result(true);
     } else {
       return new Result(false, 'Erro: user view policy not authorized');
-    };
+    }
   }
   
   public function canEdit(IdentityInterface $userSession, User $userData)
@@ -41,7 +41,7 @@ class UserPolicy implements BeforePolicyInterface
       return new Result(true);
     } else {
       return new Result(false, 'Erro: user edit policy not authorized');
-    };
+    }
   }
   
   public function canDelete(IdentityInterface $userSession, User $userData)

@@ -73,17 +73,26 @@ class AlunosController extends AppController
      */
     public function add()
     {
-        $user_session = $this->request->getAttribute('identity');
-        $user_id = $user_session->get('id');
+        //$user_session = $this->request->getAttribute('identity');
+        //$user_id = $user_session->get('id');
 
-        $alunocadastrado = $this->Alunos->find()->where(['user_id' => $user_id]);
+        //$alunocadastrado = $this->Alunos->find()->where(['user_id' => $user_id]);
 
-        if ($alunocadastrado->count() > 0) {
-            $this->Flash->error(__('Aluno já cadastrado'));
+        //if ($alunocadastrado->count() > 0) {
+        //    $this->Flash->error(__('Aluno já cadastrado'));
+        //    return $this->redirect('/');
+        //}
+        
+        $aluno = $this->Alunos->newEmptyEntity();
+        
+        try {
+            $this->Authorization->authorize($this->Alunos);
+        } catch (ForbiddenException $error) {
+            //debug($error);
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
             return $this->redirect('/');
         }
         
-        $aluno = $this->Alunos->newEmptyEntity();
         if ($this->request->is('post')) {
             $aluno = $this->Alunos->patchEntity($aluno, $this->request->getData());
             

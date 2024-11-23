@@ -41,7 +41,7 @@ class SupervisorPolicy implements BeforePolicyInterface
       return new Result(true);
     } else {
       return new Result(false, 'Erro: supervisor edit policy not authorized');
-    };
+    }
   }
   
   public function canDelete(IdentityInterface $userSession, Supervisor $supervisorData)

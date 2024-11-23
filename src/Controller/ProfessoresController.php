@@ -110,7 +110,7 @@ class ProfessoresController extends AppController
      */
     public function edit($id = null)
     {
-        $professor = $this->Professores->get($id/*, [ 'contain' => []*/ );
+        $professor = $this->Professores->get($id);
         
         try {
             $this->Authorization->authorize($professor);
@@ -142,10 +142,16 @@ class ProfessoresController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $professor = $this->Professores->get($id);
-        if ($this->Professores->delete($professor)) {
-            $this->Flash->success(__('The professor has been deleted.'));
-        } else {
-            $this->Flash->error(__('The professor could not be deleted. Please, try again.'));
+
+        try {
+            $this->Authorization->authorize($professor);
+            if ($this->Professores->delete($professor)) {
+                $this->Flash->success(__('The professor has been deleted.'));
+            } else {
+                $this->Flash->error(__('The professor could not be deleted. Please, try again.'));
+            }
+        } catch (ForbiddenException $error) {
+            $this->Flash->error(__( 'Authorization error: ' . $error->getMessage() ));
         }
 
         return $this->redirect(['action' => 'index']);

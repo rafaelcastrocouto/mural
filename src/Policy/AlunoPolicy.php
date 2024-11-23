@@ -31,7 +31,7 @@ class AlunoPolicy implements BeforePolicyInterface
       return new Result(true);
     } else {
       return new Result(false, 'Erro: aluno view policy not authorized');
-    };
+    }
   }
   
   public function canEdit(IdentityInterface $userSession, Aluno $alunoData)
@@ -41,7 +41,7 @@ class AlunoPolicy implements BeforePolicyInterface
       return new Result(true);
     } else {
       return new Result(false, 'Erro: aluno edit policy not authorized');
-    };
+    }
   }
   
   public function canDelete(IdentityInterface $userSession, Aluno $alunoData)

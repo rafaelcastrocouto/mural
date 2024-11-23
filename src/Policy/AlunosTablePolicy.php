@@ -24,11 +24,24 @@ class AlunosTablePolicy implements BeforePolicyInterface
     return null;
   }
 
-  public function canIndex(IdentityInterface $userSession, AlunosTable $alunoTable)
+  public function canIndex(IdentityInterface $userSession, AlunosTable $alunosTable)
   {
     return new Result(false, 'Erro: alunos busca policy not authorized');
   }
 
+  public function canAdd(IdentityInterface $userSession, AlunosTable $alunosTable)
+  {
+    if (!$userSession) return new Result(false, 'Erro: Preciso estar logado para ver');
+    
+    $alunocadastrado = $alunosTable->find()->where(['user_id' => $userSession->id]);
+
+    if ($alunocadastrado->count() > 0) {
+        return new Result(false, 'Erro: aluno ja cadastrado');
+    } else {
+      return new Result(true);
+    }
+    
+  }
   
   public function scopeIndex($user, $query)
   {

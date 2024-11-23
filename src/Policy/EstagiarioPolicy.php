@@ -36,7 +36,7 @@ class EstagiarioPolicy implements BeforePolicyInterface
       return new Result(true);
     } else {
       return new Result(false, 'Erro: estagiario view policy not authorized');
-    };
+    }
   }
   
   public function canEdit(IdentityInterface $userSession, Estagiario $estagiarioData)
@@ -46,7 +46,7 @@ class EstagiarioPolicy implements BeforePolicyInterface
       return new Result(true);
     } else {
       return new Result(false, 'Erro: estagiario edit policy not authorized');
-    };
+    }
   }
   
   public function canDelete(IdentityInterface $userSession, Estagiario $estagiarioData)
