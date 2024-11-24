@@ -36,7 +36,6 @@ class ProfessorPolicy implements BeforePolicyInterface
   
   public function canEdit(IdentityInterface $userSession, Professor $professorData)
   {
-    if (!$userSession) return new Result(false, 'Erro: Preciso estar logado para editar');
     if ($this->sameUser($userSession, $professorData)) {
       return new Result(true);
     } else {

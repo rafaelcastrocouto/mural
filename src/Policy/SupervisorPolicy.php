@@ -36,7 +36,6 @@ class SupervisorPolicy implements BeforePolicyInterface
   
   public function canEdit(IdentityInterface $userSession, Supervisor $userData)
   {
-    if (!$userSession) return new Result(false, 'Erro: Preciso estar logado para editar');
     if ($this->sameUser($userSession, $supervisorData)) {
       return new Result(true);
     } else {

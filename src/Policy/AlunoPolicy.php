@@ -26,7 +26,6 @@ class AlunoPolicy implements BeforePolicyInterface
   
   public function canView(IdentityInterface $userSession, Aluno $alunoData)
   {
-    if (!$userSession) return new Result(false, 'Erro: Preciso estar logado para ver');
     if ($this->sameUser($userSession, $alunoData)) {
       return new Result(true);
     } else {
@@ -36,7 +35,6 @@ class AlunoPolicy implements BeforePolicyInterface
   
   public function canEdit(IdentityInterface $userSession, Aluno $alunoData)
   {
-    if (!$userSession) return new Result(false, 'Erro: Preciso estar logado para editar');
     if ($this->sameUser($userSession, $alunoData)) {
       return new Result(true);
     } else {

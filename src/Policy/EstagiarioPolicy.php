@@ -31,7 +31,6 @@ class EstagiarioPolicy implements BeforePolicyInterface
   
   public function canView(IdentityInterface $userSession, Estagiario $estagiarioData)
   {
-    if (!$userSession) return new Result(false, 'Erro: Preciso estar logado para ver');
     if ($this->sameUser($userSession, $estagiarioData)) {
       return new Result(true);
     } else {
@@ -41,7 +40,6 @@ class EstagiarioPolicy implements BeforePolicyInterface
   
   public function canEdit(IdentityInterface $userSession, Estagiario $estagiarioData)
   {
-    if (!$userSession) return new Result(false, 'Erro: Preciso estar logado para editar');
     if ($this->sameUser($userSession, $estagiarioData)) {
       return new Result(true);
     } else {

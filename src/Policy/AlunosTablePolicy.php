@@ -31,12 +31,10 @@ class AlunosTablePolicy implements BeforePolicyInterface
 
   public function canAdd(IdentityInterface $userSession, AlunosTable $alunosTable)
   {
-    if (!$userSession) return new Result(false, 'Erro: Preciso estar logado para ver');
-    
     $alunocadastrado = $alunosTable->find()->where(['user_id' => $userSession->id]);
 
     if ($alunocadastrado->count() > 0) {
-        return new Result(false, 'Erro: aluno ja cadastrado');
+        return new Result(false, 'Erro: alunos busca policy not authorized');
     } else {
       return new Result(true);
     }
