@@ -13,13 +13,14 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
     
 ?>
 <div class="alunos index content">
-    
+	<?php if ($categoria_id == 1 OR ($alunos->count() == 0 AND $categoria_id == 2) ): ?>
 	<aside>
 		<div class="nav">
-            <?= $this->Html->link(__('Novo Aluno'), ['action' => 'add'], ['class' => 'button']) ?>
+			<?= $this->Html->link(__('Novo Aluno'), ['action' => 'add'], ['class' => 'button']) ?>
 		</div>
 	</aside>
-    
+    <?php endif; ?>
+	
     <h3><?= __('Lista de Alunos') ?></h3>
     
     <div class="paginator">

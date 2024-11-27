@@ -3,16 +3,28 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
  */
+
+declare(strict_types=1);
+
+
+$categoria_id = 0;
+$user_session = $this->request->getAttribute('identity');
+if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
+
 ?>
 <div>
     <div class="column-responsive column-80">
         <div class="users view content">
             <aside>
                 <div class="nav">
-                    <?= $this->Html->link(__('Listar Usuários'), ['action' => 'index'], ['class' => 'button']) ?>
                     <?= $this->Html->link(__('Editar Usuário'), ['action' => 'edit', $user->id], ['class' => 'button']) ?>
-                    <?= $this->Form->postLink(__('Deletar Usuário'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete {0}?', $user->email), 'class' => 'button']) ?>
-                    <?= $this->Html->link(__('Novo Usuário'), ['action' => 'add'], ['class' => 'button']) ?>
+                    
+                    <?php if ($categoria_id == 1): ?>
+                        <?= $this->Html->link(__('Listar Usuários'), ['action' => 'index'], ['class' => 'button']) ?>
+                        <?= $this->Form->postLink(__('Deletar Usuário'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete {0}?', $user->email), 'class' => 'button']) ?>
+                        <?= $this->Html->link(__('Novo Usuário'), ['action' => 'add'], ['class' => 'button']) ?>
+                    <?php endif; ?>
+                    
                 </div>
             </aside>
             <h3>user_<?= h($user->id) ?></h3>
@@ -99,6 +111,8 @@
                     </table>
                 </div>
             </div>
+            <?php elseif ($user->categoria_id == 2): ?>
+                <p><?= $this->Html->link('Adicionar aluno', ['controller' => 'alunos', 'action' => 'add'], ['class' => 'button']) ?></p>
             <?php endif; ?>
 
             <?php if (!empty($user->professor)) : ?>
@@ -131,6 +145,8 @@
                     </table>
                 </div>
             </div>
+            <?php elseif ($user->categoria_id == 3): ?>
+                <p><?= $this->Html->link('Adicionar professor', ['controller' => 'professores', 'action' => 'add'], ['class' => 'button']) ?></p>
             <?php endif; ?>
             
 
@@ -162,6 +178,8 @@
                     </table>
                 </div>
             </div>
+            <?php elseif ($user->categoria_id == 4): ?>
+                <p><?= $this->Html->link('Adicionar supervisor', ['controller' => 'supervisores', 'action' => 'add'], ['class' => 'button']) ?></p>
             <?php endif; ?>
             
         </div>
