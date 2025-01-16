@@ -151,7 +151,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                         <a href="./muralestagios">muralestagios</a> | <a href="./muralestagios/view/1">view</a> | <a href="./muralestagios/edit/1">edit</a> | <a href="./muralestagios/add">add</a><br>
                         <a href="./professores">professores</a> | <a href="./professores/view/1">view</a> | <a href="./professores/edit/1">edit</a> | <a href="./professores/add">add</a><br>
                         <a href="./supervisores">supervisores</a> | <a href="./supervisores/view/1">view</a> | <a href="./supervisores/edit/1">edit</a> | <a href="./supervisores/add">add</a><br>
-                        <a href="./turmaestagios">turmaestagios</a> | <a href="./turmaestagios/view/1">view</a> | <a href="./turmaestagios/edit/1">edit</a> | <a href="./turmaestagios/add">add</a><br>
+                        <a href="./turmas">turmas</a> | <a href="./turmas/view/1">view</a> | <a href="./turmas/edit/1">edit</a> | <a href="./turmas/add">add</a><br>
                         <a href="./users">users</a> | <a href="./users/view/1">view</a> | <a href="./users/edit/1">edit</a> | <a href="./users/add">add</a> | <a href="./users/login">login</a><br>
                         <a href="./visitas">visitas</a> | <a href="./visitas/view/1">view</a> | <a href="./visitas/edit/1">edit</a> | <a href="./visitas/add">add</a><br>
                     </p>

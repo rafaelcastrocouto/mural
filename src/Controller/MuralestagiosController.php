@@ -64,7 +64,7 @@ class MuralestagiosController extends AppController {
     public function view($id = null)
     {
         $muralestagio = $this->Muralestagios->get($id, [
-            'contain' => ['Instituicoes', 'Turmaestagios', 'Professores'/*, 'Inscricoes' => ['Alunos']*/],
+            'contain' => ['Instituicoes', 'Turmas', 'Professores'/*, 'Inscricoes' => ['Alunos']*/],
         ]);
         $this->set(compact('muralestagio'));
     }
@@ -98,9 +98,9 @@ class MuralestagiosController extends AppController {
             $this->Flash->error(__('Registro de mural de estágio não foi feito. Tente novamente.'));
         }
         $instituicoes = $this->Muralestagios->Instituicoes->find('list');
-        $turmaestagios = $this->Muralestagios->Turmaestagios->find('list');
+        $turmas = $this->Muralestagios->Turmas->find('list');
         $professores = $this->Muralestagios->Professores->find('list');
-        $this->set(compact('muralestagio', 'instituicoes', 'turmaestagios', 'professores', 'periodo'));
+        $this->set(compact('muralestagio', 'instituicoes', 'turmas', 'professores', 'periodo'));
     }
 
     /**
@@ -125,9 +125,9 @@ class MuralestagiosController extends AppController {
             $this->Flash->error(__('The muralestagio could not be saved. Please, try again.'));
         }
         $instituicoes = $this->Muralestagios->Instituicoes->find('list');
-        $turmaestagios = $this->Muralestagios->Turmaestagios->find('list');
+        $turmas = $this->Muralestagios->Turmas->find('list');
         $professores = $this->Muralestagios->Professores->find('list', ['limit' => 500]);
-        $this->set(compact('muralestagio', 'instituicoes', 'turmaestagios', 'professores'));
+        $this->set(compact('muralestagio', 'instituicoes', 'turmas', 'professores'));
     }
 
     /**

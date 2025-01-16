@@ -29,7 +29,7 @@
                     echo $this->Form->control('fim_de_semana');
                     echo $this->Form->control('carga_horaria');
                     echo $this->Form->control('requisitos');
-                    echo $this->Form->control('turmaestagio_id', ['options' => $turmaestagios, 'class' => 'form-control']);
+                    echo $this->Form->control('turma_id', ['options' => $turmas, 'class' => 'form-control']);
                     echo $this->Form->control('turno');
                     echo $this->Form->control('professor_id', ['options' => $professores, 'class' => 'form-control']);
                     echo $this->Form->control('local_inscricao');

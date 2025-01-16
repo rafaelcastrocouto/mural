@@ -54,7 +54,7 @@ class InstituicoesController extends AppController
             'contain' => [
                 'Areas',
                 'Supervisores',
-                'Estagiarios' => ['Alunos', 'Professores', 'Supervisores', 'Turmaestagios'],
+                'Estagiarios' => ['Alunos', 'Professores', 'Supervisores', 'Turmas'],
                 'Muralestagios' => ['Instituicoes', 'Professores'],
                 'Visitas' 
             ],

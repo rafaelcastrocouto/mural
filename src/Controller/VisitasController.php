@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Authorization\Exception\ForbiddenException;
+use Cake\Event\EventInterface;
+
 /**
  * Visitas Controller
  *
@@ -11,6 +14,20 @@ namespace App\Controller;
  */
 class VisitasController extends AppController
 {
+    /**
+     * beforeFilter method
+     */
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        try {
+            $this->Authorization->authorize($this->Visitas);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+    }
+    
     /**
      * Index method
      *

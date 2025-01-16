@@ -46,7 +46,7 @@ class SupervisoresController extends AppController
         $supervisor = $this->Supervisores->get($id, [
             'contain' => [
                 'Instituicoes' => ['Areas'], 
-                'Estagiarios' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores', 'Turmaestagios'], 
+                'Estagiarios' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores', 'Turmas'], 
                 'Users'
             ],
         ]);

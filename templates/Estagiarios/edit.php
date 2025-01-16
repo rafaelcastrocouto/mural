@@ -32,7 +32,7 @@
                     echo $this->Form->control('supervisor_id', ['options' => $supervisores, 'empty' => true, 'class' => 'form-control']);
                     echo $this->Form->control('professor_id', ['options' => $professores, 'empty' => true, 'class' => 'form-control']);
                     echo $this->Form->control('periodo');
-                    echo $this->Form->control('turmaestagio_id', ['options' => $turmaestagios, 'empty' => true, 'class' => 'form-control']);
+                    echo $this->Form->control('turma_id', ['options' => $turmas, 'empty' => true, 'class' => 'form-control']);
                     echo $this->Form->control('nota');
                     echo $this->Form->control('ch');
                     echo $this->Form->control('observacoes');

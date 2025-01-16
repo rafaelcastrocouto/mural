@@ -20,7 +20,7 @@ use Cake\ORM\Entity;
  * @property int|null $supervisor_id
  * @property int|null $professor_id
  * @property string $periodo
- * @property int|null $turma_estagio_id
+ * @property int|null $turma_id
  * @property string|null $nota
  * @property int|null $ch
  * @property string|null $observacoes
@@ -29,7 +29,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Instituicao $instituicao
  * @property \App\Model\Entity\Supervisor $supervisor
  * @property \App\Model\Entity\Professor $professor
- * @property \App\Model\Entity\Turmaestagio $turmaestagio
+ * @property \App\Model\Entity\Turmaestagio $turma
  */
 class Estagiario extends Entity
 {
@@ -55,7 +55,7 @@ class Estagiario extends Entity
         'supervisor_id' => true,
         'professor_id' => true,
         'periodo' => true,
-        'turma_estagio_id' => true,
+        'turma_id' => true,
         'nota' => true,
         'ch' => true,
         'observacoes' => true,

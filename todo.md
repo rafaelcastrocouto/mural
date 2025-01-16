@@ -13,7 +13,7 @@ x instituicoes
 muralestagios
 x professores
 x supervisores
-turmaestagios
+x turmas
 users
 x visitas
 
@@ -32,9 +32,9 @@ x instituicoes
 muralestagios
 x professores
 x supervisores
-turmaestagios
+x turmas
 x users
-visitas
+x visitas
 
 - redirects
 

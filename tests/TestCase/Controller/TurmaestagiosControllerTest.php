@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\TurmaestagiosController;
+use App\Controller\TurmasController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Controller\TurmaestagiosController Test Case
+ * App\Controller\TurmasController Test Case
  *
- * @uses \App\Controller\TurmaestagiosController
+ * @uses \App\Controller\TurmasController
  */
-class TurmaestagiosControllerTest extends TestCase
+class TurmasControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
@@ -22,7 +22,7 @@ class TurmaestagiosControllerTest extends TestCase
      * @var array
      */
     protected $fixtures = [
-        'app.Turmaestagios',
+        'app.Turmas',
         'app.Estagiarios',
         'app.Muralestagios',
     ];

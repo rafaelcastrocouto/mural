@@ -55,7 +55,7 @@ class ProfessoresController extends AppController
         ]);
         
         $estagiarios = $this->paginate($this->Professores->Estagiarios->find('all', [
-            'contain' => ['Alunos', 'Instituicoes', 'Supervisores', 'Turmaestagios'],
+            'contain' => ['Alunos', 'Instituicoes', 'Supervisores', 'Turmas'],
         ])->innerJoinWith('Professores', function (\Cake\ORM\Query $query) use ($professor) {
             return $query->where([
                 'professor_id' => $professor->id,

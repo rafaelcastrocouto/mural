@@ -78,7 +78,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                 </tr>
                 <tr>
                     <th><?= __('Turma') ?></th>
-                    <td><?= $muralestagio->turmaestagio ? $this->Html->link($muralestagio->turmaestagio->turma, ['controller' => 'Turmaestagios', 'action' => 'view', $muralestagio->turmaestagio->id]) : $muralestagio->turma_estagio_id ?></td>
+                    <td><?= $muralestagio->turma ? $this->Html->link($muralestagio->turma->turma, ['controller' => 'Turmas', 'action' => 'view', $muralestagio->turma->id]) : $muralestagio->turma_id ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Turno') ?></th>
