@@ -62,7 +62,7 @@ class AvaliacoesController extends AppController
                 // pr($estagiarios);
                 // die();
                 $this->set('id', $id);
-                $this->set('estagiario', $estagiarios);
+                $this->set('estagiarios', $estagiarios);
             } else {
                 $this->Flash->error(__('Selecionar estagiário, período e nível de estágio a ser avaliado'));
                 if ($this->getRequest()->getSession()->read('registro')) {
@@ -88,13 +88,13 @@ class AvaliacoesController extends AppController
             $this->Flash->error(__('Selecionar estagiário, período e nível de estágio a ser avaliado'));
             return $this->redirect('/alunos/view?registro=' . $this->getRequest()->getSession()->read('registro'));
         } else {
-            $estagiario = $this->Avaliacoes->Estagiarios->find()
+            $estagiarios = $this->Avaliacoes->Estagiarios->find()
                 ->contain(['Supervisores', 'Alunos', 'Professores', 'Folhadeatividades'])
                 ->where(['Supervisores.cress' => $cress])
                 ->order(['periodo' => 'desc'])
                 ->all();
             // pr($estagiario);
-            $this->set('estagiario', $estagiario);
+            $this->set('estagiarios', $estagiarios);
         }
     }
 
@@ -249,13 +249,13 @@ class AvaliacoesController extends AppController
             return $this->redirect('/alunos/index');
         } else {
             $estagiariostabela = $this->fetchTable('Estagiarios');
-            $estagiario = $estagiariostabela->find()
+            $estagiarios = $estagiariostabela->find()
                 ->contain(['Alunos', 'Supervisores', 'Instituicoes'])
                 ->where(['Estagiarios.registro' => $this->getRequest()->getSession()->read('registro')])
                 ->all();
         }
 
-        $this->set('estagiario', $this->paginate(estagiario));
+        $this->set('estagiarios', $this->paginate(estagiario));
     }
 
     public function imprimeavaliacaopdf($id = NULL)

@@ -91,7 +91,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($supervisor->id) ?></td>
+                    <td><?= h($supervisor->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Cress') ?></th>

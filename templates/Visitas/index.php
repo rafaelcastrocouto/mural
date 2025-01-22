@@ -38,7 +38,7 @@
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $visita->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $visita->id], ['confirm' => __('Are you sure you want to delete visita_{0}?', $visita->id)]) ?>
                     </td>
-                    <td><?= $this->Html->link($visita->id, ['action' => 'view', $visita->id]) ?></td>
+                    <td><?= $this->Html->link((string)$visita->id, ['action' => 'view', $visita->id]) ?></td>
                     <td><?= $visita->instituicao ? $this->Html->link($visita->instituicao->instituicao, ['controller' => 'Visitas', 'action' => 'view', $visita->id]) : '' ?></td>
                     <td><?= h($visita->data) ?></td>
                     <td><?= h($visita->motivo) ?></td>

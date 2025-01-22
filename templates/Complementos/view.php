@@ -19,7 +19,7 @@
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($complemento->id) ?></td>
+                    <td><?= h($complemento->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Nome') ?></th>

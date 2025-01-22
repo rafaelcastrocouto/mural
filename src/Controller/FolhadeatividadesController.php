@@ -288,19 +288,18 @@ class FolhadeatividadesController extends AppController
         if (is_null($id)) {
             $this->Flash->error(__('Selecione o estagiário e o período da folha de atividades'));
 
-            $estagiario = $this->fetchTable('Estagiarios')->find()
+            $estagiarios = $this->fetchTable('Estagiarios')->find()
                 ->contain(['Alunos', 'Supervisores', 'Instituicoes']);
-            $this->set('estagiario', $this->paginate($estagiario));
             //return $this->redirect('/estagiarios/index');
             
         } else {
-            $estagiario = $this->fetchTable('Estagiarios')->find()
+            $estagiarios = $this->fetchTable('Estagiarios')->find()
                 ->contain(['Alunos', 'Supervisores', 'Instituicoes'])
                 ->where(['Estagiarios.registro' => $this->getRequest()->getSession()->read('registro')])
                 ->orderByDesc('nivel');
-            $this->set('estagiario', $this->paginate($estagiario));
             //return $this->redirect(['controller' => 'alunos', 'action' => 'view', $estagiario->aluno_id]);
         }
+        $this->set('estagiarios', $this->paginate($estagiarios));
         // pr($estagiarios);
         // die();
     }

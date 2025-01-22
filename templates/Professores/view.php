@@ -20,7 +20,7 @@
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($professor->id) ?></td>
+                    <td><?= h($professor->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Nome') ?></th>

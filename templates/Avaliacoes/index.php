@@ -76,55 +76,55 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                             <th class="actions"><?= __('Ações') ?></th>
                         <th><?= $this->Paginator->sort('id') ?></th>
                         <?php endif; ?>
-                        <th><?= $this->Paginator->sort('estagiario.avaliacao.id', 'Avaliação') ?></th>
-                        <th><?= $this->Paginator->sort('estagiario->aluno->nome', 'Aluno') ?></th>
-                        <th><?= $this->Paginator->sort('estagiario->periodo', 'Período') ?></th>
-                        <th><?= $this->Paginator->sort('estagiario->nivel', 'Nível') ?></th>
-                        <th><?= $this->Paginator->sort('estagiario->instituicao->instituicao', 'Instituição') ?></th>
-                        <th><?= $this->Paginator->sort('estagiario->supervisor->nome', 'Supervisor(a)') ?></th>
-                        <th><?= $this->Paginator->sort('estagiario->ch', 'Carga horária') ?></th>
-                        <th><?= $this->Paginator->sort('estagiario->nota', 'Nota') ?></th>
+                        <th><?= $this->Paginator->sort('estagiarios->avaliacao->id', 'Avaliação') ?></th>
+                        <th><?= $this->Paginator->sort('estagiarios->aluno->nome', 'Aluno') ?></th>
+                        <th><?= $this->Paginator->sort('estagiarios->periodo', 'Período') ?></th>
+                        <th><?= $this->Paginator->sort('estagiarios->nivel', 'Nível') ?></th>
+                        <th><?= $this->Paginator->sort('estagiarios->instituicao->instituicao', 'Instituição') ?></th>
+                        <th><?= $this->Paginator->sort('estagiarios->supervisor->nome', 'Supervisor(a)') ?></th>
+                        <th><?= $this->Paginator->sort('estagiarios->ch', 'Carga horária') ?></th>
+                        <th><?= $this->Paginator->sort('estagiarios->nota', 'Nota') ?></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($estagiario as $c_estagiario): ?>
-                        <?php // pr($c_estagiario); ?>
+                    <?php foreach ($estagiarios as $estagiario): ?>
+                        <?php // pr($estagiario); ?>
                         <?php // die(); ?>
                         <tr>
                             <?php if ($categoria_id == 1): ?>
-                                <?php if (isset($c_estagiario->avaliacao->id)): ?>
+                                <?php if (isset($estagiario->avaliacao->id)): ?>
                                     <td class="actions">
-                                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $c_estagiario->avaliacao->id]) ?>
-                                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $c_estagiario->avaliacao->id]) ?>
-                                        <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $c_estagiario->avaliacao->id], ['confirm' => __('Tem certeza que quer excluir este registro # {0}?', $c_estagiario->avaliacao->id)]) ?>
+                                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $estagiario->avaliacao->id]) ?>
+                                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $estagiario->avaliacao->id]) ?>
+                                        <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $estagiario->avaliacao->id], ['confirm' => __('Tem certeza que quer excluir este registro # {0}?', $estagiario->avaliacao->id)]) ?>
                                     </td>
                                 <?php endif; ?>
-                                <td><?= isset($c_estagiario->id) ? $this->Html->link($c_estagiario->id, ['controller' => 'estagiarios', 'action' => 'view', $c_estagiario->id]) : '' ?>
+                                <td><?= isset((string)$estagiario->id) ? $this->Html->link($estagiario->id, ['controller' => 'estagiarios', 'action' => 'view', $estagiario->id]) : '' ?>
                                 </td>
                             <?php else: ?>
     
                             <?php if ($categoria_id == 1 || $categoria_id == 4): ?>
-                                <td><?= $c_estagiario->hasValue('avaliacao') ? $this->Html->link('Ver avaliação', ['controller' => 'Avaliacoes', 'action' => 'view', $c_estagiario->avaliacao->id], ['class' => 'btn btn-success']) : $this->Html->link('Fazer avaliação', ['controller' => 'avaliacoes', 'action' => 'add', $c_estagiario->id], ['class' => 'btn btn-warning']) ?>
+                                <td><?= $estagiario->hasValue('avaliacao') ? $this->Html->link('Ver avaliação', ['controller' => 'Avaliacoes', 'action' => 'view', $estagiario->avaliacao->id], ['class' => 'btn btn-success']) : $this->Html->link('Fazer avaliação', ['controller' => 'avaliacoes', 'action' => 'add', $estagiario->id], ['class' => 'btn btn-warning']) ?>
                                 </td>
                             <?php else: ?>
-                                <td><?= $c_estagiario->hasValue('avaliacao') ? $this->Html->link('Ver avaliação', ['controller' => 'Avaliacoes', 'action' => 'view', $c_estagiario->avaliacao->id], ['class' => 'btn btn-success']) : 'Sem avaliação on-line' ?>
+                                <td><?= $estagiario->hasValue('avaliacao') ? $this->Html->link('Ver avaliação', ['controller' => 'Avaliacoes', 'action' => 'view', $estagiario->avaliacao->id], ['class' => 'btn btn-success']) : 'Sem avaliação on-line' ?>
                                 </td>
                             <?php endif; ?>
     
                             <?php if ($categoria_id == 1): ?>
-                                <td><?= $c_estagiario->hasValue('aluno') ? $this->Html->link($c_estagiario->aluno->nome, ['controller' => 'alunos', 'action' => 'view', $c_estagiario->aluno->id]) : '' ?>
+                                <td><?= $estagiario->hasValue('aluno') ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?>
                                 </td>
                             <?php else: ?>
-                                <td><?= $c_estagiario->hasValue('aluno') ? $c_estagiario->aluno->nome : '' ?></td>
+                                <td><?= $estagiario->hasValue('aluno') ? $estagiario->aluno->nome : '' ?></td>
                             <?php endif; ?>
     
-                            <td><?= $c_estagiario->periodo ?></td>
-                            <td><?= $c_estagiario->nivel ?></td>
-                            <td><?= $c_estagiario->hasValue('instituicao') ? $c_estagiario->instituicao->instituicao : '' ?>
+                            <td><?= $estagiario->periodo ?></td>
+                            <td><?= $estagiario->nivel ?></td>
+                            <td><?= $estagiario->hasValue('instituicao') ? $estagiario->instituicao->instituicao : '' ?>
                             </td>
-                            <td><?= $c_estagiario->hasValue('supervisor') ? $c_estagiario->supervisor->nome : '' ?></td>
-                            <td><?= $c_estagiario->ch ?></td>
-                            <td><?= $c_estagiario->nota ?></td>
+                            <td><?= $estagiario->hasValue('supervisor') ? $estagiario->supervisor->nome : '' ?></td>
+                            <td><?= $estagiario->ch ?></td>
+                            <td><?= $estagiario->nota ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

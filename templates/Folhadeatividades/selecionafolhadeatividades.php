@@ -3,7 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Folhadeatividade[]|\Cake\Collection\CollectionInterface $folhadeatividades
  */
-// pr($estagiario->item->aluno);
+// pr($estagiarios);
 // die();
 
 $categoria_id = 0;
@@ -27,52 +27,52 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                         <th class="actions"><?= __('Ações') ?></th>
                     <?php endif; ?>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('estagiario.avaliacao.id', 'Folha de atividades') ?></th>
-                    <th><?= $this->Paginator->sort('estagiario->aluno->nome', 'Aluno') ?></th>
-                    <th><?= $this->Paginator->sort('estagiario->periodo', 'Período') ?></th>
-                    <th><?= $this->Paginator->sort('estagiario->nivel', 'Nível') ?></th>
-                    <th><?= $this->Paginator->sort('estagiario->instituicao->instituicao', 'Instituição') ?></th>
-                    <th><?= $this->Paginator->sort('estagiario->supervisor->nome', 'Supervisor(a)') ?></th>
-                    <th><?= $this->Paginator->sort('estagiario->ch', 'Carga horária') ?></th>
-                    <th><?= $this->Paginator->sort('estagiario->nota', 'Nota') ?></th>
+                    <th><?= $this->Paginator->sort('avaliacao->id', 'Folha de atividades') ?></th>
+                    <th><?= $this->Paginator->sort('aluno->nome', 'Aluno') ?></th>
+                    <th><?= $this->Paginator->sort('periodo', 'Período') ?></th>
+                    <th><?= $this->Paginator->sort('nivel', 'Nível') ?></th>
+                    <th><?= $this->Paginator->sort('instituicao->instituicao', 'Instituição') ?></th>
+                    <th><?= $this->Paginator->sort('supervisor->nome', 'Supervisor(a)') ?></th>
+                    <th><?= $this->Paginator->sort('ch', 'Carga horária') ?></th>
+                    <th><?= $this->Paginator->sort('nota', 'Nota') ?></th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($estagiario as $c_estagiario): ?>
-                    <?php // pr($c_estagiario); ?>
+                <?php foreach ($estagiarios as $estagiario): ?>
+                    <?php // pr($estagiario); ?>
                     <?php // die(); ?>
                     <tr>
 
                         <?php if ($categoria_id == 1): ?> 
-                            <?php if (isset($c_estagiario->id)): ?>
+                            <?php if (isset($estagiario->id)): ?>
                                 <td class="actions">
-                                    <?= $this->Html->link(__('View'), ['action' => 'view', $c_estagiario->id]) ?>
-                                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $c_estagiario->id]) ?>
-                                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $c_estagiario->id], ['confirm' => __('Tem certeza que quer excluir o registro # {0}?', $c_estagiario->id)]) ?>
+                                    <?= $this->Html->link(__('View'), ['action' => 'view', $estagiario->id]) ?>
+                                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $estagiario->id]) ?>
+                                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Tem certeza que quer excluir o registro # {0}?', $estagiario->id)]) ?>
                                 </td>
                             <?php endif; ?>
                         <?php endif; ?>
                         
                         <?php if ($categoria_id == 1): ?>
-                            <td><?= isset($c_estagiario->id) ? $this->Html->link($c_estagiario->id, ['controller' => 'estagiarios', 'action' => 'view', $c_estagiario->id]) : '' ?></td>
+                            <td><?= isset($estagiario->id) ? $this->Html->link((string)$estagiario->id, ['controller' => 'estagiarios', 'action' => 'view', $estagiario->id]) : '' ?></td>
                         <?php else: ?>
-                            <td><?= isset($c_estagiario->id) ? $c_estagiario->id : '' ?></td>
+                            <td><?= isset($estagiario->id) ? $estagiario->id : '' ?></td>
                         <?php endif; ?>
 
-                        <td><?= $this->Html->link('Preencher folha de atividades', ['controller' => 'folhadeatividades', 'action' => 'index', $c_estagiario->id]) ?></td>
+                        <td><?= $this->Html->link('Preencher folha de atividades', ['controller' => 'folhadeatividades', 'action' => 'index', $estagiario->id]) ?></td>
 
                         <?php if ($categoria_id == 1): ?>
-                            <td><?= $c_estagiario->hasValue('aluno') ? $this->Html->link($c_estagiario->aluno->nome, ['controller' => 'alunos', 'action' => 'view', $c_estagiario->aluno->id]) : '' ?></td>
+                            <td><?= $estagiario->hasValue('aluno') ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
                         <?php else: ?>
-                            <td><?= $c_estagiario->hasValue('aluno') ? $c_estagiario->aluno->nome : '' ?></td>
+                            <td><?= $estagiario->hasValue('aluno') ? $estagiario->aluno->nome : '' ?></td>
                         <?php endif; ?>
 
-                        <td><?= $c_estagiario->periodo ?></td>
-                        <td><?= $c_estagiario->nivel ?></td>
-                        <td><?= $c_estagiario->hasValue('instituicao') ? $c_estagiario->instituicao->instituicao : '' ?></td>
-                        <td><?= $c_estagiario->hasValue('supervisor') ? $c_estagiario->supervisor->nome : '' ?></td>
-                        <td><?= $c_estagiario->ch ?></td>
-                        <td><?= $c_estagiario->nota ?></td>
+                        <td><?= $estagiario->periodo ?></td>
+                        <td><?= $estagiario->nivel ?></td>
+                        <td><?= $estagiario->hasValue('instituicao') ? $estagiario->instituicao->instituicao : '' ?></td>
+                        <td><?= $estagiario->hasValue('supervisor') ? $estagiario->supervisor->nome : '' ?></td>
+                        <td><?= $estagiario->ch ?></td>
+                        <td><?= $estagiario->nota ?></td>
 
                     </tr>
                 <?php endforeach; ?>

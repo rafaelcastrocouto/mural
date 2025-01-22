@@ -39,7 +39,7 @@
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $instituicao->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $instituicao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $instituicao->id)]) ?>
                     </td>
-                    <td><?= $this->Html->link($instituicao->id, ['action' => 'view', $instituicao->id]) ?></td>
+                    <td><?= $this->Html->link((string)$instituicao->id, ['action' => 'view', $instituicao->id]) ?></td>
                     <td><?= $this->Html->link($instituicao->instituicao, ['controller' => 'instituicoes', 'action' => 'view', $instituicao->id]) ?></td>
                     <td><?= $instituicao->area ? $this->Html->link($instituicao->area->area, ['controller' => 'Areas', 'action' => 'view', $instituicao->area->id]) : '' ?></td>
                     <td><?= h($instituicao->natureza) ?></td>

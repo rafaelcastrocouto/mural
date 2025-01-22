@@ -34,7 +34,7 @@
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $turma->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $turma->id], ['confirm' => __('Are you sure you want to delete {0}?', $turma->turma)]) ?>
                     </td>
-                    <td><?= $this->Number->format($turma->id) ?></td>
+                    <td><?= h($turma->id) ?></td>
                     <td><?= $this->Html->link(h($turma->turma), ['action' => 'view', $turma->id]) ?></td>
                 </tr>
                 <?php endforeach; ?>

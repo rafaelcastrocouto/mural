@@ -95,7 +95,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                 
                 <?php if ($user_session): ?>
                     <li><?php echo $this->Html->link("Minha conta", ['controller' => 'Users', 'action' => 'view', $user_session->id]); ?></li>
-                    <li><?php echo $this->Html->link('Sair', ['controller' => 'Users', 'action' => 'logout']); ?></li>
+                    <li><?php echo $this->Html->link('Sair (' . $user_session->get('email') . ')', ['controller' => 'Users', 'action' => 'logout']); ?></li>
                 <?php else: ?>
                     <li><?php echo $this->Html->link("Login", ['controller' => 'Users', 'action' => 'login']); ?></li>
                 <?php endif; ?>

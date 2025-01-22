@@ -21,7 +21,7 @@
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= $instituicao->id ? $this->Number->format($instituicao->id) : '' ?></td>
+                    <td><?= h($instituicao->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Instituicao') ?></th>
@@ -119,7 +119,7 @@
                                 <?= $this->Html->link(__('Editar'), ['controller' => 'Supervisores', 'action' => 'edit', $supervisores->id]) ?>
                                 <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Supervisores', 'action' => 'delete', $supervisores->id], ['confirm' => __('Are you sure you want to delete # {0}?', $supervisores->id)]) ?>
                             </td>
-                            <td><?= $this->Html->link($supervisores->id, ['controller' => 'Supervisores', 'action' => 'view', $supervisores->id]) ?></td>
+                            <td><?= $this->Html->link((string)$supervisores->id, ['controller' => 'Supervisores', 'action' => 'view', $supervisores->id]) ?></td>
                             <td><?= $this->Html->link($supervisores->nome, ['controller' => 'Supervisores', 'action' => 'view', $supervisores->id]) ?></td>
                             <td><?= h($supervisores->cpf) ?></td>
                             <td><?= $supervisores->email ? $this->Text->autoLinkEmails($supervisores->email) : '' ?></td>
@@ -157,7 +157,7 @@
                                 <?= $this->Html->link(__('Editar'), ['controller' => 'Estagiarios', 'action' => 'edit', $estagiario->id]) ?>
                                 <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Estagiarios', 'action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete # {0}?', $estagiario->id)]) ?>
                             </td>
-                            <td><?= $this->Html->link($estagiario->id, ['controller' => 'Estagiarios', 'action' => 'view', $estagiario->id]) ?></td>
+                            <td><?= $this->Html->link((string)$estagiario->id, ['controller' => 'Estagiarios', 'action' => 'view', $estagiario->id]) ?></td>
                             <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
                             <td><?= h($estagiario->registro) ?></td>
                             <td>

@@ -54,7 +54,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $aluno->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $aluno->id], ['confirm' => __('Are you sure you want to delete {0}?', $aluno->nome)]) ?>
                     </td>
-                    <td><?= $this->Html->link($aluno->id, ['action' => 'view', $aluno->id]) ?></td>
+                    <td><?= $this->Html->link((string)$aluno->id, ['action' => 'view', $aluno->id]) ?></td>
                     <?php endif; ?>
                     <td><?= $aluno->nome ? $this->Html->link(h($aluno->nome), ['action' => 'view', $aluno->id]) : '' ?></td>
                     <td><?= h($aluno->registro) ?></td>

@@ -131,7 +131,8 @@ nav menu li menu li a {
     margin-left: -112px;
   }
   nav .menu-user menu {
-    margin-left: -20px;
+    right: -15px;
+  :;
   }
   nav .menu-user {
     margin-right: 30px;

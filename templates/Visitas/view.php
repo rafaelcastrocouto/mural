@@ -20,7 +20,7 @@
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($visita->id) ?></td>
+                    <td><?= h($visita->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Instituicao') ?></th>

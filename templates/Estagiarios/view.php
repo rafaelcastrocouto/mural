@@ -19,7 +19,7 @@
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($estagiario->id) ?></td>
+                    <td><?= h($estagiario->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Aluno') ?></th>

@@ -19,7 +19,7 @@
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($turma->id) ?></td>
+                    <td><?= h($turma->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Turma') ?></th>

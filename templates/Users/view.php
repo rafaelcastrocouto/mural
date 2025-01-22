@@ -31,7 +31,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($user->id) ?></td>
+                    <td><?= h($user->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Email') ?></th>
@@ -67,7 +67,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                                 <?= $this->Html->link(__('Editar'), ['controller' => 'administradores', 'action' => 'edit', $user->administrador->id]) ?>
                                 <?= $this->Form->postLink(__('Deletar'), ['controller' => 'administradores', 'action' => 'delete', $user->administrador->id], ['confirm' => __('Are you sure you want to delete administrador_{0}?', $user->administrador->id)]) ?>
                             </td>
-                            <td><?= $this->Html->link($user->administrador->id, ['controller' => 'administradores', 'action' => 'view', $user->administrador->id]) ?></td>
+                            <td><?= $this->Html->link((string)$user->administrador->id, ['controller' => 'administradores', 'action' => 'view', $user->administrador->id]) ?></td>
                             <td><?= h($user->administrador->nome) ?></td>
                         </tr>
                     </table>
@@ -98,7 +98,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                                 <?= $this->Html->link(__('Editar'), ['controller' => 'alunos', 'action' => 'edit', $user->aluno->id]) ?>
                                 <?= $this->Form->postLink(__('Deletar'), ['controller' => 'alunos', 'action' => 'delete', $user->aluno->id], ['confirm' => __('Are you sure you want to delete aluno_{0}?', $user->aluno->id)]) ?>
                             </td>
-                            <td><?= $this->Html->link($user->aluno->id, ['controller' => 'alunos', 'action' => 'view', $user->aluno->id]) ?></td>
+                            <td><?= $this->Html->link((string)$user->aluno->id, ['controller' => 'alunos', 'action' => 'view', $user->aluno->id]) ?></td>
                             <td><?= h($user->aluno->nome) ?></td>
                             <td><?= h($user->aluno->registro) ?></td>
                             <td><?= '(' . h($user->aluno->codigo_telefone) . ') ' . h($user->aluno->telefone) ?></td>
@@ -135,7 +135,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                                 <?= $this->Html->link(__('Editar'), ['controller' => 'professores', 'action' => 'edit', $user->professor->id]) ?>
                                 <?= $this->Form->postLink(__('Deletar'), ['controller' => 'professores', 'action' => 'delete', $user->professor->id], ['confirm' => __('Are you sure you want to delete professor_{0}?', $user->professor->id)]) ?>
                             </td>
-                            <td><?= $this->Html->link($user->professor->id, ['controller' => 'professores', 'action' => 'view', $user->professor->id]) ?></td>
+                            <td><?= $this->Html->link((string)$user->professor->id, ['controller' => 'professores', 'action' => 'view', $user->professor->id]) ?></td>
                             <td><?= $this->Html->link(h($user->professor->nome), ['action' => 'view', $user->professor->id]) ?></td>
                             <td><?= $user->professor->telefone ? '(' . h($user->professor->ddd_telefone) . ')' . h($user->professor->telefone) : '' ?></td>
                             <td><?= $user->professor->celular ? '(' . h($user->professor->ddd_celular) . ')' . h($user->professor->celular) : '' ?></td>
@@ -169,7 +169,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                                 <?= $this->Html->link(__('Editar'), ['controller' => 'supervisores', 'action' => 'edit', $user->supervisor->id]) ?>
                                 <?= $this->Form->postLink(__('Deletar'), ['controller' => 'supervisores', 'action' => 'delete', $user->supervisor->id], ['confirm' => __('Are you sure you want to delete supervisor_{0}?', $user->supervisor->id)]) ?>
                             </td>
-                            <td><?= $this->Html->link($user->supervisor->id, ['action' => 'view', $user->supervisor->id]) ?></td>
+                            <td><?= $this->Html->link((string)user->supervisor->id, ['action' => 'view', $user->supervisor->id]) ?></td>
                             <td><?= $this->Html->link($user->supervisor->nome, ['action' => 'view', $user->supervisor->id]) ?></td>
                             <td><?= h($user->supervisor->cpf) ?></td>
                             <td><?= h($user->supervisor->escola) ?></td>

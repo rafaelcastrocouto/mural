@@ -27,7 +27,7 @@
                         <?= $this->Html->link(__('Ver'), ['action' => 'view', $administrador->id]) ?>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $administrador->id]) ?>
                     </td>
-                    <td><?= $this->Html->link($administrador->id, ['action' => 'view', $administrador->id]) ?></td>
+                    <td><?= $this->Html->link((string)$administrador->id, ['action' => 'view', $administrador->id]) ?></td>
                     <td><?= $this->Html->link($administrador->nome, ['action' => 'view', $administrador->id]) ?></td>
                 </tr>
                 <?php endforeach; ?>

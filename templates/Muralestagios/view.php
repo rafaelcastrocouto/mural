@@ -30,7 +30,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($muralestagio->id) ?></td>
+                    <td><?= h($muralestagio->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Instituicao') ?></th>

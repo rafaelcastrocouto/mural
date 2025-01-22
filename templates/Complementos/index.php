@@ -33,7 +33,7 @@
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $complemento->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $complemento->id], ['confirm' => __('Are you sure you want to delete {0}?', $complemento->nome)]) ?>
                     </td>
-                    <td><?= $this->Html->link($complemento->id, ['action' => 'view', $complemento->id]) ?></td>
+                    <td><?= $this->Html->link((string)$complemento->id, ['action' => 'view', $complemento->id]) ?></td>
                     <td><?= $this->Html->link($complemento->periodo_especial, ['action' => 'view', $complemento->id]) ?></td>
                 </tr>
                 <?php endforeach; ?>

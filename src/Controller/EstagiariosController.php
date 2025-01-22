@@ -544,7 +544,7 @@ class EstagiariosController extends AppController
             $this->Flash->error(__('Selecionar o aluno estagiário'));
             return $this->redirect('/alunos/index');
         } else {
-            $estagiario = $this->Estagiarios->find()
+            $estagiarios = $this->Estagiarios->find()
                 ->contain(['Alunos', 'Supervisores', 'Instituicoes'])
                 ->where(['Estagiarios.registro' => $this->getRequest()->getSession()->read('registro')])
                 ->all();
@@ -552,7 +552,7 @@ class EstagiariosController extends AppController
             // die();
         }
 
-        $this->set('estagiario', $estagiario);
+        $this->set('estagiarios', $estagiarios);
     }
 
     /**
@@ -621,7 +621,7 @@ class EstagiariosController extends AppController
             $this->Flash->error(__('Selecionar o aluno e o estágio'));
             return $this->redirect('/alunos/index');
         } else {
-            $estagiario = $this->Estagiarios->find()
+            $estagiarios = $this->Estagiarios->find()
                 ->contain(['Alunos', 'Supervisores', 'Instituicoes'])
                 ->where(['Estagiarios.registro' => $this->getRequest()->getSession()->read('registro')])
                 ->all();
@@ -629,7 +629,7 @@ class EstagiariosController extends AppController
             // die();
         }
 
-        $this->set('estagiario', $estagiario);
+        $this->set('estagiarios', $estagiarios);
     }
 
     /**
@@ -680,7 +680,7 @@ class EstagiariosController extends AppController
             $this->Flash->error(__('Selecionar o aluno estagiário'));
             return $this->redirect('/alunos/index');
         } else {
-            $estagiario = $this->Estagiarios->find()
+            $estagiarios = $this->Estagiarios->find()
                 ->contain(['Alunos', 'Supervisores', 'Instituicoes'])
                 ->where(['Estagiarios.registro' => $this->getRequest()->getSession()->read('registro')])
                 ->all();
@@ -688,7 +688,7 @@ class EstagiariosController extends AppController
             // die();
         }
 
-        $this->set('estagiario', $estagiario);
+        $this->set('estagiarios', $estagiarios);
     }
 
     /**

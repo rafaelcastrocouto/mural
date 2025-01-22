@@ -17,7 +17,7 @@
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($administrador->id) ?></td>
+                    <td><?= h($administrador->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Nome') ?></th>
@@ -42,7 +42,7 @@
                                 <?= $this->Html->link(__('Editar'), ['controller' => 'Users', 'action' => 'edit', $administrador->user->id]) ?>
                                 <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Users', 'action' => 'delete', $administrador->user->id], ['confirm' => __('Are you sure you want to delete user_{0}?', $administrador->user->id)]) ?>
                             </td>
-                            <td><?= $this->Html->link($administrador->user->id, ['controller' => 'Users', 'action' => 'view', $administrador->user->id]) ?></td>
+                            <td><?= $this->Html->link((string)$administrador->user->id, ['controller' => 'Users', 'action' => 'view', $administrador->user->id]) ?></td>
                             <td><?= $administrador->user->email ? $this->Text->autoLinkEmails($administrador->user->email) : '' ?></td>
                             <td><?= h($administrador->user->timestamp) ?></td>
                         </tr>

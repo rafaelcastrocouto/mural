@@ -17,7 +17,7 @@
     <table>
         <tr>
             <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($area->id) ?></td>
+            <td><?= h($area->id) ?></td>
         </tr>
         <tr>
             <th><?= __('Area') ?></th>
@@ -47,7 +47,7 @@
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $instituicao->id]) ?>
                         <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $instituicao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $instituicao->id)]) ?>
                     </td>
-                    <td><?= $this->Number->format($instituicao->id) ?></td>
+                    <td><?= h($instituicao->id) ?></td>
                     <td><?= $this->Html->link($instituicao->instituicao, ['controller' => 'instituicoes', 'action' => 'view', $instituicao->id]) ?></td>
                     <td><?= h($instituicao->natureza) ?></td>
                     <td><?= h($instituicao->cnpj) ?></td>
