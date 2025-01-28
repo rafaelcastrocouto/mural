@@ -17,6 +17,9 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
 	<aside>
 		<div class="nav">
 			<?= $this->Html->link(__('Novo Aluno'), ['action' => 'add'], ['class' => 'button']) ?>
+			<?php if ($categoria_id == 1): ?>
+				<?= $this->Html->link(__('Buscar Aluno'), ['action' => 'busca'], ['class' => 'button']) ?>
+			<?php endif; ?>
 		</div>
 	</aside>
     <?php endif; ?>

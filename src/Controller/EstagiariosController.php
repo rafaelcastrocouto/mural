@@ -188,7 +188,21 @@ class EstagiariosController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    
+    /**
+     * pdf test
+     *
+     */
+    public function pdf($id = null)
+    {
+        $this->viewBuilder()->enableAutoLayout(false); 
+        $estagiario = $this->Estagiarios->get($id);
+        $this->viewBuilder()->setClassName('CakePdf.Pdf');
+        $this->viewBuilder()->setOption('pdfConfig',[ 'orientation' => 'portrait']);
+        $this->set('estagiario', $estagiario);
+    }
 
+    
     /**
      * Termodecompromisso method
      *

@@ -26,7 +26,12 @@ class AlunosTablePolicy implements BeforePolicyInterface
 
   public function canIndex(IdentityInterface $userSession, AlunosTable $alunosTable)
   {
-    return new Result(false, 'Erro: alunos busca policy not authorized');
+    return new Result(false, 'Erro: alunos index policy not authorized');
+  }
+  
+  public function scopeIndex($user, $query)
+  {
+    return $query->where(['Alunos.user_id' => $user->getIdentifier()]);
   }
 
   public function canAdd(IdentityInterface $userSession, AlunosTable $alunosTable)
@@ -34,16 +39,11 @@ class AlunosTablePolicy implements BeforePolicyInterface
     $alunocadastrado = $alunosTable->find()->where(['user_id' => $userSession->id]);
 
     if ($alunocadastrado->count() > 0) {
-        return new Result(false, 'Erro: alunos busca policy not authorized');
+        return new Result(false, 'Erro: alunos add policy not authorized');
     } else {
       return new Result(true);
     }
     
-  }
-  
-  public function scopeIndex($user, $query)
-  {
-    return $query->where(['Alunos.user_id' => $user->getIdentifier()]);
   }
   
   public function canBusca()
