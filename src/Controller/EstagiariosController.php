@@ -192,10 +192,9 @@ class EstagiariosController extends AppController
     /**
      * pdf test
      *
-     */
+     *
     public function pdf($id = null)
     {
-        /* pdf viwer setup */
         $this->viewBuilder()->enableAutoLayout(false); 
         $this->viewBuilder()->setClassName('CakePdf.Pdf');
         //$this->viewBuilder()->setOption('pdfConfig',[
@@ -207,7 +206,7 @@ class EstagiariosController extends AppController
         $estagiario = $this->Estagiarios->get($id);
         $this->set('estagiario', $estagiario);
     }
-
+    */
     
     /**
      * Termodecompromisso method
@@ -527,7 +526,7 @@ class EstagiariosController extends AppController
         } else {
             $estagiario = $this->Estagiarios->find()
                 ->contain(['Alunos', 'Supervisores', 'Instituicoes'])
-                ->where(['Estagiarios.id' => $id]);
+                ->where(['Estagiarios.id IS' => $id]);
         }
         // pr($estagiario->first());
         // die();
@@ -542,8 +541,8 @@ class EstagiariosController extends AppController
             'pdfConfig',
             [
                 'orientation' => 'portrait',
-                'download' => true, // This can be omitted if "filename" is specified.
-                'filename' => 'termo_de_compromisso_' . $id . '.pdf' //// This can be omitted if you want file name based on URL.
+                //'download' => true, // This can be omitted if "filename" is specified.
+                //'filename' => 'termo_de_compromisso_' . $id . '.pdf' //// This can be omitted if you want file name based on URL.
             ]
         );
         $this->set('configuracao', $configuracao);
@@ -559,20 +558,19 @@ class EstagiariosController extends AppController
     {
 
         /* No login foi capturado o id do estagiário */
-        $id = $this->getRequest()->getSession()->read('estagiario_id');
+        if (is_null($id)) { $id = $this->getRequest()->getSession()->read('estagiario_id'); }
         if (is_null($id)) {
             $this->Flash->error(__('Selecionar o aluno estagiário'));
             return $this->redirect('/alunos/index');
         } else {
             $estagiarios = $this->Estagiarios->find()
                 ->contain(['Alunos', 'Supervisores', 'Instituicoes'])
-                ->where(['Estagiarios.registro' => $this->getRequest()->getSession()->read('registro')])
-                ->all();
+                ->where(['Estagiarios.id IS' => $id]);
             //pr($estagiario);
             // die();
         }
 
-        $this->set('estagiarios', $estagiarios);
+        $this->set('estagiarios', $this->paginate($estagiarios));
     }
 
     /**
@@ -585,7 +583,7 @@ class EstagiariosController extends AppController
 
         $estagiarioquery = $this->Estagiarios->find()
             ->contain(['Alunos', 'Supervisores', 'Instituicoes'])
-            ->where(['Estagiarios.id' => $id])
+            ->where(['Estagiarios.id IS' => $id])
             ->first();
         // pr($estagioquery);
         // die('estagioquery');
@@ -620,8 +618,8 @@ class EstagiariosController extends AppController
             'pdfConfig',
             [
                 'orientation' => 'portrait',
-                'download' => true, // This can be omitted if "filename" is specified.
-                'filename' => 'declaracao_de_estagio_' . $id . '.pdf' //// This can be omitted if you want file name based on URL.
+                //'download' => true, // This can be omitted if "filename" is specified.
+                //'filename' => 'declaracao_de_estagio_' . $id . '.pdf' //// This can be omitted if you want file name based on URL.
             ]
         );
         $this->set('estagiario', $estagiarioquery);
@@ -667,7 +665,7 @@ class EstagiariosController extends AppController
         } else {
             $estagiario = $this->Estagiarios->find()
                 ->contain(['Alunos', 'Supervisores', 'Instituicoes', 'Professores'])
-                ->where(['Estagiarios.id' => $id])
+                ->where(['Estagiarios.id IS' => $id])
                 ->first();
         }
         // pr($estagiario);
@@ -679,8 +677,8 @@ class EstagiariosController extends AppController
             'pdfConfig',
             [
                 'orientation' => 'portrait',
-                'download' => true, // This can be omitted if "filename" is specified.
-                'filename' => 'folha_de_atividades_' . $id . '.pdf' //// This can be omitted if you want file name based on URL.
+                //'download' => true, // This can be omitted if "filename" is specified.
+                //'filename' => 'folha_de_atividades_' . $id . '.pdf' //// This can be omitted if you want file name based on URL.
             ]
         );
         $this->set('estagiario', $estagiario);
@@ -724,7 +722,7 @@ class EstagiariosController extends AppController
 
         $estagiario = $this->Estagiarios->find()
             ->contain(['Alunos', 'Supervisores', 'Instituicoes', 'Professores'])
-            ->where(['Estagiarios.id' => $estagiario_id])
+            ->where(['Estagiarios.id IS' => $estagiario_id])
             ->first();
 
         if (!$estagiario) {
@@ -738,8 +736,8 @@ class EstagiariosController extends AppController
             'pdfConfig',
             [
                 'orientation' => 'portrait',
-                'download' => true, // This can be omitted if "filename" is specified.
-                'filename' => 'avaliacao_discente_' . $estagiario_id . '.pdf' //// This can be omitted if you want file name based on URL.
+                //'download' => true, // This can be omitted if "filename" is specified.
+                //'filename' => 'avaliacao_discente_' . $estagiario_id . '.pdf' //// This can be omitted if you want file name based on URL.
             ]
         );
         $this->set('estagiario', $estagiario);

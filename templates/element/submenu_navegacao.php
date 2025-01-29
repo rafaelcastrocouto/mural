@@ -11,8 +11,11 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
 <script>
     addEventListener('load', () => {
         const navInputs = [...document.querySelectorAll('.toggle-input:not(#nav-toggler)')];
-        const unselect = (inputBox, event) => { if (inputBox !== event.target) inputBox.checked = false };
-        const unselectAll = (event) => { navInputs.forEach( (inputBox) => { unselect(inputBox, event) } ) };
+        const unselect = (inputBox) => { inputBox.checked = false };
+        const unselectAll = (event) => { navInputs.forEach( (inputBox) => { 
+            if (inputBox !== event.target) unselect(inputBox);
+            else event.target.checked != event.target.checked;
+        })};
         navInputs.forEach( (inputBox) => { inputBox.addEventListener('change', unselectAll) });
         addEventListener('click', unselectAll);
     });
