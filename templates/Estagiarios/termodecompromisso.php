@@ -81,7 +81,7 @@ if (isset($supervisoresdainstituicao)) {
     })
 </script>
 
-<?= $this->element('templates') ?>
+<!--?= $this->element('templates') ?-->
 
 <?php
 $submit = [

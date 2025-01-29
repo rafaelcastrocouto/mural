@@ -195,10 +195,16 @@ class EstagiariosController extends AppController
      */
     public function pdf($id = null)
     {
+        /* pdf viwer setup */
         $this->viewBuilder()->enableAutoLayout(false); 
-        $estagiario = $this->Estagiarios->get($id);
         $this->viewBuilder()->setClassName('CakePdf.Pdf');
-        $this->viewBuilder()->setOption('pdfConfig',[ 'orientation' => 'portrait']);
+        //$this->viewBuilder()->setOption('pdfConfig',[
+            //'orientation' => 'portrait',
+            //'download' => false,
+            //'filename' => 'Filename_' . $id . '.pdf'
+        //]);
+        
+        $estagiario = $this->Estagiarios->get($id);
         $this->set('estagiario', $estagiario);
     }
 
