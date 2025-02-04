@@ -28,7 +28,8 @@
                     echo $this->Form->control('beneficios');
                     echo $this->Form->control('fim_de_semana');
                     echo $this->Form->control('carga_horaria');
-                    echo $this->Form->control('requisitos');
+                    echo $this->Form->control('requisitos', ['class' => 'form-code']);
+                    echo '<div class="inputdiv" name="requisitos" contenteditable> ' . $muralestagio->requisitos . '</div>'; 
                     echo $this->Form->control('turma_id', ['options' => $turmas, 'class' => 'form-control']);
                     echo $this->Form->control('turno');
                     echo $this->Form->control('professor_id', ['options' => $professores, 'class' => 'form-control']);
@@ -40,7 +41,8 @@
                     echo $this->Form->control('forma_selecao');
                     echo $this->Form->control('contato');
                     echo $this->Form->control('periodo');
-                    echo $this->Form->control('outras');
+                    echo $this->Form->control('outras', ['class' => 'form-code']);
+                    echo '<div class="inputdiv" name="outras" contenteditable> ' . $muralestagio->outras . '</div>'; 
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Editar'), ['class' => 'button']) ?>

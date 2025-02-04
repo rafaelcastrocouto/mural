@@ -10,6 +10,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
 <!-- templates/element/submenu_navegacao.php -->
 <script>
     addEventListener('load', () => {
+        /* sub menu unselect and toggle */
         const navInputs = [...document.querySelectorAll('.toggle-input:not(#nav-toggler)')];
         const unselect = (inputBox) => { inputBox.checked = false };
         const unselectAll = (event) => { navInputs.forEach( (inputBox) => { 
@@ -18,6 +19,25 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
         })};
         navInputs.forEach( (inputBox) => { inputBox.addEventListener('change', unselectAll) });
         addEventListener('click', unselectAll);
+
+        /* form div editable content */
+        const divInputs = [...document.querySelectorAll('.inputdiv')];
+        const updateInput = (evt) => { 
+            const name = evt.target.getAttribute('name');
+            const formInput = document.querySelector('input[name='+name+']');
+            formInput.value = evt.target.innerHTML;
+        };
+        const updateDiv = (evt) => { 
+            const name = evt.target.getAttribute('name');
+            const inputDiv = document.querySelector('div[name='+name+']');
+            inputDiv.innerHTML = evt.target.value;
+        };
+        divInputs.forEach( (inputDiv) => { 
+            const name = inputDiv.getAttribute('name');
+            const formInput = document.querySelector('input[name='+name+'], textarea[name='+name+']');
+            formInput.addEventListener('input', updateDiv);
+            inputDiv.addEventListener('input', updateInput);
+        });
     });
 </script>
     
