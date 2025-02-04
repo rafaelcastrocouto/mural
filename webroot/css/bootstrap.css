@@ -2448,6 +2448,7 @@ textarea.form-control {
   flex-flow: row wrap;
   -ms-flex-align: center;
   align-items: center;
+  gap: 0.8em;
 }
 
 .form-inline .form-check {
