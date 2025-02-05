@@ -342,7 +342,7 @@ class AlunosController extends AppController
          * Autorização. Verifica se o aluno cadastrado no Users está acessando seu próprio registro.
          */
         $option = 0;
-        if (categoria_id == 2) {
+        if ($categoria_id == 2) {
             $aluno_id = $user_session->get('aluno_id');
             if ($id == $aluno_id) {
                 /**
@@ -385,20 +385,14 @@ class AlunosController extends AppController
             $aluno = $this->Alunos->find()->first();
         }
 
-        
         /**
          * Calculo a partir do ingresso em que periodo o aluno esté neste momento.
          */
+        
         /* Capturo o periodo do calendario academico atual */
-        //$configuracaotabela = $this->fetchTable('Configuracoes');
-        //$periodoacademicoatual = $configuracaotabela->find()->select(['periodo_calendario_academico'])->first();
-        $periodoacademicoatual = $this->fetchTable("Configuracoes")->find()->first()['periodo_calendario_academico'];
-        // pr($periodoacademicoatual);
-        // die();
-        /**
-         * Separo o periodo em duas partes: o ano e o indicador de primeiro ou segundo semestre.
-         */
-        $periodo_atual = $periodoacademicoatual->periodo_calendario_academico;
+        $periodo_atual = $this->fetchTable("Configuracoes")->find()->first()['periodo_calendario_academico'];
+
+        
         /** Capturo o periodo inicial para o cálculo dos semetres.
          *  Inicialmente coincide com o campo de ingresso.
          *  Mas pode ser alterada para fazer coincider os semestres no casos dos alunos que trancaram.
@@ -410,12 +404,17 @@ class AlunosController extends AppController
             $periodo_inicial = $aluno->ingresso;
         }
 
-        //pr($periodo_inicial); die();
-        
-        //$inicial = explode('-', $periodo_inicial);
-        $inicial = [$periodo_inicial, 1];
+        /**
+         * Separo o periodo em duas partes: o ano e o indicador de primeiro ou segundo semestre.
+         */
+
+        $inicial = explode('-', $periodo_inicial);
         $atual = explode('-', $periodo_atual);
+        
         // echo $atual[0] . ' ' . $inicial[0] . '<br>';
+        // echo $atual[1] . ' ' . $inicial[1] . '<br>';
+        // die();
+        
         /**
          * Calculo o total de semestres
          */
@@ -453,6 +452,8 @@ class AlunosController extends AppController
         }
 
         // pr($totalperiodos);
+        // die();
+        
         if (isset($this->getRequest()->getData()['novoperiodo'])) {
             $aluno->periodonovo = $this->getRequest()->getData()['novoperiodo'];
         } else {
