@@ -10,15 +10,16 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
 <!-- templates/element/submenu_navegacao.php -->
 <script>
     addEventListener('load', () => {
-        /* sub menu unselect and toggle */
+        /* sub menu unselect */
         const navInputs = [...document.querySelectorAll('.toggle-input:not(#nav-toggler)')];
         const unselect = (inputBox) => { inputBox.checked = false };
-        const unselectAll = (event) => { navInputs.forEach( (inputBox) => { 
-            if (inputBox !== event.target) unselect(inputBox);
-            else event.target.checked != event.target.checked;
-        })};
-        navInputs.forEach( (inputBox) => { inputBox.addEventListener('change', unselectAll) });
+        const unselectAll = (event) => { 
+            navInputs.forEach( (inputBox) => { 
+                if (inputBox !== event.target) unselect(inputBox);
+            });                
+        };
         addEventListener('click', unselectAll);
+        addEventListener('touchstart', unselectAll);
 
         /* form div editable content */
         const divInputs = [...document.querySelectorAll('.inputdiv')];
