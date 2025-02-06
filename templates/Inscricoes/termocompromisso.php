@@ -5,14 +5,12 @@
 // die();
 ?>
 
-<?= $this->Html->script("jquery.maskedinput"); ?>
+<!--?= $this->Html->script("jquery.maskedinput"); ?-->
 
 <script>
-    $(document).ready(function () {
-
-        $("#EstagiarioIngresso").mask("9999-9");
-
-    });
+    //$(document).ready(function () {
+    //    $("#EstagiarioIngresso").mask("9999-9");
+    //});
 
     $(document).ready(function () {
 
@@ -31,18 +29,16 @@
 <div class='justify-content-center'>
 <?php
 if ($inserir == 0) {
-    echo "<h3>Inserir</h3>";
+    echo "<h1>Inserir Termo de Compromisso</h1>";
 } elseif ($inserir == 1) {
-    echo "<h3>Atualizar</h3>";
+    echo "<h1>Atualizar Termo de Compromisso</h1>";
 }
 ?>
 </div>
 
 <div class='table-responsive'>
     
-    <h1>Termo de Compromisso período
-        <?= $periodo ?>
-    </h1>
+    <h2>Período <?= $periodo ?></h2>
 
     <table class='table table-hover table-striped table-responsive'>
         <tbody>
@@ -73,16 +69,13 @@ if ($inserir == 0) {
 <?php
 echo $this->Form->create(null, [
     'url' => 'termocadastra?registro=' . $registro,
-    'class' => 'form-horizontal',
-    'role' => 'form',
     'inputDefaults' => [
-        'format' => ['before', 'label', 'between', 'input', 'after', 'error'],
-        'div' => ['class' => 'form-group row'],
-        'label' => ['class' => 'col-3'],
+       // 'format' => ['before', 'label', 'between', 'input', 'after', 'error'],
+       // 'div' => ['class' => 'form-group row'],
+        'label' => true,//['class' => 'col-3'],
         'between' => "<div class = 'col-9'>",
-        'class' => ['form-control'],
-        'after' => "</div>",
-        'error' => ['attributes' => ['wrap' => 'span', 'class' => 'help-inline']]
+       // 'class' => ['form-control'],
+        'after' => "</div>"
     ]
 ]);
 

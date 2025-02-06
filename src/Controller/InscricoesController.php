@@ -187,145 +187,105 @@ class InscricoesController extends AppController
      * @return \Cake\Http\Response|null|void Renders termocompromisso
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function termocompromisso($id = null) {
+    public function termocompromisso($id = null) 
+    {
 
         $registro = $this->getRequest()->getQuery('registro');
-        if (!$registro) {
-            $this->Flash->error(__("Registro não encontrado"));
+
+        $alunosTable = $this->fetchTable("Alunos");
+        if (empty($registro) && !empty($id)) { 
+            $aluno = $alunosTable->get($id);
+            $registro = $aluno->registro; 
         }
             
         // pr($registro);
         // die("termocompromisso");
 
         /* Captura o periodo de estagio para o termo de compromisso */
-        //$this->loadModel("Configuracao");
-        //$configuracao = $this->Configuracao->findById('1');
-        //$periodo = $configuracao['Configuracao']['termo_compromisso_periodo'];
         $periodo = $this->fetchTable("Configuracoes")->find()->first()['termo_compromisso_periodo'];
 
         /* Busca em estagiarios o ultimo estagio do aluno */
-        $estagiario = $this->fetchTable("Estagiarios")->find('all',
-                [
-                    'conditions' => ['Estagiarios.registro IS' => $registro],
-                    'fields' => [
-                        'Estagiarios.id', 
-                        'Estagiarios.periodo', 
-                        'Estagiarios.turno', 
-                        'Estagiarios.complemento_id', 
-                        'Estagiarios.aluno_id', 
-                        'Estagiarios.registro', 
-                        'Estagiarios.nivel', 
-                        'Estagiarios.instituicao_id', 
-                        'Estagiarios.supervisor_id', 
-                        'Estagiarios.professor_id', 
-                       // 'Alunos.id', 
-                       // 'Alunos.registro', 
-                       // 'Alunos.nome', 
-                       // 'Alunos.ingresso', 
-                       // 'Alunos.turno'
-                    ],
-                    'order' => ['nivel' => 'DESC', 'periodo' => 'DESC']
-                ]
-        )->first();
+        $estagiario = $this->fetchTable("Estagiarios")->find('all', [
+            'conditions' => ['Estagiarios.registro IS' => $registro]
+        ])->first();
         // pr($estagiario);
-        // die();
-        /* Se nao encontra nada entao eh um aluno que ainda nao eh estagiario, portanto vai cursar estagio I */
-        if (empty($estagiario)) {
+        // die('estagiario');
 
-            /* Aluno sem estágios registrados. Inícia estágio I */
-            $nivel_ultimo = 1; // Nivel eh 1
-            $inserir = 0; // Inserir estagiário novo no nível I
-
-            /* Capturo os dados do aluno na tabela alunos */
-            //$this->loadModel("Alunos");
-            //$this->Alunos->contain();
+        /* Capturo os dados do aluno na tabela alunos */
+        if (empty($aluno)) {
             $aluno = $this->fetchTable("Alunos")->find('all', [
                 'conditions' => ['Alunos.registro IS' => $registro]
             ])->first();
-            // pr($alunos);
-            // die('alunos');
-            /* Aluno novo cadastrado: copia todos os dados do alunos para a tabela aluno excluindo o id. */
-            if (empty($aluno)) {
-                // pr('Cadastra alunos em aluno');
-                /* Busca se ja esta registrado como Aluno. O resultado normal eh que nao estaja cadastrado. */
-                /* Se nao esta cadastrado, o que eh normal, entao copia para aluno excluindo o id */
-                /* Excluo o id porque é uma nova inserção */
-                //unset($alunos['Alunos']['id']);
-                // pr($alunos);
-                // die('alunos');
-                //$this->Aluno->set($alunos['Alunos']);
-                /* Aluno criado ainda sem o estagiario. 
-                 * Se o usuário aborta a operação de inserir um estagiário então o aluno fica orfão (sem estagio) */
-                //if ($this->Aluno->save()):
-                //    $this->Flash->success(__("Aluno cadastrado"));
-                //else:
-                    // pr($this->Aluno->validationErrors);
-                    // die();
-                //    $this->Flash->error(__("Não foi possível finalizar o cadastro. Preencha corretamente todos os dados"));
-                //    $this->redirect(['controller' => 'Alunos', 'action' => 'view', $alunos['Alunos']['id']]);
-                //   die("Não cadastrado");
-                //endif;
-                
-            //} else {
-                $this->Flash->error(__("Aluno não cadastrado"));
-                //$this->redirect(['controller' => 'Alunos', 'action' => 'add?registro=' . $registro]);
-            }
-            // Aluno estagiário
-        } else {
-
-            /* Calculo o ano de ingresso para definir se é do ajuste2020 */
-            // pr(intval(substr($estagiario['Estagiario']['registro'], 1, 2)));
-            if (strlen(trim($estagiario['Estagiario']['registro'])) == 9) {
-                /* Se o aluno ingressou depois de 2019 entao são tres niveis de estagio, senao son 4 niveis */
-                /* O calculo deveria ser realizado com o campo de inscricao e nao a partir do registro */
-                if (intval(substr(trim($estagiario['Estagiario']['registro']), 1, 2)) > 19) {
-                    // echo 'estudante ingressou em 2020 ou depois';
-                    $estagiario['Estagiario']['ajuste2020'] = 1;
-                    $ultimo_nivel_curricular = 3;
-                } else {
-                    $estagiario['Estagiario']['ajuste2020'] = 0;
-                    $ultimo_nivel_curricular = 4;
-                }
-            } elseif (strlen(trim($estagiario['Estagiario']['registro'])) == 8) {
-                /* Alunos anteriores ao ano de 2000 */
-                $estagiario['Estagiario']['ajuste2020'] = 0;
+        }
+        // pr($aluno);
+        // die('aluno');
+        
+        /* Se nao encontra nada entao eh um aluno que ainda nao eh estagiario, portanto vai cursar estagio I */
+        if (empty($estagiario)) {
+            /* Aluno sem estágios registrados. Inícia estágio I */
+            $nivel_ultimo = 1; // Nivel eh 1
+            $inserir = 0; // Inserir estagiário novo no nível I
+        } 
+        
+        if (empty($registro)) { $this->Flash->error(__("Registro não encontrado")); }
+        else if (empty($aluno)) {
+            $this->Flash->error(__("Aluno não cadastrado"));
+            $this->redirect(['controller' => 'Alunos', 'action' => 'add?registro=' . $registro]);
+        }
+        
+        $reg = (string)$registro;
+        //pr($reg);
+        //die();
+        
+        /* Calculo o ano de ingresso para definir se é do ajuste2020 */
+        if (strlen(trim($reg)) == 9) {
+            /* Se o aluno ingressou depois de 2019 entao são tres niveis de estagio, senao son 4 niveis */
+            /* O calculo deveria ser realizado com o campo de inscricao e nao a partir do registro */
+            if (intval(substr(trim($reg), 1, 2)) > 19) {
+                // echo 'estudante ingressou em 2020 ou depois';
+                $estagiario['ajuste2020'] = 1;
+                $ultimo_nivel_curricular = 3;
+            } else {
+                $estagiario['ajuste2020'] = 0;
                 $ultimo_nivel_curricular = 4;
             }
-            // die();
-            $nivel_ultimo = null;
-            /* Ultimo periodo cadastrado é menor que periodo atual então tem que cadastrar novo estágio */
-            if ($estagiario['Estagiario']['periodo'] < $periodo) {
-
-                $estagiario['Estagiario']['id'] = null;
-                $inserir = 0; // Inserir
-
-                /* Se o nivel de estagio a ser cadastrado eh menor que o ultimo nivel curricular entao aumento o nivel de estagio para o seguinte nivel */
-                if ($estagiario['Estagiario']['nivel'] < $ultimo_nivel_curricular) {
-                    $nivel_ultimo = $estagiario['Estagiario']['nivel'] + 1;
-                    // die("Inserir novo estágio");
-                /* Caso contrario, ou seja, se o nivel a ser cadastrado supera o nivel curricular, entao o aluno ja finalizou estagio curricular e agora esta fazendo estagio nao obrigatorio */    
-                } elseif ($estagiario['Estagiario']['nivel'] >= $ultimo_nivel_curricular) {
-                    $nivel_ultimo = 9; // estágio não obrigatório
-                    // die("Inserir novo estágio não obrigatório");
-                }
-                // pr($nivel_ultimo);
-                // die();
-                /* Se o periodo cadastrado é igual ao periodo atual então o aluno está solicitando novamente o mesmo termo de compromisso */
-            } elseif ($estagiario['Estagiario']['periodo'] == $periodo) {
-                $nivel_ultimo = $estagiario['Estagiario']['nivel'];
-                $inserir = 1; // Atualizar estagiario
-                // die("Atualizar estágio");
-            } else {
-                $this->Flash->error(__("Período atual é menor que período de estágio cadastrado. Verifique os dados."));
-                //$this->redirect(['controller' => 'inscricaos', 'action' => 'termosolicita']);
-            }
-            // die();
+        } elseif (strlen(trim($reg)) == 8) {
+            /* Alunos anteriores ao ano de 2000 */
+            $estagiario['ajuste2020'] = 0;
+            $ultimo_nivel_curricular = 4;
         }
+        // die();
+        $nivel_ultimo = null;
+        /* Ultimo periodo cadastrado é menor que periodo atual então tem que cadastrar novo estágio */
+        if ($estagiario['periodo'] < $periodo) {
 
+            $estagiario['id'] = null;
+            $inserir = 0; // Inserir
+
+            /* Se o nivel de estagio a ser cadastrado eh menor que o ultimo nivel curricular entao aumento o nivel de estagio para o seguinte nivel */
+            if ($estagiario['nivel'] < $ultimo_nivel_curricular) {
+                $nivel_ultimo = $estagiario['nivel'] + 1;
+                // die("Inserir novo estágio");
+            /* Caso contrario, ou seja, se o nivel a ser cadastrado supera o nivel curricular, entao o aluno ja finalizou estagio curricular e agora esta fazendo estagio nao obrigatorio */    
+            } elseif ($estagiario['nivel'] >= $ultimo_nivel_curricular) {
+                $nivel_ultimo = 9; // estágio não obrigatório
+                // die("Inserir novo estágio não obrigatório");
+            }
+            // pr($nivel_ultimo);
+            // die();
+            /* Se o periodo cadastrado é igual ao periodo atual então o aluno está solicitando novamente o mesmo termo de compromisso */
+        } elseif ($estagiario['periodo'] == $periodo) {
+            $nivel_ultimo = $estagiario['nivel'];
+            $inserir = 1; // Atualizar estagiario
+            // die("Atualizar estágio");
+        } else {
+            $this->Flash->error(__("Período atual é menor que período de estágio cadastrado. Verifique os dados."));
+            //$this->redirect(['controller' => 'inscricaos', 'action' => 'termosolicita']);
+        }
+        
         /* Capturo as instituicoes */
-        //$this->loadModel('Instituicao');
-        //$this->Instituicao->contain();
-        $instituicoes = $this->fetchTable("Instituicoes")->find(
+        $instituicoesTable = $this->fetchTable("Instituicoes");
+        $instituicoes = $instituicoesTable->find(
                 'list',
                 [
                     'fields' => ['Instituicoes.id', 'Instituicoes.instituicao'],
@@ -335,41 +295,39 @@ class InscricoesController extends AppController
         // pr($instituicoes);
 
         /* Capturo os supervisores da instituicao atual */
-        if (isset($estagiario['Estagiario']['instituicao_id'])) {
-            // $this->Instituicao->contain('Supervisor', ['order' => 'nome']);
-            $supervisores = $this->Instituicao->find(
-                    'first',
-                    [
-                        'contain' => ['Supervisor' => ['order' => 'nome']],
-                        'conditions' => ['Instituicao.id' => $estagiario['Estagiario']['instituicao_id']]
-                    ]
+        if (isset($estagiario['instituicao_id'])) {
+            $supervisores = $instituicoesTable->find('all',
+                [
+                    //'contain' => ['Supervisor' => ['order' => 'nome']],
+                    'conditions' => ['Instituicoes.id' => $estagiario['instituicao_id']]
+                ]
             );
 
-            foreach ($supervisores['Supervisor'] as $supervisor) {
+            foreach ($supervisores as $supervisor) {
                 $supervisoresAtuais[$supervisor['id']] = $supervisor['nome'];
                 // pr($supervisor['nome']);
             }
         }
-
+        
         // Envio os dados
-        $this->set('estagiario_id', isset($estagiario['Estagiario']['id']) ? $estagiario['Estagiario']['id'] : null);
+        $this->set('estagiario_id', $estagiario['id']);
         $this->set('inserir', $inserir);
         $this->set('nivel', $nivel_ultimo);
-        $this->set('ingresso', isset($estagiario['Alunos']['ingresso']) ? $estagiario['Alunos']['ingresso'] : (isset($alunos['Alunos']['ingresso']) ? $alunos['Alunos']['ingresso'] : null));
-        $this->set('alunoturno', isset($estagiario['Alunos']['turno']) ? $estagiario['Alunos']['turno'] : (isset($alunos['Alunos']['turno']) ? $alunos['Alunos']['turno'] : null));
-        $this->set('aluno_id', isset($estagiario['Estagiario']['id_aluno']) ? $estagiario['Estagiario']['id_aluno'] : null);
+        $this->set('ingresso', isset($estagiario['ingresso']) ? $estagiario['ingresso'] : (isset($aluno['ingresso']) ? $aluno['ingresso'] : null));
+        $this->set('alunoturno', isset($estagiario['turno']) ? $estagiario['turno'] : (isset($aluno['turno']) ? $aluno['turno'] : null));
+        $this->set('aluno_id', isset($estagiario['id_aluno']) ? $estagiario['id_aluno'] : null);
         $this->set('registro', $registro);
-        $this->set('aluno', isset($estagiario['Alunos']['nome']) ? $estagiario['Alunos']['nome'] : (isset($alunos['Alunos']['nome']) ? $alunos['Alunos']['nome'] : null));
+        $this->set('aluno', isset($estagiario['nome']) ? $estagiario['nome'] : (isset($aluno['nome']) ? $aluno['nome'] : null));
         $this->set('turno', isset($turno_ultimo) ? $turno_ultimo : 'I');
         $this->set('periodo', $periodo);
         // $this->set('id_area', $id_area);
-        $this->set('complemento_id', isset($estagiario['Estagiario']['complemento_id']) ? $estagiario['Estagiario']['complemento_id'] : null);
-        //$this->set('alunos_id', isset($estagiario['Alunos']['id']) ? $estagiario['Alunos']['id'] : '');
-        $this->set('ajuste2020', isset($estagiario['Estagiario']['ajuste2020']) ? $estagiario['Estagiario']['ajuste2020'] : 0);
+        $this->set('complemento_id', isset($estagiario['complemento_id']) ? $estagiario['complemento_id'] : null);
+        //$this->set('alunos_id', isset($estagiario'id']) ? $estagiario['id'] : '');
+        $this->set('ajuste2020', isset($estagiario['ajuste2020']) ? $estagiario['ajuste2020'] : 0);
 
-        $this->set('professor_atual', isset($estagiario['Estagiario']['id_professor']) ? $estagiario['Estagiario']['id_professor'] : 0);
-        $this->set('instituicao_atual', isset($estagiario['Estagiario']['id_instituicao']) ? $estagiario['Estagiario']['id_instituicao'] : 0);
-        $this->set('supervisor_atual', isset($estagiario['Estagiario']['id_supervisor']) ? $estagiario['Estagiario']['id_supervisor'] : 0);
+        $this->set('professor_atual', isset($estagiario['id_professor']) ? $estagiario['id_professor'] : 0);
+        $this->set('instituicao_atual', isset($estagiario['id_instituicao']) ? $estagiario['id_instituicao'] : 0);
+        $this->set('supervisor_atual', isset($estagiario['id_supervisor']) ? $estagiario['id_supervisor'] : 0);
 
         $this->set('instituicoes', $instituicoes);
         $this->set('supervisores', isset($super_atuais) ? $super_atuais : null); // Aluno sem estaǵio não tem supervisores de instituição cadastrados
