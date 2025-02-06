@@ -342,7 +342,9 @@ class AlunosController extends AppController
          * Autorização. Verifica se o aluno cadastrado no Users está acessando seu próprio registro.
          */
         $option = 0;
-        if ($categoria_id == 2) {
+        if ($categoria_id == 1) {
+            //$this->Flash->info(__("Administrador autorizado"));
+        } elseif ($categoria_id == 2) {
             $aluno_id = $user_session->get('aluno_id');
             if ($id == $aluno_id) {
                 /**
@@ -367,9 +369,6 @@ class AlunosController extends AppController
                     // die('Aluno não autorizado.');
                 }
             }
-        } elseif ($categoria_id == 1) {
-            
-            $this->Flash->info(__("Administrador autorizado"));
         } else {
             $this->Flash->error(__('2. Operação não autorizada.'));
             return $this->redirect(['controller' => 'Muralestagios', 'action' => 'index']);
@@ -498,8 +497,8 @@ class AlunosController extends AppController
                 'pdfConfig',
                 [
                     'orientation' => 'portrait',
-                    'download' => true, // This can be omitted if "filename" is specified.
-                    'filename' => 'declaracao_de_periodo_' . $id . '.pdf' //// This can be omitted if you want file name based on URL.
+                    //'download' => true, // This can be omitted if "filename" is specified.
+                    //'filename' => 'declaracao_de_periodo_' . $id . '.pdf' //// This can be omitted if you want file name based on URL.
                 ]
         );
 

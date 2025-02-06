@@ -9,12 +9,12 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
 
 ?>
 
-<?= $this->Html->script("jquery.maskedinput"); ?>
+<!--?= $this->Html->script("jquery.maskedinput"); ?>
 <script>
     $(document).ready(function () {
         $("#AlunoRegistro").mask("999999999");
     });
-</script>
+</script-->
 
 <h1>Folha de atividades</h1>
 
