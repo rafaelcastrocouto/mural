@@ -1,4 +1,7 @@
-termodecompromisso
+
+
+old fix inscricoes murals view
+<input type="hidden" name="data[Inscricao][id_aluno]" value="" id="InscricaoIdAluno">
 
 - controllers:
 

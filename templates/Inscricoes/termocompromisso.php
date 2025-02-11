@@ -93,41 +93,56 @@ echo $this->Form->input('periodo', array('type' => 'hidden', 'value' => $periodo
 echo $this->Form->input('complemento_id', array('type' => 'hidden', 'value' => $complemento_id));
 
 if (strlen($ingresso) == 6) {
-    echo $this->Form->input('ingresso', ['type' => 'hidden', 'label' => ['text' => 'Ano e semestre de ingresso na ESS', 'class' => 'col-3'], 'between' => '<div class = "col-2">', 'value' => $ingresso, 'required', 'class' => 'form-control']);
+    echo $this->Form->input('ingresso', ['type' => 'hidden', 'label' => ['text' => 'Ano e semestre de ingresso na ESS'], 'value' => $ingresso, 'required', 'class' => 'form-control']);
 } else {
-    echo $this->Form->input('ingresso', ['type' => 'text', 'label' => ['text' => 'Ano e semestre de ingresso na ESS', 'class' => 'col-3'], 'between' => '<div class = "col-2">', 'value' => $ingresso, 'required', 'class' => 'form-control']);
+    echo $this->Form->label('ingresso', 'Ano e semestre de ingresso na ESS');
+    echo $this->Form->input('ingresso', ['type' => 'text', 'value' => $ingresso, 'required', 'class' => 'form-control']);
 }
 
 if (isset($alunoturno)) {
-    echo $this->Form->input('alunoturno', ['type' => 'hidden', 'label' => ['text' => 'Turno', 'class' => 'col-3'], 'empty' => 'Seleciona', 'between' => '<div class = "col-2">', 'value' => $alunoturno, 'required', 'class' => 'form-control']);
+    echo $this->Form->input('alunoturno', ['type' => 'hidden', 'empty' => 'Seleciona', 'value' => $alunoturno, 'required', 'class' => 'form-control']);
 } else {
-    echo $this->Form->input('alunoturno', ['type' => 'select', 'label' => ['text' => 'Turno', 'class' => 'col-3'], 'options' => ['diurno' => 'Diurno', 'noturno' => 'Noturno'], 'empty' => 'Seleciona', 'required', 'between' => '<div class = "col-2">', 'class' => 'form-control']);
+    echo $this->Form->label('alunoturno', 'Turno');
+    echo $this->Form->input('alunoturno', ['type' => 'select', 'options' => ['diurno' => 'Diurno', 'noturno' => 'Noturno'], 'empty' => 'Seleciona', 'required', 'class' => 'form-control']);
 }
 
-echo $this->Form->input('ajuste2020', array('type' => 'select', 'label' => ['text' => 'Ajuste curricular 2020', 'class' => 'col-3'], 'options' => ['0' => 'Não', '1' => 'Sim'], 'value' => $ajuste2020, 'empty' => 'Seleciona', 'required', 'between' => '<div class = "col-2">', 'after' => '<small>Para ingressantes a partir de 2020 são 3 níves de estágio</small></div>'));
+echo $this->Form->label('ajuste2020', 'Ajuste curricular 2020');
+echo $this->Form->input('ajuste2020', ['type' => 'select', 'options' => ['0' => 'Não', '1' => 'Sim'], 'value' => $ajuste2020, 'empty' => 'Seleciona', 'required']);
+echo '<p>Para ingressantes a partir de 2020 são 3 níves de estágio</p>';
 
-echo $this->Form->input('tipo_de_estagio', array('type' => 'select', 'label' => ['text' => 'Seleciona tipo de estágio', 'class' => 'col-3'], 'options' => [1 => 'Presencial', 2 => 'Remoto'], 'default' => '1', 'between' => '<div class = "col-2">', 'class' => 'form-control'));
+echo $this->Form->label('tipo_de_estagio', 'Seleciona tipo de estágio');
+echo $this->Form->input('tipo_de_estagio', ['type' => 'select', 'options' => [1 => 'Presencial', 2 => 'Remoto'], 'default' => '1', 'class' => 'form-control']);
 ?>
 
 <fieldset class="border p-1">
     <legend class="w-auto">Benefícios</legend>
     <?php
-    echo $this->Form->input('benetransporte', ['type' => 'select', 'label' => ['text' => 'A instituição oferece vale transporte?', 'class' => 'col-3'], 'options' => [1 => 'Sim', 0 => 'Não'], 'default' => '0', 'between' => '<div class = "col-2">', 'class' => 'form-control']);
-    echo $this->Form->input('benealimentacao', ['type' => 'select', 'label' => ['text' => 'A instituição oferece alimentação?', 'class' => 'col-3'], 'options' => [1 => 'Sim', 0 => 'Não'], 'default' => '0', 'between' => '<div class = "col-2">', 'class' => 'form-control']);
-    echo $this->Form->input('benebolsa', ['type' => 'text', 'label' => ['text' => 'Se a instituição oferece bolsa indique o valor em números inteiros, caso contrário digite o número 0', 'class' => 'col-3'], 'between' => '<div class = "col-2">', 'class' => 'form-control', 'required']);
+    echo $this->Form->label('benetransporte', 'A instituição oferece vale transporte?');
+    echo $this->Form->input('benetransporte', ['type' => 'select', 'options' => [1 => 'Sim', 0 => 'Não'], 'default' => '0', 'class' => 'form-control']);
+    
+    echo $this->Form->label('benealimentacao', 'A instituição oferece alimentação?');
+    echo $this->Form->input('benealimentacao', ['type' => 'select', 'options' => [1 => 'Sim', 0 => 'Não'], 'default' => '0', 'class' => 'form-control']);
+
+    echo $this->Form->label('benebolsa', 'Se a instituição oferece bolsa indique o valor em números inteiros, caso contrário digite o número 0');
+    echo $this->Form->input('benebolsa', ['type' => 'text', 'class' => 'form-control', 'required']);
     ?>
 </fieldset>
 
 <fieldset class="border p-2">
     <?php
-    echo $this->Form->input('id_instituicao', array('type' => 'select', 'label' => ['text' => 'Instituição', 'class' => 'col-3'], 'options' => $instituicoes, 'empty' => ['0' => 'Selecione'], 'value' => $instituicao_atual, 'required', 'between' => '<div class ="col-9">', 'after' => '<small>É obrigatório selecionar uma instituição.</small></div>', 'class' => 'form-control'));
-    echo $this->Form->input('id_supervisor', array('type' => 'select', 'label' => ['text' => 'Supervisor', 'class' => 'col-3'], 'options' => $supervisores, 'value' => $supervisor_atual, 'empty' => ['0' => 'Selecione'], 'between' => '<div class ="col-9">', 'after' => '<small>Se não souber quem é o(a) supervisor(a) pode deixar em branco</small></div>', 'class' => 'form-control'));
+    echo $this->Form->label('id_instituicao', 'Instituição');
+    echo $this->Form->input('id_instituicao', ['type' => 'select', 'options' => $instituicoes, 'empty' => ['0' => 'Selecione'], 'value' => $instituicao_atual, 'required', 'class' => 'form-control']);
+    echo '<p>É obrigatório selecionar uma instituição.</p>';
+
+    echo $this->Form->label('id_supervisor', 'Supervisor');
+    echo $this->Form->input('id_supervisor', ['type' => 'select', 'label' => ['text' => 'Supervisor'], 'options' => $supervisores, 'value' => $supervisor_atual, 'empty' => ['0' => 'Selecione'], 'class' => 'form-control']);
+    echo '<p>Se não souber quem é o(a) supervisor(a) pode deixar em branco</p>';
     ?>
 </fieldset>
 
 <div class='row justify-content-left'>
     <div class='col-auto'>
-        <?php echo $this->Form->submit('Confirma', ['type' => 'Submit', 'label' => ['text' => 'Confirma', 'class' => 'col-4 col-form-label'], 'class' => 'btn btn-primary']);
+        <?php echo $this->Form->submit('Confirma', ['type' => 'Submit', 'class' => 'btn btn-primary']);
         ?>
         <?php echo $this->Form->end(); ?>
     </div>
