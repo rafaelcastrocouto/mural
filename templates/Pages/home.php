@@ -102,11 +102,11 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                     </div>   
                     <div class="col">
                         <p>Prezadas(os) usuárias(os),</p>
-                        <p>O Mural de Estágio tem a função de: permitir a consulta e inscrição em vagas de estágio; retirar o Termo de Compromisso, folha de atividades, avaliação do/a supervisor/a, declaração de estágio, dentre outros.</p>
-                        <p>É a sua primeira vez por aqui? Faça o cadastro com dados completos. Não abrevie seu nome.</p>
-                        <p>Vai retirar o Termo de Compromisso? Preencha os dados da supervisão de campo e do/a docente de OTP.</p>
-                        <p>Supervisores/as e docentes também podem fazer o cadastro e contribuir para mantermos atualizados os dados das instituições, assim como seus dados profissionais, incluindo e-mail e telefone.</p>
-                        <p>Ficou alguma dúvida? Escreva um e-mail detalhado para: <?= $this->Text->autoLinkEmails('estagio@ess.ufrj.br') ?>.</p>
+                        <p>O Mural de Estágio tem a função de: <br>permitir a consulta e inscrição em vagas de estágio; <br>retirar o Termo de Compromisso, folha de atividades, avaliação do/a supervisor/a, declaração de estágio, dentre outros.</p>
+                        <p>É a sua primeira vez por aqui? <br>Faça o cadastro com dados completos, não abrevie seu nome.</p>
+                        <p>Vai retirar o Termo de Compromisso? <br>Preencha os dados da supervisão de campo e do/a docente de OTP.</p>
+                        <p>Supervisores e docentes também podem fazer o cadastro e contribuir para mantermos atualizados os dados das instituições, assim como seus dados profissionais, incluindo e-mail e telefone.</p>
+                        <p>Ficou alguma dúvida? <br>Escreva um e-mail detalhado para: <?= $this->Text->autoLinkEmails('estagio@ess.ufrj.br') ?>.</p>
                         <p>Estamos à disposição.</p>
                     </div>
                 </div>
@@ -117,7 +117,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
         <main class="main">
             
             <div class="message default text-center">
-                <small>Please be aware that this page will not be shown if you turn off debug mode.</small>
+                <small>Atenção: a seção abaixo não irá aparecer se o modo debug estiver desligado.</small>
             </div>
             <div>
                 <div class="content">
@@ -298,8 +298,8 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                 </div>
             </div>
         </main>
+        <?php endif; ?>
     </div>
-    <?php endif; ?>
     <?= $this->element('footer'); ?>
 </body>
 </html>
