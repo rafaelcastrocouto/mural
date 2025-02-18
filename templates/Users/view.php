@@ -17,7 +17,8 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
         <div class="users view content">
             <aside>
                 <div class="nav">
-                    <?= $this->Html->link(__('Editar Usuário'), ['action' => 'edit', $user->id], ['class' => 'button']) ?>
+                    <?= $this->Html->link(__('Editar Email'), ['action' => 'edit', $user->id], ['class' => 'button']) ?>
+                    <?= $this->Html->link(__('Editar Senha'), ['action' => 'editpassword', $user->id], ['class' => 'button']) ?>
                     
                     <?php if ($categoria_id == 1): ?>
                         <?= $this->Html->link(__('Listar Usuários'), ['action' => 'index'], ['class' => 'button']) ?>

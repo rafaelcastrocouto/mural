@@ -41,6 +41,14 @@ class UserPolicy implements BeforePolicyInterface
       return new Result(false, 'Erro: user edit policy not authorized');
     }
   }
+  public function canEditpassword(IdentityInterface $userSession, User $userData)
+  {
+    if ($this->sameUser($userSession, $userData)) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: user edit policy not authorized');
+    }
+  }
   
   public function canDelete(IdentityInterface $userSession, User $userData)
   {
