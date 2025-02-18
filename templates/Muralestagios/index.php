@@ -66,7 +66,6 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
 			        <?php endif; ?>
                     <th><?= $this->Paginator->sort('Instituicao.instituicao', 'Instituição') ?></th>
                     <th><?= $this->Paginator->sort('vagas') ?></th>
-                    <th><?= $this->Paginator->sort('professor') ?></th>
                     <th><?= $this->Paginator->sort('beneficios') ?></th>
                     <th><?= $this->Paginator->sort('fim_de_semana', 'Fim de semana') ?></th>
                     <th><?= $this->Paginator->sort('carga_horaria', 'Carga Horária') ?></th>
@@ -87,7 +86,6 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
 				        <?php endif; ?>
                         <td><?= $muralestagio->instituicao ? $this->Html->link($muralestagio->instituicao->instituicao, ['controller' => 'Muralestagios', 'action' => 'view', $muralestagio->id]) : '' ?></td>
                         <td><?= h($muralestagio->vagas) ?></td>
-						<td><?= $muralestagio->professor ? $this->Html->link($muralestagio->professor->nome, ['controller' => 'Professores', 'action' => 'view', $muralestagio->professor->id]) : '' ?></td>
                         <td><?= h($muralestagio->beneficios) ?></td>
                         <td>
 							<?php

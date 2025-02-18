@@ -18,11 +18,11 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
         <div class="muralestagios view content">
 		    <aside>
 		        <div class="nav">
-					<?= $this->Html->link(__('Listar Muralestagios'), ['action' => 'index'], ['class' => 'button']) ?>
+					<?= $this->Html->link(__('Mural estagios'), ['action' => 'index'], ['class' => 'button']) ?>
                     <?php if ($categoria_id == 1): ?>
-			            <?= $this->Html->link(__('Editar Muralestagio'), ['action' => 'edit', $muralestagio->id], ['class' => 'button']) ?>
-			            <?= $this->Form->postLink(__('Deletar Muralestagio'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id), 'class' => 'button']) ?>
-			            <?= $this->Html->link(__('Novo Muralestagio'), ['action' => 'add'], ['class' => 'button']) ?>
+			            <?= $this->Html->link(__('Editar estagio'), ['action' => 'edit', $muralestagio->id], ['class' => 'button']) ?>
+			            <?= $this->Form->postLink(__('Deletar estagio'), ['action' => 'delete', $muralestagio->id], ['confirm' => __('Are you sure you want to delete # {0}?', $muralestagio->id), 'class' => 'button']) ?>
+			            <?= $this->Html->link(__('Novo estagio'), ['action' => 'add'], ['class' => 'button']) ?>
 					<?php endif; ?>
 		        </div>
 		    </aside>
@@ -184,6 +184,51 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                 </div>
             </div>
 			<?php endif; ?>
+
+			<!--
+            Para o administrador as inscrições sempre estão abertas
+            //-->
+            <?php if ($categoria_id === 1): ?>
+
+                <tr>
+                    <td colspan = '2' class="text-center">
+                        <?php echo $this->Html->link('Inscrição', ['controller' => 'inscricaos', 'action' => 'add', $muralestagio['Mural']['id']], ['role' => 'button', 'class' => 'btn btn-primary']); ?>
+                    </td>
+                </tr>
+
+            <?php else: ?>
+                <!--
+                Para os outros usuários as inscrições dependem da data de encerramento
+							date('Y-m-d', strtotime())
+                //-->
+                <?php if (date('d-m-Y') <= $muralestagio['data_inscricao']): ?>
+                    <!--
+                    Se a inscricao e na instituição também tem que fazer inscrição no mural
+                    //-->
+                    <?php if ((string)$muralestagio['localInscricao'] === '1'): ?>
+
+                        <tr>
+                            <td colspan = 2>
+                                <p class="text-center text-danger">Não esqueça de também fazer inscrição na instituição. Ambas são necessárias!</p>
+                            </td>
+                        </tr>
+
+                    <?php endif; ?>
+
+                    <tr>
+                        <td colspan = 2 class="text-center">
+                            <?php echo $this->Html->link('Inscrição', ['controller' => 'inscricaos', 'action' => 'add', $muralestagio['id']], ['role' => 'button', 'class' => 'btn btn-primary']); ?>
+                        </td>
+                    </tr>
+                <?php else: ?>
+                    <tr>
+                        <td colspan = 2>
+                            <p class="text-center text-danger">Inscrições encerradas!</p>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+
+            <?php endif; ?>
 			
         </div>
     </div>

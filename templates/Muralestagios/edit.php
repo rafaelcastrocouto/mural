@@ -9,7 +9,7 @@
         <div class="muralestagios form content">
             <aside>
                 <div class="nav">
-                    <?= $this->Html->link(__('Listar Muralestagios'), ['action' => 'index'], ['class' => 'button']) ?>
+                    <?= $this->Html->link(__('Mural estagios'), ['action' => 'index'], ['class' => 'button']) ?>
                     <?= $this->Form->postLink(
                         __('Deletar'),
                         ['action' => 'delete', $muralestagio->id],
