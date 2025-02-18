@@ -37,10 +37,12 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                     <th><?= __('Email') ?></th>
                     <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
                 </tr>
+                <?php /*
                 <tr>
                     <th><?= __('Categoria') ?></th>
                     <td><?= h($user->categoria->categoria); ?></td>
                 </tr>
+                */ ?>
                 <tr>
                     <th><?= __('Criado') ?></th>
                     <td><?= h($user->created) ?></td>
@@ -111,8 +113,8 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                     </table>
                 </div>
             </div>
-            <?php elseif ($user->categoria_id == 2): ?>
-                <p><?= $this->Html->link('Adicionar aluno', ['controller' => 'alunos', 'action' => 'add'], ['class' => 'button']) ?></p>
+            <?php else: ?>
+                <p><?= $this->Html->link('Adicionar aluno', ['controller' => 'alunos', 'action' => 'add'], ['class' => 'button btn-info']) ?></p>
             <?php endif; ?>
 
             <?php if (!empty($user->professor)) : ?>
@@ -145,8 +147,8 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                     </table>
                 </div>
             </div>
-            <?php elseif ($user->categoria_id == 3): ?>
-                <p><?= $this->Html->link('Adicionar professor', ['controller' => 'professores', 'action' => 'add'], ['class' => 'button']) ?></p>
+            <?php else: ?>
+                <p><?= $this->Html->link('Adicionar professor', ['controller' => 'professores', 'action' => 'add'], ['class' => 'button btn-info']) ?></p>
             <?php endif; ?>
             
 
@@ -178,8 +180,8 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                     </table>
                 </div>
             </div>
-            <?php elseif ($user->categoria_id == 4): ?>
-                <p><?= $this->Html->link('Adicionar supervisor', ['controller' => 'supervisores', 'action' => 'add'], ['class' => 'button']) ?></p>
+            <?php else: ?>
+                <p><?= $this->Html->link('Adicionar supervisor', ['controller' => 'supervisores', 'action' => 'add'], ['class' => 'button btn-info']) ?></p>
             <?php endif; ?>
             
         </div>
