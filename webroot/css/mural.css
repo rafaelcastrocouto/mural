@@ -29,7 +29,12 @@ hr {
     border-top: 0;
     margin-bottom: 35px;
 }
-
+.default-cursor {
+    cursor: default;
+}
+.message p {
+    margin: 0;
+}
 .container {
     margin: 1em;
     padding-bottom: 2em;

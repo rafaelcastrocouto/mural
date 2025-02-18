@@ -10,6 +10,7 @@ use Authentication\IdentityInterface as AuthenticationIdentity;
 use Authorization\AuthorizationService;
 use Authorization\IdentityInterface as AuthorizationIdentity;
 use Authorization\Policy\ResultInterface;
+use Cake\ORM\TableRegistry;
 
 /**
  * User Entity
@@ -66,6 +67,26 @@ class User extends Entity implements AuthorizationIdentity, AuthenticationIdenti
      */
     public function getOriginalData(): ArrayAccess|array
     {
+        $alunos = TableRegistry::getTableLocator()->get('Alunos');
+        $aluno = $alunos->find('all', ['conditions' => ['Alunos.user_id' => $this->id] ])->first();
+        $this->aluno_id = false;
+        if (!empty($aluno)) $this->aluno_id = $aluno->id;
+
+        $professores = TableRegistry::getTableLocator()->get('Professores');
+        $professor = $professores->find('all', ['conditions' => ['Professores.user_id' => $this->id] ])->first();
+        $this->professor_id = false;
+        if (!empty($professor)) $this->professor_id = $professor->id;
+
+        $supervisores = TableRegistry::getTableLocator()->get('Supervisores');
+        $supervisor = $supervisores->find('all', ['conditions' => ['Supervisores.user_id' => $this->id] ])->first();
+        $this->supervisor_id = false;
+        if (!empty($supervisor)) $this->supervisor_id = $supervisor->id;
+
+        $administradores = TableRegistry::getTableLocator()->get('Administradores');
+        $administrador = $administradores->find('all', ['conditions' => ['Administradores.user_id' => $this->id] ])->first();
+        $this->administrador_id = false;
+        if (!empty($administrador)) $this->administrador_id = $administrador->id;
+        
         return $this;
     }
 
