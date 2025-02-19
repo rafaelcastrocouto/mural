@@ -18,7 +18,6 @@ use Cake\ORM\TableRegistry;
  * @property int $id
  * @property string|null $email
  * @property string|null $password
- * @property string $categoria_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  */
@@ -35,7 +34,6 @@ class User extends Entity implements AuthorizationIdentity, AuthenticationIdenti
      */
     protected array $_accessible = [
         'email' => true,
-        'categoria_id' => true,
         'created' => true,
         'modified' => true,
     ];

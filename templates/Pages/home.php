@@ -55,14 +55,7 @@ $checkConnection = function (string $name) {
 
 $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituicao'];
 
-$categoria_id = 0;
 $user_session = $this->request->getAttribute('identity');
-if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
-
-//if ($user_session) {
-//    $user_data = $user_session->getOriginalData();
-//    pr($user_data);
-//}
     
 ?>
 

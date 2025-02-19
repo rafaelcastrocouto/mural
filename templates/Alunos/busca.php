@@ -6,12 +6,6 @@
 
 declare(strict_types=1);
 
-
-$categoria_id = 0;
-$user_session = $this->request->getAttribute('identity');
-if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
-
-
 $nome = $this->getRequest()->getQuery('nome');
 $dre = $this->getRequest()->getQuery('dre');
 $cpf = $this->getRequest()->getQuery('cpf');

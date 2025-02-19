@@ -7,14 +7,14 @@ declare(strict_types=1);
  * @var \App\Model\Entity\Avaliacao[]|\Cake\Collection\CollectionInterface $avaliacoes
  */
 
-$categoria_id = 0;
+$user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
 $user_session = $this->request->getAttribute('identity');
-if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
+if ($user_session) { $user_data = $user_session->getOriginalData(); }
 
 ?>
 <div class="avaliacoes index content">
 
-    <?php if ( $categoria_id == 1 || $categoria_id == 3 || $categoria_id == 4 ): ?>
+    <?php if ( $user_data['administrador_id'] || $user_data['professor_id'] || $user_data['supervisor_id'] == 4 ): ?>
 
         <aside>
             <div class="nav">
@@ -24,7 +24,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
 
     <?php endif; ?>
     
-    <?php if ( $categoria_id == 1 ): ?>
+    <?php if ($user_data['administrador_id']): ?>
     
         <h3><?= __('Lista de Avaliações') ?></h3>
     
@@ -72,7 +72,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
             <table class="table table-striped table-hover table-responsive">
                 <thead>
                     <tr>
-                        <?php if ($categoria_id == 1): ?>
+                        <?php if ($user_data['administrador_id']): ?>
                             <th class="actions"><?= __('Ações') ?></th>
                         <th><?= $this->Paginator->sort('id') ?></th>
                         <?php endif; ?>
@@ -91,7 +91,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                         <?php // pr($estagiario); ?>
                         <?php // die(); ?>
                         <tr>
-                            <?php if ($categoria_id == 1): ?>
+                            <?php if ($user_data['administrador_id']): ?>
                                 <?php if (isset($estagiario->avaliacao->id)): ?>
                                     <td class="actions">
                                         <?= $this->Html->link(__('Ver'), ['action' => 'view', $estagiario->avaliacao->id]) ?>
@@ -103,7 +103,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                                 </td>
                             <?php else: ?>
     
-                            <?php if ($categoria_id == 1 || $categoria_id == 4): ?>
+                            <?php if ($user_data['administrador_id'] || $user_data['supervisor_id']): ?>
                                 <td><?= $estagiario->hasValue('avaliacao') ? $this->Html->link('Ver avaliação', ['controller' => 'Avaliacoes', 'action' => 'view', $estagiario->avaliacao->id], ['class' => 'btn btn-success']) : $this->Html->link('Fazer avaliação', ['controller' => 'avaliacoes', 'action' => 'add', $estagiario->id], ['class' => 'btn btn-warning']) ?>
                                 </td>
                             <?php else: ?>
@@ -111,7 +111,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                                 </td>
                             <?php endif; ?>
     
-                            <?php if ($categoria_id == 1): ?>
+                            <?php if ($user_data['administrador_id']): ?>
                                 <td><?= $estagiario->hasValue('aluno') ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?>
                                 </td>
                             <?php else: ?>

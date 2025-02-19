@@ -35,16 +35,16 @@ class AvaliacoesController extends AppController
      */
     public function index($id = NULL)
     {
-        $categoria_id = 0;
+        $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
         $user_session = $this->request->getAttribute('identity');
-        if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
+        if ($user_session) { $user_data = $user_session->getOriginalData(); }
         
-        if ($categoria_id == 1) {
+        if ($user_data['administrador_id']) {
             $avaliacoes = $this->paginate($this->Avaliacoes->find()->contain(['Estagiarios' => ['Alunos', 'Instituicoes']]));
             $this->set(compact('avaliacoes'));
             $this->set('id', '');
         }
-        else if ($categoria_id == 2) {
+        else if ($user_data['aluno_id']) {
             $estagiario_id = $this->getRequest()->getQuery('estagiario_id');
             // pr($estagiario_id);
             // die();

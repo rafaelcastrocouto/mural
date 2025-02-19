@@ -335,16 +335,17 @@ class AlunosController extends AppController
     
     public function certificadoperiodo($id = null) 
     {
-        $categoria_id = 0;
+        $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
         $user_session = $this->request->getAttribute('identity');
-        if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
+        if ($user_session) { $user_data = $user_session->getOriginalData(); }
+        
         /**
          * Autorização. Verifica se o aluno cadastrado no Users está acessando seu próprio registro.
          */
         $option = 0;
-        if ($categoria_id == 1) {
+        if ($user_data['administrador_id']) {
             //$this->Flash->info(__("Administrador autorizado"));
-        } elseif ($categoria_id == 2) {
+        } elseif ($user_data['aluno_id']) {
             $aluno_id = $user_session->get('aluno_id');
             if ($id == $aluno_id) {
                 /**
@@ -528,12 +529,11 @@ class AlunosController extends AppController
      */    
     public function folhasolicita()
     {
-        $categoria_id = 0;
+        $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
         $user_session = $this->request->getAttribute('identity');
-        if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
-
+        if ($user_session) { $user_data = $user_session->getOriginalData(); }
         
-        if ($categoria_id != 2) {
+        if (!$user_data['aluno_id']) {
 
             // pr($this->data);
             // die();

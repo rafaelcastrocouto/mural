@@ -3,12 +3,10 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
  */
-?>
 
-<?php
-$categoria_id = 0;
+$user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
 $user_session = $this->request->getAttribute('identity');
-if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
+if ($user_session) { $user_data = $user_session->getOriginalData(); }
 ?>
     
 <div class="users form content">
@@ -16,7 +14,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
         <div class="nav">
             <?php 
             echo $this->Html->link(__('Ver Usuário'), ['action' => 'view', $user->id], ['class' => 'button']);
-            if ($categoria_id == 1):
+            if ($user_data['administrador_id']):
                 echo $this->Html->link(__('Listar Usuários'), ['action' => 'index'], ['class' => 'button']);
                 echo $this->Form->postLink( __('Deletar'), ['action' => 'delete', $user->id],
                     ['confirm' => __('Are you sure you want to delete user_{0}?', $user->email), 'class' => 'button']

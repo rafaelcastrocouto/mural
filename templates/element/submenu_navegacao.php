@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-$categoria_id = 0;
+$user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
 $user_session = $this->request->getAttribute('identity');
-if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
+if ($user_session) { $user_data = $user_session->getOriginalData(); }
+
+// $user_data['administrador_id'] || $user_data['aluno_id'] || $user_data['professor_id'] || $user_data['supervisor_id']
     
 ?>
 <!-- templates/element/submenu_navegacao.php -->
@@ -64,7 +66,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
                 <li><?php echo $this->Html->link("Folha de atividades", "/Alunos/folhasolicita"); ?></li>
                 <li><?php echo $this->Html->link("Folha de atividades on-line", "/folhadeatividades/busca_dre"); ?></li>
 
-                <?php if ($categoria_id == 1 || $categoria_id == 3 || $categoria_id == 4): ?>
+                <?php if ($user_data['administrador_id'] || $user_data['professor_id'] || $user_data['supervisor_id']): ?>
                     <li><?php echo $this->Html->link("Declaração de estágio", "/Alunos/busca_dre"); ?></li>
                 <?php else: ?>
                     <li><?php echo $this->Html->link("Declaração de estágio", "/Estagiarios/view?registro="); ?></li>
@@ -90,7 +92,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
         
         <li><?php echo $this->Html->link('Grupo Google', 'https://groups.google.com/forum/#!forum/estagio_ess'); ?></li>
         
-        <?php if ($categoria_id == 1): ?>
+        <?php if ($user_data['administrador_id']): ?>
             <li class="menu-admin">
                 <input id="menu-admin-toggler" type="checkbox" class="toggle-input" />
                 <label for="menu-admin-toggler" class="toggle-label">Administração <span class="toggle-more">▾</span><span class="toggle-less">◂</span></label>

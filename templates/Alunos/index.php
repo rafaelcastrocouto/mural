@@ -7,17 +7,17 @@
 //pr($alunos);
 //die();
 
-$categoria_id = 0;
+$user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
 $user_session = $this->request->getAttribute('identity');
-if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
+if ($user_session) { $user_data = $user_session->getOriginalData(); }
     
 ?>
 <div class="alunos index content">
-	<?php if ($categoria_id == 1 OR ($alunos->count() == 0 AND $categoria_id == 2) ): ?>
+	<?php if ($user_data['administrador_id'] OR ($alunos->count() == 0 AND $user_data['aluno_id'] == 2) ): ?>
 	<aside>
 		<div class="nav">
 			<?= $this->Html->link(__('Novo Aluno'), ['action' => 'add'], ['class' => 'button']) ?>
-			<?php if ($categoria_id == 1): ?>
+			<?php if ($user_data['administrador_id']): ?>
 				<?= $this->Html->link(__('Buscar Aluno'), ['action' => 'busca'], ['class' => 'button']) ?>
 			<?php endif; ?>
 		</div>
@@ -33,7 +33,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
         <table>
             <thead>
                 <tr>
-				    <?php if ($categoria_id == 1): ?>
+				    <?php if ($user_data['administrador_id']): ?>
                         <th class="actions"><?= __('Actions') ?></th>
                         <th><?= $this->Paginator->sort('id') ?></th>
                     <?php endif; ?>
@@ -51,7 +51,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
             <tbody>
                 <?php foreach ($alunos as $aluno): ?>
                 <tr>
-				    <?php if ($categoria_id == 1): ?>
+				    <?php if ($user_data['administrador_id']): ?>
                     <td class="actions">
                         <?= $this->Html->link(__('Ver'), ['action' => 'view', $aluno->id]) ?>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $aluno->id]) ?>
