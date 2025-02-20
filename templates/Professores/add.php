@@ -7,10 +7,9 @@
 
 declare(strict_types=1);
 
-$categoria_id = 0;
+$user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
 $user_session = $this->request->getAttribute('identity');
-if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
-
+if ($user_session) { $user_data = $user_session->getOriginalData(); }
 ?>
 <div>
     <div class="column-responsive column-80">
@@ -24,7 +23,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
             <fieldset>
                 <h3><?= __('Adicionando Professor') ?></h3>
                 <?php
-                    if ($categoria_id == 1):
+                    if ($user_data['administrador_id']):
                         $val = $this->request->getParam('pass') ? $this->request->getParam('pass')[0] : '';
                         echo $this->Form->control('user_id', ['type' => 'number', 'value' => $val ]); 
                     else:

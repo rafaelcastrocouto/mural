@@ -4,9 +4,9 @@
  * @var \App\Model\Entity\Muralestagio[]|\Cake\Collection\CollectionInterface $muralestagios
  */
 
-$categoria_id = 0;
+$user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
 $user_session = $this->request->getAttribute('identity');
-if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
+if ($user_session) { $user_data = $user_session->getOriginalData(); }
 
 ?>
 
@@ -27,7 +27,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
 	
 	<div class="row justify-content-center">
 	    <div class="col-auto">
-	        <?php if ($categoria_id == 1): ?>
+	        <?php if ($user_data['administrador_id']): ?>
 	            <?= $this->Form->create($muralestagios, ['class' => 'form-inline']); ?>
 					<?= $this->Form->label('periodo', 'Período'); ?>
 					<?= $this->Form->input('periodo', [
@@ -60,7 +60,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
         <table>
             <thead>
                 <tr>
-			        <?php if ($categoria_id == 1): ?>
+			        <?php if ($user_data['administrador_id']): ?>
 	                    <th class="actions"><?= __('Actions') ?></th>
 	                    <th><?= $this->Paginator->sort('id') ?></th>
 			        <?php endif; ?>
@@ -76,7 +76,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
             <tbody>
                 <?php foreach ($muralestagios as $muralestagio): ?>
                     <tr>
-				        <?php if ($categoria_id == 1): ?>
+				        <?php if ($user_data['administrador_id']): ?>
 	                        <td class="actions">
 	                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $muralestagio->id]) ?>
 	                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $muralestagio->id]) ?>

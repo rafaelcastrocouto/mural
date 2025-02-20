@@ -6,10 +6,9 @@
 
 declare(strict_types=1);
 
-$categoria_id = 0;
+$user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
 $user_session = $this->request->getAttribute('identity');
-if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
-
+if ($user_session) { $user_data = $user_session->getOriginalData(); }
 ?>
 
 <script type="text/javascript">
@@ -29,7 +28,7 @@ if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
 	
 	<div class="row justify-content-center">
 	    <div class="col-auto">
-	        <?php if ($categoria_id == 1): ?>
+	        <?php if ($user_data['administrador_id']): ?>
 	            <?= $this->Form->create($estagiarios, ['class' => 'form-inline']); ?>
 					<?= $this->Form->label('estagiarioperiodo', 'Período'); ?>
 					<?= $this->Form->input('periodo', [

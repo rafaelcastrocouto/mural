@@ -3,18 +3,16 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
  */
-?>
 
-<?php
-$categoria_id = 0;
+$user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
 $user_session = $this->request->getAttribute('identity');
-if ($user_session) { $categoria_id = $user_session->get('categoria_id'); }
+if ($user_session) { $user_data = $user_session->getOriginalData(); }
 ?>
 
 <div class="users form content">
     <aside>
         <div class="nav">
-            <?php if ($categoria_id == 1): ?>
+            <?php if ($user_data['administrador_id']): ?>
                 <?= $this->Html->link(__('Listar Usuários'), ['action' => 'index'], ['class' => 'button']) ?>
             <?php endif; ?>
             <?php if (!$user_session):  ?>
