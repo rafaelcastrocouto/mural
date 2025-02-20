@@ -9,7 +9,6 @@ estagiarios
 folhadeatividades
 inscricoes
 muralestagios
-users
 
 - policies:
 
