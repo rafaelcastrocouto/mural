@@ -23,7 +23,6 @@
                     <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
-                    <th><?= $this->Paginator->sort('categoria_id', 'Categoria') ?></th>
                     <th><?= $this->Paginator->sort('created', 'Criado') ?></th>
                     <th><?= $this->Paginator->sort('modified', 'Modificado') ?></th>
                 </tr>
@@ -38,7 +37,6 @@
                     </td>
                     <td><?= $this->Html->link((string)$user->id, ['action' => 'view', $user->id]) ?></td>
                     <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
-                    <td><?= h($user->categoria->categoria) ?></td>
                     <td><?= $user->created ? h($user->created) : '' ?></td>
                     <td><?= $user->modified ? h($user->modified) : '' ?></td>
                 </tr>

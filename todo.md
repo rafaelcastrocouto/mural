@@ -21,5 +21,4 @@ muralestagios
 - redirects
 - error msg
 - front end
-- categoria binary
 - paginate contain https://stackoverflow.com/questions/43901181/how-to-paginate-associated-records

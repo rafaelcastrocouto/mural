@@ -82,8 +82,10 @@ class InscricoesController extends AppController
         
         if (!$aluno) {
             $this->Flash->error(__('Erro ao selecionar aluno'));
+            //$user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
             //$user_session = $this->request->getAttribute('identity');
-            //if ($user_session->get('categoria_id') == 1) {
+            //if ($user_session) { $user_data = $user_session->getOriginalData(); }
+            //if ($user_data['administrador_id']) {
             //    return    $this->redirect(['controller' => 'Users', 'action' => 'alternarusuario']);
             //} else return $this->redirect(['controller' => 'Inscricoes', 'action' => 'index']);
         }

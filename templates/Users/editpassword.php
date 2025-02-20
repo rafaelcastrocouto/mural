@@ -28,7 +28,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
         <?php
             echo $this->Form->control('password', ['value' => '', 'label' => 'Nova senha', 'placeholder' => 'nova senha', 'id' => 'password', 'required' => false]);
             echo $this->element('show_password');
-            //echo $this->Form->control('categoria_id', ['options' => $categorias, 'value' => $user->categoria_id, 'class' => 'form-control']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Alterar Senha'), ['class' => 'button']) ?>

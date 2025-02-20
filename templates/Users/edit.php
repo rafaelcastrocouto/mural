@@ -30,7 +30,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
         <h3><?= __('Editando user_') . $user->id ?></h3>
         <?php
             echo $this->Form->control('email', ['type' => 'email', 'label' => 'Novo email']);
-            //echo $this->Form->control('categoria_id', ['options' => $categorias, 'value' => $user->categoria_id, 'class' => 'form-control']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Editar'), ['class' => 'button']) ?>

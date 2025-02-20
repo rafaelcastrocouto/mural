@@ -17,8 +17,8 @@ class AreasTablePolicy implements BeforePolicyInterface
   public function before(?IdentityInterface $identity, mixed $resource, string $action): ResultInterface|bool|null
   {
     if ($identity) {
-      $data = $identity->getOriginalData();
-      if ($data and $data->categoria_id == 1) {
+      $user_data = $identity->getOriginalData();
+      if ($user_data and $user_data['administrador_id']) {
         return true;
       }
     }

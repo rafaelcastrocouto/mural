@@ -36,12 +36,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <th><?= __('Email') ?></th>
                     <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
                 </tr>
-                <?php /*
-                <tr>
-                    <th><?= __('Categoria') ?></th>
-                    <td><?= h($user->categoria->categoria); ?></td>
-                </tr>
-                */ ?>
                 <tr>
                     <th><?= __('Criado') ?></th>
                     <td><?= h($user->created) ?></td>

@@ -62,9 +62,6 @@ class UsersTable extends Table
             'foreignKey' => 'user_id',
         ]);
         
-        $this->belongsTo('Categorias', [
-            'foreignKey' => 'categoria_id'
-        ]);
     }
 
     /**
@@ -88,14 +85,6 @@ class UsersTable extends Table
             ->scalar('password')
             ->maxLength('password', 40)
             ->notEmptyString('password', 'Erro: senha vazia');
-
-        $validator
-            ->scalar('categoria_id')
-            ->notEmptyString('categoria_id', 'Erro: categoria vazia')
-            ->add('role', 'inList', [
-                'rule' => ['inList', [2, 3, 4]],
-                'message' => 'Erro: categoria falsa'
-            ]);
 
         $validator
             ->dateTime('created')

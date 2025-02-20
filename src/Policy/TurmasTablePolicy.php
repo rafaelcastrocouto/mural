@@ -16,8 +16,8 @@ class TurmasTablePolicy implements BeforePolicyInterface
   public function before(?IdentityInterface $identity, mixed $resource, string $action): ResultInterface|bool|null
   {
     if ($identity) {
-      $data = $identity->getOriginalData();
-      if ($data and ( $data->categoria_id == 1 || $data->categoria_id == 3 || $data->categoria_id == 4 )) {
+      $user_data = $identity->getOriginalData();
+      if ($user_data and ( $user_data['administrador_id'] || $user_data['professor_id'] || $user_data['supervisor_id'])) {
         return true;
       }
     }

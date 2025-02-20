@@ -30,7 +30,7 @@ class UsersController extends AppController {
      */
     protected array $paginate = [
         'sortableFields' => [
-            'id', 'email', 'categoria_id', 'Alunos.nome', 'Professores.nome', 'Supervisores.nome', 'created', 'modified'
+            'id', 'email', 'Alunos.nome', 'Professores.nome', 'Supervisores.nome', 'created', 'modified'
         ]
     ];   
     
@@ -41,13 +41,14 @@ class UsersController extends AppController {
      */
     public function index()
     {
+        $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
         $user_session = $this->request->getAttribute('identity');
-        $authAdmin = ($user_session and $user_session->get('categoria_id') == 1);
+        if ($user_session) { $user_data = $user_session->getOriginalData(); }
         
-        if ($authAdmin) {
-            $query = $this->Users->find()->contain(['Categorias']);
+        if ($user_data['administrador_id']) {
+            $query = $this->Users->find();
         } else {
-            $query = $this->Authorization->applyScope($this->Users->find()->contain(['Categorias']));
+            $query = $this->Authorization->applyScope($this->Users->find());
         }
         $users = $this->paginate($query);
         $this->set(compact('users'));
@@ -62,7 +63,7 @@ class UsersController extends AppController {
      */
     public function view($id = null)
     {
-        $contained = ['Categorias', 'Administradores', 'Alunos', 'Supervisores', 'Professores'];
+        $contained = ['Administradores', 'Alunos', 'Supervisores', 'Professores'];
         
         $user = $this->Users->get($id, [ 'contain' =>  $contained ]);
         
@@ -87,8 +88,9 @@ class UsersController extends AppController {
         // authorize all users to add
         $this->Authorization->skipAuthorization();
         
+        $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
         $user_session = $this->request->getAttribute('identity');
-        $authAdmin = ($user_session and $user_session->get('categoria_id') == 1);
+        if ($user_session) { $user_data = $user_session->getOriginalData(); }
 
         if ($user_session) {
             $this->Flash->warning(__('Usuario ja esta logado.'));
@@ -98,28 +100,19 @@ class UsersController extends AppController {
         
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData(), [
-                'fields' => ['categoria_id', 'password', 'email'],
+                'fields' => ['password', 'email'],
                 'accessibleFields' => ['password' => true]
             ]);
                 
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
-                //$redir_categorias = [null, null, 'Alunos', 'Professores', 'Supervisores'];
-                //$categoria = $redir_categorias[$user->categoria_id];
-                //return $this->redirect(['controller' => $categoria ?? 'Users' , 'action' => $categoria ? 'add' : 'index']);
                 return $this->redirect(['action' => 'view', $user->id]);
             }
             
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        // filter input list options
-        if ($authAdmin) {
-            $categorias = $this->Users->Categorias->find('list');
-        } else {
-            $categorias = $this->Users->Categorias->find('list')->where(['id !=' => 1]);            
-        }
         
-        $this->set(compact('user', 'categorias'));
+        $this->set(compact('user'));
     }
 
     /**
@@ -135,11 +128,13 @@ class UsersController extends AppController {
     }
     public function edit($id = null)
     {
+        $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
         $user_session = $this->request->getAttribute('identity');
-        $authAdmin = ($user_session and $user_session->get('categoria_id') == 1);
-        $authUser = ($user_session and $user_session->get('id') == $id);
-        
+        if ($user_session) { $user_data = $user_session->getOriginalData(); }
+
         $user = $this->Users->get($id);
+        $sameUser = ($user_session and $user_session->get('id') == $id);
+        
         
         try {
             $this->Authorization->authorize($user);
@@ -150,13 +145,13 @@ class UsersController extends AppController {
             
         if ($this->request->is(['patch', 'post', 'put'])) {
             
-            $opt = ['fields' => ['categoria_id', 'email']];
+            $opt = ['fields' => ['email']];
             $data = $this->request->getData();
             
             if ($data['password']) {
                 $opt = [
-                    'fields' => ['categoria_id', 'email', 'password'],
-                    'accessibleFields' => ['password' => ($authAdmin OR $authUser)]
+                    'fields' => ['email', 'password'],
+                    'accessibleFields' => ['password' => ($user_data['administrador_id'] OR $sameUser)]
                 ];
             } else { unset($data['password']); }
             
@@ -169,15 +164,9 @@ class UsersController extends AppController {
             
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        
-        if ($authAdmin) {
-            $categorias = $this->Users->Categorias->find('list');
-        } else {
-            $categorias = $this->Users->Categorias->find('list')->where(['id !=' => 1]);            
-        }
 
         $user['password'] = '';    
-        $this->set(compact('user', 'categorias'));
+        $this->set(compact('user'));
     }
 
     /**

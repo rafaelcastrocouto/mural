@@ -20,7 +20,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 
 <?php
 echo $this->Form->create();
-echo $this->Form->input('categoria', ['label' => ['text' => 'Selecione', 'class' => 'label-control col-2'], 'options' => ['2' => 'Estudante', '3' => 'Professor', '4' => 'Supervisor'], 'empty' => 'Seleciona', 'class' => 'form-control']);
 echo $this->Form->input('numero', ['label' => ['text' => 'DRE, SIAPE ou CRESS respectivamente', 'class' => 'label-control col-2'], 'class' => 'form-control']);
 ?>
 

@@ -27,7 +27,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
             echo $this->Form->control('email', ['required' => true, 'autocomplete' => 'username']);
             echo $this->Form->control('password', ['label' => 'Senha', 'required' => true, 'autocomplete' => 'new-password', 'id' => 'password' ]);
             echo $this->element('show_password');
-            //echo $this->Form->control('categoria_id', ['options' => $categorias, 'value' => '2', 'class' => 'form-control', 'required' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Adicionar'), ['class' => 'button']) ?>

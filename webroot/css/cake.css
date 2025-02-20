@@ -97,14 +97,14 @@ h2.label {
 }
 
 /* Utility */
-.table-responsive {
-    display: block;
+table {
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
 }
 table p {
     margin: 0;
+}
+.view table {
+    width: auto;
 }
 
 /* Main */
@@ -127,10 +127,6 @@ table p {
     font-weight: bold;
     /* padding: 0 0.4rem; */
     display: block;
-}
-.table_wrap {
-    margin-right: 2em;
-    display: inline-block;
 }
 th {
     white-space: nowrap;
