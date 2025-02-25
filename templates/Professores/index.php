@@ -6,7 +6,7 @@
 ?>
 <div class="professores index content">
 	<aside>
-		<div class="nav"> 
+		<div class="nav">
             <?= $this->Html->link(__('Novo Professor'), ['action' => 'add'], ['class' => 'button']) ?>
 		</div>
 	</aside>

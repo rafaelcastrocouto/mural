@@ -80,7 +80,8 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
             <label for="menu-consulta-toggler" class="toggle-label">Consulta <span class="toggle-more">▾</span><span class="toggle-less">◂</span></label>
             
             <menu class="toggle-dropdown">
-        
+                
+                <li><?php echo $this->Html->link("Inscrições", ['controller' => 'Inscricoes', 'action' => 'index']); ?></li>
                 <li><?php echo $this->Html->link("Instituições", ['controller' => 'Instituicoes', 'action' => 'index']); ?></li>
                 <li><?php echo $this->Html->link("Estagiários", ['controller' => 'Estagiarios', 'action' => 'index']); ?></li>
                 <li><?php echo $this->Html->link("Alunos", ['controller' => 'Alunos', 'action' => 'index']); ?></li>
