@@ -48,7 +48,9 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 	
 	<aside>
 		<div class="nav">
-		    <?= $this->Html->link(__('Novo Estagiario'), ['action' => 'add'], ['class' => 'button']) ?>
+	        <?php if ($user_data['administrador_id']): ?>
+			    <?= $this->Html->link(__('Novo Estagiario'), ['action' => 'add'], ['class' => 'button']) ?>
+	        <?php endif; ?>
 		</div>
 	</aside>
 	
