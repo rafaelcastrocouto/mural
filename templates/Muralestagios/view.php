@@ -191,7 +191,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 
                 <tr>
                     <td colspan = '2' class="text-center">
-                        <?php echo $this->Html->link('Inscrição', ['controller' => 'inscricaos', 'action' => 'add', $muralestagio['Mural']['id']], ['role' => 'button', 'class' => 'btn btn-primary']); ?>
+                        <?php echo $this->Html->link('Inscrição', ['controller' => 'Inscricoes', 'action' => 'add', $muralestagio['id']], ['role' => 'button', 'class' => 'button btn-primary']); ?>
                     </td>
                 </tr>
 
@@ -216,7 +216,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 
                     <tr>
                         <td colspan = 2 class="text-center">
-                            <?php echo $this->Html->link('Inscrição', ['controller' => 'inscricaos', 'action' => 'add', $muralestagio['id']], ['role' => 'button', 'class' => 'btn btn-primary']); ?>
+                            <?php echo $this->Html->link('Inscrição', ['controller' => 'Inscricoes', 'action' => 'add', $muralestagio['id']], ['role' => 'button', 'class' => 'button btn-primary']); ?>
                         </td>
                     </tr>
                 <?php else: ?>

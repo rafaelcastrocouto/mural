@@ -7,7 +7,6 @@
 $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
 $user_session = $this->request->getAttribute('identity');
 if ($user_session) { $user_data = $user_session->getOriginalData(); }
-
 ?>
 
 <script type="text/javascript">
@@ -47,7 +46,9 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 	
 	<aside>
 		<div class="nav">
-		    <?= $this->Html->link(__('Novas vagas'), ['action' => 'add'], ['class' => 'button']) ?>
+	        <?php if ($user_data['administrador_id'] || $user_data['professor_id'] || $user_data['supervisor_id']): ?>
+			    <?= $this->Html->link(__('Novas vagas'), ['action' => 'add'], ['class' => 'button']) ?>
+	        <?php endif; ?>
 		</div>
 	</aside>
 	

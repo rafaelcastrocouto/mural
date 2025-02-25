@@ -64,77 +64,71 @@ class InscricoesController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id = null)
     {
-        $inscricao = $this->Inscricoes->newEmptyEntity();
+        $dados = $this->request->getData();
         
-        $mural_estagio_id = $this->getRequest()->getQuery('mural_estagio_id');
-        $periodo = $this->getRequest()->getQuery('periodo');
+        $periodo = $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
+        $dados['periodo'] = $periodo;
+        
+        $mural_estagio_id = $id;
+        if (!$mural_estagio_id) {
+            $this->Flash->error(__('Erro no identificador do mural de estagios'));
+        } else {
+            $mural_estagio = $this->fetchTable('Muralestagios')->get($mural_estagio_id);
+            $dados['mural_estagio'] = $mural_estagio;
+            $dados['mural_estagio_id'] = $mural_estagio->id;
+            
+            /** Verifico o periodo do mural e comparo com o periodo da inscricao */
+            if ($mural_estagio->periodo != $periodo) {
+                $this->Flash->error(__('O periodo de inscricao nao coincide com o periodo do Mural.'));
+                return $this->redirect(['controller' => 'Muralestagios', 'action' => 'view', $mural_estagio_id]);
+            }
 
-        if (empty($periodo)) {
-            $configuracaotabela = $this->fetchTable('Configuracoes');
-            $periodoconfiguracao = $configuracaotabela->find()->first();
-            $periodo = $periodoconfiguracao->mural_periodo_atual;
+            $instituicao = $this->fetchTable('Instituicoes')->get($mural_estagio->instituicao_id);
         }
+
+        $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
+        $user_session = $this->request->getAttribute('identity');
+        if ($user_session) { $user_data = $user_session->getOriginalData(); }
         
-        $user_id = $this->Authentication->getIdentifier();
-        $aluno = $this->fetchTable('Alunos')->find()->where(['user_id' => $user_id ])->first();
-        
+        $aluno = $this->fetchTable('Alunos')->get($user_data['aluno_id']);
         if (!$aluno) {
             $this->Flash->error(__('Erro ao selecionar aluno'));
-            //$user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
-            //$user_session = $this->request->getAttribute('identity');
-            //if ($user_session) { $user_data = $user_session->getOriginalData(); }
-            //if ($user_data['administrador_id']) {
-            //    return    $this->redirect(['controller' => 'Users', 'action' => 'alternarusuario']);
-            //} else return $this->redirect(['controller' => 'Inscricoes', 'action' => 'index']);
-        }
-        
-        /** Verifico o periodo do mural e comparo com o periodo da inscricao */
-        $muralestagiotabela = $this->fetchTable('Muralestagios');
-
-        $request_id = $this->getRequest()->getData('mural_estagio_id');
-
-        if (!$request_id) {
-            $this->Flash->error(__('Erro no identificador do mural de estagios'));
-        }
-
-        if ($request_id) {
-            $muralestagio = $muralestagiotabela->find()->where(['id' => $request_id])->first();
-            if ($muralestagio->periodo <> $this->getRequest()->getData('periodo')) {
-                $this->Flash->error(__('O periodo de inscricao nao coincide com o periodo do Mural.'));
-                //return $this->redirect(['controller' => 'Muralestagios', 'action' => 'view', $this->getRequest()->getData('mural_estagio_id')]);
+            
+            if ($user_data['administrador_id']) {
+                return $this->redirect(['controller' => 'Users', 'action' => 'alternarusuario']);
+            } else {
+                $user_id = $this->Authentication->getIdentifier();
+                return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_id]);
             }
-        }
-        
-        if ($aluno) {
-            /** Verifico se já fez inscrição para não duplicar */
-            $inscricao_dupli = $this->Inscricoes->find()->where(['Inscricoes.aluno_id' => $aluno->id, 'Inscricoes.mural_estagio_id' => $muralestagio->id])->first();
-            if ($inscricao_dupli) {
-                $this->Flash->error(__("Inscrição já realizada"));
-                //return $this->redirect(['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]);
-            }
-        
-
-            $dados = $this->request->getData();
+            
+        } else {  
             $dados['registro'] = $aluno->registro;
             $dados['aluno_id'] = $aluno->id;
-            $dados['mural_estagio_id'] = $this->getRequest()->getData('muralestagio_id');
-            $dados['data'] = date('Y-m-d');
-            $dados['periodo'] = $this->getRequest()->getData('periodo');
+            
+            /** Verifico se já fez inscrição para não duplicar */
+            $inscricao_duplicada = $this->Inscricoes->find()->where(['Inscricoes.aluno_id' => $aluno->id, 'Inscricoes.mural_estagio_id' => $mural_estagio->id])->first();
+            if ($inscricao_duplicada) {
+                $this->Flash->error(__("Inscrição já realizada"));
+                return $this->redirect(['controller' => 'Inscricoes', 'action' => 'view', $inscricao_duplicada->id]);
+            }
         }
-
         
+        $data = date('Y-m-d');
+        $dados['data'] = $data;
+
+        $inscricao = $this->Inscricoes->newEmptyEntity();
         if ($this->request->is('post')) {
             $inscricao = $this->Inscricoes->patchEntity($inscricao, $dados);
             if ($this->Inscricoes->save($inscricao)) {
-                $this->Flash->success(__('The inscricao has been saved.'));
+                $this->Flash->success(__('Inscricao realizada com sucesso.'));
 
-                return $this->redirect(['action' => 'view', $id]);
+                return $this->redirect(['action' => 'view', $inscricao->id]);
             }
             $this->Flash->error(__('The inscricao could not be saved. Please, try again.'));
         }
-        $this->set(compact('inscricao', 'aluno', 'periodo', 'mural_estagio_id'));
+        $this->set(compact('inscricao', 'aluno', 'periodo', 'mural_estagio', 'data', 'instituicao'));
     }
 
     /**

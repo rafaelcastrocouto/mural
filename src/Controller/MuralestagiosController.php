@@ -76,22 +76,13 @@ class MuralestagiosController extends AppController {
      */
     public function add()
     {
-        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
+        $periodo = $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
         
         $muralestagio = $this->Muralestagios->newEmptyEntity();
         if ($this->request->is('post')) {
-
-            $instituicao = $this->Muralestagios->Instituicoes->find()
-                    ->where(['id' => $this->request->getData('instituicao_id')])
-                    ->select(['instituicao'])
-                    ->first();
-            
-            $dados = $this->request->getData();
-            $dados['instituicao_id'] = $instituicao->id;
-            
-            $muralestagio = $this->Muralestagios->patchEntity($muralestagio, $dados);
+            $muralestagio = $this->Muralestagios->patchEntity($muralestagio, $this->request->getData());
             if ($this->Muralestagios->save($muralestagio)) {
-                $this->Flash->success(__('The muralestagio has been saved.'));
+                $this->Flash->success(__('Registro de mural de estágio feito com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
