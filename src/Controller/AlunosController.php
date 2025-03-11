@@ -59,7 +59,7 @@ class AlunosController extends AppController
         try {
             $this->Authorization->authorize($aluno);
         } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
         }
         
@@ -78,7 +78,7 @@ class AlunosController extends AppController
         try {
             $this->Authorization->authorize($this->Alunos);
         } catch (ForbiddenException $error) {
-            $this->Flash->warning('Erro de authorizacao: aluno ja cadastrado');
+            $this->Flash->warning('Erro de authorização: aluno já está cadastrado');
             return $this->redirect('/');
         }
         
@@ -91,10 +91,10 @@ class AlunosController extends AppController
             }
             
             if ($this->Alunos->save($aluno)) {
-                $this->Flash->success(__('The aluno has been saved.'));
+                $this->Flash->success(__('O aluno foi adicionado com sucesso.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The aluno could not be saved. Please, try again.'));
+            $this->Flash->error(__('Erro ao adicionar: não foi possível salvar os dados.'));
         }
         $this->set(compact('aluno'));
     }
@@ -113,17 +113,17 @@ class AlunosController extends AppController
         try {
             $this->Authorization->authorize($aluno);
         } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
         }
         
         if ($this->request->is(['patch', 'post', 'put'])) {
             $aluno = $this->Alunos->patchEntity($aluno, $this->request->getData());
             if ($this->Alunos->save($aluno)) {
-                $this->Flash->success(__('The aluno has been saved.'));
+                $this->Flash->success(__('A edição foi salva com sucesso.'));
                 return $this->redirect(['action' => 'view', $id]);
             }
-            $this->Flash->error(__('The aluno could not be saved. Please, try again.'));
+            $this->Flash->error(__('Erro ao salvar: não foi possível salvar os dados.'));
         }
         $this->set(compact('aluno'));
     }
@@ -141,14 +141,14 @@ class AlunosController extends AppController
         $aluno = $this->Alunos->get($id, ['contain' => ['Estagiarios']]);
         
         if (sizeof($aluno->estagiarios) > 0) {
-            $this->Flash->error(__('Erro ao deletar: Aluno tem estagiários associados.'));
+            $this->Flash->error(__('Erro ao deletar: O aluno tem estagiários associados.'));
             return $this->redirect(['controller' => 'alunos', 'action' => 'view', $id]);
         }
 
         try {
             $this->Authorization->authorize($aluno);
             if ($this->Alunos->delete($aluno)) {
-                $this->Flash->success(__('The aluno has been deleted.'));
+                $this->Flash->success(__('O aluno foi deletado com sucesso.'));
             } else {
                 $this->Flash->error(__('Erro ao deletar: Não foi possível deletar o aluno.'));
             }
@@ -169,7 +169,7 @@ class AlunosController extends AppController
         try {
             $this->Authorization->authorize($this->Alunos);
         } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
         }
         
@@ -365,13 +365,13 @@ class AlunosController extends AppController
                     // echo "Aluno registro autorizado";
                 } else {
                     // echo "Registros não coincidem" . "<br>";
-                    $this->Flash->error(__('1. Operação não autorizada.'));
+                    $this->Flash->error(__('Erro 1: Operação não autorizada.'));
                     return $this->redirect(['controller' => 'Alunos', 'action' => 'certificadoperiodo?registro=' . $estudante_registro]);
                     // die('Aluno não autorizado.');
                 }
             }
         } else {
-            $this->Flash->error(__('2. Operação não autorizada.'));
+            $this->Flash->error(__('Erro 2: Operação não autorizada.'));
             return $this->redirect(['controller' => 'Muralestagios', 'action' => 'index']);
             // die('Professores e Supervisores não autorizados');
         }
@@ -443,12 +443,12 @@ class AlunosController extends AppController
 
         /** Se o período inicial é maior que o período atual então informar que há um erro */
         if ($totalperiodos <= 0) {
-            $this->Flash->error(__('Error: período inicial é maior que período atual'));
+            $this->Flash->error(__('Erro: período inicial é maior que período atual.'));
         }
 
 
         if ($totalperiodos > 20) {
-            $this->Flash->error(__('Error: período é maior q o permitido'));
+            $this->Flash->error(__('Erro: período é maior q o permitido.'));
         }
 
         // pr($totalperiodos);
@@ -540,10 +540,10 @@ class AlunosController extends AppController
             if (empty($this->data)) {
                 //$this->data = $this->Alunos->read();
                 
-                $this->Flash->info(__('No data'));
+                $this->Flash->info(__('Erro: os dados não foram encontrados'));
             } else {
                 
-                $this->Flash->info(__('Redirect to folhadeatividadespdf registro'));
+                $this->Flash->info(__('Redirecionar para folhadeatividadespdf registro'));
                 // pr($this->data);
                 // die();
                 // $this->Session->write('menu_aluno', 'estagiario');
@@ -552,7 +552,7 @@ class AlunosController extends AppController
                 //$this->redirect(['action' => 'folhadeatividadespdf', $this->data['Aluno']['registro'], 'ext' => 'pdf', 'folhadeatividades']);
             }
         } else {
-            $this->Flash->info(__('Redirect to folhadeatividadespdf numero'));
+            $this->Flash->info(__('Redirecionar para folhadeatividadespdf numero'));
             //$this->redirect(['action' => 'folhadeatividadespdf', $this->Session->read('numero'), 'ext' => 'pdf', 'folhadeatividades']);
         }
     }
