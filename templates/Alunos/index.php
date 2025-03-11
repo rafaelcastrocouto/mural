@@ -3,6 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Aluno[]|\Cake\Collection\CollectionInterface $alunos
  */
+declare(strict_types=1);
 
 //pr($alunos);
 //die();
