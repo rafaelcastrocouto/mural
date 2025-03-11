@@ -63,8 +63,10 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
         <table>
             <thead>
                 <tr>
-                    <th class="actions"><?= __('Actions') ?></th>
-                    <th><?= $this->Paginator->sort('id') ?></th>
+			        <?php if ($user_data['administrador_id']): ?>
+	                    <th class="actions"><?= __('Actions') ?></th>
+	                    <th><?= $this->Paginator->sort('id') ?></th>
+					<?php endif; ?>
                     <th><?= $this->Paginator->sort('Alunos.nome', 'Aluno') ?></th>
                     <th><?= $this->Paginator->sort('turno') ?></th>
                     <th><?= $this->Paginator->sort('nivel') ?></th>
@@ -80,13 +82,15 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
             <tbody>
                 <?php foreach ($estagiarios as $estagiario): ?>
                 <tr>
-                    <td class="actions">
-                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $estagiario->id]) ?>
-                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $estagiario->id]) ?>
-                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete estagiario #{0}?', $estagiario->id)]) ?>
-                    </td>
-                    <td><?= $this->Html->link((string)$estagiario->id, ['action' => 'view', $estagiario->id]) ?></td>
-                    <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
+					<?php if ($user_data['administrador_id']): ?>
+	                    <td class="actions">
+	                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $estagiario->id]) ?>
+	                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $estagiario->id]) ?>
+	                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete estagiario #{0}?', $estagiario->id)]) ?>
+	                    </td>
+	                    <td><?= $this->Html->link((string)$estagiario->id, ['action' => 'view', $estagiario->id]) ?></td>
+                    <?php endif; ?>
+					<td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
                     <td>
 						<?php
                         $turno = '';

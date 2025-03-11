@@ -23,10 +23,15 @@ class EstagiariosTablePolicy implements BeforePolicyInterface
     }
     return null;
   }
+
+  public function canIndex(IdentityInterface $userSession, EstagiariosTable $estagiariosTable)
+  {
+    return new Result(false, 'Erro: estagiarios index policy not authorized');
+  }
   
   public function scopeIndex($user, $query)
   {
-    return $query->where(['Estagiarios.Aluno.user_id' => $user->getIdentifier()]);
+    return $query->where(['Estagiarios.aluno_id' => $user->aluno_id ]);
   }
   
   public function canBusca()

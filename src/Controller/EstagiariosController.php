@@ -34,13 +34,22 @@ class EstagiariosController extends AppController
         $this->set('periodo', $periodo);
         
         $contained = ['Alunos', 'Professores', 'Supervisores', 'Instituicoes', 'Turmas'];
-        
-        if ($periodo == 'all') {
-            $estagiarios = $this->Estagiarios->find('all')
-                ->contain($contained);
-        } else {
-            $estagiarios = $this->Estagiarios->find('all', ['conditions' => ['Estagiarios.periodo' => $periodo] ])
-                ->contain($contained);
+
+        $conditions = ['conditions' => ['Estagiarios.periodo' => $periodo] ];
+
+        try {
+            $this->Authorization->authorize($this->Estagiarios);
+            if ($periodo == 'all') {
+                $estagiarios = $this->Estagiarios->find('all')->contain($contained);
+            } else {
+                $estagiarios = $this->Estagiarios->find('all', $conditions)->contain($contained);
+            }
+        } catch (ForbiddenException $error) {
+            if ($periodo == 'all') {
+                $estagiarios = $this->Authorization->applyScope($this->Estagiarios->find('all')->contain($contained));
+            } else {
+                $estagiarios = $this->Authorization->applyScope($this->Estagiarios->find('all', $conditions)->contain($contained));
+            }
         }
         
         $this->set('estagiarios', $this->paginate($estagiarios));
