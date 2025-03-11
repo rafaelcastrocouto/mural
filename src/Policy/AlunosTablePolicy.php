@@ -50,5 +50,20 @@ class AlunosTablePolicy implements BeforePolicyInterface
   {
     return new Result(false, 'Erro: alunos busca policy not authorized');
   }
-
+  
+  public function canPlanilhacress()
+  {
+    return new Result(false, 'Erro: alunos planilha cress policy not authorized');
+  }
+  
+  public function canPlanilhaseguro()
+  {
+    return new Result(false, 'Erro: alunos planilha seguro policy not authorized');
+  }
+  
+  public function canCargahoraria()
+  {
+    return new Result(false, 'Erro: alunos planilha seguro policy not authorized');
+  }
+  
 }

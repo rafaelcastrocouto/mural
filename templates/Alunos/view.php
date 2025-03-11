@@ -37,6 +37,10 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <td><?= h($aluno->registro) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Ingresso') ?></th>
+                    <td><?= h($aluno->ingresso) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Cpf') ?></th>
                     <td><?= h($aluno->cpf) ?></td>
                 </tr>
@@ -104,13 +108,13 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
             
             <?php if (!empty($aluno->inscricoes)) : ?>
             <div class="related">
-                <h4><?= __('Inscricoes') ?></h4>
+                <h4><?= __('Inscrições') ?></h4>
                 <div class="table_wrap">
                     <table>
                         <tr>
                             <th class="actions"><?= __('Actions') ?></th>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('Muralestagio') ?></th>
+                            <th><?= __('Estagio') ?></th>
                             <th><?= __('Data') ?></th>
                             <th><?= __('Periodo') ?></th>
                             <th><?= __('Timestamp') ?></th>

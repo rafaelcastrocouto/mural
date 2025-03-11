@@ -219,7 +219,13 @@ class AlunosController extends AppController
      */
     public function planilhacress($id = null) 
     {
-
+        try {
+            $this->Authorization->authorize($this->Alunos);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
         $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
         $this->set('periodo', $periodo);
         
@@ -273,6 +279,12 @@ class AlunosController extends AppController
      */
     public function planilhaseguro($id = null) 
     {
+        try {
+            $this->Authorization->authorize($this->Alunos);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
         
         $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
         $this->set('periodo', $periodo);
@@ -343,37 +355,14 @@ class AlunosController extends AppController
          * Autorização. Verifica se o aluno cadastrado no Users está acessando seu próprio registro.
          */
         $option = 0;
+
+
         if ($user_data['administrador_id']) {
-            //$this->Flash->info(__("Administrador autorizado"));
-        } elseif ($user_data['aluno_id']) {
-            $aluno_id = $user_session->get('aluno_id');
-            if ($id == $aluno_id) {
-                /**
-                 * @var $option
-                 * Para consultar a tabela alunos com o id.
-                 */
-                $option = "id = $aluno_id";
-                // echo "Aluno Id autorizado";
-            } else {
-                $estudante_registro = $user_session['registro'];
-                if ($estudante_registro == $this->request->getQuery('registro')) {
-                    /**
-                     * @var $option
-                     * Para consultar a tabela alunos com o registro
-                     */
-                    $option = "Alunos.registro  =  $estudante_registro";
-                    // echo "Aluno registro autorizado";
-                } else {
-                    // echo "Registros não coincidem" . "<br>";
-                    $this->Flash->error(__('Erro 1: Operação não autorizada.'));
-                    return $this->redirect(['controller' => 'Alunos', 'action' => 'certificadoperiodo?registro=' . $estudante_registro]);
-                    // die('Aluno não autorizado.');
-                }
-            }
-        } else {
-            $this->Flash->error(__('Erro 2: Operação não autorizada.'));
-            return $this->redirect(['controller' => 'Muralestagios', 'action' => 'index']);
-            // die('Professores e Supervisores não autorizados');
+            if ($id) $option = "id = " . $id;
+        }
+        
+        if ($user_data['aluno_id']) {
+            $option = "id = " . $user_data['aluno_id'];
         }
 
         /**
@@ -381,8 +370,12 @@ class AlunosController extends AppController
          */
         if ($option) {
             $aluno = $this->Alunos->find()->where([$option])->first();
-        } else {
-            $aluno = $this->Alunos->find()->first();
+        }
+
+        if (empty($aluno)) {
+            $this->Flash->error(__('Erro: Não foi possível encontrar o aluno.'));
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_data['id']]);
+            // die('Professores e Supervisores não autorizados');
         }
 
         /**
@@ -516,6 +509,13 @@ class AlunosController extends AppController
      */
     public function cargahoraria($ordem = null) {
 
+        try {
+            $this->Authorization->authorize($this->Alunos);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
         $alunos = $this->Alunos->find()->contain(['Estagiarios']);
 
         $this->set('alunos', $this->paginate($alunos));
