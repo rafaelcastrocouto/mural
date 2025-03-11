@@ -40,11 +40,7 @@ class EstagiarioPolicy implements BeforePolicyInterface
   
   public function canEdit(IdentityInterface $userSession, Estagiario $estagiarioData)
   {
-    if ($this->sameUser($userSession, $estagiarioData)) {
-      return new Result(true);
-    } else {
-      return new Result(false, 'Erro: estagiario edit policy not authorized');
-    }
+    return new Result(false, 'Erro: estagiario edit policy not authorized');
   }
   
   public function canDelete(IdentityInterface $userSession, Estagiario $estagiarioData)

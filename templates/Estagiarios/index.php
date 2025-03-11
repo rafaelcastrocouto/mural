@@ -65,15 +65,15 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 <tr>
 			        <?php if ($user_data['administrador_id']): ?>
 	                    <th class="actions"><?= __('Actions') ?></th>
-	                    <th><?= $this->Paginator->sort('id') ?></th>
 					<?php endif; ?>
+	                <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('Alunos.nome', 'Aluno') ?></th>
+                    <th><?= $this->Paginator->sort('Instituicoes.instituicao', 'Instituicao') ?></th>
+                    <th><?= $this->Paginator->sort('periodo') ?></th>
                     <th><?= $this->Paginator->sort('turno') ?></th>
                     <th><?= $this->Paginator->sort('nivel') ?></th>
-                    <th><?= $this->Paginator->sort('Instituicoes.instituicao', 'Instituicao') ?></th>
                     <th><?= $this->Paginator->sort('Supervisores.nome', 'Supervisor') ?></th>
                     <th><?= $this->Paginator->sort('Professores.nome', 'Professor') ?></th>
-                    <th><?= $this->Paginator->sort('periodo') ?></th>
                     <th><?= $this->Paginator->sort('Turmas.turma', 'Turma') ?></th>
                     <th><?= $this->Paginator->sort('nota') ?></th>
                     <th><?= $this->Paginator->sort('ch') ?></th>
@@ -88,10 +88,12 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 	                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $estagiario->id]) ?>
 	                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $estagiario->id], ['confirm' => __('Are you sure you want to delete estagiario #{0}?', $estagiario->id)]) ?>
 	                    </td>
-	                    <td><?= $this->Html->link((string)$estagiario->id, ['action' => 'view', $estagiario->id]) ?></td>
                     <?php endif; ?>
+	                <td><?= $this->Html->link((string)$estagiario->id, ['action' => 'view', $estagiario->id]) ?></td>
 					<td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
-                    <td>
+                    <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
+					<td><?= h($estagiario->periodo) ?></td>
+					<td>
 						<?php
                         $turno = '';
 						switch ( $estagiario->turno ) {
@@ -104,10 +106,8 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 						?>
 					</td>
                     <td><?= h($estagiario->nivel) ?></td>
-                    <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
                     <td><?= ($estagiario->supervisor and $estagiario->supervisor->nome) ? $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario->supervisor->id]) : '' ?></td>
                     <td><?= $estagiario->professor ? $this->Html->link($estagiario->professor->nome, ['controller' => 'Professores', 'action' => 'view', $estagiario->professor->id]) : '' ?></td>
-                    <td><?= h($estagiario->periodo) ?></td>
                     <td><?= $estagiario->turma ? $this->Html->link($estagiario->turma->turma, ['controller' => 'Turmas', 'action' => 'view', $estagiario->turma->id]) : '' ?></td>
                     <td><?= $estagiario->nota ? $this->Number->format($estagiario->nota) : '' ?></td>
                     <td><?= $estagiario->ch ? $this->Number->format($estagiario->ch) : '' ?></td>
