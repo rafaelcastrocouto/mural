@@ -72,7 +72,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
             
             <?php if (!empty($user->aluno)) : ?>
             <div class="related">
-                <h4><?= __('Related Aluno') ?></h4>
+                <h4><?= __('Aluno') ?></h4>
                 <div class="table_wrap">
                     <table>
                         <tr>
@@ -80,6 +80,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                             <th><?= __('Id') ?></th>
                             <th><?= __('Nome') ?></th>
                             <th><?= __('Registro') ?></th>
+                            <th><?= __('Ingresso') ?></th>
                             <th><?= __('Telefone') ?></th>
                             <th><?= __('Celular') ?></th>
                             <th><?= __('CFP') ?></th>
@@ -96,6 +97,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                             <td><?= $this->Html->link((string)$user->aluno->id, ['controller' => 'alunos', 'action' => 'view', $user->aluno->id]) ?></td>
                             <td><?= h($user->aluno->nome) ?></td>
                             <td><?= h($user->aluno->registro) ?></td>
+                            <td><?= h($user->aluno->ingresso) ?></td>
                             <td><?= '(' . h($user->aluno->codigo_telefone) . ') ' . h($user->aluno->telefone) ?></td>
                             <td><?= '(' . h($user->aluno->codigo_celular) . ') ' . h($user->aluno->celular) ?></td>
                             <td><?= h($user->aluno->cpf) ?></td>
@@ -112,7 +114,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 
             <?php if (!empty($user->professor)) : ?>
             <div class="related">
-                <h4><?= __('Related Professor') ?></h4>
+                <h4><?= __('Professor') ?></h4>
                 <div class="table_wrap">
                     <table>
                         <tr>
@@ -147,7 +149,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 
             <?php if (!empty($user->supervisor)) : ?>
             <div class="related">
-                <h4><?= __('Related Supervisor') ?></h4>
+                <h4><?= __('Supervisor') ?></h4>
                 <div class="table_wrap">
                     <table>
                         <tr>

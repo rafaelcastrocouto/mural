@@ -1,6 +1,8 @@
 old fix inscricoes murals view
 <input type="hidden" name="data[Inscricao][id_aluno]" value="" id="InscricaoIdAluno">
 
+declaracoes
+
 - controllers:
 
 alunos
@@ -14,10 +16,11 @@ muralestagios
 
 avaliacoes
 folhadeatividades
-inscricoes
 muralestagios
 
-- redirects
-- error msg
-- front end
-- paginate contain https://stackoverflow.com/questions/43901181/how-to-paginate-associated-records
+- others
+
+users flow (alunos prof superv)
+front end sanitize
+paginate contain https://stackoverflow.com/questions/43901181/how-to-paginate-associated-records
+alternaususario https://book.cakephp.org/authentication/3/en/impersonation.html
