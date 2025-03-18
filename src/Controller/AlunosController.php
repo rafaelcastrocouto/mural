@@ -533,28 +533,15 @@ class AlunosController extends AppController
         $user_session = $this->request->getAttribute('identity');
         if ($user_session) { $user_data = $user_session->getOriginalData(); }
         
-        if (!$user_data['aluno_id']) {
+        $registro = $this->getRequest()->getQuery('registro');
+        pr('reg: ' . $registro);
 
-            // pr($this->data);
-            // die();
-            if (empty($this->data)) {
-                //$this->data = $this->Alunos->read();
-                
-                $this->Flash->info(__('Erro: os dados não foram encontrados'));
-            } else {
-                
-                $this->Flash->info(__('Redirecionar para folhadeatividadespdf registro'));
-                // pr($this->data);
-                // die();
-                // $this->Session->write('menu_aluno', 'estagiario');
-                //$this->Session->write('numero', $this->data['Aluno']['registro']);
-                // $this->redirect('folhadeatividades');
-                //$this->redirect(['action' => 'folhadeatividadespdf', $this->data['Aluno']['registro'], 'ext' => 'pdf', 'folhadeatividades']);
-            }
+        if (empty($registro)) {
+            if (!$user_data['administrador_id']) $this->Flash->info(__('Erro: os dados não foram encontrados'));
         } else {
-            $this->Flash->info(__('Redirecionar para folhadeatividadespdf numero'));
-            //$this->redirect(['action' => 'folhadeatividadespdf', $this->Session->read('numero'), 'ext' => 'pdf', 'folhadeatividades']);
-        }
+            $this->redirect(['action' => 'folhadeatividadespdf', $registro, 'ext' => 'pdf', 'folhadeatividades']);
+            
+        } 
     }
     
 }

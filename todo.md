@@ -1,6 +1,8 @@
 old fix inscricoes murals view
 <input type="hidden" name="data[Inscricao][id_aluno]" value="" id="InscricaoIdAluno">
 
+inscritos selection checkbox
+separate elements (scripts forms userdata)
 declaracoes
 
 - controllers:
@@ -20,6 +22,7 @@ muralestagios
 
 - others
 
+add ligess logo footer
 users flow (alunos prof superv)
 front end sanitize
 paginate contain https://stackoverflow.com/questions/43901181/how-to-paginate-associated-records
