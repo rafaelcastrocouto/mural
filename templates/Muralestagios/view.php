@@ -148,41 +148,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <?= $this->Text->autoParagraph($muralestagio->outras); ?>
                 </blockquote>
             </div>
-			
-            <?php if (!empty($muralestagio->inscricoes)) : ?>
-            <div class="related">
-                <h4><?= __('Inscricoes para o Mural de Estágios') ?></h4>
-                <div class="table_wrap">
-                    <table>
-                        <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Registro') ?></th>
-                            <th><?= __('Aluno') ?></th>
-                            <th><?= __('Data') ?></th>
-                            <th><?= __('Periodo') ?></th>
-                            <th><?= __('Timestamp') ?></th>
-                        </tr>
-                        <?php foreach ($muralestagio->inscricoes as $inscricao) : ?>
-                        <tr>
-                            <?php // pr($inscricao) ?>
-							<td class="actions">
-                                <?= $this->Html->link(__('Ver'), ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>
-                                <?= $this->Html->link(__('Editar'), ['controller' => 'Inscricoes', 'action' => 'edit', $inscricao->id]) ?>
-                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Inscricoes', 'action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id)]) ?>
-                            </td>
-                            <td><?= h($inscricao->id) ?></td>
-                            <td><?= $inscricao->aluno ? h($inscricao->aluno->registro) : '' ?></td>
-                            <td><?= $inscricao->aluno ? $this->Html->link($inscricao->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $inscricao->aluno->id])  : '' ?></td>
-                            <td><?= h($inscricao->data) ?></td>
-                            <td><?= h($inscricao->periodo) ?></td>
-                            <td><?= $inscricao->timestamp ? h($inscricao->timestamp) : '' ?></td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-            </div>
-			<?php endif; ?>
 
 			<!--
             Para o administrador as inscrições sempre estão abertas
@@ -191,7 +156,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 
                 <tr>
                     <td colspan = '2' class="text-center">
-                        <?php echo $this->Html->link('Inscrição', ['controller' => 'Inscricoes', 'action' => 'add', $muralestagio['id']], ['role' => 'button', 'class' => 'button btn-primary']); ?>
+                        <?php echo $this->Html->link('Fazer inscrição', ['controller' => 'Inscricoes', 'action' => 'add', $muralestagio['id']], ['role' => 'button', 'class' => 'button btn-primary']); ?>
                     </td>
                 </tr>
 
@@ -216,7 +181,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 
                     <tr>
                         <td colspan = 2 class="text-center">
-                            <?php echo $this->Html->link('Inscrição', ['controller' => 'Inscricoes', 'action' => 'add', $muralestagio['id']], ['role' => 'button', 'class' => 'button btn-primary']); ?>
+                            <?php echo $this->Html->link('Fazer inscrição', ['controller' => 'Inscricoes', 'action' => 'add', $muralestagio['id']], ['role' => 'button', 'class' => 'button btn-primary']); ?>
                         </td>
                     </tr>
                 <?php else: ?>
@@ -228,7 +193,51 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 <?php endif; ?>
 
             <?php endif; ?>
-			
+
+
+            <?php if ($user_data['administrador_id'] || $user_data['professor_id'] || $user_data['supervisor_id']): ?>
+	            <?php if (!empty($muralestagio->inscricoes)) : ?>
+	            <div class="related">
+	                <h4><?= __('Inscrições') ?></h4>
+	                <div class="table_wrap">
+	                    <table>
+	                        <tr>
+	                            <th class="actions"><?= __('Actions') ?></th>
+	                            <th><?= __('Id') ?></th>
+	                            <th><?= __('Selecionado') ?></th>
+	                            <th><?= __('Registro') ?></th>
+	                            <th><?= __('Aluno') ?></th>
+	                            <th><?= __('Data') ?></th>
+	                            <th><?= __('Periodo') ?></th>
+	                            <th><?= __('Timestamp') ?></th>
+	                        </tr>
+	                        <?php foreach ($muralestagio->inscricoes as $inscricao) : ?>
+	                        <tr>
+	                            <?php // pr($inscricao) ?>
+								<td class="actions">
+	                                <?= $this->Html->link(__('Ver'), ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>
+	                                <?= $this->Html->link(__('Editar'), ['controller' => 'Inscricoes', 'action' => 'edit', $inscricao->id]) ?>
+	                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Inscricoes', 'action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id)]) ?>
+	                            </td>
+	                            <td><?= h($inscricao->id) ?></td>
+	                            <td style="text-align: center"><input type="checkbox"></td>
+	                            <td><?= $inscricao->aluno ? h($inscricao->aluno->registro) : '' ?></td>
+	                            <td><?= $inscricao->aluno ? $this->Html->link($inscricao->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $inscricao->aluno->id])  : '' ?></td>
+	                            <td><?= h($inscricao->data) ?></td>
+	                            <td><?= h($inscricao->periodo) ?></td>
+	                            <td><?= $inscricao->timestamp ? h($inscricao->timestamp) : '' ?></td>
+	                        </tr>
+	                        <?php endforeach; ?>
+	                    </table>
+	                </div>
+	            </div>
+	            <?php else: ?>
+	            <div class="related">
+	                <h4>Sem incrições</h4>
+				</div>
+	            <?php endif; ?>
+
+			<?php endif; ?>
         </div>
     </div>
 </div>
