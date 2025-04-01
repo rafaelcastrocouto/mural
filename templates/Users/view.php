@@ -166,7 +166,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                                 <?= $this->Html->link(__('Editar'), ['controller' => 'supervisores', 'action' => 'edit', $user->supervisor->id]) ?>
                                 <?= $this->Form->postLink(__('Deletar'), ['controller' => 'supervisores', 'action' => 'delete', $user->supervisor->id], ['confirm' => __('Are you sure you want to delete supervisor_{0}?', $user->supervisor->id)]) ?>
                             </td>
-                            <td><?= $this->Html->link((string)user->supervisor->id, ['action' => 'view', $user->supervisor->id]) ?></td>
+                            <td><?= $this->Html->link((string)$user->supervisor->id, ['action' => 'view', $user->supervisor->id]) ?></td>
                             <td><?= $this->Html->link($user->supervisor->nome, ['action' => 'view', $user->supervisor->id]) ?></td>
                             <td><?= h($user->supervisor->cpf) ?></td>
                             <td><?= h($user->supervisor->escola) ?></td>

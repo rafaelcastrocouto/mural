@@ -36,7 +36,7 @@
                     <td><?= h($instituicao->natureza) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Cnpj') ?></th>
+                    <th><?= __('CNPJ') ?></th>
                     <td><?= h($instituicao->cnpj) ?></td>
                 </tr>
                 <tr>
@@ -107,7 +107,8 @@
                             <th class="actions"><?= __('Actions') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Nome') ?></th>
-                            <th><?= __('Cpf') ?></th>
+                            <th><?= __('CPF') ?></th>
+                            <th><?= __('CRESS') ?></th>
                             <th><?= __('Email') ?></th>
                             <th><?= __('Escola') ?></th>
                             <th><?= __('Ano Formatura') ?></th>
@@ -122,7 +123,8 @@
                             <td><?= $this->Html->link((string)$supervisores->id, ['controller' => 'Supervisores', 'action' => 'view', $supervisores->id]) ?></td>
                             <td><?= $this->Html->link($supervisores->nome, ['controller' => 'Supervisores', 'action' => 'view', $supervisores->id]) ?></td>
                             <td><?= h($supervisores->cpf) ?></td>
-                            <td><?= $supervisores->email ? $this->Text->autoLinkEmails($supervisores->email) : '' ?></td>
+                            <td><?= h($supervisores->cress) ?></td>
+                            <td><?= $this->Text->autoLinkEmails($supervisores->user->email) ?></td>
                             <td><?= h($supervisores->escola) ?></td>
                             <td><?= h($supervisores->ano_formatura) ?></td>
                         </tr>

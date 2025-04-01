@@ -148,7 +148,7 @@ class UsersController extends AppController {
             $opt = ['fields' => ['email']];
             $data = $this->request->getData();
             
-            if ($data['password']) {
+            if (array_key_exists('password', $data)) {
                 $opt = [
                     'fields' => ['email', 'password'],
                     'accessibleFields' => ['password' => ($user_data['administrador_id'] OR $sameUser)]

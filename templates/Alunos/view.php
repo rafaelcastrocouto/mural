@@ -105,39 +105,8 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 </div>
             </div>
             <?php endif; ?>
-            
-            <?php if (!empty($aluno->inscricoes)) : ?>
-            <div class="related">
-                <h4><?= __('Inscrições') ?></h4>
-                <div class="table_wrap">
-                    <table>
-                        <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Estagio') ?></th>
-                            <th><?= __('Data') ?></th>
-                            <th><?= __('Periodo') ?></th>
-                            <th><?= __('Timestamp') ?></th>
-                        </tr>
-                        <?php foreach ($aluno->inscricoes as $inscricao) : ?>
-                        <tr>
-                            <td class="actions">
-                                <?= $this->Html->link(__('Ver'), ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>
-                                <?= $this->Html->link(__('Editar'), ['controller' => 'Inscricoes', 'action' => 'edit', $inscricao->id]) ?>
-                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Inscricoes', 'action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id)]) ?>
-                            </td>
-                            <td><?= $this->Html->link(h((string)$inscricao->id), ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?></td>
-        					<td><?= $inscricao->muralestagio ? $this->Html->link($inscricao->muralestagio->instituicao ? $inscricao->muralestagio->instituicao->instituicao : $inscricao->muralestagio->id , ['controller' => 'Muralestagios', 'action' => 'view', $inscricao->muralestagio->id]) : $inscricao->muralestagio_id ?></td>
-                            <td><?= h($inscricao->data) ?></td>
-                            <td><?= h($inscricao->periodo) ?></td>
-                            <td><?= h($inscricao->timestamp) ? h($inscricao->timestamp) : '' ?></td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-            </div>
-            <?php endif; ?>
-            
+
+
             <?php if (!empty($aluno->estagiarios)) : ?>
             <div class="related">
                 <h4><?= __('Estágios') ?></h4>
@@ -187,6 +156,38 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                             <td><?= h($estagiario->nota) ?></td>
                             <td><?= h($estagiario->ch) ?></td>
                             <td><?= h($estagiario->observacoes) ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+            </div>
+            <?php endif; ?>
+            
+            <?php if (!empty($aluno->inscricoes)) : ?>
+            <div class="related">
+                <h4><?= __('Inscrições') ?></h4>
+                <div class="table_wrap">
+                    <table>
+                        <tr>
+                            <th class="actions"><?= __('Actions') ?></th>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Estagio') ?></th>
+                            <th><?= __('Data') ?></th>
+                            <th><?= __('Periodo') ?></th>
+                            <th><?= __('Timestamp') ?></th>
+                        </tr>
+                        <?php foreach ($aluno->inscricoes as $inscricao) : ?>
+                        <tr>
+                            <td class="actions">
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Inscricoes', 'action' => 'edit', $inscricao->id]) ?>
+                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Inscricoes', 'action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id)]) ?>
+                            </td>
+                            <td><?= $this->Html->link(h((string)$inscricao->id), ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?></td>
+        					<td><?= $inscricao->muralestagio ? $this->Html->link($inscricao->muralestagio->instituicao ? $inscricao->muralestagio->instituicao->instituicao : $inscricao->muralestagio->id , ['controller' => 'Muralestagios', 'action' => 'view', $inscricao->muralestagio->id]) : $inscricao->muralestagio_id ?></td>
+                            <td><?= h($inscricao->data) ?></td>
+                            <td><?= h($inscricao->periodo) ?></td>
+                            <td><?= h($inscricao->timestamp) ? h($inscricao->timestamp) : '' ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </table>

@@ -71,7 +71,8 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 </tr>
 				<tr>
                     <th><?= __('Complemento') ?></th>
-                    <td><?= $estagiario->complemento ? h($estagiario->complemento->periodo_especial) : '' ?></td>
+                    <td>
+						<?= $estagiario->complemento ? h($estagiario->complemento->periodo_especial) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Nivel') ?></th>

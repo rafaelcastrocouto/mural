@@ -53,8 +53,8 @@ class InstituicoesController extends AppController
         $instituicao = $this->Instituicoes->get($id, [
             'contain' => [
                 'Areas',
-                'Supervisores',
-                'Estagiarios' => ['Alunos', 'Professores', 'Supervisores', 'Turmas'],
+                'Supervisores'=> ['Users'],
+                'Estagiarios' => ['Alunos', 'Professores', 'Supervisores', 'Instituicoes', 'Turmas'],
                 'Muralestagios' => ['Instituicoes', 'Professores'],
                 'Visitas' 
             ],

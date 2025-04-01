@@ -4,6 +4,7 @@ old fix inscricoes murals view
 inscritos selection form
 separate elements (scripts forms userdata)
 declaracoes
+remove users dupli
 
 - controllers:
 

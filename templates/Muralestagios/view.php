@@ -204,7 +204,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 	                        <tr>
 	                            <th class="actions"><?= __('Actions') ?></th>
 	                            <th><?= __('Id') ?></th>
-	                            <th><?= __('Selecionado') ?></th>
 	                            <th><?= __('Registro') ?></th>
 	                            <th><?= __('Aluno') ?></th>
 	                            <th><?= __('Data') ?></th>
@@ -220,7 +219,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 	                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Inscricoes', 'action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id)]) ?>
 	                            </td>
 	                            <td><?= h($inscricao->id) ?></td>
-	                            <td style="text-align: center"><input type="checkbox"></td>
 	                            <td><?= $inscricao->aluno ? h($inscricao->aluno->registro) : '' ?></td>
 	                            <td><?= $inscricao->aluno ? $this->Html->link($inscricao->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $inscricao->aluno->id])  : '' ?></td>
 	                            <td><?= h($inscricao->data) ?></td>
