@@ -39,13 +39,17 @@ class VisitasTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('visita');
+        $this->setTable('visitas');
         $this->setAlias('Visitas');
         $this->setDisplayField('instituicao_id');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Instituicoes', [
             'foreignKey' => 'instituicao_id',
+        ]);
+        
+        $this->belongsTo('Professores', [
+            'foreignKey' => 'professor_id',
         ]);
     }
 

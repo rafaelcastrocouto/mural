@@ -24,15 +24,15 @@
                 </tr>
                 <tr>
                     <th><?= __('Instituicao') ?></th>
-                    <td><?= $visita->instituicao ? $this->Html->link($visita->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $visita->instituicao->id]) : '' ?></td>
+                    <td><?= $visita->instituicao ? $this->Html->link(h($visita->instituicao->instituicao), ['controller' => 'Instituicoes', 'action' => 'view', $visita->instituicao->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Motivo') ?></th>
                     <td><?= h($visita->motivo) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Responsavel') ?></th>
-                    <td><?= h($visita->responsavel) ?></td>
+                    <th><?= __('Professor') ?></th>
+                    <td><?= $visita->professor ? $this->Html->link(h($visita->professor->nome), ['controller' => 'Professores', 'action' => 'view', $visita->professor->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Avaliacao') ?></th>

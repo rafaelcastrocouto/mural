@@ -53,7 +53,7 @@ class VisitasController extends AppController
     public function view($id = null)
     {
         $visita = $this->Visitas->get($id, [
-            'contain' => ['Instituicoes'],
+            'contain' => ['Instituicoes', 'Professores'],
         ]);
 
         $this->set(compact('visita'));
