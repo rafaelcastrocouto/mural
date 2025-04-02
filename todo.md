@@ -6,6 +6,21 @@ declaracoes
 remove duplicated users
 universidades profesores edit
 
+- add to menu navegacao:
+areas
+avaliacoes
+dias *
+disciplinas *
+folhadeatividades
+horarios*
+historico_professor *
+nucleos_de_pesquisa *
+situacoes *
+turmas
+universidades *
+visitas
+
+
 - controllers:
 
 alunos
