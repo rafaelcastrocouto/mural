@@ -1,10 +1,10 @@
 old fix inscricoes murals view
 <input type="hidden" name="data[Inscricao][id_aluno]" value="" id="InscricaoIdAluno">
 
-inscritos selection form
-separate elements (scripts forms userdata)
+inscritos selection form ?
 declaracoes
-remove users dupli
+remove duplicated users
+universidades profesores edit
 
 - controllers:
 

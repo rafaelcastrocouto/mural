@@ -24,9 +24,7 @@ class AvaliacoesController extends AppController
      * paginate array
      */
     protected array $paginate = [
-        'sortableFields' => [
-            'id', 'timestamp'
-        ]
+        'sortableFields' => ['id', 'timestamp']
     ];
     /**
      * Index method. Mostra os estágios de um aluno estagiario.
@@ -42,7 +40,6 @@ class AvaliacoesController extends AppController
         if ($user_data['administrador_id']) {
             $avaliacoes = $this->paginate($this->Avaliacoes->find()->contain(['Estagiarios' => ['Alunos', 'Instituicoes']]));
             $this->set(compact('avaliacoes'));
-            $this->set('id', '');
         }
         else if ($user_data['aluno_id']) {
             $estagiario_id = $this->getRequest()->getQuery('estagiario_id');
@@ -61,15 +58,10 @@ class AvaliacoesController extends AppController
                     ->all();
                 // pr($estagiarios);
                 // die();
-                $this->set('id', $id);
                 $this->set('estagiarios', $estagiarios);
             } else {
                 $this->Flash->error(__('Selecionar estagiário, período e nível de estágio a ser avaliado'));
-                if ($this->getRequest()->getSession()->read('registro')) {
-                    return $this->redirect(['controller' => 'alunos', 'action' => 'view', '?' => ['registro' => $this->getRequest()->getSession()->read('registro')]]);
-                } else {
-                    return $this->redirect('/alunos/index');
-                }
+                return $this->redirect('/avaliacoes');
             }
         }
     }
@@ -108,7 +100,7 @@ class AvaliacoesController extends AppController
      */
     public function view($id = null)
     {
-        $contained = ['Estagiarios' => ['Alunos', 'Instituicoes']];
+        $contained = ['Estagiarios' => ['Alunos', 'Instituicoes', 'Professores', 'Supervisores']];
         
         if ($id) {
             $avaliacao = $this->Avaliacoes->find()->contain($contained)

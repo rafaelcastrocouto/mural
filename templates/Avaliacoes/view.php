@@ -13,37 +13,10 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 
 // pr($avaliacao);
 
-$supervisora = isset($avaliacao->estagiario->supervisor->nome);
-if ($supervisora) {
-    $supervisora = $avaliacao->estagiario->supervisor->nome;
-} else {
-    $supervisora = "____________________";
-}
-
-$regiao = isset($avaliacao->estagiario->supervisor->regiao);
-if ($regiao) {
-    $regiao = $avaliacao->estagiario->supervisor->regiao;
-} else {
-    $regiao = '__';
-}
-
-$cress = isset($avaliacao->estagiario->supervisor->cress);
-if ($cress) {
-    $cress = $avaliacao->estagiario->supervisor->cress;
-} else {
-    $cress = '_____';
-}
-
-$professora = isset($avaliacao->estagiario->professor->nome);
-if ($professora) {
-    $professora = $avaliacao->estagiario->professor->nome;
-} else {
-    $professora = '____________________';
-}
 ?>
 <div>
     <div class="column-responsive column-80">
-        <div class="areas view content">
+        <div class="avaliacoes view content">
             <aside>
                 <div class="nav">
                     <?php if ($user_data['administrador_id']): ?>
@@ -55,16 +28,17 @@ if ($professora) {
                     <?= $this->Html->link(__('Imprimir avaliação'), ['action' => 'imprimeavaliacaopdf/' . $avaliacao->id], ['class' => 'button']) ?>
                 </div>
             </aside>
-            <div class="table_wrap">
+            <div>
                 <h3><?= h('avaliacao_' . $avaliacao->id) ?></h3>
-                <p>Avaliação da(o) estagiario(a): <?= $avaliacao->hasValue('estagiario') ? $this->Html->link($avaliacao->estagiario->aluno->nome, ['controller' => 'Estagiarios', 'action' => 'view', $avaliacao->estagiario->id]) : '' ?></p>
-                <p>Campo de estágio: <?= $avaliacao->estagiario->instituicao->instituicao ?>.</p> 
-                <p>Supervisor(a): <?= $supervisora ?>.</p>
-                <p>Cress: <?= $cress ?>.</p>
-                <p>Período de estágio: <?= $avaliacao->estagiario->periodo ?>. </p>
-                <p>Nível: <?= $avaliacao->estagiario->nivel ?>.</p>
-                <p>Supervisão acadêmica: <?= $professora ?>.</p>
-                <table>
+                <p>Avaliação da(o) estagiario(a): <?= $avaliacao->estagiario ? $this->Html->link($avaliacao->estagiario->aluno->nome, ['controller' => 'Estagiarios', 'action' => 'view', $avaliacao->estagiario->id]) : '' ?></p>
+                <p>Campo de estágio: <?= $avaliacao->estagiario ? $this->Html->link($avaliacao->estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $avaliacao->estagiario->instituicao->id]) : '' ?></p> 
+                <p>Supervisor(a): <?= $avaliacao->estagiario ? $this->Html->link($avaliacao->estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $avaliacao->estagiario->supervisor->id]) : '' ?></p>
+                <p>Supervisão acadêmica: <?= $avaliacao->estagiario ? $this->Html->link($avaliacao->estagiario->professor->nome, ['controller' => 'Professores', 'action' => 'view', $avaliacao->estagiario->professor->id]) : '' ?></p>                
+                <p>Cress: <?= $avaliacao->estagiario ? $avaliacao->estagiario->supervisor->cress : '' ?></p>
+                <p>Região: <?= $avaliacao->estagiario ? $avaliacao->estagiario->supervisor->regiao : '' ?></p>
+                <p>Período de estágio: <?= $avaliacao->estagiario ? $avaliacao->estagiario->periodo : '' ?></p>
+                <p>Nível: <?= $avaliacao->estagiario->nivel ?></p>
+                <table class="table_wrap">
                     <tr>
                         <th><?= __('1) ASSIDUIDADE: Desenvolveu as atividades propostas com frequência, ausentando-se apenas com conhecimento e acordado com o(a) supervisor(a) de campo e ou acadêmico(a), seja por motivo de saúde, seja por situações estabelecidas na Lei 11788/2008, entre outras:') ?>
                         </th>
@@ -329,7 +303,7 @@ if ($professora) {
                     </tr>
                     <tr>
                         <th><?= __('Sugestões ao que foi desenvolvido?') ?></th>
-                        <td><?php h($avaliacao->avaliacao12_1) ?></td>
+                        <td><?= h($avaliacao->avaliacao12_1) ?></td>
                     </tr>
                     <tr>
                         <th><?= __('13) Há questões que você considera que devam ser mais enfatizadas na disciplina de OTP?') ?>

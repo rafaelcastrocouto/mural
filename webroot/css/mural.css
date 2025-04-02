@@ -68,6 +68,9 @@ hr {
   height: 3.8rem;
   padding: .6rem 1.0rem .7rem;
 }
+.content.avaliacoes th {
+    white-space: normal;
+}
 .tabset {
     display: flex;
     flex-wrap: wrap;

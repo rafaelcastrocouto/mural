@@ -18,7 +18,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 
         <aside>
             <div class="nav">
-                <?= $this->Html->link(__('Nova Avaliação'), ['action' => 'add', $id], ['class' => 'button']) ?>
+                <?= $this->Html->link(__('Nova Avaliação'), ['action' => 'add'], ['class' => 'button']) ?>
             </div>
         </aside>
 
@@ -99,32 +99,32 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                                         <?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $estagiario->avaliacao->id], ['confirm' => __('Tem certeza que quer excluir este registro # {0}?', $estagiario->avaliacao->id)]) ?>
                                     </td>
                                 <?php endif; ?>
-                                <td><?= isset((string)$estagiario->id) ? $this->Html->link($estagiario->id, ['controller' => 'estagiarios', 'action' => 'view', $estagiario->id]) : '' ?>
-                                </td>
+                                <td><?= isset($estagiario->id) ? $this->Html->link((string)$estagiario->id, ['controller' => 'estagiarios', 'action' => 'view', $estagiario->id]) : '' ?></td>
                             <?php else: ?>
     
-                            <?php if ($user_data['administrador_id'] || $user_data['supervisor_id']): ?>
-                                <td><?= $estagiario->hasValue('avaliacao') ? $this->Html->link('Ver avaliação', ['controller' => 'Avaliacoes', 'action' => 'view', $estagiario->avaliacao->id], ['class' => 'btn btn-success']) : $this->Html->link('Fazer avaliação', ['controller' => 'avaliacoes', 'action' => 'add', $estagiario->id], ['class' => 'btn btn-warning']) ?>
+                                <?php if ($user_data['administrador_id'] || $user_data['supervisor_id']): ?>
+                                    <td><?= $estagiario->hasValue('avaliacao') ? $this->Html->link('Ver avaliação', ['controller' => 'Avaliacoes', 'action' => 'view', $estagiario->avaliacao->id], ['class' => 'btn btn-success']) : $this->Html->link('Fazer avaliação', ['controller' => 'avaliacoes', 'action' => 'add', $estagiario->id], ['class' => 'btn btn-warning']) ?>
+                                    </td>
+                                <?php else: ?>
+                                    <td><?= $estagiario->hasValue('avaliacao') ? $this->Html->link('Ver avaliação', ['controller' => 'Avaliacoes', 'action' => 'view', $estagiario->avaliacao->id], ['class' => 'btn btn-success']) : 'Sem avaliação on-line' ?>
+                                    </td>
+                                <?php endif; ?>
+    
+                                <?php if ($user_data['administrador_id']): ?>
+                                    <td><?= $estagiario->hasValue('aluno') ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?>
+                                    </td>
+                                <?php else: ?>
+                                    <td><?= $estagiario->hasValue('aluno') ? $estagiario->aluno->nome : '' ?></td>
+                                <?php endif; ?>
+    
+                                <td><?= $estagiario->periodo ?></td>
+                                <td><?= $estagiario->nivel ?></td>
+                                <td><?= $estagiario->hasValue('instituicao') ? $estagiario->instituicao->instituicao : '' ?>
                                 </td>
-                            <?php else: ?>
-                                <td><?= $estagiario->hasValue('avaliacao') ? $this->Html->link('Ver avaliação', ['controller' => 'Avaliacoes', 'action' => 'view', $estagiario->avaliacao->id], ['class' => 'btn btn-success']) : 'Sem avaliação on-line' ?>
-                                </td>
+                                <td><?= $estagiario->hasValue('supervisor') ? $estagiario->supervisor->nome : '' ?></td>
+                                <td><?= $estagiario->ch ?></td>
+                                <td><?= $estagiario->nota ?></td>
                             <?php endif; ?>
-    
-                            <?php if ($user_data['administrador_id']): ?>
-                                <td><?= $estagiario->hasValue('aluno') ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?>
-                                </td>
-                            <?php else: ?>
-                                <td><?= $estagiario->hasValue('aluno') ? $estagiario->aluno->nome : '' ?></td>
-                            <?php endif; ?>
-    
-                            <td><?= $estagiario->periodo ?></td>
-                            <td><?= $estagiario->nivel ?></td>
-                            <td><?= $estagiario->hasValue('instituicao') ? $estagiario->instituicao->instituicao : '' ?>
-                            </td>
-                            <td><?= $estagiario->hasValue('supervisor') ? $estagiario->supervisor->nome : '' ?></td>
-                            <td><?= $estagiario->ch ?></td>
-                            <td><?= $estagiario->nota ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
