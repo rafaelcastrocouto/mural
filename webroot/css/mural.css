@@ -29,6 +29,9 @@ hr {
     border-top: 0;
     margin-bottom: 35px;
 }
+.hidden {
+    display: none;
+}
 .default-cursor {
     cursor: default;
 }
@@ -53,6 +56,18 @@ hr {
     margin-bottom: 1em;
 }
 
+.content .showCode + label {
+    font-weight: normal;
+    font-size: 14px;
+}
+.content form .inputDiv {
+  border: 0.1rem solid #d1d1d1;
+  border-radius: .4rem;
+  box-shadow: none;
+  box-sizing: inherit;
+  height: 3.8rem;
+  padding: .6rem 1.0rem .7rem;
+}
 .tabset {
     display: flex;
     flex-wrap: wrap;
@@ -133,7 +148,7 @@ hr {
     display: grid;
     place-content: center;
 }
-.form-code {
+.formCode {
     font-family: consolas, monospace;
 }
 .inputdiv {

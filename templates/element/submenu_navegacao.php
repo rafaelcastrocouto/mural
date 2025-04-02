@@ -20,25 +20,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
         })};
         addEventListener('mouseup', unselectAll);
         addEventListener('touchend', unselectAll);
-
-        /* form div editable content */
-        const divInputs = [...document.querySelectorAll('.inputdiv')];
-        const updateInput = (evt) => { 
-            const name = evt.target.getAttribute('name');
-            const formInput = document.querySelector('input[name='+name+']');
-            formInput.value = evt.target.innerHTML;
-        };
-        const updateDiv = (evt) => { 
-            const name = evt.target.getAttribute('name');
-            const inputDiv = document.querySelector('div[name='+name+']');
-            inputDiv.innerHTML = evt.target.value;
-        };
-        divInputs.forEach( (inputDiv) => { 
-            const name = inputDiv.getAttribute('name');
-            const formInput = document.querySelector('input[name='+name+'], textarea[name='+name+']');
-            formInput.addEventListener('input', updateDiv);
-            inputDiv.addEventListener('input', updateInput);
-        });
     });
 </script>
     

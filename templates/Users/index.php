@@ -23,7 +23,7 @@
                     <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
-                    <th><?= h('Categorias') ?></th>
+                    <!--th><?= h('Categorias') ?></th-->
                     <th><?= $this->Paginator->sort('created', 'Criado') ?></th>
                     <th><?= $this->Paginator->sort('modified', 'Modificado') ?></th>
                 </tr>
@@ -38,7 +38,7 @@
                     </td>
                     <td><?= $this->Html->link((string)$user->id, ['action' => 'view', $user->id]) ?></td>
                     <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
-                    <td>
+                    <!--td>
                     <?php 
                         $categorias = [];
                         if ($user->administrador) $categorias[] = 'administrador';
@@ -47,7 +47,7 @@
                         if ($user->supervisor) $categorias[] = 'supervisor';
                         echo implode(', ', $categorias);
                     ?>
-                    </td>
+                    </td-->
                     <td><?= $user->created ? h($user->created) : '' ?></td>
                     <td><?= $user->modified ? h($user->modified) : '' ?></td>
                 </tr>

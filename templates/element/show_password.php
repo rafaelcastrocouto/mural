@@ -1,5 +1,5 @@
 <!-- templates/element/show_password.php -->
-<?php /* Require previous <input type=password id=password>  */ ?>
+<?php /* requires previous <input type="password" id="password"> */ ?>
 <div class="checkbox show-password">
   <input type="checkbox" id="show-password"> <label for="show-password" id="show-password-label">Mostrar senha</label>
 </div>
