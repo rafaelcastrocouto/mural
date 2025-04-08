@@ -31,7 +31,7 @@
                     echo $this->Form->control('requisitos', ['class' => 'formCode hidden']);
                     echo $this->element('input_div', ['name' => 'requisitos', 'content' => $muralestagio->requisitos ]);
                     echo $this->Form->control('turma_id', ['options' => $turmas, 'class' => 'form-control']);
-                    echo $this->Form->control('turno');
+                    echo $this->Form->control('turno_id', ['options' => $turnos, 'class' => 'form-control']);
                     echo $this->Form->control('professor_id', ['options' => $professores, 'class' => 'form-control']);
                     echo $this->Form->control('local_inscricao');
                     echo $this->Form->control('data_inscricao', ['empty' => true]);

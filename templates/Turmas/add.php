@@ -4,7 +4,7 @@
  * @var \App\Model\Entity\Turma $turma
  */
 ?>
-<div
+<div>
     <div class="column-responsive column-80">
         <div class="turmas form content">
             <aside>

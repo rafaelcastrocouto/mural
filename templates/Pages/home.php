@@ -151,6 +151,7 @@ $user_session = $this->request->getAttribute('identity');
                         <a href="./professores">professores</a> | <a href="./professores/view/1">view</a> | <a href="./professores/edit/1">edit</a> | <a href="./professores/add">add</a><br />
                         <a href="./supervisores">supervisores</a> | <a href="./supervisores/view/1">view</a> | <a href="./supervisores/edit/1">edit</a> | <a href="./supervisores/add">add</a><br />
                         <a href="./turmas">turmas</a> | <a href="./turmas/view/1">view</a> | <a href="./turmas/edit/1">edit</a> | <a href="./turmas/add">add</a><br />
+                        <a href="./turnos">turnos</a> | <a href="./turnos/view/1">view</a> | <a href="./turnos/edit/1">edit</a> | <a href="./turnos/add">add</a><br />
                         <a href="./users">users</a> | <a href="./users/view/1">view</a> | <a href="./users/edit/1">edit</a> | <a href="./users/add">add</a> | <a href="./users/login">login</a><br />
                         <a href="./visitas">visitas</a> | <a href="./visitas/view/1">view</a> | <a href="./visitas/edit/1">edit</a> | <a href="./visitas/add">add</a><br />
                     </p>

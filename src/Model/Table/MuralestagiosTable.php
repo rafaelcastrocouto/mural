@@ -12,10 +12,11 @@ use Cake\Validation\Validator;
 /**
  * Muralestagios Model
  *
- * @property \App\Model\Table\InstituicoesTable&\Cake\ORM\Association\BelongsTo $Instituicoes
- * @property \App\Model\Table\TurmasTable&\Cake\ORM\Association\BelongsTo $Turmas
- * @property \App\Model\Table\ProfessoresTable&\Cake\ORM\Association\BelongsTo $Professores
  * @property \App\Model\Table\InscricoesTable&\Cake\ORM\Association\HasMany $Inscricoes
+ * @property \App\Model\Table\InstituicoesTable&\Cake\ORM\Association\BelongsTo $Instituicoes
+ * @property \App\Model\Table\ProfessoresTable&\Cake\ORM\Association\BelongsTo $Professores
+ * @property \App\Model\Table\TurmasTable&\Cake\ORM\Association\BelongsTo $Turmas
+ * @property \App\Model\Table\TurnosTable&\Cake\ORM\Association\BelongsTo $Turnos
  *
  * @method \App\Model\Entity\Muralestagio newEmptyEntity()
  * @method \App\Model\Entity\Muralestagio newEntity(array $data, array $options = [])
@@ -57,6 +58,9 @@ class MuralestagiosTable extends Table {
         ]);
         $this->belongsTo('Turmas', [
             'foreignKey' => ['turma_id']
+        ]);
+        $this->belongsTo('Turnos', [
+            'foreignKey' => ['turno_id']
         ]);
         $this->belongsTo('Professores', [
             'foreignKey' => ['professor_id'],
@@ -110,12 +114,6 @@ class MuralestagiosTable extends Table {
                 ->scalar('requisitos')
                 ->maxLength('requisitos', 255)
                 ->allowEmptyString('requisitos');
-
-        $validator
-                ->scalar('turno')
-                ->maxLength('turno', 1)
-                ->allowEmptyString('turno');
-
 
         $validator
                 ->scalar('local_inscricao')
@@ -172,8 +170,9 @@ class MuralestagiosTable extends Table {
      */
     public function buildRules(RulesChecker $rules): RulesChecker {
         $rules->add($rules->existsIn(['instituicao_id'], 'Instituicoes'), ['errorField' => 'instituicao_id']);
-        $rules->add($rules->existsIn(['turma_id'], 'Turmas'), ['errorField' => 'turma_id']);
         $rules->add($rules->existsIn(['professor_id'], 'Professores'), ['errorField' => 'professor_id']);
+        $rules->add($rules->existsIn(['turma_id'], 'Turmas'), ['errorField' => 'turma_id']);
+        $rules->add($rules->existsIn(['turno_id'], 'Turnos'), ['errorField' => 'turno_id']);
 
         return $rules;
     }

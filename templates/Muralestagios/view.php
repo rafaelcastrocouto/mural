@@ -81,18 +81,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 </tr>
                 <tr>
                     <th><?= __('Turno') ?></th>
-                    <td>
-						<?php
-						$turno = '';
-						switch ( $muralestagio->turno ) {
-							case 'D': $turno = 'Diurno';   break;
-							case 'N': $turno = 'Noturno';  break;
-							case 'A': $turno = 'Ambos';    break;
-		                    case 'I': $turno = 'Integral'; break;
-						}
-						echo h($turno);
-						?>
-					</td>
+                    <td><?= $muralestagio->turno ? h($muralestagio->turno->turno ) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Professor') ?></th>

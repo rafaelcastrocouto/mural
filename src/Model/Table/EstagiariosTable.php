@@ -16,6 +16,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\SupervisoresTable&\Cake\ORM\Association\BelongsTo $Supervisores
  * @property \App\Model\Table\ProfessoresTable&\Cake\ORM\Association\BelongsTo $Professores
  * @property \App\Model\Table\TurmasTable&\Cake\ORM\Association\BelongsTo $Turmas
+ * @property \App\Model\Table\TurnosTable&\Cake\ORM\Association\BelongsTo $Turnos
  *
  * @method \App\Model\Entity\Estagiario newEmptyEntity()
  * @method \App\Model\Entity\Estagiario newEntity(array $data, array $options = [])
@@ -63,6 +64,9 @@ class EstagiariosTable extends Table
         $this->belongsTo('Turmas', [
             'foreignKey' => 'turma_id',
         ]);
+        $this->belongsTo('Turnos', [
+            'foreignKey' => 'turno_id',
+        ]);
         $this->belongsTo('Complementos', [
             'foreignKey' => 'complemento_id',
         ]);
@@ -88,11 +92,6 @@ class EstagiariosTable extends Table
             ->scalar('ajustecurricular2020')
             ->maxLength('ajustecurricular2020', 1)
             ->notEmptyString('ajustecurricular2020');
-
-        $validator
-            ->scalar('turno')
-            ->maxLength('turno', 1)
-            ->notEmptyString('turno');
 
         $validator
             ->scalar('nivel')
@@ -140,6 +139,7 @@ class EstagiariosTable extends Table
         $rules->add($rules->existsIn(['supervisor_id'], 'Supervisores'), ['errorField' => 'supervisor_id']);
         $rules->add($rules->existsIn(['professor_id'], 'Professores'), ['errorField' => 'professor_id']);
         $rules->add($rules->existsIn(['turma_id'], 'Turmas'), ['errorField' => 'turma_id']);
+        $rules->add($rules->existsIn(['turno_id'], 'Turnos'), ['errorField' => 'turno_id']);
 
         return $rules;
     }

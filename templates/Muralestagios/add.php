@@ -25,7 +25,7 @@
                     echo $this->Form->control('cargaHoraria', ['placeholder' => '12']);
                     echo $this->Form->control('requisitos', ['placeholder' => 'A partir do estágio I']);
                     echo $this->Form->control('turma', ['options' => $turmas, 'class' => 'form-control']);
-                    echo $this->Form->control('turno', ['type' => 'select', 'options' => ['D' => 'Diurno', 'N' => 'Noturno', 'A' => 'Ambos', 'I' => 'Integral'], 'empty' => false, 'default' => 'D', 'class' => 'form-control']);
+                    echo $this->Form->control('turno_id', ['type' => 'select', 'options' => $turnos, 'empty' => false, 'class' => 'form-control']);
                     echo $this->Form->control('professor_id', ['options' => $professores, 'empty' => false]);
                     echo $this->Form->control('local_inscricao', ['type' => 'select', 'options' => [1 => 'Inscrição somente no mural da Coordenação de Estágio da ESS', 0 => 'Inscrição na Instituição e no mural da Coordenação de Estágio da ESS'], 'empty' => false, 'default' => '0', 'class' => 'form-control']);
                     echo $this->Form->control('data_inscricao', ['empty' => false]);

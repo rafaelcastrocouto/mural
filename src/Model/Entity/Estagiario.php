@@ -12,7 +12,6 @@ use Cake\ORM\Entity;
  * @property int $aluno_id
  * @property int $registro
  * @property string $ajustecurricular2020
- * @property string $turno
  * @property string $nivel
  * @property int $tc
  * @property \Cake\I18n\FrozenDate|null $tc_solicitacao
@@ -20,7 +19,8 @@ use Cake\ORM\Entity;
  * @property int|null $supervisor_id
  * @property int|null $professor_id
  * @property string $periodo
- * @property int|null $turma_id
+ * @property int $turma_id
+ * @property int $turno_id
  * @property string|null $nota
  * @property int|null $ch
  * @property string|null $observacoes
@@ -44,10 +44,8 @@ class Estagiario extends Entity
      */
     protected array $_accessible = [
         'aluno_id' => true,
-        'alunonovo_id' => true,
         'registro' => true,
         'ajustecurricular2020' => true,
-        'turno' => true,
         'nivel' => true,
         'tc' => true,
         'tc_solicitacao' => true,
@@ -56,6 +54,7 @@ class Estagiario extends Entity
         'professor_id' => true,
         'periodo' => true,
         'turma_id' => true,
+        'turno_id' => true,
         'nota' => true,
         'ch' => true,
         'observacoes' => true,

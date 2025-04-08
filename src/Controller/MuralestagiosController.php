@@ -64,7 +64,7 @@ class MuralestagiosController extends AppController {
     public function view($id = null)
     {
         $muralestagio = $this->Muralestagios->get($id, [
-            'contain' => ['Instituicoes', 'Turmas', 'Professores', 'Inscricoes' => ['Alunos']],
+            'contain' => ['Instituicoes', 'Turmas', 'Turnos', 'Professores', 'Inscricoes' => ['Alunos']],
         ]);
         
         $this->set(compact('muralestagio'));
@@ -89,10 +89,11 @@ class MuralestagiosController extends AppController {
             }
             $this->Flash->error(__('Registro de mural de estágio não foi feito. Tente novamente.'));
         }
+        $professores = $this->Muralestagios->Professores->find('list');
         $instituicoes = $this->Muralestagios->Instituicoes->find('list');
         $turmas = $this->Muralestagios->Turmas->find('list');
-        $professores = $this->Muralestagios->Professores->find('list');
-        $this->set(compact('muralestagio', 'instituicoes', 'turmas', 'professores', 'periodo'));
+        $turnos = $this->Muralestagios->Turnos->find('list');
+        $this->set(compact('muralestagio', 'instituicoes', 'turmas', 'turnos', 'professores', 'periodo'));
     }
 
     /**
@@ -104,9 +105,7 @@ class MuralestagiosController extends AppController {
      */
     public function edit($id = null)
     {
-        $muralestagio = $this->Muralestagios->get($id, [
-            'contain' => ['Instituicoes'],
-        ]);
+        $muralestagio = $this->Muralestagios->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $muralestagio = $this->Muralestagios->patchEntity($muralestagio, $this->request->getData());
             if ($this->Muralestagios->save($muralestagio)) {
@@ -118,8 +117,9 @@ class MuralestagiosController extends AppController {
         }
         $instituicoes = $this->Muralestagios->Instituicoes->find('list');
         $turmas = $this->Muralestagios->Turmas->find('list');
+        $turnos = $this->Muralestagios->Turnos->find('list');
         $professores = $this->Muralestagios->Professores->find('list', ['limit' => 500]);
-        $this->set(compact('muralestagio', 'instituicoes', 'turmas', 'professores'));
+        $this->set(compact('muralestagio', 'instituicoes', 'turmas', 'turnos', 'professores'));
     }
 
     /**

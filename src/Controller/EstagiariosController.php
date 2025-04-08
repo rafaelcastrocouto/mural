@@ -19,7 +19,7 @@ class EstagiariosController extends AppController
      */
     protected array $paginate = [
         'sortableFields' => [
-            'id', 'Alunos.nome', 'registro', 'turno', 'nivel', 'Instituicoes.instituicao', 'Supervisores.nome', 'Professores.nome'
+            'id', 'Alunos.nome', 'registro', 'Turnos.turno', 'nivel', 'Instituicoes.instituicao', 'Supervisores.nome', 'Professores.nome'
         ]
     ];
     
@@ -33,7 +33,7 @@ class EstagiariosController extends AppController
         $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
         $this->set('periodo', $periodo);
         
-        $contained = ['Alunos', 'Professores', 'Supervisores', 'Instituicoes', 'Turmas'];
+        $contained = ['Alunos', 'Professores', 'Supervisores', 'Instituicoes', 'Turnos', 'Turmas'];
 
         $conditions = ['conditions' => ['Estagiarios.periodo' => $periodo] ];
 
@@ -75,7 +75,7 @@ class EstagiariosController extends AppController
     public function view($id = null)
     {
         $estagiario = $this->Estagiarios->get($id, [
-            'contain' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores', 'Turmas', 'Complementos'/*, 'Folhadeatividades' */],
+            'contain' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores', 'Turmas', 'Turnos', 'Complementos'/*, 'Folhadeatividades' */],
         ]);
 
         try {
@@ -128,8 +128,9 @@ class EstagiariosController extends AppController
         $supervisores = $this->Estagiarios->Supervisores->find('list');
         $professores = $this->Estagiarios->Professores->find('list');
         $turmas = $this->Estagiarios->Turmas->find('list');
+        $turnos = $this->Estagiarios->Turnos->find('list');
         
-        $this->set(compact('periodo', 'estagiario', 'alunos', 'instituicoes', 'supervisores', 'professores', 'turmas'));
+        $this->set(compact('periodo', 'estagiario', 'alunos', 'instituicoes', 'supervisores', 'professores', 'turmas', 'turnos'));
     }
 
     /**
@@ -141,9 +142,7 @@ class EstagiariosController extends AppController
      */
     public function edit($id = null)
     {
-        $estagiario = $this->Estagiarios->get($id, [
-            'contain' => ['Alunos'],
-        ]);
+        $estagiario = $this->Estagiarios->get($id);
         
         try {
             $this->Authorization->authorize($estagiario);
@@ -167,8 +166,9 @@ class EstagiariosController extends AppController
         $supervisores = $this->Estagiarios->Supervisores->find('list');
         $professores = $this->Estagiarios->Professores->find('list');
         $turmas = $this->Estagiarios->Turmas->find('list');
+        $turnos = $this->Estagiarios->Turnos->find('list');
         
-        $this->set(compact('estagiario', 'alunos', 'instituicoes', 'supervisores', 'professores', 'turmas'));
+        $this->set(compact('estagiario', 'alunos', 'instituicoes', 'supervisores', 'professores', 'turmas', 'turnos'));
     }
 
     /**
@@ -343,7 +343,7 @@ class EstagiariosController extends AppController
                 $estudante_semestagio = $estudantestabela->find()
                     ->contain([])
                     ->where(['Alunos.id' => $aluno_id])
-                    ->select(['id', 'registro', 'nome', 'turno', 'ingresso'])
+                    ->select(['id', 'registro', 'nome', 'ingresso'])
                     ->first();
                 $this->set('estudante_semestagio', $estudante_semestagio);
                 $this->set('atualiza', 0); // nova inserção de estagiario

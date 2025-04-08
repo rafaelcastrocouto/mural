@@ -1,8 +1,12 @@
 old fix inscricoes murals view
 <input type="hidden" name="data[Inscricao][id_aluno]" value="" id="InscricaoIdAluno">
 
+bake model -> avaliacao_notas [ruim regular bom excelente s/a]
+bake model -> resposta (instituicao-fimdesemana, mural-convenio) [sim nao parcialmente s/a]
+bake model -> mural-formaselecao) [entrevista prova cr outra]
+
 inscritos selection form ?
-declaracoes
+declaracoes - como funciona a folha de atividades?
 remove duplicated users
 universidades profesores edit
 
@@ -12,7 +16,7 @@ avaliacoes
 dias *
 disciplinas *
 folhadeatividades
-horarios*
+horarios *
 historico_professor *
 nucleos_de_pesquisa *
 situacoes *
