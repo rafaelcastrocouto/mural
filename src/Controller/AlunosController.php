@@ -534,7 +534,7 @@ class AlunosController extends AppController
         if ($user_session) { $user_data = $user_session->getOriginalData(); }
         
         $registro = $this->getRequest()->getQuery('registro');
-        pr('reg: ' . $registro);
+        //pr('reg: ' . $registro);
 
         if (empty($registro)) {
             if (!$user_data['administrador_id']) $this->Flash->info(__('Erro: os dados não foram encontrados'));

@@ -7,6 +7,7 @@ bake model -> mural-formaselecao) [entrevista prova cr outra]
 
 inscritos selection form ?
 declaracoes - como funciona a folha de atividades?
+carga horaria?
 remove duplicated users
 universidades profesores edit
 
