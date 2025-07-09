@@ -1,12 +1,14 @@
 <?php
-// pr($estagiorealizado);
-$dia = strftime('%e', time());
-$mes = strftime('%B', time());
-$ano = strftime('%Y', time());
-// pr($estudante['Alunonovo']['turno']);
-if ($estudante['Alunonovo']['turno'] == 'diurno'):
+
+// pr($aluno->turno);
+// die();
+$formatter = new IntlDateFormatter('pt_BR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+//pr($formatter->format(time()));
+
+// pr($aluno['aluno']['turno']);
+if ($aluno->turno == 'diurno'):
     $duracaocurso = '8';
-elseif ($estudante['Alunonovo']['turno'] == 'noturno'):
+elseif ($aluno->turno == 'noturno'):
     $duracaocurso = '10';
 endif;
 // die($duracaocurso);
@@ -22,22 +24,22 @@ endif;
     <br />
     <br />
     <p style="text-align:justify; line-height: 2.5;">
-        Declaramos que o/a estudante <b><?= $estudante['Alunonovo']['nome']; ?></b> 
-        inscrito(a) no CPF sob o nº <?= $estudante["Alunonovo"]["cpf"]; ?> 
-        e no RG nº <?= $estudante["Alunonovo"]["identidade"]; ?> 
-        expedido por <?= $estudante["Alunonovo"]["orgao"]; ?>, 
+        Declaramos que o/a aluno <b><?= $aluno->nome; ?></b> 
+        inscrito(a) no CPF sob o nº <?= $aluno->cpf; ?> 
+        e no RG nº <?= $aluno->identidade; ?> 
+        expedido por <?= $aluno->orgao; ?>, 
         matriculado(a) no Curso de Serviço Social da 
-        Universidade Federal do Rio de Janeiro com o número <?= $estudante["Alunonovo"]["registro"]; ?>, 
-        ingressou em <?= $estudante['Alunonovo']['ingresso'] ?> no turno <?= ucfirst($estudante["Alunonovo"]["turno"]); ?>
-        cursando atualmente <?= $totalperiodo ?><sup>o</sup> período.
+        Universidade Federal do Rio de Janeiro com o número <?= $aluno->registro; ?>, 
+        ingressou em <?= $aluno->ingresso ?> no turno <?= ucfirst($aluno->turno); ?>
+        cursando atualmente <?= $totalperiodos ?><sup>o</sup> período.
     <p>
 
     <p style="text-align:justify; line-height: 2.5;">
-        O turno <?= ucfirst($estudante['Alunonovo']['turno']); ?> do curso de Serviço Social consta de <?= ($estudante['Alunonovo']['turno'] == 'diurno') ? '8': '10'; ?> semestres.
+        O turno <?= ucfirst($aluno->turno); ?> do curso de Serviço Social consta de <?= ($aluno->turno == 'diurno') ? '8': '10'; ?> semestres.
     </p>
     <br />
     <br />
-    <p style="text-align:right">Rio de Janeiro, <?= $dia; ?> de <?= $mes; ?> de <?= $ano; ?>.</p>
+    <p style="text-align:right">Rio de Janeiro, <?= $formatter->format(time()); ?>.</p>
 
     <br style='line-height: 10.0'/>
 

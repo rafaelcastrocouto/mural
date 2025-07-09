@@ -345,7 +345,12 @@ class AlunosController extends AppController
         // die();
     }
     
-    public function certificadoperiodo($id = null) 
+    /**
+     * Declaracaoperiodo method
+     *
+     * @param string|null $id Aluno id.
+     */
+    public function declaracaoperiodo($id = null) 
     {
         $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
         $user_session = $this->request->getAttribute('identity');
@@ -359,6 +364,7 @@ class AlunosController extends AppController
 
         if ($user_data['administrador_id']) {
             if ($id) $option = "id = " . $id;
+            // ask aluno id
         }
         
         if ($user_data['aluno_id']) {
@@ -460,13 +466,13 @@ class AlunosController extends AppController
     }
 
     /**
-     * Certificadoperiodopdf method
+     * Declaracaoperiodopdf method
      *
      * @param string|null $id Aluno id.
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function certificadoperiodopdf($id = NULL) {
+    public function declaracaoperiodopdf($id = NULL) {
 
         $this->layout = false;
         $id = $this->getRequest()->getQuery('id');

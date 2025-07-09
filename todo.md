@@ -1,6 +1,16 @@
 old fix inscricoes murals view
 <input type="hidden" name="data[Inscricao][id_aluno]" value="" id="InscricaoIdAluno">
 
+pdf 
+= alunos =
+Declaração de periodo do aluno - aluno/certificadoperiodo aluno/declaracaoperiodo
+
+= estagiarios =
+Avaliação do estagiario aluno/avaliacaoimprime avaliacao/imprimeavaliacao estagiario/avaliacaodiscente
+Folha de ativiades do estagiario - aluno/folhadeatividades estagiario/folhadeatividades folhadeatividades/folhadeatividades
+Declaração de estágio curricular - estagiario/declaracaodeestagio
+Termo de compromisso de estagio - estagiario/termodecompromisso
+
 bake model -> avaliacao_notas [ruim regular bom excelente s/a]
 bake model -> resposta (instituicao-fimdesemana, mural-convenio) [sim nao parcialmente s/a]
 bake model -> mural-formaselecao) [entrevista prova cr outra]
@@ -44,7 +54,6 @@ muralestagios
 - others
 
 add ligess logo footer
-users flow (alunos prof superv)
 front end sanitize
 paginate contain https://stackoverflow.com/questions/43901181/how-to-paginate-associated-records
 alternaususario https://book.cakephp.org/authentication/3/en/impersonation.html
