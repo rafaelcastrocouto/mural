@@ -49,6 +49,10 @@ class EstagiariosTable extends Table
         $this->setDisplayField('registro');
         $this->setPrimaryKey('id');
 
+        $this->hasMany('Avaliacoes', [
+            'foreignKey' => 'estagiario_id',
+        ]);
+        
         $this->belongsTo('Alunos', [
             'foreignKey' => 'aluno_id',
         ]);

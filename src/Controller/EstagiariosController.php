@@ -30,9 +30,6 @@ class EstagiariosController extends AppController
      */
     public function index()
     {
-        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
-        $this->set('periodo', $periodo);
-        
         $contained = ['Alunos', 'Professores', 'Supervisores', 'Instituicoes', 'Turnos', 'Turmas'];
 
         $conditions = ['conditions' => ['Estagiarios.periodo' => $periodo] ];
@@ -53,7 +50,10 @@ class EstagiariosController extends AppController
         }
         
         $this->set('estagiarios', $this->paginate($estagiarios));
-
+        
+        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
+        $this->set('periodo', $periodo);
+        
         $periodototal = $this->Estagiarios->find('list', [
             'keyField' => 'periodo',
             'valueField' => 'periodo'
@@ -759,73 +759,53 @@ class EstagiariosController extends AppController
      */  
     public function lancanota($id = null)
     {
-
         $siape = $this->getRequest()->getQuery('siape');
-
-        $estagiarios = $this->Estagiarios->Professores->find()
-            ->contain([
-                'Estagiarios' => [
-                    'sort' => ['periodo' => 'desc'],
-                    'Alunos' => ['fields' => ['id', 'nome'], 'sort' => ['nome']],
-                    'Professores' => ['fields' => ['id', 'nome', 'siape']],
-                    'Supervisores' => ['fields' => ['id', 'nome']],
-                    'Instituicoes' => ['fields' => ['id', 'instituicao']],
-                    'Avaliacoes' => ['fields' => ['id', 'estagiario_id']]
-                ]
-            ])
-            ->where(['siape' => $siape])
-            ->first();
+          
+        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
+        $this->set('periodo', $periodo);
+        
+        $periodototal = $this->Estagiarios->find('list', [
+            'keyField' => 'periodo',
+            'valueField' => 'periodo'
+        ]);
+        $periodos = $periodototal->toArray();
+        $periodos = array_merge($periodos, array('all' => 'Todos'));
+        $periodos = array_reverse($periodos);
+        
+        $this->set('periodos', $periodos);
+        
+        $contained = ['Alunos', 'Professores', 'Supervisores', 'Instituicoes', 'Turnos', 'Turmas'];
+        
+        $conditions = ['conditions' => ['Estagiarios.periodo' => $periodo] ];
+        
+        $estagiarios = $this->Estagiarios
+            ->find('all', $conditions)
+            ->contain($contained);
+        //    ->where(['siape IS' => $siape])
+        //    ->first();
 
         // pr($estagiarios);
-        $i = 0;
-        $estagiarioslancanota[] = null;
-        foreach ($estagiarios as $estagiario):
-            // pr($estagiario);
-            // $estagiarioslancanota[$i]['periodo'] = $estagiario;
-            foreach ($estagiario->estagiarios as $estagio):
-                // pr($c_estagio);
-                $estagiarioslancanota[$i]['id'] = $estagio['id'];
-                $estagiarioslancanota[$i]['registro'] = $estagio['registro'];
-                $estagiarioslancanota[$i]['periodo'] = $estagio['periodo'];
-                $estagiarioslancanota[$i]['nivel'] = $estagio['nivel'];
-                $estagiarioslancanota[$i]['nota'] = $estagio['nota'];
-                $estagiarioslancanota[$i]['ch'] = $estagio['ch'];
-                // pr($c_estagio->instituicao);
-                // pr($c_estagio->supervisor);
-                // pr($c_estagio->professor);
-                // pr($c_estagio->aluno);
-                $folhadeatividadestabela = $this->fetchTable('Folhadeatividades');
-                $folha = $folhadeatividadestabela->find()
-                    ->where(['Folhadeatividades.estagiario_id' => $estagio->id])
-                    ->first();
-                if ($folha):
-                    // pr($folha);
-                endif;
-                $estagiarioslancanota[$i]['instituicao_id'] = $estagio->instituicao->id;
-                $estagiarioslancanota[$i]['instituicao'] = $estagio->instituicao->instituicao;
-                $estagiarioslancanota[$i]['supervisor_id'] = $estagio->supervisor->id;
-                $estagiarioslancanota[$i]['supervisora'] = $estagio->supervisor->nome;
-                $estagiarioslancanota[$i]['professor_id'] = $estagio->professor->id;
-                $estagiarioslancanota[$i]['professor'] = $estagio->professor->nome;
-                $estagiarioslancanota[$i]['aluno_id'] = $estagio->aluno->id;
-                $estagiarioslancanota[$i]['aluno'] = $estagio->aluno->nome;
-                if (isset($folha)):
-                    $estagiarioslancanota[$i]['folha_id'] = $folha->id;
-                else:
-                    $estagiarioslancanota[$i]['folha_id'] = null;
-                endif;
-                if (isset($estagio->avaliacao->id)):
-                    $estagiarioslancanota[$i]['avaliacao_id'] = $estagio->avaliacao->id;
-                else:
-                    $estagiarioslancanota[$i]['avaliacao_id'] = null;
-                endif;
-                $i++;
-            endforeach;
-
-        endforeach;
+        //foreach ($estagiarios as $estagio):
+            //$folhadeatividadestabela = $this->fetchTable('Folhadeatividades');
+            //$folha = $folhadeatividadestabela->find()
+            //    ->where(['Folhadeatividades.estagiario_id' => $estagio->id])
+            //    ->first();
+            //if (isset($folha)):
+            //    // pr($folha);
+            //    $estagiarioslancanota[$i]['folha_id'] = $folha->id;
+            //else:
+            //    $estagiarioslancanota[$i]['folha_id'] = null;
+            //endif;
+            //if (isset($estagio->avaliacao->id)):
+            //    $estagiarioslancanota[$i]['avaliacao_id'] = $estagio->avaliacao->id;
+            //else:
+             //   $estagiarioslancanota[$i]['avaliacao_id'] = null;
+            //endif;
+        // endforeach;
         // pr($estagiarioslancanota);
         // die();
-        $this->set('estagiarios', $estagiarioslancanota);
+        
+        $this->set('estagiarios',  $this->paginate($estagiarios));
 
     }
     

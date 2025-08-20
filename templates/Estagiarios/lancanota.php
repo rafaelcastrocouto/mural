@@ -13,21 +13,17 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 
 <script type="text/javascript">
     $(document).ready(function () {
-
         var url = "<?= $this->Html->Url->build(['controller' => 'estagiarios', 'action' => 'lancanota']); ?>";
-        // alert(url);
-        $("#Periodo").change(function () {
+        var select= $("#estagiarioperiodo");
+		var pathname = location.pathname.split('/').filter(Boolean);
+		if (pathname[pathname.length - 2] == 'index') select.val(pathname[pathname.length - 1]);
+        select.change(function () {
             var periodo = $(this).val();
-            // alert(url + '/index/' + periodo);
             window.location = url + '/index/' + periodo;
-        })
-
-    })
+        });
+    });
 </script>
 
-<?php
-// die();
-?>
 <div class="row justify-content-center">
     <div class="col-auto">
         <?php if ($user_data['administrador_id']): ?>
@@ -65,18 +61,17 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
             </thead>
             <tbody>
                 <?php foreach ($estagiarios as $estagiario): ?>
-                    <?php // pr($estagiario); ?>
-                    <?php // die(); ?>
+                    <?php // pr($estagiario); die(); ?>
                     <tr>
                         <?php if ($user_data['administrador_id']): ?>
                             <td><?= $estagiario->id ?></td>
                         <?php endif; ?>
-                        <td><?= $this->Html->link($estagiario['aluno'], ['controller' => 'Alunos', 'action' => 'view', $estagiario['aluno_id']]) ?>
+                        <td><?= $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario['aluno_id']]) ?>
                         </td>
                         <td><?= $estagiario['registro'] ?></td>
-                        <td><?= $this->Html->link($estagiario['instituicao'], ['controller' => 'Instituicoes', 'action' => 'view', $estagiario['instituicao_id']]) ?>
+                        <td><?= $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $estagiario['instituicao_id']]) ?>
                         </td>
-                        <td><?= $this->Html->link($estagiario['supervisora'], ['controller' => 'Supervisores', 'action' => 'view', $estagiario['supervisor_id']]) ?>
+                        <td><?= $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario['supervisor_id']]) ?>
                         </td>
                         <td><?= $estagiario['periodo'] ?></td>
                         <td><?= $estagiario['nivel'] ?></td>
