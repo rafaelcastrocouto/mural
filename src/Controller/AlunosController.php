@@ -364,7 +364,6 @@ class AlunosController extends AppController
 
         if ($user_data['administrador_id']) {
             if ($id) $option = "id = " . $id;
-            // ask aluno id
         }
         
         if ($user_data['aluno_id']) {
@@ -460,6 +459,7 @@ class AlunosController extends AppController
         }
 
         // pr($aluno);
+        // pr($aluno->turno);
         // die();
         $this->set('aluno', $aluno);
         $this->set('totalperiodos', $totalperiodos);

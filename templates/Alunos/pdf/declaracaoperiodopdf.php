@@ -1,6 +1,6 @@
 <?php
 
-// pr($aluno->turno);
+//pr($aluno->turno);
 // die();
 $formatter = new IntlDateFormatter('pt_BR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
 //pr($formatter->format(time()));
@@ -30,12 +30,12 @@ endif;
         expedido por <?= $aluno->orgao; ?>, 
         matriculado(a) no Curso de Serviço Social da 
         Universidade Federal do Rio de Janeiro com o número <?= $aluno->registro; ?>, 
-        ingressou em <?= $aluno->ingresso ?> no turno <?= ucfirst($aluno->turno); ?>
+        ingressou em <?= $aluno->ingresso ?> no turno <?= $aluno->turno ? ucfirst($aluno->turno) : 'diurno' ; ?>
         cursando atualmente <?= $totalperiodos ?><sup>o</sup> período.
     <p>
 
     <p style="text-align:justify; line-height: 2.5;">
-        O turno <?= ucfirst($aluno->turno); ?> do curso de Serviço Social consta de <?= ($aluno->turno == 'diurno') ? '8': '10'; ?> semestres.
+        O turno <?= $aluno->turno ? ucfirst($aluno->turno) : 'diurno' ; ?> do curso de Serviço Social consta de <?= ($aluno->turno == 'noturno') ? '10': '8'; ?> semestres.
     </p>
     <br />
     <br />
@@ -43,9 +43,12 @@ endif;
 
     <br style='line-height: 10.0'/>
 
-    <table style="width:100%">
+    <table style="text-align:center;width:60%;margin: 0 auto">
         <tr>
-            <td style="text-decoration: overline;">Coordenação de Estágio</td>
+            <td style="border-top: 1px solid black;"></td>
+        </tr>
+        <tr>
+            <td>Coordenação de Estágio</td>
         </tr>
         <tr>
             <td>Escola de Serviço Social</td>

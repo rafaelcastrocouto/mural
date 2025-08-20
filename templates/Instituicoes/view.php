@@ -124,7 +124,7 @@
                             <td><?= $this->Html->link($supervisores->nome, ['controller' => 'Supervisores', 'action' => 'view', $supervisores->id]) ?></td>
                             <td><?= h($supervisores->cpf) ?></td>
                             <td><?= h($supervisores->cress) ?></td>
-                            <td><?= $this->Text->autoLinkEmails($supervisores->user->email) ?></td>
+                            <td><?= $supervisores->user ? $this->Text->autoLinkEmails($supervisores->user->email) : '' ?></td>
                             <td><?= h($supervisores->escola) ?></td>
                             <td><?= h($supervisores->ano_formatura) ?></td>
                         </tr>
