@@ -3,66 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Estagiario $estagiario
  */
-if (isset($periodo)) {
-    // echo "periodo" . "<br>";
-    // pr($periodo);
-    // die();
-} else {
-    // echo "Sem periodo." . "<br>";
-}
 
-if (isset($aluno_id)) {
-    // echo "aluno_id" . "<br>";
-    // pr($aluno_id);
-    // die();
-} else {
-    // echo "Sem instituicao." . "<br>";
-}
-
-if (isset($instituicao_id)) {
-    // echo "Instituicao_id" . "<br>";
-    // pr($instituicao_id);
-} else {
-    // echo "Sem instituicao." . "<br>";
-}
-
-if (isset($estudanteestagiario)) {
-    // echo "estudanteestagiario" . "<br>";
-    // pr($estudanteestagiario);
-} else {
-    // echo "Aluno sem estágios." . "<br>";
-} 
-if (isset($ultimoestagio)) {
-    // echo "ulitmoestagio" . "<br>";
-    // echo $ultimoestagio->instituicao->id;
-    // pr($ultimoestagio->hasValue('instituicao') ? $ultimoestagio->instituicao->id : 'vazio');
-} else {
-    // echo "Aluno sem último estágio" . "<br>";
-}
-
-if (isset($estudante_semestagio)) {
-    // echo "estudante_semestagio". "<br>";
-    // pr($estudante_semestagio);
-} else {
-    // echo "Aluno estagiário." . "<br>";
-}
-
-if (isset($atualiza)) {
-    // echo 'atualizar: 1 => Sim, 0 => Inserção' . '<br>';
-    // pr($atualiza);
-}
-
-if (isset($instituicoes)) {
-    // echo 'instituicoes' . '<br>';
-    // pr($instituicoes);
-}
-
-if (isset($supervisoresdainstituicao)) {
-    // echo 'supervisoresdainstituicao' . '<br>';
-    // pr($supervisoresdainstituicao);
-} else {
-    // echo "Sem supervisores da instituicao" . '<br>';
-}
 // pr($periodo);
 // die();
 ?>
