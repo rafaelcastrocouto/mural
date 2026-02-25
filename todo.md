@@ -58,6 +58,8 @@ front end sanitize
 paginate contain https://stackoverflow.com/questions/43901181/how-to-paginate-associated-records
 alternaususario https://book.cakephp.org/authentication/3/en/impersonation.html
 
+selecao de instituicao com busca
+
 1. Estudantes, em cada contato, sempre informem NOME COMPLETO e DRE, assim como mantenham em anexo os documentos para análise.
 2. Consulte as Recomendações de Estágio para 2024.1? Disponível em: https://ess.ufrj.br/index.php/estagio/areas-otp-estagio
 3. Vagas de estágio? Acesse o Mural de Estágios com regularidade.

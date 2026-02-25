@@ -22,8 +22,6 @@
     })
 </script>
 
-<!--?= $this->element('templates') ?-->
-
 <?php
 $submit = [
     "button" => "<div class='d-flex justify-content-center'><button type ='submit' class= 'btn btn-danger' {{attrs}}>{{text}}</button></div>"

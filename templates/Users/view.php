@@ -85,8 +85,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                             <th><?= __('Celular') ?></th>
                             <th><?= __('CFP') ?></th>
                             <th><?= __('Nascimento') ?></th>
-                            <th><?= __('Estagiario Count') ?></th>
-                            <th><?= __('Inscricao Count') ?></th>
                         </tr>
                         <tr>
                             <td class="actions">
@@ -102,8 +100,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                             <td><?= '(' . h($user->aluno->codigo_celular) . ') ' . h($user->aluno->celular) ?></td>
                             <td><?= h($user->aluno->cpf) ?></td>
                             <td><?= h($user->aluno->nascimento) ?></td>
-                            <td><?= h($user->aluno->estagiario_count) ?></td>
-                            <td><?= h($user->aluno->inscricao_count) ?></td>
                         </tr>
                     </table>
                 </div>

@@ -30,6 +30,9 @@ class EstagiariosController extends AppController
      */
     public function index()
     {
+        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
+        $this->set('periodo', $periodo);
+        
         $contained = ['Alunos', 'Professores', 'Supervisores', 'Instituicoes', 'Turnos', 'Turmas'];
 
         $conditions = ['conditions' => ['Estagiarios.periodo' => $periodo] ];
@@ -50,9 +53,7 @@ class EstagiariosController extends AppController
         }
         
         $this->set('estagiarios', $this->paginate($estagiarios));
-        
-        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
-        $this->set('periodo', $periodo);
+
         
         $periodototal = $this->Estagiarios->find('list', [
             'keyField' => 'periodo',
