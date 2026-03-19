@@ -48,6 +48,30 @@ class AlunosController extends AppController
      */
     public function view($id = null)
     {
+        $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
+        $user_session = $this->request->getAttribute('identity');
+        if ($user_session) { $user_data = $user_session->getOriginalData(); }
+        
+        if (empty($id)) { 
+            $registro = $this->request->getQuery('registro');
+            if ($registro) {
+                $aluno = $this->Alunos->find()->where(['Alunos.registro' => $registro])->first();
+                if ($aluno) { $id = $aluno->id; }
+                else {
+                    if (!empty($user_data->aluno_id)) {
+                        return $this->redirect(['action' => 'view', $user_data->aluno_id]); 
+                    }
+                    else {
+                        $this->Flash->error('Aluno não encontrado');
+                        if (!empty($user_session->id)) {
+                            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+                        }
+                        else { return $this->redirect('/'); }
+                    }
+                }
+            }
+        }
+        
         $contained = [
             'Estagiarios' => ['Instituicoes', 'Supervisores', 'Professores', 'Turmas'], 
             'Inscricoes' => ['Muralestagios' => ['Instituicoes']], 

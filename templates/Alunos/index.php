@@ -45,8 +45,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <th><?= $this->Paginator->sort('celular') ?></th>
                     <th><?= $this->Paginator->sort('cpf') ?></th>
                     <th><?= $this->Paginator->sort('nascimento') ?></th>
-                    <th><?= $this->Paginator->sort('estagiario_count') ?></th>
-                    <th><?= $this->Paginator->sort('inscricao_count') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -67,8 +65,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <td><?= $aluno->celular ? '(' . $aluno->codigo_celular . ') ' . h($aluno->celular) : '' ?></td>
                     <td><?= h($aluno->cpf) ?></td>
                     <td><?= h($aluno->nascimento) ?></td>
-                    <td><?= h($aluno->estagiario_count) ?></td>
-                    <td><?= h($aluno->inscricao_count) ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
