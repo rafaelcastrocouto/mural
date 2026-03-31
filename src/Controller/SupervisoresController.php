@@ -130,4 +130,39 @@ class SupervisoresController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+/**
+     * Busca method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function busca() 
+    {
+        try {
+            $supervisor = $this->Supervisores->newEmptyEntity();
+            $this->Authorization->authorize($supervisor);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        $condition = ['Supervisores.nome LIKE' => ''];
+        
+        $nome = $this->getRequest()->getQuery('nome');
+        if ($nome) { $condition = ['Supervisores.nome LIKE' => '%' . $nome . '%']; }
+
+        $cress = $this->getRequest()->getQuery('cress');
+        if ($cress) { $condition = ['Supervisores.cress' => $cress]; }
+                
+        $cpf = $this->getRequest()->getQuery('cpf');
+        if ($cpf) { $condition = ['Supervisores.cpf' => $cpf]; }
+        
+        $email = $this->getRequest()->getQuery('email');
+        if ($email) { $condition = ['Users.email' => $email]; }
+        
+        $busca = $this->Supervisores->find('all',  ['conditions' => $condition ])->contain(['Users']);
+        $supervisores = $this->paginate($busca);
+        $this->set(compact('supervisores'));
+
+    }
+    
 }
