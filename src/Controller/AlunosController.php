@@ -52,21 +52,20 @@ class AlunosController extends AppController
         $user_session = $this->request->getAttribute('identity');
         if ($user_session) { $user_data = $user_session->getOriginalData(); }
         
-        if (empty($id)) { 
+        if (empty($id)) {
             $registro = $this->request->getQuery('registro');
-            if ($registro) {
+            if ($registro) { 
                 $aluno = $this->Alunos->find()->where(['Alunos.registro' => $registro])->first();
-                if ($aluno) { $id = $aluno->id; }
-                else {
+                if ($aluno) { 
+                    return $this->redirect(['action' => 'view', $aluno->id]); 
+                } else {
                     if (!empty($user_data->aluno_id)) {
                         return $this->redirect(['action' => 'view', $user_data->aluno_id]); 
-                    }
-                    else {
+                    } else {
                         $this->Flash->error('Aluno não encontrado');
                         if (!empty($user_session->id)) {
                             return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
-                        }
-                        else { return $this->redirect('/'); }
+                        } else { return $this->redirect('/'); }
                     }
                 }
             }
@@ -196,42 +195,23 @@ class AlunosController extends AppController
             $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
         }
+        $condition = ['Alunos.nome LIKE' => ''];
         
         $nome = $this->getRequest()->getQuery('nome');
-        if ($nome) {
-            $condition = ['Alunos.nome LIKE' => '%' . $nome . '%'];
-            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
-            $alunos = $this->paginate($busca);
-            $this->set(compact('alunos'));
-            return;
-        }
+        if ($nome) { $condition = ['Alunos.nome LIKE' => '%' . $nome . '%']; }
 
         $dre = $this->getRequest()->getQuery('dre');
-        if ($dre) {
-            $condition = ['Alunos.registro' => $dre];
-            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
-            $alunos = $this->paginate($busca);
-            $this->set(compact('alunos'));
-            return;
-        }
+        if ($dre) { $condition = ['Alunos.registro' => $dre]; }
                 
         $cpf = $this->getRequest()->getQuery('cpf');
-        if ($cpf) {
-            $condition = ['Alunos.cpf' => $cpf];
-            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
-            $alunos = $this->paginate($busca);
-            $this->set(compact('alunos'));
-            return;
-        }
+        if ($cpf) { $condition = ['Alunos.cpf' => $cpf]; }
         
         $email = $this->getRequest()->getQuery('email');
-        if ($email) {
-            $condition = ['Users.email' => $email];
-            $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
-            $alunos = $this->paginate($busca);
-            $this->set(compact('alunos'));
-            return;
-        }
+        if ($email) { $condition = ['Users.email' => $email]; }
+        
+        $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
+        $alunos = $this->paginate($busca);
+        $this->set(compact('alunos'));
     }
     
     /**

@@ -156,4 +156,40 @@ class ProfessoresController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    
+    /**
+     * Busca method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function busca() 
+    {
+        try {
+            $professor = $this->Professores->newEmptyEntity();
+            $this->Authorization->authorize($professor);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        $condition = ['Professores.nome LIKE' => ''];
+        
+        $nome = $this->getRequest()->getQuery('nome');
+        if ($nome) { $condition = ['Professores.nome LIKE' => '%' . $nome . '%']; }
+
+        $siape = $this->getRequest()->getQuery('siape');
+        if ($siape) { $condition = ['Professores.siape' => $siape]; }
+                
+        $cpf = $this->getRequest()->getQuery('cpf');
+        if ($cpf) { $condition = ['Professores.cpf' => $cpf]; }
+        
+        $email = $this->getRequest()->getQuery('email');
+        if ($email) { $condition = ['Users.email' => $email]; }
+        
+        $busca = $this->Professores->find('all',  ['conditions' => $condition ])->contain(['Users']);
+        $professores = $this->paginate($busca);
+        $this->set(compact('professores'));
+
+    }
+
+    
 }

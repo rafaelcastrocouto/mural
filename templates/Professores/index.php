@@ -3,11 +3,21 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Professor[]|\Cake\Collection\CollectionInterface $professores
  */
+
+declare(strict_types=1);
+
+$user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
+$user_session = $this->request->getAttribute('identity');
+if ($user_session) { $user_data = $user_session->getOriginalData(); }
+    
 ?>
 <div class="professores index content">
 	<aside>
 		<div class="nav">
             <?= $this->Html->link(__('Novo Professor'), ['action' => 'add'], ['class' => 'button']) ?>
+			<?php if ($user_data['administrador_id']): ?>
+				<?= $this->Html->link(__('Buscar Professor'), ['action' => 'busca'], ['class' => 'button']) ?>
+			<?php endif; ?>
 		</div>
 	</aside>
     
