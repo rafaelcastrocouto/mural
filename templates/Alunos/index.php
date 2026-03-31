@@ -19,7 +19,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 		<div class="nav">
 			<?= $this->Html->link(__('Novo Aluno'), ['action' => 'add'], ['class' => 'button']) ?>
 			<?php if ($user_data['administrador_id']): ?>
-				<?= $this->Html->link(__('Buscar Aluno'), ['action' => 'busca'], ['class' => 'button']) ?>
+				<?= $this->Html->link(__('Buscar Aluno'), ['action' => 'buscar'], ['class' => 'button']) ?>
 			<?php endif; ?>
 		</div>
 	</aside>

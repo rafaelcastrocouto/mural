@@ -1,5 +1,4 @@
-old fix inscricoes murals view
-<input type="hidden" name="data[Inscricao][id_aluno]" value="" id="InscricaoIdAluno">
+busca instituicao inscricao estagiario
 
 pdf 
 = alunos =
@@ -15,11 +14,8 @@ bake model -> avaliacao_notas [ruim regular bom excelente s/a]
 bake model -> resposta (instituicao-fimdesemana, mural-convenio) [sim nao parcialmente s/a]
 bake model -> mural-formaselecao) [entrevista prova cr outra]
 
-inscritos selection form ?
 declaracoes - como funciona a folha de atividades?
 carga horaria?
-remove duplicated users
-universidades profesores edit
 
 - add to menu navegacao:
 areas
@@ -56,9 +52,6 @@ muralestagios
 add ligess logo footer
 front end sanitize
 paginate contain https://stackoverflow.com/questions/43901181/how-to-paginate-associated-records
-alternaususario https://book.cakephp.org/authentication/3/en/impersonation.html
-
-selecao de instituicao com busca
 
 1. Estudantes, em cada contato, sempre informem NOME COMPLETO e DRE, assim como mantenham em anexo os documentos para análise.
 2. Consulte as Recomendações de Estágio para 2024.1? Disponível em: https://ess.ufrj.br/index.php/estagio/areas-otp-estagio
@@ -68,8 +61,5 @@ selecao de instituicao com busca
 
 5. Precisa de algum formulário? (Mudança de campo, Folha de Atividades, Avaliação Final, etc.) Acesse: ESS/Estágio/Formulários
 
-Atendimento presencial: 2ª, 3ª e 4ª feira: 09h-13h; 5ª f: 09h-20h e 6ª f: 08h-18h. Atendimento com a assistente social, terças e sextas - agendar por e-mail. Durante o período de greve, consultar por e-mail.
-
-Para nós, todas as solicitações são importantes ;)
-
-PRAZO DE RESPOSTA: ATÉ 72H ÚTEIS. Agradecemos a compreensão e colaboração \@/
+old fix inscricoes murals view
+<input type="hidden" name="data[Inscricao][id_aluno]" value="" id="InscricaoIdAluno">

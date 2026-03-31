@@ -187,7 +187,7 @@ class AlunosController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function busca() 
+    public function buscar () 
     {
         try {
             $this->Authorization->authorize($this->Alunos);

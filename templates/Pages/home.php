@@ -138,7 +138,7 @@ $user_session = $this->request->getAttribute('identity');
                     <h3>Mapa do site</h3>
                     <p>
                         <a href="./administradores">administradores</a> | <a href="./administradores/view/1">view</a> | <a href="./administradores/edit/1">edit</a><br />
-                        <a href="./alunos">alunos</a> | <a href="./alunos/view/1">view</a> | <a href="./alunos/edit/1">edit</a> | <a href="./alunos/add">add</a> | <a href="./alunos/busca">busca</a> | <a href="./alunos/planilhacress">planilhacress</a> | <a href="./alunos/planilhaseguro">planilhaseguro</a> | <a href="./alunos/cargahoraria">cargahoraria</a> | <a href="./alunos/declaracaoperiodo/1">declaracaoperiodo</a> | <a href="./alunos/folhasolicita">folhasolicita</a> | <a href="./alunos/avaliacaosolicita">avaliacaosolicita</a><br />
+                        <a href="./alunos">alunos</a> | <a href="./alunos/view/1">view</a> | <a href="./alunos/edit/1">edit</a> | <a href="./alunos/add">add</a> | <a href="./alunos/buscar">buscar</a> | <a href="./alunos/planilhacress">planilhacress</a> | <a href="./alunos/planilhaseguro">planilhaseguro</a> | <a href="./alunos/cargahoraria">cargahoraria</a> | <a href="./alunos/declaracaoperiodo/1">declaracaoperiodo</a> | <a href="./alunos/folhasolicita">folhasolicita</a> | <a href="./alunos/avaliacaosolicita">avaliacaosolicita</a><br />
                         <a href="./areas">areas</a> | <a href="./areas/view/1">view</a> | <a href="./areas/edit/1">edit</a> | <a href="./areas/add">add</a><br />
                         <a href="./avaliacoes">avaliacoes</a> | <a href="./avaliacoes/view/1">view</a> | <a href="./avaliacoes/edit/1">edit</a> | <a href="./avaliacoes/add">add</a><br />
                         <a href="./complementos">complementos</a> | <a href="./complementos/view/1">view</a> | <a href="./complementos/edit/1">edit</a> | <a href="./complementos/add">add</a><br />
@@ -148,11 +148,11 @@ $user_session = $this->request->getAttribute('identity');
                         <a href="./inscricoes">inscricoes</a> | <a href="./inscricoes/view/1">view</a> | <a href="./inscricoes/edit/1">edit</a> | <a href="./inscricoes/add">add</a> | <a href="./inscricoes/termocompromisso/1">termocompromisso</a><br />
                         <a href="./instituicoes">instituicoes</a> | <a href="./instituicoes/view/1">view</a> | <a href="./instituicoes/edit/1">edit</a> | <a href="./instituicoes/add">add</a><br />
                         <a href="./muralestagios">muralestagios</a> | <a href="./muralestagios/view/1">view</a> | <a href="./muralestagios/edit/1">edit</a> | <a href="./muralestagios/add">add</a><br />
-                        <a href="./professores">professores</a> | <a href="./professores/view/1">view</a> | <a href="./professores/edit/1">edit</a> | <a href="./professores/add">add</a><br />
-                        <a href="./supervisores">supervisores</a> | <a href="./supervisores/view/1">view</a> | <a href="./supervisores/edit/1">edit</a> | <a href="./supervisores/add">add</a><br />
+                        <a href="./professores">professores</a> | <a href="./professores/view/1">view</a> | <a href="./professores/edit/1">edit</a> | <a href="./professores/add">add</a> | <a href="./professores/buscar">buscar</a><br />
+                        <a href="./supervisores">supervisores</a> | <a href="./supervisores/view/1">view</a> | <a href="./supervisores/edit/1">edit</a> | <a href="./supervisores/add">add</a> | <a href="./supervisores/buscar">buscar</a><br />
                         <a href="./turmas">turmas</a> | <a href="./turmas/view/1">view</a> | <a href="./turmas/edit/1">edit</a> | <a href="./turmas/add">add</a><br />
                         <a href="./turnos">turnos</a> | <a href="./turnos/view/1">view</a> | <a href="./turnos/edit/1">edit</a> | <a href="./turnos/add">add</a><br />
-                        <a href="./users">users</a> | <a href="./users/view/1">view</a> | <a href="./users/edit/1">edit</a> | <a href="./users/add">add</a> | <a href="./users/login">login</a><br />
+                        <a href="./users">users</a> | <a href="./users/view/1">view</a> | <a href="./users/edit/1">edit</a> | <a href="./users/editpassword/1">edit</a> | <a href="./users/add">add</a> | <a href="./users/login">login</a> | <a href="./users/alternar">alternar</a><br />
                         <a href="./visitas">visitas</a> | <a href="./visitas/view/1">view</a> | <a href="./visitas/edit/1">edit</a> | <a href="./visitas/add">add</a><br />
                     </p>
 

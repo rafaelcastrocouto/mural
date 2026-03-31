@@ -16,7 +16,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
     
     <?= $this->Html->link(__('Novo Supervisor'), ['action' => 'add'], ['class' => 'button']) ?>
     <?php if ($user_data['administrador_id']): ?>
-        <?= $this->Html->link(__('Buscar Supervisor'), ['action' => 'busca'], ['class' => 'button']) ?>
+        <?= $this->Html->link(__('Buscar Supervisor'), ['action' => 'buscar'], ['class' => 'button']) ?>
     <?php endif; ?>
     
     <h3><?= __('Lista de Supervisores') ?></h3>

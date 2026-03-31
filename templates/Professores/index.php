@@ -16,7 +16,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 		<div class="nav">
             <?= $this->Html->link(__('Novo Professor'), ['action' => 'add'], ['class' => 'button']) ?>
 			<?php if ($user_data['administrador_id']): ?>
-				<?= $this->Html->link(__('Buscar Professor'), ['action' => 'busca'], ['class' => 'button']) ?>
+				<?= $this->Html->link(__('Buscar Professor'), ['action' => 'buscar'], ['class' => 'button']) ?>
 			<?php endif; ?>
 		</div>
 	</aside>

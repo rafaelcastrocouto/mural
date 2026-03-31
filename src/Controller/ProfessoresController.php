@@ -162,7 +162,7 @@ class ProfessoresController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function busca() 
+    public function buscar () 
     {
         try {
             $professor = $this->Professores->newEmptyEntity();
