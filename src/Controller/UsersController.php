@@ -234,6 +234,36 @@ class UsersController extends AppController {
     }
 
 
+
+    /**
+     * Busca method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function busca() 
+    {
+        try {
+            $user = $this->Users->newEmptyEntity();
+            $this->Authorization->authorize($user);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        $condition = ['Users.email' => ''];
+        
+        $id = $this->getRequest()->getQuery('id');
+        if ($id) { $condition = ['Users.id' => $id]; }
+        
+        $email = $this->getRequest()->getQuery('email');
+        if ($email) { $condition = ['Users.email' => $email]; }
+        
+        $busca = $this->Users->find('all',  ['conditions' => $condition ]);
+        $users = $this->paginate($busca);
+        $this->set(compact('users'));
+
+    }
+
+
     /*
      * Alternarusuario method
      * https://book.cakephp.org/authentication/3/en/impersonation.html

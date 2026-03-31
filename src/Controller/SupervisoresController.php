@@ -131,7 +131,8 @@ class SupervisoresController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-/**
+    
+    /**
      * Busca method
      *
      * @return \Cake\Http\Response|null|void Renders view

@@ -13,8 +13,6 @@ $cress = $this->getRequest()->getQuery('cress');
 $cpf = $this->getRequest()->getQuery('cpf');
 $email = $this->getRequest()->getQuery('email');
      
-// pr($supervisores);
-// die();
 ?>
 
 <?= $this->Html->script("jquery.mask.min"); ?>
@@ -89,10 +87,6 @@ $email = $this->getRequest()->getQuery('email');
                         </tr>
                     </thead>
                     <?php foreach ($supervisores as $supervisor): ?>
-                        <?php 
-                          //pr($supervisor);
-                          // die();
-                        ?>
                         <tr>
                             <td><?= $supervisor->cress; ?></td>
                             <td><?= $this->Html->link($supervisor->nome, ['action' => 'view', $supervisor->id]); ?></td>
