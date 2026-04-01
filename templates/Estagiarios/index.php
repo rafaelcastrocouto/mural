@@ -49,12 +49,13 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 	<aside>
 		<div class="nav">
 	        <?php if ($user_data['administrador_id']): ?>
-			    <?= $this->Html->link(__('Novo Estagiario'), ['action' => 'add'], ['class' => 'button']) ?>
-	        <?php endif; ?>
+			    <?= $this->Html->link(__('Novo Estagiário'), ['action' => 'add'], ['class' => 'button']) ?>
+				<?= $this->Html->link(__('Buscar Estagiário'), ['action' => 'buscar'], ['class' => 'button']) ?>
+			<?php endif; ?>
 		</div>
 	</aside>
 	
-    <h3><?= __('Lista de Estagiarios') ?></h3>
+    <h3><?= __('Lista de Estagiários') ?></h3>
 	
 	<div class="paginator">
         <?= $this->element('paginator'); ?>

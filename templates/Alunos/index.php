@@ -3,15 +3,16 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Aluno[]|\Cake\Collection\CollectionInterface $alunos
  */
-declare(strict_types=1);
 
-//pr($alunos);
-//die();
+declare(strict_types=1);
 
 $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
 $user_session = $this->request->getAttribute('identity');
 if ($user_session) { $user_data = $user_session->getOriginalData(); }
     
+//pr($alunos);
+//die();
+
 ?>
 <div class="alunos index content">
 	<?php if ($user_data['administrador_id'] OR ($alunos->count() == 0 AND $user_data['aluno_id'] == 2) ): ?>

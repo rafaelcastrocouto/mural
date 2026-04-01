@@ -183,7 +183,7 @@ class AlunosController extends AppController
     }
     
     /**
-     * Busca method
+     * Buscar method
      *
      * @return \Cake\Http\Response|null|void Renders view
      */

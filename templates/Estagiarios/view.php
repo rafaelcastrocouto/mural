@@ -43,6 +43,10 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Inscrição') ?></th>
+                    <td><?= $estagiario->inscricao ? $this->Html->link((string)$estagiario->inscricao->id, ['controller' => 'Inscricoes', 'action' => 'view', $estagiario->inscricao->id]) : '' ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Periodo') ?></th>
                     <td><?= h($estagiario->periodo) ?></td>
                 </tr>

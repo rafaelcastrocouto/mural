@@ -15,6 +15,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\InstituicoesTable&\Cake\ORM\Association\BelongsTo $Instituicoes
  * @property \App\Model\Table\SupervisoresTable&\Cake\ORM\Association\BelongsTo $Supervisores
  * @property \App\Model\Table\ProfessoresTable&\Cake\ORM\Association\BelongsTo $Professores
+ * @property \App\Model\Table\InscricoesTable&\Cake\ORM\Association\BelongsTo $Inscricoes
  * @property \App\Model\Table\TurmasTable&\Cake\ORM\Association\BelongsTo $Turmas
  * @property \App\Model\Table\TurnosTable&\Cake\ORM\Association\BelongsTo $Turnos
  *
@@ -65,6 +66,9 @@ class EstagiariosTable extends Table
         $this->belongsTo('Professores', [
             'foreignKey' => 'professor_id',
         ]);
+        $this->belongsTo('Inscricoes', [
+            'foreignKey' => 'inscricao_id',
+        ]);
         $this->belongsTo('Turmas', [
             'foreignKey' => 'turma_id',
         ]);
@@ -87,10 +91,6 @@ class EstagiariosTable extends Table
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
-
-        $validator
-            ->integer('registro')
-            ->notEmptyString('registro');
 
         $validator
             ->scalar('ajustecurricular2020')
@@ -138,12 +138,13 @@ class EstagiariosTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['aluno_id'], 'Alunos'), ['errorField' => 'aluno_id']);
-        $rules->add($rules->existsIn(['instituicao_id'], 'Instituicoes'), ['errorField' => 'instituicao_id']);
-        $rules->add($rules->existsIn(['supervisor_id'], 'Supervisores'), ['errorField' => 'supervisor_id']);
-        $rules->add($rules->existsIn(['professor_id'], 'Professores'), ['errorField' => 'professor_id']);
-        $rules->add($rules->existsIn(['turma_id'], 'Turmas'), ['errorField' => 'turma_id']);
-        $rules->add($rules->existsIn(['turno_id'], 'Turnos'), ['errorField' => 'turno_id']);
+        $rules->add($rules->existsIn(['id'], 'Alunos'), ['errorField' => 'aluno_id']);
+        $rules->add($rules->existsIn(['id'], 'Instituicoes'), ['errorField' => 'instituicao_id']);
+        $rules->add($rules->existsIn(['id'], 'Supervisores'), ['errorField' => 'supervisor_id']);
+        $rules->add($rules->existsIn(['id'], 'Professores'), ['errorField' => 'professor_id']);
+        $rules->add($rules->existsIn(['id'], 'Inscricoes'), ['errorField' => 'inscricao_id']);
+        $rules->add($rules->existsIn(['id'], 'Turmas'), ['errorField' => 'turma_id']);
+        $rules->add($rules->existsIn(['id'], 'Turnos'), ['errorField' => 'turno_id']);
 
         return $rules;
     }

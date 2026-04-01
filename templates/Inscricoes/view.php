@@ -26,23 +26,19 @@
                     <td><?= $inscricao->aluno ? $this->Html->link($inscricao->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $inscricao->aluno->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Estagio') ?></th>
-                    <td><?= $inscricao->muralestagio ? $this->Html->link($inscricao->muralestagio->instituicao ? $inscricao->muralestagio->instituicao->instituicao : $inscricao->muralestagio->id , ['controller' => 'Muralestagios', 'action' => 'view', $inscricao->muralestagio->id]) : $inscricao->muralestagio_id ?></td>
+                    <th><?= __('Estágio') ?></th>
+                    <td><?= $inscricao->muralestagio ? $this->Html->link($inscricao->muralestagio->instituicao ?'Vaga para '. $inscricao->muralestagio->instituicao->instituicao : $inscricao->muralestagio->id , ['controller' => 'Muralestagios', 'action' => 'view', $inscricao->muralestagio->id]) : $inscricao->muralestagio_id ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Periodo') ?></th>
+                    <th><?= __('Período') ?></th>
                     <td><?= h($inscricao->periodo) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Registro') ?></th>
-                    <td><?= $this->Number->format($inscricao->registro) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Data') ?></th>
+                    <th><?= __('Alteração') ?></th>
                     <td><?= $inscricao->data ? h($inscricao->data) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Timestamp') ?></th>
+                    <th><?= __('Criação') ?></th>
                     <td><?= $inscricao->timestamp ? h($inscricao->timestamp) : '' ?></td>
                 </tr>
             </table>

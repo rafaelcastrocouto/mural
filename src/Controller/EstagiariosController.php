@@ -76,7 +76,7 @@ class EstagiariosController extends AppController
     public function view($id = null)
     {
         $estagiario = $this->Estagiarios->get($id, [
-            'contain' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores', 'Turmas', 'Turnos', 'Complementos'/*, 'Folhadeatividades' */],
+            'contain' => ['Alunos', 'Instituicoes', 'Supervisores', 'Professores', 'Inscricoes', 'Turmas', 'Turnos', 'Complementos'],
         ]);
 
         try {
@@ -771,5 +771,39 @@ class EstagiariosController extends AppController
         $this->set('estagiarios',  $this->paginate($estagiarios));
 
     }
+
+    
+    /**
+     * Buscar method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function buscar () 
+    {
+        try {
+            $this->Authorization->authorize($this->Alunos);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        $condition = ['Alunos.nome LIKE' => ''];
+        
+        $nome = $this->getRequest()->getQuery('nome');
+        if ($nome) { $condition = ['Alunos.nome LIKE' => '%' . $nome . '%']; }
+
+        $dre = $this->getRequest()->getQuery('dre');
+        if ($dre) { $condition = ['Alunos.registro' => $dre]; }
+                
+        $cpf = $this->getRequest()->getQuery('cpf');
+        if ($cpf) { $condition = ['Alunos.cpf' => $cpf]; }
+        
+        $email = $this->getRequest()->getQuery('email');
+        if ($email) { $condition = ['Users.email' => $email]; }
+        
+        $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
+        $alunos = $this->paginate($busca);
+        $this->set(compact('alunos'));
+    }
+        
     
 }

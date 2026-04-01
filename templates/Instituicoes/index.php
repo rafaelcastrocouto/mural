@@ -15,6 +15,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 		<div class="nav">    
         	<?php if ($user_data['administrador_id']): ?>
                 <?= $this->Html->link(__('Nova Instituição'), ['action' => 'add'], ['class' => 'button']) ?>
+				<?= $this->Html->link(__('Buscar Instituição'), ['action' => 'buscar'], ['class' => 'button']) ?>
             <?php endif; ?>
 		</div>
 	</aside>

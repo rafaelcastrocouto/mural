@@ -3,13 +3,23 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Inscricao[]|\Cake\Collection\CollectionInterface $inscricoes
  */
+
+declare(strict_types=1);
+
+$user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
+$user_session = $this->request->getAttribute('identity');
+if ($user_session) { $user_data = $user_session->getOriginalData(); }
+    
 // pr($inscricoes);
 // die();
 ?>
 <div class="inscricoes index content">
 	<aside>
 		<div class="nav">
-            <?= $this->Html->link(__('Nova Inscricao'), ['action' => 'add'], ['class' => 'button']) ?>
+            <?= $this->Html->link(__('Nova Inscrição'), ['action' => 'add'], ['class' => 'button']) ?>
+			<?php if ($user_data['administrador_id']): ?>
+				<?= $this->Html->link(__('Buscar Inscrição'), ['action' => 'buscar'], ['class' => 'button']) ?>
+			<?php endif; ?>
 		</div>
 	</aside>
     
@@ -25,11 +35,10 @@
                     <th class="actions"><?= __('Actions') ?></th>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('aluno_id') ?></th>
-                    <th><?= $this->Paginator->sort('registro') ?></th>
-                    <th><?= $this->Paginator->sort('muralestagio_id') ?></th>
-                    <th><?= $this->Paginator->sort('data') ?></th>
-                    <th><?= $this->Paginator->sort('periodo') ?></th>
-                    <th><?= $this->Paginator->sort('timestamp') ?></th>
+                    <th><?= $this->Paginator->sort('muralestagio_id', 'Estágio') ?></th>
+                    <th><?= $this->Paginator->sort('periodo', 'Período') ?></th>
+                    <th><?= $this->Paginator->sort('timestamp', 'Criação') ?></th>
+                    <th><?= $this->Paginator->sort('data', 'Alteração') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -48,8 +57,7 @@
                     </td>
                     <td><?= $this->Html->link((string)$inscricao->id, ['action' => 'view', $inscricao->id]) ?></td>
                     <td><?= $inscricao->aluno ? $this->Html->link($inscricao->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $inscricao->aluno->id]) : '' ?></td>
-                    <td><?= $this->Number->format($inscricao->registro) ?></td>
-					<td><?= $inscricao->muralestagio ? $this->Html->link($inscricao->muralestagio->instituicao ? $inscricao->muralestagio->instituicao->instituicao . ' (' . $inscricao->muralestagio->dataSelecao . ')' : $inscricao->muralestagio->id , ['controller' => 'Muralestagios', 'action' => 'view', $inscricao->muralestagio->id]) : $inscricao->muralestagio_id ?></td>
+					<td><?= $inscricao->muralestagio ? $this->Html->link($inscricao->muralestagio->instituicao ? 'Vaga para '.$inscricao->muralestagio->instituicao->instituicao . ' (' . $inscricao->muralestagio->data_selecao . ')' : $inscricao->muralestagio->id , ['controller' => 'Muralestagios', 'action' => 'view', $inscricao->muralestagio->id]) : $inscricao->muralestagio_id ?></td>
                     <td><?= h($inscricao->data) ?></td>
                     <td><?= h($inscricao->periodo) ?></td>
                     <td><?= $inscricao->timestamp ? h($inscricao->timestamp) : '' ?></td>

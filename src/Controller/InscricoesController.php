@@ -333,4 +333,37 @@ class InscricoesController extends AppController
         $this->set('supervisores', isset($super_atuais) ? $super_atuais : null); // Aluno sem estaǵio não tem supervisores de instituição cadastrados
     }
     
+    /**
+     * Buscar method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function buscar () 
+    {
+        try {
+            $this->Authorization->authorize($this->Alunos);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        $condition = ['Alunos.nome LIKE' => ''];
+        
+        $nome = $this->getRequest()->getQuery('nome');
+        if ($nome) { $condition = ['Alunos.nome LIKE' => '%' . $nome . '%']; }
+
+        $dre = $this->getRequest()->getQuery('dre');
+        if ($dre) { $condition = ['Alunos.registro' => $dre]; }
+                
+        $cpf = $this->getRequest()->getQuery('cpf');
+        if ($cpf) { $condition = ['Alunos.cpf' => $cpf]; }
+        
+        $email = $this->getRequest()->getQuery('email');
+        if ($email) { $condition = ['Users.email' => $email]; }
+        
+        $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
+        $alunos = $this->paginate($busca);
+        $this->set(compact('alunos'));
+    }
+    
+    
 }
