@@ -27,7 +27,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                         $val = $this->request->getParam('pass') ? $this->request->getParam('pass')[0] : '';
                         echo $this->Form->control('user_id', ['type' => 'number', 'value' => $val ]); 
                     else:
-                        echo $this->Form->control('user_id', ['type' => 'number', 'value' => $user_session->get('id'), 'hidden' => true ]); 
+                        echo $this->Form->hidden('user_id', ['type' => 'number', 'value' => $user_session->get('id') ]); 
                     endif;
                     echo $this->Form->control('nome');
                     echo $this->Form->control('cpf');
