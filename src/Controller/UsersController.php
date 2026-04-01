@@ -277,43 +277,43 @@ class UsersController extends AppController {
         if ($user_session) { $user_data = $user_session->getOriginalData(); }
         
         // Only administrators can impersonate
+        
         if (!$user_data['administrador_id'] && !$this->request->getSession()->check('Auth.impersonating')) {
             $this->Flash->error(__('Acesso negado. Apenas administradores podem alternar usuários.'));
             return $this->redirect(['action' => 'index']);
         }
 
         if ($this->Authentication->isImpersonating()) {
-            $originalId = $this->request->getSession()->read('Auth.impersonating');
-            if ($originalId) {
-                $originalUser = $this->Users->get($originalId);
-                if ($originalUser) $this->set('originalUser', $originalUser);
-            }
 
-            if ($this->request->getQuery('reset')) { // add button to stop impersonating
-                // Stop impersonating if no ID is provided and we are currently impersonating
-                $this->Authentication->stopImpersonating();
-                $this->Authentication->impersonate($originalUser);
+            // stop impersonating
+            if ($this->request->getQuery('reset')) {
                 $this->request->getSession()->delete('Auth.impersonating');
-                return $this->Flash->success(__('Identidade restaurada para administrador.'));
+                $this->Authentication->stopImpersonating();
+                $this->Flash->success(__('Identidade restaurada para administrador.'));
+                return $this->redirect(['action' => 'alternar']);
+                
+            } else {
+                // show impersonation original user data
+                $originalId = $this->request->getSession()->read('Auth.impersonating');
+                if ($originalId) {
+                    $originalUser = $this->Users->get($originalId);
+                    if ($originalUser) $this->set('originalUser', $originalUser);
+                }
             }
             
-        }
-        
-        if (empty($id)) { $id = $this->request->getData('id'); }
-        
-        if ($id) {
-            // Start impersonating
-            $targetUser = $this->Users->get($id);
-
-            // Store original admin ID if not already impersonating
-            if ($targetUser && !$this->request->getSession()->check('Auth.impersonating') && !$this->Authentication->isImpersonating()) {
-                $this->Authentication->stopImpersonating();
-                $this->Authentication->impersonate($targetUser);
-                $this->request->getSession()->write('Auth.impersonating', $user_data['id']);
-                return $this->Flash->success(__('Você agora está acessando como ' . $targetUser->email));
+        } else {
+            // start impersonating
+            if (empty($id)) { $id = $this->request->getData('id'); }
+            if ($id) {
+                $targetUser = $this->Users->get($id);
+                if ($targetUser) {
+                    if ($this->Authentication->isImpersonating()) { $this->Authentication->stopImpersonating(); }
+                    $this->Authentication->impersonate($targetUser);
+                    $this->request->getSession()->write('Auth.impersonating', $user_data['id']);
+                    $this->Flash->success(__('Você agora está acessando como ' . $targetUser->email));
+                    return $this->redirect(['action' => 'alternar']);
+                }
             }
         }
-
     }
-    
 }
