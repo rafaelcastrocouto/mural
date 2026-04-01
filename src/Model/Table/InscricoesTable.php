@@ -42,7 +42,7 @@ class InscricoesTable extends Table {
 
         $this->setTable('inscricoes');
         $this->setAlias('Inscricoes');
-        $this->setDisplayField('registro');
+        $this->setDisplayField('date');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Alunos', [
@@ -63,9 +63,7 @@ class InscricoesTable extends Table {
         $validator
                 ->integer('id')
                 ->allowEmptyString('id', null, 'create');
-        $validator
-                ->integer('registro')
-                ->notEmptyString('registro');
+
         $validator
                 ->integer('aluno_id')
                 ->notEmptyString('aluno_id');
@@ -103,8 +101,7 @@ class InscricoesTable extends Table {
      * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules): RulesChecker {
-        $rules->add($rules->existsIn(['registro'], 'Alunos'), ['errorField' => 'registro']);
-        $rules->add($rules->existsIn(['instituicao_id'], 'Muralestagios'), ['errorField' => 'instituicao_id']);
+        $rules->add($rules->existsIn(['id'], 'Muralestagios'), ['errorField' => 'mural_estagios_id']);
 
         return $rules;
     }

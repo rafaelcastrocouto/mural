@@ -9,7 +9,6 @@ use Cake\ORM\Entity;
  * Inscricao Entity
  *
  * @property int $id
- * @property int $registro
  * @property int|null $aluno_id
  * @property int $mural_estagio_id
  * @property \Cake\I18n\FrozenDate $data
@@ -31,7 +30,6 @@ class Inscricao extends Entity
      * @var array
      */
     protected array $_accessible = [
-        'registro' => true,
         'aluno_id' => true,
         'instituicao_id' => true, // id atual do mural de estagios
         'mural_estagio_id' => true,
