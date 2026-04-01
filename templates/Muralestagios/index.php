@@ -28,7 +28,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 	
 	<div class="row justify-content-center">
 	    <div class="col-auto">
-	        <?php if ($user_data['administrador_id']): ?>
 	            <?= $this->Form->create($muralestagios, ['class' => 'form-inline']); ?>
 					<?= $this->Form->label('periodo', 'Período'); ?>
 					<?= $this->Form->input('periodo', [
@@ -40,9 +39,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 						]); 
 					?>
 	            <?= $this->Form->end(); ?>
-	        <?php else: ?>
-	            <h2 class="label">Período: <?= $configuracao['mural_periodo_atual']; ?></h2>
-	        <?php endif; ?>
 	    </div>
 	</div>
 	
@@ -54,7 +50,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 		</div>
 	</aside>
 	
-	<h3><?= __('Mural de estágios') ?></h3>
+	<h3>Mural de estágios</h3>
 	
     <div class="paginator">
         <?= $this->element('paginator'); ?>

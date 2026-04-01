@@ -4,14 +4,14 @@
  * @var \App\Model\Entity\Muralestagio $muralestagio
  */
 
-
 declare(strict_types=1);
 
 $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
 $user_session = $this->request->getAttribute('identity');
 if ($user_session) { $user_data = $user_session->getOriginalData(); }
-?>
 
+?>
+	
 <div>
     <div class="column-responsive column-80">
         <div class="muralestagios view content">
@@ -150,78 +150,91 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 </tr>
 
             <?php else: ?>
-                <!--
-                Para os outros usuários as inscrições dependem da data de encerramento
+				<!--  Para os outros usuários as inscrições dependem da data de encerramento
 							date('Y-m-d', strtotime())
-                //-->
-                <?php if (date('d-m-Y') <= $muralestagio['data_inscricao']): ?>
-                    <!--
-                    Se a inscricao e na instituição também tem que fazer inscrição no mural
-                    //-->
-                    <?php if ((string)$muralestagio['localInscricao'] === '1'): ?>
+				//-->
+				<?php if (date('d-m-Y') <= $muralestagio['data_inscricao']): ?>
+					<!--
+					Se a inscricao e na instituição também tem que fazer inscrição no mural
+					//-->
+					<?php if ((string)$muralestagio['localInscricao'] === '1'): ?>
+	
+						<tr>
+							<td colspan = 2>
+								<p class="text-center text-danger">Não esqueça de também fazer inscrição na instituição. Ambas são necessárias!</p>
+							</td>
+						</tr>
+	
+					<?php endif; ?>
+	
+					<!-- todo verificar alunos inscritos -->
+					
 
-                        <tr>
-                            <td colspan = 2>
-                                <p class="text-center text-danger">Não esqueça de também fazer inscrição na instituição. Ambas são necessárias!</p>
-                            </td>
-                        </tr>
-
-                    <?php endif; ?>
-
-                    <tr>
-                        <td colspan = 2 class="text-center">
-                            <?php echo $this->Html->link('Fazer inscrição', ['controller' => 'Inscricoes', 'action' => 'add', $muralestagio['id']], ['role' => 'button', 'class' => 'button btn-primary']); ?>
-                        </td>
-                    </tr>
-                <?php else: ?>
-                    <tr>
-                        <td colspan = 2>
-                            <p class="text-center text-danger">Inscrições encerradas!</p>
-                        </td>
-                    </tr>
-                <?php endif; ?>
-
-            <?php endif; ?>
+					<?php if (empty($inscricao)): ?>	
+					<tr>
+						<td colspan = 2 class="text-center">
+							<?php echo $this->Html->link('Fazer inscrição', ['controller' => 'Inscricoes', 'action' => 'add', $muralestagio['id']], ['role' => 'button', 'class' => 'button btn-primary']); ?>
+						</td>
+					</tr>
+					<?php else: ?>
+					<tr>
+						<td colspan = 2 class="text-center"> O usuário já está inscrito, 
+						<?php echo $this->Html->link('visualisar inscrição', ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]); ?>
+					</tr>		
+					<?php endif; ?>
+							
+				<?php else: ?>
+					<tr>
+						<td colspan = 2>
+							<p class="text-center text-danger">Inscrições encerradas!</p>
+						</td>
+					</tr>
+				<?php endif; ?>
+				
+			<?php endif; ?>
 
 
             <?php if ($user_data['administrador_id'] || $user_data['professor_id'] || $user_data['supervisor_id']): ?>
 	            <?php if (!empty($muralestagio->inscricoes)) : ?>
-	            <div class="related">
-	                <h4><?= __('Inscrições') ?></h4>
-	                <div class="table_wrap">
-	                    <table>
-	                        <tr>
-	                            <th class="actions"><?= __('Actions') ?></th>
-	                            <th><?= __('Id') ?></th>
-	                            <th><?= __('Registro') ?></th>
-	                            <th><?= __('Aluno') ?></th>
-	                            <th><?= __('Data') ?></th>
-	                            <th><?= __('Periodo') ?></th>
-	                            <th><?= __('Timestamp') ?></th>
-	                        </tr>
-	                        <?php foreach ($muralestagio->inscricoes as $inscricao) : ?>
-	                        <tr>
-	                            <?php // pr($inscricao) ?>
-								<td class="actions">
-	                                <?= $this->Html->link(__('Ver'), ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>
-	                                <?= $this->Html->link(__('Editar'), ['controller' => 'Inscricoes', 'action' => 'edit', $inscricao->id]) ?>
-	                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Inscricoes', 'action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id)]) ?>
-	                            </td>
-	                            <td><?= h($inscricao->id) ?></td>
-	                            <td><?= $inscricao->aluno ? h($inscricao->aluno->registro) : '' ?></td>
-	                            <td><?= $inscricao->aluno ? $this->Html->link($inscricao->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $inscricao->aluno->id])  : '' ?></td>
-	                            <td><?= h($inscricao->data) ?></td>
-	                            <td><?= h($inscricao->periodo) ?></td>
-	                            <td><?= $inscricao->timestamp ? h($inscricao->timestamp) : '' ?></td>
-	                        </tr>
-	                        <?php endforeach; ?>
-	                    </table>
-	                </div>
-	            </div>
+		            <div class="related">
+		                <h4><?= __('Inscrições') ?></h4>
+		                <div class="table_wrap">
+		                    <table>
+		                        <tr>
+		                            <th class="actions"><?= __('Actions') ?></th>
+		                            <th><?= __('Id') ?></th>
+		                            <th><?= __('Registro') ?></th>
+		                            <th><?= __('Aluno') ?></th>
+		                            <th><?= __('Data') ?></th>
+		                            <th><?= __('Periodo') ?></th>
+		                            <th><?= __('Timestamp') ?></th>
+		                        </tr>
+		                        <?php foreach ($muralestagio->inscricoes as $inscricao) : ?>
+			                        <tr>
+			                            <?php // pr($inscricao) ?>
+										<td class="actions">
+			                                <?= $this->Html->link(__('Ver'), ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>
+			                                <?= $this->Html->link(__('Editar'), ['controller' => 'Inscricoes', 'action' => 'edit', $inscricao->id]) ?>
+			                                <?= $this->Form->postLink(__('Deletar'), ['controller' => 'Inscricoes', 'action' => 'delete', $inscricao->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inscricao->id)]) ?>
+			                            </td>
+			                            <td><?= h($inscricao->id) ?></td>
+			                            <td><?= $inscricao->aluno ? h($inscricao->aluno->registro) : '' ?></td>
+			                            <td><?= $inscricao->aluno ? $this->Html->link($inscricao->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $inscricao->aluno->id])  : '' ?></td>
+			                            <td><?= h($inscricao->data) ?></td>
+			                            <td><?= h($inscricao->periodo) ?></td>
+			                            <td><?= $inscricao->timestamp ? h($inscricao->timestamp) : '' ?></td>
+			                        </tr>
+		                        <?php endforeach; ?>
+		                    </table>
+		                </div>
+		            </div>
+							
 	            <?php else: ?>
-	            <div class="related">
-	                <h4>Sem incrições</h4>
-				</div>
+							
+		            <div class="related">
+		                <h4>Sem incrições</h4>
+					</div>
+							
 	            <?php endif; ?>
 
 			<?php endif; ?>

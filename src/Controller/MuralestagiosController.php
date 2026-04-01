@@ -63,11 +63,23 @@ class MuralestagiosController extends AppController {
      */
     public function view($id = null)
     {
-        $muralestagio = $this->Muralestagios->get($id, [
-            'contain' => ['Instituicoes', 'Turmas', 'Turnos', 'Professores', 'Inscricoes' => ['Alunos']],
-        ]);
+        try {
+            $this->Authorization->authorize($this->Muralestagios);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['action' => 'view', $user_session->id]);
+        }
         
-        $this->set(compact('muralestagio'));
+        $contained = ['Instituicoes', 'Turmas', 'Turnos', 'Professores', 'Inscricoes' => ['Alunos']];
+        $muralestagio = $this->Muralestagios->get($id, ['contain' => $contained]);
+
+        $inscricao = $this->fetchTable('Inscricoes')
+            ->find('all', ['conditions' =>['mural_estagio_id' => $id]])
+            ->contain(['Alunos', 'Muralestagios' => ['Instituicoes']])
+            ->first();
+
+        $this->set(compact('muralestagio', 'inscricao'));
     }
 
     /**
