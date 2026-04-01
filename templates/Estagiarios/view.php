@@ -35,6 +35,10 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Aprovado') ?></th>
+                    <td><?= h(($estagiario->aprovado == 0) ? 'Não' : 'Sim') ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Instituicao') ?></th>
                     <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
                 </tr>
@@ -74,10 +78,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 <tr>
                     <th><?= __('Registro') ?></th>
                     <td><?= h($estagiario->registro) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Tc') ?></th>
-                    <td><?= $this->Number->format($estagiario->tc ?? '') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Nota') ?></th>

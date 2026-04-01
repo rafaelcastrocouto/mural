@@ -3,6 +3,13 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Estagiario $estagiario
  */
+
+declare(strict_types=1);
+
+$user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
+$user_session = $this->request->getAttribute('identity');
+if ($user_session) { $user_data = $user_session->getOriginalData(); }
+
 ?>
 <div">
     <div class="column-responsive column-80">
@@ -17,11 +24,17 @@
                 <h3><?= __('Adicionando Estagiario') ?></h3>
                 <?php
                     echo $this->Form->control('aluno_id', ['options' => $alunos, 'class' => 'form-control']);
+                
+                    if ($user_data['administrador_id']):
+                        echo $this->Form->control('aprovado', ['label' => ['text' => 'Aprovado'], 'options' => ['0' => 'Não', '1' => 'Sim'], 'value' => 0]);
+                    else:
+                        echo $this->Form->hidden('aprovado'); 
+                    endif;
+                
                     echo $this->Form->control('registro');
                     echo $this->Form->control('ajustecurricular2020');
                     echo $this->Form->control('turno');
                     echo $this->Form->control('nivel');
-                    echo $this->Form->control('tc');
                     echo $this->Form->control('tc_solicitacao', ['empty' => true]);
                     echo $this->Form->control('instituicao_id', ['options' => $instituicoes, 'class' => 'form-control']);
                     echo $this->Form->control('supervisor_id', ['options' => $supervisores, 'empty' => true, 'class' => 'form-control']);

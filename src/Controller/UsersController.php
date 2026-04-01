@@ -225,11 +225,12 @@ class UsersController extends AppController {
     public function logout()
     {
         // authorize all users to access logout
-        $this->Authorization->skipAuthorization();
         
+        $this->Authorization->skipAuthorization();
+        $this->request->getSession()->delete('Auth.impersonating');
         $this->Authentication->logout();
         
-        $this->Flash->warning(__('Usuario desconectado.'));
+        $this->Flash->warning(__('Sessão de usuario encerrada.'));
         return $this->redirect('/');
     }
 
@@ -270,8 +271,6 @@ class UsersController extends AppController {
      */
     public function alternar(?string $id = null)
     {
-        //$this->Authorization->skipAuthorization();
-
         $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
         $user_session = $this->request->getAttribute('identity');
         if ($user_session) { $user_data = $user_session->getOriginalData(); }

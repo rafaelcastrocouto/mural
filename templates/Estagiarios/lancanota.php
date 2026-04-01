@@ -47,7 +47,6 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                         <th><?= $this->Paginator->sort('id') ?></th>
                     <?php endif; ?>
                     <th><?= $this->Paginator->sort('Alunos.nome', 'Aluno') ?></th>
-                    <th><?= $this->Paginator->sort('registro') ?></th>
                     <th><?= $this->Paginator->sort('Instituicoes.instituicao', 'Instituicoes') ?></th>
                     <th><?= $this->Paginator->sort('Supervisores.nome', 'Supervisor') ?></th>
                     <th><?= $this->Paginator->sort('periodo', 'Período') ?></th>
@@ -68,7 +67,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                         <?php endif; ?>
                         <td><?= $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario['aluno_id']]) ?>
                         </td>
-                        <td><?= $estagiario['registro'] ?></td>
+
                         <td><?= $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $estagiario['instituicao_id']]) ?>
                         </td>
                         <td><?= $this->Html->link($estagiario->supervisor->nome, ['controller' => 'Supervisores', 'action' => 'view', $estagiario['supervisor_id']]) ?>

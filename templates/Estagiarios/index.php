@@ -68,6 +68,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 					<?php endif; ?>
 	                <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('Alunos.nome', 'Aluno') ?></th>
+	                <th><?= $this->Paginator->sort('aprovado', 'Aprovado') ?></th>
                     <th><?= $this->Paginator->sort('Instituicoes.instituicao', 'Instituicao') ?></th>
                     <th><?= $this->Paginator->sort('periodo') ?></th>
                     <th><?= $this->Paginator->sort('turno') ?></th>
@@ -91,7 +92,8 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <?php endif; ?>
 	                <td><?= $this->Html->link((string)$estagiario->id, ['action' => 'view', $estagiario->id]) ?></td>
 					<td><?= $estagiario->aluno ? $this->Html->link($estagiario->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]) : '' ?></td>
-                    <td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
+					<td><?= h(($estagiario->aprovado == 0) ? 'Não' : 'Sim') ?></td>
+					<td><?= $estagiario->instituicao ? $this->Html->link($estagiario->instituicao->instituicao, ['controller' => 'Instituicoes', 'action' => 'view', $estagiario->instituicao->id]) : '' ?></td>
 					<td><?= h($estagiario->periodo) ?></td>
                     <td><?= $estagiario->turno ? h($estagiario->turno->turno) : '' ?></td>
                     <td><?= h($estagiario->nivel) ?></td>

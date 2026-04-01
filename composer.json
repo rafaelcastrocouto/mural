@@ -4,7 +4,7 @@
     "type": "project",
     "homepage": "https://mural.ess.ufrj.br/",
     "license": "MIT",
-    "author": "Luiz Acosta",
+    "author": "Luiz Acosta e Rafael Couto",
     "require": {
         "php": ">=8.1",
         "cakephp/authentication": "^3.1",

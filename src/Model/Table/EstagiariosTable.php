@@ -103,7 +103,7 @@ class EstagiariosTable extends Table
             ->notEmptyString('nivel');
 
         $validator
-            ->notEmptyString('tc');
+            ->notEmptyString('aprovado');
 
         $validator
             ->date('tc_solicitacao')

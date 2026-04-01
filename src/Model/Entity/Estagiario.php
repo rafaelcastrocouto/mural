@@ -13,7 +13,7 @@ use Cake\ORM\Entity;
  * @property int $registro
  * @property string $ajustecurricular2020
  * @property string $nivel
- * @property int $tc
+ * @property int $aprovado
  * @property \Cake\I18n\FrozenDate|null $tc_solicitacao
  * @property int $instituicao_id
  * @property int|null $supervisor_id
@@ -47,7 +47,7 @@ class Estagiario extends Entity
         'registro' => true,
         'ajustecurricular2020' => true,
         'nivel' => true,
-        'tc' => true,
+        'aprovado' => true,
         'tc_solicitacao' => true,
         'instituicao_id' => true,
         'supervisor_id' => true,
