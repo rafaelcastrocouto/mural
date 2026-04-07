@@ -1,55 +1,65 @@
 <?php 
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Aluno[]|\Cake\Collection\CollectionInterface $alunos
+ * @var \App\Model\Entity\Instituicao[]|\Cake\Collection\CollectionInterface $instituicoes
  */
 
 declare(strict_types=1);
 
-$nome = $this->getRequest()->getQuery('nome');
-$dre = $this->getRequest()->getQuery('dre');
-$cpf = $this->getRequest()->getQuery('cpf');
+$instituicao = $this->getRequest()->getQuery('instituicao');
+$area = $this->getRequest()->getQuery('area');
+$cep = $this->getRequest()->getQuery('cep');
+$cnpj = $this->getRequest()->getQuery('cnpj');
 $email = $this->getRequest()->getQuery('email');
      
-// pr($alunos);
+// pr($instituicoes);
 // die();
 ?>
+
 
 <?= $this->Html->script("jquery.mask.min"); ?>
 <script>
     $(document).ready(function () {
-        $("#cpf").mask("999999999-99");
-        $("#registro").mask("999999999");
+        $(".cpf").mask("999.999.999-99");
     });
 </script>
 
-<div class="alunos busca content">
+<div class="instituicoes busca content">
 
     <div class="tabset">
         
-        <input type="radio" name="tabs" id="tab_nome" <?= ($nome or (!$dre and !$cpf and !$email)) ? 'checked' : '' ?> >
-        <label for="tab_nome">Busca por nome</label>
+        <input type="radio" name="tabs" id="tab_insituicao" <?= ($instituicao or (!$area and !$cnpj and !$cep and !$email)) ? 'checked' : '' ?> >
+        <label for="tab_insituicao">Busca por instituição</label>
         <div class="tab-content">
             <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
-            <?php echo $this->Form->control('nome', ['label' => ['text' => 'Digite o nome do aluno'], 'class' => 'form-control']); ?>
+            <?php echo $this->Form->control('instituicao', ['label' => ['text' => 'Digite o nome da instituição'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
         </div>
         
-        <input type="radio" name="tabs" id="tab_dre" <?= ($dre) ? 'checked' : '' ?> >
-        <label for="tab_dre">Busca por DRE</label>
+        <input type="radio" name="tabs" id="tab_area" <?= ($area) ? 'checked' : '' ?> >
+        <label for="tab_area">Busca por área</label>
         <div class="tab-content">
             <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
-            <?php echo $this->Form->control('dre', ['label' => ['text' => 'Digite o DRE do aluno'], 'class' => 'form-control']); ?>
+            <?php echo $this->Form->control('area', ['label' => ['text' => 'Digite a área'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
         </div>
         
-        <input type="radio" name="tabs" id="tab_cpf" <?= ($cpf) ? 'checked' : '' ?> >
-        <label for="tab_cpf">Busca por CPF</label>
+        <input type="radio" name="tabs" id="tab_cep" <?= ($cep) ? 'checked' : '' ?> >
+        <label for="tab_cep">Busca por CEP</label>
         <div class="tab-content">
             <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
-            <?php echo $this->Form->control('cpf', ['label' => ['text' => 'Digite o CPF do aluno'], 'class' => 'form-control']); ?>
+            <?php echo $this->Form->control('cep', ['label' => ['text' => 'Digite o CEP'], 'class' => 'form-control']); ?>
+            <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
+            <?php echo $this->Form->end(); ?>
+        </div>
+        
+        <input type="radio" name="tabs" id="tab_cnpj" <?= ($cnpj) ? 'checked' : '' ?> >
+        <label for="tab_cnpj">Busca por CNPJ</label>
+        <div class="tab-content">
+            <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
+            <?php echo $this->Form->control('cnpj', ['label' => ['text' => 'Digite o CNPJ'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
         </div>
@@ -58,20 +68,21 @@ $email = $this->getRequest()->getQuery('email');
         <label for="tab_email">Busca por email</label>
         <div class="tab-content">
             <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
-            <?php echo $this->Form->control('email', ['label' => ['text' => 'Digite o email do aluno'], 'class' => 'form-control']); ?>
+            <?php echo $this->Form->control('email', ['label' => ['text' => 'Digite o email da instituição'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
         </div>
     </div>
     
-    <?php if (isset($alunos)): ?>
+    <?php if (isset($instituicoes)): ?>
     
-        <?php if (iterator_count($alunos)): ?>
+        <?php if (iterator_count($instituicoes)): ?>
     
         
-            <?php if ($nome): ?><h3>Resultado da busca para o termo "<?= $nome ?>"</h3><?php endif; ?>
-            <?php if ($dre):  ?><h3>Resultado da busca para o DRE <?= $dre ?></h3><?php endif; ?>
-            <?php if ($cpf):  ?><h3>Resultado da busca para o CPF <?= $cpf ?></h3><?php endif; ?>
+            <?php if ($instituicao): ?><h3>Resultado da busca para o termo "<?= $instituicao ?>"</h3><?php endif; ?>
+            <?php if ($area): ?><h3>Resultado da busca para o termo "<?= $area ?>"</h3><?php endif; ?>
+            <?php if ($cep):  ?><h3>Resultado da busca para o CEP <?= $cep ?></h3><?php endif; ?>
+            <?php if ($cnpj):  ?><h3>Resultado da busca para o CNPJ <?= $cnpj ?></h3><?php endif; ?>
             <?php if ($email):  ?><h3>Resultado da busca para o email <?= $email ?></h3><?php endif; ?>
     
             <div class="paginator">
@@ -81,22 +92,24 @@ $email = $this->getRequest()->getQuery('email');
                 <table>
                     <thead class='thead-light'>
                         <tr>
-                            <th><?= $this->Paginator->sort('registro', 'DRE'); ?></th>
-                            <th><?= $this->Paginator->sort('nome', 'Nome'); ?></th>
-                            <th><?= $this->Paginator->sort('cpf', 'CPF'); ?></th>
+                            <th><?= $this->Paginator->sort('instituicao', 'Nome'); ?></th>
+                            <th><?= $this->Paginator->sort('area', 'Área'); ?></th>
+                            <th><?= $this->Paginator->sort('cep', 'CNPJ'); ?></th>
+                            <th><?= $this->Paginator->sort('cnpj', 'CNPJ'); ?></th>
                             <th><?= $this->Paginator->sort('email', 'E-mail'); ?></th>
                         </tr>
                     </thead>
-                    <?php foreach ($alunos as $aluno): ?>
+                    <?php foreach ($instituicoes as $instituicao): ?>
                         <?php 
-                          //pr($aluno);
+                          //pr($instituicao);
                           // die();
                         ?>
                         <tr>
-                            <td><?= $aluno->registro; ?></td>
-                            <td><?= $this->Html->link($aluno->nome, ['action' => 'view', $aluno->id]); ?></td>
-                            <td><?= $aluno->cpf; ?></td>
-                            <td><?= ($aluno->user and $aluno->user->email) ? $this->Text->autoLinkEmails($aluno->user->email) : '' ?></td>
+                            <td><?= $this->Html->link($instituicao->instituicao, ['action' => 'view', $instituicao->id]); ?></td>
+                            <td><?= $this->Html->link($instituicao->area->area, ['controller' => 'Areas', 'action' => 'view', $instituicao->id]); ?></td>
+                            <td><?= $instituicao->cep; ?></td>
+                            <td><?= $instituicao->cnpj; ?></td>
+                            <td><?= ($instituicao->email) ? $this->Text->autoLinkEmails($instituicao->email) : '' ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
@@ -107,9 +120,10 @@ $email = $this->getRequest()->getQuery('email');
             </div>
         
         <?php else: ?>
-            <?php if ($nome): ?><h3>Nenhum resultado encontrado para o termo "<?= $nome ?>"</h3><?php endif; ?>
-            <?php if ($dre):  ?><h3>Nenhum resultado encontrado para o DRE <?= $dre ?></h3><?php endif; ?>
-            <?php if ($cpf):  ?><h3>Nenhum resultado encontrado para o CPF <?= $cpf ?></h3><?php endif; ?>
+            <?php if ($instituicao): ?><h3>Nenhum resultado encontrado para o termo "<?= $instituicao ?>"</h3><?php endif; ?>
+            <?php if ($area): ?><h3>Nenhum resultado encontrado para o termo "<?= $area ?>"</h3><?php endif; ?>
+            <?php if ($cep):  ?><h3>Nenhum resultado encontrado para o DRE <?= $cep ?></h3><?php endif; ?>
+            <?php if ($cnpj):  ?><h3>Nenhum resultado encontrado para o CPF <?= $cnpj ?></h3><?php endif; ?>
             <?php if ($email):  ?><h3>Nenhum resultado encontrado para o email <?= $email ?></h3><?php endif; ?>
         <?php endif; ?>
     

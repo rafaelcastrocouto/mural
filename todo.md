@@ -1,7 +1,5 @@
 busca instituicao inscricao estagiario
 
-editar nascimento yymmdd para ddmmyy
-
 pdf 
 = alunos =
 Declaração de periodo do aluno - aluno/certificadoperiodo aluno/declaracaoperiodo

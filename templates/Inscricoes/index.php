@@ -58,8 +58,8 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <td><?= $this->Html->link((string)$inscricao->id, ['action' => 'view', $inscricao->id]) ?></td>
                     <td><?= $inscricao->aluno ? $this->Html->link($inscricao->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $inscricao->aluno->id]) : '' ?></td>
 					<td><?= $inscricao->muralestagio ? $this->Html->link($inscricao->muralestagio->instituicao ? 'Vaga para '.$inscricao->muralestagio->instituicao->instituicao . ' (' . $inscricao->muralestagio->data_selecao . ')' : $inscricao->muralestagio->id , ['controller' => 'Muralestagios', 'action' => 'view', $inscricao->muralestagio->id]) : $inscricao->muralestagio_id ?></td>
-                    <td><?= h($inscricao->data) ?></td>
                     <td><?= h($inscricao->periodo) ?></td>
+					<td><?= h($inscricao->data) ?></td>
                     <td><?= $inscricao->timestamp ? h($inscricao->timestamp) : '' ?></td>
                 </tr>
                 <?php endforeach; ?>

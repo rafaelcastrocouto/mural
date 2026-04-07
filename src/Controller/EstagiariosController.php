@@ -581,6 +581,9 @@ class EstagiariosController extends AppController
         
         $nome = $this->getRequest()->getQuery('nome');
         if ($nome) { $condition = ['Alunos.nome LIKE' => '%' . $nome . '%']; }
+        
+        $instituicao = $this->getRequest()->getQuery('instituicao');
+        if ($instituicao) { $condition = ['Instituicoes.instituicao LIKE' => '%' . $instituicao . '%']; }
 
         $dre = $this->getRequest()->getQuery('dre');
         if ($dre) { $condition = ['Alunos.registro' => $dre]; }
@@ -591,7 +594,9 @@ class EstagiariosController extends AppController
         $email = $this->getRequest()->getQuery('email');
         if ($email) { $condition = ['Users.email' => $email]; }
         
-        $busca = $this->Estagiarios->find('all',  ['conditions' => $condition ])->contain(['Alunos' => ['Users']]);
+        $contained = ['Alunos' => ['Users'], 'Instituicoes'];
+        
+        $busca = $this->Estagiarios->find('all',  ['conditions' => $condition ])->contain($contained);
         $estagiarios = $this->paginate($busca);
         $this->set(compact('estagiarios'));
     }

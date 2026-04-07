@@ -140,30 +140,35 @@ class InstituicoesController extends AppController
     public function buscar () 
     {
         try {
-            $this->Authorization->authorize($this->Alunos);
+            $this->Authorization->authorize($this->Instituicoes);
         } catch (ForbiddenException $error) {
             $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
         }
-        $condition = ['Alunos.nome LIKE' => ''];
+        $condition = ['Instituicoes.instituicao LIKE' => ''];
         
-        $nome = $this->getRequest()->getQuery('nome');
-        if ($nome) { $condition = ['Alunos.nome LIKE' => '%' . $nome . '%']; }
+        $instituicao = $this->getRequest()->getQuery('instituicao');
+        if ($instituicao) { $condition = ['Instituicoes.instituicao LIKE' => '%' . instituicao . '%']; }
+        
+        $area = $this->getRequest()->getQuery('area');
+        if ($area) { $condition = ['Areas.area LIKE' => '%' . $area . '%']; }
 
-        $dre = $this->getRequest()->getQuery('dre');
-        if ($dre) { $condition = ['Alunos.registro' => $dre]; }
+        $cep = $this->getRequest()->getQuery('cep');
+        if ($cep) { $condition = ['Instituicoes.cep LIKE' => $cep]; }
                 
-        $cpf = $this->getRequest()->getQuery('cpf');
-        if ($cpf) { $condition = ['Alunos.cpf' => $cpf]; }
+        $cnpj = $this->getRequest()->getQuery('cnpj');
+        if ($cnpj) { $condition = ['Instituicoes.cnpj LIKE' => $cnpj]; }
         
         $email = $this->getRequest()->getQuery('email');
-        if ($email) { $condition = ['Users.email' => $email]; }
+        if ($email) { $condition = ['Instituicoes.email' => $email]; }
         
-        $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
-        $alunos = $this->paginate($busca);
-        $this->set(compact('alunos'));
+        $contained = ['Areas'];
+        
+        $busca = $this->Instituicoes->find('all',  ['conditions' => $condition ])->contain($contained);
+        $instituicoes = $this->paginate($busca);
+        $this->set(compact('instituicoes'));
     }
-    
+       
 
     
 }

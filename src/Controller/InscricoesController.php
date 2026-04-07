@@ -75,9 +75,7 @@ class InscricoesController extends AppController
         $periodo = $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
         $dados['periodo'] = $periodo;
         
-        if (!$id) {
-            $this->Flash->error(__('Erro no identificador do mural de estagios'));
-        } else {
+        if ($id) {
             $mural_estagio = $this->fetchTable('Muralestagios')->get($id);
             $dados['mural_estagio'] = $mural_estagio;
             
@@ -96,9 +94,7 @@ class InscricoesController extends AppController
                 return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_id]);
             }
         } else {  
-            $dados['registro'] = $aluno->registro;
             $dados['aluno_id'] = $aluno->id;
-
             if ($id) {
                 /** Verifico se já fez inscrição para não duplicar */
                 $conditions = ['mural_estagio_id' => $id, 'aluno_id' => $aluno->id];
@@ -342,15 +338,18 @@ class InscricoesController extends AppController
     public function buscar () 
     {
         try {
-            $this->Authorization->authorize($this->Alunos);
+            $this->Authorization->authorize($this->Inscricoes);
         } catch (ForbiddenException $error) {
             $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
         }
-        $condition = ['Alunos.nome LIKE' => ''];
+        $condition = ['Inscricoes.id' => ''];
         
         $nome = $this->getRequest()->getQuery('nome');
         if ($nome) { $condition = ['Alunos.nome LIKE' => '%' . $nome . '%']; }
+        
+        $instituicao = $this->getRequest()->getQuery('instituicao');
+        if ($instituicao) { $condition = ['Instituicoes.instituicao LIKE' => '%' . $instituicao . '%']; }
 
         $dre = $this->getRequest()->getQuery('dre');
         if ($dre) { $condition = ['Alunos.registro' => $dre]; }
@@ -360,10 +359,15 @@ class InscricoesController extends AppController
         
         $email = $this->getRequest()->getQuery('email');
         if ($email) { $condition = ['Users.email' => $email]; }
+
+        $contained = [
+            'Alunos' => ['Users'], 
+            'Muralestagios' => ['Instituicoes']
+        ];
         
-        $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
-        $alunos = $this->paginate($busca);
-        $this->set(compact('alunos'));
+        $busca = $this->Inscricoes->find('all',  ['conditions' => $condition ])->contain($contained);
+        $inscricoes = $this->paginate($busca);
+        $this->set(compact('inscricoes'));
     }
     
     
