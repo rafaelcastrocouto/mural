@@ -44,6 +44,7 @@ use Cake\Mailer\TransportFactory;
 use Cake\Routing\Router;
 use Cake\Utility\Security;
 use Cake\Utility\Inflector;
+use Cake\I18n\Date;
 
 /**
  * Load global functions.
@@ -238,7 +239,7 @@ Inflector::rules('irregular', ['supervisor'    => 'supervisores']);
 // set a custom date and time format
 // see https://book.cakephp.org/5/en/core-libraries/time.html#setting-the-default-locale-and-format-string
 // and https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax
-//\Cake\I18n\Date::setToStringFormat('dd.MM.yyyy');
+Date::setToStringFormat('dd.MM.yyyy');
 //\Cake\I18n\Time::setToStringFormat('dd.MM.yyyy HH:mm');
 
 Configure::write('CakePdf', [

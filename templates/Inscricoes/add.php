@@ -9,6 +9,7 @@ declare(strict_types=1);
 $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
 $user_session = $this->request->getAttribute('identity');
 if ($user_session) { $user_data = $user_session->getOriginalData(); }
+    
 ?>
 <div class="inscricoes form content">
     <aside>
@@ -18,14 +19,20 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
     </aside>
     <?= $this->Form->create($inscricao) ?>
     <fieldset>
-        <h3><?= __('Adicionar Inscricao') ?></h3>
-        <?php
-            echo $this->Form->control('aluno_id', ['disabled' => !$user_data['administrador_id'], 'type' => 'text', 'value' => $aluno ? $aluno->id : '']);
-            echo $this->Form->control('mural_estagio_id', ['disabled' => !$user_data['administrador_id']]);
-            echo $this->Form->control('data', ['disabled' => !$user_data['administrador_id'], 'type' => 'text', 'value' => $data ? $data : '']);
-            echo $this->Form->control('periodo', ['disabled' => !$user_data['administrador_id'], 'type' => 'text', 'value' => $periodo ? $periodo : '']);
-            echo $this->Form->hidden('timestamp', ['disabled' => !$user_data['administrador_id']]);
-        ?>
+        <h3><?= __('Adicionar Inscrição') ?></h3>
+	        <?php if ($user_data['administrador_id']): ?>
+                <label for="aluno-id">ID do aluno</label>
+                <?= $this->Form->number('aluno_id', ['id' => 'aluno-id', 'value' => empty($aluno) ? '' : $aluno->id]); ?>
+                <label for="mural-estagio-id">ID do estagio</label>
+                <?= $this->Form->number('mural_estagio_id', ['id' => 'mural-estagio-id', 'value' => empty($mural_estagio) ? '' : $mural_estagio->id]); ?>
+	        <?php else: ?>
+                <?= $this->Form->hidden('aluno_id'); ?>
+                <?= $this->Form->hidden('mural_estagio_id'); ?>
+	        <?php endif; ?>
+            <?= $this->Form->control('periodo', ['disabled' => !$user_data['administrador_id']]); ?>
+            <?= $this->Form->control('data', ['disabled' => !$user_data['administrador_id']]); ?>
+            <?= $this->Form->hidden('timestamp'); ?>
+    
     </fieldset>
     <?= $this->Form->button(__('Confirmar Inscrição'), ['class' => 'button btn-primary']) ?>
     <?= $this->Form->end() ?>

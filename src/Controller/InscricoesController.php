@@ -88,18 +88,13 @@ class InscricoesController extends AppController
             }
         }
         
-        $aluno = $this->fetchTable('Alunos')->get($user_data['aluno_id']);
+        if ($user_data['aluno_id']) $aluno = $this->fetchTable('Alunos')->get($user_data['aluno_id']);
         
-        if (!$aluno) {
-            $this->Flash->error(__('Erro ao selecionar aluno'));
-            
-            if ($user_data['administrador_id']) {
-                return $this->redirect(['controller' => 'Users', 'action' => 'alternar']);
-            } else {
-                $user_id = $this->Authentication->getIdentifier();
+        if (empty($aluno)) {
+            if (!$user_data['administrador_id']) {
+                $this->Flash->error(__('Erro ao selecionar aluno'));
                 return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_id]);
             }
-            
         } else {  
             $dados['registro'] = $aluno->registro;
             $dados['aluno_id'] = $aluno->id;
@@ -115,7 +110,7 @@ class InscricoesController extends AppController
             }
         }
         
-        $data = date('Y-m-d');
+        $data = date('d-m-Y');
         $dados['data'] = $data;
 
         $inscricao = $this->Inscricoes->newEmptyEntity();
@@ -128,10 +123,16 @@ class InscricoesController extends AppController
             }
             $this->Flash->error(__('The inscricao could not be saved. Please, try again.'));
         }
-        if ($id) {
-            $this->set(compact('inscricao', 'aluno', 'periodo', 'mural_estagio', 'data'));
+        
+        $this->set(compact('inscricao', 'periodo', 'data'));
+        
+        if (!empty($aluno)) {
+            $this->set(compact('aluno'));
+        }
+        if (!empty($mural_estagio)) {
+            $this->set(compact('mural_estagio'));
         } else {
-            $this->set(compact('inscricao', 'aluno', 'periodo', 'data'));
+            $this->Flash->error(__("Erro ao localizar a vaga no mural de estágios"));
         }
     }
 

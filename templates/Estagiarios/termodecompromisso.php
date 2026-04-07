@@ -62,7 +62,7 @@ $submit = [
                     echo "</fieldset>";
                 endif;
                 echo $this->Form->control('aprovado', ['label' => ['text' => 'Termo de compromisso'], 'options' => ['0' => 'Não', '1' => 'Sim'], 'value' => 1, 'readonly']);
-                echo $this->Form->control('tc_solicitacao', ['label' => ['text' => 'Data de solicitação do TC'], 'value' => date('Y-m-d'), 'readonly']);
+                echo $this->Form->control('tc_solicitacao', ['label' => ['text' => 'Data de solicitação do TC'], 'value' => date('d-m-Y'), 'readonly']);
                 echo $this->Form->control('tipo_de_estagio', ['label' => ['text' => 'Tipo de estágio'], 'options' => ['1' => 'Presencial', '2' => 'Remoto'], 'default' => '1']);
 
                 if (isset($instituicao_id)) {

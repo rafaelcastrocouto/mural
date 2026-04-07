@@ -151,7 +151,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 
             <?php else: ?>
 				<!--  Para os outros usuários as inscrições dependem da data de encerramento
-							date('Y-m-d', strtotime())
+							date('d-m-Y', strtotime())
 				//-->
 				<?php if (date('d-m-Y') <= $muralestagio['data_inscricao']): ?>
 					<!--
