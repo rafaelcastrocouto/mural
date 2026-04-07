@@ -385,40 +385,6 @@ class EstagiariosController extends AppController
         }
     }
     
-    /**
-     * Selecionasupervisores method
-     *
-     * Seleciona os supervisores da instituicao
-     *
-     * @param string|null $id Estagiario id.
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     *
-     */
-    private function selecionasupervisores($instituicao_id = null)
-    {
-        $supervisoresinstituicao = null;
-        if ($instituicao_id) {
-
-            $supervisoresDaInstituicao = $this->Estagiarios->Instituicoes->find()
-                ->contain(['Supervisores'])
-                ->where(['Instituicoes.id' => $instituicao_id])
-                ->first();
-
-            // pr($supervisoresDaInstituicao);
-            // die();
-
-            if ($supervisoresDaInstituicao) {
-
-                foreach ($supervisoresDaInstituicao->supervisores as $supervisor) {
-                    $supervisoresinstituicao[$supervisor['id']] = $supervisor['nome'];
-                }
-            } else {
-                $supervisoresinstituicao[0] = "Sem supervisor(a)";
-                $supervisoresinstituicao[0] = "Sem dados";
-            }
-        }
-        return $supervisoresinstituicao;
-    }
 
     /**
      * Nivelestagio method
@@ -447,40 +413,6 @@ class EstagiariosController extends AppController
         return $nivel;
     }
 
-    /**
-     * Alunoinsere method
-     *
-     * Inserir dados de aluno na tabela alunoestagiario.
-     *
-     */
-    private function alunoinsere($aluno_id, $estagiario_id)
-    {
-        /**
-         * Verificar se o aluno está cadastrado em estagiarios.
-         */
-        $estagiario = $this->Estagiarios->find()->where(['id' => $estagiario_id])->first();
-        $aluno = $this->fetchTable('Alunos')->find()->where(['id' => $estagiario->aluno_id])->first();
-        if ($alun) {
-            echo 'Aluno cadastrado: atualizar apenas o aluno_id em estagiarios' . '<br>';
-            $estagiario_entity = $this->Estagiarios->get($estagiario_id);
-            $estagiario = $this->Estagiarios->find()->where(['id' => $estagiario_id])->first();
-            // pr($estagiario);
-            $dadosinsere = $estagiario->toArray();
-            // pr($dadosinsere);
-            // die('estagiario');
-            $dadosinsere['aluno_id'] = $aluno->id;
-            // pr($dadosinsere);
-            // die();
-            $estagiario_aluno_resultado = $this->Estagiarios->patchEntity($estagiario_entity, $dadosinsere);
-            if ($this->Estagiarios->save($estagiario_aluno_resultado)) {
-                $this->Flash->success(__("Estagiário atualizado"));
-            } else {
-                // debug($estagiario_aluno_resultado);
-                // die();
-            }
-        } 
-        return;
-    }
 
     /**
      * Termodecompromissopdf method
@@ -519,30 +451,6 @@ class EstagiariosController extends AppController
         );
         $this->set('configuracao', $configuracao);
         $this->set('estagiario', $estagiario->first());
-    }
-
-    /**
-     * Selecionadeclaracaodeestagio method
-     *
-     * @param string|null $id Estagiario id.
-     */     
-    public function selecionadeclaracaodeestagio($id = null)
-    {
-
-        /* No login foi capturado o id do estagiário */
-        if (is_null($id)) { $id = $this->getRequest()->getSession()->read('estagiario_id'); }
-        if (is_null($id)) {
-            $this->Flash->error(__('Selecionar o aluno estagiário'));
-            return $this->redirect('/alunos/index');
-        } else {
-            $estagiarios = $this->Estagiarios->find()
-                ->contain(['Alunos', 'Supervisores', 'Instituicoes'])
-                ->where(['Estagiarios.id IS' => $id]);
-            //pr($estagiario);
-            // die();
-        }
-
-        $this->set('estagiarios', $this->paginate($estagiarios));
     }
 
     /**
@@ -597,123 +505,6 @@ class EstagiariosController extends AppController
         $this->set('estagiario', $estagiarioquery);
     }
     
-    /**
-     * Selecionafolhadeatividades method
-     *
-     * @param string|null $id Estagiario id.
-     */  
-    public function selecionafolhadeatividades($id = null)
-    {
-
-        /* No login foi capturado o id do estagiário */
-        $id = $this->getRequest()->getSession()->read('estagiario_id');
-        if (is_null($id)) {
-            $this->Flash->error(__('Selecionar o aluno e o estágio'));
-            return $this->redirect('/alunos/index');
-        } else {
-            $estagiarios = $this->Estagiarios->find()
-                ->contain(['Alunos', 'Supervisores', 'Instituicoes'])
-                ->where(['Estagiarios.registro' => $this->getRequest()->getSession()->read('registro')])
-                ->all();
-            //pr($estagiario);
-            // die();
-        }
-
-        $this->set('estagiarios', $estagiarios);
-    }
-
-    /**
-     * Folhadeatividadespdf method
-     *
-     * @param string|null $id Estagiario id.
-     */  
-    public function folhadeatividadespdf($id = null)
-    {
-
-        $this->layout = false;
-        if (is_null($id)) {
-            $this->Flash->error(__('Por favor selecionar o estágio do aluno'));
-            return $this->redirect('/alunos/view/' . $this->getRequest()->getSession()->read('id'));
-        } else {
-            $estagiario = $this->Estagiarios->find()
-                ->contain(['Alunos', 'Supervisores', 'Instituicoes', 'Professores'])
-                ->where(['Estagiarios.id IS' => $id])
-                ->first();
-        }
-        // pr($estagiario);
-        // die('estagioario');
-
-        $this->viewBuilder()->enableAutoLayout(false);
-        $this->viewBuilder()->setClassName('CakePdf.Pdf');
-        $this->viewBuilder()->setOption(
-            'pdfConfig',
-            [
-                'orientation' => 'portrait',
-                //'download' => true, // This can be omitted if "filename" is specified.
-                //'filename' => 'folha_de_atividades_' . $id . '.pdf' //// This can be omitted if you want file name based on URL.
-            ]
-        );
-        $this->set('estagiario', $estagiario);
-    }
-
-    /**
-     * Selecionaavaliacaodiscente method
-     *
-     * @param string|null $id Estagiario id.
-     */      
-    public function selecionaavaliacaodiscente($id = null)
-    {
-
-        /* No login foi capturado o id do estagiário */
-        $id = $this->getRequest()->getSession()->read('estagiario_id');
-        if (is_null($id)) {
-            $this->Flash->error(__('Selecionar o aluno estagiário'));
-            return $this->redirect('/alunos/index');
-        } else {
-            $estagiarios = $this->Estagiarios->find()
-                ->contain(['Alunos', 'Supervisores', 'Instituicoes'])
-                ->where(['Alunos.registro' => $this->getRequest()->getSession()->read('registro')])
-                ->all();
-            //pr($estagiario);
-            // die();
-        }
-
-        $this->set('estagiarios', $estagiarios);
-    }
-
-    /**
-     * Avaliacaodiscentepdf method
-     *
-     * @param string|null $id Estagiario id.
-     */  
-    public function avaliacaodiscentepdf($id = null)
-    {
-
-        $this->layout = false;
-        $estagiario_id = $this->getRequest()->getQuery('estagiario_id');
-
-        $estagiario = $this->Estagiarios->find()
-            ->contain(['Alunos', 'Supervisores', 'Instituicoes', 'Professores'])
-            ->where(['Estagiarios.id IS' => $estagiario_id])
-            ->first();
-
-        if (!$estagiario) {
-            $this->Flash->error(__('Sem estagiarios cadastrados'));
-            return $this->redirect(['estagiario' => $estagiario, 'action' => 'view', $estagiario_id]);
-        }
-
-        $this->viewBuilder()->enableAutoLayout(false);
-        $this->viewBuilder()->setClassName('CakePdf.Pdf');
-        $this->viewBuilder()->setOption(
-            'pdfConfig',
-            [
-                'orientation' => 'portrait',
-                //'download' => true, // This can be omitted if "filename" is specified.
-                //'filename' => 'avaliacao_discente_' . $estagiario_id . '.pdf' //// This can be omitted if you want file name based on URL.
-            ]
-        );
-        $this->set('estagiario', $estagiario);
-    }
     
     /**
      * Lancanota method
@@ -781,12 +572,12 @@ class EstagiariosController extends AppController
     public function buscar () 
     {
         try {
-            $this->Authorization->authorize($this->Alunos);
+            $this->Authorization->authorize($this->Estagiarios);
         } catch (ForbiddenException $error) {
             $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
         }
-        $condition = ['Alunos.nome LIKE' => ''];
+        $condition = ['Estagiarios.id' => ''];
         
         $nome = $this->getRequest()->getQuery('nome');
         if ($nome) { $condition = ['Alunos.nome LIKE' => '%' . $nome . '%']; }
@@ -800,9 +591,9 @@ class EstagiariosController extends AppController
         $email = $this->getRequest()->getQuery('email');
         if ($email) { $condition = ['Users.email' => $email]; }
         
-        $busca = $this->Alunos->find('all',  ['conditions' => $condition ])->contain(['Users']);
-        $alunos = $this->paginate($busca);
-        $this->set(compact('alunos'));
+        $busca = $this->Estagiarios->find('all',  ['conditions' => $condition ])->contain(['Alunos' => ['Users']]);
+        $estagiarios = $this->paginate($busca);
+        $this->set(compact('estagiarios'));
     }
         
     

@@ -179,7 +179,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 					<?php else: ?>
 					<tr>
 						<td colspan = 2 class="text-center"> O usuário já está inscrito, 
-						<?php echo $this->Html->link('visualisar inscrição', ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]); ?>
+						<?php echo $this->Html->link('visualizar inscrição', ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]); ?>
 					</tr>		
 					<?php endif; ?>
 							

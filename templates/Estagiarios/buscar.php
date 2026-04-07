@@ -1,7 +1,7 @@
 <?php 
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Aluno[]|\Cake\Collection\CollectionInterface $alunos
+ * @var \App\Model\Entity\Aluno[]|\Cake\Collection\CollectionInterface $estagiarios
  */
 
 declare(strict_types=1);
@@ -11,7 +11,7 @@ $dre = $this->getRequest()->getQuery('dre');
 $cpf = $this->getRequest()->getQuery('cpf');
 $email = $this->getRequest()->getQuery('email');
      
-// pr($alunos);
+// pr($estagiarios);
 // die();
 ?>
 
@@ -23,7 +23,7 @@ $email = $this->getRequest()->getQuery('email');
     });
 </script>
 
-<div class="alunos busca content">
+<div class="estagiarios busca content">
 
     <div class="tabset">
         
@@ -64,9 +64,9 @@ $email = $this->getRequest()->getQuery('email');
         </div>
     </div>
     
-    <?php if (isset($alunos)): ?>
+    <?php if (isset($estagiarios)): ?>
     
-        <?php if (iterator_count($alunos)): ?>
+        <?php if (iterator_count($estagiarios)): ?>
     
         
             <?php if ($nome): ?><h3>Resultado da busca para o termo "<?= $nome ?>"</h3><?php endif; ?>
@@ -87,16 +87,16 @@ $email = $this->getRequest()->getQuery('email');
                             <th><?= $this->Paginator->sort('email', 'E-mail'); ?></th>
                         </tr>
                     </thead>
-                    <?php foreach ($alunos as $aluno): ?>
+                    <?php foreach ($estagiarios as $estagiario): ?>
                         <?php 
-                          //pr($aluno);
+                          //pr($estagiario);
                           // die();
                         ?>
                         <tr>
-                            <td><?= $aluno->registro; ?></td>
-                            <td><?= $this->Html->link($aluno->nome, ['action' => 'view', $aluno->id]); ?></td>
-                            <td><?= $aluno->cpf; ?></td>
-                            <td><?= ($aluno->user and $aluno->user->email) ? $this->Text->autoLinkEmails($aluno->user->email) : '' ?></td>
+                            <td><?= $this->Html->link((string)$estagiario->aluno->registro, ['controller' => 'Alunos', 'action' => 'view', $estagiario->aluno->id]); ?></td>
+                            <td><?= $this->Html->link($estagiario->aluno->nome, ['action' => 'view', $estagiario->id]); ?></td>
+                            <td><?= $estagiario->aluno->cpf; ?></td>
+                            <td><?= ($estagiario->aluno->user and $estagiario->aluno->user->email) ? $this->Text->autoLinkEmails($estagiario->aluno->user->email) : '' ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>

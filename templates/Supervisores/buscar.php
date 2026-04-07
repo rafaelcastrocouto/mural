@@ -36,7 +36,7 @@ $email = $this->getRequest()->getQuery('email');
         </div>
         
         <input type="radio" name="tabs" id="tab_cress" <?= ($cress) ? 'checked' : '' ?> >
-        <label for="tab_cress">Busca por cress</label>
+        <label for="tab_cress">Busca por CRESS</label>
         <div class="tab-content">
             <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
             <?php echo $this->Form->control('cress', ['label' => ['text' => 'Digite o CRESS do supervisor'], 'class' => 'form-control']); ?>
