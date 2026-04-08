@@ -46,7 +46,7 @@ class AlunosTablePolicy implements BeforePolicyInterface
     
   }
   
-  public function canBusca()
+  public function canBuscar()
   {
     return new Result(false, 'Erro: alunos busca policy not authorized');
   }

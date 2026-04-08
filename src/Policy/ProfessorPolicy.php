@@ -53,5 +53,10 @@ class ProfessorPolicy implements BeforePolicyInterface
   {
     return ($userSession->id == $professorData->user_id);
   }
+
+  public function canBuscar()
+  {
+    return new Result(false, 'Erro: professores buscar policy not authorized');
+  }
   
 }

@@ -34,7 +34,7 @@ class EstagiariosTablePolicy implements BeforePolicyInterface
     return $query->where(['Estagiarios.aluno_id' => $user->aluno_id ]);
   }
   
-  public function canBusca()
+  public function canBuscar()
   {
     return new Result(false, 'Erro: estagiarios busca policy not authorized');
   }

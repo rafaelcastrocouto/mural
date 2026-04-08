@@ -28,5 +28,10 @@ class UsersTablePolicy implements BeforePolicyInterface
   {
     return $query->where(['Users.id' => $user->getIdentifier()]);
   }
+
+  public function canBuscar()
+  {
+    return new Result(false, 'Erro: users buscar policy not authorized');
+  }
   
 }

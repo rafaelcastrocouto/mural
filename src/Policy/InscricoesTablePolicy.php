@@ -46,7 +46,7 @@ class InscricoesTablePolicy implements BeforePolicyInterface
     
   }
   
-  public function canBusca()
+  public function canBuscar()
   {
     return new Result(false, 'Erro: inscricoes busca policy not authorized');
   }

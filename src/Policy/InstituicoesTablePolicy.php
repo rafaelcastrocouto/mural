@@ -49,4 +49,9 @@ class InstituicoesTablePolicy implements BeforePolicyInterface
   {
     return new Result(false, 'Erro: instituicoes delete policy not authorized');
   }
+
+  public function canBuscar()
+  {
+    return new Result(false, 'Erro: instituicoes buscar policy not authorized');
+  }
 }

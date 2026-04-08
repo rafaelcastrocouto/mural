@@ -53,5 +53,10 @@ class SupervisorPolicy implements BeforePolicyInterface
   {
     return ($userSession->id == $supervisorData->user_id);
   }
+
+  public function canBuscar()
+  {
+    return new Result(false, 'Erro: supervisor buscar policy not authorized');
+  }
   
 }
