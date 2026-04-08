@@ -145,7 +145,7 @@ class InstituicoesController extends AppController
             $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
         }
-        $condition = ['Instituicoes.instituicao LIKE' => ''];
+        $condition = ['Instituicoes.id' => ''];
         
         $instituicao = $this->getRequest()->getQuery('instituicao');
         if ($instituicao) { $condition = ['Instituicoes.instituicao LIKE' => '%' . instituicao . '%']; }
@@ -154,10 +154,10 @@ class InstituicoesController extends AppController
         if ($area) { $condition = ['Areas.area LIKE' => '%' . $area . '%']; }
 
         $cep = $this->getRequest()->getQuery('cep');
-        if ($cep) { $condition = ['Instituicoes.cep LIKE' => $cep]; }
+        if ($cep) { $condition = ['Instituicoes.cep LIKE' => '%' . $cep . '%']; }
                 
         $cnpj = $this->getRequest()->getQuery('cnpj');
-        if ($cnpj) { $condition = ['Instituicoes.cnpj LIKE' => $cnpj]; }
+        if ($cnpj) { $condition = ['Instituicoes.cnpj LIKE' => '%' .$cnpj. '%']; }
         
         $email = $this->getRequest()->getQuery('email');
         if ($email) { $condition = ['Instituicoes.email' => $email]; }

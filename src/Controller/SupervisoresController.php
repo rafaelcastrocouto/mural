@@ -146,7 +146,7 @@ class SupervisoresController extends AppController
             $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
         }
-        $condition = ['Supervisores.nome LIKE' => ''];
+        $condition = ['Supervisores.id' => ''];
         
         $nome = $this->getRequest()->getQuery('nome');
         if ($nome) { $condition = ['Supervisores.nome LIKE' => '%' . $nome . '%']; }

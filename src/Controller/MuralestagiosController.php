@@ -46,6 +46,7 @@ class MuralestagiosController extends AppController {
         
         $this->set('muralestagios', $this->paginate($muralestagios));
 
+        // cria a lista de periodos
         $periodototal = $this->Muralestagios->find('list', [
             'keyField' => 'periodo',
             'valueField' => 'periodo'
@@ -177,20 +178,20 @@ class MuralestagiosController extends AppController {
         if ($requisitos) { $condition = ['Muralestagios.requisitos LIKE' => '%' . $requisitos . '%']; }
 
         $outras = $this->getRequest()->getQuery('outras');
-        if ($outras) { $condition = ['Muralestagios.outras LIKE' => $outras]; }
+        if ($outras) { $condition = ['Muralestagios.outras LIKE' => '%' . $outras. '%']; }
         
         $instituicao = $this->getRequest()->getQuery('instituicao');
         if ($instituicao) { $condition = ['Instituicoes.instituicao LIKE' => '%' . $instituicao . '%']; }
                 
         $cnpj = $this->getRequest()->getQuery('cnpj');
-        if ($cnpj) { $condition = ['Instituicoes.cnpj LIKE' => $cnpj]; }
+        if ($cnpj) { $condition = ['Instituicoes.cnpj LIKE' => '%' . $cnpj. '%']; }
         
         $email = $this->getRequest()->getQuery('email');
         if ($email) { $condition = ['Instituicoes.email' => $email]; }
         
         $contained = ['Instituicoes'];
         
-        $busca = $this->Muralestagios->find('all',  ['conditions' => $condition ])->contain($contained);
+        $busca = $this->Muralestagios->find('all',  ['conditions' => $condition ])->contain($contained)->order(['periodo' => 'DESC']);
         $muralestagios = $this->paginate($busca);
         $this->set(compact('muralestagios'));
     }

@@ -195,7 +195,7 @@ class AlunosController extends AppController
             $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
         }
-        $condition = ['Alunos.nome LIKE' => ''];
+        $condition = ['Alunos.id' => ''];
         
         $nome = $this->getRequest()->getQuery('nome');
         if ($nome) { $condition = ['Alunos.nome LIKE' => '%' . $nome . '%']; }

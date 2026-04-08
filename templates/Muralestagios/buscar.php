@@ -50,7 +50,7 @@ $email = $this->getRequest()->getQuery('email');
         <label for="tab_outras">Busca por outras informações</label>
         <div class="tab-content">
             <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
-            <?php echo $this->Form->control('outras', ['label' => ['text' => 'Digite o CEP'], 'class' => 'form-control']); ?>
+            <?php echo $this->Form->control('outras', ['label' => ['text' => 'Digite o termo de pesquisa'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
         </div>

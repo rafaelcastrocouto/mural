@@ -171,7 +171,7 @@ class ProfessoresController extends AppController
             $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
         }
-        $condition = ['Professores.nome LIKE' => ''];
+        $condition = ['Professores.id' => ''];
         
         $nome = $this->getRequest()->getQuery('nome');
         if ($nome) { $condition = ['Professores.nome LIKE' => '%' . $nome . '%']; }
