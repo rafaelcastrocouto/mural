@@ -7,8 +7,8 @@
 declare(strict_types=1);
 
 $instituicao = $this->getRequest()->getQuery('instituicao');
-$area = $this->getRequest()->getQuery('area');
-$cep = $this->getRequest()->getQuery('cep');
+$requisitos = $this->getRequest()->getQuery('requisitos');
+$outras = $this->getRequest()->getQuery('outras');
 $cnpj = $this->getRequest()->getQuery('cnpj');
 $email = $this->getRequest()->getQuery('email');
      
@@ -24,11 +24,11 @@ $email = $this->getRequest()->getQuery('email');
     });
 </script>
 
-<div class="instituicoes busca content">
+<div class="muralestagios buscar content">
 
     <div class="tabset">
         
-        <input type="radio" name="tabs" id="tab_insituicao" <?= ($instituicao or (!$area and !$cnpj and !$cep and !$email)) ? 'checked' : '' ?> >
+        <input type="radio" name="tabs" id="tab_insituicao" <?= ($instituicao or (!$requisitos and !$cnpj and !$outras and !$email)) ? 'checked' : '' ?> >
         <label for="tab_insituicao">Busca por instituição</label>
         <div class="tab-content">
             <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
@@ -37,20 +37,20 @@ $email = $this->getRequest()->getQuery('email');
             <?php echo $this->Form->end(); ?>
         </div>
         
-        <input type="radio" name="tabs" id="tab_area" <?= ($area) ? 'checked' : '' ?> >
-        <label for="tab_area">Busca por área</label>
+        <input type="radio" name="tabs" id="tab_requisitos" <?= ($requisitos) ? 'checked' : '' ?> >
+        <label for="tab_requisitos">Busca por requisitos</label>
         <div class="tab-content">
             <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
-            <?php echo $this->Form->control('area', ['label' => ['text' => 'Digite a área'], 'class' => 'form-control']); ?>
+            <?php echo $this->Form->control('requisitos', ['label' => ['text' => 'Digite a área'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
         </div>
         
-        <input type="radio" name="tabs" id="tab_cep" <?= ($cep) ? 'checked' : '' ?> >
-        <label for="tab_cep">Busca por CEP</label>
+        <input type="radio" name="tabs" id="tab_outras" <?= ($outras) ? 'checked' : '' ?> >
+        <label for="tab_outras">Busca por outras informações</label>
         <div class="tab-content">
             <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
-            <?php echo $this->Form->control('cep', ['label' => ['text' => 'Digite o CEP'], 'class' => 'form-control']); ?>
+            <?php echo $this->Form->control('outras', ['label' => ['text' => 'Digite o CEP'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
         </div>
@@ -74,14 +74,14 @@ $email = $this->getRequest()->getQuery('email');
         </div>
     </div>
     
-    <?php if (isset($instituicoes)): ?>
+    <?php if (isset($muralestagios)): ?>
     
-        <?php if (iterator_count($instituicoes)): ?>
+        <?php if (iterator_count($muralestagios)): ?>
     
         
             <?php if ($instituicao): ?><h3>Resultado da busca para o termo "<?= $instituicao ?>"</h3><?php endif; ?>
-            <?php if ($area): ?><h3>Resultado da busca para o termo "<?= $area ?>"</h3><?php endif; ?>
-            <?php if ($cep):  ?><h3>Resultado da busca para o CEP <?= $cep ?></h3><?php endif; ?>
+            <?php if ($requisitos): ?><h3>Resultado da busca para o termo "<?= $requisitos ?>"</h3><?php endif; ?>
+            <?php if ($outras):  ?><h3>Resultado da busca para o termo <?= $outras ?></h3><?php endif; ?>
             <?php if ($cnpj):  ?><h3>Resultado da busca para o CNPJ <?= $cnpj ?></h3><?php endif; ?>
             <?php if ($email):  ?><h3>Resultado da busca para o email <?= $email ?></h3><?php endif; ?>
     
@@ -92,24 +92,28 @@ $email = $this->getRequest()->getQuery('email');
                 <table>
                     <thead class='thead-light'>
                         <tr>
+                            <th><?= $this->Paginator->sort('id', 'ID'); ?></th>
                             <th><?= $this->Paginator->sort('instituicao', 'Nome'); ?></th>
-                            <th><?= $this->Paginator->sort('area', 'Área'); ?></th>
-                            <th><?= $this->Paginator->sort('cep', 'CNPJ'); ?></th>
+                            <th><?= $this->Paginator->sort('requisitos', 'Requisitos'); ?></th>
+                            <th><?= $this->Paginator->sort('periodo', 'Período'); ?></th>
                             <th><?= $this->Paginator->sort('cnpj', 'CNPJ'); ?></th>
                             <th><?= $this->Paginator->sort('email', 'E-mail'); ?></th>
+                            <th><?= $this->Paginator->sort('outras', 'Outras informações'); ?></th>
                         </tr>
                     </thead>
-                    <?php foreach ($instituicoes as $instituicao): ?>
+                    <?php foreach ($muralestagios as $muralestagio): ?>
                         <?php 
-                          //pr($instituicao);
+                          //pr($muralestagio);
                           // die();
                         ?>
                         <tr>
-                            <td><?= $this->Html->link($instituicao->instituicao, ['action' => 'view', $instituicao->id]); ?></td>
-                            <td><?= $this->Html->link($instituicao->area->area, ['controller' => 'Areas', 'action' => 'view', $instituicao->id]); ?></td>
-                            <td><?= h($instituicao->cep()); ?></td>
-                            <td class="cnpj"><?= h($instituicao->cnpj); ?></td>
-                            <td><?= ($instituicao->email) ? $this->Text->autoLinkEmails($instituicao->email) : '' ?></td>
+                            <td><?= $this->Html->link((string)$muralestagio->id, ['action' => 'view', $muralestagio->id]); ?></td>
+                            <td><?= ($muralestagio->instituicao) ? $this->Html->link($muralestagio->instituicao->instituicao, ['controller' => 'Instituicao', 'action' => 'view', $muralestagio->instituicao->id]) : ''; ?></td>
+                            <td><?= $muralestagio->requisitos; ?></td>
+                            <td><?= h($muralestagio->periodo); ?></td>
+                            <td class="cnpj"><?= ($muralestagio->instituicao) ? h($muralestagio->instituicao->cnpj) : ''; ?></td>
+                            <td><?= ($muralestagio->instituicao && $muralestagio->instituicao->email) ? $this->Text->autoLinkEmails($muralestagio->instituicao->email) : '' ?></td>
+                            <td><?= $muralestagio->outras; ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
@@ -121,8 +125,8 @@ $email = $this->getRequest()->getQuery('email');
         
         <?php else: ?>
             <?php if ($instituicao): ?><h3>Nenhum resultado encontrado para o termo "<?= $instituicao ?>"</h3><?php endif; ?>
-            <?php if ($area): ?><h3>Nenhum resultado encontrado para o termo "<?= $area ?>"</h3><?php endif; ?>
-            <?php if ($cep):  ?><h3>Nenhum resultado encontrado para o CEP <?= $cep ?></h3><?php endif; ?>
+            <?php if ($requisitos): ?><h3>Nenhum resultado encontrado para o termo "<?= $requisitos ?>"</h3><?php endif; ?>
+            <?php if ($outras):  ?><h3>Nenhum resultado encontrado para o termo <?= $outras ?></h3><?php endif; ?>
             <?php if ($cnpj):  ?><h3>Nenhum resultado encontrado para o CNPJ <?= $cnpj ?></h3><?php endif; ?>
             <?php if ($email):  ?><h3>Nenhum resultado encontrado para o email <?= $email ?></h3><?php endif; ?>
         <?php endif; ?>

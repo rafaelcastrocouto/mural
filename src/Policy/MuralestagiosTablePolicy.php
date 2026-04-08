@@ -48,4 +48,9 @@ class MuralestagiosTablePolicy implements BeforePolicyInterface
   {
     return new Result(false, 'Erro: mural delete policy not authorized');
   }
+
+  public function canBuscar()
+  {
+    return new Result(true);
+  }
 }

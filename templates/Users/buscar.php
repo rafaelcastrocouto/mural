@@ -13,11 +13,11 @@ $email = $this->getRequest()->getQuery('email');
      
 ?>
 
-<div class="users busca content">
+<div class="users buscar content">
 
     <div class="tabset">
         
-        <input type="radio" name="tabs" id="tab_nome" <?= ($id or !$email) ? 'checked' : '' ?> >
+        <input type="radio" name="tabs" id="tab_id" <?= ($id or !$email) ? 'checked' : '' ?> >
         <label for="tab_id">Busca por ID</label>
         <div class="tab-content">
             <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>

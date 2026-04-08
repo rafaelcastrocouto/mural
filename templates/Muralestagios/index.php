@@ -44,6 +44,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 	
 	<aside>
 		<div class="nav">
+			<?= $this->Html->link(__('Buscar vagas'), ['action' => 'buscar'], ['class' => 'button']) ?>
 	        <?php if ($user_data['administrador_id'] || $user_data['professor_id'] || $user_data['supervisor_id']): ?>
 			    <?= $this->Html->link(__('Novas vagas'), ['action' => 'add'], ['class' => 'button']) ?>
 	        <?php endif; ?>

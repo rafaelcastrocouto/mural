@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Authorization\Exception\ForbiddenException;
+use Cake\Event\EventInterface;
+
 /**
  * Muralestagios Controller
  *
@@ -153,5 +156,44 @@ class MuralestagiosController extends AppController {
 
         return $this->redirect(['action' => 'index']);
     }
+
+
+    /**
+     * Buscar method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function buscar () 
+    {
+        try {
+            $this->Authorization->authorize($this->Muralestagios);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        $condition = ['Muralestagios.id' => ''];
+        
+        $requisitos = $this->getRequest()->getQuery('requisitos');
+        if ($requisitos) { $condition = ['Muralestagios.requisitos LIKE' => '%' . $requisitos . '%']; }
+
+        $outras = $this->getRequest()->getQuery('outras');
+        if ($outras) { $condition = ['Muralestagios.outras LIKE' => $outras]; }
+        
+        $instituicao = $this->getRequest()->getQuery('instituicao');
+        if ($instituicao) { $condition = ['Instituicoes.instituicao LIKE' => '%' . $instituicao . '%']; }
+                
+        $cnpj = $this->getRequest()->getQuery('cnpj');
+        if ($cnpj) { $condition = ['Instituicoes.cnpj LIKE' => $cnpj]; }
+        
+        $email = $this->getRequest()->getQuery('email');
+        if ($email) { $condition = ['Instituicoes.email' => $email]; }
+        
+        $contained = ['Instituicoes'];
+        
+        $busca = $this->Muralestagios->find('all',  ['conditions' => $condition ])->contain($contained);
+        $muralestagios = $this->paginate($busca);
+        $this->set(compact('muralestagios'));
+    }
+       
 
 }

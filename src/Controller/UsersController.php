@@ -241,11 +241,10 @@ class UsersController extends AppController {
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function busca() 
+    public function buscar() 
     {
         try {
-            $user = $this->Users->newEmptyEntity();
-            $this->Authorization->authorize($user);
+            $this->Authorization->authorize( $this->Users);
         } catch (ForbiddenException $error) {
             $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
