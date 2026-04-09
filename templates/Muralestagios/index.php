@@ -70,7 +70,10 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <th><?= $this->Paginator->sort('fim_de_semana', 'Fim de semana') ?></th>
                     <th><?= $this->Paginator->sort('carga_horaria', 'Carga Horária') ?></th>
                     <th><?= $this->Paginator->sort('data_selecao', 'Seleção') ?></th>
-                    <th><?= $this->Paginator->sort('data_inscricao', 'Inscrição') ?></th>
+                    <th><?= $this->Paginator->sort('data_inscricao', 'Prazo de Inscrição') ?></th>
+				    <?php if ($user_data['aluno_id']): ?>
+	                    <th><?= $this->Paginator->sort('inscricao', 'Inscrito') ?></th>
+				    <?php endif; ?>
                 </tr>
             </thead>
             <tbody>
@@ -101,6 +104,9 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                         <td><?= h($muralestagio->carga_horaria) ?></td>
                         <td><?= h($muralestagio->data_selecao) ?></td>
                         <td><?= h($muralestagio->data_inscricao) ?></td>
+				        <?php if ($user_data['aluno_id']): ?>
+	                        <td><?= h($muralestagio->inscricao ? 'Sim' : 'Não') ?></td>
+				        <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

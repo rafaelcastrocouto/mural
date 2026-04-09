@@ -43,6 +43,27 @@ class MuralestagiosController extends AppController {
             $muralestagios = $this->Muralestagios->find('all', ['conditions' => ['Muralestagios.periodo' => $periodo] ])
             ->contain($contained);
         }
+
+        // verifica se o aluno está inscrito
+        $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
+        $user_session = $this->request->getAttribute('identity');
+        if ($user_session) { $user_data = $user_session->getOriginalData(); }
+        
+        if ($user_data['aluno_id']) {
+            $muralestagios->
+                formatResults(function (\Cake\Collection\CollectionInterface $results) use ($user_data) {
+                return $results->map(function ($row) use ($user_data) {
+                    $condition = ['aluno_id' => $user_data->aluno_id];
+                    $inscricoes = $this->fetchTable('Inscricoes')->find('all', ['conditions' => $condition]);
+                    $inscrito = false;
+                    foreach ($inscricoes as $inscricao) {
+                        if ($row['id'] == $inscricao->mural_estagio_id) { $inscrito = true; }
+                    }
+                    $row['inscricao'] = $inscrito;
+                    return $row;
+                });
+            });
+        }
         
         $this->set('muralestagios', $this->paginate($muralestagios));
 
