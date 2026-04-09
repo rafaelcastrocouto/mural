@@ -150,13 +150,19 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 </tr>
 
             <?php else: ?>
-				<!--  Para os outros usuários as inscrições dependem da data de encerramento
-							date('d-m-Y', strtotime())
-				//-->
+
+							
+				<?php if (!empty($inscricao)): ?>
+					<tr>
+						<td colspan = 2>
+							<p class="text-center">O usuário já está inscrito, <?php echo $this->Html->link('visualizar inscrição', ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>.</p>
+					</tr>
+				
+				<?php endif; ?>
+								
 				<?php if (date('d-m-Y') <= $muralestagio['data_inscricao']): ?>
-					<!--
-					Se a inscricao e na instituição também tem que fazer inscrição no mural
-					//-->
+						
+					<!--	Se a inscricao e na instituição também tem que fazer inscrição no mural //-->
 					<?php if ((string)$muralestagio['localInscricao'] === '1'): ?>
 	
 						<tr>
@@ -166,23 +172,14 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 						</tr>
 	
 					<?php endif; ?>
-	
-					<!-- todo verificar alunos inscritos -->
-					
-
-					<?php if (empty($inscricao)): ?>	
+							
+							
 					<tr>
 						<td colspan = 2 class="text-center">
 							<?php echo $this->Html->link('Fazer inscrição', ['controller' => 'Inscricoes', 'action' => 'add', $muralestagio['id']], ['role' => 'button', 'class' => 'button btn-primary']); ?>
 						</td>
 					</tr>
-					<?php else: ?>
-					<tr>
-						<td colspan = 2 class="text-center"> O usuário já está inscrito, 
-						<?php echo $this->Html->link('visualizar inscrição', ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]); ?>
-					</tr>		
-					<?php endif; ?>
-							
+
 				<?php else: ?>
 					<tr>
 						<td colspan = 2>
@@ -190,6 +187,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 						</td>
 					</tr>
 				<?php endif; ?>
+				
 				
 			<?php endif; ?>
 
