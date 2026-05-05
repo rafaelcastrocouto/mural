@@ -15,6 +15,21 @@ use Cake\Event\EventInterface;
 class EstagiariosController extends AppController
 {
     /**
+     * beforeFilter method
+     */
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        try {
+            $this->Authorization->authorize($this->Estagiarios);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
+    }
+    
+    /**
      * paginate array
      */
     protected array $paginate = [

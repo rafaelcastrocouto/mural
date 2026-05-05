@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Controller;
 use App\Model\Entity\Folhadeatividade;
 
+use Authorization\Exception\ForbiddenException;
+use Cake\Event\EventInterface;
+
 /**
  * Folhadeatividades Controller
  *
@@ -13,6 +16,19 @@ use App\Model\Entity\Folhadeatividade;
  */
 class FolhadeatividadesController extends AppController
 {
+    /**
+     * beforeFilter method
+     */
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        try {
+            $this->Authorization->authorize($this->Folhadeatividades);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+    }
 
     /**
      * Index method

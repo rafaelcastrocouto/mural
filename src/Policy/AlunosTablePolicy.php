@@ -23,10 +23,10 @@ class AlunosTablePolicy implements BeforePolicyInterface
     }
     return null;
   }
-
-  public function canIndex(IdentityInterface $userSession, AlunosTable $alunosTable)
+  
+  public function canIndex()
   {
-    return new Result(false, 'Erro: alunos index policy not authorized');
+    return new Result(false, 'Erro: alunos busca policy not authorized');
   }
   
   public function scopeIndex($user, $query)
@@ -65,5 +65,5 @@ class AlunosTablePolicy implements BeforePolicyInterface
   {
     return new Result(false, 'Erro: alunos planilha seguro policy not authorized');
   }
-  
+
 }

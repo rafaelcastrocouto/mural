@@ -13,7 +13,8 @@ use Cake\Event\EventInterface;
  * @property \App\Model\Table\MuralestagiosTable $Muralestagios
  * @method \App\Model\Entity\Muralestagio[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class MuralestagiosController extends AppController {
+class MuralestagiosController extends AppController 
+{
     /**
      * beforeFilter method
      */
@@ -22,6 +23,12 @@ class MuralestagiosController extends AppController {
         parent::beforeFilter($event);
     
         $this->Authentication->allowUnauthenticated(['index', 'view']);
+        try {
+            $this->Authorization->authorize($this->Muralestagios);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
     }
 
     /**

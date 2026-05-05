@@ -14,6 +14,19 @@ use Cake\Event\EventInterface;
 class InscricoesController extends AppController
 {
     /**
+     * beforeFilter method
+     */
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        try {
+            $this->Authorization->authorize($this->Inscricoes);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+    }
+    /**
      * Index method
      *
      * @return \Cake\Http\Response|null|void Renders view

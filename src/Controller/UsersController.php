@@ -23,6 +23,13 @@ class UsersController extends AppController {
 
         // allow all visitors to access login and add
         $this->Authentication->allowUnauthenticated(['login', 'add']);
+        
+        try {
+            $this->Authorization->authorize($this->Users);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
     }
 
     /**

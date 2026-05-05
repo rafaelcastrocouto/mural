@@ -24,9 +24,9 @@ class InscricoesTablePolicy implements BeforePolicyInterface
     return null;
   }
 
-  public function canIndex(IdentityInterface $userSession, InscricoesTable $alunosTable)
+  public function canIndex()
   {
-    return new Result(false, 'Erro: inscricoes busca policy not authorized');
+    return new Result(false, 'Erro: inscricoes index policy not authorized');
   }
   
   public function scopeIndex($user, $query)
@@ -34,21 +34,30 @@ class InscricoesTablePolicy implements BeforePolicyInterface
     return $query->where(['Inscricoes.user_id' => $user->getIdentifier()]);
   }
 
-  public function canAdd(IdentityInterface $userSession, InscricoesTable $inscricoesTable)
+  public function canAdd()
   {
-    $alunocadastrado = $this->fetchTable("Alunos")->find()->where(['user_id' => $userSession->id]);
+    return new Result(false, 'Erro: inscricoes canAdd policy not authorized');
+  }
 
-    if ($alunocadastrado->count() > 0) {
-        return new Result(false, 'Erro: inscricoes canAdd policy not authorized');
-    } else {
-      return new Result(true);
-    }
-    
+  public function canEdit()
+  {
+    return new Result(false, 'Erro: inscricoes canAdd policy not authorized');
+  }
+
+  public function canView()
+  {
+    return new Result(false, 'Erro: inscricoes canAdd policy not authorized');
   }
   
   public function canBuscar()
   {
     return new Result(false, 'Erro: inscricoes busca policy not authorized');
   }
+  
+  public function canTermocompromisso()
+  {
+    return new Result(false, 'Erro: inscricoes busca policy not authorized');
+  }
+
 
 }

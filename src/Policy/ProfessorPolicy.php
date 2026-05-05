@@ -24,14 +24,23 @@ class ProfessorPolicy implements BeforePolicyInterface
     return null;
   }
   
-  public function canAdd()
+  public function canIndex()
   {
-      return new Result(true);
+      return new Result(false, 'Erro: professor index policy not authorized');
   }
   
-  public function canView()
+  public function canAdd()
   {
-    return new Result(true);
+      return new Result(false, 'Erro: professor add policy not authorized');
+  }
+  
+  public function canView(IdentityInterface $userSession, Professor $professorData)
+  {
+    if ($this->sameUser($userSession, $professorData)) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: professor view policy not authorized');
+    }
   }
   
   public function canEdit(IdentityInterface $userSession, Professor $professorData)
@@ -43,20 +52,19 @@ class ProfessorPolicy implements BeforePolicyInterface
     }
   }
   
-  public function canDelete(IdentityInterface $userSession, Professor $professorData)
+  public function canDelete()
   {
     return new Result(false, 'Erro: professor delete policy not allowed');
-  }
-
-  
-  protected function sameUser(IdentityInterface $userSession, Professor $professorData)
-  {
-    return ($userSession->id == $professorData->user_id);
   }
 
   public function canBuscar()
   {
     return new Result(false, 'Erro: professores buscar policy not authorized');
+  }
+  
+  protected function sameUser(IdentityInterface $userSession, Professor $professorData)
+  {
+    return ($userSession->id == $professorData->user_id);
   }
   
 }

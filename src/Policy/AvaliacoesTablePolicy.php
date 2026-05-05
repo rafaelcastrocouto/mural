@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Policy;
 
-use App\Model\Table\InstituicoesTable;
+use App\Model\Table\AvaliacoesTable;
 use Authorization\IdentityInterface;
 use Authorization\Policy\Result;
 use Authorization\Policy\BeforePolicyInterface;
 use Authorization\Policy\ResultInterface;
 
 
-class InstituicoesTablePolicy implements BeforePolicyInterface
+class AvaliacoesTablePolicy implements BeforePolicyInterface
 {
   
   public function before(?IdentityInterface $identity, mixed $resource, string $action): ResultInterface|bool|null
@@ -27,31 +27,26 @@ class InstituicoesTablePolicy implements BeforePolicyInterface
 
   public function canIndex()
   {
-    return new Result(false, 'Erro: instituicoes index policy not authorized');
+    return new Result(false, 'Erro: avaliacoes index policy not authorized');
   }
 
   public function canView()
   {
-    return new Result(false, 'Erro: instituicoes edit policy not authorized');
+    return new Result(false, 'Erro: avaliacoes view policy not authorized');
   }
   
   public function canEdit()
   {
-    return new Result(false, 'Erro: instituicoes edit policy not authorized');
+    return new Result(false, 'Erro: avaliacoes edit policy not authorized');
   }
 
   public function canAdd()
   {
-    return new Result(false, 'Erro: instituicoes add policy not authorized');
+    return new Result(false, 'Erro: avaliacoes add policy not authorized');
   }
 
   public function canDelete()
   {
-    return new Result(false, 'Erro: instituicoes delete policy not authorized');
-  }
-
-  public function canBuscar()
-  {
-    return new Result(false, 'Erro: instituicoes buscar policy not authorized');
+    return new Result(false, 'Erro: avaliacoes delete policy not authorized');
   }
 }

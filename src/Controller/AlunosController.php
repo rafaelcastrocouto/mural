@@ -20,7 +20,15 @@ class AlunosController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
+        try {
+            $this->Authorization->authorize($this->Alunos);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
     }
+    
     /**
      * Index method
      *

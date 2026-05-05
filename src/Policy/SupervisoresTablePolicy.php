@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Policy;
 
-use App\Model\Table\EstagiariosTable;
+use App\Model\Table\SupervisoresTable;
 use Authorization\IdentityInterface;
 use Authorization\Policy\Result;
 use Authorization\Policy\BeforePolicyInterface;
 use Authorization\Policy\ResultInterface;
 
-class EstagiariosTablePolicy implements BeforePolicyInterface
+class SupervisoresTablePolicy implements BeforePolicyInterface
 {
   
   public function before(?IdentityInterface $identity, mixed $resource, string $action): ResultInterface|bool|null
@@ -23,36 +23,41 @@ class EstagiariosTablePolicy implements BeforePolicyInterface
     }
     return null;
   }
-
+  
   public function canIndex()
   {
-    return new Result(false, 'Erro: estagiarios index policy not authorized');
-  }
-
-  public function canADd()
-  {
-    return new Result(false, 'Erro: estagiarios add policy not authorized');
+    return new Result(false, 'Erro: supervisores index policy not authorized');
   }
   
   public function canView()
   {
-    return new Result(false, 'Erro: estagiarios view policy not authorized');
-  }
-
-  public function canEdit()
-  {
-    return new Result(false, 'Erro: estagiarios edit policy not authorized');
+    return new Result(false, 'Erro: supervisores view policy not authorized');
   }
   
+  public function canEdit()
+  {
+    return new Result(false, 'Erro: supervisores delete policy not authorized');
+  }
+  
+  public function canDelete()
+  {
+    return new Result(false, 'Erro: supervisores delete policy not authorized');
+  }
   
   public function scopeIndex($user, $query)
   {
-    return $query->where(['Estagiarios.aluno_id' => $user->aluno_id ]);
+    return $query->where(['Supervisores.user_id' => $user->getIdentifier()]);
+  }
+
+  public function canAdd()
+  {
+    return new Result(false, 'Erro: supervisores add policy not authorized');
   }
   
   public function canBuscar()
   {
-    return new Result(false, 'Erro: estagiarios buscar policy not authorized');
+    return new Result(false, 'Erro: supervisores busca policy not authorized');
   }
+
 
 }
