@@ -24,22 +24,26 @@ class EstagiariosTablePolicy implements BeforePolicyInterface
     return null;
   }
 
-  public function canIndex()
+  public function canIndex(IdentityInterface $userSession, EstagiariosTable $estagiariosTableData)
   {
     return new Result(false, 'Erro: estagiarios index policy not authorized');
   }
 
-  public function canADd()
+  public function canAdd(IdentityInterface $userSession, EstagiariosTable $estagiariosTableData)
   {
     return new Result(false, 'Erro: estagiarios add policy not authorized');
   }
   
-  public function canView()
+  public function canView(IdentityInterface $userSession, EstagiariosTable $estagiariosTableData)
   {
-    return new Result(false, 'Erro: estagiarios view policy not authorized');
+    if ($this->isRegistred($userSession)) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: users view policy not authorized');
+    }
   }
 
-  public function canEdit()
+  public function canEdit(IdentityInterface $userSession, EstagiariosTable $estagiariosTableData)
   {
     return new Result(false, 'Erro: estagiarios edit policy not authorized');
   }
@@ -50,9 +54,23 @@ class EstagiariosTablePolicy implements BeforePolicyInterface
     return $query->where(['Estagiarios.aluno_id' => $user->aluno_id ]);
   }
   
-  public function canBuscar()
+  public function canBuscar(IdentityInterface $userSession, EstagiariosTable $estagiariosTableData)
   {
     return new Result(false, 'Erro: estagiarios buscar policy not authorized');
+  }
+  
+  public function canTermodecompromisso(IdentityInterface $userSession, EstagiariosTable $estagiariosTableData)
+  {
+    if ($this->isRegistred($userSession)) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: estagiarios termodecompromisso policy not authorized');
+    }
+  }
+
+  protected function isRegistred($user)
+  {
+    return ($user['aluno_id'] OR $user['supervisor_id'] OR $user['professor_id']);
   }
 
 }

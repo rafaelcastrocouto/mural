@@ -24,22 +24,22 @@ class UsersTablePolicy implements BeforePolicyInterface
     return null;
   }
   
-  public function canLogin()
+  public function canLogin(IdentityInterface $userSession, UsersTable $usersTableData)
   {
     return new Result(true);
   }
   
-  public function canAdd()
+  public function canAdd(IdentityInterface $userSession, UsersTable $usersTableData)
   {
     return new Result(true);
   }
 
-  public function canIndex()
+  public function canIndex(IdentityInterface $userSession, UsersTable $usersTableData)
   {
     return new Result(false, 'Erro: users index policy not authorized');
   }
   
-  public function canView(IdentityInterface $userSession, UsersTable $userData)
+  public function canView(IdentityInterface $userSession, UsersTable $usersTableData)
   {
     if ($this->isRegistred($userSession)) {
       return new Result(true);
@@ -48,7 +48,7 @@ class UsersTablePolicy implements BeforePolicyInterface
     }
   }
   
-  public function canEdit()
+  public function canEdit(IdentityInterface $userSession, UsersTable $usersTableData)
   {    
     if ($this->isRegistred($userSession)) {
       return new Result(true);
@@ -57,7 +57,7 @@ class UsersTablePolicy implements BeforePolicyInterface
     }
   }
   
-  public function canEditpassword()
+  public function canEditpassword(IdentityInterface $userSession, UsersTable $usersTableData)
   {
     if ($this->isRegistred($userSession)) {
       return new Result(true);
@@ -66,7 +66,7 @@ class UsersTablePolicy implements BeforePolicyInterface
     }
   }
   
-  public function canAlternar()
+  public function canAlternar(IdentityInterface $userSession, UsersTable $usersTableData)
   {
     return new Result(false, 'Erro: users alternar policy not authorized');
   }
@@ -81,7 +81,7 @@ class UsersTablePolicy implements BeforePolicyInterface
     return $query->where(['Users.id' => $user->getIdentifier()]);
   }
 
-  public function canBuscar()
+  public function canBuscar(IdentityInterface $userSession, UsersTable $usersTableData)
   {
     return new Result(false, 'Erro: users buscar policy not authorized');
   }

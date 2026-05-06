@@ -24,7 +24,7 @@ class AlunosTablePolicy implements BeforePolicyInterface
     return null;
   }
   
-  public function canIndex()
+  public function canIndex(IdentityInterface $userSession, AlunosTable $alunosTable)
   {
     return new Result(false, 'Erro: alunos busca policy not authorized');
   }
@@ -45,25 +45,37 @@ class AlunosTablePolicy implements BeforePolicyInterface
     }
     
   }
+  public function canView(IdentityInterface $userSession, AlunosTable $alunosTable) {
+    if ($this->isRegistred($userSession)) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: estagiarios termodecompromisso policy not authorized');
+    }
+  }
   
-  public function canBuscar()
+  public function canBuscar(IdentityInterface $userSession, AlunosTable $alunosTable)
   {
     return new Result(false, 'Erro: alunos busca policy not authorized');
   }
   
-  public function canPlanilhacress()
+  public function canPlanilhacress(IdentityInterface $userSession, AlunosTable $alunosTable)
   {
     return new Result(false, 'Erro: alunos planilha cress policy not authorized');
   }
   
-  public function canPlanilhaseguro()
+  public function canPlanilhaseguro(IdentityInterface $userSession, AlunosTable $alunosTable)
   {
     return new Result(false, 'Erro: alunos planilha seguro policy not authorized');
   }
   
-  public function canCargahoraria()
+  public function canCargahoraria(IdentityInterface $userSession, AlunosTable $alunosTable)
   {
     return new Result(false, 'Erro: alunos planilha seguro policy not authorized');
+  }
+
+  protected function isRegistred($user)
+  {
+    return ($user['aluno_id'] OR $user['supervisor_id'] OR $user['professor_id']);
   }
 
 }
