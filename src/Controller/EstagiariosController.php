@@ -249,15 +249,19 @@ class EstagiariosController extends AppController
 
         $estagiario = $this->Estagiarios->find()->where(['aluno_id' => $aluno_id])->contain(['Alunos'])->first();
         
-        if (!$estagiario) {
-            $aluno = $this->fetchTable("Alunos")->find()->where(['id' => $aluno_id])->first();
-            $this->set('$estudante_sem_estagio', $aluno);
-            
+        if (!empty($estagiario->aluno)) {
+            $this->set('aluno', $estagiario->aluno);
         } else {
-            $this->set('ultimoestagio', $estagiario);
+            $aluno = $this->fetchTable("Alunos")->find()->where(['id' => $aluno_id])->first();
+            $this->set('aluno', $aluno);
+        }
+            
+        if ($estagiario) {
+            $this->set('estagiario', $estagiario);
         
             $configuracao = $this->fetchTable('Configuracoes')->find()->select(['mural_periodo_atual'])->first();
             $periodo_atual = $configuracao->mural_periodo_atual;
+            $this->set('periodo', $periodo_atual);
             
             $compare = $this->comparePeriodo((string)$periodo_atual, (string)$estagiario->periodo);
            
@@ -278,6 +282,9 @@ class EstagiariosController extends AppController
             // }
             
         }
+        
+        $instituicoes = $this->Estagiarios->Instituicoes->find('list');
+        $this->set('instituicoes', $instituicoes);
     }
 
 
