@@ -250,12 +250,6 @@ class UsersController extends AppController {
      */
     public function buscar() 
     {
-        try {
-            $this->Authorization->authorize( $this->Users);
-        } catch (ForbiddenException $error) {
-            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
-            return $this->redirect('/');
-        }
         $condition = ['Users.email' => ''];
         
         $id = $this->getRequest()->getQuery('id');

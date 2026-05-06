@@ -41,7 +41,8 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
             <label for="menu-declaracoes-toggler" class="toggle-label">Declarações <span class="toggle-more">▾</span><span class="toggle-less">◂</span></label>
             
             <menu class="toggle-dropdown">
-                <li><?php echo $this->Html->link("Termo de compromisso", "/Inscricoes/termosolicita"); ?></li>
+                
+                <li><?php echo $this->Html->link('Termo de compromisso', ['controller' => 'Estagiarios', 'action' => 'termodecompromisso']); ?></li>
                 <li><?php echo $this->Html->link("Folha de avaliação discente", "/Alunos/avaliacaosolicita"); ?></li>
                 <li><?php echo $this->Html->link("Avaliação discente on-line", "/Avaliacoes/busca_dre"); ?></li>
                 <li><?php echo $this->Html->link("Folha de atividades", "/Alunos/folhasolicita"); ?></li>

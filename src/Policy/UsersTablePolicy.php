@@ -39,24 +39,41 @@ class UsersTablePolicy implements BeforePolicyInterface
     return new Result(false, 'Erro: users index policy not authorized');
   }
   
-  public function canView()
+  public function canView(IdentityInterface $userSession, UsersTable $userData)
   {
-    return new Result(false, 'Erro: users view policy not authorized');
+    if ($this->isRegistred($userSession)) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: users view policy not authorized');
+    }
   }
   
   public function canEdit()
-  {
-    return new Result(false, 'Erro: users edit policy not authorized');
+  {    
+    if ($this->isRegistred($userSession)) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: users view policy not authorized');
+    }
   }
   
   public function canEditpassword()
   {
-    return new Result(false, 'Erro: users buscar policy not authorized');
+    if ($this->isRegistred($userSession)) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: users view policy not authorized');
+    }
   }
   
   public function canAlternar()
   {
     return new Result(false, 'Erro: users alternar policy not authorized');
+  }
+
+  protected function isRegistred($user)
+  {
+    return ($user['aluno_id'] OR $user['supervisor_id'] OR $user['professor_id']);
   }
   
   public function scopeIndex($user, $query)

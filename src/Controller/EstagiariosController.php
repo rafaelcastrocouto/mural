@@ -246,8 +246,7 @@ class EstagiariosController extends AppController
         $aluno_id = $this->getRequest()->getQuery('aluno_id');
         $instituicao_id = $this->getRequest()->getQuery('instituicao_id');
 
-        /** Vou utilizar a tabela alunos */
-        $estudantestabela = $this->fetchTable('Alunos');
+        $tabela_alunos = $this->fetchTable('Alunos');
 
         if ($this->getRequest()->is('post')) {
 
@@ -277,7 +276,7 @@ class EstagiariosController extends AppController
             } else {
                 $estagiario = $this->Estagiarios->newEmptyEntity();
                 /** Capturo o id do aluno para passar para o estagiario */
-                $aluno = $estudantestabela->find()
+                $aluno = $tabela_alunos->find()
                     ->contain([])
                     ->where(['Alunos.id' => $aluno_id])
                     ->first();
@@ -356,12 +355,12 @@ class EstagiariosController extends AppController
             } else {
                 /** Aluno sem estágio: nível 1 */
                 $nivel = 1;
-                $estudante_semestagio = $estudantestabela->find()
+                $aluno_sem_estagio = $tabela_alunos->find()
                     ->contain([])
                     ->where(['Alunos.id' => $aluno_id])
                     ->select(['id', 'nome', 'ingresso'])
                     ->first();
-                $this->set('estudante_semestagio', $estudante_semestagio);
+                $this->set('aluno_semestagio', $aluno_sem_estagio);
                 $this->set('atualiza', 0); // nova inserção de estagiario
             }
 
@@ -390,7 +389,7 @@ class EstagiariosController extends AppController
             $this->set('aluno_id', $aluno_id);
             $this->set('instituicao_id', $instituicao_id);
 
-            $aluno = $estudantestabela->find()->where(['Alunos.id' => $aluno_id])->first();
+            $aluno = $tabela_alunos->find()->where(['Alunos.id' => $aluno_id])->first();
             $instituicoes = $this->Estagiarios->Instituicoes->find('list');
             $turmas = $this->Estagiarios->Turmas->find('list');
             $this->set(compact('instituicoes', 'turmas', 'aluno'));
