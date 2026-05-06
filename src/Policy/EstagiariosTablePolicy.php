@@ -28,26 +28,6 @@ class EstagiariosTablePolicy implements BeforePolicyInterface
   {
     return new Result(false, 'Erro: estagiarios index policy not authorized');
   }
-
-  public function canAdd(IdentityInterface $userSession, EstagiariosTable $estagiariosTableData)
-  {
-    return new Result(false, 'Erro: estagiarios add policy not authorized');
-  }
-  
-  public function canView(IdentityInterface $userSession, EstagiariosTable $estagiariosTableData)
-  {
-    if ($this->isRegistred($userSession)) {
-      return new Result(true);
-    } else {
-      return new Result(false, 'Erro: users view policy not authorized');
-    }
-  }
-
-  public function canEdit(IdentityInterface $userSession, EstagiariosTable $estagiariosTableData)
-  {
-    return new Result(false, 'Erro: estagiarios edit policy not authorized');
-  }
-  
   
   public function scopeIndex($user, $query)
   {
@@ -59,18 +39,5 @@ class EstagiariosTablePolicy implements BeforePolicyInterface
     return new Result(false, 'Erro: estagiarios buscar policy not authorized');
   }
   
-  public function canTermodecompromisso(IdentityInterface $userSession, EstagiariosTable $estagiariosTableData)
-  {
-    if ($this->isRegistred($userSession)) {
-      return new Result(true);
-    } else {
-      return new Result(false, 'Erro: estagiarios termodecompromisso policy not authorized');
-    }
-  }
-
-  protected function isRegistred($user)
-  {
-    return ($user['aluno_id'] OR $user['supervisor_id'] OR $user['professor_id']);
-  }
 
 }

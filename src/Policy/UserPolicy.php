@@ -54,11 +54,20 @@ class UserPolicy implements BeforePolicyInterface
   {
     return new Result(false, 'Erro: user delete policy not allowed');
   }
-
+  
+  public function canAlternar(IdentityInterface $userSession, Users $usersData)
+  {
+    return new Result(false, 'Erro: users alternar policy not authorized');
+  }
   
   protected function sameUser(IdentityInterface $userSession, User $userData)
   {
     return ($userSession->id == $userData->id);
   }
+
+  // protected function isRegistred($user)
+  // {
+  //   return ($user['aluno_id'] OR $user['supervisor_id'] OR $user['professor_id']);
+  // }
   
 }

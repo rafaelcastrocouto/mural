@@ -36,7 +36,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                         echo $this->Form->hidden('aprovado'); 
                     endif;
                 
-                    echo $this->Form->control('ajustecurricular2020');
+                    echo $this->Form->control('ajuste2020', ['options' => ['1' => 'Sim (3 semestres)', '0' => 'Não (4 semestres)']]);
                     echo $this->Form->control('turno_id', ['options' => $turnos, 'class' => 'form-control']);
                     echo $this->Form->control('nivel');
                     echo $this->Form->control('tc_solicitacao', ['empty' => true]);

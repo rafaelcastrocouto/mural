@@ -28,7 +28,7 @@ $submit = [
 ]
     ?>
 
-<?php if ((isset($ultimoestagio) && $ultimoestagio) || (isset($estudante_semestagio) && $estudante_semestagio)): ?>
+<?php if ((isset($ultimoestagio) && $ultimoestagio) || (isset($estudante_sem_estagio) && $estudante_sem_estagio)): ?>
     <div class="row">
         <div class="container">
             <?= $this->Form->create(null, ['type' => 'post']) ?>
@@ -53,10 +53,10 @@ $submit = [
                 else:
                     echo "<fieldset>";
                     echo "<legend>Aluno sem estágio</legend>";
-                    echo $this->Form->control('registro', ['value' => $estudante_semestagio->registro, 'readonly']);
-                    echo $this->Form->control('aluno_id', ['label' => ['text' => 'Aluno'], 'options' => [$estudante_semestagio->id => $estudante_semestagio->nome], 'empty' => false, 'readonly']);
-                    echo $this->Form->control('ingresso', ['label' => ['text' => 'Ingresso'], 'value' => $estudante_semestagio->ingresso, 'readonly']);
-                    echo $this->Form->control('turno', ['options' => ['D' => 'Diurno', 'N' => 'Noturno', 'I' => 'Sem informação'], 'value' => substr($estudante_semestagio->turno, 0, 1)]);
+                    echo $this->Form->control('registro', ['value' => $estudante_sem_estagio->registro, 'readonly']);
+                    echo $this->Form->control('aluno_id', ['label' => ['text' => 'Aluno'], 'options' => [$estudante_sem_estagio->id => $estudante_sem_estagio->nome], 'empty' => false, 'readonly']);
+                    echo $this->Form->control('ingresso', ['label' => ['text' => 'Ingresso'], 'value' => $estudante_sem_estagio->ingresso, 'readonly']);
+                    echo $this->Form->control('turno', ['options' => ['D' => 'Diurno', 'N' => 'Noturno', 'I' => 'Sem informação'], 'value' => substr($estudante_sem_estagio->turno, 0, 1)]);
                     echo $this->Form->control('nivel', ['value' => 1, 'readonly']);
                     echo $this->Form->control('periodo', ['label' => ['text' => 'Período'], 'value' => $periodo, 'readonly']);
                     echo "</fieldset>";

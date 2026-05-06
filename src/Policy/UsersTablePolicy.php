@@ -23,67 +23,20 @@ class UsersTablePolicy implements BeforePolicyInterface
     }
     return null;
   }
-  
-  public function canLogin(IdentityInterface $userSession, UsersTable $usersTableData)
-  {
-    return new Result(true);
-  }
-  
-  public function canAdd(IdentityInterface $userSession, UsersTable $usersTableData)
-  {
-    return new Result(true);
-  }
 
   public function canIndex(IdentityInterface $userSession, UsersTable $usersTableData)
   {
-    return new Result(false, 'Erro: users index policy not authorized');
-  }
-  
-  public function canView(IdentityInterface $userSession, UsersTable $usersTableData)
-  {
-    if ($this->isRegistred($userSession)) {
-      return new Result(true);
-    } else {
-      return new Result(false, 'Erro: users view policy not authorized');
-    }
-  }
-  
-  public function canEdit(IdentityInterface $userSession, UsersTable $usersTableData)
-  {    
-    if ($this->isRegistred($userSession)) {
-      return new Result(true);
-    } else {
-      return new Result(false, 'Erro: users view policy not authorized');
-    }
-  }
-  
-  public function canEditpassword(IdentityInterface $userSession, UsersTable $usersTableData)
-  {
-    if ($this->isRegistred($userSession)) {
-      return new Result(true);
-    } else {
-      return new Result(false, 'Erro: users view policy not authorized');
-    }
-  }
-  
-  public function canAlternar(IdentityInterface $userSession, UsersTable $usersTableData)
-  {
-    return new Result(false, 'Erro: users alternar policy not authorized');
-  }
-
-  protected function isRegistred($user)
-  {
-    return ($user['aluno_id'] OR $user['supervisor_id'] OR $user['professor_id']);
-  }
-  
-  public function scopeIndex($user, $query)
-  {
-    return $query->where(['Users.id' => $user->getIdentifier()]);
+    return new Result(false, 'Erro: users table index policy not authorized');
   }
 
   public function canBuscar(IdentityInterface $userSession, UsersTable $usersTableData)
   {
-    return new Result(false, 'Erro: users buscar policy not authorized');
+    return new Result(false, 'Erro: users table buscar policy not authorized');
+  }
+
+  public function scopeIndex($user, $query)
+  {
+    return $query->where(['Users.id' => $user->getIdentifier()]);
   }
   
 }

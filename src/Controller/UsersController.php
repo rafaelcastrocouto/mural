@@ -23,13 +23,6 @@ class UsersController extends AppController {
 
         // allow all visitors to access login and add
         $this->Authentication->allowUnauthenticated(['login', 'add']);
-        
-        try {
-            $this->Authorization->authorize($this->Users);
-        } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error: ' . $error->getMessage());
-            return $this->redirect('/');
-        }
     }
 
     /**
@@ -48,6 +41,13 @@ class UsersController extends AppController {
      */
     public function index()
     {
+        try {
+            $this->Authorization->authorize($this->Users);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
         $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
         $user_session = $this->request->getAttribute('identity');
         if ($user_session) { $user_data = $user_session->getOriginalData(); }
@@ -250,6 +250,13 @@ class UsersController extends AppController {
      */
     public function buscar() 
     {
+        try {
+            $this->Authorization->authorize($this->Users);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
         $condition = ['Users.email' => ''];
         
         $id = $this->getRequest()->getQuery('id');
@@ -271,6 +278,13 @@ class UsersController extends AppController {
      */
     public function alternar(?string $id = null)
     {
+        try {
+            $this->Authorization->authorize($this->Users->newEmptyEntity());
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
         $user_data = ['administrador_id'=>0,'aluno_id'=>0,'professor_id'=>0,'supervisor_id'=>0];
         $user_session = $this->request->getAttribute('identity');
         if ($user_session) { $user_data = $user_session->getOriginalData(); }

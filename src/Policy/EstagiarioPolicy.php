@@ -39,19 +39,36 @@ class EstagiarioPolicy implements BeforePolicyInterface
   }
   
   public function canEdit(IdentityInterface $userSession, Estagiario $estagiarioData)
-  {
-    return new Result(false, 'Erro: estagiario edit policy not authorized');
+  {    
+    if ($this->sameUser($userSession, $estagiarioData)) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: estagiario edit policy not authorized');
+    }
   }
   
   public function canDelete(IdentityInterface $userSession, Estagiario $estagiarioData)
   {
     return new Result(false, 'Erro: estagiario delete policy not allowed');
   }
-
+  
+  public function canTermodecompromisso(IdentityInterface $userSession, Estagiario $estagiarioData)
+  {
+    if ($this->isRegistred($userSession)) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: estagiarios termodecompromisso policy not authorized');
+    }
+  }
   
   protected function sameUser(IdentityInterface $userSession, Estagiario $estagiarioData)
   {
-    return ($userSession->id == $estagiarioData->aluno->user_id);
+    return ($userSession->aluno_id == $estagiarioData->aluno_id);
+  }
+  
+  protected function isRegistred($user)
+  {
+    return ($user['aluno_id'] OR $user['supervisor_id'] OR $user['professor_id']);
   }
   
 }

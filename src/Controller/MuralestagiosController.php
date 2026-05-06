@@ -38,7 +38,8 @@ class MuralestagiosController extends AppController
      */
     public function index($id = null)
     {
-        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
+        $periodo_atual = $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
+        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $periodo_atual;
         $this->set('periodo', $periodo);
         
         $contained = ['Instituicoes', 'Professores'];
@@ -80,6 +81,7 @@ class MuralestagiosController extends AppController
             'valueField' => 'periodo'
         ]);
         $periodos = $periodototal->toArray();
+        $periodos = array_merge($periodos, array($periodo_atual => $periodo_atual));
         $periodos = array_merge($periodos, array('all' => 'Todos'));
         $periodos = array_reverse($periodos);
         

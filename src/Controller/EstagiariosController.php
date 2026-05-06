@@ -20,23 +20,9 @@ class EstagiariosController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        try {
-            $this->Authorization->authorize($this->Estagiarios);
-        } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error: ' . $error->getMessage());
-            return $this->redirect('/');
-        }
         
     }
-    
-    /**
-     * paginate array
-     */
-    protected array $paginate = [
-        'sortableFields' => [
-            'id', 'Alunos.nome', 'Alunos.registro', 'Turnos.turno', 'nivel', 'Instituicoes.instituicao', 'Supervisores.nome', 'Professores.nome'
-        ]
-    ];
+
     
     /**
      * Index method
@@ -45,9 +31,10 @@ class EstagiariosController extends AppController
      */
     public function index()
     {
-        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
+        $periodo_atual = $this->fetchTable("Configuracoes")->find()->first()['mural_periodo_atual'];
+        $periodo = $this->getRequest()->getParam('pass') ? $this->request->getParam('pass')[0] : $periodo_atual;
         $this->set('periodo', $periodo);
-        
+
         $contained = ['Alunos', 'Professores', 'Supervisores', 'Instituicoes', 'Turnos', 'Turmas'];
 
         $conditions = ['conditions' => ['Estagiarios.periodo' => $periodo] ];
@@ -70,11 +57,9 @@ class EstagiariosController extends AppController
         $this->set('estagiarios', $this->paginate($estagiarios));
 
         
-        $periodototal = $this->Estagiarios->find('list', [
-            'keyField' => 'periodo',
-            'valueField' => 'periodo'
-        ]);
+        $periodototal = $this->Estagiarios->find('list', [ 'keyField' => 'periodo', 'valueField' => 'periodo']);
         $periodos = $periodototal->toArray();
+        $periodos = array_merge($periodos, array($periodo_atual => $periodo_atual));
         $periodos = array_merge($periodos, array('all' => 'Todos'));
         $periodos = array_reverse($periodos);
         
@@ -239,65 +224,59 @@ class EstagiariosController extends AppController
      *
      */
     public function termodecompromisso($id = null)
-    {
+    {        
+        try {
+            $this->Authorization->authorize($this->Estagiarios->newEmptyEntity());
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
         $user_data = ['administrador_id' => 0, 'aluno_id' => 0, 'professor_id' => 0, 'supervisor_id' => 0];
         $user_session = $this->request->getAttribute('identity');
-        if ($user_session) {
-            $user_data = $user_session->getOriginalData();
-        }
+        if ($user_session) { $user_data = $user_session->getOriginalData(); }
 
         $aluno_id = $this->request->getQuery('aluno_id');
 
-        if (isset($user_data) && $user_data['aluno_id']) {
+        if (!$aluno_id && $user_data['aluno_id']) {
             $aluno_id = $user_data['aluno_id'];
         }
 
-        if (!isset($aluno_id) || $aluno_id === null) {
-            $this->Flash->error(__('Selecionar o(a) aluno(a) para o termo de compromisso'));
-            return $this->redirect(['controller' => 'Users', 'action' => 'view'], $user_data->id);
+        if (!isset($aluno_id)) {
+            $this->Flash->error(__('Usuário(a) não está registrado como aluno(a)'));
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_data->id]);
         }
 
-        $estagiario = $this->Estagiarios
-            ->find()
-            ->where(['aluno_id' => $aluno_id])
-            ->order(['nivel' => 'desc'])
-            ->first();
-
-        if (empty($estagiario)) {
-            $this->Flash->error(__('Aluno sem estágio.'));
-            return $this->redirect(['controller' => 'Users', 'action' => 'view'], $user_data->id);
-        }
-
-        if ($estagiario) {
-            $configuracao = $this->fetchTable('Configuracoes')->find()->select(['mural_periodo_atual'])->first();
-            $periodo_atual = $configuracao->mural_periodo_atual;
-
-            $compare = $this->comparePeriodo((string)$periodo_atual, (string)$estagiario->periodo);
-
-            // Mesmo período: editar o estágio do período atual
-            if ($compare === 0) {
-                return $this->redirect(['action' => 'edit',  $estagiario->id]);
-            }
-
-            // Período atual (configurações) posterior ao último estágio: criar novo estágio
-            if ($compare === 1) {
-                return $this->redirect(['action' => 'add','?' => ['aluno_id' => $aluno_id]]);
-            }
-
-            // Período atual anterior ao último estágio: configurações desatualizadas / dados inconsistentes
-            $this->Flash->error(
-                __(
-                    'Período atual ({0}) não pode ser anterior ao último período de estágio ({1}).',
-                    (string)$periodo_atual,
-                    (string)$estagiario->periodo,
-                ),
-            );
-
-            return $this->redirect(['action' => 'edit', $estagiario->id ]);
+        $estagiario = $this->Estagiarios->find()->where(['aluno_id' => $aluno_id])->contain(['Alunos'])->first();
+        
+        if (!$estagiario) {
+            $aluno = $this->fetchTable("Alunos")->find()->where(['id' => $aluno_id])->first();
+            $this->set('$estudante_sem_estagio', $aluno);
             
         } else {
-            $this->Flash->success(__('O(a) aluno(a) ainda não é estagiário'));
-            return $this->redirect(['controller' => 'Alunos', 'action' => 'view'], $user_data->aluno_id);
+            $this->set('ultimoestagio', $estagiario);
+        
+            $configuracao = $this->fetchTable('Configuracoes')->find()->select(['mural_periodo_atual'])->first();
+            $periodo_atual = $configuracao->mural_periodo_atual;
+            
+            $compare = $this->comparePeriodo((string)$periodo_atual, (string)$estagiario->periodo);
+           
+            if ($compare === -1) {
+                // Período atual anterior ao último estágio: configurações desatualizadas / dados inconsistentes
+                $this->Flash->error(__('Período atual ({0}) não pode ser anterior ao último período de estágio ({1}).', (string)$periodo_atual, (string)$estagiario->periodo));
+                return $this->redirect(['action' => 'edit', $estagiario->id]);
+            } 
+            
+            if ($compare === 0) {
+                $this->Flash->error( __('Período atual não pode ser o mesmo período ({0}) editar o período do estágiario.', (string)$periodo_atual));
+                return $this->redirect(['action' => 'edit', $estagiario->id]);
+            }
+    
+            // Período atual (configurações) posterior ao último estágio: criar novo estágio
+            // if ($compare === 1) {
+            //     return $this->redirect(['action' => 'add']);
+            // }
+            
         }
     }
 
@@ -540,6 +519,7 @@ class EstagiariosController extends AppController
             $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
         }
+        
         $condition = ['Estagiarios.id' => ''];
         
         $nome = $this->getRequest()->getQuery('nome');
