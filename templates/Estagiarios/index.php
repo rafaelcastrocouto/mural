@@ -28,21 +28,17 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 	
 	<div class="row justify-content-center">
 	    <div class="col-auto">
-	        <?php if ($user_data['administrador_id']): ?>
-	            <?= $this->Form->create($estagiarios, ['class' => 'form-inline']); ?>
-					<?= $this->Form->label('estagiarioperiodo', 'Período'); ?>
-					<?= $this->Form->input('periodo', [
-							'default'=> $periodo ? $periodo : $configuracao['mural_periodo_atual'],
-							'id' => 'estagiarioperiodo', 
-							'type' => 'select', 
-							'options' => $periodos, 
-							'class' => 'form-control'
-						]); 
-					?>
-	            <?= $this->Form->end(); ?>
-	        <?php else: ?>
-	            <h3 class="label">Período: <?= $configuracao['mural_periodo_atual']; ?></h3>
-	        <?php endif; ?>
+			<?= $this->Form->create($estagiarios, ['class' => 'form-inline']); ?>
+				<?= $this->Form->label('estagiarioperiodo', 'Período'); ?>
+				<?= $this->Form->input('periodo', [
+						'default'=> $periodo ? $periodo : $configuracao['mural_periodo_atual'],
+						'id' => 'estagiarioperiodo', 
+						'type' => 'select', 
+						'options' => $periodos, 
+						'class' => 'form-control'
+					]); 
+				?>
+			<?= $this->Form->end(); ?>
 	    </div>
 	</div>
 	

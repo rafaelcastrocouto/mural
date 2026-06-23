@@ -96,7 +96,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <td><?= h($estagiario->ajustecurricular2020) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Tc Solicitacao') ?></th>
+                    <th><?= __('Data Aprovacao') ?></th>
                     <td><?= h($estagiario->tc_solicitacao) ?></td>
                 </tr>
             </table>

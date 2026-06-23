@@ -27,36 +27,16 @@ class InscricoesController extends AppController
      */
     public function index()
     {
+        $contained = ['Alunos', 'Muralestagios' => ['Instituicoes']];
+        
         try {
             $this->Authorization->authorize($this->Inscricoes);
+            $inscricoes = $this->Inscricoes->find('all')->contain($contained);
         } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error: ' . $error->getMessage());
-            return $this->redirect('/');
+            $inscricoes = $this->Authorization->applyScope($this->Inscricoes->find('all')->contain($contained));
         }
-        
-        $periodo = $this->getRequest()->getQuery('periodo');
 
-        if (empty($periodo)) {
-            $configuracao = $this->fetchTable('Configuracoes');
-            $periodo_atual = $configuracao->find()->select(['mural_periodo_atual'])->first();
-            $periodo = $periodo_atual->mural_periodo_atual;
-        }
-        
-        $estagiariotabela = $this->fetchTable('Estagiarios');
-        $periodototal = $estagiariotabela->find('list', [
-            'keyField' => 'periodo',
-            'valueField' => 'periodo',
-            'order' => 'periodo'
-        ]);
-        $periodos = $periodototal->toArray();
-
-        $query = $this->Inscricoes->find()
-                ->contain(['Alunos', 'Muralestagios' => ['Instituicoes']])
-                ->where(['Inscricoes.periodo' => $periodo]);
-
-        $inscricoes = $this->paginate($query);
-
-        $this->set(compact('inscricoes', 'periodos', 'periodo'));
+        $this->set('inscricoes', $this->paginate($inscricoes));
     }
 
     /**
@@ -390,6 +370,7 @@ class InscricoesController extends AppController
             $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
         }
+        
         $condition = ['Inscricoes.id' => ''];
         
         $nome = $this->getRequest()->getQuery('nome');

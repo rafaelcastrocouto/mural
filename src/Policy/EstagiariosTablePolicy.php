@@ -24,7 +24,7 @@ class EstagiariosTablePolicy implements BeforePolicyInterface
     return null;
   }
 
-  public function canIndex(IdentityInterface $userSession, EstagiariosTable $estagiariosTableData)
+  public function canIndex()
   {
     return new Result(false, 'Erro: estagiarios index policy not authorized');
   }
