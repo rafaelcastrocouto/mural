@@ -133,6 +133,14 @@ class InscricoesController extends AppController
         $dados['data'] = $data;
 
         $inscricao = $this->Inscricoes->newEmptyEntity();
+
+        try {
+            $this->Authorization->authorize($inscricao);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
         if ($this->request->is('post')) {
             $inscricao = $this->Inscricoes->patchEntity($inscricao, $dados);
             if ($this->Inscricoes->save($inscricao)) {
@@ -167,6 +175,14 @@ class InscricoesController extends AppController
         $inscricao = $this->Inscricoes->get($id, [
             'contain' => ['Alunos'],
         ]);
+
+        try {
+            $this->Authorization->authorize($inscricao);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
         if ($this->request->is(['patch', 'post', 'put'])) {
             $inscricao = $this->Inscricoes->patchEntity($inscricao, $this->request->getData());
             if ($this->Inscricoes->save($inscricao)) {
@@ -190,6 +206,14 @@ class InscricoesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $inscricao = $this->Inscricoes->get($id);
+
+        try {
+            $this->Authorization->authorize($inscricao);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
         if ($this->Inscricoes->delete($inscricao)) {
             $this->Flash->success(__('The inscricao has been deleted.'));
         } else {
