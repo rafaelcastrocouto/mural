@@ -34,25 +34,6 @@ class AlunosTablePolicy implements BeforePolicyInterface
     return $query->where(['Alunos.user_id' => $user->getIdentifier()]);
   }
 
-  public function canAdd(IdentityInterface $userSession, AlunosTable $alunosTable)
-  {
-    $alunocadastrado = $alunosTable->find()->where(['user_id' => $userSession->id]);
-
-    if ($alunocadastrado->count() > 0) {
-        return new Result(false, 'Erro: alunos add policy not authorized');
-    } else {
-      return new Result(true);
-    }
-    
-  }
-  public function canView(IdentityInterface $userSession, AlunosTable $alunosTable) {
-    if ($this->isRegistred($userSession)) {
-      return new Result(true);
-    } else {
-      return new Result(false, 'Erro: estagiarios termodecompromisso policy not authorized');
-    }
-  }
-  
   public function canBuscar(IdentityInterface $userSession, AlunosTable $alunosTable)
   {
     return new Result(false, 'Erro: alunos busca policy not authorized');

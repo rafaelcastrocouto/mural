@@ -34,20 +34,7 @@ class InscricoesTablePolicy implements BeforePolicyInterface
     return $query->where(['Inscricoes.user_id' => $user->getIdentifier()]);
   }
 
-  public function canAdd()
-  {
-    return new Result(false, 'Erro: inscricoes canAdd policy not authorized');
-  }
 
-  public function canEdit()
-  {
-    return new Result(false, 'Erro: inscricoes canAdd policy not authorized');
-  }
-
-  public function canView()
-  {
-    return new Result(false, 'Erro: inscricoes canAdd policy not authorized');
-  }
   
   public function canBuscar()
   {

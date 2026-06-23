@@ -19,12 +19,6 @@ class InscricoesController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        try {
-            $this->Authorization->authorize($this->Inscricoes);
-        } catch (ForbiddenException $error) {
-            $this->Flash->error('Authorization error: ' . $error->getMessage());
-            return $this->redirect('/');
-        }
     }
     /**
      * Index method
@@ -33,6 +27,13 @@ class InscricoesController extends AppController
      */
     public function index()
     {
+        try {
+            $this->Authorization->authorize($this->Inscricoes);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
         $periodo = $this->getRequest()->getQuery('periodo');
 
         if (empty($periodo)) {
@@ -71,6 +72,13 @@ class InscricoesController extends AppController
             'contain' => ['Alunos', 'Muralestagios' => ['Instituicoes']],
         ]);
 
+        try {
+            $this->Authorization->authorize($inscricao);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        
         $this->set(compact('inscricao'));
     }
 
