@@ -100,7 +100,7 @@ class AlunosController extends AppController
         $aluno = $this->Alunos->newEmptyEntity();
         
         try {
-            $this->Authorization->authorize($this->Alunos);
+            $this->Authorization->authorize($aluno);
         } catch (ForbiddenException $error) {
             $this->Flash->warning('Erro de authorização: aluno já está cadastrado');
             return $this->redirect('/');

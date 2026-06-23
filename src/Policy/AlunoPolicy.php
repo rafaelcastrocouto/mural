@@ -24,6 +24,11 @@ class AlunoPolicy implements BeforePolicyInterface
     return null;
   }
   
+  public function canAdd(IdentityInterface $userSession, Aluno $alunoData)
+  {
+    if ($userSession) { return new Result(true); }
+  }
+  
   public function canView(IdentityInterface $userSession, Aluno $alunoData)
   {
     if ($this->sameUser($userSession, $alunoData)) {
