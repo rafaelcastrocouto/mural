@@ -151,7 +151,13 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
             <?php else: ?>
 
 							
-				<?php if (!empty($inscricao)): ?>
+				<?php if (!$user_session): ?>
+					<tr>
+						<td colspan = 2>
+							<p class="text-center">É preciso fazer <?php echo $this->Html->link('login', ['controller' => 'Users', 'action' => 'login']) ?> para se inscrever.</p>
+					</tr>
+
+				<?php elseif (!empty($inscricao)): ?>			
 					<tr>
 						<td colspan = 2>
 							<p class="text-center">O usuário já está inscrito, <?php echo $this->Html->link('visualizar inscrição', ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>.</p>
@@ -172,12 +178,13 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 	
 					<?php endif; ?>
 							
-							
+					<?php if ($user_session): ?>		
 					<tr>
 						<td colspan = 2 class="text-center">
 							<?php echo $this->Html->link('Fazer inscrição', ['controller' => 'Inscricoes', 'action' => 'add', $muralestagio['id']], ['role' => 'button', 'class' => 'button btn-primary']); ?>
 						</td>
 					</tr>
+					<?php endif; ?>		
 
 				<?php else: ?>
 					<tr>
