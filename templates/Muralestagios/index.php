@@ -61,7 +61,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
             <thead>
                 <tr>
 			        <?php if ($user_data['administrador_id']): ?>
-	                    <th class="actions"><?= __('Actions') ?></th>
+	                    <th class="actions"><?= __('Ações') ?></th>
 	                    <th><?= $this->Paginator->sort('id') ?></th>
 			        <?php endif; ?>
                     <th><?= $this->Paginator->sort('Instituicao.instituicao', 'Instituição') ?></th>
@@ -105,7 +105,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                         <td><?= h($muralestagio->data_selecao) ?></td>
                         <td><?= h($muralestagio->data_inscricao) ?></td>
 				        <?php if ($user_data['aluno_id']): ?>
-	                        <td><?= h($muralestagio->inscricao ? 'Sim' : 'Não') ?></td>
+	                        <td><?= h($muralestagio->inscricao ? '✔️' : '❌') ?></td>
 				        <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>

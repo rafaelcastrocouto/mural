@@ -33,7 +33,7 @@
                 <div class="table_wrap">
                     <table>
                         <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Aluno Id') ?></th>
                             <th><?= __('Nome') ?></th>
@@ -98,7 +98,7 @@
                 <div class="table_wrap">
                     <table>
                         <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Instituicao') ?></th>
                             <th><?= __('Convenio') ?></th>

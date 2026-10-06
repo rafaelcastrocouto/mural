@@ -119,7 +119,7 @@
                 <div class="table_wrap">
                     <table>
                         <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Email') ?></th>
                             <th><?= __('Registro') ?></th>
@@ -147,7 +147,7 @@
                     <div class="table_wrap">
                         <table>
                             <tr>
-                                <th class="actions"><?= __('Actions') ?></th>
+                                <th class="actions"><?= __('Ações') ?></th>
                                 <th><?= __('Id') ?></th>
                                 <th><?= __('Instituicao') ?></th>
                                 <th><?= __('Area') ?></th>
@@ -185,7 +185,7 @@
                 <div class="table_wrap">
                     <table>
                         <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Aluno') ?></th>
                             <th><?= __('Registro') ?></th>

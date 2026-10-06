@@ -84,7 +84,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 <div class="table_wrap">
                     <table>
                         <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Email') ?></th>
                             <th><?= __('Criado') ?></th>
@@ -113,7 +113,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 <div class="table_wrap">
                     <table>
                         <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Instituicao') ?></th>
                             <th><?= __('Periodo') ?></th>
@@ -169,7 +169,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 <div class="table_wrap">
                     <table>
                         <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Estagio') ?></th>
                             <th><?= __('Data') ?></th>

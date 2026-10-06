@@ -24,7 +24,8 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 					<?php endif; ?>
 		        </div>
 		    </aside>
-            <h3>estagio_<?= h($muralestagio->id) ?></h3>
+            <h3>estagio_<?= h($muralestagio->id) ?> <?php if ($user_session and !empty($inscricao)): ?><?php echo $this->Html->link('✔️', ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?><?php endif; ?></h3>
+			
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
@@ -129,83 +130,79 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <th><?= __('Periodo') ?></th>
                     <td><?= h($muralestagio->periodo) ?></td>
                 </tr>
-            </table>
-            <div class="text">
-                <strong><?= __('Outras') ?></strong>
-                <blockquote>
-                    <?= $this->Text->autoParagraph($muralestagio->outras); ?>
-                </blockquote>
-            </div>
-
-			<!--
-            Para o administrador as inscrições sempre estão abertas
-            //-->
-            <?php if ($user_data['administrador_id']): ?>
-
-                <tr>
-                    <td colspan = '2' class="text-center">
-                        <?php echo $this->Html->link('Fazer inscrição', ['controller' => 'Inscricoes', 'action' => 'add', $muralestagio['id']], ['role' => 'button', 'class' => 'button btn-primary']); ?>
-                    </td>
+				<tr>
+					<th><?= __('Outras') ?></th>
+					<td class="text">
+						<?= $this->Text->autoParagraph($muralestagio->outras); ?>
+					</td>
                 </tr>
-
-            <?php else: ?>
-
+	        </table>
+				
+			<div> <!-- Botao de inscricao -->	
+					
+				<?php if (!$user_session): ?><!-- Sem login não ha inscricao -->	
 							
-				<?php if (!$user_session): ?>
-					<tr>
 						<td colspan = 2>
 							<p class="text-center">É preciso fazer <?php echo $this->Html->link('login', ['controller' => 'Users', 'action' => 'login']) ?> para se inscrever.</p>
-					</tr>
-
-				<?php elseif (!empty($inscricao)): ?>			
-					<tr>
-						<td colspan = 2>
-							<p class="text-center">O usuário já está inscrito, <?php echo $this->Html->link('visualizar inscrição', ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>.</p>
-					</tr>
-				
-				<?php endif; ?>
-							
-				<?php if (new \Cake\I18n\Date('now') <= $muralestagio['data_inscricao']): ?>
-						
-					<!--	Se a inscricao e na instituição também tem que fazer inscrição no mural //-->
-					<?php if ((string)$muralestagio['localInscricao'] === '1'): ?>
-	
-						<tr>
-							<td colspan = 2>
-								<p class="text-center text-danger">Não esqueça de também fazer inscrição na instituição. Ambas são necessárias!</p>
-							</td>
-						</tr>
-	
-					<?php endif; ?>
-							
-					<?php if ($user_session): ?>		
-					<tr>
-						<td colspan = 2 class="text-center">
+						</td>
+								
+				<?php else: ?><!-- Se o usuario esta logado -->	
+					
+					<?php if ($user_data['administrador_id']): ?>
+								
+						<!-- Para o administrador as inscrições sempre estão abertas -->
+						<td colspan = '2' class="text-center">
 							<?php echo $this->Html->link('Fazer inscrição', ['controller' => 'Inscricoes', 'action' => 'add', $muralestagio['id']], ['role' => 'button', 'class' => 'button btn-primary']); ?>
 						</td>
-					</tr>
-					<?php endif; ?>		
-
-				<?php else: ?>
-					<tr>
+	
+					<?php elseif (!empty($inscricao)): ?>	
+								
 						<td colspan = 2>
-							<p class="text-center text-danger">Inscrições encerradas!</p>
+							<p>O usuário já está inscrito, <?php echo $this->Html->link('visualizar inscrição', ['controller' => 'Inscricoes', 'action' => 'view', $inscricao->id]) ?>.</p>
 						</td>
-					</tr>
-				<?php endif; ?>
-				
-				
-			<?php endif; ?>
+					
+					<?php else: ?><!-- Se o usuario nao tem inscricao nem admin pode se inscrever -->	
+									
+						<?php if (new \Cake\I18n\Date('now') <= $muralestagio['data_inscricao']): ?>	
+	
+							<!-- data de incricao já passou -->	
+							<td colspan = 2>
+								<p class="text-center text-danger">Inscrições encerradas!</p>
+							</td>
+		
+						<?php else: ?><!-- ainda da tempo de se inscrever -->
+								
+							<!-- Aviso antes da inscricao: Se a inscricao for na instituição também tem que fazer inscrição no mural -->
+							<?php if ((string)$muralestagio['localInscricao'] === '1'): ?>
+								<td colspan = 2>
+									<p class="text-center text-danger">Não esqueça de também fazer inscrição na instituição. Ambas são necessárias!</p>
+								</td>
+							<?php endif; ?>
+							
+							<!-- O botao de incricao -->
+							<td colspan = 2 class="text-center">
+								<?php echo $this->Html->link('Fazer inscrição', ['controller' => 'Inscricoes', 'action' => 'add', $muralestagio['id']], ['role' => 'button', 'class' => 'button btn-primary']); ?>
+							</td>
+								
+						<?php endif; ?>
+								
+					<?php endif; ?>
+					
+				<?php endif; ?> 
 
+			</div>
 
             <?php if ($user_data['administrador_id'] || $user_data['professor_id'] || $user_data['supervisor_id']): ?>
-	            <?php if (!empty($muralestagio->inscricoes)) : ?>
-		            <div class="related">
+						
+		        <div class="related">
+					
+		            <?php if (!empty($muralestagio->inscricoes)) : ?>
+							
 		                <h4><?= __('Inscrições') ?></h4>
 		                <div class="table_wrap">
 		                    <table>
 		                        <tr>
-		                            <th class="actions"><?= __('Actions') ?></th>
+		                            <th class="actions"><?= __('Ações') ?></th>
 		                            <th><?= __('Id') ?></th>
 		                            <th><?= __('Registro') ?></th>
 		                            <th><?= __('Aluno') ?></th>
@@ -231,15 +228,13 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 		                        <?php endforeach; ?>
 		                    </table>
 		                </div>
-		            </div>
 							
-	            <?php else: ?>
-							
-		            <div class="related">
-		                <h4>Sem incrições</h4>
-					</div>
-							
-	            <?php endif; ?>
+		            <?php else: ?>
+								
+			            <h4>Sem incrições</h4>
+								
+		            <?php endif; ?>
+		        </div>
 
 			<?php endif; ?>
         </div>

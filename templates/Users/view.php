@@ -52,7 +52,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 <div class="table_wrap">
                     <table>
                         <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Nome') ?></th>
                         </tr>
@@ -76,7 +76,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 <div class="table_wrap">
                     <table>
                         <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Nome') ?></th>
                             <th><?= __('Registro') ?></th>
@@ -114,7 +114,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 <div class="table_wrap">
                     <table>
                         <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Nome') ?></th>
                             <th><?= __('Telefone') ?></th>
@@ -149,7 +149,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 <div class="table_wrap">
                     <table>
                         <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Nome') ?></th>
                             <th><?= __('Cpf') ?></th>

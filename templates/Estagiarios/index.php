@@ -61,7 +61,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
             <thead>
                 <tr>
 			        <?php if ($user_data['administrador_id']): ?>
-	                    <th class="actions"><?= __('Actions') ?></th>
+	                    <th class="actions"><?= __('Ações') ?></th>
 					<?php endif; ?>
 	                <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('Alunos.nome', 'Aluno') ?></th>

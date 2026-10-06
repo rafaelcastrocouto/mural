@@ -104,7 +104,7 @@
                 <div class="table_wrap">
                     <table>
                         <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Nome') ?></th>
                             <th><?= __('CPF') ?></th>
@@ -139,7 +139,7 @@
                 <div class="table_wrap">
                     <table>
                         <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Aluno') ?></th>
                             <th><?= __('Registro') ?></th>
@@ -193,7 +193,7 @@
                 <div class="table_wrap">
                     <table>
                         <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Vagas') ?></th>
                             <th><?= __('Professor') ?></th>
@@ -241,7 +241,7 @@
                 <div class="table_wrap">
                     <table>
                         <tr>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Data') ?></th>
                             <th><?= __('Motivo') ?></th>
